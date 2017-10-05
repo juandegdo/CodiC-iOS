@@ -1,7 +1,7 @@
 [![Swift 3](https://img.shields.io/badge/Swift-3.0-orange.svg?style=flat)](https://swift.org)
 
-# Radioish iOS App
-Code repository for the Radioish iOS application
+# Medic Connect iOS App
+Code repository for the Medic Connect iOS application
 
 ## Getting Started
 
