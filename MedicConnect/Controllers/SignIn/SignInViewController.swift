@@ -8,9 +8,6 @@
 
 import UIKit
 import ACFloatingTextfield
-import TwitterKit
-import FacebookCore
-import FacebookLogin
 
 class SignInViewController: BaseViewController, UITextFieldDelegate {
     
@@ -121,110 +118,6 @@ extension SignInViewController {
     @IBAction func tapSignup(_ sender: Any) {
         self.view.endEditing(true)
         self.performSegue(withIdentifier: "segueToWelcome", sender: nil)
-    }
-    
-    @IBAction func onLoginWithFB(sender: AnyObject) {
-        self.view.endEditing(true)
-        (sender as! UIButton).isEnabled = false
-        
-        let loginManager = LoginManager()
-        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
-            switch loginResult {
-            case .failed(let error):
-                print(error)
-            case .cancelled:
-                print("User cancelled login.")
-            case .success( _, _, let accessToken):
-                print("Logged in!")
-                let request = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: accessToken, httpMethod: .GET, apiVersion: FacebookCore.GraphAPIVersion.defaultVersion)
-                request.start { (response, result) in
-                    switch result {
-                    case .success(let value):
-                        if let fbUser = value.dictionaryValue, let fullName = fbUser["name"] as? String, let email = fbUser["email"] as? String, let id = fbUser["id"] as? String {
-                            print(fbUser)
-                            
-                            let password = fullName + id
-                            let _user = User(email: email, password: password)
-                            
-                            UserService.Instance.login(_user, completion: {
-                                (success: Bool, message: String) in
-                                
-                                if success {
-                                    self.navigationController?.popViewController(animated: false)
-                                    
-                                } else {
-                                    if !message.isEmpty {
-                                        AlertUtil.showOKAlert(self, message: "We can't find a Medic Connect account associated with that Facebook user.")
-                                    }
-                                    
-                                }
-                                (sender as! UIButton).isEnabled = true
-                            })
-                        }
-                        else {
-                            (sender as! UIButton).isEnabled = true
-                            AlertUtil.showOKAlert(self, message: "Oops! Failed to fetch user information from Facebook.")
-                        }
-                        
-                        break
-                    case .failed(let error):
-                        print(error)
-                        (sender as! UIButton).isEnabled = true
-                        AlertUtil.showOKAlert(self, message: "Oops! Failed to authenticate Facebook.")
-                    }
-                }
-            }
-        }
-    }
-    
-    @IBAction func onLoginWithTwitter(sender: AnyObject) {
-        self.view.endEditing(true)
-        (sender as! UIButton).isEnabled = false
-        
-        Twitter.sharedInstance().logIn(completion: { (session, error) in
-            if let s = session {
-                print("logged in user with id \(s.userID)")
-                print("logged in user with name \(s.userName)")
-                
-                let client = TWTRAPIClient.withCurrentUser()
-                client.loadUser(withID: s.userID, completion: { (user, error) in
-                    if let u = user {
-                        print("logged in user with screen name \(u.name)" )
-                        
-                        client.requestEmail { email, error in
-                            if (email != nil) {
-                                print("logged in user with name \(email!)")
-                                
-                                let password = u.screenName + u.userID
-                                let _user = User(email: email!, password: password)
-                                
-                                UserService.Instance.login(_user, completion: {
-                                    (success: Bool, message: String) in
-                                    
-                                    if success {
-                                        self.navigationController?.popViewController(animated: false)
-                                        
-                                    } else {
-                                        if !message.isEmpty {
-                                            AlertUtil.showOKAlert(self, message: "We can't find a Medic Connect account associated with that Twitter user.")
-                                        }
-                                        
-                                    }
-                                    (sender as! UIButton).isEnabled = true
-                                })
-                            }
-                        }
-                    }
-                })
-                
-            } else {
-                // log error
-                if let e = error {
-                    print("error: \(e.localizedDescription)")
-                }
-                (sender as! UIButton).isEnabled = true
-            }
-        })
     }
     
     @IBAction func onResetPassword(sender: AnyObject) {
