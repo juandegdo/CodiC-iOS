@@ -1,11 +1,11 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-target 'Radioish' do
+target 'MedicConnect' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Radioish
+  # Pods for MedicConnect
 
 pod 'ACFloatingTextfield'
 pod 'Alamofire'
@@ -33,12 +33,12 @@ pod 'FacebookCore'
 pod 'FacebookLogin'
 pod 'FacebookShare'
 
-  target 'RadioishTests' do
+  target 'MedicConnectTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'RadioishUITests' do
+  target 'MedicConnectUITests' do
     inherit! :search_paths
     # Pods for testing
   end
