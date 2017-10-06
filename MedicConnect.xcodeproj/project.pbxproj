@@ -253,7 +253,7 @@
 		D25EB15E1E845DA20082A9D5 /* Meta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		D25EB1601E8478B40082A9D5 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		D268F0E01E89875F0097BA48 /* MTScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MTScrollView.swift; path = MedicConnect/Helper/MTScrollView.swift; sourceTree = SOURCE_ROOT; };
-		D270B7D51DE51F7600458C2E /* MedicConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MedicConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D270B7D51DE51F7600458C2E /* Medic Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Medic Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D270B7D81DE51F7600458C2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D270B7DD1DE51F7600458C2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D270B7DF1DE51F7600458C2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -605,7 +605,7 @@
 		D270B7D61DE51F7600458C2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D270B7D51DE51F7600458C2E /* MedicConnect.app */,
+				D270B7D51DE51F7600458C2E /* Medic Connect.app */,
 				D270B7E91DE51F7600458C2E /* MedicConnectTests.xctest */,
 				D270B7F41DE51F7600458C2E /* MedicConnectUITests.xctest */,
 			);
@@ -776,7 +776,7 @@
 			);
 			name = MedicConnect;
 			productName = Radioish;
-			productReference = D270B7D51DE51F7600458C2E /* MedicConnect.app */;
+			productReference = D270B7D51DE51F7600458C2E /* Medic Connect.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D270B7E81DE51F7600458C2E /* MedicConnectTests */ = {
@@ -1347,7 +1347,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.loewen.medic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Medic Connect";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MedicConnect-Bridging-Header.h";
@@ -1372,7 +1372,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.loewen.medic;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Medic Connect";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MedicConnect-Bridging-Header.h";

@@ -16,7 +16,7 @@
         <!--Splash View Controller-->
         <scene sceneID="eJC-uK-5YF">
             <objects>
-                <viewController id="qSq-MU-kWL" customClass="SplashViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qSq-MU-kWL" customClass="SplashViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5b9-Ze-4m3"/>
                         <viewControllerLayoutGuide type="bottom" id="qF2-Tc-43o"/>
@@ -24,21 +24,7 @@
                     <view key="view" contentMode="scaleToFill" id="9Sa-ac-Vl7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2nc-0N-WKr">
-                                <rect key="frame" x="72.333333333333314" y="290" width="269.33333333333337" height="76"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="480" id="05i-Cj-F0v"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="2nc-0N-WKr" firstAttribute="width" secondItem="2nc-0N-WKr" secondAttribute="height" multiplier="480:136" id="3gQ-z9-PUc"/>
-                            <constraint firstItem="2nc-0N-WKr" firstAttribute="centerX" secondItem="9Sa-ac-Vl7" secondAttribute="centerX" id="IF1-XW-g8f"/>
-                            <constraint firstItem="2nc-0N-WKr" firstAttribute="width" secondItem="9Sa-ac-Vl7" secondAttribute="width" multiplier="0.65" priority="999" id="eib-3u-vzK"/>
-                            <constraint firstItem="2nc-0N-WKr" firstAttribute="centerY" secondItem="9Sa-ac-Vl7" secondAttribute="centerY" constant="-40" id="ySV-rB-mf0"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xdz-dz-zWo"/>
                     <connections>
@@ -71,7 +57,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="MHj-Fc-1NQ">
             <objects>
-                <viewController id="cXk-ZN-lTr" customClass="SignInViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cXk-ZN-lTr" customClass="SignInViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DgG-IT-sWd"/>
                         <viewControllerLayoutGuide type="bottom" id="dHD-jE-AFF"/>
@@ -363,7 +349,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="F7z-e8-ja9">
             <objects>
-                <viewController id="9Gq-tl-fyt" customClass="SignUpViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9Gq-tl-fyt" customClass="SignUpViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Hn-Wf-fdE"/>
                         <viewControllerLayoutGuide type="bottom" id="yTT-e9-oyL"/>
@@ -602,7 +588,7 @@
         <!--Home View Controller-->
         <scene sceneID="rbh-TN-VR8">
             <objects>
-                <viewController id="HhR-CN-ka1" customClass="HomeViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HhR-CN-ka1" customClass="HomeViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngl-8F-kZZ"/>
                         <viewControllerLayoutGuide type="bottom" id="XBZ-2G-V74"/>
@@ -817,7 +803,7 @@
         <!--Share Popup View Controller-->
         <scene sceneID="niA-Pn-nh1">
             <objects>
-                <viewController id="75C-cM-54S" customClass="SharePopupViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="75C-cM-54S" customClass="SharePopupViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LaE-y2-Nko"/>
                         <viewControllerLayoutGuide type="bottom" id="ooX-3A-5Jg"/>
@@ -1065,7 +1051,7 @@
         <!--Invite Popup View Controller-->
         <scene sceneID="qCz-nr-Cac">
             <objects>
-                <viewController storyboardIdentifier="InvitePopupVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mC0-Gl-I5p" customClass="InvitePopupViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InvitePopupVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mC0-Gl-I5p" customClass="InvitePopupViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yzl-Eh-eAc"/>
                         <viewControllerLayoutGuide type="bottom" id="n1a-oX-Lut"/>
@@ -1356,7 +1342,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Profile View Controller-->
         <scene sceneID="Z4U-6t-UEE">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" id="FrV-8f-pub" customClass="ProfileViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="FrV-8f-pub" customClass="ProfileViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WPy-RW-EkX"/>
                         <viewControllerLayoutGuide type="bottom" id="2Ka-lt-D84"/>
@@ -1718,7 +1704,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Edit Profile View Controller-->
         <scene sceneID="UBr-jB-S7x">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" id="dIj-Ko-9ku" customClass="EditProfileViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" id="dIj-Ko-9ku" customClass="EditProfileViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vp5-de-Hv4"/>
                         <viewControllerLayoutGuide type="bottom" id="pgj-k0-T9G"/>
@@ -1825,7 +1811,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhx-WM-U9d">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MHJ-SD-LYz" customClass="RadAvatar" customModule="MedicConnect" customModuleProvider="target">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MHJ-SD-LYz" customClass="RadAvatar" customModule="Medic_Connect" customModuleProvider="target">
                                         <rect key="frame" x="20" y="20" width="82" height="82"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2054,7 +2040,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Following View Controller-->
         <scene sceneID="GIH-pQ-q5I">
             <objects>
-                <viewController storyboardIdentifier="FollowingViewController" id="sow-wn-UC9" customClass="FollowingViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FollowingViewController" id="sow-wn-UC9" customClass="FollowingViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r9K-lj-jZx"/>
                         <viewControllerLayoutGuide type="bottom" id="9uK-Dc-dpL"/>
@@ -2238,7 +2224,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Pre Recording Broadcast View Controller-->
         <scene sceneID="ecF-5P-vE1">
             <objects>
-                <viewController id="4aX-01-L4Y" customClass="PreRecordingBroadcastViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4aX-01-L4Y" customClass="PreRecordingBroadcastViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="efS-CC-dqk"/>
                         <viewControllerLayoutGuide type="bottom" id="TJB-hW-T2r"/>
@@ -2410,7 +2396,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Recording Broadcast View Controller-->
         <scene sceneID="KXT-Ck-G8i">
             <objects>
-                <viewController id="w7X-aX-zW5" customClass="RecordingBroadcastViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="w7X-aX-zW5" customClass="RecordingBroadcastViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iMr-x8-0iN"/>
                         <viewControllerLayoutGuide type="bottom" id="XUP-Xh-Pk7"/>
@@ -2568,7 +2554,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Edit Recording Broadcast View Controller-->
         <scene sceneID="HCM-H5-O9l">
             <objects>
-                <viewController id="yyh-Zf-iCf" customClass="EditRecordingBroadcastViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yyh-Zf-iCf" customClass="EditRecordingBroadcastViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OKz-fT-kiM"/>
                         <viewControllerLayoutGuide type="bottom" id="kCY-7Q-fbx"/>
@@ -2663,7 +2649,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAg-A4-gA0">
                                 <rect key="frame" x="0.0" y="502" width="414" height="50"/>
                                 <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-NW-Njc" customClass="RecordSlider" customModule="MedicConnect" customModuleProvider="target">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-NW-Njc" customClass="RecordSlider" customModule="Medic_Connect" customModuleProvider="target">
                                         <rect key="frame" x="36" y="10" width="305" height="31"/>
                                         <color key="minimumTrackTintColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                         <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
@@ -2831,7 +2817,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Save Broadcast View Controller-->
         <scene sceneID="IBy-ee-BEk">
             <objects>
-                <viewController storyboardIdentifier="saveBroadcastVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QbM-bR-Xg1" customClass="SaveBroadcastViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="saveBroadcastVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QbM-bR-Xg1" customClass="SaveBroadcastViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tt5-8d-AId"/>
                         <viewControllerLayoutGuide type="bottom" id="At6-wg-hyJ"/>
@@ -3145,7 +3131,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Share Broadcast View Controller-->
         <scene sceneID="8bj-Fu-eVh">
             <objects>
-                <viewController id="XbM-PQ-f3v" customClass="ShareBroadcastViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XbM-PQ-f3v" customClass="ShareBroadcastViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ogd-OP-eLC"/>
                         <viewControllerLayoutGuide type="bottom" id="0M7-0w-rXQ"/>
@@ -3346,7 +3332,7 @@ uploaded a new broadcast...</string>
         <!--Tutorial View Controller-->
         <scene sceneID="Asx-dV-26P">
             <objects>
-                <viewController storyboardIdentifier="TutorialViewController" id="nDY-vz-RNp" customClass="TutorialViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TutorialViewController" id="nDY-vz-RNp" customClass="TutorialViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jgB-9P-Lel"/>
                         <viewControllerLayoutGuide type="bottom" id="XA8-oo-hnj"/>
@@ -3405,7 +3391,7 @@ uploaded a new broadcast...</string>
         <!--Notifications View Controller-->
         <scene sceneID="5oy-k9-cgb">
             <objects>
-                <viewController storyboardIdentifier="NotificationVC" id="8vy-hS-EQE" customClass="NotificationsViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotificationVC" id="8vy-hS-EQE" customClass="NotificationsViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IBG-wx-ZmW"/>
                         <viewControllerLayoutGuide type="bottom" id="gH8-eT-9M1"/>
@@ -3498,7 +3484,7 @@ uploaded a new broadcast...</string>
         <!--Change Password View Controller-->
         <scene sceneID="Mx8-wZ-fQ9">
             <objects>
-                <viewController storyboardIdentifier="ChangePasswordVC" id="TBf-wS-KCm" customClass="ChangePasswordViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChangePasswordVC" id="TBf-wS-KCm" customClass="ChangePasswordViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lmq-Aa-vln"/>
                         <viewControllerLayoutGuide type="bottom" id="LB6-KE-5Wa"/>
@@ -3593,7 +3579,7 @@ uploaded a new broadcast...</string>
         <!--Settings View Controller-->
         <scene sceneID="77w-0Z-SfE">
             <objects>
-                <viewController storyboardIdentifier="SettingsVC" id="8xs-e9-bht" customClass="SettingsViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsVC" id="8xs-e9-bht" customClass="SettingsViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UIO-bP-R9R"/>
                         <viewControllerLayoutGuide type="bottom" id="itd-9r-728"/>
@@ -3673,7 +3659,7 @@ uploaded a new broadcast...</string>
         <!--Settings Detail View Controller-->
         <scene sceneID="YmO-t3-2jd">
             <objects>
-                <viewController storyboardIdentifier="SettingsDetailViewController" id="blF-Iv-w30" customClass="SettingsDetailViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsDetailViewController" id="blF-Iv-w30" customClass="SettingsDetailViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2cv-ZU-h9V"/>
                         <viewControllerLayoutGuide type="bottom" id="0GA-KH-hCv"/>
@@ -3751,7 +3737,7 @@ uploaded a new broadcast...</string>
         <!--Blocked Users View Controller-->
         <scene sceneID="OYF-LP-Flg">
             <objects>
-                <viewController storyboardIdentifier="BlockedUsersVCId" id="M4W-7b-8Lm" customClass="BlockedUsersViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BlockedUsersVCId" id="M4W-7b-8Lm" customClass="BlockedUsersViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="13F-fe-heN"/>
                         <viewControllerLayoutGuide type="bottom" id="bG7-tO-gwK"/>
@@ -3801,7 +3787,7 @@ uploaded a new broadcast...</string>
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="blockedUsersCellId" rowHeight="88" id="sWG-BL-ZcP" customClass="BlockedUserTableViewCell" customModule="MedicConnect" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="blockedUsersCellId" rowHeight="88" id="sWG-BL-ZcP" customClass="BlockedUserTableViewCell" customModule="Medic_Connect" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWG-BL-ZcP" id="PM6-yj-LR9">
@@ -3914,7 +3900,7 @@ uploaded a new broadcast...</string>
         <!--Comments View Controller-->
         <scene sceneID="J2n-uP-ap9">
             <objects>
-                <viewController storyboardIdentifier="CommentsViewController" id="5MD-hV-YMx" customClass="CommentsViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentsViewController" id="5MD-hV-YMx" customClass="CommentsViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4ht-sd-WO4"/>
                         <viewControllerLayoutGuide type="bottom" id="Txq-Rv-Txg"/>
@@ -4067,7 +4053,7 @@ uploaded a new broadcast...</string>
         <!--Search View Controller-->
         <scene sceneID="MqY-33-ZMm">
             <objects>
-                <viewController id="5GW-o6-ZgT" customClass="SearchViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5GW-o6-ZgT" customClass="SearchViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wsJ-np-yu2"/>
                         <viewControllerLayoutGuide type="bottom" id="oll-mm-aiD"/>
@@ -4608,7 +4594,7 @@ uploaded a new broadcast...</string>
         <!--Search Results View Controller-->
         <scene sceneID="yMG-4z-mvN">
             <objects>
-                <viewController storyboardIdentifier="SearchResultsViewController" id="hrB-PQ-okv" customClass="SearchResultsViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchResultsViewController" id="hrB-PQ-okv" customClass="SearchResultsViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="56k-OM-Qcw"/>
                         <viewControllerLayoutGuide type="bottom" id="7f6-0B-IOm"/>
@@ -4725,7 +4711,7 @@ uploaded a new broadcast...</string>
         <!--Playlist View Controller-->
         <scene sceneID="GXV-qK-den">
             <objects>
-                <viewController id="XY9-CG-u4J" customClass="PlaylistViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XY9-CG-u4J" customClass="PlaylistViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PKg-Zi-qdc"/>
                         <viewControllerLayoutGuide type="bottom" id="ChP-ZN-SwZ"/>
@@ -5004,7 +4990,7 @@ uploaded a new broadcast...</string>
         <!--Welcome View Controller-->
         <scene sceneID="blI-UY-BiU">
             <objects>
-                <viewController id="oXR-9R-Zxs" customClass="WelcomeViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oXR-9R-Zxs" customClass="WelcomeViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qjJ-Ix-jdG"/>
                         <viewControllerLayoutGuide type="bottom" id="HXK-lp-hTx"/>
@@ -5172,7 +5158,7 @@ uploaded a new broadcast...</string>
         <!--Welcome Profile View Controller-->
         <scene sceneID="Je6-Rn-VcL">
             <objects>
-                <viewController storyboardIdentifier="WelcomeProfileVC" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DZR-Zp-gfd" customClass="WelcomeProfileViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeProfileVC" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DZR-Zp-gfd" customClass="WelcomeProfileViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fUR-0n-NRy"/>
                         <viewControllerLayoutGuide type="bottom" id="d7M-oR-GUK"/>
@@ -5412,7 +5398,7 @@ uploaded a new broadcast...</string>
         <!--Welcome Last View Controller-->
         <scene sceneID="hdL-0S-B5B">
             <objects>
-                <viewController storyboardIdentifier="WelcomeLastVC" id="OES-br-f5G" customClass="WelcomeLastViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeLastVC" id="OES-br-f5G" customClass="WelcomeLastViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BKh-85-3Tg"/>
                         <viewControllerLayoutGuide type="bottom" id="gaT-q6-MiD"/>
@@ -5538,7 +5524,7 @@ uploaded a new broadcast...</string>
         <!--Reset View Controller-->
         <scene sceneID="viO-wx-Q7u">
             <objects>
-                <viewController storyboardIdentifier="ResetVC" id="2vA-gC-TmH" customClass="ResetViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetVC" id="2vA-gC-TmH" customClass="ResetViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2r1-6P-v2g"/>
                         <viewControllerLayoutGuide type="bottom" id="Et2-d8-aZf"/>
@@ -5697,7 +5683,7 @@ uploaded a new broadcast...</string>
         <!--Another Profile View Controller-->
         <scene sceneID="tOG-jQ-4xg">
             <objects>
-                <viewController storyboardIdentifier="AnotherProfileViewController" id="MgO-f2-Y45" customClass="AnotherProfileViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnotherProfileViewController" id="MgO-f2-Y45" customClass="AnotherProfileViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ozP-ts-pqh"/>
                         <viewControllerLayoutGuide type="bottom" id="oQh-GE-cCt"/>
@@ -6031,7 +6017,7 @@ uploaded a new broadcast...</string>
         <!--Reset Password View Controller-->
         <scene sceneID="2Ma-cS-EMB">
             <objects>
-                <viewController storyboardIdentifier="ResetPasswordVC" id="Ml5-ez-YjT" customClass="ResetPasswordViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResetPasswordVC" id="Ml5-ez-YjT" customClass="ResetPasswordViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7C0-dR-ftr"/>
                         <viewControllerLayoutGuide type="bottom" id="M5m-80-9TE"/>
@@ -6216,7 +6202,7 @@ uploaded a new broadcast...</string>
         <!--Likes View Controller-->
         <scene sceneID="KOc-t4-a1Q">
             <objects>
-                <viewController storyboardIdentifier="LikesViewController" id="GjL-E6-AxO" customClass="LikesViewController" customModule="MedicConnect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LikesViewController" id="GjL-E6-AxO" customClass="LikesViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gFO-Xw-dKG"/>
                         <viewControllerLayoutGuide type="bottom" id="lDt-AJ-pCb"/>
@@ -6394,7 +6380,6 @@ uploaded a new broadcast...</string>
         <image name="icon_social_twitter_off" width="38" height="38"/>
         <image name="icon_social_twitter_on" width="38" height="38"/>
         <image name="icon_textview_rectangle" width="16" height="16"/>
-        <image name="splash_logo" width="236" height="67"/>
         <image name="tab_icon_home" width="23" height="20"/>
         <image name="tab_icon_playlist" width="25" height="19"/>
         <image name="tab_icon_profile" width="18" height="21"/>

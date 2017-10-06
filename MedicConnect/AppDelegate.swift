@@ -13,8 +13,6 @@ import Crashlytics
 import UserNotifications
 import CoreData
 import AVFoundation
-import TwitterKit
-import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -48,31 +46,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("Failed to enable playing audio in silent mode")
         }
         
-        // Twitter Init
-        Twitter.sharedInstance().start(withConsumerKey:"BGW2Oh2P632SKpZeIhdYvDRFu", consumerSecret:"TGJxSHjH1yqVLcXz1dOZNPOQ82tvCkz9VwO4Zv77fjqEpuEuoi")
-        
-        // Facebook Init
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
         return true
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if url.absoluteString.contains("twitterkit") {
-            return Twitter.sharedInstance().application(app, open: url, options: options)
-        }
-        else if url.absoluteString.lowercased().contains("medicconnectlink"){
+        if url.absoluteString.lowercased().contains("medicconnectlink"){
             let notificationName = "goToResetPassword"
             let data:[String: String] = ["token": url.lastPathComponent]
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationName), object: nil, userInfo: data)
             
             return true
         }
-        else {
-            // Facebook
-            return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
-        }
+        
+        return false
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

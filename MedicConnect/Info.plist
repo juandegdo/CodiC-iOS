@@ -28,18 +28,6 @@
 				<string>MedicConnectLink</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>twitterkit-BGW2Oh2P632SKpZeIhdYvDRFu</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb144618109458235</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>29</string>
@@ -57,19 +45,6 @@
             </dict>
         </array>
     </dict>
-	<key>FacebookAppID</key>
-	<string>144618109458235</string>
-	<key>FacebookDisplayName</key>
-	<string>Medic Connect</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>twitter</string>
-		<string>twitterauth</string>
-		<string>fbapi</string>
-		<string>fb-messenger-api</string>
-		<string>fbauth2</string>
-		<string>fbshareextension</string>
-	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
