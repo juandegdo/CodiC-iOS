@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "bg_profile_btn.png",
+      "filename" : "icon_show_profile.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "bg_profile_btn@2x.png",
+      "filename" : "icon_show_profile@2x.png",
       "scale" : "2x"
     },
     {

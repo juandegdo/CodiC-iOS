@@ -11,10 +11,9 @@ import UIKit
 class Constants {
     
     // MARK: Segue Constants
-    static let SegueMedicConnectWelcome = "segueToWelcome"
-    static let SegueMedicConnectSignup = "Signup"
+    static let SegueMedicConnectSignup = "segueToSignUp"
     static let SegueMedicConnectWelcomeProfile = "segueToWelcomeProfile"
-    static let SegueMedicConnectWelcomeFinal = "WelcomeFinal"
+    static let SegueMedicConnectWelcomeLast = "segueToWelcomeLast"
     static let SegueMedicConnectHome = "GoHome"
     static let SegueMedicConnectSignIn = "GoSignIn"
     static let SegueMedicConnectShareBroadcastPopup = "ShareBroadcastPopUp"

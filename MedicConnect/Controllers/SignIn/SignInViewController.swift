@@ -117,7 +117,7 @@ extension SignInViewController {
     
     @IBAction func tapSignup(_ sender: Any) {
         self.view.endEditing(true)
-        self.performSegue(withIdentifier: "segueToWelcome", sender: nil)
+        self.performSegue(withIdentifier: Constants.SegueMedicConnectSignup, sender: nil)
     }
     
     @IBAction func onResetPassword(sender: AnyObject) {
