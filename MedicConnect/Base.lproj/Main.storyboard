@@ -610,11 +610,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="JCQ-Oq-JTY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="111" id="yaA-YT-Vxj"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="zXe-qG-YmM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wo9-V8-Ib5">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -740,7 +738,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JCQ-Oq-JTY" firstAttribute="top" secondItem="e8m-lB-JTI" secondAttribute="top" id="Bec-Xx-cxM"/>
+                            <constraint firstItem="zXe-qG-YmM" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="2ha-XU-vfg"/>
                             <constraint firstItem="PnI-mP-a7E" firstAttribute="top" secondItem="BL4-yZ-5tD" secondAttribute="bottom" id="He0-Ng-YQE"/>
                             <constraint firstItem="XBZ-2G-V74" firstAttribute="top" secondItem="PnI-mP-a7E" secondAttribute="bottom" id="Hfm-mU-tbL"/>
                             <constraint firstItem="PnI-mP-a7E" firstAttribute="top" secondItem="BL4-yZ-5tD" secondAttribute="bottom" id="Hro-2C-lnW"/>
@@ -748,12 +746,13 @@
                             <constraint firstAttribute="trailing" secondItem="PnI-mP-a7E" secondAttribute="trailing" id="Ozg-x8-Jld"/>
                             <constraint firstItem="BL4-yZ-5tD" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="bottom" id="SPV-jN-TKF"/>
                             <constraint firstItem="BL4-yZ-5tD" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="bottom" id="VnX-bu-jTa"/>
+                            <constraint firstItem="zXe-qG-YmM" firstAttribute="top" secondItem="e8m-lB-JTI" secondAttribute="top" id="bPb-vh-xaU"/>
                             <constraint firstItem="PnI-mP-a7E" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" constant="-1" id="cYl-hZ-kVf"/>
                             <constraint firstAttribute="trailing" secondItem="Wo9-V8-Ib5" secondAttribute="trailing" id="ngP-qI-WMK"/>
                             <constraint firstAttribute="trailing" secondItem="BL4-yZ-5tD" secondAttribute="trailing" id="pb4-bH-lsL"/>
-                            <constraint firstItem="JCQ-Oq-JTY" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="qM7-KC-Grx"/>
                             <constraint firstItem="Wo9-V8-Ib5" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="qUQ-c5-rSt"/>
-                            <constraint firstAttribute="trailing" secondItem="JCQ-Oq-JTY" secondAttribute="trailing" id="wSJ-h0-hHM"/>
+                            <constraint firstAttribute="bottom" secondItem="zXe-qG-YmM" secondAttribute="bottom" id="ttf-s3-mGb"/>
+                            <constraint firstAttribute="trailing" secondItem="zXe-qG-YmM" secondAttribute="trailing" id="uRp-hd-D4A"/>
                             <constraint firstItem="BL4-yZ-5tD" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="zoM-0z-a4I"/>
                         </constraints>
                     </view>
@@ -2062,11 +2061,9 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="z2q-dH-bW5">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="111" id="oAW-Dr-Qnt"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="wVY-ma-WBI">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wg9-jM-k7X">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -2204,19 +2201,20 @@ community. Invite people that you actually like to give it a try ;)</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="z2q-dH-bW5" firstAttribute="top" secondItem="eBx-fI-aBV" secondAttribute="top" id="4Pn-g4-jxD"/>
+                            <constraint firstAttribute="trailing" secondItem="wVY-ma-WBI" secondAttribute="trailing" id="4yf-Eo-RlJ"/>
                             <constraint firstItem="9uK-Dc-dpL" firstAttribute="top" secondItem="Xaw-TM-lIY" secondAttribute="bottom" id="5xu-d5-JSJ"/>
+                            <constraint firstItem="wVY-ma-WBI" firstAttribute="top" secondItem="eBx-fI-aBV" secondAttribute="top" id="BGd-ty-6g5"/>
+                            <constraint firstItem="wVY-ma-WBI" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="Byu-sX-DKN"/>
                             <constraint firstItem="Wg9-jM-k7X" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="HrS-FX-X4t"/>
                             <constraint firstAttribute="trailing" secondItem="Wg9-jM-k7X" secondAttribute="trailing" id="Jo5-PG-9Up"/>
+                            <constraint firstItem="9uK-Dc-dpL" firstAttribute="top" secondItem="wVY-ma-WBI" secondAttribute="bottom" id="Juf-ca-WV0"/>
                             <constraint firstItem="Xaw-TM-lIY" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" constant="-1" id="KUa-XV-j1o"/>
                             <constraint firstItem="wUC-ii-Gz0" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="W0W-h8-2TM"/>
                             <constraint firstItem="Xaw-TM-lIY" firstAttribute="top" secondItem="wUC-ii-Gz0" secondAttribute="bottom" id="ZeB-85-Ufk"/>
                             <constraint firstAttribute="trailing" secondItem="Xaw-TM-lIY" secondAttribute="trailing" id="cES-0x-Sb4"/>
                             <constraint firstAttribute="trailing" secondItem="wUC-ii-Gz0" secondAttribute="trailing" id="fSW-MT-eve"/>
-                            <constraint firstItem="z2q-dH-bW5" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="rZA-4a-i8i"/>
                             <constraint firstItem="Wg9-jM-k7X" firstAttribute="top" secondItem="eBx-fI-aBV" secondAttribute="top" id="xWg-FR-k5n"/>
                             <constraint firstItem="wUC-ii-Gz0" firstAttribute="top" secondItem="Wg9-jM-k7X" secondAttribute="bottom" id="xxy-pY-5fQ"/>
-                            <constraint firstAttribute="trailing" secondItem="z2q-dH-bW5" secondAttribute="trailing" id="zaE-bG-Dma"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Iye-PE-mDq"/>
@@ -2811,12 +2809,13 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="TKx-ep-Fdh">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Vm-iJ-YUM" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="i3S-Xu-6h4">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cSE-zg-J0U">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -2847,16 +2846,12 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="PFR-fd-QvR" firstAttribute="leading" secondItem="cSE-zg-J0U" secondAttribute="trailing" constant="10" id="1wi-di-1G7"/>
-                                    <constraint firstAttribute="bottom" secondItem="i3S-Xu-6h4" secondAttribute="bottom" id="6Zc-Hy-Yh5"/>
-                                    <constraint firstAttribute="trailing" secondItem="i3S-Xu-6h4" secondAttribute="trailing" id="7Gc-xy-HSn"/>
                                     <constraint firstAttribute="height" constant="64" id="FJh-08-qja"/>
                                     <constraint firstItem="2G1-FC-JWS" firstAttribute="leading" secondItem="PFR-fd-QvR" secondAttribute="trailing" constant="10" id="Nkt-Fw-AcG"/>
                                     <constraint firstAttribute="trailing" secondItem="2G1-FC-JWS" secondAttribute="trailing" constant="5" id="OnR-w9-H0I"/>
                                     <constraint firstItem="cSE-zg-J0U" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" constant="22" id="XAK-VH-zh4"/>
                                     <constraint firstItem="cSE-zg-J0U" firstAttribute="leading" secondItem="7Vm-iJ-YUM" secondAttribute="leading" id="ZnE-zO-w9m"/>
-                                    <constraint firstItem="i3S-Xu-6h4" firstAttribute="leading" secondItem="7Vm-iJ-YUM" secondAttribute="leading" id="bkR-7E-NG3"/>
                                     <constraint firstItem="2G1-FC-JWS" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" constant="22" id="cNb-iM-czg"/>
-                                    <constraint firstItem="i3S-Xu-6h4" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" id="gj8-e8-7Gw"/>
                                     <constraint firstItem="PFR-fd-QvR" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" constant="32" id="jej-ni-1a1"/>
                                 </constraints>
                             </view>
@@ -3088,10 +3083,14 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="n45-8P-jlA" secondAttribute="trailing" id="COI-5G-YH2"/>
                             <constraint firstAttribute="trailing" secondItem="7Vm-iJ-YUM" secondAttribute="trailing" id="EO3-ek-SpB"/>
+                            <constraint firstAttribute="trailing" secondItem="TKx-ep-Fdh" secondAttribute="trailing" id="EUt-Qq-crb"/>
                             <constraint firstItem="n45-8P-jlA" firstAttribute="leading" secondItem="qVt-QN-5qv" secondAttribute="leading" id="Oic-y7-4eA"/>
+                            <constraint firstAttribute="bottom" secondItem="TKx-ep-Fdh" secondAttribute="bottom" id="dio-Hu-qUa"/>
+                            <constraint firstItem="TKx-ep-Fdh" firstAttribute="top" secondItem="qVt-QN-5qv" secondAttribute="top" id="flU-UK-Tp0"/>
                             <constraint firstItem="7Vm-iJ-YUM" firstAttribute="top" secondItem="qVt-QN-5qv" secondAttribute="top" id="jMj-V5-aEY"/>
                             <constraint firstAttribute="bottom" secondItem="n45-8P-jlA" secondAttribute="bottom" id="o3l-3H-DoW"/>
                             <constraint firstItem="n45-8P-jlA" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="bottom" id="p9j-3X-wCC"/>
+                            <constraint firstItem="TKx-ep-Fdh" firstAttribute="leading" secondItem="qVt-QN-5qv" secondAttribute="leading" id="wJs-xK-Iq9"/>
                             <constraint firstItem="7Vm-iJ-YUM" firstAttribute="leading" secondItem="qVt-QN-5qv" secondAttribute="leading" id="zi6-e4-u9X"/>
                         </constraints>
                     </view>
@@ -3385,12 +3384,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="adz-xi-KzH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-5b-Ssx" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_dark_blue" translatesAutoresizingMaskIntoConstraints="NO" id="Zbt-NE-mjA">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hnh-CD-wWM">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -3428,13 +3428,9 @@ uploaded a new broadcast...</string>
                                     <constraint firstAttribute="height" constant="64" id="3Eh-XI-d6y"/>
                                     <constraint firstItem="Fyy-tg-cAn" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" constant="50" id="8dk-V7-J8X"/>
                                     <constraint firstAttribute="trailing" secondItem="MgU-Bh-hJF" secondAttribute="trailing" constant="5" id="Qvx-vr-jHP"/>
-                                    <constraint firstItem="Zbt-NE-mjA" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" id="TgS-5p-agu"/>
-                                    <constraint firstItem="Zbt-NE-mjA" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" id="aWb-gf-dbg"/>
                                     <constraint firstItem="MgU-Bh-hJF" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" constant="22" id="d7n-vZ-rjQ"/>
                                     <constraint firstItem="Hnh-CD-wWM" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" id="g0g-YK-Axo"/>
                                     <constraint firstItem="Fyy-tg-cAn" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" constant="32" id="ltC-BD-uDQ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Zbt-NE-mjA" secondAttribute="trailing" id="m21-h8-SEe"/>
-                                    <constraint firstAttribute="bottom" secondItem="Zbt-NE-mjA" secondAttribute="bottom" id="ngm-e2-lbm"/>
                                     <constraint firstItem="Hnh-CD-wWM" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" constant="22" id="pqr-0w-yI5"/>
                                 </constraints>
                             </view>
@@ -3451,11 +3447,15 @@ uploaded a new broadcast...</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Adq-5b-Ssx" secondAttribute="trailing" id="0iC-Xy-TYa"/>
                             <constraint firstAttribute="trailing" secondItem="LXI-yD-OwK" secondAttribute="trailing" id="0mq-dy-jKu"/>
+                            <constraint firstItem="adz-xi-KzH" firstAttribute="top" secondItem="KZX-RU-DYP" secondAttribute="top" id="ELB-G3-ba3"/>
+                            <constraint firstAttribute="trailing" secondItem="adz-xi-KzH" secondAttribute="trailing" id="Jni-OL-dJL"/>
                             <constraint firstItem="LXI-yD-OwK" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="bottom" id="KL2-Vf-qWf"/>
                             <constraint firstItem="gH8-eT-9M1" firstAttribute="top" secondItem="LXI-yD-OwK" secondAttribute="bottom" id="MH9-C3-lVS"/>
                             <constraint firstItem="Adq-5b-Ssx" firstAttribute="leading" secondItem="KZX-RU-DYP" secondAttribute="leading" id="UpT-S5-Aci"/>
+                            <constraint firstItem="adz-xi-KzH" firstAttribute="leading" secondItem="KZX-RU-DYP" secondAttribute="leading" id="gjb-Jx-DY4"/>
                             <constraint firstItem="Adq-5b-Ssx" firstAttribute="top" secondItem="KZX-RU-DYP" secondAttribute="top" id="kTG-re-3Rm"/>
                             <constraint firstItem="LXI-yD-OwK" firstAttribute="leading" secondItem="KZX-RU-DYP" secondAttribute="leading" id="mST-zH-2hL"/>
+                            <constraint firstItem="gH8-eT-9M1" firstAttribute="top" secondItem="adz-xi-KzH" secondAttribute="bottom" id="tvE-u8-5SD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3478,12 +3478,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="K07-N7-pif">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HIw-1e-xMo" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_dark_blue" translatesAutoresizingMaskIntoConstraints="NO" id="kg5-Nc-XJE">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNg-D7-18U">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -3520,16 +3521,12 @@ uploaded a new broadcast...</string>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="dku-hO-ZGK" secondAttribute="trailing" constant="5" id="22f-k8-WaF"/>
                                     <constraint firstItem="pNg-D7-18U" firstAttribute="top" secondItem="HIw-1e-xMo" secondAttribute="top" constant="22" id="8uf-O7-X91"/>
-                                    <constraint firstItem="kg5-Nc-XJE" firstAttribute="top" secondItem="HIw-1e-xMo" secondAttribute="top" id="Bvd-LY-QpV"/>
                                     <constraint firstItem="dku-hO-ZGK" firstAttribute="top" secondItem="HIw-1e-xMo" secondAttribute="top" constant="22" id="Ix8-9C-lvp"/>
                                     <constraint firstItem="utY-pZ-6xd" firstAttribute="leading" secondItem="HIw-1e-xMo" secondAttribute="leading" constant="50" id="KGY-U0-qVT"/>
-                                    <constraint firstAttribute="bottom" secondItem="kg5-Nc-XJE" secondAttribute="bottom" id="LD0-9K-ddb"/>
-                                    <constraint firstItem="kg5-Nc-XJE" firstAttribute="leading" secondItem="HIw-1e-xMo" secondAttribute="leading" id="aGp-a7-Rmy"/>
                                     <constraint firstItem="pNg-D7-18U" firstAttribute="leading" secondItem="HIw-1e-xMo" secondAttribute="leading" id="fZ1-WY-6w8"/>
                                     <constraint firstAttribute="trailing" secondItem="utY-pZ-6xd" secondAttribute="trailing" constant="50" id="hc6-Yb-Bll"/>
                                     <constraint firstAttribute="height" constant="64" id="hd5-Hk-ZJ8"/>
                                     <constraint firstItem="utY-pZ-6xd" firstAttribute="top" secondItem="HIw-1e-xMo" secondAttribute="top" constant="32" id="i9Y-Tj-oCD"/>
-                                    <constraint firstAttribute="trailing" secondItem="kg5-Nc-XJE" secondAttribute="trailing" id="sMn-No-Y26"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Lu-ya-ePh">
@@ -3546,9 +3543,13 @@ uploaded a new broadcast...</string>
                             <constraint firstItem="LB6-KE-5Wa" firstAttribute="top" secondItem="5Lu-ya-ePh" secondAttribute="bottom" id="CMe-OW-kt3"/>
                             <constraint firstItem="5Lu-ya-ePh" firstAttribute="top" secondItem="HIw-1e-xMo" secondAttribute="bottom" id="CgC-Q7-yBI"/>
                             <constraint firstAttribute="trailing" secondItem="5Lu-ya-ePh" secondAttribute="trailing" id="ImP-yI-BQu"/>
+                            <constraint firstItem="K07-N7-pif" firstAttribute="top" secondItem="Izv-XD-sa0" secondAttribute="top" id="Jsw-Gu-4HC"/>
                             <constraint firstItem="HIw-1e-xMo" firstAttribute="top" secondItem="Izv-XD-sa0" secondAttribute="top" id="M6H-Em-sIF"/>
                             <constraint firstItem="HIw-1e-xMo" firstAttribute="leading" secondItem="Izv-XD-sa0" secondAttribute="leading" id="S3u-q0-OHW"/>
+                            <constraint firstItem="K07-N7-pif" firstAttribute="leading" secondItem="Izv-XD-sa0" secondAttribute="leading" id="dTd-wJ-6PR"/>
+                            <constraint firstAttribute="trailing" secondItem="K07-N7-pif" secondAttribute="trailing" id="fh3-5H-riE"/>
                             <constraint firstAttribute="trailing" secondItem="HIw-1e-xMo" secondAttribute="trailing" id="tbH-vs-V7R"/>
+                            <constraint firstItem="LB6-KE-5Wa" firstAttribute="top" secondItem="K07-N7-pif" secondAttribute="bottom" id="vrP-c3-lZ5"/>
                             <constraint firstItem="5Lu-ya-ePh" firstAttribute="leading" secondItem="Izv-XD-sa0" secondAttribute="leading" id="vub-lg-1Hi"/>
                         </constraints>
                     </view>
@@ -3654,12 +3655,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="k1X-cB-qd2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xe-F3-Xqz" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="DiL-wT-Wbj">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dc-3y-gB2">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -3681,15 +3683,11 @@ uploaded a new broadcast...</string>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="fiO-uo-FGg" secondAttribute="bottom" constant="12" id="2ra-Z1-WYu"/>
                                     <constraint firstAttribute="height" constant="64" id="3NG-LN-E6f"/>
-                                    <constraint firstAttribute="trailing" secondItem="DiL-wT-Wbj" secondAttribute="trailing" id="5rr-xY-sCk"/>
                                     <constraint firstItem="2dc-3y-gB2" firstAttribute="leading" secondItem="4xe-F3-Xqz" secondAttribute="leading" id="C2k-mP-mXb"/>
                                     <constraint firstItem="fiO-uo-FGg" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="32" id="Heg-gN-1EK"/>
                                     <constraint firstAttribute="trailing" secondItem="fiO-uo-FGg" secondAttribute="trailing" constant="50" id="U83-Dx-ZcQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="DiL-wT-Wbj" secondAttribute="bottom" id="bep-Y0-gGp"/>
                                     <constraint firstItem="2dc-3y-gB2" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="22" id="cCp-rn-rgf"/>
-                                    <constraint firstItem="DiL-wT-Wbj" firstAttribute="leading" secondItem="4xe-F3-Xqz" secondAttribute="leading" id="m9L-TJ-60E"/>
                                     <constraint firstItem="fiO-uo-FGg" firstAttribute="leading" secondItem="2dc-3y-gB2" secondAttribute="trailing" constant="10" id="y2b-YI-ccf"/>
-                                    <constraint firstItem="DiL-wT-Wbj" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" id="zmN-Ms-FfY"/>
                                 </constraints>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-vF-8Dj">
@@ -3708,7 +3706,11 @@ uploaded a new broadcast...</string>
                             <constraint firstItem="4xe-F3-Xqz" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Xee-Df-RYj"/>
                             <constraint firstAttribute="trailing" secondItem="CZA-vF-8Dj" secondAttribute="trailing" id="YTd-g2-uzZ"/>
                             <constraint firstItem="CZA-vF-8Dj" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Zpv-4D-KwC"/>
+                            <constraint firstItem="0GA-KH-hCv" firstAttribute="top" secondItem="k1X-cB-qd2" secondAttribute="bottom" id="aZ0-T5-N2m"/>
+                            <constraint firstItem="k1X-cB-qd2" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="chN-u2-cxu"/>
                             <constraint firstItem="0GA-KH-hCv" firstAttribute="top" secondItem="CZA-vF-8Dj" secondAttribute="bottom" id="i3a-K0-ETJ"/>
+                            <constraint firstAttribute="trailing" secondItem="k1X-cB-qd2" secondAttribute="trailing" id="ntg-mM-08q"/>
+                            <constraint firstItem="k1X-cB-qd2" firstAttribute="top" secondItem="1fB-zz-69v" secondAttribute="top" id="sSY-Iy-m0W"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3732,13 +3734,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="7b9-Qj-mRy">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMq-Bd-iXK" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="IzF-Gs-ey8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpB-kS-hSv">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -3777,7 +3779,7 @@ uploaded a new broadcast...</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWG-BL-ZcP" id="PM6-yj-LR9">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="87.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-0w-zZl">
@@ -3868,8 +3870,12 @@ uploaded a new broadcast...</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Wt7-wM-ips" secondAttribute="trailing" id="02y-WB-CTD"/>
                             <constraint firstItem="Wt7-wM-ips" firstAttribute="top" secondItem="TMq-Bd-iXK" secondAttribute="bottom" id="3pd-ze-77y"/>
+                            <constraint firstItem="7b9-Qj-mRy" firstAttribute="top" secondItem="A6J-wg-u9w" secondAttribute="top" id="9xY-Qq-3Oj"/>
                             <constraint firstItem="TMq-Bd-iXK" firstAttribute="top" secondItem="A6J-wg-u9w" secondAttribute="top" id="DRH-He-xQS"/>
+                            <constraint firstAttribute="trailing" secondItem="7b9-Qj-mRy" secondAttribute="trailing" id="Nbu-Sb-I3r"/>
                             <constraint firstAttribute="trailing" secondItem="TMq-Bd-iXK" secondAttribute="trailing" id="V99-0b-Ute"/>
+                            <constraint firstItem="bG7-tO-gwK" firstAttribute="top" secondItem="7b9-Qj-mRy" secondAttribute="bottom" id="Xvc-Iq-8lK"/>
+                            <constraint firstItem="7b9-Qj-mRy" firstAttribute="leading" secondItem="A6J-wg-u9w" secondAttribute="leading" id="hpx-rA-TpF"/>
                             <constraint firstItem="TMq-Bd-iXK" firstAttribute="leading" secondItem="A6J-wg-u9w" secondAttribute="leading" id="iB7-bO-KOb"/>
                             <constraint firstItem="Wt7-wM-ips" firstAttribute="leading" secondItem="A6J-wg-u9w" secondAttribute="leading" id="kZE-f0-tir"/>
                             <constraint firstItem="bG7-tO-gwK" firstAttribute="top" secondItem="Wt7-wM-ips" secondAttribute="bottom" id="xwg-lc-DJg"/>
@@ -3895,12 +3901,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="SgM-Re-15L">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Oo-HY-nTE">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="1M7-JA-1cp">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpI-NF-821">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -3955,8 +3962,6 @@ uploaded a new broadcast...</string>
                                 <constraints>
                                     <constraint firstItem="Ene-p3-BIy" firstAttribute="leading" secondItem="1Oo-HY-nTE" secondAttribute="leading" constant="90" id="FeS-hP-KcW"/>
                                     <constraint firstItem="jML-9s-vIG" firstAttribute="leading" secondItem="yaa-T8-F5V" secondAttribute="trailing" id="K9n-UF-59L"/>
-                                    <constraint firstAttribute="trailing" secondItem="1M7-JA-1cp" secondAttribute="trailing" id="M0e-eM-e2U"/>
-                                    <constraint firstItem="1M7-JA-1cp" firstAttribute="top" secondItem="1Oo-HY-nTE" secondAttribute="top" id="Msw-7p-zTB"/>
                                     <constraint firstAttribute="trailing" secondItem="jML-9s-vIG" secondAttribute="trailing" constant="5" id="QPs-j1-dZa"/>
                                     <constraint firstItem="cpI-NF-821" firstAttribute="top" secondItem="1Oo-HY-nTE" secondAttribute="top" constant="22" id="QVn-rN-1We"/>
                                     <constraint firstItem="jML-9s-vIG" firstAttribute="top" secondItem="1Oo-HY-nTE" secondAttribute="top" constant="22" id="U0Y-E2-9qc"/>
@@ -3965,9 +3970,7 @@ uploaded a new broadcast...</string>
                                     <constraint firstItem="cpI-NF-821" firstAttribute="leading" secondItem="1Oo-HY-nTE" secondAttribute="leading" id="a1f-Ie-sWz"/>
                                     <constraint firstItem="yaa-T8-F5V" firstAttribute="centerY" secondItem="jML-9s-vIG" secondAttribute="centerY" id="cu9-JM-ReI"/>
                                     <constraint firstItem="Ene-p3-BIy" firstAttribute="top" secondItem="1Oo-HY-nTE" secondAttribute="top" constant="32" id="fp3-yW-qHg"/>
-                                    <constraint firstItem="1M7-JA-1cp" firstAttribute="leading" secondItem="1Oo-HY-nTE" secondAttribute="leading" id="kiV-Hx-ChF"/>
                                     <constraint firstItem="Fip-aI-adV" firstAttribute="leading" secondItem="cpI-NF-821" secondAttribute="trailing" id="ln5-q6-mJ5"/>
-                                    <constraint firstAttribute="bottom" secondItem="1M7-JA-1cp" secondAttribute="bottom" id="vND-bd-0Gs"/>
                                     <constraint firstAttribute="height" constant="64" id="w6v-To-WD1"/>
                                 </constraints>
                             </view>
@@ -4017,12 +4020,16 @@ uploaded a new broadcast...</string>
                             <constraint firstItem="1Oo-HY-nTE" firstAttribute="top" secondItem="dHS-vt-ZSg" secondAttribute="top" id="BWA-vP-Qfj"/>
                             <constraint firstItem="yC6-zF-yyg" firstAttribute="top" secondItem="xZT-RL-hnh" secondAttribute="bottom" id="N07-zS-Ybo"/>
                             <constraint firstItem="xZT-RL-hnh" firstAttribute="top" secondItem="1Oo-HY-nTE" secondAttribute="bottom" id="NKb-KB-AYH"/>
+                            <constraint firstItem="Txq-Rv-Txg" firstAttribute="top" secondItem="SgM-Re-15L" secondAttribute="bottom" id="UFJ-mz-f1F"/>
                             <constraint firstItem="yC6-zF-yyg" firstAttribute="leading" secondItem="dHS-vt-ZSg" secondAttribute="leading" id="Unb-Yi-yah"/>
+                            <constraint firstItem="SgM-Re-15L" firstAttribute="top" secondItem="dHS-vt-ZSg" secondAttribute="top" id="V2S-Zr-3rV"/>
                             <constraint firstAttribute="trailing" secondItem="yC6-zF-yyg" secondAttribute="trailing" id="Ves-Da-AJG"/>
+                            <constraint firstItem="SgM-Re-15L" firstAttribute="leading" secondItem="dHS-vt-ZSg" secondAttribute="leading" id="Xwk-Xg-i0i"/>
                             <constraint firstItem="xZT-RL-hnh" firstAttribute="leading" secondItem="dHS-vt-ZSg" secondAttribute="leading" id="fZi-Kn-G1N"/>
                             <constraint firstAttribute="trailing" secondItem="xZT-RL-hnh" secondAttribute="trailing" id="hHh-S7-OnJ"/>
                             <constraint firstItem="Txq-Rv-Txg" firstAttribute="top" secondItem="yC6-zF-yyg" secondAttribute="bottom" id="hTV-Nm-Chi"/>
                             <constraint firstAttribute="trailing" secondItem="1Oo-HY-nTE" secondAttribute="trailing" id="u1P-8l-fbl"/>
+                            <constraint firstAttribute="trailing" secondItem="SgM-Re-15L" secondAttribute="trailing" id="urw-v4-cAe"/>
                             <constraint firstItem="1Oo-HY-nTE" firstAttribute="leading" secondItem="dHS-vt-ZSg" secondAttribute="leading" id="xqN-nB-K8h"/>
                         </constraints>
                     </view>
@@ -4048,12 +4055,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="yIV-Le-H2f">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1k-no-0HS">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="1Yc-AR-Pgy">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEs-Jq-vaO" userLabel="Navigation">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                         <subviews>
@@ -4326,17 +4334,13 @@ uploaded a new broadcast...</string>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="tEs-Jq-vaO" firstAttribute="top" secondItem="q1k-no-0HS" secondAttribute="top" id="1eD-ap-uYv"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Yc-AR-Pgy" secondAttribute="trailing" id="1oT-dO-Ipm"/>
-                                    <constraint firstAttribute="bottom" secondItem="1Yc-AR-Pgy" secondAttribute="bottom" id="7Pl-4C-WQB"/>
-                                    <constraint firstItem="1Yc-AR-Pgy" firstAttribute="top" secondItem="q1k-no-0HS" secondAttribute="top" id="Cnp-xN-a9z"/>
                                     <constraint firstItem="QoF-8e-0XE" firstAttribute="top" secondItem="tEs-Jq-vaO" secondAttribute="bottom" id="ETA-Ac-klD"/>
                                     <constraint firstAttribute="trailing" secondItem="tEs-Jq-vaO" secondAttribute="trailing" id="HTa-Cs-hHD"/>
                                     <constraint firstItem="NGa-H0-0dU" firstAttribute="top" secondItem="tEs-Jq-vaO" secondAttribute="bottom" id="HUi-Hg-c84"/>
                                     <constraint firstAttribute="height" constant="114" id="Q9l-74-QkK"/>
-                                    <constraint firstItem="1Yc-AR-Pgy" firstAttribute="leading" secondItem="q1k-no-0HS" secondAttribute="leading" id="UUx-l9-yF7"/>
                                     <constraint firstItem="QoF-8e-0XE" firstAttribute="leading" secondItem="q1k-no-0HS" secondAttribute="leading" id="ZbR-Ms-Zop"/>
                                     <constraint firstAttribute="trailing" secondItem="NGa-H0-0dU" secondAttribute="trailing" id="hRR-Zl-j66"/>
                                     <constraint firstItem="NGa-H0-0dU" firstAttribute="leading" secondItem="q1k-no-0HS" secondAttribute="leading" id="qmk-Mu-EEs"/>
@@ -4547,9 +4551,13 @@ uploaded a new broadcast...</string>
                             <constraint firstItem="z1a-am-mYu" firstAttribute="top" secondItem="q1k-no-0HS" secondAttribute="bottom" id="5BO-Ue-n8K"/>
                             <constraint firstAttribute="trailing" secondItem="q1k-no-0HS" secondAttribute="trailing" id="AKS-49-B3t"/>
                             <constraint firstItem="z1a-am-mYu" firstAttribute="leading" secondItem="EHV-ak-DiN" secondAttribute="leading" id="DsB-0d-si5"/>
+                            <constraint firstAttribute="trailing" secondItem="yIV-Le-H2f" secondAttribute="trailing" id="LCY-Ee-P8d"/>
+                            <constraint firstAttribute="bottom" secondItem="yIV-Le-H2f" secondAttribute="bottom" id="Q4V-2V-i6Y"/>
+                            <constraint firstItem="yIV-Le-H2f" firstAttribute="top" secondItem="EHV-ak-DiN" secondAttribute="top" id="Uvc-IK-GNw"/>
                             <constraint firstItem="q1k-no-0HS" firstAttribute="leading" secondItem="EHV-ak-DiN" secondAttribute="leading" id="itF-08-i5S"/>
                             <constraint firstAttribute="trailing" secondItem="z1a-am-mYu" secondAttribute="trailing" id="qdt-Hi-WeF"/>
                             <constraint firstItem="oll-mm-aiD" firstAttribute="top" secondItem="z1a-am-mYu" secondAttribute="bottom" id="uVL-tK-pVu"/>
+                            <constraint firstItem="yIV-Le-H2f" firstAttribute="leading" secondItem="EHV-ak-DiN" secondAttribute="leading" id="wdB-xq-Rh1"/>
                             <constraint firstItem="q1k-no-0HS" firstAttribute="top" secondItem="EHV-ak-DiN" secondAttribute="top" id="x6Q-dW-UaM"/>
                         </constraints>
                     </view>
@@ -4589,12 +4597,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="XoF-UM-4vc">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jHH-fN-KeJ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="7gb-qn-LDb">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hGS-iA-Or5">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -4650,19 +4659,15 @@ uploaded a new broadcast...</string>
                                     <constraint firstItem="SDX-MR-0cR" firstAttribute="leading" secondItem="jHH-fN-KeJ" secondAttribute="leading" constant="90" id="2PB-QF-iCQ"/>
                                     <constraint firstItem="4KP-vi-be5" firstAttribute="leading" secondItem="hGS-iA-Or5" secondAttribute="trailing" id="ALa-xa-cf8"/>
                                     <constraint firstItem="hGS-iA-Or5" firstAttribute="leading" secondItem="jHH-fN-KeJ" secondAttribute="leading" id="KXb-f9-T31"/>
-                                    <constraint firstItem="7gb-qn-LDb" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="top" id="LUw-t6-PgS"/>
                                     <constraint firstItem="hGS-iA-Or5" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="top" constant="22" id="SW6-3h-UIv"/>
-                                    <constraint firstAttribute="trailing" secondItem="7gb-qn-LDb" secondAttribute="trailing" id="X6m-aR-rAI"/>
                                     <constraint firstItem="ryW-92-kKK" firstAttribute="centerY" secondItem="yaz-fJ-G9L" secondAttribute="centerY" id="YYc-pP-HEd"/>
                                     <constraint firstItem="yaz-fJ-G9L" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="top" constant="22" id="YvN-eH-cD4"/>
                                     <constraint firstItem="SDX-MR-0cR" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="top" constant="32" id="e8o-bS-9sG"/>
-                                    <constraint firstItem="7gb-qn-LDb" firstAttribute="leading" secondItem="jHH-fN-KeJ" secondAttribute="leading" id="iYj-g5-t04"/>
                                     <constraint firstItem="4KP-vi-be5" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="top" constant="22" id="ji8-zG-WGO"/>
                                     <constraint firstItem="yaz-fJ-G9L" firstAttribute="leading" secondItem="ryW-92-kKK" secondAttribute="trailing" id="mgu-5o-8LO"/>
                                     <constraint firstAttribute="height" constant="64" id="pRc-m8-fYk"/>
                                     <constraint firstAttribute="trailing" secondItem="yaz-fJ-G9L" secondAttribute="trailing" constant="5" id="sIu-G2-6yL"/>
                                     <constraint firstAttribute="trailing" secondItem="SDX-MR-0cR" secondAttribute="trailing" constant="90" id="voD-3x-PlJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="7gb-qn-LDb" secondAttribute="bottom" id="zo1-ZP-Bav"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BeI-Fq-vrf">
@@ -4676,11 +4681,15 @@ uploaded a new broadcast...</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="7f6-0B-IOm" firstAttribute="top" secondItem="XoF-UM-4vc" secondAttribute="bottom" id="3KJ-Eq-EbR"/>
+                            <constraint firstItem="XoF-UM-4vc" firstAttribute="top" secondItem="AuJ-YK-5Wg" secondAttribute="top" id="9KD-3n-Yxp"/>
                             <constraint firstItem="BeI-Fq-vrf" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="bottom" id="BBc-a0-Nxj"/>
                             <constraint firstItem="jHH-fN-KeJ" firstAttribute="leading" secondItem="AuJ-YK-5Wg" secondAttribute="leading" id="BVL-xM-iq4"/>
+                            <constraint firstItem="XoF-UM-4vc" firstAttribute="leading" secondItem="AuJ-YK-5Wg" secondAttribute="leading" id="CSd-nt-HXs"/>
                             <constraint firstItem="jHH-fN-KeJ" firstAttribute="top" secondItem="AuJ-YK-5Wg" secondAttribute="top" id="HAe-AN-X4h"/>
                             <constraint firstItem="BeI-Fq-vrf" firstAttribute="leading" secondItem="AuJ-YK-5Wg" secondAttribute="leading" id="MJ7-3B-CpP"/>
                             <constraint firstAttribute="trailing" secondItem="BeI-Fq-vrf" secondAttribute="trailing" id="SM3-TB-MwZ"/>
+                            <constraint firstAttribute="trailing" secondItem="XoF-UM-4vc" secondAttribute="trailing" id="VyU-cd-yGD"/>
                             <constraint firstAttribute="trailing" secondItem="jHH-fN-KeJ" secondAttribute="trailing" id="kPg-Tg-3cK"/>
                             <constraint firstItem="7f6-0B-IOm" firstAttribute="top" secondItem="BeI-Fq-vrf" secondAttribute="bottom" id="ur1-Ef-TYx"/>
                         </constraints>
@@ -4706,12 +4715,13 @@ uploaded a new broadcast...</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="5fN-zn-wvm">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Bi-75-jyz">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="mcL-PH-1Ad">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="111"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o32-e6-9mB">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                         <subviews>
@@ -4916,20 +4926,16 @@ uploaded a new broadcast...</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="114" id="13o-qO-l2h"/>
-                                    <constraint firstAttribute="trailing" secondItem="mcL-PH-1Ad" secondAttribute="trailing" id="CpR-nE-ctZ"/>
                                     <constraint firstItem="YyB-gf-iR1" firstAttribute="top" secondItem="XcX-45-7N8" secondAttribute="bottom" id="FLP-mg-reL"/>
                                     <constraint firstAttribute="trailing" secondItem="XcX-45-7N8" secondAttribute="trailing" id="PPJ-Y4-3qX"/>
                                     <constraint firstItem="XcX-45-7N8" firstAttribute="top" secondItem="o32-e6-9mB" secondAttribute="bottom" id="T63-EL-Pj6"/>
-                                    <constraint firstItem="mcL-PH-1Ad" firstAttribute="top" secondItem="4Bi-75-jyz" secondAttribute="top" id="ZID-AP-RXK"/>
                                     <constraint firstItem="o32-e6-9mB" firstAttribute="top" secondItem="4Bi-75-jyz" secondAttribute="top" id="aAw-Ls-VSf"/>
-                                    <constraint firstItem="mcL-PH-1Ad" firstAttribute="leading" secondItem="4Bi-75-jyz" secondAttribute="leading" id="bCL-VY-HH3"/>
                                     <constraint firstAttribute="trailing" secondItem="o32-e6-9mB" secondAttribute="trailing" id="ePR-do-RHd"/>
                                     <constraint firstItem="o32-e6-9mB" firstAttribute="leading" secondItem="4Bi-75-jyz" secondAttribute="leading" id="etw-L2-24C"/>
                                     <constraint firstAttribute="bottom" secondItem="YyB-gf-iR1" secondAttribute="bottom" id="ghI-2m-H8V"/>
-                                    <constraint firstItem="YyB-gf-iR1" firstAttribute="top" secondItem="mcL-PH-1Ad" secondAttribute="bottom" id="is4-gZ-7BU"/>
                                     <constraint firstItem="YyB-gf-iR1" firstAttribute="leading" secondItem="4Bi-75-jyz" secondAttribute="leading" id="r1S-Va-JQb"/>
                                     <constraint firstItem="XcX-45-7N8" firstAttribute="leading" secondItem="4Bi-75-jyz" secondAttribute="leading" id="rMP-Mj-6Dt"/>
                                     <constraint firstAttribute="trailing" secondItem="YyB-gf-iR1" secondAttribute="trailing" id="sn9-RI-hsr"/>
@@ -4946,12 +4952,16 @@ uploaded a new broadcast...</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="5fN-zn-wvm" secondAttribute="trailing" id="0ko-tW-9oA"/>
                             <constraint firstItem="jEf-Tn-ED2" firstAttribute="leading" secondItem="OqA-Ng-h65" secondAttribute="leading" id="4ru-hm-pdw"/>
                             <constraint firstAttribute="trailing" secondItem="4Bi-75-jyz" secondAttribute="trailing" id="BoY-OU-4AR"/>
                             <constraint firstAttribute="trailing" secondItem="jEf-Tn-ED2" secondAttribute="trailing" id="Kfm-9K-imQ"/>
                             <constraint firstItem="4Bi-75-jyz" firstAttribute="leading" secondItem="OqA-Ng-h65" secondAttribute="leading" id="NAI-9c-2DZ"/>
+                            <constraint firstItem="5fN-zn-wvm" firstAttribute="top" secondItem="OqA-Ng-h65" secondAttribute="top" id="cC3-Oe-rbP"/>
                             <constraint firstItem="4Bi-75-jyz" firstAttribute="top" secondItem="OqA-Ng-h65" secondAttribute="top" id="dWw-2T-VLE"/>
                             <constraint firstItem="ChP-ZN-SwZ" firstAttribute="top" secondItem="jEf-Tn-ED2" secondAttribute="bottom" id="iMx-2G-3Eh"/>
+                            <constraint firstAttribute="bottom" secondItem="5fN-zn-wvm" secondAttribute="bottom" id="q9A-SD-S1d"/>
+                            <constraint firstItem="5fN-zn-wvm" firstAttribute="leading" secondItem="OqA-Ng-h65" secondAttribute="leading" id="uTN-D1-va8"/>
                             <constraint firstItem="jEf-Tn-ED2" firstAttribute="top" secondItem="4Bi-75-jyz" secondAttribute="bottom" id="zpt-oK-jO3"/>
                         </constraints>
                     </view>
@@ -6060,12 +6070,13 @@ set up your account.Tap the link in the
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="yr3-Hx-dPG">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ub7-06-nd1">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_navigation_bar" translatesAutoresizingMaskIntoConstraints="NO" id="QfJ-jh-5BX">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrA-gx-MhM">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
@@ -6120,16 +6131,12 @@ set up your account.Tap the link in the
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="1Lq-vW-9MW" secondAttribute="trailing" constant="5" id="06u-00-kdi"/>
                                     <constraint firstAttribute="height" constant="64" id="0yo-nE-vDn"/>
-                                    <constraint firstAttribute="trailing" secondItem="QfJ-jh-5BX" secondAttribute="trailing" id="9cJ-tv-aSv"/>
                                     <constraint firstAttribute="trailing" secondItem="7J9-hb-vEj" secondAttribute="trailing" constant="90" id="AY9-96-3d5"/>
                                     <constraint firstItem="7J9-hb-vEj" firstAttribute="leading" secondItem="ub7-06-nd1" secondAttribute="leading" constant="90" id="Eib-bX-gv7"/>
-                                    <constraint firstItem="QfJ-jh-5BX" firstAttribute="top" secondItem="ub7-06-nd1" secondAttribute="top" id="KRT-oX-iq4"/>
                                     <constraint firstItem="RrA-gx-MhM" firstAttribute="top" secondItem="ub7-06-nd1" secondAttribute="top" constant="22" id="Pfj-di-xZF"/>
-                                    <constraint firstItem="QfJ-jh-5BX" firstAttribute="leading" secondItem="ub7-06-nd1" secondAttribute="leading" id="ZfR-eF-4c5"/>
                                     <constraint firstItem="7J9-hb-vEj" firstAttribute="top" secondItem="ub7-06-nd1" secondAttribute="top" constant="32" id="ZsK-l5-P3d"/>
                                     <constraint firstItem="3Ul-PK-kg8" firstAttribute="centerY" secondItem="1Lq-vW-9MW" secondAttribute="centerY" id="c0Y-aG-jI0"/>
                                     <constraint firstItem="RrA-gx-MhM" firstAttribute="leading" secondItem="ub7-06-nd1" secondAttribute="leading" id="c7H-Zm-A8W"/>
-                                    <constraint firstAttribute="bottom" secondItem="QfJ-jh-5BX" secondAttribute="bottom" id="dQa-ww-w0c"/>
                                     <constraint firstItem="Bdu-oV-re1" firstAttribute="leading" secondItem="RrA-gx-MhM" secondAttribute="trailing" id="j5m-M3-gOL"/>
                                     <constraint firstItem="1Lq-vW-9MW" firstAttribute="leading" secondItem="3Ul-PK-kg8" secondAttribute="trailing" id="lqc-yY-mhX"/>
                                     <constraint firstItem="1Lq-vW-9MW" firstAttribute="top" secondItem="ub7-06-nd1" secondAttribute="top" constant="22" id="qKj-l7-uaR"/>
@@ -6147,13 +6154,17 @@ set up your account.Tap the link in the
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yr3-Hx-dPG" firstAttribute="leading" secondItem="hfO-rh-Jyl" secondAttribute="leading" id="2Xr-Zv-E3T"/>
+                            <constraint firstItem="lDt-AJ-pCb" firstAttribute="top" secondItem="yr3-Hx-dPG" secondAttribute="bottom" id="JPq-Lf-YzW"/>
                             <constraint firstItem="ub7-06-nd1" firstAttribute="top" secondItem="hfO-rh-Jyl" secondAttribute="top" id="K4X-zy-ayc"/>
                             <constraint firstItem="8sU-zg-dqb" firstAttribute="leading" secondItem="hfO-rh-Jyl" secondAttribute="leading" id="KQ5-Bm-wFt"/>
                             <constraint firstAttribute="trailing" secondItem="8sU-zg-dqb" secondAttribute="trailing" id="VPo-7K-b0f"/>
                             <constraint firstItem="lDt-AJ-pCb" firstAttribute="top" secondItem="8sU-zg-dqb" secondAttribute="bottom" id="WRU-fE-cYs"/>
+                            <constraint firstItem="yr3-Hx-dPG" firstAttribute="top" secondItem="hfO-rh-Jyl" secondAttribute="top" id="qMW-ZC-43c"/>
                             <constraint firstItem="8sU-zg-dqb" firstAttribute="top" secondItem="ub7-06-nd1" secondAttribute="bottom" id="t61-XN-Msr"/>
                             <constraint firstAttribute="trailing" secondItem="ub7-06-nd1" secondAttribute="trailing" id="taB-gD-diS"/>
                             <constraint firstItem="ub7-06-nd1" firstAttribute="leading" secondItem="hfO-rh-Jyl" secondAttribute="leading" id="vtG-a7-pB3"/>
+                            <constraint firstAttribute="trailing" secondItem="yr3-Hx-dPG" secondAttribute="trailing" id="x1Z-9H-fT8"/>
                         </constraints>
                     </view>
                     <connections>
@@ -6166,7 +6177,6 @@ set up your account.Tap the link in the
         </scene>
     </scenes>
     <resources>
-        <image name="bg_dark_blue" width="375" height="667"/>
         <image name="bg_light_green" width="375" height="667"/>
         <image name="bg_navigation_bar" width="375" height="111"/>
         <image name="bg_profile_avatar" width="204" height="204"/>
@@ -6233,6 +6243,6 @@ set up your account.Tap the link in the
         <image name="tab_icon_search" width="22" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vbE-pK-CLR"/>
+        <segue reference="dMz-5h-amD"/>
     </inferredMetricsTieBreakers>
 </document>
