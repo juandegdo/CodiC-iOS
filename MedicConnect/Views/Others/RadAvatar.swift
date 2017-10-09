@@ -23,8 +23,8 @@ class RadAvatar: UIImageView {
         self.backgroundColor = UIColor.white //ColorOrange
         self.layer.cornerRadius = self.frame.height / 2
         
-        self.layer.borderColor = UIColor.white.cgColor
-        self.layer.borderWidth = 1.5
+        self.layer.borderColor = UIColor.init(red: 116/255.0, green: 183/255.0, blue: 191/255.0, alpha: 1.0).cgColor
+        self.layer.borderWidth = 1
     }
     
 }

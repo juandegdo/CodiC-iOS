@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import ACFloatingTextfield
 
 let updatedProfileNotification = NSNotification.Name(rawValue:"userUpdated")
 
 class EditProfileViewController: BaseViewController {
     
     @IBOutlet var imgAvatar: RadAvatar!
-    @IBOutlet var tvDescription: RadContentHeightTextView!
-    @IBOutlet var txFieldName: UITextField!
-    @IBOutlet var txFieldPhoneNumber: UITextField!
-    @IBOutlet var txFieldEmail: UITextField!
+    @IBOutlet var tfName: ACFloatingTextField!
+    @IBOutlet var tfTitle: ACFloatingTextField!
+    @IBOutlet var tfMSP: ACFloatingTextField!
+    @IBOutlet var tfLocation: ACFloatingTextField!
+    @IBOutlet var tfPhoneNumber: ACFloatingTextField!
+    @IBOutlet var tfEmail: ACFloatingTextField!
     @IBOutlet var btnChangePicture: UIButton!
     @IBOutlet var btnSave: UIButton!
     
@@ -50,46 +53,60 @@ class EditProfileViewController: BaseViewController {
         
     }
     
-    // MARK: Private methods
+    // MARK: Initialize Views
     
     func initViews() {
         
-        self.txFieldEmail.isEnabled = false
+        // Name
+        self.tfName.placeholder = NSLocalizedString("Name", comment: "comment")
+        
+        // Title
+        self.tfTitle.placeholder = NSLocalizedString("Title", comment: "comment")
+        
+        // MSP
+        self.tfMSP.placeholder = NSLocalizedString("MSP #", comment: "comment")
+        
+        // Location
+        self.tfLocation.placeholder = NSLocalizedString("Location", comment: "comment")
+        
+        // Phone Number
+        self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
+        
+        // Email
+        self.tfEmail.placeholder = NSLocalizedString("Email", comment: "comment")
+        
+        self.tfEmail.isEnabled = false
         
         if let _user = UserController.Instance.getUser() as User? {
             
             // Customize Avatar
-            _ = UIFont(name: "Avenir-Heavy", size: 18.0) as UIFont? ?? UIFont.systemFont(ofSize: 18.0)
-                        
             if let imgURL = URL(string: _user.photo) as URL? {
                 self.imgAvatar.af_setImage(withURL: imgURL)
             } else {
                 self.imgAvatar.image = nil
             }
             
-            self.txFieldName.text = _user.fullName
-            self.txFieldEmail.text = _user.email
-            self.txFieldPhoneNumber.text = _user.phoneNumber
-            self.tvDescription.text = _user.description
+            self.tfName.text = _user.fullName
+//            self.tfTitle.text = _user.title
+//            self.tfMSP.text = _user.msp
+//            self.tfLocation.text = _user.location
+            self.tfEmail.text = _user.email
+            self.tfPhoneNumber.text = _user.phoneNumber
             
-            // Customize Description
-            self.tvDescription.minHeight = 50.0
-            self.tvDescription.maxHeight = 150.0
         }
         
         // Change Picture Button
-        self.btnChangePicture.layer.cornerRadius = 3
+        self.btnChangePicture.layer.cornerRadius = 14
         self.btnChangePicture.clipsToBounds = true
-        self.btnChangePicture.layer.borderColor = UIColor.init(red: 18/255.0, green: 42/255.0, blue: 54/255.0, alpha: 1.0).cgColor
+        self.btnChangePicture.layer.borderColor = UIColor.init(red: 113/255.0, green: 127/255.0, blue: 134/255.0, alpha: 1.0).cgColor
         self.btnChangePicture.layer.borderWidth = 1
-        self.btnChangePicture.setBackgroundColor(color: UIColor.init(white: 0.2, alpha: 1.0), forState: .highlighted)
         
         // Save Button
-        self.btnSave.layer.cornerRadius = 3
-        self.btnSave.clipsToBounds = true
-        self.btnSave.layer.borderColor = UIColor.init(red: 255/255.0, green: 13/255.0, blue: 13/255.0, alpha: 1.0).cgColor
-        self.btnSave.layer.borderWidth = 1
-        self.btnSave.setBackgroundColor(color: UIColor.init(white: 0.5, alpha: 1.0), forState: .highlighted)
+//        self.btnSave.layer.cornerRadius = 3
+//        self.btnSave.clipsToBounds = true
+//        self.btnSave.layer.borderColor = UIColor.init(red: 255/255.0, green: 13/255.0, blue: 13/255.0, alpha: 1.0).cgColor
+//        self.btnSave.layer.borderWidth = 1
+//        self.btnSave.setBackgroundColor(color: UIColor.init(white: 0.5, alpha: 1.0), forState: .highlighted)
         
     }
     
@@ -136,21 +153,14 @@ extension EditProfileViewController : UITextFieldDelegate {
         guard let text = textField.text else { return true }
         let newLength = text.characters.count + string.characters.count - range.length
         
-        if (textField == self.txFieldName) {
+        if (textField == self.tfName) {
             return newLength <= Constants.MaxFullNameLength
-        } else { /// phone number
+        } else if (textField == self.tfPhoneNumber) { /// phone number
             return newLength <= Constants.MaxPhoneNumberLength
         }
         
-    }
-}
-
-extension EditProfileViewController : UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard let description = textView.text else { return true }
-        let newLength = description.characters.count + text.characters.count - range.length
+        return true
         
-        return newLength <= Constants.MaxDescriptionLength
     }
 }
 
@@ -202,9 +212,11 @@ extension EditProfileViewController {
         
         if let _user = UserController.Instance.getUser() as User? {
             
-            _user.fullName = self.txFieldName.text!
-            _user.description = self.tvDescription.text!
-            _user.phoneNumber = self.txFieldPhoneNumber.text!
+            _user.fullName = self.tfName.text!
+//            _user.title = self.tfTitle.text!
+//            _user.msp = self.tfMSP.text!
+//            _user.location = self.tfLocation.text!
+            _user.phoneNumber = self.tfPhoneNumber.text!
             
             //SwiftSpinner.show("Updating user...")
             self.btnSave.isEnabled = false
