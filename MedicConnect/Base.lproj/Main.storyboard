@@ -2830,7 +2830,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <constraint firstAttribute="width" constant="40" id="dYo-d5-DrM"/>
                                             <constraint firstAttribute="height" constant="40" id="mJt-K5-Tfa"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="onBackWithSender:" destination="QbM-bR-Xg1" eventType="touchUpInside" id="Rrn-gz-v6m"/>
                                         </connections>
@@ -3509,7 +3509,7 @@ uploaded a new broadcast...</string>
                                             <constraint firstAttribute="width" constant="40" id="RHP-cN-BHI"/>
                                             <constraint firstAttribute="height" constant="40" id="WPP-IF-W7g"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="onBackWithSender:" destination="TBf-wS-KCm" eventType="touchUpInside" id="BGe-aU-Tks"/>
                                         </connections>
@@ -3686,7 +3686,7 @@ uploaded a new broadcast...</string>
                                             <constraint firstAttribute="width" constant="40" id="bYJ-zI-7RU"/>
                                             <constraint firstAttribute="height" constant="40" id="zw4-gb-nAn"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="btnBackClicked:" destination="blF-Iv-w30" eventType="touchUpInside" id="qe1-uV-uC5"/>
                                         </connections>
@@ -3765,7 +3765,7 @@ uploaded a new broadcast...</string>
                                             <constraint firstAttribute="height" constant="40" id="l5T-TX-0f2"/>
                                             <constraint firstAttribute="width" constant="40" id="nsu-42-bDb"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="btnBackClicked:" destination="M4W-7b-8Lm" eventType="touchUpInside" id="WXQ-gb-vCy"/>
                                         </connections>
@@ -3932,7 +3932,7 @@ uploaded a new broadcast...</string>
                                             <constraint firstAttribute="height" constant="40" id="Vy3-mf-SZr"/>
                                             <constraint firstAttribute="width" constant="40" id="YbC-Pf-H6P"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="onBackWithSender:" destination="5MD-hV-YMx" eventType="touchUpInside" id="tNg-Sn-Koo"/>
                                         </connections>
@@ -4628,7 +4628,7 @@ uploaded a new broadcast...</string>
                                             <constraint firstAttribute="height" constant="40" id="LVZ-Jy-us0"/>
                                             <constraint firstAttribute="width" constant="40" id="XPx-2h-igq"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="onBackWithSender:" destination="hrB-PQ-okv" eventType="touchUpInside" id="MIu-5A-qrK"/>
                                         </connections>
@@ -6103,7 +6103,7 @@ you a link to reset your password.</string>
                                             <constraint firstAttribute="width" constant="40" id="Iac-n7-gIc"/>
                                             <constraint firstAttribute="height" constant="40" id="K44-QJ-cTf"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="onBackWithSender:" destination="GjL-E6-AxO" eventType="touchUpInside" id="p8F-i1-hsG"/>
                                         </connections>
@@ -6262,6 +6262,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_search" width="22" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dMz-5h-amD"/>
+        <segue reference="OMB-Di-mue"/>
     </inferredMetricsTieBreakers>
 </document>
