@@ -8,9 +8,6 @@
 
 import UIKit
 import MessageUI
-import TwitterKit
-import FacebookCore
-import FacebookLogin
 
 class SettingsViewController: BaseViewController {
     
@@ -61,7 +58,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         
         if tableView == self.tvSettings {
-            return 4
+            return 3
         }
         
         return 1
@@ -73,12 +70,10 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             
             switch (section) {
             case 0:
-                return 7
+                return 6
             case 1:
-                return 5
+                return 3
             case 2:
-                return 5
-            case 3:
                 return 4
                 
             default:
@@ -111,15 +106,12 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     cell.setCellWithTitle(title: NSLocalizedString("Blocked Users", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
                 else if indexPath.row == 3 {
-                    cell.setCellWithTitle(title: NSLocalizedString("Private Account", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if indexPath.row == 4 {
                     cell.setCellWithTitle(title: NSLocalizedString("Reset Tutorial", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
-                else if indexPath.row == 5 {
+                else if indexPath.row == 4 {
                     cell.setCellWithTitle(title: NSLocalizedString("Logout", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
-                else if indexPath.row == 6 {
+                else if indexPath.row == 5 {
                     cell.setCellWithTitle(title: NSLocalizedString("Delete Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
                 
@@ -132,13 +124,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     cell.setCellWithTitle(title: NSLocalizedString("Comments", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("New Broadcasts", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 3) {
-                    cell.setCellWithTitle(title: NSLocalizedString("New Followers", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 4) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Follower Requests", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+                    cell.setCellWithTitle(title: NSLocalizedString("New Diagnosis", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 
             } else if indexPath.section == 2 {
@@ -150,11 +136,8 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     cell.setCellWithTitle(title: NSLocalizedString("Privacy Policy", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
                 else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Code of Conduct", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }
-                else if (indexPath.row == 3) {
                     cell.setCellWithTitle(title: NSLocalizedString("Terms of Use", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }else if (indexPath.row == 4) {
+                }else if (indexPath.row == 3) {
                     cell.setCellWithTitle(title: NSLocalizedString("Contact Us", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
                 
@@ -208,9 +191,6 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     present(vc, animated: false, completion: nil)
                     
                 } else if indexPath.row == 3 {
-                    print("Private account")
-                    
-                } else if indexPath.row == 4 {
                     print("Reset Tutorial")
                     
                     // Reset Tutorial
@@ -224,7 +204,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                         
                     })
                     
-                } else if indexPath.row == 5 {
+                } else if indexPath.row == 4 {
                     
                     // Logout
                     AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to logout?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
@@ -237,7 +217,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                         
                     })
                     
-                } else if indexPath.row == 6 {
+                } else if indexPath.row == 5 {
                     
                     // Delete account
                     AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete your account?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
@@ -265,7 +245,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
             } else if indexPath.section == 2 { // Information
                 
-                if (indexPath.row == 4) {
+                if (indexPath.row == 3) {
                     self.sendEmail(emailAddress: "info@radioishapp.com")
                     
                 } else if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
@@ -274,23 +254,11 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                         vc.strTitle = "About"
                     } else if (indexPath.row == 1) {
                         vc.strTitle = "Privacy Policy"
-                    } else if (indexPath.row == 2) {
-                        vc.strTitle = "Code of Conduct"
-                    } else if (indexPath.row == 3) {
+                    }else if (indexPath.row == 2) {
                         vc.strTitle = "Terms of Use"
                     }
                     
                     present(vc, animated: false, completion: nil)
-                }
-            } else if indexPath.section == 3 { // Link/Unlink Socials
-                if (indexPath.row == 0) {
-                    print("Twitter account")
-                } else if (indexPath.row == 1) {
-                    print("Facebook account")
-                } else if (indexPath.row == 2) {
-                    print("Instagram account")
-                } else if (indexPath.row == 3) {
-                    print("Snapchat account")
                 }
             }
         }
@@ -310,8 +278,6 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             headerCell.setTitle(title: NSLocalizedString("Notifications", comment: "comment"))
         } else if section == 2 {
             headerCell.setTitle(title: NSLocalizedString("Information", comment: "comment"))
-        } else if section == 3 {
-            headerCell.setTitle(title: NSLocalizedString("Link/Unlink Socials", comment: "comment"))
         }
         
         return headerCell.contentView
@@ -394,59 +360,6 @@ extension SettingsViewController : SettingListCellDelegate {
                     })
                     
                 })
-            }
-            else if indexPath.section == 3 {
-                if indexPath.row == 0 {
-                    if sender.isOn == true {
-                        Twitter.sharedInstance().logIn(completion: { (session, error) in
-                            if let _ = session {
-                                AlertUtil.showOKAlert(self, message: "You linked Twitter account successfully.")
-                            }
-                            else {
-                                if let e = error {
-                                    print("error: \(e.localizedDescription)")
-                                    AlertUtil.showOKAlert(self, message: e.localizedDescription)
-                                }
-                                sender.isOn = false
-                            }
-                        })
-                    }
-                    else {
-                        let store = Twitter.sharedInstance().sessionStore
-                        if let userID = store.session()?.userID {
-                            store.logOutUserID(userID)
-                        }
-                    }
-                }
-                else if indexPath.row == 1 {
-                    if sender.isOn == true {
-                        let loginManager = LoginManager()
-                        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
-                            switch loginResult {
-                            case .failed(let error):
-                                print(error)
-                                AlertUtil.showOKAlert(self, message: "Oops. Failed to link Facebook.")
-                                sender.isOn = false
-                                break
-                            case .cancelled:
-                                print("User cancelled login.")
-                                AlertUtil.showOKAlert(self, message: "You cancelled linking Facebook.")
-                                sender.isOn = false
-                                break
-                            case .success( _, _, _):
-                                print("Logged in!")
-                                AlertUtil.showOKAlert(self, message: "You linked Facebook account successfully.")
-                                break
-                            }
-                        }
-                    }
-                    else {
-                        if let _ = AccessToken.current {
-                            let loginManager = LoginManager()
-                            loginManager.logOut()
-                        }
-                    }
-                }
             }
         }
     }

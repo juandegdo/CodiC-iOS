@@ -111,53 +111,66 @@ extension WelcomeProfileViewController {
     }
     
     @IBAction func tapSave(_ sender: Any) {
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
-//        if let _user = UserController.Instance.getUser() as User? {
-//            
-//            if self.tfDescription.text != "" {
-//                _user.description = self.tfDescription.text!
-//                
-//                UserService.Instance.editUser(user: _user, completion: {
-//                    (success: Bool, message: String) in
-//                    if !success {
-//                        if !message.isEmpty {
-//                            AlertUtil.showOKAlert(self, message: message)
-//                        }
-//                    }
-//                    
-//                })
+        
+        if let _user = UserController.Instance.getUser() as User? {
+            
+            // TODO: Update user object on server side
+//            if self.tfTitle.text != "" {
+//                _user.title = self.tfTitle.text!
 //            }
 //            
-//            if let _image = self.avatarImageView.image {
-//                
-//                self.btnSave.isEnabled = false
-//                UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
-//                    (success: Bool) in
-//                    print("\(success) uploading image.")
-//                    
-//                    if success {
-//                        UserService.Instance.getMe(completion: {
-//                            (user: User?) in
-//                            
-//                            self.btnSave.isEnabled = true
-//                            
-//                            self.navigationController?.popToRootViewController(animated: false)
-//                            
-//                            print("\(success) refreshing user info.")
-//                            
-//                        })
-//                    } else {
-//                        AlertUtil.showOKAlert(self, message: "Uplading your profile image failed. Try again.")
-//                    }
-//                })
-//                
-//            } else {
-//                self.navigationController?.popToRootViewController(animated: false)
+//            if self.tfMSP.text != "" {
+//                _user.msp = self.tfMSP.text!
 //            }
 //            
-//        } else {
-//            print("No user found")
-//        }
+//            if self.tfLocation.text != "" {
+//                _user.location = self.tfLocation.text!
+//            }
+//            
+//            if self.tfPhoneNumber.text != "" {
+//                _user.phoneNumber = self.tfPhoneNumber.text!
+//            }
+            
+            UserService.Instance.editUser(user: _user, completion: {
+                (success: Bool, message: String) in
+                if !success {
+                    if !message.isEmpty {
+                        AlertUtil.showOKAlert(self, message: message)
+                    }
+                }
+                
+            })
+            
+            if let _image = self.avatarImageView.image {
+                
+                self.btnSave.isEnabled = false
+                UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
+                    (success: Bool) in
+                    print("\(success) uploading image.")
+                    
+                    if success {
+                        UserService.Instance.getMe(completion: {
+                            (user: User?) in
+                            
+                            self.btnSave.isEnabled = true
+                            
+                            self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
+                            
+                            print("\(success) refreshing user info.")
+                            
+                        })
+                    } else {
+                        AlertUtil.showOKAlert(self, message: "Uplading your profile image failed. Try again.")
+                    }
+                })
+                
+            } else {
+                self.navigationController?.popToRootViewController(animated: false)
+            }
+            
+        } else {
+            print("No user found")
+        }
         
     }
     
