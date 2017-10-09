@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tab_icon_record.png",
+      "filename" : "tab_icon_favorites.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tab_icon_record@2x.png",
+      "filename" : "tab_icon_favorites@2x.png",
       "scale" : "2x"
     },
     {
