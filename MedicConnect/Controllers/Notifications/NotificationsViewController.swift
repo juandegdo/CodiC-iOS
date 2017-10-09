@@ -319,14 +319,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if tableView == self.tvNotifications {
-            let notification = NotificationController.Instance.getNotifications()[indexPath.row]
-            
-            if (notification.notificationType == .like || notification.notificationType == .comment || notification.notificationType == .broadcast) {
-                return 75
-                
-            } else {
-                return 75
-            }
+            return 70
         }
         
         return 0.0

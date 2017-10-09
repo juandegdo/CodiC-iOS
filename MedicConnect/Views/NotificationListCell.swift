@@ -19,13 +19,13 @@ class NotificationListCell: UITableViewCell {
     @IBOutlet var btnRequested: TVButton!
     @IBOutlet var btnAccept: TVButton!
     @IBOutlet var btnDecline: TVButton!
-    @IBOutlet var viewBroadcasts: UIView!
     
     @IBOutlet weak var lbcDescriptionMarginToRight: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         
         // Set button border colors
+        self.imgUserPhoto.layer.borderColor = UIColor.init(red: 116/255.0, green: 183/255.0, blue: 191/255.0, alpha: 1.0).cgColor
         self.btnFollowing.layer.borderColor = UIColor.init(red: 150/255.0, green: 155/255.0, blue: 168/255.0, alpha: 1.0).cgColor
         self.btnRequested.layer.borderColor = UIColor.init(red: 28/255.0, green: 48/255.0, blue: 58/255.0, alpha: 1.0).cgColor
         self.btnDecline.layer.borderColor = UIColor.init(red: 183/255.0, green: 184/255.0, blue: 186/255.0, alpha: 1.0).cgColor
@@ -54,8 +54,6 @@ class NotificationListCell: UITableViewCell {
         self.btnAccept.isHidden = true
         self.btnDecline.isHidden = true
         
-        self.viewBroadcasts.isHidden = true
-        
         // Customize Avatar
         _ = UIFont(name: "Avenir-Heavy", size: 13.0) as UIFont? ?? UIFont.systemFont(ofSize: 13.0)
         
@@ -80,12 +78,10 @@ class NotificationListCell: UITableViewCell {
         } else if notification.notificationType == .comment {
             
             self.lbcDescriptionMarginToRight.constant = -100
-            self.viewBroadcasts.isHidden = true
             
         } else if notification.notificationType == .broadcast {
 
             self.lbcDescriptionMarginToRight.constant = -100
-            self.viewBroadcasts.isHidden = true
             
         } else if notification.notificationType == .newFollower {
             

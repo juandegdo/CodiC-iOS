@@ -3405,7 +3405,7 @@ uploaded a new broadcast...</string>
                                             <constraint firstAttribute="height" constant="40" id="JGF-0V-GTD"/>
                                             <constraint firstAttribute="width" constant="40" id="att-k8-hKc"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="onBackWithSender:" destination="8vy-hS-EQE" eventType="touchUpInside" id="tmT-Gr-PKQ"/>
                                         </connections>
@@ -3419,11 +3419,19 @@ uploaded a new broadcast...</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pck-I5-PDG">
+                                        <rect key="frame" x="337" y="22" width="36" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="XYz-IW-Spb"/>
+                                            <constraint firstAttribute="height" constant="40" id="qhy-if-SQM"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_search"/>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgU-Bh-hJF">
-                                        <rect key="frame" x="369" y="22" width="40" height="40"/>
+                                        <rect key="frame" x="373" y="22" width="36" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1qF-EG-tME"/>
-                                            <constraint firstAttribute="width" constant="40" id="XPy-u9-WqD"/>
+                                            <constraint firstAttribute="width" constant="36" id="XPy-u9-WqD"/>
                                         </constraints>
                                         <state key="normal" image="icon_setting"/>
                                         <connections>
@@ -3435,6 +3443,8 @@ uploaded a new broadcast...</string>
                                     <constraint firstAttribute="trailing" secondItem="Fyy-tg-cAn" secondAttribute="trailing" constant="50" id="0Qu-XD-uwG"/>
                                     <constraint firstAttribute="height" constant="64" id="3Eh-XI-d6y"/>
                                     <constraint firstItem="Fyy-tg-cAn" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" constant="50" id="8dk-V7-J8X"/>
+                                    <constraint firstItem="MgU-Bh-hJF" firstAttribute="leading" secondItem="pck-I5-PDG" secondAttribute="trailing" id="FUT-vG-oaS"/>
+                                    <constraint firstItem="pck-I5-PDG" firstAttribute="top" secondItem="MgU-Bh-hJF" secondAttribute="top" id="IKM-Sq-XBx"/>
                                     <constraint firstAttribute="trailing" secondItem="MgU-Bh-hJF" secondAttribute="trailing" constant="5" id="Qvx-vr-jHP"/>
                                     <constraint firstItem="MgU-Bh-hJF" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" constant="22" id="d7n-vZ-rjQ"/>
                                     <constraint firstItem="Hnh-CD-wWM" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" id="g0g-YK-Axo"/>
