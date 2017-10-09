@@ -8,9 +8,6 @@
 
 import UIKit
 import MessageUI
-import TwitterKit
-import FacebookCore
-import FacebookShare
 
 let inviteTitle = "Check Out This New App"
 let inviteText = "Hey, I'm trying this new Audio Social App called Medic Connect, tap the link below and sign up to Beta Test it with me!"
@@ -53,13 +50,6 @@ class InvitePopupViewController: BaseViewController {
         // Background captured image
         self.mBackgroundImageView.image = ImageHelper.captureView()
         
-        let store = Twitter.sharedInstance().sessionStore
-        if let _ = store.session()?.userID {
-            btnTwitter.isSelected = true
-        }
-        if let _ = AccessToken.current {
-            btnFacebook.isSelected = true
-        }
     }
     
 }
@@ -80,33 +70,11 @@ extension InvitePopupViewController {
     }
     
     @IBAction func onFacebook(sender: UIButton!) {
-        if sender.isSelected == true {
-            do{
-                let content = LinkShareContent(url: URL.init(string: inviteURL)!, quote: inviteText)
-                try ShareDialog.show(from: self, content: content)
-            }
-            catch {
-                print("Error: \(error)")
-            }
-        }
+        
     }
     
     @IBAction func onTwitter(sender: UIButton!) {
-        if sender.isSelected == true {
-            let composer = TWTRComposer()
-            
-            composer.setText(inviteText)
-            composer.setURL(URL.init(string: inviteURL))
-            
-            // Called from a UIViewController
-            composer.show(from: self, completion: { (result) in
-                if (result == .done) {
-                    print("Successfully composed Tweet")
-                } else {
-                    print("Cancelled composing")
-                }
-            })
-        }
+        
     }
     
     @IBAction func onEmail(sender: UIButton!) {

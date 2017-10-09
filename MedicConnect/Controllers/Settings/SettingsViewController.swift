@@ -137,24 +137,11 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
                 else if (indexPath.row == 2) {
                     cell.setCellWithTitle(title: NSLocalizedString("Terms of Use", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }else if (indexPath.row == 3) {
+                }
+                else if (indexPath.row == 3) {
                     cell.setCellWithTitle(title: NSLocalizedString("Contact Us", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
                 
-            } else if indexPath.section == 3 {
-                
-                if (indexPath.row == 0) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Twitter Account", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 1) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Facebook Account", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Instagram Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
-                }
-                else if (indexPath.row == 3) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Snapchat Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
-                }
             }
             
             return cell

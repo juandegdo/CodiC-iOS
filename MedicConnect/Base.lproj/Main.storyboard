@@ -5441,7 +5441,7 @@ set up your account.Tap the link in the
                                             <constraint firstAttribute="height" constant="40" id="6k7-X2-cwS"/>
                                             <constraint firstAttribute="width" constant="40" id="P7I-YD-Ede"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="dismiss" destination="2vA-gC-TmH" eventType="touchUpInside" id="PpT-Rm-wzY"/>
                                             <action selector="onBackWithSender:" destination="8xs-e9-bht" eventType="touchUpInside" id="WCX-M2-gjJ"/>
@@ -5461,7 +5461,7 @@ set up your account.Tap the link in the
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="400"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGM-IV-Dft">
-                                                <rect key="frame" x="82" y="0.0" width="250" height="40"/>
+                                                <rect key="frame" x="82" y="16" width="250" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="XPH-c9-mjt"/>
                                                 </constraints>
@@ -5469,32 +5469,34 @@ set up your account.Tap the link in the
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your email and we will send you a link to reset your password." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uM-uC-kIK">
-                                                <rect key="frame" x="25" y="127.99999999999999" width="364" height="23.666666666666643"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uM-uC-kIK">
+                                                <rect key="frame" x="25" y="138" width="364" height="46.666666666666657"/>
+                                                <string key="text">Enter your email and we will send
+you a link to reset your password.</string>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                                <color key="textColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eF-xU-qJ3" customClass="ACFloatingTextField">
-                                                <rect key="frame" x="25" y="221.66666666666669" width="364" height="50"/>
+                                                <rect key="frame" x="25" y="254.66666666666669" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="t4C-vC-bMd"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                        <color key="value" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                        <color key="value" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
-                                                        <color key="value" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
-                                                        <color key="value" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
@@ -5502,7 +5504,7 @@ set up your account.Tap the link in the
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j55-UO-ji7">
-                                                <rect key="frame" x="25" y="321.66666666666669" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="354.66666666666669" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="6TQ-9r-Pa0"/>
                                                 </constraints>
@@ -5518,12 +5520,12 @@ set up your account.Tap the link in the
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="qGM-IV-Dft" firstAttribute="centerX" secondItem="oGf-wh-Qu8" secondAttribute="centerX" id="3H7-YB-6cS"/>
-                                            <constraint firstItem="qGM-IV-Dft" firstAttribute="top" secondItem="oGf-wh-Qu8" secondAttribute="top" id="3wW-OO-srP"/>
+                                            <constraint firstItem="qGM-IV-Dft" firstAttribute="top" secondItem="oGf-wh-Qu8" secondAttribute="top" constant="16" id="3wW-OO-srP"/>
                                             <constraint firstAttribute="trailing" secondItem="j55-UO-ji7" secondAttribute="trailing" constant="25" id="8Sh-F5-BgX"/>
                                             <constraint firstAttribute="trailing" secondItem="6eF-xU-qJ3" secondAttribute="trailing" constant="25" id="AmD-lk-F2G"/>
                                             <constraint firstItem="j55-UO-ji7" firstAttribute="top" secondItem="6eF-xU-qJ3" secondAttribute="bottom" constant="50" id="B4h-Pm-EcD"/>
                                             <constraint firstAttribute="trailing" secondItem="6uM-uC-kIK" secondAttribute="trailing" constant="25" id="DAU-i6-yhL"/>
-                                            <constraint firstItem="6uM-uC-kIK" firstAttribute="top" secondItem="qGM-IV-Dft" secondAttribute="bottom" constant="88" id="It2-Es-TlQ"/>
+                                            <constraint firstItem="6uM-uC-kIK" firstAttribute="top" secondItem="qGM-IV-Dft" secondAttribute="bottom" constant="82" id="It2-Es-TlQ"/>
                                             <constraint firstItem="6eF-xU-qJ3" firstAttribute="top" secondItem="6uM-uC-kIK" secondAttribute="bottom" constant="70" id="QS9-1b-fFL"/>
                                             <constraint firstItem="6eF-xU-qJ3" firstAttribute="leading" secondItem="oGf-wh-Qu8" secondAttribute="leading" constant="25" id="dxI-VH-8uI"/>
                                             <constraint firstItem="6uM-uC-kIK" firstAttribute="leading" secondItem="oGf-wh-Qu8" secondAttribute="leading" constant="25" id="fz9-OE-TqB"/>
@@ -5925,7 +5927,7 @@ set up your account.Tap the link in the
                                             <constraint firstAttribute="width" constant="40" id="VPo-MR-JOg"/>
                                             <constraint firstAttribute="height" constant="40" id="y1w-cn-dHE"/>
                                         </constraints>
-                                        <state key="normal" image="icon_arrow_grey_left1"/>
+                                        <state key="normal" image="icon_back"/>
                                         <connections>
                                             <action selector="dismiss" destination="Ml5-ez-YjT" eventType="touchUpInside" id="G0o-qx-0wG"/>
                                         </connections>

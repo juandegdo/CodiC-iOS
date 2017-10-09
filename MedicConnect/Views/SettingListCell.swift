@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import TwitterKit
-import FacebookCore
 
 protocol SettingListCellDelegate {
     func switchValueChanged(sender: UISwitch, indexPath: IndexPath)
@@ -70,19 +68,6 @@ class SettingListCell: UITableViewCell {
                     if let _me = UserController.Instance.getUser() {
                         self.switchCtrl.isOn = ((_me.notificationfilter & (1<<tag.row)) != 0) //(_me.deviceToken != nil)
                         return
-                    }
-                }
-            }
-            else if tag.section == 3 {
-                if tag.row == 0 {
-                    let store = Twitter.sharedInstance().sessionStore
-                    if let _ = store.session()?.userID {
-                        self.switchCtrl.isOn = true
-                    }
-                }
-                else if tag.row == 1 {
-                    if let _ = AccessToken.current {
-                        self.switchCtrl.isOn = true
                     }
                 }
             }

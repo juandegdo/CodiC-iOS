@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import TwitterKit
-import FacebookCore
-import FacebookLogin
 
 class BaseViewController: UIViewController {
     
@@ -142,17 +139,6 @@ class BaseViewController: UIViewController {
         NotificationController.Instance.setNotifications([])
         UserDefaultsUtil.DeleteToken()
         
-        // Twitter Log out if needed
-        let store = Twitter.sharedInstance().sessionStore
-        if let userID = store.session()?.userID {
-            store.logOutUserID(userID)
-        }
-        
-        // Facebook Log out if needed
-        if let _ = AccessToken.current {
-            let loginManager = LoginManager()
-            loginManager.logOut()
-        }
     }
 }
 
