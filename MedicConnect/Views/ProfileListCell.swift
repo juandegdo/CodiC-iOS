@@ -17,17 +17,14 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var btnLike: TVButton!
     @IBOutlet var btnLoop: UIButton!
     @IBOutlet var btnMessage: UIButton!
-    @IBOutlet var btnPlaylist: TVButton!
     
     // Constraints
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
-    @IBOutlet var constOfBtnPlaylistWidth: NSLayoutConstraint!
-    @IBOutlet var constOfBtnPlaylistBottom: NSLayoutConstraint!
+    @IBOutlet var constOfBtnButtonBottom: NSLayoutConstraint!
     @IBOutlet var constOfTxtVHashtagsHeight: NSLayoutConstraint!
     
     // Labels
     @IBOutlet var lblBroadcast: UILabel!
-    @IBOutlet var lblPlayNumber: UILabel!
     @IBOutlet var lblDescription: ExpandableLabel!
     @IBOutlet var lblDate: UILabel!
     @IBOutlet var lblLikedDescription: UILabel!
@@ -46,7 +43,7 @@ class ProfileListCell: UITableViewCell {
     var isExpanded:Bool = false {
         didSet {
             if !isExpanded {
-                self.constOfBtnPlaylistBottom.constant = 14
+                self.constOfBtnButtonBottom.constant = 14
                 self.lblLikedDescription.isHidden = true
                 self.txtVHashtags.isHidden = true
                 
@@ -55,7 +52,7 @@ class ProfileListCell: UITableViewCell {
                 let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.txtVHashtags.font!], context: nil)
                 
                 self.constOfTxtVHashtagsHeight.constant = (boundingBox?.height)! + 16.0
-                self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + 20 // 90
+                self.constOfBtnButtonBottom.constant = self.constOfTxtVHashtagsHeight.constant + 20 // 90
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
                     self.lblLikedDescription.isHidden = false
                     self.txtVHashtags.isHidden = false
@@ -82,8 +79,8 @@ class ProfileListCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.btnPlay.playColor = Constants.ColorRed
-        self.btnPlay.pauseColor = Constants.ColorRed
+        self.btnPlay.playColor = UIColor.black
+        self.btnPlay.pauseColor = UIColor.black
         self.btnPlay.progressTrackColor = Constants.ColorLightGray
     }
     
@@ -116,10 +113,6 @@ class ProfileListCell: UITableViewCell {
         
         // Set Broadcast Label
         self.lblBroadcast.text = post.title
-        
-        let helperString = post.playCount == 1 ? "Play" : "Plays"
-        self.lblPlayNumber.text = "\(post.playCount) \(helperString)"
-        
 //        self.lblDescription.text = post.description
         self.lblDate.text = post.getFormattedDate().uppercased()
         

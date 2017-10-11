@@ -13,21 +13,23 @@ import HTHorizontalSelectionList
 
 class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
-    let OffsetHeaderStop: CGFloat = 271.0
+    let OffsetHeaderStop: CGFloat = 240.0
     
     let ProfileListCellID = "ProfileListCell"
     
     // Header
-    @IBOutlet var headerView: UIView!
     @IBOutlet var headerLabel: UILabel!
     
     // Profile info
     @IBOutlet var viewProfileInfo: UIView!
     @IBOutlet var imgAvatar: UIImageView!
     @IBOutlet var lblUsername: UILabel!
-    @IBOutlet var lblDescription: UILabel!
-    @IBOutlet var lblFollowerNumber: UILabel!
-    @IBOutlet var lblFollowingNumber: UILabel!
+    @IBOutlet var lblLocation: UILabel!
+    @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var lblDiagnosisNumber: UILabel!
+    @IBOutlet var lblDiagnosisText: UILabel!
+    @IBOutlet var lblNotesNumber: UILabel!
+    @IBOutlet var lblNotesText: UILabel!
     
     // Scroll
     @IBOutlet var mainScrollView: UIScrollView!
@@ -38,7 +40,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
-    var isMyProfile: Bool = true
+    var isDiagnosis: Bool = true
     var vcDisappearType : ViewControllerDisappearType = .other
     
     var expandedRows = Set<String>()
@@ -57,8 +59,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             
             UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 1)
         }
-        
-        self.headerViewHeightConstraint.constant = self.isMyProfile ? 335.0 : 385.0
     }
     
     override func viewDidLoad() {
@@ -107,8 +107,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     // MARK: Private methods
     
     func initViews() {
-        
-        self.tableViewHeightConstraint.constant = self.view.frame.height - self.headerViewHeightConstraint.constant
         
         self.imgAvatar.layer.borderWidth = 1.5
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
@@ -189,15 +187,27 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                 self.imgAvatar.image = nil
             }
             
-            // Customize User name
+            // Customize User information
             self.lblUsername.text = _user.fullName
-            
-            // Customize Description
-            self.lblDescription.text  = _user.description
+//            self.lblLocation.text  = _user.location
+//            self.lblTitle.text  = _user.title
             
             // Customize Following/Follower
-            self.lblFollowerNumber.text  = "\(_user.follower.count)"
-            self.lblFollowingNumber.text  = "\(_user.following.count)"
+            self.lblDiagnosisNumber.text  = "\(_user.getPosts().count)"
+            self.lblNotesNumber.text  = "\(_user.getPosts().count)"
+            
+            if self.isDiagnosis {
+                self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
+                self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
+                self.lblNotesNumber.textColor = Constants.ColorLightGray1
+                self.lblNotesText.textColor = Constants.ColorLightGray1
+            } else {
+                self.lblDiagnosisNumber.textColor = Constants.ColorLightGray1
+                self.lblDiagnosisText.textColor = Constants.ColorLightGray1
+                self.lblNotesNumber.textColor = Constants.ColorDarkGray4
+                self.lblNotesText.textColor = Constants.ColorDarkGray4
+            }
+            
         }
         
         self.tableView.reloadData()
@@ -317,6 +327,12 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             NSLog("Word: \(String(describing: tappedHashtag))")
             self.callSearchResultVC(hashtag: tappedHashtag)
         }
+        
+    }
+    
+    func onToggleAction(sender: UIButton) {
+        
+        print("\(sender.tag)")
         
     }
     
@@ -449,18 +465,18 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     // MARK: Scroll Ralated
     
     func updateScroll(offset: CGFloat) {
-        
         self.viewProfileInfo.alpha = max (0.0, (OffsetHeaderStop - offset) / OffsetHeaderStop)
         
         // ScrollViews Frame
         if (offset >= OffsetHeaderStop) {
-            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant - 60
-            self.tableViewHeightConstraint.constant = self.view.frame.height - (self.headerViewHeightConstraint.constant - OffsetHeaderStop)
+            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64
+            
             self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
         }
         else {
-            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant - 60
-            self.tableViewHeightConstraint.constant = self.view.frame.height - self.headerViewHeightConstraint.constant + offset
+            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
             self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
         }
         
@@ -469,7 +485,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     func getCurrentScroll() -> UIScrollView {
         
         let scrollView: UIScrollView = self.tableView
-        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
+        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height - 64.0 + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
         return scrollView
         
     }
@@ -577,25 +593,32 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 cell.btnPlay.playing = false
             }
             
-            cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-            cell.btnLike.index = indexPath.row
-            cell.btnLike.isEnabled = false
+            cell.btnLike.isHidden = !self.isDiagnosis
+            cell.btnMessage.isHidden = !self.isDiagnosis
+            cell.btnAction.isHidden = !self.isDiagnosis
             
-            // Hide playlist button
-            cell.constOfBtnPlaylistWidth.constant = 0
-            
-            if let _user = UserController.Instance.getUser() as User? {
-                let hasLiked = post.hasLiked(id: _user.id)
-                let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
-                cell.btnLike.setImage(image, for: .normal)
-                cell.btnLike.tag = hasLiked ? 1 : 0
+            if self.isDiagnosis {
+                cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
+                cell.btnLike.index = indexPath.row
+                cell.btnLike.isUserInteractionEnabled = false
                 
-                let hasCommented = post.hasCommented(id: _user.id)
-                let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
-                cell.btnMessage.setImage(image1, for: .normal)
+                if let _user = UserController.Instance.getUser() as User? {
+                    let hasLiked = post.hasLiked(id: _user.id)
+                    let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
+                    cell.btnLike.setImage(image, for: .normal)
+                    cell.btnLike.tag = hasLiked ? 1 : 0
+                    
+                    let hasCommented = post.hasCommented(id: _user.id)
+                    let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
+                    cell.btnMessage.setImage(image1, for: .normal)
+                }
+                
+                cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
+                cell.btnAction.tag = indexPath.row
+            } else {
+//                cell.likeBadgeView.isHidden = true
+//                cell.commentBadgeView.isHidden = true
             }
-            
-            cell.btnAction.isHidden = true
             
             let isFullDesc = self.states.contains(post.id)
             cell.lblDescription.delegate = self
@@ -758,18 +781,17 @@ extension ProfileViewController : UIScrollViewDelegate {
         if scrollView == self.mainScrollView {
             
             let offset: CGFloat = scrollView.contentOffset.y
-            var headerTransform: CATransform3D = CATransform3DIdentity
             
             if offset < 0 { // PULL DOWN -----------------
-                
-                let headerScaleFactor: CGFloat = -(offset) / self.headerView.bounds.height
-                let headerSizevariation: CGFloat = ((self.headerView.bounds.height * (1.0 + headerScaleFactor)) - self.headerView.bounds.height) / 2.0
-                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+//                var headerTransform: CATransform3D = CATransform3DIdentity
+//                let headerScaleFactor: CGFloat = -(offset) / self.viewProfileInfo.bounds.height
+//                let headerSizevariation: CGFloat = ((self.viewProfileInfo.bounds.height * (1.0 + headerScaleFactor)) - self.viewProfileInfo.bounds.height) / 2.0
+//                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
+//                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
                 
                 // Apply Transformations
-                self.headerView.layer.transform = headerTransform
-                self.viewProfileInfo.layer.transform = CATransform3DIdentity
+//                self.headerView.layer.transform = headerTransform
+//                self.viewProfileInfo.layer.transform = CATransform3DIdentity
             }
             else { // SCROLL UP/DOWN ------------
                 
@@ -794,21 +816,17 @@ extension ProfileViewController {
     //MARK: IBActions
     
     @IBAction func onEditProfile(sender: AnyObject!) {
-    
         self.callEditVC()
-        
     }
     
-    @IBAction func onMyFollowers(sender: AnyObject!) {
-        
-        self.callFollowerVC()
-        
+    @IBAction func onDiagnosisTapped(sender: AnyObject!) {
+        self.isDiagnosis = true
+        self.updateUI()
     }
     
-    @IBAction func onMyFollowings(sender: AnyObject!) {
-        
-        self.callFollowingVC()
-        
+    @IBAction func onNotesTapped(sender: AnyObject!) {
+        self.isDiagnosis = false
+        self.updateUI()
     }
     
 }

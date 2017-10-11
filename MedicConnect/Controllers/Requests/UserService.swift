@@ -383,17 +383,16 @@ class UserService: BaseTaskController {
                                                             
                                 if let _id = p["_id"] as? String,
                                     let _audio = p["audio"] as? String,
-                                    let metaDic = p["meta"] as? [String : String],
-                                    let _createdAt = metaDic["created_at"] as String?,
+                                    let _createdAt = p["createdAt"] as? String?,
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String {
                                     
                                     // Create meta
-                                    let _meta = Meta(createdAt: _createdAt)
+                                    let _meta = Meta(createdAt: _createdAt!)
                                     
-                                    if let _updatedAt = metaDic["updated_at"] as String? {
-                                        _meta.updatedAt = _updatedAt
+                                    if let _updatedAt = p["updatedAt"] as? String? {
+                                        _meta.updatedAt = _updatedAt!
                                     }
                                     
                                     let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user)

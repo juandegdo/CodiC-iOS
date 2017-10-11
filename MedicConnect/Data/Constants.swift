@@ -32,11 +32,13 @@ class Constants {
     static let ColorRed: UIColor = UIColor(red: 243/255, green: 52/255, blue: 47/255, alpha: 1.0)
 
     static let ColorLightGray: UIColor = UIColor(red: 225/255, green: 225/255, blue: 225/255, alpha: 0.75)
+    static let ColorLightGray1: UIColor = UIColor(red: 210/255, green: 211/255, blue: 213/255, alpha: 0.75)
     
     static let ColorDarkGray: UIColor = UIColor(red: 140/255, green: 140/255, blue: 140/255, alpha: 1.0)
     static let ColorDarkGray1: UIColor = UIColor(red: 29/255, green: 29/255, blue: 38/255, alpha: 1.0)
     static let ColorDarkGray2: UIColor = UIColor(red: 40/255, green: 40/255, blue: 40/255, alpha: 0.5)
     static let ColorDarkGray3: UIColor = UIColor(red: 117/255, green: 117/255, blue: 133/255, alpha: 1.0)
+    static let ColorDarkGray4: UIColor = UIColor(red: 118/255, green: 122/255, blue: 128/255, alpha: 1.0)
     
     static let ColorTabSelected : UIColor = UIColor(red: 249/255, green: 36/255, blue: 60/255, alpha: 1.0)
     

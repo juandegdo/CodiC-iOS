@@ -724,17 +724,10 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 let hasCommented = post.hasCommented(id: _user.id)
                 let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
                 cell.btnMessage.setImage(image1, for: .normal)
-                
-                let hasAddedToPlaylist = playlist.contains(where: { $0.id == post.id })
-                let image2 = hasAddedToPlaylist ? UIImage(named: "icon_broadcast_playlisted") : UIImage(named: "icon_broadcast_playlist")
-                cell.btnPlaylist.setImage(image2, for: .normal)
             }
             
             cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
             cell.btnAction.tag = indexPath.row
-            
-            // Hide Playlist button
-            cell.constOfBtnPlaylistWidth.constant = 0;
             
             let isFullDesc = self.states.contains(post.id)
             cell.lblDescription.delegate = self
