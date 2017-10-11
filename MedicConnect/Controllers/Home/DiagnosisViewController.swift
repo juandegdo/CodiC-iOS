@@ -36,18 +36,6 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if (UIApplication.shared.applicationIconBadgeNumber > 0) {
-            NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-        }
-        
-        // Register Device Token
-        if let _me = UserController.Instance.getUser() as User?, let deviceToken = UserController.Instance.getDeviceToken() as String?, deviceToken != _me.deviceToken {
-            UserService.Instance.putDeviceToken(deviceToken: deviceToken) { (success) in
-                if (success) {
-                    _me.deviceToken = deviceToken
-                }
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,15 +48,15 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
         super.viewWillAppear(animated)
         
         // Show Tutorial Screen
-        if (UserDefaultsUtil.LoadFirstLoad() / 10 == 0) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
-                vc.type = .home
-                self.present(vc, animated: false, completion: nil)
-            }
-            
-            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 10)
-        }
+//        if (UserDefaultsUtil.LoadFirstLoad() / 10 == 0) {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
+//                vc.type = .home
+//                self.present(vc, animated: false, completion: nil)
+//            }
+//            
+//            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 10)
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

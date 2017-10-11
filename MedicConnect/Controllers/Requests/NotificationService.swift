@@ -79,8 +79,7 @@ class NotificationService: BaseTaskController {
                             if  let _nid = n["_id"] as? String,
                                 let _message = n["message"] as? String,
                                 let _notificationType = n["notificationType"] as? Int,
-                                let metaDic = n["meta"] as? [String : String],
-                                let _createdAt = metaDic["created_at"] as String?,
+                                let _createdAt = n["createdAt"] as? String,
                                 let _userObj = n["fromUser"] as? NSDictionary {
                                 
                                 if firstNotifcation {
@@ -133,8 +132,7 @@ class NotificationService: BaseTaskController {
                                 if let _broadcastObj = n["broadcast"] as? NSDictionary,
                                     let _id = _broadcastObj["_id"] as? String,
                                     let _audio = _broadcastObj["audio"] as? String,
-                                    let _metaDic = _broadcastObj["meta"] as? [String : String],
-                                    let _createdAt = _metaDic["created_at"] as String?,
+                                    let _createdAt = _broadcastObj["createdAt"] as? String,
                                     let _playCount = _broadcastObj["play_count"] as? Int,
                                     let _commentsCount = _broadcastObj["comments_count"] as? Int,
                                     let _title = _broadcastObj["title"] as? String {
@@ -142,7 +140,7 @@ class NotificationService: BaseTaskController {
                                     // Create Meta
                                     let _meta = Meta(createdAt: _createdAt)
                                     
-                                    if let _updatedAt = metaDic["updated_at"] as String? {
+                                    if let _updatedAt = _broadcastObj["updatedAt"] as? String {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     

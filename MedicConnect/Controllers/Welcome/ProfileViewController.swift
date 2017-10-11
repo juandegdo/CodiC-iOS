@@ -50,19 +50,32 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         super.viewWillAppear(animated)
         
         // Show Tutorial Screen
-        if (UserDefaultsUtil.LoadFirstLoad() % 10 == 0) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
-                vc.type = .profile
-                self.present(vc, animated: false, completion: nil)
-            }
-            
-            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 1)
-        }
+//        if (UserDefaultsUtil.LoadFirstLoad() % 10 == 0) {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
+//                vc.type = .profile
+//                self.present(vc, animated: false, completion: nil)
+//            }
+//            
+//            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 1)
+//        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if (UIApplication.shared.applicationIconBadgeNumber > 0) {
+            NotificationUtil.updateNotificationAlert(hasNewAlert: true)
+        }
+        
+        // Register Device Token
+        if let _me = UserController.Instance.getUser() as User?, let deviceToken = UserController.Instance.getDeviceToken() as String?, deviceToken != _me.deviceToken {
+            UserService.Instance.putDeviceToken(deviceToken: deviceToken) { (success) in
+                if (success) {
+                    _me.deviceToken = deviceToken
+                }
+            }
+        }
         
         // Initialize Table Views
         self.tableView.register(UINib(nibName: ProfileListCellID, bundle: nil), forCellReuseIdentifier: ProfileListCellID)

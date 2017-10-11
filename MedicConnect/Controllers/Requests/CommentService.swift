@@ -35,8 +35,7 @@ class CommentService: BaseTaskController {
                         
                         if  let c = status["comment"] as? [String: AnyObject],
                             let _content = c["content"] as? String,
-                            let metaDic = c["meta"] as? [String : String],
-                            let _createdAt = metaDic["created_at"] as String? {
+                            let _createdAt = c["createdAt"] as? String {
                             
                             // Create final Post
                             let _comment = Comment(date: _createdAt, comment: _content)
@@ -83,8 +82,7 @@ class CommentService: BaseTaskController {
                         for c in _comments {
                             
                             if  let _content = c["content"] as? String,
-                                let metaDic = c["meta"] as? [String : String],
-                                let _createdAt = metaDic["created_at"] as String?,
+                                let _createdAt = c["createdAt"] as? String,
                                 let _userObj = c["user"] as? NSDictionary,
                                 let _userId = _userObj["_id"] as? String,
                                 let _name = _userObj["name"] as? String {
