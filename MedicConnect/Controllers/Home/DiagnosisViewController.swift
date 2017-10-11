@@ -506,26 +506,30 @@ extension DiagnosisViewController {
     
     func callProfileVC(user: User) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if  let _me = UserController.Instance.getUser() as User?,
-            let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
-            
-            if let blockedby = _me.blockedby as? [User] {
-                if blockedby.contains(where: { $0.id == user.id }) {
-                    return
-                }
-            }
-            if let blocking = _me.blocking as? [User] {
-                if blocking.contains(where: { $0.id == user.id }) {
-                    return
-                }
+        if  let _me = UserController.Instance.getUser() as User? {
+            if _me.id == user.id {
+                return
             }
             
-            vc.currentUser = user
-            vc.isMyProfile = (_me.id == user.id)
-            self.present(vc, animated: false, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+                
+                if let blockedby = _me.blockedby as? [User] {
+                    if blockedby.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                if let blocking = _me.blocking as? [User] {
+                    if blocking.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                
+                vc.currentUser = user
+                self.present(vc, animated: false, completion: nil)
+                
+            }
         }
         
     }

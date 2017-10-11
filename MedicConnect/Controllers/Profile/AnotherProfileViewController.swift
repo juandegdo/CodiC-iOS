@@ -17,17 +17,15 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     let PrivateUserTableViewCellID = "PrivateUserTableViewCell"
     
     // Header
-    @IBOutlet var headerView: UIView!
     @IBOutlet var headerLabel: UILabel!
     
     // Profile info
     @IBOutlet var viewProfileInfo: UIView!
     @IBOutlet var imgAvatar: UIImageView!
     @IBOutlet var lblUsername: UILabel!
-    @IBOutlet var lblDescription: UILabel!
-    @IBOutlet var lblFollowerNumber: UILabel!
-    @IBOutlet var lblFollowingNumber: UILabel!
-    @IBOutlet var btnFollow: UIButton!
+    @IBOutlet var lblLocation: UILabel!
+    @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var btnFavorites: UIButton!
     
     // Scroll
     @IBOutlet var mainScrollView: UIScrollView!
@@ -38,10 +36,9 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
-    var isMyProfile: Bool = false
     var currentUser: User?
     var vcDisappearType : ViewControllerDisappearType = .other
-    var OffsetHeaderStop: CGFloat = 321.0
+    var OffsetHeaderStop: CGFloat = 190.0
     var selectedDotsIndex = 0
     
     var profileType = 0 //0: normal, 1: private, 2: blocked
@@ -51,8 +48,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        OffsetHeaderStop = self.isMyProfile ? 271.0 : 321.0
-        self.headerViewHeightConstraint.constant = self.isMyProfile ? 335.0 : 385.0
+        self.headerViewHeightConstraint.constant = OffsetHeaderStop
     }
     
     override func viewDidLoad() {
@@ -95,12 +91,8 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func initViews() {
         
-        self.tableViewHeightConstraint.constant = self.view.frame.height - self.headerViewHeightConstraint.constant
-        
         self.imgAvatar.layer.borderWidth = 1.5
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
-        
-        self.btnFollow.isHidden = self.isMyProfile
         
         self.refreshData()
         
@@ -189,36 +181,14 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     func updateUI(user: User) {
         
         // Customize Avatar
-        _ = UIFont(name: "Avenir-Heavy", size: 18.0) as UIFont? ?? UIFont.systemFont(ofSize: 18.0)
-        
         if let imgURL = URL(string: user.photo) as URL? {
             self.imgAvatar.af_setImage(withURL: imgURL)
         }
         
-        // Customize User name
+        // Customize User Info
         self.lblUsername.text = user.fullName
-        
-        // Customize Description
-        self.lblDescription.text  = user.description
-        
-        // Customize Following/Follower
-        self.lblFollowerNumber.text  = "\(user.follower.count)"
-        self.lblFollowingNumber.text  = "\(user.following.count)"
-        
-        if let _me = UserController.Instance.getUser() as User? {
-            if (_me.requesting as! [User]).contains(where: { $0.id == user.id }) {
-                self.btnFollow.setTitle(NSLocalizedString("REQUESTED", comment: "comment"), for: .normal)
-                self.btnFollow.tag = 2
-            }else if (_me.following as! [User]).contains(where: { $0.id == user.id }) {
-                self.btnFollow.setTitle(NSLocalizedString("FOLLOWING", comment: "comment"), for: .normal)
-                self.btnFollow.tag = 1
-            } else {
-                self.btnFollow.setTitle(NSLocalizedString("FOLLOW", comment: "comment"), for: .normal)
-                self.btnFollow.tag = 0
-            }
-            
-            self.btnFollow.makeEnabled(enabled: true)
-        }
+//        self.lblLocation.text = user.location
+//        self.lblTitle.text = user.title
         
         if self.profileType == 0 {
             // Private
@@ -244,19 +214,21 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
     }
     
+    // MARK: Scroll Ralated
+    
     func updateScroll(offset: CGFloat) {
         
         self.viewProfileInfo.alpha = max (0.0, (OffsetHeaderStop - offset) / OffsetHeaderStop)
         
         // ScrollViews Frame
         if (offset >= OffsetHeaderStop) {
-            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant - 60.0
-            self.tableViewHeightConstraint.constant = self.view.frame.height - (self.headerViewHeightConstraint.constant - OffsetHeaderStop)
+            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64.0
             self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
         }
         else {
-            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant - 60.0
-            self.tableViewHeightConstraint.constant = self.view.frame.height - self.headerViewHeightConstraint.constant + offset
+            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
             self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
         }
         
@@ -265,17 +237,8 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     func getCurrentScroll() -> UIScrollView {
         
         let scrollView: UIScrollView = self.tableView
-        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
+        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height - 64.0 + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
         return scrollView
-        
-    }
-    
-    func callEditVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
-            self.present(vc, animated: false, completion: nil)
-        }
         
     }
     
@@ -686,7 +649,6 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
             cell.btnLike.index = indexPath.row
-            cell.btnLike.isEnabled = !isMyProfile
             
             if let _user = UserController.Instance.getUser() {
                 let hasLiked = post.hasLiked(id: _user.id)
@@ -839,21 +801,19 @@ extension AnotherProfileViewController : UIScrollViewDelegate {
             
             let offset: CGFloat = scrollView.contentOffset.y
             
-            var headerTransform: CATransform3D = CATransform3DIdentity
             
             if offset < 0 { // PULL DOWN -----------------
+//                var headerTransform: CATransform3D = CATransform3DIdentity
+//                let headerScaleFactor: CGFloat = -(offset) / self.headerView.bounds.height
+//                let headerSizevariation: CGFloat = ((self.headerView.bounds.height * (1.0 + headerScaleFactor)) - self.headerView.bounds.height) / 2.0
+//                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
+//                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+//                
+//                // Apply Transformations
+//                self.headerView.layer.transform = headerTransform
+//                self.viewProfileInfo.layer.transform = CATransform3DIdentity
                 
-                let headerScaleFactor: CGFloat = -(offset) / self.headerView.bounds.height
-                let headerSizevariation: CGFloat = ((self.headerView.bounds.height * (1.0 + headerScaleFactor)) - self.headerView.bounds.height) / 2.0
-                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-                
-                // Apply Transformations
-                self.headerView.layer.transform = headerTransform
-                self.viewProfileInfo.layer.transform = CATransform3DIdentity
-            }
-            else { // SCROLL UP/DOWN ------------
-                
+            } else { // SCROLL UP/DOWN ------------
                 self.updateScroll(offset: offset)
             }
         }
@@ -883,19 +843,7 @@ extension AnotherProfileViewController {
         
     }
     
-    @IBAction func onMyFollowers(sender: AnyObject!) {
-        
-//        self.callFollowerVC()
-        
-    }
-    
-    @IBAction func onMyFollowings(sender: AnyObject!) {
-        
-//        self.callFollowingVC()
-        
-    }
-    
-    @IBAction func onFollow(sender: AnyObject!) {
+    @IBAction func onFavorites(sender: AnyObject!) {
         
         guard let _currentUser = self.currentUser as User? else {
             return
@@ -904,7 +852,7 @@ extension AnotherProfileViewController {
             return
         }
         
-        self.btnFollow.makeEnabled(enabled: false)
+        self.btnFavorites.makeEnabled(enabled: false)
         if sender.tag == 0 {
             UserService.Instance.follow(userId: _currentUser.id, completion: {
                 (success: Bool) in
@@ -915,7 +863,7 @@ extension AnotherProfileViewController {
                         self.refreshData()
                     })
                 } else {
-                    self.btnFollow.makeEnabled(enabled: true)
+                    self.btnFavorites.makeEnabled(enabled: true)
                 }
             })
             
@@ -930,7 +878,7 @@ extension AnotherProfileViewController {
                         self.refreshData()
                     })
                 } else {
-                    self.btnFollow.makeEnabled(enabled: true)
+                    self.btnFavorites.makeEnabled(enabled: true)
                 }
             })
             

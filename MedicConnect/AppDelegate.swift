@@ -151,15 +151,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func callProfileVC(user: User) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if  let _me = UserController.Instance.getUser() as User?,
-            let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+        if  let _me = UserController.Instance.getUser() as User? {
+            if _me.id == user.id {
+                return
+            }
             
-            vc.currentUser = user
-            vc.isMyProfile = (_me.id == user.id)
-            if let vvc = self.window?.visibleViewController() {
-                vvc.present(vc, animated: false, completion: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+                
+                vc.currentUser = user
+                if let vvc = self.window?.visibleViewController() {
+                    vvc.present(vc, animated: false, completion: nil)
+                }
             }
         }
         
