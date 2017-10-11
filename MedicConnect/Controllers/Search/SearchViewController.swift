@@ -28,12 +28,6 @@ class SearchViewController: BaseViewController{
     let SearchTagCellID = "SearchTagCell"
     let SearchPlaceCellID = "SearchPlaceCell"
     
-    @IBOutlet var viewPlayer: UIView!
-    @IBOutlet var lblBroadcastname: UILabel!
-    @IBOutlet var lblUsername: UILabel!
-    @IBOutlet var btnPlay: UIButton!
-    @IBOutlet var btnPause: UIButton!
-    
     @IBOutlet var viewSearch: UIView!
     @IBOutlet var txFieldSearch: UITextField!
     
@@ -68,7 +62,7 @@ class SearchViewController: BaseViewController{
         super.viewDidLoad()
         
         self.initViews()
-        self.updatePlayer()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +70,6 @@ class SearchViewController: BaseViewController{
         
         PostService.Instance.getTrendingHashtags(completion: { (success : Bool) in
             if success {
-//                self.cvTags.layoutIfNeeded()
                 self.cvTags.reloadData()
                 self.cvTagsHeightConstraint.constant = self.customJustifiedFlowLayout.collectionViewContentSize.height
             }
@@ -158,11 +151,6 @@ class SearchViewController: BaseViewController{
         self.customJustifiedFlowLayout.horizontalJustification = FlowLayoutHorizontalJustification.left
         self.customJustifiedFlowLayout.horizontalCellPadding = 10
         self.customJustifiedFlowLayout.sectionInset = UIEdgeInsets.zero
-        
-//        self.cvTags.layoutIfNeeded()
-//        self.cvTags.reloadData()
-//
-//        self.cvTagsHeightConstraint.constant = self.customJustifiedFlowLayout.collectionViewContentSize.height
         
         // Category
         self.tfCategory.isOptionalDropDown = true
@@ -255,24 +243,12 @@ class SearchViewController: BaseViewController{
     
     func playBroadcastWithIndex(index: Int) {
         self.playerStatus = Constants.BrodcastPlayerStatus.Playing
-        self.updatePlayer()
         self.showPlayer(show: true)
     }
     
     func showPlayer(show: Bool) {
         self.mainScrollView.isHidden = !show
         self.pageScroll.isHidden = show
-    }
-    
-    func updatePlayer() {
-        self.btnPlay.isHidden = self.playerStatus == Constants.BrodcastPlayerStatus.Playing
-        self.btnPause.isHidden = !(self.playerStatus == Constants.BrodcastPlayerStatus.Playing)
-    }
-    
-    func setPlayerData(broadcast: Broadcast) {
-        broadcast.isPlaying = true
-        self.lblBroadcastname.text = broadcast.broadcastName
-        self.lblUsername.text = "\(NSLocalizedString("By:", comment: "comment")) \(broadcast.userName)"
     }
     
     func callProfileVC(user: User) {
@@ -544,23 +520,6 @@ extension SearchViewController {
     
     @IBAction func onNext(sender: AnyObject) {
         self.cvBroadCasts.scrollToPage(at: min(self.cvBroadCasts.currentPageIndex + 1, self.cvBroadCasts.numberOfPages - 1), animated: true)
-    }
-    
-    @IBAction func onPlay(sender: AnyObject) {
-        
-        self.cvBroadCasts.reloadData()
-        
-        self.playerStatus = Constants.BrodcastPlayerStatus.Playing
-        self.playBroadcastWithIndex(index: self.cvBroadCasts.currentPageIndex)
-    }
-    
-    @IBAction func onPause(sender: AnyObject) {
-        
-        self.cvBroadCasts.reloadData()
-        
-        self.playerStatus = Constants.BrodcastPlayerStatus.Paused
-        self.updatePlayer()
-        
     }
     
     @IBAction func onRecommended(_ sender: Any) {

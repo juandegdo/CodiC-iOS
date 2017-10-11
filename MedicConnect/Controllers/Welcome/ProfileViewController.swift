@@ -13,8 +13,8 @@ import HTHorizontalSelectionList
 
 class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
+//    let homeTypes: [String] = ["Following", "Recommended"]
     let OffsetHeaderStop: CGFloat = 240.0
-    
     let ProfileListCellID = "ProfileListCell"
     
     // Header
@@ -85,7 +85,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         self.initViews()
         
         vcDisappearType = .other
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(DiagnosisViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
     }
     
@@ -494,25 +494,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
-            self.present(vc, animated: false, completion: nil)
-        }
-        
-    }
-    
-    func callFollowerVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FollowingViewController") as? FollowingViewController {
-            self.present(vc, animated: false, completion: nil)
-        }
-        
-    }
-    
-    func callFollowingVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FollowingViewController") as? FollowingViewController {
-            vc.isDefaultFollowers = true
             self.present(vc, animated: false, completion: nil)
         }
         

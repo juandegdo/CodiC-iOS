@@ -59,8 +59,4 @@ class Constants {
     static let MaxFullNameLength = 100
     static let MaxDescriptionLength = 500
     
-    
-    //// Identifiers
-    static let FollowerCellID = "FollowerCell"
-    static let PlaylistCellID = "PlaylistCell"
 }

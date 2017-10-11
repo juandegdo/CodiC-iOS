@@ -24,7 +24,6 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     @IBOutlet var viewProfileInfo: UIView!
     @IBOutlet var imgAvatar: UIImageView!
     @IBOutlet var lblUsername: UILabel!
-    @IBOutlet var btnPlaylist: UIButton!
     @IBOutlet var lblDescription: UILabel!
     @IBOutlet var lblFollowerNumber: UILabel!
     @IBOutlet var lblFollowingNumber: UILabel!
@@ -64,11 +63,6 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         self.tableView.register(UINib(nibName: PrivateUserTableViewCellID, bundle: nil), forCellReuseIdentifier: PrivateUserTableViewCellID)
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1 ))
         
-        PlayListDataController.Instance.loadPlayList()
-        if playlist.contains(where: { $0.user_id == self.currentUser?.id }) {
-            self.btnPlaylist.setImage(UIImage.init(named: "icon_playlist_highlighted"), for: .normal)
-        }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,7 +71,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         self.initViews()
         
         vcDisappearType = .other
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
     }
@@ -280,27 +274,6 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
-            self.present(vc, animated: false, completion: nil)
-        }
-        
-    }
-    
-    func callFollowerVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FollowingViewController") as? FollowingViewController {
-            vc.currentUser = self.currentUser
-            self.present(vc, animated: false, completion: nil)
-        }
-        
-    }
-    
-    func callFollowingVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FollowingViewController") as? FollowingViewController {
-            vc.currentUser = self.currentUser
-            vc.isDefaultFollowers = true
             self.present(vc, animated: false, completion: nil)
         }
         
@@ -910,66 +883,15 @@ extension AnotherProfileViewController {
         
     }
     
-    @IBAction func onPlaylist(sender: AnyObject!) {
-        
-        if btnFollow.tag == 0 {
-            let alertController = UIAlertController(title: "Alert", message: "Please follow this broadcaster before you add the most recent broadcast into your playlist.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: false, completion: nil)
-            return
-        }
-        
-        if let _user = self.currentUser {
-            if _user.getPosts().count == 0 {
-                return
-            }
-            
-            let post = _user.getPosts()[0]
-            let userId: String = _user.id
-            
-            PlayListDataController.Instance.loadPlayList()
-            if !playlist.contains(where: { $0.user_id == userId }) {
-                PlayListDataController.Instance.addPost(post: post)
-                PlayListDataController.Instance.loadPlayList()
-                
-                self.btnPlaylist.makeEnabled(enabled: false)
-                PlaylistService.Instance.addToPlaylist(userId: userId, completion: { (success: Bool) in
-                    self.btnPlaylist.makeEnabled(enabled: true)
-                    
-                    if success {
-                        // Show success alert
-                        let alertController = UIAlertController(title: "Success", message: "Successfully added to your playlist.", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        
-                        self.btnPlaylist.setImage(UIImage.init(named: "icon_playlist_highlighted"), for: .normal)
-                        
-                    } else {
-                        NSLog("Failed to save the playlist user on remote db.")
-                        // Show error alert
-                        let alertController = UIAlertController(title: "Error", message: "Failed to add to your playlist.", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        
-                    }
-                })
-            }
-        }
-        
-    }
-    
     @IBAction func onMyFollowers(sender: AnyObject!) {
         
-        self.callFollowerVC()
+//        self.callFollowerVC()
         
     }
     
     @IBAction func onMyFollowings(sender: AnyObject!) {
         
-        self.callFollowingVC()
+//        self.callFollowingVC()
         
     }
     

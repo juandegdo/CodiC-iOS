@@ -11,6 +11,8 @@ import AVFoundation
 
 class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
     
+    let SearchPostCellID = "PlaylistCell"
+    
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var tvPosts: UITableView!
     
@@ -44,7 +46,7 @@ class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
         
         self.loadPosts()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
     }
@@ -74,7 +76,7 @@ class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
         self.lblTitle.text = self.hashtag
         
         // Initialize Table View
-        self.tvPosts.register(UINib(nibName: Constants.PlaylistCellID, bundle: nil), forCellReuseIdentifier: Constants.PlaylistCellID)
+        self.tvPosts.register(UINib(nibName: SearchPostCellID, bundle: nil), forCellReuseIdentifier: SearchPostCellID)
         self.tvPosts.tableFooterView = UIView()
         self.tvPosts.estimatedRowHeight = 125.0
         self.tvPosts.rowHeight = UITableViewAutomaticDimension
@@ -498,7 +500,7 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
         
         if tableView == self.tvPosts {
             
-            let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: Constants.PlaylistCellID) as! PlaylistCell
+            let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: SearchPostCellID) as! PlaylistCell
             
             let post = PostController.Instance.getHashtagPosts()[indexPath.row]
             cell.setData(post: post)
@@ -540,9 +542,9 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
                 let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
                 cell.btnMessage.setImage(image1, for: .normal)
                 
-                let hasAddedToPlaylist = playlist.contains(where: { $0.id == post.id })
-                let image2 = hasAddedToPlaylist ? UIImage(named: "icon_broadcast_playlisted") : UIImage(named: "icon_broadcast_playlist")
-                cell.btnPlaylist.setImage(image2, for: .normal)
+//                let hasAddedToPlaylist = playlist.contains(where: { $0.id == post.id })
+//                let image2 = hasAddedToPlaylist ? UIImage(named: "icon_broadcast_playlisted") : UIImage(named: "icon_broadcast_playlist")
+//                cell.btnPlaylist.setImage(image2, for: .normal)
             }
             
             let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))

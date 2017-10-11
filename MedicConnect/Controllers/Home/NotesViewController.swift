@@ -1,9 +1,9 @@
 //
-//  HomeViewController.swift
+//  NotesViewController.swift
 //  MedicConnect
 //
-//  Created by alessandro on 11/26/16.
-//  Copyright © 2016 Loewen. All rights reserved.
+//  Created by Daniel Yang on 2017-10-11.
+//  Copyright © 2017 Loewen. All rights reserved.
 //
 
 import UIKit
@@ -14,22 +14,12 @@ import MessageUI
 import Fabric
 import Crashlytics
 
-public enum ViewControllerDisappearType {
-    case comment
-    case like
-    case share
-    case playlist
-    case other
-}
-
-class HomeViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+class NotesViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
     
-    @IBOutlet var selectionList: HTHorizontalSelectionList!
-    @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var tvFollowings: UITableView!
-    @IBOutlet var tvRecommends: UITableView!
+    let NotesCellID = "PlaylistCell"
     
-    let homeTypes: [String] = ["Following", "Recommended"]
+    @IBOutlet var tvNotes: UITableView!
+    
     var vcDisappearType : ViewControllerDisappearType = .other
     
     var selectedDotsIndex = 0
@@ -81,7 +71,7 @@ class HomeViewController: BaseViewController, UIGestureRecognizerDelegate, Expan
         self.loadAll()
         
         vcDisappearType = .other
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(NotesViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
         
@@ -100,7 +90,7 @@ class HomeViewController: BaseViewController, UIGestureRecognizerDelegate, Expan
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         }
         
-
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -114,85 +104,32 @@ class HomeViewController: BaseViewController, UIGestureRecognizerDelegate, Expan
     
     func initViews() {
         
-        // Initialize Selection Lists
-        
-        self.selectionList.delegate = self
-        self.selectionList.dataSource = self
-        
-        self.selectionList.centerButtons = true
-        self.selectionList.snapToCenter = true
-        self.selectionList.selectionIndicatorHeight = 3
-        self.selectionList.selectionIndicatorHorizontalPadding = -1
-        
-        self.selectionList.backgroundColor = UIColor.clear
-        self.selectionList.bottomTrimColor = Constants.ColorDarkGray3
-        self.selectionList.selectionIndicatorColor = Constants.ColorRed
-        self.selectionList.selectionIndicatorAnimationMode = .noBounce
-        
-        let selectionListFont: UIFont = UIFont(name: "Avenir-Book", size: 15.0) as UIFont? ?? UIFont.systemFont(ofSize: 15.0)
-        self.selectionList.setTitleFont(selectionListFont, for: .normal)
-        self.selectionList.setTitleFont(selectionListFont, for: .selected)
-        
-        let selectionListColor = UIColor(white: 1.0, alpha: 0.4)
-        self.selectionList.setTitleColor(selectionListColor, for: .normal)
-        self.selectionList.setTitleColor(UIColor.white, for: .selected)
-        
         // Initialize Table Views
         
-        let nibPlaylistCell = UINib(nibName: Constants.PlaylistCellID, bundle: nil)
-        self.tvFollowings.register(nibPlaylistCell, forCellReuseIdentifier: Constants.PlaylistCellID)
+        let nibNotesCell = UINib(nibName: NotesCellID, bundle: nil)
+        self.tvNotes.register(nibNotesCell, forCellReuseIdentifier: NotesCellID)
         
-        let nibFollowerCell = UINib(nibName: Constants.FollowerCellID, bundle: nil)
-        self.tvRecommends.register(nibFollowerCell, forCellReuseIdentifier: Constants.FollowerCellID)
-        
-        self.tvFollowings.tableFooterView = UIView()
-        self.tvFollowings.estimatedRowHeight = 125.0
-        self.tvFollowings.rowHeight = UITableViewAutomaticDimension
-        
-        self.tvRecommends.tableFooterView = UIView()
-        self.tvRecommends.rowHeight = 88.0
+        self.tvNotes.tableFooterView = UIView()
+        self.tvNotes.estimatedRowHeight = 125.0
+        self.tvNotes.rowHeight = UITableViewAutomaticDimension
         
     }
     
 }
 
-extension HomeViewController {
+extension NotesViewController {
     
     // MARK: Private methods
     
-    /**
-     * Get the page frame for index
-     */
-    func getPageFrame(pageIndex: Int) -> CGRect {
-        
-        var pageFrame: CGRect = self.scrollView.bounds
-        pageFrame.origin.x = CGFloat(pageIndex) * pageFrame.width
-        
-        return pageFrame
-        
-    }
-    
     func loadPosts() {
         
-        // Load Playlist
-        PlayListDataController.Instance.loadPlayList()
-        
+        // Load Timeline
         UserService.Instance.getTimeline(completion: {
             (success: Bool) in
-            
             if success {
-                self.tvFollowings.reloadData()
+                self.tvNotes.reloadData()
             }
-            
         })
-        
-        UserService.Instance.getRecommendedUsers { (success : Bool) in
-            
-            if success {
-                self.tvRecommends.reloadData()
-            }
-            
-        }
         
     }
     
@@ -240,10 +177,10 @@ extension HomeViewController {
             PlayerController.Instance.shouldSeek = true
             
             if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _refTableView = _lastPlayed.refTableView as UITableView?,
+                let _ = _lastPlayed.refTableView as UITableView?,
                 let _index = _lastPlayed.index as Int? {
                 
-                let post = _refTableView == self.tvFollowings ? PostController.Instance.getFollowingPosts()[_index] : PostController.Instance.getRecommendedPosts()[_index]
+                let post = PostController.Instance.getFollowingPosts()[_index]
                 post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
             }
             
@@ -278,7 +215,7 @@ extension HomeViewController {
                 return
         }
         
-        let post = _refTableView == self.tvFollowings ? PostController.Instance.getFollowingPosts()[_index] : PostController.Instance.getRecommendedPosts()[_index]
+        let post = PostController.Instance.getFollowingPosts()[_index]
         
         self.releasePlayer(onlyState: true)
         
@@ -350,11 +287,11 @@ extension HomeViewController {
         if let sender = PlayerController.Instance.lastPlayed {
             sender.playing = false
             guard let _index = PlayerController.Instance.currentIndex as Int?,
-                let _refTableView = sender.refTableView as UITableView? else {
+                let _ = sender.refTableView as UITableView? else {
                     return
             }
             
-            let post = _refTableView == self.tvFollowings ? PostController.Instance.getFollowingPosts()[_index] : PostController.Instance.getRecommendedPosts()[_index]
+            let post = PostController.Instance.getFollowingPosts()[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
             
         }
@@ -380,31 +317,23 @@ extension HomeViewController {
         PlayerController.Instance.scheduleReset()
         
         guard let _index = sender.index as Int?,
-            let _refTableView = sender.refTableView as UITableView? else {
+            let _ = sender.refTableView as UITableView? else {
                 return
         }
         
-        let post = _refTableView == self.tvFollowings ? PostController.Instance.getFollowingPosts()[_index] : PostController.Instance.getRecommendedPosts()[_index]
+        let post = PostController.Instance.getFollowingPosts()[_index]
         post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
     }
     
     func onToggleFollowing(sender: TVButton) {
         
         guard let _index = sender.index as Int?,
-            let _refTableView = sender.refTableView as UITableView? else {
+            let _ = sender.refTableView as UITableView? else {
                 return
         }
         
-        var userId: String = ""
-        
-        if (_refTableView == self.tvFollowings) {
-            let post = PostController.Instance.getFollowingPosts()[_index]
-            userId = post.user.id
-            
-        } else {
-            let user = UserController.Instance.getRecommendedUsers()[_index]
-            userId = user.id
-        }
+        let post = PostController.Instance.getFollowingPosts()[_index]
+        let userId = post.user.id
         
         sender.makeEnabled(enabled: false)
         if sender.tag == 0 {
@@ -437,36 +366,6 @@ extension HomeViewController {
         
     }
     
-    
-    
-    func onTogglePlayList(sender: TVButton) {
-        sender.isEnabled = false
-        
-        guard let _index = sender.index as Int?,
-            let _refTableView = sender.refTableView as UITableView? else {
-                return
-        }
-        
-        var userId: String = ""
-        
-        if (_refTableView == self.tvFollowings) {
-            let post = PostController.Instance.getFollowingPosts()[_index]
-            userId = post.user.id
-            
-            PlayListDataController.Instance.loadPlayList()
-            if !playlist.contains(where: { $0.user_id == userId }) {
-                PlayListDataController.Instance.addPost(post: post)
-                PlayListDataController.Instance.loadPlayList()
-                _refTableView.reloadData()
-            }
-            
-        } else {
-            let user = UserController.Instance.getRecommendedUsers()[_index]
-            userId = user.id
-        }
-        sender.isEnabled = true
-    }
-    
     func onToggleAction(sender: TVButton) {
         guard let _ = sender.index as Int?,
             let _ = sender.refTableView as UITableView? else {
@@ -478,7 +377,7 @@ extension HomeViewController {
         let post = PostController.Instance.getFollowingPosts()[selectedDotsIndex]
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-
+        
         let actionReportThisBroadcast = UIAlertAction(title: "Report this broadcast", style: .destructive) { (action) in
             
             guard let _user = UserController.Instance.getUser() as User? else {
@@ -537,7 +436,7 @@ extension HomeViewController {
         }
         
         let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-
+        
         alertController.addAction(actionReportThisBroadcast)
         alertController.addAction(actionReportUser)
         alertController.addAction(actionBlockUser)
@@ -660,14 +559,9 @@ extension HomeViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
-            var post : Post?
-            if (selectionList.selectedButtonIndex == 0) {
-                post = PostController.Instance.getFollowingPosts()[sender.tag]
-            } else {
-                post = PostController.Instance.getRecommendedPosts()[sender.tag]
-            }
-            
+            let post : Post? = PostController.Instance.getFollowingPosts()[sender.tag]
             vc.currentPost = post
+            
             self.present(vc, animated: false, completion: nil)
         }
         
@@ -675,13 +569,7 @@ extension HomeViewController {
     
     func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
-        var post : Post?
-        
-        if (selectionList.selectedButtonIndex == 0) {
-            post = PostController.Instance.getFollowingPosts()[index!]
-        } else {
-            post = PostController.Instance.getRecommendedPosts()[index!]
-        }
+        let post : Post? = PostController.Instance.getFollowingPosts()[index!]
         
         if (post != nil) {
             self.callProfileVC(user: (post?.user)!)
@@ -694,13 +582,7 @@ extension HomeViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "LikesViewController") as? LikesViewController {
             let index = sender.view?.tag
-            var post : Post?
-            
-            if (selectionList.selectedButtonIndex == 0) {
-                post = PostController.Instance.getFollowingPosts()[index!]
-            } else {
-                post = PostController.Instance.getRecommendedPosts()[index!]
-            }
+            let post : Post? = PostController.Instance.getFollowingPosts()[index!]
             
             if (post != nil) {
                 vc.currentPost = post
@@ -714,7 +596,7 @@ extension HomeViewController {
         let _pos: CGPoint = sender.location(in: myTextView)
         
         //eliminate scroll offset
-//        pos.y += _tv.contentOffset.y;
+        //        pos.y += _tv.contentOffset.y;
         
         //get location in text from textposition at point
         let tapPos = myTextView.closestPosition(to: _pos)
@@ -737,49 +619,11 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController : UIScrollViewDelegate{
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let pageWidth: CGFloat = self.scrollView.frame.size.width
-        let targetContentOffsetX = targetContentOffset.pointee.x
-        let fractionalPage: Float = Float(targetContentOffsetX) / Float(pageWidth)
-        let page = lroundf(fractionalPage)
-        
-        if(scrollView.contentOffset.x != 0) {
-            self.selectionList.setSelectedButtonIndex(page, animated: true)
-            self.scrollView.scrollRectToVisible(self.getPageFrame(pageIndex: page), animated: true)
-        }
-    }
-}
-
-extension HomeViewController : HTHorizontalSelectionListDataSource, HTHorizontalSelectionListDelegate {
-    // MARK: HTHorizontalSelectionListDataSource Methods
-    func numberOfItems(in selectionList: HTHorizontalSelectionList) -> Int {
-        return self.homeTypes.count
-    }
-    
-    func selectionList(_ selectionList: HTHorizontalSelectionList, titleForItemWith index: Int) -> String? {
-        return self.homeTypes[index]
-    }
-    
-    // MARK: HTHorizontalSelectionListDataSource Methods
-    func selectionList(_ selectionList: HTHorizontalSelectionList, didSelectButtonWith index: Int) {
-        self.scrollView.scrollRectToVisible(self.getPageFrame(pageIndex: index), animated: true)
-    }
-}
-
-extension HomeViewController : UITableViewDataSource, UITableViewDelegate {
+extension NotesViewController : UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableView DataSource Methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        if tableView == self.tvFollowings {
-            tableView.backgroundView = nil
-            return 1
-        } else if tableView == self.tvRecommends {
-            tableView.backgroundView = nil
-            return 1
-        }
-        
+        tableView.backgroundView = nil
         return 1
     }
     
@@ -788,112 +632,75 @@ extension HomeViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if tableView == self.tvFollowings {
-            
-            let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: Constants.PlaylistCellID) as! PlaylistCell
-            
-            let post = PostController.Instance.getFollowingPosts()[indexPath.row]
-            cell.setData(post: post)
-            
-            cell.btnShare.tag = indexPath.row
-            cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
-            
-            cell.btnMessage.tag = indexPath.row
-            cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
-            
-            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
-            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
-            cell.btnPlay.index = indexPath.row
-            cell.btnPlay.refTableView = tableView
-            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
-            
-            if cell.btnPlay.playing {
-                cell.btnPlay.playing = false
-            }
-            
-            cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-            cell.btnLike.index = indexPath.row
-            cell.btnLike.refTableView = tableView
-            
-            cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-            cell.btnAction.index = indexPath.row
-            cell.btnAction.refTableView = tableView
-            
-            cell.btnPlaylist.addTarget(self, action: #selector(onTogglePlayList(sender:)), for: .touchUpInside)
-            cell.btnPlaylist.index = indexPath.row
-            cell.btnPlaylist.refTableView = tableView
-            
-            if let _user = UserController.Instance.getUser() as User? {
-                let hasLiked = post.hasLiked(id: _user.id)
-                let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
-                cell.btnLike.setImage(image, for: .normal)
-                cell.btnLike.tag = hasLiked ? 1 : 0
-                
-                let hasCommented = post.hasCommented(id: _user.id)
-                let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
-                cell.btnMessage.setImage(image1, for: .normal)
-                
-                let hasAddedToPlaylist = playlist.contains(where: { $0.id == post.id })
-                let image2 = hasAddedToPlaylist ? UIImage(named: "icon_broadcast_playlisted") : UIImage(named: "icon_broadcast_playlist")
-                cell.btnPlaylist.setImage(image2, for: .normal)
-            }
-            
-            let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
-            cell.imgUserAvatar.addGestureRecognizer(tapGestureOnUserAvatar)
-            cell.imgUserAvatar.tag = indexPath.row
-            
-            let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
-            cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
-            cell.lblUsername.tag = indexPath.row
-            
-            let isFullDesc = self.states.contains(post.id)
-            cell.lblDescription.delegate = self
-            cell.lblDescription.shouldCollapse = true
-            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-            cell.lblDescription.text = post.description
-            cell.lblDescription.collapsed = !isFullDesc
-            cell.showFullDescription = isFullDesc
-            
-            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-            cell.lblLikedDescription.tag = indexPath.row
-            
-            let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
-            cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
-            cell.txtVHashtags.tag = indexPath.row
-            
-            cell.isExpanded = self.expandedRows.contains(post.id)
-            cell.selectionStyle = .none
-            
-            return cell
-            
-        } else {
-            
-            let cell: FollowerCell = tableView.dequeueReusableCell(withIdentifier: Constants.FollowerCellID) as! FollowerCell
-            
-            // Set button actions
-            
-            cell.btnFollowing.tag = 1
-            cell.btnFollowing.index = indexPath.row
-            cell.btnFollowing.refTableView = tableView
-            cell.btnFollowing.addTarget(self, action: #selector(onToggleFollowing(sender:)), for: .touchUpInside)
-            cell.btnFollowing.makeEnabled(enabled: true)
-            
-            cell.btnUnFollow.tag = 0
-            cell.btnUnFollow.index = indexPath.row
-            cell.btnUnFollow.refTableView = tableView
-            cell.btnUnFollow.addTarget(self, action: #selector(onToggleFollowing(sender:)), for: .touchUpInside)
-            cell.btnUnFollow.makeEnabled(enabled: true)
-            
-            // Set cell data
-            
-            if let _recommendedUser = UserController.Instance.getRecommendedUsers()[indexPath.row] as User? {
-                cell.setFollowData(user: _recommendedUser)
-            }
-            
-            return cell
+        
+        let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: NotesCellID) as! PlaylistCell
+        
+        let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+        cell.setData(post: post)
+        
+        cell.btnShare.tag = indexPath.row
+        cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
+        
+        cell.btnMessage.tag = indexPath.row
+        cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
+        
+        cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
+        cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
+        cell.btnPlay.index = indexPath.row
+        cell.btnPlay.refTableView = tableView
+        cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
+        
+        if cell.btnPlay.playing {
+            cell.btnPlay.playing = false
         }
+        
+        cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
+        cell.btnLike.index = indexPath.row
+        cell.btnLike.refTableView = tableView
+        
+        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
+        cell.btnAction.index = indexPath.row
+        cell.btnAction.refTableView = tableView
+        
+        if let _user = UserController.Instance.getUser() as User? {
+            let hasLiked = post.hasLiked(id: _user.id)
+            let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
+            cell.btnLike.setImage(image, for: .normal)
+            cell.btnLike.tag = hasLiked ? 1 : 0
+            
+            let hasCommented = post.hasCommented(id: _user.id)
+            let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
+            cell.btnMessage.setImage(image1, for: .normal)
+        }
+        
+        let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
+        cell.imgUserAvatar.addGestureRecognizer(tapGestureOnUserAvatar)
+        cell.imgUserAvatar.tag = indexPath.row
+        
+        let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
+        cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
+        cell.lblUsername.tag = indexPath.row
+        
+        let isFullDesc = self.states.contains(post.id)
+        cell.lblDescription.delegate = self
+        cell.lblDescription.shouldCollapse = true
+        cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
+        cell.lblDescription.text = post.description
+        cell.lblDescription.collapsed = !isFullDesc
+        cell.showFullDescription = isFullDesc
+        
+        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
+        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
+        cell.lblLikedDescription.tag = indexPath.row
+        
+        let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
+        cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
+        cell.txtVHashtags.tag = indexPath.row
+        
+        cell.isExpanded = self.expandedRows.contains(post.id)
+        cell.selectionStyle = .none
+        
+        return cell
         
     }
     
@@ -901,62 +708,43 @@ extension HomeViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if tableView == self.tvFollowings {
+        guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+            else { return }
+        
+        let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+        
+        switch cell.isExpanded {
+        case true:
+            self.expandedRows.remove(post.id)
             
-            guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getFollowingPosts()[indexPath.row]
-            
-            switch cell.isExpanded {
-            case true:
-                self.expandedRows.remove(post.id)
-                
-            case false:
-                self.expandedRows.insert(post.id)
-            }
-            
-            cell.isExpanded = !cell.isExpanded
-            
-            self.tvFollowings.beginUpdates()
-            self.tvFollowings.endUpdates()
-            
-        } else {
-            
-            tableView.deselectRow(at: indexPath, animated: false)
-            
-            let user = UserController.Instance.getRecommendedUsers()[indexPath.row]
-            self.callProfileVC(user: user)
-            
+        case false:
+            self.expandedRows.insert(post.id)
         }
+        
+        cell.isExpanded = !cell.isExpanded
+        
+        self.tvNotes.beginUpdates()
+        self.tvNotes.endUpdates()
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        if tableView == self.tvFollowings {
-            
-            guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getFollowingPosts()[indexPath.row]
-            self.expandedRows.remove(post.id)
-            
-            cell.isExpanded = false
-            
-            self.tvFollowings.beginUpdates()
-            self.tvFollowings.endUpdates()
-            
-        }
+        guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+            else { return }
+        
+        let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+        self.expandedRows.remove(post.id)
+        
+        cell.isExpanded = false
+        
+        self.tvNotes.beginUpdates()
+        self.tvNotes.endUpdates()
         
     }
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
-        if inTableView == self.tvFollowings {
-            return PostController.Instance.getFollowingPosts().count
-        } else {
-            return UserController.Instance.getRecommendedUsers().count
-        }
-        
+        return PostController.Instance.getFollowingPosts().count
     }
     
     //
@@ -964,31 +752,31 @@ extension HomeViewController : UITableViewDataSource, UITableViewDelegate {
     //
     
     func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvFollowings.beginUpdates()
+        self.tvNotes.beginUpdates()
     }
     
     func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvFollowings)
-        if let indexPath = self.tvFollowings.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvFollowings.cellForRow(at: indexPath) as? PlaylistCell
+        let point = label.convert(CGPoint.zero, to: self.tvNotes)
+        if let indexPath = self.tvNotes.indexPathForRow(at: point) as IndexPath? {
+            guard let cell = self.tvNotes.cellForRow(at: indexPath) as? PlaylistCell
                 else { return }
             
             let post = PostController.Instance.getFollowingPosts()[indexPath.row]
             self.states.insert(post.id)
-
+            
             cell.showFullDescription = true
         }
-        self.tvFollowings.endUpdates()
+        self.tvNotes.endUpdates()
     }
     
     func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tvFollowings.beginUpdates()
+        self.tvNotes.beginUpdates()
     }
     
     func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvFollowings)
-        if let indexPath = self.tvFollowings.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvFollowings.cellForRow(at: indexPath) as? PlaylistCell
+        let point = label.convert(CGPoint.zero, to: self.tvNotes)
+        if let indexPath = self.tvNotes.indexPathForRow(at: point) as IndexPath? {
+            guard let cell = self.tvNotes.cellForRow(at: indexPath) as? PlaylistCell
                 else { return }
             
             let post = PostController.Instance.getFollowingPosts()[indexPath.row]
@@ -996,6 +784,7 @@ extension HomeViewController : UITableViewDataSource, UITableViewDelegate {
             
             cell.showFullDescription = false
         }
-        self.tvFollowings.endUpdates()
+        self.tvNotes.endUpdates()
     }
 }
+
