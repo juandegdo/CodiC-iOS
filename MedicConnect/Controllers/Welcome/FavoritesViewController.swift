@@ -131,9 +131,10 @@ class FavoritesViewController: BaseViewController {
                     
                     // If in Following list, just set button state locally, as it's better for UX.
                     // Otherwise, reload data.
-                    let cell = _tableView.cellForRow(at: IndexPath(row: _index, section: 0)) as! FollowingCell
-                    cell.toggleFollowData()
+//                    let cell = _tableView.cellForRow(at: IndexPath(row: _index, section: 0)) as! FollowingCell
+//                    cell.toggleFollowData()
                     sender.makeEnabled(enabled: true)
+                    self.loadData()
                     
                 }
                 
@@ -164,10 +165,10 @@ class FavoritesViewController: BaseViewController {
                     
                     // If in Following list, just set button state locally, as it's better for UX.
                     // Otherwise, reload data.
-                    let cell = _tableView.cellForRow(at: IndexPath(row: _index, section: 0)) as! FollowingCell
-                    cell.toggleFollowData()
+//                    let cell = _tableView.cellForRow(at: IndexPath(row: _index, section: 0)) as! FollowingCell
+//                    cell.toggleFollowData()
                     sender.makeEnabled(enabled: true)
-//                    self.loadData()
+                    self.loadData()
                 }
                 
             })
@@ -225,15 +226,10 @@ extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
         
         // Set button actions
         
-        cell.btnFollowing.index = indexPath.row
-        cell.btnFollowing.refTableView = tableView
-        cell.btnFollowing.addTarget(self, action: #selector(FavoritesViewController.setUnfollow(sender:)), for: .touchUpInside)
-        cell.btnFollowing.makeEnabled(enabled: true)
-        
-        cell.btnUnFollow.index = indexPath.row
-        cell.btnUnFollow.refTableView = tableView
-        cell.btnUnFollow.addTarget(self, action: #selector(FavoritesViewController.setFollow(sender:)), for: .touchUpInside)
-        cell.btnUnFollow.makeEnabled(enabled: true)
+        cell.btnFavorite.index = indexPath.row
+        cell.btnFavorite.refTableView = tableView
+        cell.btnFavorite.addTarget(self, action: #selector(FavoritesViewController.setUnfollow(sender:)), for: .touchUpInside)
+        cell.btnFavorite.makeEnabled(enabled: true)
         
         // Set cell data
         
@@ -258,7 +254,7 @@ extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88.0
+        return 98.0
     }
 
 }

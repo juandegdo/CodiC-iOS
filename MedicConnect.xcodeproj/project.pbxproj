@@ -10,8 +10,6 @@
 		005642961EFEDA3000B42A42 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005642951EFEDA3000B42A42 /* NotificationService.swift */; };
 		005642981EFF003B00B42A42 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005642971EFF003B00B42A42 /* NotificationController.swift */; };
 		0056429A1EFF007300B42A42 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 005642991EFF007300B42A42 /* Notification.swift */; };
-		00C7483D1EFCA9F900BD3EAE /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C7483B1EFCA9F900BD3EAE /* FollowerCell.swift */; };
-		00C7483E1EFCA9F900BD3EAE /* FollowerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00C7483C1EFCA9F900BD3EAE /* FollowerCell.xib */; };
 		00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C748411EFD179200BD3EAE /* NotificationUtil.swift */; };
 		00CFBD8D1EF7DC5B000A4D1E /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */; };
 		00CFBD8F1EF83BEE000A4D1E /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFBD8E1EF83BEE000A4D1E /* CommentController.swift */; };
@@ -156,8 +154,6 @@
 		005642951EFEDA3000B42A42 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		005642971EFF003B00B42A42 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationController.swift; path = ../Controllers/Welcome/NotificationController.swift; sourceTree = "<group>"; };
 		005642991EFF007300B42A42 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		00C7483B1EFCA9F900BD3EAE /* FollowerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
-		00C7483C1EFCA9F900BD3EAE /* FollowerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowerCell.xib; sourceTree = "<group>"; };
 		00C748411EFD179200BD3EAE /* NotificationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		00CFBD8E1EF83BEE000A4D1E /* CommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommentController.swift; path = ../Controllers/Welcome/CommentController.swift; sourceTree = "<group>"; };
@@ -520,8 +516,6 @@
 				D2941E641E109E7D00CB7552 /* ChangePasswordListCell.xib */,
 				D279AD4D1E132A14001714FC /* CommentsListCell.swift */,
 				D279AD4F1E132A26001714FC /* CommentsListCell.xib */,
-				00C7483B1EFCA9F900BD3EAE /* FollowerCell.swift */,
-				00C7483C1EFCA9F900BD3EAE /* FollowerCell.xib */,
 				D2F55A911DEB74F40038A392 /* FollowingCell.swift */,
 				D2A634551E1DE05500E51AA0 /* FollowingCell.xib */,
 				D21BC8F71DEA2867008F5443 /* PlaylistCell.swift */,
@@ -879,7 +873,6 @@
 				D270B7E31DE51F7600458C2E /* LaunchScreen.storyboard in Resources */,
 				A9A358791F07447F005B8011 /* Privacy_policy_HTML.html in Resources */,
 				D270B7E01DE51F7600458C2E /* Assets.xcassets in Resources */,
-				00C7483E1EFCA9F900BD3EAE /* FollowerCell.xib in Resources */,
 				D2F55A9C1DEBB8BB0038A392 /* ProfileListCell.xib in Resources */,
 				A9C741D81F0FDCC700894651 /* PrivateUserTableViewCell.xib in Resources */,
 				D2941E651E109E7D00CB7552 /* ChangePasswordListCell.xib in Resources */,
@@ -1114,7 +1107,6 @@
 				D2301FDF1E5FC71A006C636A /* AlertUtil.swift in Sources */,
 				D270B80C1DE5234300458C2E /* BaseViewController.swift in Sources */,
 				D270B8101DE5237300458C2E /* SignInViewController.swift in Sources */,
-				00C7483D1EFCA9F900BD3EAE /* FollowerCell.swift in Sources */,
 				D29891F01E613DBA004C0FC1 /* EditProfileViewController.swift in Sources */,
 				00CFBD8D1EF7DC5B000A4D1E /* CommentService.swift in Sources */,
 				D20658411E5BCD30003875E4 /* UserDefaultsUtil.swift in Sources */,

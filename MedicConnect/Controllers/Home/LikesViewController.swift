@@ -204,15 +204,15 @@ extension LikesViewController : UITableViewDataSource, UITableViewDelegate{
             
             // Set button actions
             
-            cell.btnFollowing.index = indexPath.row
-            cell.btnFollowing.refTableView = tableView
-            cell.btnFollowing.addTarget(self, action: #selector(LikesViewController.setUnfollow(sender:)), for: .touchUpInside)
-            cell.btnFollowing.makeEnabled(enabled: true)
-            
-            cell.btnUnFollow.index = indexPath.row
-            cell.btnUnFollow.refTableView = tableView
-            cell.btnUnFollow.addTarget(self, action: #selector(LikesViewController.setFollow(sender:)), for: .touchUpInside)
-            cell.btnUnFollow.makeEnabled(enabled: true)
+//            cell.btnFollowing.index = indexPath.row
+//            cell.btnFollowing.refTableView = tableView
+//            cell.btnFollowing.addTarget(self, action: #selector(LikesViewController.setUnfollow(sender:)), for: .touchUpInside)
+//            cell.btnFollowing.makeEnabled(enabled: true)
+//            
+//            cell.btnUnFollow.index = indexPath.row
+//            cell.btnUnFollow.refTableView = tableView
+//            cell.btnUnFollow.addTarget(self, action: #selector(LikesViewController.setFollow(sender:)), for: .touchUpInside)
+//            cell.btnUnFollow.makeEnabled(enabled: true)
             
             // Set cell data
             if let _user = LikeController.Instance.getPostLikes()[indexPath.row] as User? {
