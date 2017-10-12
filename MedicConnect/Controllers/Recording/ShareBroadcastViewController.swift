@@ -55,7 +55,11 @@ extension ShareBroadcastViewController {
     //MARK: IBActions
     
     @IBAction func onClose(sender: UIButton) {
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectStopBroadcast, sender: nil)
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
     @IBAction func onSocialButtonSelect(sender: UIButton!) {
@@ -65,7 +69,7 @@ extension ShareBroadcastViewController {
     }
     
     @IBAction func onOK(sender: UIButton) {
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectStopBroadcast, sender: nil)
+        self.onClose(sender: sender)
     }
 
 }

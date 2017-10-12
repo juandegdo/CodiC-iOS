@@ -20,6 +20,7 @@
 		6522BF141F732EAF00E40759 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF131F732EAF00E40759 /* SearchService.swift */; };
 		6522BF161F732F7C00E40759 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF151F732F7C00E40759 /* SearchController.swift */; };
 		6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */; };
+		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
 		659C70CE1F2014BF0045F6CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C70CD1F2014BF0045F6CF /* AlertController.swift */; };
 		65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896D1F3A935400547D72 /* LikesViewController.swift */; };
@@ -167,6 +168,7 @@
 		6522BF131F732EAF00E40759 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		6522BF151F732F7C00E40759 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableLabel.swift; path = ExpandableLabel/ExpandableLabel.swift; sourceTree = "<group>"; };
 		659C70CD1F2014BF0045F6CF /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		65A2896D1F3A935400547D72 /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
@@ -460,10 +462,12 @@
 			isa = PBXGroup;
 			children = (
 				A9A358741F07446B005B8011 /* htmls */,
-				D213CB1A1E0CA7B0004BEA3C /* SettingsViewController.swift */,
-				D2941E601E10993300CB7552 /* ChangePasswordViewController.swift */,
-				A9A358721F0742D7005B8011 /* SettingsDetailViewController.swift */,
 				A9E444B61F09683D00F49C7E /* BlockedUsersViewController.swift */,
+				D2941E601E10993300CB7552 /* ChangePasswordViewController.swift */,
+				D29891F41E651075004C0FC1 /* ResetViewController.swift */,
+				9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */,
+				D213CB1A1E0CA7B0004BEA3C /* SettingsViewController.swift */,
+				A9A358721F0742D7005B8011 /* SettingsDetailViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -693,11 +697,10 @@
 		D2E87DD01EA441C700996DBC /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				D29891EC1E613DBA004C0FC1 /* EditProfileViewController.swift */,
 				D29891EE1E613DBA004C0FC1 /* ProfileViewController.swift */,
 				D2E87DD11EA441DB00996DBC /* AnotherProfileViewController.swift */,
-				D29891F41E651075004C0FC1 /* ResetViewController.swift */,
-				9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */,
+				D29891EC1E613DBA004C0FC1 /* EditProfileViewController.swift */,
+				654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1070,6 +1073,7 @@
 				D268F0E11E89875F0097BA48 /* MTScrollView.swift in Sources */,
 				D2AFD0081E99426C00246477 /* PlayerController.swift in Sources */,
 				654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */,
+				654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */,
 				D24512AD1E1B1DFB00BCD417 /* TagSelectCell.swift in Sources */,
 				D20658331E5BB9ED003875E4 /* RadTabBar.m in Sources */,
 				D29891F51E651075004C0FC1 /* ResetViewController.swift in Sources */,

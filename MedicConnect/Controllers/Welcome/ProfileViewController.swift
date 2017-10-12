@@ -35,6 +35,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     @IBOutlet var mainScrollView: UIScrollView!
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var btnRecord: UIButton!
+    
     // Constraints
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
@@ -803,6 +805,14 @@ extension ProfileViewController : UIScrollViewDelegate {
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueMedicConnectRecordPopup {
+            if let popupVC = segue.destination as? RecordPopupViewController {
+                popupVC.isDiagnosis = self.isDiagnosis
+            }
+        }
+    }
+    
 }
 
 extension ProfileViewController {
@@ -821,6 +831,11 @@ extension ProfileViewController {
     @IBAction func onNotesTapped(sender: AnyObject!) {
         self.isDiagnosis = false
         self.updateUI()
+    }
+    
+    @IBAction func onRecord(sender: AnyObject!) {
+        vcDisappearType = .record
+        self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordPopup, sender: nil)
     }
     
 }

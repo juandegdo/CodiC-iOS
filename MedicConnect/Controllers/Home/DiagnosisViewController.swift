@@ -19,6 +19,7 @@ public enum ViewControllerDisappearType {
     case like
     case share
     case other
+    case record
 }
 
 class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {

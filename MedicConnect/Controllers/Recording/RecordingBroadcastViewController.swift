@@ -148,8 +148,11 @@ extension RecordingBroadcastViewController {
     @IBAction func onClose(sender: AnyObject) {
         stopRecording()
         
-        self.tabBarController?.selectedIndex = DataManager.Instance.getLastTabIndex()
-        self.navigationController?.popToRootViewController(animated: false)
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
     @IBAction func onStopRecording(sender: AnyObject) {

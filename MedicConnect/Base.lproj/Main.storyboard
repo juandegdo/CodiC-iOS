@@ -365,7 +365,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQO-em-fUr">
-                                                <rect key="frame" x="144" y="-2" width="127" height="40"/>
+                                                <rect key="frame" x="144.33333333333337" y="-2" width="126.66666666666663" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="wMU-3b-a5N"/>
                                                 </constraints>
@@ -374,13 +374,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provide the following information to sign up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ei-76-eon">
-                                                <rect key="frame" x="60" y="50" width="295" height="21"/>
+                                                <rect key="frame" x="60.333333333333343" y="50" width="294.66666666666663" height="20.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hhT-vs-kHL">
-                                                <rect key="frame" x="25" y="119" width="364" height="224"/>
+                                                <rect key="frame" x="25" y="118.66666666666667" width="364" height="224"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6go-Ra-sgA" customClass="ACFloatingTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
@@ -407,7 +407,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8D-64-SFs" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="58" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="58" width="364" height="50.000000000000028"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -431,7 +431,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MK3-zx-TRG" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="116" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="116.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -455,7 +455,7 @@
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zmo-IG-nx6" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="174" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="174.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -484,7 +484,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRm-Fk-KA9">
-                                                <rect key="frame" x="25" y="403" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="402.66666666666669" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="rlf-7C-4aC"/>
                                                 </constraints>
@@ -497,7 +497,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKo-x0-zfR">
-                                                <rect key="frame" x="85" y="493" width="244" height="30"/>
+                                                <rect key="frame" x="85" y="492.66666666666663" width="244" height="30"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmh-tZ-M5U">
                                                         <rect key="frame" x="0.0" y="4" width="178" height="22"/>
@@ -1080,7 +1080,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kev-Bq-Rq8">
-                                        <rect key="frame" x="15" y="187" width="275" height="50"/>
+                                        <rect key="frame" x="15" y="185.66666666666669" width="275" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VKX-ID-2s0">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1164,7 +1164,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3b0-H0-fbw">
-                                        <rect key="frame" x="35" y="105" width="235" height="66"/>
+                                        <rect key="frame" x="35" y="104.99999999999999" width="235" height="65.666666666666643"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="235" id="amS-1Q-jU2"/>
                                         </constraints>
@@ -1257,7 +1257,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Navigation Controller-->
         <scene sceneID="Rl1-6d-zR2">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mE3-Yh-sdm" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="recordNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="mE3-Yh-sdm" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <tabBarItem key="tabBarItem" tag="1003" title="" id="VcY-z1-Nez"/>
                     <toolbarItems/>
@@ -1277,7 +1277,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <!--Navigation Controller-->
         <scene sceneID="EiA-Vf-DE5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="cOV-hP-4Zg" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="searchNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="cOV-hP-4Zg" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gbc-ob-jxj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1628,6 +1628,9 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <constraint firstAttribute="height" constant="50" id="vtY-9A-Ie5"/>
                                 </constraints>
                                 <state key="normal" image="icon_profile_add"/>
+                                <connections>
+                                    <action selector="onRecordWithSender:" destination="FrV-8f-pub" eventType="touchUpInside" id="Cul-Cc-k2M"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1652,6 +1655,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="Do8-SQ-Vw5"/>
                     <connections>
+                        <outlet property="btnRecord" destination="chu-wv-5TT" id="cL7-d8-RVV"/>
                         <outlet property="headerLabel" destination="I4h-Cq-DCg" id="i8L-8Z-8IG"/>
                         <outlet property="headerViewHeightConstraint" destination="cZf-mR-CC9" id="DMt-87-sOe"/>
                         <outlet property="imgAvatar" destination="dBF-Kb-Xev" id="SqZ-e9-OGi"/>
@@ -1670,6 +1674,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <outlet property="viewProfileInfo" destination="oGP-1Q-fhG" id="oDf-EZ-ZWl"/>
                         <segue destination="dIj-Ko-9ku" kind="show" identifier="EditProfile" id="HOx-wp-DVQ"/>
                         <segue destination="75C-cM-54S" kind="show" identifier="ShareBroadcastPopUp" animates="NO" id="vbE-pK-CLR"/>
+                        <segue destination="4IT-S5-5ZL" kind="show" identifier="segueRecordPopUp" animates="NO" id="VI6-oN-DoH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="806-Gz-M0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2236,75 +2241,23 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <constraint firstAttribute="height" constant="22" id="dy7-7N-4hp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xEE-gI-Ibb">
-                                        <rect key="frame" x="182" y="326" width="50" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="JTx-JY-wWC"/>
-                                            <constraint firstAttribute="height" constant="22" id="xP3-NP-tVe"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xQg-vd-9n5">
-                                        <rect key="frame" x="84" y="388" width="246" height="37"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="37" id="0Cr-3K-vLb"/>
-                                            <constraint firstAttribute="width" constant="246" id="81q-H9-r3r"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="11"/>
-                                        <state key="normal" title="GO LIVE NOW" backgroundImage="bg_rounded_btn_gray">
-                                            <color key="titleColor" white="1" alpha="0.23277948943661972" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f5p-tt-UaJ">
-                                        <rect key="frame" x="84" y="473" width="246" height="37"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="246" id="DvL-Ls-GuC"/>
-                                            <constraint firstAttribute="height" constant="37" id="VHg-nS-uIE"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="11"/>
-                                        <state key="normal" title="UPLOAD BROADCAST" backgroundImage="bg_rounded_btn_white_new">
-                                            <color key="titleColor" red="0.96862745100000003" green="0.15686274510000001" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onUploadBroadcast:" destination="4aX-01-L4Y" eventType="touchUpInside" id="ywm-7u-V4C"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="sWT-9r-IcK" firstAttribute="top" secondItem="556-4Y-xxc" secondAttribute="bottom" constant="40" id="19z-Ep-NZO"/>
-                                    <constraint firstItem="f5p-tt-UaJ" firstAttribute="centerX" secondItem="Bmz-Ko-Mpq" secondAttribute="centerX" id="1Xp-w9-SvC"/>
                                     <constraint firstItem="556-4Y-xxc" firstAttribute="centerX" secondItem="Bmz-Ko-Mpq" secondAttribute="centerX" id="6DN-Ul-Dut"/>
-                                    <constraint firstItem="xQg-vd-9n5" firstAttribute="centerX" secondItem="Bmz-Ko-Mpq" secondAttribute="centerX" id="BwK-iD-1rT"/>
-                                    <constraint firstItem="xQg-vd-9n5" firstAttribute="top" secondItem="xEE-gI-Ibb" secondAttribute="bottom" constant="40" id="Fr5-cM-i9l"/>
+                                    <constraint firstAttribute="bottom" secondItem="sWT-9r-IcK" secondAttribute="bottom" constant="30" id="EmZ-wj-a3S"/>
                                     <constraint firstItem="556-4Y-xxc" firstAttribute="top" secondItem="Bmz-Ko-Mpq" secondAttribute="top" constant="20" id="SuG-u9-njz"/>
                                     <constraint firstItem="sWT-9r-IcK" firstAttribute="width" secondItem="Bmz-Ko-Mpq" secondAttribute="width" constant="-40" id="iFx-pk-G5I"/>
-                                    <constraint firstItem="xEE-gI-Ibb" firstAttribute="centerX" secondItem="Bmz-Ko-Mpq" secondAttribute="centerX" id="s2a-WK-Sk2"/>
                                     <constraint firstItem="sWT-9r-IcK" firstAttribute="leading" secondItem="Bmz-Ko-Mpq" secondAttribute="leading" constant="20" id="vTj-CA-qJi"/>
-                                    <constraint firstItem="f5p-tt-UaJ" firstAttribute="top" secondItem="xQg-vd-9n5" secondAttribute="bottom" constant="48" id="w0g-fS-3oG"/>
                                     <constraint firstAttribute="trailing" secondItem="sWT-9r-IcK" secondAttribute="trailing" constant="20" id="xSs-dz-U5C"/>
-                                    <constraint firstItem="xEE-gI-Ibb" firstAttribute="top" secondItem="sWT-9r-IcK" secondAttribute="bottom" constant="40" id="yXh-Xz-DMU"/>
-                                    <constraint firstAttribute="bottom" secondItem="f5p-tt-UaJ" secondAttribute="bottom" constant="30" id="zQr-ym-pZe"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIJ-4C-0cG" userLabel="Navigation">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1E-ms-roB">
-                                        <rect key="frame" x="0.0" y="22" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="gki-Sz-XQo"/>
-                                            <constraint firstAttribute="height" constant="40" id="ubp-E8-JXF"/>
-                                        </constraints>
-                                        <state key="normal" image="icon_back"/>
-                                        <connections>
-                                            <action selector="onCloseWithSender:" destination="4aX-01-L4Y" eventType="touchUpInside" id="V9c-44-tfc"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Broadcast" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCc-fw-M6X">
                                         <rect key="frame" x="60" y="31" width="294" height="22"/>
                                         <constraints>
@@ -2315,7 +2268,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfO-fx-DlE">
-                                        <rect key="frame" x="374" y="22" width="40" height="40"/>
+                                        <rect key="frame" x="10" y="22" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Jlz-lM-ePh"/>
                                             <constraint firstAttribute="width" constant="40" id="SzK-0y-wlh"/>
@@ -2327,12 +2280,10 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="E1E-ms-roB" firstAttribute="top" secondItem="XIJ-4C-0cG" secondAttribute="top" constant="22" id="3N1-vq-noK"/>
+                                    <constraint firstItem="cfO-fx-DlE" firstAttribute="leading" secondItem="XIJ-4C-0cG" secondAttribute="leading" constant="10" id="8wf-v5-3WT"/>
                                     <constraint firstItem="SCc-fw-M6X" firstAttribute="leading" secondItem="XIJ-4C-0cG" secondAttribute="leading" constant="60" id="RCB-EC-ebG"/>
-                                    <constraint firstAttribute="trailing" secondItem="cfO-fx-DlE" secondAttribute="trailing" id="XcR-hC-lfy"/>
                                     <constraint firstItem="SCc-fw-M6X" firstAttribute="top" secondItem="XIJ-4C-0cG" secondAttribute="top" constant="31" id="Z7J-0a-y5S"/>
                                     <constraint firstAttribute="height" constant="64" id="fVp-da-RF6"/>
-                                    <constraint firstItem="E1E-ms-roB" firstAttribute="leading" secondItem="XIJ-4C-0cG" secondAttribute="leading" id="pF7-pl-b4A"/>
                                     <constraint firstAttribute="trailing" secondItem="SCc-fw-M6X" secondAttribute="trailing" constant="60" id="vZQ-tW-2bK"/>
                                     <constraint firstItem="cfO-fx-DlE" firstAttribute="top" secondItem="XIJ-4C-0cG" secondAttribute="top" constant="22" id="vj8-CB-iNg"/>
                                 </constraints>
@@ -2396,20 +2347,20 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                     <action selector="onStopRecordingWithSender:" destination="w7X-aX-zW5" eventType="touchUpInside" id="Z83-X7-gJz"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JC8-OM-DIX">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JC8-OM-DIX">
                                                 <rect key="frame" x="157" y="228" width="100" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="DX3-pj-Vpx"/>
                                                     <constraint firstAttribute="height" constant="22" id="tAK-ko-k1o"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                <color key="textColor" red="0.5568627451" green="0.65098039220000004" blue="0.70196078429999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="textColor" red="0.74901960784313726" green="0.79607843137254897" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap The Button to PAUSE or STOP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7w-Ow-RJm">
                                                 <rect key="frame" x="92" y="264" width="231" height="21"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHC-Yr-Md6" customClass="SCSiriWaveformView">
@@ -2545,7 +2496,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <constraint firstAttribute="height" constant="22" id="myv-aB-irz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpM-Ou-p0U">
@@ -2555,16 +2506,16 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <constraint firstAttribute="width" constant="50" id="afd-tN-xjr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                <color key="textColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.74901960779999999" green="0.79607843140000001" blue="0.82745098039999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLf-0f-4kL">
                                 <rect key="frame" x="107" y="509" width="200" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mul-ct-Yxm">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mul-ct-Yxm">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="icon_recording_prev_on"/>
+                                        <state key="normal" image="icon_playlist_prev_off"/>
                                         <state key="disabled" image="icon_recording_prev_off"/>
                                         <connections>
                                             <action selector="onRewind:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="QnI-0I-LUx"/>
@@ -2573,7 +2524,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEN-9m-RIR">
                                         <rect key="frame" x="80" y="0.0" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="icon_recording_play_on"/>
+                                        <state key="normal" image="icon_playlist_play_off"/>
                                         <state key="disabled" image="icon_recording_play_off"/>
                                         <connections>
                                             <action selector="onPlay:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="jkj-vg-s8V"/>
@@ -2582,16 +2533,16 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fum-UW-dcS">
                                         <rect key="frame" x="80" y="0.0" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="icon_recording_pause_on"/>
+                                        <state key="normal" image="icon_playlist_pause_off"/>
                                         <state key="disabled" image="icon_recording_pause_off"/>
                                         <connections>
                                             <action selector="onPause:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="A5k-o2-HW9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHb-qR-0I3">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHb-qR-0I3">
                                         <rect key="frame" x="160" y="0.0" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="icon_recording_next_on"/>
+                                        <state key="normal" image="icon_playlist_next_off"/>
                                         <state key="disabled" image="icon_recording_next_off"/>
                                     </button>
                                 </subviews>
@@ -2605,8 +2556,8 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 <subviews>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="MaP-NW-Njc" customClass="RecordSlider" customModule="Medic_Connect" customModuleProvider="target">
                                         <rect key="frame" x="36" y="10" width="305" height="31"/>
-                                        <color key="minimumTrackTintColor" red="1" green="1" blue="1" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
-                                        <color key="maximumTrackTintColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                        <color key="minimumTrackTintColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="maximumTrackTintColor" red="0.83921568627450982" green="0.83921568627450982" blue="0.83921568627450982" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSeekWithSender:" destination="yyh-Zf-iCf" eventType="valueChanged" id="gfV-7a-rpH"/>
                                         </connections>
@@ -3008,6 +2959,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </connections>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="jhi-ce-lc5" firstAttribute="leading" secondItem="n45-8P-jlA" secondAttribute="leading" constant="25" id="0PP-2H-mhN"/>
                                     <constraint firstAttribute="trailing" secondItem="aZH-VM-yCi" secondAttribute="trailing" constant="25" id="2Z4-wB-XBW"/>
@@ -3144,7 +3096,7 @@ uploaded a new broadcast...</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now go ahead and share it!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="50C-3p-bZp">
-                                        <rect key="frame" x="72" y="104" width="201" height="22"/>
+                                        <rect key="frame" x="72.333333333333314" y="104" width="200.33333333333337" height="22"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="16"/>
                                         <color key="textColor" red="0.70980392156862748" green="0.72156862745098038" blue="0.72941176470588232" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -3379,7 +3331,7 @@ uploaded a new broadcast...</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pck-I5-PDG">
-                                        <rect key="frame" x="337" y="22" width="36" height="40"/>
+                                        <rect key="frame" x="342" y="22" width="36" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="XYz-IW-Spb"/>
                                             <constraint firstAttribute="height" constant="40" id="qhy-if-SQM"/>
@@ -3387,7 +3339,7 @@ uploaded a new broadcast...</string>
                                         <state key="normal" image="icon_search"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgU-Bh-hJF">
-                                        <rect key="frame" x="373" y="22" width="36" height="40"/>
+                                        <rect key="frame" x="378" y="22" width="36" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1qF-EG-tME"/>
                                             <constraint firstAttribute="width" constant="36" id="XPy-u9-WqD"/>
@@ -3404,7 +3356,7 @@ uploaded a new broadcast...</string>
                                     <constraint firstItem="Fyy-tg-cAn" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" constant="50" id="8dk-V7-J8X"/>
                                     <constraint firstItem="MgU-Bh-hJF" firstAttribute="leading" secondItem="pck-I5-PDG" secondAttribute="trailing" id="FUT-vG-oaS"/>
                                     <constraint firstItem="pck-I5-PDG" firstAttribute="top" secondItem="MgU-Bh-hJF" secondAttribute="top" id="IKM-Sq-XBx"/>
-                                    <constraint firstAttribute="trailing" secondItem="MgU-Bh-hJF" secondAttribute="trailing" constant="5" id="Qvx-vr-jHP"/>
+                                    <constraint firstAttribute="trailing" secondItem="MgU-Bh-hJF" secondAttribute="trailing" id="Qvx-vr-jHP"/>
                                     <constraint firstItem="MgU-Bh-hJF" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" constant="22" id="d7n-vZ-rjQ"/>
                                     <constraint firstItem="Hnh-CD-wWM" firstAttribute="leading" secondItem="Adq-5b-Ssx" secondAttribute="leading" id="g0g-YK-Axo"/>
                                     <constraint firstItem="Fyy-tg-cAn" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="top" constant="32" id="ltC-BD-uDQ"/>
@@ -3441,7 +3393,7 @@ uploaded a new broadcast...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="miN-nI-CfZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510" y="4592"/>
+            <point key="canvasLocation" x="457" y="3056"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="Mx8-wZ-fQ9">
@@ -3537,7 +3489,7 @@ uploaded a new broadcast...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nab-yQ-ref" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="5285"/>
+            <point key="canvasLocation" x="1246" y="3749"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="77w-0Z-SfE">
@@ -3618,7 +3570,7 @@ uploaded a new broadcast...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mKC-6k-ayG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="4592"/>
+            <point key="canvasLocation" x="1246" y="3056"/>
         </scene>
         <!--Settings Detail View Controller-->
         <scene sceneID="YmO-t3-2jd">
@@ -3697,7 +3649,7 @@ uploaded a new broadcast...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QlL-ky-zu8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2103" y="4592"/>
+            <point key="canvasLocation" x="2051" y="3056"/>
         </scene>
         <!--Blocked Users View Controller-->
         <scene sceneID="OYF-LP-Flg">
@@ -3864,7 +3816,7 @@ uploaded a new broadcast...</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vLP-0W-u0Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2922" y="4592"/>
+            <point key="canvasLocation" x="2870" y="3056"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="J2n-uP-ap9">
@@ -4578,7 +4530,7 @@ uploaded a new broadcast...</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="530"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gA3-4j-FPx">
-                                                <rect key="frame" x="156" y="-2" width="102" height="40"/>
+                                                <rect key="frame" x="156.33333333333337" y="-2" width="101.66666666666663" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="HeU-h3-g9Y"/>
                                                 </constraints>
@@ -4587,13 +4539,13 @@ uploaded a new broadcast...</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the image below to add a profile picture" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqG-x3-FgA">
-                                                <rect key="frame" x="58" y="50" width="299" height="21"/>
+                                                <rect key="frame" x="58.333333333333343" y="50" width="298.33333333333337" height="20.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qJ1-5h-g23">
-                                                <rect key="frame" x="162" y="83" width="90" height="90"/>
+                                                <rect key="frame" x="162" y="82.666666666666657" width="90" height="90"/>
                                                 <color key="backgroundColor" red="0.82352941176470584" green="0.85882352941176465" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -4606,7 +4558,7 @@ uploaded a new broadcast...</string>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dC0-Km-o8L">
-                                                <rect key="frame" x="162" y="83" width="90" height="90"/>
+                                                <rect key="frame" x="162" y="82.666666666666657" width="90" height="90"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="2No-xK-Mr1"/>
                                                     <constraint firstAttribute="width" secondItem="dC0-Km-o8L" secondAttribute="height" multiplier="1:1" id="WWY-4M-n92"/>
@@ -4618,10 +4570,10 @@ uploaded a new broadcast...</string>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ptn-2j-ZGI">
-                                                <rect key="frame" x="25" y="179" width="364" height="218"/>
+                                                <rect key="frame" x="25" y="178.66666666666669" width="364" height="218.00000000000006"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WwQ-EB-3dp" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="50.000000000000028"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -4645,7 +4597,7 @@ uploaded a new broadcast...</string>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7sO-Iv-B8b" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="56" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="56.000000000000028" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -4669,7 +4621,7 @@ uploaded a new broadcast...</string>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vq7-ZI-lhX" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="112" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="112.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -4693,7 +4645,7 @@ uploaded a new broadcast...</string>
                                                         </connections>
                                                     </textField>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jof-5y-n19" customClass="ACFloatingTextField">
-                                                        <rect key="frame" x="0.0" y="168" width="364" height="50"/>
+                                                        <rect key="frame" x="0.0" y="168.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
@@ -4722,7 +4674,7 @@ uploaded a new broadcast...</string>
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2x-Id-t5o">
-                                                <rect key="frame" x="25" y="454" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="453.66666666666663" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="iCI-iK-mLC"/>
                                                 </constraints>
@@ -5089,7 +5041,7 @@ you a link to reset your password.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4GD-Ub-Etd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2103" y="5285"/>
+            <point key="canvasLocation" x="2051" y="3749"/>
         </scene>
         <!--Another Profile View Controller-->
         <scene sceneID="tOG-jQ-4xg">
@@ -5500,7 +5452,7 @@ you a link to reset your password.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yCv-Wz-UeS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2922" y="5285"/>
+            <point key="canvasLocation" x="2870" y="3749"/>
         </scene>
         <!--Likes View Controller-->
         <scene sceneID="KOc-t4-a1Q">
@@ -5902,20 +5854,126 @@ you a link to reset your password.</string>
             </objects>
             <point key="canvasLocation" x="1270" y="2210"/>
         </scene>
+        <!--Record Popup View Controller-->
+        <scene sceneID="xlE-ta-v1d">
+            <objects>
+                <viewController storyboardIdentifier="RecordPopupViewController" id="4IT-S5-5ZL" customClass="RecordPopupViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="THv-TK-1UA"/>
+                        <viewControllerLayoutGuide type="bottom" id="VtQ-oE-QID"/>
+                    </layoutGuides>
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7Gq-oE-VHy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MSI-9p-7ye">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkd-AQ-Fc9" customClass="FXBlurView">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="blurRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamic" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view alpha="0.44999997615814202" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogO-dR-xml" userLabel="Mask">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="986-Dy-vE3">
+                                <rect key="frame" x="349" y="626" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Zg6-ce-SvN"/>
+                                    <constraint firstAttribute="width" constant="50" id="oyo-JN-HUO"/>
+                                </constraints>
+                                <state key="normal" image="icon_profile_add"/>
+                                <connections>
+                                    <action selector="onCloseWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="YuX-KR-EC8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-sk-eQe">
+                                <rect key="frame" x="258" y="582" width="130" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="amZ-tH-7EB"/>
+                                    <constraint firstAttribute="width" constant="130" id="g70-ME-yuU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                <state key="normal" title="upload diagnosis" image="icon_upload">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="icon_upload_highlighted"/>
+                                <connections>
+                                    <action selector="onUploadWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="bd7-vQ-Bql"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-7j-iiZ">
+                                <rect key="frame" x="258" y="542" width="130" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="7kL-HM-kqc"/>
+                                    <constraint firstAttribute="height" constant="40" id="Qv6-s3-Tle"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                                <state key="normal" title="record diagnosis" image="icon_record_diagnosis_highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRecordWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="aYg-tr-kmu"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ogO-dR-xml" secondAttribute="trailing" id="205-gu-RmB"/>
+                            <constraint firstItem="qkd-AQ-Fc9" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="3Pz-Um-nOg"/>
+                            <constraint firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" constant="26" id="3no-DV-RFd"/>
+                            <constraint firstAttribute="bottom" secondItem="qkd-AQ-Fc9" secondAttribute="bottom" id="4vY-Ql-h4e"/>
+                            <constraint firstAttribute="bottom" secondItem="ogO-dR-xml" secondAttribute="bottom" id="5GH-xs-fAh"/>
+                            <constraint firstItem="o5x-7j-iiZ" firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" id="BW8-4O-GL2"/>
+                            <constraint firstAttribute="trailing" secondItem="qkd-AQ-Fc9" secondAttribute="trailing" id="L9A-i8-Bg4"/>
+                            <constraint firstAttribute="trailing" secondItem="986-Dy-vE3" secondAttribute="trailing" constant="15" id="Qt9-y0-HRO"/>
+                            <constraint firstItem="986-Dy-vE3" firstAttribute="top" secondItem="6jj-sk-eQe" secondAttribute="bottom" constant="4" id="Xv7-cK-L0g"/>
+                            <constraint firstItem="qkd-AQ-Fc9" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="YQg-F3-yfJ"/>
+                            <constraint firstItem="MSI-9p-7ye" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="ZfL-Bn-sOu"/>
+                            <constraint firstAttribute="bottom" secondItem="986-Dy-vE3" secondAttribute="bottom" constant="60" id="dVp-42-jCL"/>
+                            <constraint firstAttribute="trailing" secondItem="MSI-9p-7ye" secondAttribute="trailing" id="iNF-ze-Svj"/>
+                            <constraint firstAttribute="bottom" secondItem="MSI-9p-7ye" secondAttribute="bottom" id="jN3-N0-URn"/>
+                            <constraint firstItem="ogO-dR-xml" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="lJm-px-hrM"/>
+                            <constraint firstItem="6jj-sk-eQe" firstAttribute="top" secondItem="o5x-7j-iiZ" secondAttribute="bottom" id="lWE-XX-iRm"/>
+                            <constraint firstItem="MSI-9p-7ye" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="tVn-mv-zvf"/>
+                            <constraint firstItem="ogO-dR-xml" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="v7J-Ou-DiH"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="fL1-MY-gLL"/>
+                    <connections>
+                        <outlet property="btnRecord" destination="o5x-7j-iiZ" id="oVM-fX-50S"/>
+                        <outlet property="btnUpload" destination="6jj-sk-eQe" id="5la-t2-N7d"/>
+                        <outlet property="mBackgroundImageView" destination="MSI-9p-7ye" id="pxx-MN-sne"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gDz-3S-d2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2885.507246376812" y="63.586956521739133"/>
+        </scene>
     </scenes>
     <resources>
         <image name="bg_light_green" width="375" height="667"/>
         <image name="bg_profile_avatar" width="204" height="204"/>
         <image name="bg_profile_btn_highlighted" width="99" height="99"/>
         <image name="bg_recording_btn" width="204" height="204"/>
-        <image name="bg_rounded_btn_gray" width="245" height="37"/>
         <image name="bg_rounded_btn_green" width="322" height="44"/>
         <image name="bg_rounded_btn_lightblue" width="32" height="34"/>
         <image name="bg_rounded_btn_lightblue1" width="29" height="29"/>
         <image name="bg_rounded_btn_red" width="245" height="37"/>
         <image name="bg_rounded_btn_red_small" width="143" height="37"/>
         <image name="bg_rounded_btn_white" width="37" height="37"/>
-        <image name="bg_rounded_btn_white_new" width="245" height="37"/>
         <image name="bg_rounded_btn_white_small" width="143" height="37"/>
         <image name="bg_search_field" width="9" height="30"/>
         <image name="bg_tabgbar" width="1" height="55"/>
@@ -5929,17 +5987,18 @@ you a link to reset your password.</string>
         <image name="icon_edit" width="11" height="14"/>
         <image name="icon_favorites_gray" width="18" height="17"/>
         <image name="icon_notification" width="15" height="15"/>
+        <image name="icon_playlist_next_off" width="25" height="16"/>
+        <image name="icon_playlist_pause_off" width="20" height="24"/>
+        <image name="icon_playlist_play_off" width="20" height="23"/>
+        <image name="icon_playlist_prev_off" width="25" height="16"/>
         <image name="icon_plus" width="29" height="26"/>
         <image name="icon_profile_add" width="44" height="44"/>
+        <image name="icon_record_diagnosis_highlighted" width="26" height="26"/>
         <image name="icon_recording_btn" width="151" height="151"/>
         <image name="icon_recording_next_off" width="29" height="18"/>
-        <image name="icon_recording_next_on" width="29" height="18"/>
         <image name="icon_recording_pause_off" width="20" height="26"/>
-        <image name="icon_recording_pause_on" width="20" height="26"/>
         <image name="icon_recording_play_off" width="20" height="23"/>
-        <image name="icon_recording_play_on" width="20" height="23"/>
         <image name="icon_recording_prev_off" width="29" height="18"/>
-        <image name="icon_recording_prev_on" width="29" height="18"/>
         <image name="icon_save_done_new" width="21" height="21"/>
         <image name="icon_search" width="16" height="16"/>
         <image name="icon_setting" width="16" height="16"/>
@@ -5952,6 +6011,8 @@ you a link to reset your password.</string>
         <image name="icon_social_twitter_off" width="38" height="38"/>
         <image name="icon_social_twitter_on" width="38" height="38"/>
         <image name="icon_textview_rectangle" width="16" height="16"/>
+        <image name="icon_upload" width="26" height="26"/>
+        <image name="icon_upload_highlighted" width="26" height="26"/>
         <image name="icon_user_profile" width="41" height="51"/>
         <image name="splash_logo" width="150" height="62"/>
         <image name="tab_icon_diagnosis" width="33" height="40"/>

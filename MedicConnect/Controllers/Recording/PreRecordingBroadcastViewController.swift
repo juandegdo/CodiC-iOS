@@ -49,9 +49,6 @@ class PreRecordingBroadcastViewController: BaseViewController {
 extension PreRecordingBroadcastViewController {
     //MARK: IBActions
     
-    func tapMicrophone() {
-        
-    }
     func processMicrophoneSettings() {
         let alertController = UIAlertController(title: "Setting", message: "You've already disabled microphone.\nGo to settings and enable microphone please.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -93,19 +90,14 @@ extension PreRecordingBroadcastViewController {
     
     @IBAction func onClose(sender: AnyObject) {
         
-        self.tabBarController?.selectedIndex = DataManager.Instance.getLastTabIndex()
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
         
     }
     
-    @IBAction func onGoLive(sender: AnyObject) {
-    }
-    
-    //MARK: Navigation
-    @IBAction func unWindToPreRecording(segue: UIStoryboardSegue) {
-        
-        self.tabBarController?.selectedIndex = Constants.ProfileTabIndex;
-        
-    }
 }
 
 //MARK: - UIDocumentMenuDelegate

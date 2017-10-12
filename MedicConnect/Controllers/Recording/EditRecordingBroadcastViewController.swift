@@ -145,8 +145,12 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onClose(sender: UIButton) {
         self.stop()
-        self.tabBarController?.selectedIndex = DataManager.Instance.getLastTabIndex()
-        self.navigationController?.popToRootViewController(animated: false)
+        
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
         
     }
     
@@ -185,8 +189,6 @@ extension EditRecordingBroadcastViewController {
         
         AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete recording?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
             // OK completion block
-//            self.stop()
-//            self.performSegue(withIdentifier: Constants.SegueMedicConnectStopBroadcast, sender: nil)
             self.onClose(sender: UIButton())
         }, cancelCompletionBlock: {
             // Cancel completion block
@@ -201,8 +203,8 @@ extension EditRecordingBroadcastViewController {
     }
     
     @IBAction func onContinueRecording(sender: UIButton) {
-        
-        _ = self.navigationController?.popViewController(animated: false)
+        self.stop()
+        self.navigationController?.popViewController(animated: false)
         
     }
     
