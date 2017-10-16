@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import MobileCoreServices
 
 class PreRecordingBroadcastViewController: BaseViewController {
     
@@ -30,20 +29,6 @@ class PreRecordingBroadcastViewController: BaseViewController {
         
     }
     
-    func uploadFile(_ url: URL) {
-        self.fileURL = url
-        
-        let destinationVC = self.storyboard!.instantiateViewController(withIdentifier: "saveBroadcastVC") as! SaveBroadcastViewController
-        destinationVC.fileURL = self.fileURL
-        self.navigationController?.pushViewController(destinationVC, animated: true)
-    }
-    
-    @IBAction func onUploadBroadcast(_ sender: UIButton) {
-        let importMenu = UIDocumentMenuViewController(documentTypes: [kUTTypeAudio as String], in: .import)
-        importMenu.delegate = self
-        importMenu.popoverPresentationController?.sourceView = sender
-        self.present(importMenu, animated: true, completion: nil)
-    }
 }
 
 extension PreRecordingBroadcastViewController {
@@ -98,31 +83,4 @@ extension PreRecordingBroadcastViewController {
         
     }
     
-}
-
-//MARK: - UIDocumentMenuDelegate
-extension PreRecordingBroadcastViewController: UIDocumentMenuDelegate {
-    
-    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        print("document pick")
-        documentPicker.delegate = self
-        self.present(documentPicker, animated: true, completion: nil)
-    }
-    
-    public func documentMenuWasCancelled(_ documentMenu: UIDocumentMenuViewController) {
-        print("document menu cancelled")
-    }
-}
-
-//MARK: - UIDocumentPickerDelegate
-extension PreRecordingBroadcastViewController: UIDocumentPickerDelegate {
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        
-        self.uploadFile(url)
-    }
-    
-    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("document picker cancelled")
-    }
 }

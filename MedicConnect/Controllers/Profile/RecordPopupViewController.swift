@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MobileCoreServices
 
 class RecordPopupViewController: BaseViewController {
     
@@ -15,6 +16,7 @@ class RecordPopupViewController: BaseViewController {
     @IBOutlet var btnRecord: UIButton!
     
     var isDiagnosis: Bool = true
+    var fileURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,15 @@ class RecordPopupViewController: BaseViewController {
             self.btnUpload.setTitle("upload new note", for: .normal)
             
         }
+    }
+    
+    //MARK: Private Methods
+    func uploadFile(_ url: URL) {
+        self.fileURL = url
         
+        let destinationVC = self.storyboard!.instantiateViewController(withIdentifier: "saveBroadcastVC") as! SaveBroadcastViewController
+        destinationVC.fileURL = self.fileURL
+        self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
 }
@@ -86,7 +96,35 @@ extension RecordPopupViewController {
     }
     
     @IBAction func onUpload(sender: UIButton!) {
-        
+        let importMenu = UIDocumentMenuViewController(documentTypes: [kUTTypeAudio as String], in: .import)
+        importMenu.delegate = self
+        importMenu.popoverPresentationController?.sourceView = sender
+        self.present(importMenu, animated: true, completion: nil)
+    }
+}
+
+//MARK: - UIDocumentMenuDelegate
+extension RecordPopupViewController: UIDocumentMenuDelegate {
+    
+    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        print("document pick")
+        documentPicker.delegate = self
+        self.present(documentPicker, animated: true, completion: nil)
     }
     
+    public func documentMenuWasCancelled(_ documentMenu: UIDocumentMenuViewController) {
+        print("document menu cancelled")
+    }
+}
+
+//MARK: - UIDocumentPickerDelegate
+extension RecordPopupViewController: UIDocumentPickerDelegate {
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        self.uploadFile(url)
+    }
+    
+    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("document picker cancelled")
+    }
 }

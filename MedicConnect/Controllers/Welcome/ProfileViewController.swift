@@ -209,7 +209,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             
             // Customize Following/Follower
             self.lblDiagnosisNumber.text  = "\(_user.getPosts().count)"
-            self.lblNotesNumber.text  = "\(_user.getPosts().count)"
+            self.lblNotesNumber.text  = "0"
             
             if self.isDiagnosis {
                 self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
@@ -528,7 +528,12 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         if (tableView == self.tableView) {
             
             if let _user = UserController.Instance.getUser() as User? {
-                return _user.getPosts().count
+                if self.isDiagnosis {
+                    return _user.getPosts().count
+                } else {
+                    return 0
+                }
+                
             } else {
                 return 0
             }
