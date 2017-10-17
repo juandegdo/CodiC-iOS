@@ -32,7 +32,7 @@ class FollowingCell: UITableViewCell {
     
     func setFollowData(user: User, showFollowingStatus: Bool = true) {
         
-        guard let _user = UserController.Instance.getUser() as User? else {
+        guard (UserController.Instance.getUser() as User?) != nil else {
             return
         }
         
