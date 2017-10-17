@@ -13,7 +13,7 @@
 		00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C748411EFD179200BD3EAE /* NotificationUtil.swift */; };
 		00CFBD8D1EF7DC5B000A4D1E /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */; };
 		00CFBD8F1EF83BEE000A4D1E /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFBD8E1EF83BEE000A4D1E /* CommentController.swift */; };
-		04E2409A6575819BBD829C3B /* Pods_MedicConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB8CB135971FDBA662C5F09 /* Pods_MedicConnectUITests.framework */; };
+		45A7B1E968F7EC644C84BD83 /* Pods_MedicConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB8CB135971FDBA662C5F09 /* Pods_MedicConnectUITests.framework */; };
 		650E28881F71B64B0096A3F0 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 650E28871F71B64B0096A3F0 /* SCSiriWaveformView.m */; };
 		651952AD1F42413D00AA6627 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651952AC1F42413D00AA6627 /* TutorialViewController.swift */; };
 		651952AF1F426A3300AA6627 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651952AE1F426A3300AA6627 /* PlaylistService.swift */; };
@@ -37,7 +37,7 @@
 		65D250171F8E810C00279713 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250161F8E810C00279713 /* NotesViewController.swift */; };
 		65D250191F8E812700279713 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250181F8E812700279713 /* DiagnosisViewController.swift */; };
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
-		6EC843B5C0E1DABC9BDDE408 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
+		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
 		9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */; };
 		A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A358721F0742D7005B8011 /* SettingsDetailViewController.swift */; };
 		A9A358781F07447F005B8011 /* Code_of_conduct_HTML.html in Resources */ = {isa = PBXBuildFile; fileRef = A9A358751F07447F005B8011 /* Code_of_conduct_HTML.html */; };
@@ -318,7 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EC843B5C0E1DABC9BDDE408 /* Pods_MedicConnectTests.framework in Frameworks */,
+				8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +326,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04E2409A6575819BBD829C3B /* Pods_MedicConnectUITests.framework in Frameworks */,
+				45A7B1E968F7EC644C84BD83 /* Pods_MedicConnectUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
