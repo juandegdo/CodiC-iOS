@@ -56,7 +56,6 @@ class NotesViewController: BaseViewController, UIGestureRecognizerDelegate, Expa
         super.viewDidAppear(animated)
         
 //        self.loadMe()
-//        self.loadAll()
         
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(NotesViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
@@ -108,18 +107,6 @@ extension NotesViewController {
     
     // MARK: Private methods
     
-    func loadPosts() {
-        
-        // Load Timeline
-        UserService.Instance.getTimeline(completion: {
-            (success: Bool) in
-            if success {
-                self.tvNotes.reloadData()
-            }
-        })
-        
-    }
-    
     func loadMe() {
         
         UserService.Instance.getMe(completion: {
@@ -127,29 +114,8 @@ extension NotesViewController {
             
             if let _user = user as User? {
                 self.logUser(user: _user)
-                self.loadPosts()
             }
         })
-        
-    }
-    
-    func loadAll() {
-        
-        UserService.Instance.getAll(name: "", completion: {
-            (success: BaseTaskController.Response) in
-            
-        })
-        
-        NotificationService.Instance.getNotifications { (success) in
-            print("notification: \(success)")
-        }
-        
-        UserService.Instance.getPromotedUsers { (success : Bool) in
-            if success {
-                let count = UserController.Instance.getPromotedUsers().count
-                print("Promoted Content User Counts: \(count)")
-            }
-        }
         
     }
     

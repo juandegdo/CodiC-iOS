@@ -213,16 +213,12 @@ extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
     // MARK: UITableView DataSource Methods
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         tableView.backgroundView = nil
         return 1
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return numberOfRows(inTableView: tableView, section: section)
-        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -230,14 +226,12 @@ extension FavoritesViewController : UITableViewDelegate, UITableViewDataSource {
         let cell: FollowingCell = tableView.dequeueReusableCell(withIdentifier: FollowingCellID) as! FollowingCell
         
         // Set button actions
-        
         cell.btnFavorite.index = indexPath.row
         cell.btnFavorite.refTableView = tableView
         cell.btnFavorite.addTarget(self, action: #selector(FavoritesViewController.setUnfollow(sender:)), for: .touchUpInside)
         cell.btnFavorite.makeEnabled(enabled: true)
         
         // Set cell data
-        
         if let _followingUser = self.getUserForRow(inTableView: tableView, row: indexPath.row) as User? {
             cell.setFollowData(user: _followingUser)
         }

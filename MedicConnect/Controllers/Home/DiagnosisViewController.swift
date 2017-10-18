@@ -64,7 +64,6 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
         super.viewDidAppear(animated)
         
         self.loadMe()
-        self.loadAll()
         
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(NotesViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
@@ -139,26 +138,6 @@ extension DiagnosisViewController {
                 self.loadPosts()
             }
         })
-        
-    }
-    
-    func loadAll() {
-        
-        UserService.Instance.getAll(name: "", completion: {
-            (success: BaseTaskController.Response) in
-            
-        })
-        
-        NotificationService.Instance.getNotifications { (success) in
-            print("notification: \(success)")
-        }
-        
-        UserService.Instance.getPromotedUsers { (success : Bool) in
-            if success {
-                let count = UserController.Instance.getPromotedUsers().count
-                print("Promoted Content User Counts: \(count)")
-            }
-        }
         
     }
     

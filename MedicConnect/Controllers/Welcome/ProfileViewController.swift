@@ -128,6 +128,20 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
         self.updateUI()
         self.refreshData()
+        self.loadAll()
+        
+    }
+    
+    func loadAll() {
+        
+        UserService.Instance.getAll(name: "", completion: {
+            (success: BaseTaskController.Response) in
+            
+        })
+        
+        NotificationService.Instance.getNotifications { (success) in
+            print("notification: \(success)")
+        }
         
     }
     
@@ -596,7 +610,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             
             cell.btnLike.isHidden = !self.isDiagnosis
             cell.btnMessage.isHidden = !self.isDiagnosis
-            cell.btnAction.isHidden = !self.isDiagnosis
+            cell.btnAction.isHidden = true
             
             if self.isDiagnosis {
                 cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)

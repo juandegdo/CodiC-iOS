@@ -89,6 +89,13 @@ class BaseViewController: UIViewController {
         
     }
     
+    @IBAction func onSearch(sender: AnyObject) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchVC")
+        
+        self.gotoNextViewController(vc: vc)
+    }
+    
     @IBAction func onSettings(sender: AnyObject) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsVC")
