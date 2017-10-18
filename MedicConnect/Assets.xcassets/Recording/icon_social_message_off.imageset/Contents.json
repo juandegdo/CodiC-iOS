@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icon_social_message_off.png",
+      "filename" : "icon_social_message_on.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icon_social_message_off@2x.png",
+      "filename" : "icon_social_message_on@2x.png",
       "scale" : "2x"
     },
     {

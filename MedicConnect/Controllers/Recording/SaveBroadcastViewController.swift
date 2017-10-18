@@ -57,25 +57,18 @@ class SaveBroadcastViewController: BaseViewController {
     func initViews() {
         
         // Avatar
-        self.imgAvatar.layer.borderWidth = 1.5
-        self.imgAvatar.layer.borderColor = UIColor.white.cgColor
-        
-        _ = UIFont(name: "Avenir-Heavy", size: 18.0) as UIFont? ?? UIFont.systemFont(ofSize: 18.0)
+        self.imgAvatar.image = UIImage.init(named: "icon_save_plus")
+        self.imgAvatar.contentMode = .center
+        self.imgAvatar.layer.borderWidth = 1.0
+        self.imgAvatar.layer.borderColor = UIColor.init(red: 112/255.0, green: 183/255.0, blue: 191/255.0, alpha: 1.0).cgColor
         
         if let _user = UserController.Instance.getUser() as User? {
-            if let imgURL = URL(string: _user.photo) as URL? {
-                self.imgAvatar.af_setImage(withURL: imgURL)
-            } else {
-                self.imgAvatar.image = nil
-            }
-            
             self.tfAuthor.text = _user.fullName
-            
         }
         
         // Add Picture Button
         self.btnAddPicture.layer.borderWidth = 1.5
-        self.btnAddPicture.layer.borderColor = UIColor(red:152.0/255, green:163.0/255, blue:169.0/255, alpha:1.0).cgColor
+        self.btnAddPicture.layer.borderColor = UIColor(red:113.0/255, green:127.0/255, blue:134.0/255, alpha:1.0).cgColor
         
         // Author
         self.viewAuthorContraint.constant = self.isLiveBroadCast ? 0 : 147
@@ -89,17 +82,6 @@ class SaveBroadcastViewController: BaseViewController {
         self.hashTagCtrl.tagsTextColor = UIColor.white
         self.hashTagCtrl.tagsDeleteButtonColor = UIColor.white
         self.hashTagCtrl.reloadTagSubviews()
-        
-        // Save Broadcast Button
-        self.btnSave.layer.cornerRadius = 4.0
-        
-        self.btnSave.layer.borderWidth = 1.5
-        self.btnSave.layer.borderColor = UIColor(red:251.0/255, green:27.0/255, blue:70.0/255, alpha:1.0).cgColor
-        
-        self.btnSave.layer.shadowColor = UIColor(red:251.0/255, green:27.0/255, blue:70.0/255, alpha:1.0).cgColor
-        self.btnSave.layer.shadowOpacity = 0.1
-        self.btnSave.layer.shadowRadius = 8.0
-        self.btnSave.layer.shadowOffset = CGSize.zero
         
     }
     
@@ -147,6 +129,7 @@ extension SaveBroadcastViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.imgAvatar.contentMode = .scaleAspectFill
             self.imgAvatar.image = pickedImage
         }
         
@@ -177,16 +160,6 @@ extension SaveBroadcastViewController {
     func stopIndicating() {
         activityIndicatorView.stopAnimating()
         UIApplication.shared.endIgnoringInteractionEvents()
-    }
-    
-    @IBAction func onBack(sender: AnyObject!) {
-        
-        if let _nav = self.navigationController as UINavigationController? {
-            _ = _nav.popViewController(animated: false)
-        } else {
-            self.dismiss(animated: false, completion: nil)
-        }
-        
     }
     
     @IBAction func onSave(sender: UIButton) {
