@@ -749,6 +749,17 @@
                                     <outlet property="delegate" destination="HhR-CN-ka1" id="YSV-qK-5qd"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZYh-ub-Mc2">
+                                <rect key="frame" x="341" y="624" width="58" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="58" id="MYK-9R-knf"/>
+                                    <constraint firstAttribute="height" constant="58" id="aAB-15-4wr"/>
+                                </constraints>
+                                <state key="normal" image="icon_patient_add"/>
+                                <connections>
+                                    <action selector="onAddTappedWithSender:" destination="HhR-CN-ka1" eventType="touchUpInside" id="7nb-qy-rJe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -759,8 +770,10 @@
                             <constraint firstAttribute="trailing" secondItem="eaE-6Z-It4" secondAttribute="trailing" id="7KP-Ba-5GD"/>
                             <constraint firstItem="Wo9-V8-Ib5" firstAttribute="top" secondItem="e8m-lB-JTI" secondAttribute="top" id="KhP-7l-2ea"/>
                             <constraint firstItem="XGS-6r-aI5" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="bottom" id="TYL-K3-oC3"/>
+                            <constraint firstItem="XBZ-2G-V74" firstAttribute="top" secondItem="ZYh-ub-Mc2" secondAttribute="bottom" constant="5" id="WBg-v6-jOl"/>
                             <constraint firstItem="zXe-qG-YmM" firstAttribute="top" secondItem="e8m-lB-JTI" secondAttribute="top" id="bPb-vh-xaU"/>
                             <constraint firstAttribute="trailing" secondItem="XGS-6r-aI5" secondAttribute="trailing" id="e2Y-Z4-TXF"/>
+                            <constraint firstAttribute="trailing" secondItem="ZYh-ub-Mc2" secondAttribute="trailing" constant="15" id="fxt-Gg-L0j"/>
                             <constraint firstAttribute="trailing" secondItem="Wo9-V8-Ib5" secondAttribute="trailing" id="ngP-qI-WMK"/>
                             <constraint firstItem="Wo9-V8-Ib5" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="qUQ-c5-rSt"/>
                             <constraint firstItem="XBZ-2G-V74" firstAttribute="top" secondItem="eaE-6Z-It4" secondAttribute="bottom" id="r1p-95-Mi2"/>
@@ -5749,6 +5762,7 @@ you a link to reset your password.</string>
         <image name="icon_edit" width="11" height="14"/>
         <image name="icon_favorites_gray" width="18" height="17"/>
         <image name="icon_notification" width="15" height="15"/>
+        <image name="icon_patient_add" width="58" height="58"/>
         <image name="icon_playlist_next_off" width="29" height="18"/>
         <image name="icon_playlist_pause_off" width="20" height="26"/>
         <image name="icon_playlist_play_off" width="20" height="23"/>

@@ -92,8 +92,8 @@ class PlaylistCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.btnPlay.playColor = Constants.ColorRed
-        self.btnPlay.pauseColor = Constants.ColorRed
+        self.btnPlay.playColor = UIColor.black
+        self.btnPlay.pauseColor = UIColor.black
         self.btnPlay.progressTrackColor = Constants.ColorLightGray
         
         self.btnFollowing.isHidden = true

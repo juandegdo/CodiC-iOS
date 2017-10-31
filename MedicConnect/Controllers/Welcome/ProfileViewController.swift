@@ -345,7 +345,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         let _pos: CGPoint = sender.location(in: myTextView)
         
         //eliminate scroll offset
-        //        pos.y += _tv.contentOffset.y;
+//        pos.y += _tv.contentOffset.y;
         
         //get location in text from textposition at point
         let tapPos = myTextView.closestPosition(to: _pos)

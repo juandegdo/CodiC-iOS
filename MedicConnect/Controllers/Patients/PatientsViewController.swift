@@ -337,4 +337,8 @@ extension PatientsViewController {
         }
     }
     
+    @IBAction func onAddTapped(sender: AnyObject) {
+        
+    }
+    
 }
