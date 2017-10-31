@@ -26,7 +26,6 @@
         item.imageInsets = UIEdgeInsetsMake(tapItemTopInset, tapItemLeftInset, -tapItemTopInset, -tapItemLeftInset);
         item.titlePositionAdjustment = UIOffsetZero;
     }
-    
 }
 
 -(CGSize)sizeThatFits:(CGSize)size {

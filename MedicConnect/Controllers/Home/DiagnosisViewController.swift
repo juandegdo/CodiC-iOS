@@ -66,7 +66,7 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
         self.loadMe()
         
         vcDisappearType = .other
-        NotificationCenter.default.addObserver(self, selector: #selector(NotesViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(DiagnosisViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
         

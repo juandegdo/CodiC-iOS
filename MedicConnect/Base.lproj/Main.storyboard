@@ -602,10 +602,10 @@
             </objects>
             <point key="canvasLocation" x="-2245" y="-82"/>
         </scene>
-        <!--Notes View Controller-->
+        <!--Patients View Controller-->
         <scene sceneID="rbh-TN-VR8">
             <objects>
-                <viewController id="HhR-CN-ka1" customClass="NotesViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HhR-CN-ka1" customClass="PatientsViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ngl-8F-kZZ"/>
                         <viewControllerLayoutGuide type="bottom" id="XBZ-2G-V74"/>
@@ -693,8 +693,56 @@
                                     <constraint firstItem="N59-km-lzw" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="top" constant="22" id="xic-vc-e7Q"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XGS-6r-aI5" userLabel="Search Control">
+                                <rect key="frame" x="0.0" y="64" width="414" height="50"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_search_field" translatesAutoresizingMaskIntoConstraints="NO" id="fYs-Z9-5PB">
+                                        <rect key="frame" x="12" y="5" width="391" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="8Za-DB-oTW"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search patient" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ot5-u1-z8h">
+                                        <rect key="frame" x="25" y="6" width="339" height="30"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="LJl-ii-aKk"/>
+                                        </constraints>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                <color key="value" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4A-rp-Dho">
+                                        <rect key="frame" x="369" y="5" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="HjE-mO-RWO"/>
+                                            <constraint firstAttribute="width" constant="30" id="qVD-2F-Ved"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_search"/>
+                                        <connections>
+                                            <action selector="onSearchTappedWithSender:" destination="HhR-CN-ka1" eventType="touchUpInside" id="5H7-hv-8sR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="O4A-rp-Dho" secondAttribute="trailing" constant="15" id="63x-WY-MAO"/>
+                                    <constraint firstItem="O4A-rp-Dho" firstAttribute="top" secondItem="XGS-6r-aI5" secondAttribute="top" constant="5" id="BgD-sF-7mv"/>
+                                    <constraint firstItem="fYs-Z9-5PB" firstAttribute="top" secondItem="XGS-6r-aI5" secondAttribute="top" constant="5" id="LK5-aM-Hd2"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ou8-tV-oFU"/>
+                                    <constraint firstItem="ot5-u1-z8h" firstAttribute="leading" secondItem="XGS-6r-aI5" secondAttribute="leading" constant="25" id="XWt-DB-Zfw"/>
+                                    <constraint firstItem="fYs-Z9-5PB" firstAttribute="leading" secondItem="XGS-6r-aI5" secondAttribute="leading" constant="11.5" id="cT2-zn-2tt"/>
+                                    <constraint firstAttribute="trailing" secondItem="fYs-Z9-5PB" secondAttribute="trailing" constant="11.5" id="g0F-WE-HbU"/>
+                                    <constraint firstItem="O4A-rp-Dho" firstAttribute="leading" secondItem="ot5-u1-z8h" secondAttribute="trailing" constant="5" id="gvC-VS-4N0"/>
+                                    <constraint firstItem="ot5-u1-z8h" firstAttribute="top" secondItem="XGS-6r-aI5" secondAttribute="top" constant="6" id="nqe-OV-pNn"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eaE-6Z-It4">
-                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                                <rect key="frame" x="0.0" y="114" width="414" height="573"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="HhR-CN-ka1" id="fpS-Kb-8E9"/>
@@ -705,11 +753,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="eaE-6Z-It4" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="1JE-1d-Qmh"/>
-                            <constraint firstItem="eaE-6Z-It4" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="bottom" id="2IJ-jo-lWm"/>
+                            <constraint firstItem="XGS-6r-aI5" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="1yA-a3-qbp"/>
+                            <constraint firstItem="eaE-6Z-It4" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="bottom" constant="50" id="2IJ-jo-lWm"/>
                             <constraint firstItem="zXe-qG-YmM" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="2ha-XU-vfg"/>
                             <constraint firstAttribute="trailing" secondItem="eaE-6Z-It4" secondAttribute="trailing" id="7KP-Ba-5GD"/>
                             <constraint firstItem="Wo9-V8-Ib5" firstAttribute="top" secondItem="e8m-lB-JTI" secondAttribute="top" id="KhP-7l-2ea"/>
+                            <constraint firstItem="XGS-6r-aI5" firstAttribute="top" secondItem="Wo9-V8-Ib5" secondAttribute="bottom" id="TYL-K3-oC3"/>
                             <constraint firstItem="zXe-qG-YmM" firstAttribute="top" secondItem="e8m-lB-JTI" secondAttribute="top" id="bPb-vh-xaU"/>
+                            <constraint firstAttribute="trailing" secondItem="XGS-6r-aI5" secondAttribute="trailing" id="e2Y-Z4-TXF"/>
                             <constraint firstAttribute="trailing" secondItem="Wo9-V8-Ib5" secondAttribute="trailing" id="ngP-qI-WMK"/>
                             <constraint firstItem="Wo9-V8-Ib5" firstAttribute="leading" secondItem="e8m-lB-JTI" secondAttribute="leading" id="qUQ-c5-rSt"/>
                             <constraint firstItem="XBZ-2G-V74" firstAttribute="top" secondItem="eaE-6Z-It4" secondAttribute="bottom" id="r1p-95-Mi2"/>
@@ -719,8 +770,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="I80-io-Ke4"/>
                     <connections>
-                        <outlet property="tvNotes" destination="eaE-6Z-It4" id="g3S-cZ-bL4"/>
+                        <outlet property="tvPatients" destination="eaE-6Z-It4" id="GSg-Mn-ndP"/>
+                        <outlet property="txFieldSearch" destination="ot5-u1-z8h" id="yeM-7w-s4d"/>
                         <outlet property="viewNotificationAlert" destination="Tq9-FA-Yhi" id="hou-Vh-gl8"/>
+                        <outlet property="viewSearch" destination="XGS-6r-aI5" id="uR4-Z4-cAe"/>
                         <segue destination="75C-cM-54S" kind="show" identifier="ShareBroadcastPopUp" animates="NO" id="dMz-5h-amD"/>
                     </connections>
                 </viewController>
@@ -757,7 +810,7 @@
         <scene sceneID="fju-W8-4NO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="9Rw-kA-iik" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1001" title="" image="tab_icon_notes" id="yI1-MV-Jga"/>
+                    <tabBarItem key="tabBarItem" tag="1001" title="" image="tab_icon_patient" id="yI1-MV-Jga"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gem-sX-cYE">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1239,7 +1292,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <scene sceneID="Pk1-O8-slM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="RTa-YJ-vwu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1002" title="" image="tab_icon_profile" id="Ved-8q-cab"/>
+                    <tabBarItem key="tabBarItem" tag="1002" title="" image="tab_icon_home" id="Ved-8q-cab"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hnl-pJ-K6i">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1276,7 +1329,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <scene sceneID="8li-ad-7Gz">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Uph-7W-oOM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1005" title="" image="tab_icon_favorites" id="tYR-YC-QcY"/>
+                    <tabBarItem key="tabBarItem" tag="1005" title="" image="tab_icon_video" id="tYR-YC-QcY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="a4R-nD-lZn">
                         <autoresizingMask key="autoresizingMask"/>
@@ -2128,7 +2181,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </constraints>
                                         <state key="normal" image="icon_search"/>
                                         <connections>
-                                            <action selector="onSearchWithSender:" destination="5GW-o6-ZgT" eventType="touchUpInside" id="3HS-1r-VPO"/>
+                                            <action selector="onSearchTappedWithSender:" destination="sow-wn-UC9" eventType="touchUpInside" id="g1v-Dh-hpL"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -5429,7 +5482,7 @@ you a link to reset your password.</string>
         <scene sceneID="wnz-Si-kTX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Egh-hb-14Z" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1005" title="" image="tab_icon_message" id="7g2-45-kPc"/>
+                    <tabBarItem key="tabBarItem" tag="1005" title="" image="tab_icon" id="7g2-45-kPc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="m4D-66-fJC">
                         <autoresizingMask key="autoresizingMask"/>
@@ -5483,8 +5536,8 @@ you a link to reset your password.</string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-mK-IC7">
-                                                <rect key="frame" x="167.66666666666666" y="32" width="79.333333333333343" height="20"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kR-mK-IC7">
+                                                <rect key="frame" x="207.66666666666666" y="32" width="0.0" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Zb0-l2-tGK"/>
                                                 </constraints>
@@ -5724,11 +5777,11 @@ you a link to reset your password.</string>
         <image name="icon_upload_highlighted" width="26" height="26"/>
         <image name="icon_user_profile" width="41" height="51"/>
         <image name="splash_logo" width="150" height="62"/>
+        <image name="tab_icon" width="29" height="28"/>
         <image name="tab_icon_diagnosis" width="33" height="40"/>
-        <image name="tab_icon_favorites" width="33" height="32"/>
-        <image name="tab_icon_message" width="40" height="24"/>
-        <image name="tab_icon_notes" width="33" height="31"/>
-        <image name="tab_icon_profile" width="28" height="29"/>
+        <image name="tab_icon_home" width="37" height="28"/>
+        <image name="tab_icon_patient" width="27" height="29"/>
+        <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="dMz-5h-amD"/>

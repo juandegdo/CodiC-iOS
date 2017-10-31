@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "tab_icon_envelope.png",
+      "filename" : "tab_icon_patient.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "tab_icon_envelope@2x.png",
+      "filename" : "tab_icon_patient@2x.png",
       "scale" : "2x"
     },
     {

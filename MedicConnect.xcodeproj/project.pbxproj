@@ -20,6 +20,8 @@
 		6522BF141F732EAF00E40759 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF131F732EAF00E40759 /* SearchService.swift */; };
 		6522BF161F732F7C00E40759 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF151F732F7C00E40759 /* SearchController.swift */; };
 		6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */; };
+		652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C331FA9242A009B7765 /* PatientListCell.swift */; };
+		652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652A1C341FA9242A009B7765 /* PatientListCell.xib */; };
 		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
@@ -34,7 +36,6 @@
 		65A2897C1F3BC98E00547D72 /* SearchPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A2897A1F3BC98E00547D72 /* SearchPlaceCell.xib */; };
 		65A289801F3BD86900547D72 /* EVTTabPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */; };
 		65A289831F3E5BEE00547D72 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A289821F3E5BEE00547D72 /* SplashViewController.swift */; };
-		65D250171F8E810C00279713 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250161F8E810C00279713 /* NotesViewController.swift */; };
 		65D250191F8E812700279713 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250181F8E812700279713 /* DiagnosisViewController.swift */; };
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
@@ -169,6 +170,8 @@
 		6522BF131F732EAF00E40759 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		6522BF151F732F7C00E40759 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		652A1C331FA9242A009B7765 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
+		652A1C341FA9242A009B7765 /* PatientListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientListCell.xib; sourceTree = "<group>"; };
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableLabel.swift; path = ExpandableLabel/ExpandableLabel.swift; sourceTree = "<group>"; };
@@ -184,7 +187,6 @@
 		65A2897E1F3BD86900547D72 /* EVTTabPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EVTTabPageScrollView.h; path = EVTTabPageScrollView/EVTTabPageScrollView.h; sourceTree = "<group>"; };
 		65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EVTTabPageScrollView.m; path = EVTTabPageScrollView/EVTTabPageScrollView.m; sourceTree = "<group>"; };
 		65A289821F3E5BEE00547D72 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SplashViewController.swift; path = Onboarding/SplashViewController.swift; sourceTree = "<group>"; };
-		65D250161F8E810C00279713 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		65D250181F8E812700279713 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewController.swift; path = Message/MessageViewController.swift; sourceTree = "<group>"; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -508,7 +510,6 @@
 			isa = PBXGroup;
 			children = (
 				65D250181F8E812700279713 /* DiagnosisViewController.swift */,
-				65D250161F8E810C00279713 /* NotesViewController.swift */,
 				D279AD4B1E13295B001714FC /* CommentsViewController.swift */,
 				65A2896D1F3A935400547D72 /* LikesViewController.swift */,
 				D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */,
@@ -532,6 +533,8 @@
 				D279AD4F1E132A26001714FC /* CommentsListCell.xib */,
 				D2F55A911DEB74F40038A392 /* FollowingCell.swift */,
 				D2A634551E1DE05500E51AA0 /* FollowingCell.xib */,
+				652A1C331FA9242A009B7765 /* PatientListCell.swift */,
+				652A1C341FA9242A009B7765 /* PatientListCell.xib */,
 				D21BC8F71DEA2867008F5443 /* PlaylistCell.swift */,
 				D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */,
 				D2F55A951DEBB8920038A392 /* ProfileListCell.swift */,
@@ -897,6 +900,7 @@
 				D2F0C6C71DF3223700475696 /* RadPopUpVC.xib in Resources */,
 				D2F55A8B1DEB23D90038A392 /* RadTableBackgroundView.xib in Resources */,
 				A9A3587A1F07447F005B8011 /* Terms_of_service_HTML.html in Resources */,
+				652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */,
 				D213CB1F1E0CABC6004BEA3C /* SettingListCell.xib in Resources */,
 				65A289741F3BC95300547D72 /* SearchPeopleCell.xib in Resources */,
 				D279AD501E132A26001714FC /* CommentsListCell.xib in Resources */,
@@ -1133,6 +1137,7 @@
 				D2F2A9F31E285F0000DA2434 /* InvitePopupViewController.swift in Sources */,
 				0056429A1EFF007300B42A42 /* Notification.swift in Sources */,
 				9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */,
+				652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */,
 				D20658451E5BCEB4003875E4 /* User.swift in Sources */,
 				D25EB1611E8478B40082A9D5 /* DateUtil.swift in Sources */,
 				D213CB1D1E0CAA93004BEA3C /* SettingListCell.swift in Sources */,
@@ -1173,7 +1178,6 @@
 				D24473571DF4C2E8006AC4D5 /* SaveBroadcastViewController.swift in Sources */,
 				A9E444F71F0A454A00F49C7E /* Reachability.m in Sources */,
 				A9E444B71F09683D00F49C7E /* BlockedUsersViewController.swift in Sources */,
-				65D250171F8E810C00279713 /* NotesViewController.swift in Sources */,
 				D21BC8FD1DEA32AD008F5443 /* ImageHelper.swift in Sources */,
 				D20658431E5BCD39003875E4 /* KeychainUtil.swift in Sources */,
 				D2A9E7321E0A09DD0032C2CA /* NotificationsViewController.swift in Sources */,
@@ -1352,6 +1356,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = MedicConnect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1378,6 +1383,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = MedicConnect/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

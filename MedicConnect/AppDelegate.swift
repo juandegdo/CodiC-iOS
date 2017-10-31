@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-    func callNotificationVC(){
+    func callNotificationVC() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationVC")
         if let vvc = self.window?.visibleViewController() {
             vvc.present(vc, animated: false, completion: nil)

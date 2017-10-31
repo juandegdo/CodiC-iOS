@@ -262,8 +262,10 @@ extension FavoritesViewController {
     
     // MARK: IBActions
     
-    @IBAction func onBack(sender: AnyObject!) {
-        self.dismiss(animated: false, completion: nil)
+    @IBAction func onSearchTapped(sender: AnyObject) {
+        if (!self.txFieldSearch.isFirstResponder) {
+            self.txFieldSearch.becomeFirstResponder()
+        }
     }
     
 }
