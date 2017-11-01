@@ -1670,10 +1670,10 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chu-wv-5TT">
-                                <rect key="frame" x="349" y="632" width="50" height="50"/>
+                                <rect key="frame" x="341" y="624" width="58" height="58"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="8YN-ir-q1e"/>
-                                    <constraint firstAttribute="height" constant="50" id="vtY-9A-Ie5"/>
+                                    <constraint firstAttribute="width" constant="58" id="8YN-ir-q1e"/>
+                                    <constraint firstAttribute="height" constant="58" id="vtY-9A-Ie5"/>
                                 </constraints>
                                 <state key="normal" image="icon_profile_add"/>
                                 <connections>
@@ -3731,7 +3731,7 @@ uploaded a new diagnosis...</string>
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWG-BL-ZcP" id="PM6-yj-LR9">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="87.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-0w-zZl">
@@ -5666,10 +5666,10 @@ you a link to reset your password.</string>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="986-Dy-vE3">
-                                <rect key="frame" x="349" y="626" width="50" height="50"/>
+                                <rect key="frame" x="341" y="618" width="58" height="58"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Zg6-ce-SvN"/>
-                                    <constraint firstAttribute="width" constant="50" id="oyo-JN-HUO"/>
+                                    <constraint firstAttribute="height" constant="58" id="Zg6-ce-SvN"/>
+                                    <constraint firstAttribute="width" constant="58" id="oyo-JN-HUO"/>
                                 </constraints>
                                 <state key="normal" image="icon_profile_add"/>
                                 <connections>
@@ -5677,30 +5677,29 @@ you a link to reset your password.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-sk-eQe">
-                                <rect key="frame" x="258" y="582" width="130" height="40"/>
+                                <rect key="frame" x="224" y="562" width="164" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="amZ-tH-7EB"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="g70-ME-yuU"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="164" id="g70-ME-yuU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                <state key="normal" title="upload diagnosis" image="icon_upload">
+                                <state key="normal" title="upload new diagnosis" image="icon_upload">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" image="icon_upload_highlighted"/>
                                 <connections>
                                     <action selector="onUploadWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="bd7-vQ-Bql"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-7j-iiZ">
-                                <rect key="frame" x="258" y="542" width="130" height="40"/>
+                                <rect key="frame" x="228" y="508" width="160" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="7kL-HM-kqc"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="7kL-HM-kqc"/>
                                     <constraint firstAttribute="height" constant="40" id="Qv6-s3-Tle"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                <state key="normal" title="record diagnosis" image="icon_record_diagnosis_highlighted">
+                                <state key="normal" title="record new diagnosis" image="icon_record_diagnosis_highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -5719,7 +5718,7 @@ you a link to reset your password.</string>
                             <constraint firstAttribute="trailing" secondItem="qkd-AQ-Fc9" secondAttribute="trailing" id="L9A-i8-Bg4"/>
                             <constraint firstItem="o5x-7j-iiZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gq-oE-VHy" secondAttribute="leading" constant="20" symbolic="YES" id="Mic-cB-IIV"/>
                             <constraint firstAttribute="trailing" secondItem="986-Dy-vE3" secondAttribute="trailing" constant="15" id="Qt9-y0-HRO"/>
-                            <constraint firstItem="986-Dy-vE3" firstAttribute="top" secondItem="6jj-sk-eQe" secondAttribute="bottom" constant="4" id="Xv7-cK-L0g"/>
+                            <constraint firstItem="986-Dy-vE3" firstAttribute="top" secondItem="6jj-sk-eQe" secondAttribute="bottom" constant="16" id="Xv7-cK-L0g"/>
                             <constraint firstItem="qkd-AQ-Fc9" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="YQg-F3-yfJ"/>
                             <constraint firstItem="MSI-9p-7ye" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="ZfL-Bn-sOu"/>
                             <constraint firstItem="6jj-sk-eQe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gq-oE-VHy" secondAttribute="leading" constant="20" symbolic="YES" id="bFQ-bq-pcR"/>
@@ -5727,7 +5726,7 @@ you a link to reset your password.</string>
                             <constraint firstAttribute="trailing" secondItem="MSI-9p-7ye" secondAttribute="trailing" id="iNF-ze-Svj"/>
                             <constraint firstAttribute="bottom" secondItem="MSI-9p-7ye" secondAttribute="bottom" id="jN3-N0-URn"/>
                             <constraint firstItem="ogO-dR-xml" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="lJm-px-hrM"/>
-                            <constraint firstItem="6jj-sk-eQe" firstAttribute="top" secondItem="o5x-7j-iiZ" secondAttribute="bottom" id="lWE-XX-iRm"/>
+                            <constraint firstItem="6jj-sk-eQe" firstAttribute="top" secondItem="o5x-7j-iiZ" secondAttribute="bottom" constant="14" id="lWE-XX-iRm"/>
                             <constraint firstItem="MSI-9p-7ye" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="tVn-mv-zvf"/>
                             <constraint firstItem="ogO-dR-xml" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="v7J-Ou-DiH"/>
                         </constraints>
@@ -6026,8 +6025,8 @@ you a link to reset your password.</string>
         <image name="icon_playlist_play_off" width="20" height="23"/>
         <image name="icon_playlist_prev_off" width="29" height="18"/>
         <image name="icon_plus" width="29" height="26"/>
-        <image name="icon_profile_add" width="44" height="44"/>
-        <image name="icon_record_diagnosis_highlighted" width="26" height="26"/>
+        <image name="icon_profile_add" width="58" height="58"/>
+        <image name="icon_record_diagnosis_highlighted" width="36" height="36"/>
         <image name="icon_recording_btn" width="93" height="93"/>
         <image name="icon_recording_next_off" width="29" height="18"/>
         <image name="icon_recording_pause_off" width="20" height="26"/>
@@ -6045,8 +6044,7 @@ you a link to reset your password.</string>
         <image name="icon_social_twitter_off" width="38" height="38"/>
         <image name="icon_social_twitter_on" width="38" height="38"/>
         <image name="icon_textview_rectangle" width="16" height="16"/>
-        <image name="icon_upload" width="26" height="26"/>
-        <image name="icon_upload_highlighted" width="26" height="26"/>
+        <image name="icon_upload" width="36" height="36"/>
         <image name="icon_user_profile" width="41" height="51"/>
         <image name="splash_logo" width="150" height="62"/>
         <image name="tab_icon" width="29" height="28"/>
@@ -6056,6 +6054,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dMz-5h-amD"/>
+        <segue reference="vbE-pK-CLR"/>
     </inferredMetricsTieBreakers>
 </document>
