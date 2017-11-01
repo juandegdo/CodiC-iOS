@@ -22,6 +22,7 @@
 		6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */; };
 		652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C331FA9242A009B7765 /* PatientListCell.swift */; };
 		652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652A1C341FA9242A009B7765 /* PatientListCell.xib */; };
+		652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */; };
 		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
@@ -172,6 +173,7 @@
 		6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		652A1C331FA9242A009B7765 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		652A1C341FA9242A009B7765 /* PatientListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientListCell.xib; sourceTree = "<group>"; };
+		652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableLabel.swift; path = ExpandableLabel/ExpandableLabel.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 			isa = PBXGroup;
 			children = (
 				65488DAB1F944239005C1EA8 /* PatientsViewController.swift */,
+				652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */,
 			);
 			path = Patients;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				D213CB1D1E0CAA93004BEA3C /* SettingListCell.swift in Sources */,
 				D213CB231E0CB002004BEA3C /* SettingHeaderCell.swift in Sources */,
 				D2301FDB1E5FBD03006C636A /* UserController.swift in Sources */,
+				652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */,
 				D2301FDD1E5FC212006C636A /* WelcomeLastViewController.swift in Sources */,
 				D213CB1B1E0CA7B0004BEA3C /* SettingsViewController.swift in Sources */,
 				D23BFACA1E8AF80600F3934B /* TVButton.swift in Sources */,

@@ -23,6 +23,7 @@ class Constants {
     static let SegueMedicConnectStopBroadcast = "StopRecordingBroadcast"
     static let SegueMedicConnectSaveBroadcast = "SaveBroadcast"
     static let SegueMedicConnectShareBroadcast = "ShareBroadcast"
+    static let SegueMedicConnectAddPatient = "AddPatient"
     
     static let SampleURL1 = "http://54.68.190.196:1935/audio/audio1.m4a/playlist.m3u8"
     static let SampleURL2 = "http://54.68.190.196:1935/audio/audio2.m4a/playlist.m3u8"

@@ -338,7 +338,7 @@ extension PatientsViewController {
     }
     
     @IBAction func onAddTapped(sender: AnyObject) {
-        
+        self.performSegue(withIdentifier: Constants.SegueMedicConnectAddPatient, sender: nil)
     }
     
 }
