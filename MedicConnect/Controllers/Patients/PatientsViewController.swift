@@ -24,6 +24,7 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     var vcDisappearType : ViewControllerDisappearType = .other
     
     var patients: [[String: String]] = []
+    var searchedPatients: [[String: String]] = []
     var selectedDotsIndex = 0
     var states = Set<String>()
     
@@ -87,30 +88,44 @@ extension PatientsViewController {
                      "date": "October 20 2017",
                      "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"],
                     ["id": "2",
-                     "patientName": "Patient Name  #1234567890",
+                     "patientName": "Patient Name  #2340238234",
                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                      "doctorName": "Dr. Jeff Harder",
                      "date": "October 20 2017",
                      "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507822955506"],
                     ["id": "3",
-                     "patientName": "Patient Name  #1234567890",
+                     "patientName": "Patient Name  #549430284",
                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                      "doctorName": "Dr. Dave Loewen",
                      "date": "October 20 2017",
                      "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"],
                     ["id": "4",
-                     "patientName": "Patient Name  #1234567890",
+                     "patientName": "Patient Name  #734390439",
                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                      "doctorName": "Dr. Jeff Harder",
                      "date": "October 20 2017",
                      "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507822955506"],
                     ["id": "5",
-                     "patientName": "Patient Name  #1234567890",
+                     "patientName": "Patient Name  #09293283",
                      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
                      "doctorName": "Dr. Dave Loewen",
                      "date": "October 20 2017",
                      "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"]
         ]
+        
+        searchedPatients = patients
+        self.tvPatients.reloadData()
+    }
+    
+    func loadSearchResult(_ keyword: String) {
+        // Local search
+        if keyword == "" {
+            searchedPatients = patients
+        } else {
+            searchedPatients = patients.filter({(patient:[String: String]) -> Bool in
+                return patient["patientName"]!.contains(keyword)
+            })
+        }
         
         self.tvPatients.reloadData()
     }
@@ -242,7 +257,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
-        return self.patients.count
+        return self.searchedPatients.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -252,7 +267,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PatientListCell = tableView.dequeueReusableCell(withIdentifier: PatientCellID) as! PatientListCell
         
-        let data = self.patients[indexPath.row]
+        let data = self.searchedPatients[indexPath.row]
         cell.setData(data: data)
         
         cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
@@ -300,7 +315,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
             guard let cell = self.tvPatients.cellForRow(at: indexPath) as? PatientListCell
                 else { return }
             
-            let patient = patients[indexPath.row]
+            let patient = searchedPatients[indexPath.row]
             self.states.insert(patient["id"]!)
             
             cell.showFullDescription = true
@@ -318,7 +333,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
             guard let cell = self.tvPatients.cellForRow(at: indexPath) as? PatientListCell
                 else { return }
             
-            let patient = patients[indexPath.row]
+            let patient = searchedPatients[indexPath.row]
             self.states.remove(patient["id"]!)
             
             cell.showFullDescription = false
@@ -339,6 +354,32 @@ extension PatientsViewController {
     
     @IBAction func onAddTapped(sender: AnyObject) {
         self.performSegue(withIdentifier: Constants.SegueMedicConnectAddPatient, sender: nil)
+    }
+    
+}
+
+extension PatientsViewController : UITextFieldDelegate {
+    // UITextfield delegate methods
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        var txtAfterUpdate: NSString =  NSString(string: self.txFieldSearch.text!)
+        txtAfterUpdate = txtAfterUpdate.replacingCharacters(in: range, with: string) as NSString
+        txtAfterUpdate = txtAfterUpdate.trimmingCharacters(in: .whitespacesAndNewlines) as NSString
+        
+        // Remote search
+//        if txtAfterUpdate.length > 0 {
+//            self.searchTimer?.invalidate()
+//            self.searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(SearchViewController.loadData(searchTimer:)), userInfo: txtAfterUpdate as String, repeats: false)
+//        }
+        
+        self.loadSearchResult(txtAfterUpdate as String)
+        
+        return true
     }
     
 }

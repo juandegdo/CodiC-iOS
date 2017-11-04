@@ -26,6 +26,9 @@
 		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
+		65691C421FA958960071C162 /* ConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65691C411FA958960071C162 /* ConferenceViewController.swift */; };
+		65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */; };
+		65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */; };
 		659C70CE1F2014BF0045F6CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C70CD1F2014BF0045F6CF /* AlertController.swift */; };
 		65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896D1F3A935400547D72 /* LikesViewController.swift */; };
 		65A289701F3A95D600547D72 /* LikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896F1F3A95D600547D72 /* LikeController.swift */; };
@@ -177,6 +180,9 @@
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandableLabel.swift; path = ExpandableLabel/ExpandableLabel.swift; sourceTree = "<group>"; };
+		65691C411FA958960071C162 /* ConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceViewController.swift; sourceTree = "<group>"; };
+		65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallHistoryAudioCell.swift; sourceTree = "<group>"; };
+		65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallHistoryAudioCell.xib; sourceTree = "<group>"; };
 		659C70CD1F2014BF0045F6CF /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		65A2896D1F3A935400547D72 /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		65A2896F1F3A95D600547D72 /* LikeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LikeController.swift; path = ../Controllers/Welcome/LikeController.swift; sourceTree = "<group>"; };
@@ -395,6 +401,14 @@
 			name = ExpandableLabel;
 			sourceTree = "<group>";
 		};
+		65691C401FA958770071C162 /* Conference */ = {
+			isa = PBXGroup;
+			children = (
+				65691C411FA958960071C162 /* ConferenceViewController.swift */,
+			);
+			path = Conference;
+			sourceTree = "<group>";
+		};
 		65A2897D1F3BD85E00547D72 /* EVTTabPageScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -530,24 +544,25 @@
 				D2F55A7D1DEB23D90038A392 /* Others */,
 				D206582E1E5BB9DB003875E4 /* RadTabBarController */,
 				659C70CD1F2014BF0045F6CF /* AlertController.swift */,
+				A9E444B81F096C9700F49C7E /* BlockedUserTableViewCell.swift */,
+				65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */,
+				65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */,
 				D2941E621E109BCA00CB7552 /* ChangePasswordListCell.swift */,
 				D2941E641E109E7D00CB7552 /* ChangePasswordListCell.xib */,
 				D279AD4D1E132A14001714FC /* CommentsListCell.swift */,
 				D279AD4F1E132A26001714FC /* CommentsListCell.xib */,
 				D2F55A911DEB74F40038A392 /* FollowingCell.swift */,
 				D2A634551E1DE05500E51AA0 /* FollowingCell.xib */,
+				D2A9E7351E0A11BB0032C2CA /* NotificationListCell.swift */,
+				D2A9E7371E0A18E70032C2CA /* NotificationListCell.xib */,
 				652A1C331FA9242A009B7765 /* PatientListCell.swift */,
 				652A1C341FA9242A009B7765 /* PatientListCell.xib */,
 				D21BC8F71DEA2867008F5443 /* PlaylistCell.swift */,
 				D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */,
+				A9C741D51F0FDCC600894651 /* PrivateUserTableViewCell.swift */,
+				A9C741D61F0FDCC600894651 /* PrivateUserTableViewCell.xib */,
 				D2F55A951DEBB8920038A392 /* ProfileListCell.swift */,
 				D2F55A9B1DEBB8BB0038A392 /* ProfileListCell.xib */,
-				D2A9E7351E0A11BB0032C2CA /* NotificationListCell.swift */,
-				D2A9E7371E0A18E70032C2CA /* NotificationListCell.xib */,
-				D213CB221E0CB002004BEA3C /* SettingHeaderCell.swift */,
-				D213CB241E0CB043004BEA3C /* SettingHeaderCell.xib */,
-				D213CB1C1E0CAA93004BEA3C /* SettingListCell.swift */,
-				D213CB1E1E0CABC6004BEA3C /* SettingListCell.xib */,
 				D24512B01E1B272300BCD417 /* SearchBroadcastCell.swift */,
 				D24512AE1E1B270F00BCD417 /* SearchBroadcastCell.xib */,
 				65A289711F3BC95300547D72 /* SearchPeopleCell.swift */,
@@ -556,11 +571,12 @@
 				65A289761F3BC97B00547D72 /* SearchTagCell.xib */,
 				65A289791F3BC98E00547D72 /* SearchPlaceCell.swift */,
 				65A2897A1F3BC98E00547D72 /* SearchPlaceCell.xib */,
+				D213CB221E0CB002004BEA3C /* SettingHeaderCell.swift */,
+				D213CB241E0CB043004BEA3C /* SettingHeaderCell.xib */,
+				D213CB1C1E0CAA93004BEA3C /* SettingListCell.swift */,
+				D213CB1E1E0CABC6004BEA3C /* SettingListCell.xib */,
 				D24512AC1E1B1DFB00BCD417 /* TagSelectCell.swift */,
 				D24512AA1E1B1D9F00BCD417 /* TagSelectCell.xib */,
-				A9E444B81F096C9700F49C7E /* BlockedUserTableViewCell.swift */,
-				A9C741D51F0FDCC600894651 /* PrivateUserTableViewCell.swift */,
-				A9C741D61F0FDCC600894651 /* PrivateUserTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -659,6 +675,7 @@
 			isa = PBXGroup;
 			children = (
 				D270B80A1DE5233500458C2E /* Base */,
+				65691C401FA958770071C162 /* Conference */,
 				65D2501D1F8EB31C00279713 /* Favories */,
 				D21BC8F31DEA17A9008F5443 /* Home */,
 				A9E444F21F0A43A100F49C7E /* Internet */,
@@ -906,6 +923,7 @@
 				652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */,
 				D213CB1F1E0CABC6004BEA3C /* SettingListCell.xib in Resources */,
 				65A289741F3BC95300547D72 /* SearchPeopleCell.xib in Resources */,
+				65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */,
 				D279AD501E132A26001714FC /* CommentsListCell.xib in Resources */,
 				D270B7DE1DE51F7600458C2E /* Main.storyboard in Resources */,
 				D21BC8FF1DEA3F0D008F5443 /* PlaylistCell.xib in Resources */,
@@ -1141,6 +1159,7 @@
 				0056429A1EFF007300B42A42 /* Notification.swift in Sources */,
 				9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */,
 				652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */,
+				65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */,
 				D20658451E5BCEB4003875E4 /* User.swift in Sources */,
 				D25EB1611E8478B40082A9D5 /* DateUtil.swift in Sources */,
 				D213CB1D1E0CAA93004BEA3C /* SettingListCell.swift in Sources */,
@@ -1171,6 +1190,7 @@
 				005642981EFF003B00B42A42 /* NotificationController.swift in Sources */,
 				65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */,
 				D2F55A941DEB77AB0038A392 /* RadAvatar.swift in Sources */,
+				65691C421FA958960071C162 /* ConferenceViewController.swift in Sources */,
 				D2F0C6C41DF3120F00475696 /* RecordingBroadcastViewController.swift in Sources */,
 				6522BF141F732EAF00E40759 /* SearchService.swift in Sources */,
 				D2941E631E109BCA00CB7552 /* ChangePasswordListCell.swift in Sources */,

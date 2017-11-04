@@ -294,8 +294,4 @@ extension SearchViewController : UITextFieldDelegate {
         
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-    }
-    
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import HTHorizontalSelectionList
 
 class FavoritesViewController: BaseViewController {
     

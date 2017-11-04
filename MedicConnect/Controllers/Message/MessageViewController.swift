@@ -10,10 +10,14 @@ import UIKit
 
 class MessageViewController: BaseViewController {
 
+    @IBOutlet weak var tvMessage: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tvMessage.tableFooterView = UIView()
+        
     }
 
     override func didReceiveMemoryWarning() {
