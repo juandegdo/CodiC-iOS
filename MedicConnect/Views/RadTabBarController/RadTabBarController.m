@@ -24,6 +24,7 @@
     [self.tabBar addSubview:borderTop];
     
     // Tab Selected Image Color
+    self.tabBar.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
     [self.tabBar setTintColor:COLOR_TABBAR_TINT];
     
 }

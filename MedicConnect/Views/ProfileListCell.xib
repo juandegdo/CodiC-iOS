@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxK-Y6-6Un" customClass="SVGPlayButton" customModule="Medic_Connect" customModuleProvider="target">
-                        <rect key="frame" x="18" y="32" width="45" height="45"/>
+                        <rect key="frame" x="26" y="32" width="45" height="45"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="O7M-ws-H9p"/>
                             <constraint firstAttribute="width" secondItem="cxK-Y6-6Un" secondAttribute="height" multiplier="1:1" id="erA-IP-ug9"/>
@@ -38,7 +38,7 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="BUK-L1-LQL">
-                        <rect key="frame" x="77" y="28" width="119" height="21"/>
+                        <rect key="frame" x="85" y="28" width="119" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="yhN-H8-IWd"/>
                         </constraints>
@@ -55,7 +55,7 @@
                         <state key="normal" image="icon_broadcast_action"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuY-LI-OfG" userLabel="Lbl Description" customClass="ExpandableLabel" customModule="Medic_Connect" customModuleProvider="target">
-                        <rect key="frame" x="77" y="46" width="278" height="18"/>
+                        <rect key="frame" x="85" y="46" width="270" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="Got-Wf-l9T"/>
                         </constraints>
@@ -64,7 +64,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 DAYS AGO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vC3-Iy-HDQ">
-                        <rect key="frame" x="77" y="70" width="65" height="21"/>
+                        <rect key="frame" x="85" y="70" width="65" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="CZ8-Lf-fTK"/>
                         </constraints>
@@ -106,7 +106,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcD-o7-eSP">
-                        <rect key="frame" x="72" y="116" width="291" height="70"/>
+                        <rect key="frame" x="80" y="116" width="283" height="70"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="70" id="SFH-f9-dab"/>

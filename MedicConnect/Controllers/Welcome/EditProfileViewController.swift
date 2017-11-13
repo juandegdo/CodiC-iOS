@@ -151,7 +151,7 @@ extension EditProfileViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         
         if (textField == self.tfName) {
             return newLength <= Constants.MaxFullNameLength

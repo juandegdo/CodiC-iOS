@@ -97,7 +97,7 @@ extension SaveBroadcastViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         guard let text = textField.text else { return true }
-        let newLength = text.characters.count + string.characters.count - range.length
+        let newLength = text.count + string.count - range.length
         
         if (textField == self.tfBroadcastName) {
             return newLength <= Constants.MaxFullNameLength
@@ -112,7 +112,7 @@ extension SaveBroadcastViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard let description = textView.text else { return true }
         
-        let newLength = description.characters.count + text.characters.count - range.length
+        let newLength = description.count + text.count - range.length
         return newLength <= Constants.MaxDescriptionLength
     }
 }
@@ -165,7 +165,7 @@ extension SaveBroadcastViewController {
     @IBAction func onSave(sender: UIButton) {
         
         let title = self.tfBroadcastName.text!
-        guard  title.characters.count != 0 else {
+        guard  title.count != 0 else {
             AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your broadcast a name!")
             return
         }
