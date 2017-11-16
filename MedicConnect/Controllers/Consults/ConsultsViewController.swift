@@ -1,8 +1,8 @@
 //
-//  DiagnosisViewController.swift
+//  ConsultsViewController.swift
 //  MedicConnect
 //
-//  Created by Daniel Yang on 2017-10-11.
+//  Created by Daniel Yang on 2017-11-16.
 //  Copyright © 2017 Loewen. All rights reserved.
 //
 
@@ -10,19 +10,11 @@ import UIKit
 import AVFoundation
 import Crashlytics
 
-public enum ViewControllerDisappearType {
-    case comment
-    case like
-    case share
-    case other
-    case record
-}
+class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
 
-class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+    let ConsultCellID = "PlaylistCell"
     
-    let DiagnosisCellID = "PlaylistCell"
-    
-    @IBOutlet var tvDiagnoses: UITableView!
+    @IBOutlet var tvConsults: UITableView!
     
     var vcDisappearType : ViewControllerDisappearType = .other
     
@@ -45,21 +37,21 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
         super.viewWillAppear(animated)
         
         // Show Tutorial Screen
-//        if (UserDefaultsUtil.LoadFirstLoad() / 10 == 0) {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
-//                vc.type = .home
-//                self.present(vc, animated: false, completion: nil)
-//            }
-//            
-//            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 10)
-//        }
+        //        if (UserDefaultsUtil.LoadFirstLoad() / 10 == 0) {
+        //            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        //            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
+        //                vc.type = .home
+        //                self.present(vc, animated: false, completion: nil)
+        //            }
+        //
+        //            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 10)
+        //        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.loadMe()
+//        self.loadMe()
         
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(DiagnosisViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
@@ -97,18 +89,18 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
         
         // Initialize Table Views
         
-        let nibDiagnosisCell = UINib(nibName: DiagnosisCellID, bundle: nil)
-        self.tvDiagnoses.register(nibDiagnosisCell, forCellReuseIdentifier: DiagnosisCellID)
+        let nibConsultCell = UINib(nibName: ConsultCellID, bundle: nil)
+        self.tvConsults.register(nibConsultCell, forCellReuseIdentifier: ConsultCellID)
         
-        self.tvDiagnoses.tableFooterView = UIView()
-        self.tvDiagnoses.estimatedRowHeight = 125.0
-        self.tvDiagnoses.rowHeight = UITableViewAutomaticDimension
+        self.tvConsults.tableFooterView = UIView()
+        self.tvConsults.estimatedRowHeight = 125.0
+        self.tvConsults.rowHeight = UITableViewAutomaticDimension
         
     }
     
 }
 
-extension DiagnosisViewController {
+extension ConsultsViewController {
     
     // MARK: Private methods
     
@@ -118,7 +110,7 @@ extension DiagnosisViewController {
         UserService.Instance.getTimeline(completion: {
             (success: Bool) in
             if success {
-                self.tvDiagnoses.reloadData()
+                self.tvConsults.reloadData()
             }
         })
         
@@ -594,7 +586,7 @@ extension DiagnosisViewController {
     }
 }
 
-extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
+extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     
     // MARK: UITableView DataSource Methods
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -608,7 +600,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: DiagnosisCellID) as! PlaylistCell
+        let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: ConsultCellID) as! PlaylistCell
         
         let post = PostController.Instance.getFollowingPosts()[indexPath.row]
         cell.setData(post: post)
@@ -698,8 +690,8 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         cell.isExpanded = !cell.isExpanded
         
-        self.tvDiagnoses.beginUpdates()
-        self.tvDiagnoses.endUpdates()
+        self.tvConsults.beginUpdates()
+        self.tvConsults.endUpdates()
         
     }
     
@@ -713,8 +705,8 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         cell.isExpanded = false
         
-        self.tvDiagnoses.beginUpdates()
-        self.tvDiagnoses.endUpdates()
+        self.tvConsults.beginUpdates()
+        self.tvConsults.endUpdates()
         
     }
     
@@ -727,13 +719,13 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
     //
     
     func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvDiagnoses.beginUpdates()
+        self.tvConsults.beginUpdates()
     }
     
     func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvDiagnoses)
-        if let indexPath = self.tvDiagnoses.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvDiagnoses.cellForRow(at: indexPath) as? PlaylistCell
+        let point = label.convert(CGPoint.zero, to: self.tvConsults)
+        if let indexPath = self.tvConsults.indexPathForRow(at: point) as IndexPath? {
+            guard let cell = self.tvConsults.cellForRow(at: indexPath) as? PlaylistCell
                 else { return }
             
             let post = PostController.Instance.getFollowingPosts()[indexPath.row]
@@ -741,17 +733,17 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
             
             cell.showFullDescription = true
         }
-        self.tvDiagnoses.endUpdates()
+        self.tvConsults.endUpdates()
     }
     
     func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tvDiagnoses.beginUpdates()
+        self.tvConsults.beginUpdates()
     }
     
     func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvDiagnoses)
-        if let indexPath = self.tvDiagnoses.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvDiagnoses.cellForRow(at: indexPath) as? PlaylistCell
+        let point = label.convert(CGPoint.zero, to: self.tvConsults)
+        if let indexPath = self.tvConsults.indexPathForRow(at: point) as IndexPath? {
+            guard let cell = self.tvConsults.cellForRow(at: indexPath) as? PlaylistCell
                 else { return }
             
             let post = PostController.Instance.getFollowingPosts()[indexPath.row]
@@ -759,6 +751,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
             
             cell.showFullDescription = false
         }
-        self.tvDiagnoses.endUpdates()
+        self.tvConsults.endUpdates()
     }
+
 }

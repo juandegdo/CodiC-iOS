@@ -42,6 +42,7 @@
 		65A2897C1F3BC98E00547D72 /* SearchPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A2897A1F3BC98E00547D72 /* SearchPlaceCell.xib */; };
 		65A289801F3BD86900547D72 /* EVTTabPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */; };
 		65A289831F3E5BEE00547D72 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A289821F3E5BEE00547D72 /* SplashViewController.swift */; };
+		65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */; };
 		65D250191F8E812700279713 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250181F8E812700279713 /* DiagnosisViewController.swift */; };
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
@@ -198,6 +199,7 @@
 		65A2897E1F3BD86900547D72 /* EVTTabPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVTTabPageScrollView.h; sourceTree = "<group>"; };
 		65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVTTabPageScrollView.m; sourceTree = "<group>"; };
 		65A289821F3E5BEE00547D72 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultsViewController.swift; sourceTree = "<group>"; };
 		65D250181F8E812700279713 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 		654C972D1FBDDDC200490627 /* Consults */ = {
 			isa = PBXGroup;
 			children = (
+				65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */,
 			);
 			path = Consults;
 			sourceTree = "<group>";
@@ -1120,6 +1123,7 @@
 				D23CB7A41E1C6FA800C0EE8A /* Broadcast.swift in Sources */,
 				D20658341E5BB9ED003875E4 /* RadTabBarController.m in Sources */,
 				D2F55A6E1DEB1A690038A392 /* SharePopupViewController.swift in Sources */,
+				65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */,
 				D2941E611E10993300CB7552 /* ChangePasswordViewController.swift in Sources */,
 				D21BC8F81DEA2867008F5443 /* PlaylistCell.swift in Sources */,
 				D29891F11E613DBA004C0FC1 /* FavoritesViewController.swift in Sources */,
