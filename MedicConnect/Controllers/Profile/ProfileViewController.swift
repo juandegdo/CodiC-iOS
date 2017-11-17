@@ -244,127 +244,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
-    func onToggleLike(sender: TVButton) {
-        
-        guard let _index = sender.index as Int? else {
-                return
-        }
-        
-        guard let _user = UserController.Instance.getUser() as User? else {
-            return
-        }
-        
-        let post = _user.getPosts()[_index]
-        
-        sender.makeEnabled(enabled: false)
-        if sender.tag == 1 {
-            PostService.Instance.unlike(postId: post.id, completion: { (success, like_description) in
-                sender.makeEnabled(enabled: true)
-                
-                if success, let like_description = like_description {
-                    print("Post succesfully unliked")
-                    
-                    post.removeLike(id: _user.id)
-                    post.likeDescription = like_description
-                    if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                        cell.setData(post: post)
-                        
-                        cell.btnLike.setImage(UIImage(named: "icon_broadcast_like"), for: .normal)
-                        cell.btnLike.tag = 0
-                    }
-                }
-            })
-            
-        } else {
-            PostService.Instance.like(postId: post.id, completion: { (success, like_description) in
-                sender.makeEnabled(enabled: true)
-                
-                if success, let like_description = like_description {
-                    print("Post succesfully liked")
-                    
-                    post.addLike(id: _user.id)
-                    post.likeDescription = like_description
-                    if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                        cell.setData(post: post)
-                        
-                        cell.btnLike.setImage(UIImage(named: "icon_broadcast_liked"), for: .normal)
-                        cell.btnLike.tag = 1
-                    }
-                }
-            })
-            
-        }
-        
-    }
-    
-    // MARK: Selectors
-    
-    func onSelectShare(sender: UIButton) {
-        
-        vcDisappearType = .share
-        
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcastPopup, sender: nil)
-        
-    }
-    
-    func onSelectComment(sender: UIButton) {
-        
-        vcDisappearType = .comment
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
-            if let _user = UserController.Instance.getUser() {
-                let post = _user.getPosts()[sender.tag]
-                vc.currentPost = post
-                
-                self.present(vc, animated: false, completion: nil)
-            }
-        }
-        
-    }
-    
-    func onSelectLikeDescription(sender: UITapGestureRecognizer) {
-        
-        vcDisappearType = .like
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "LikesViewController") as? LikesViewController {
-            if let _user = UserController.Instance.getUser(),
-                let index = sender.view?.tag {
-                let post = _user.getPosts()[index]
-                vc.currentPost = post
-                
-                self.present(vc, animated: false, completion: nil)
-            }
-        }
-        
-    }
-    
-    func onSelectHashtag (sender: UITapGestureRecognizer) {
-        let myTextView = sender.view as! UITextView //sender is TextView
-        let _pos: CGPoint = sender.location(in: myTextView)
-        
-        //eliminate scroll offset
-//        pos.y += _tv.contentOffset.y;
-        
-        //get location in text from textposition at point
-        let tapPos = myTextView.closestPosition(to: _pos)
-        
-        //fetch the word at this position (or nil, if not available)
-        if let wordRange = myTextView.tokenizer.rangeEnclosingPosition(tapPos!, with: UITextGranularity.word, inDirection: UITextLayoutDirection.right.rawValue),
-            let tappedHashtag = myTextView.text(in: wordRange) {
-            NSLog("Word: \(String(describing: tappedHashtag))")
-            self.callSearchResultVC(hashtag: tappedHashtag)
-        }
-        
-    }
-    
-    func onToggleAction(sender: UIButton) {
-        
-        print("\(sender.tag)")
-        
-    }
-    
     func onPlayAudio(sender: SVGPlayButton) {
         
         guard let _index = sender.index as Int? else {
@@ -518,24 +397,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         return scrollView
         
     }
-    
-    func callEditVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
-            self.present(vc, animated: false, completion: nil)
-        }
-        
-    }
-    
-    func callSearchResultVC(hashtag: String) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if let vc = storyboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as? SearchResultsViewController {
-            vc.hashtag = "#\(hashtag)"
-            self.present(vc, animated: false, completion: nil)
-        }
-    }
 
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         
@@ -592,48 +453,16 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             
             let post = _user.getPosts()[indexPath.row]
             cell.setData(post: post)
-            
-            cell.btnLoop.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
-            
-            cell.btnMessage.tag = indexPath.row
-            cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
                         
-            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
-            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
-            cell.btnPlay.index = indexPath.row
-            cell.btnPlay.refTableView = tableView
-            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
+//            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
+//            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
+//            cell.btnPlay.index = indexPath.row
+//            cell.btnPlay.refTableView = tableView
+//            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
             
-            if cell.btnPlay.playing {
-                cell.btnPlay.playing = false
-            }
-            
-            cell.btnLike.isHidden = !self.isDiagnosis
-            cell.btnMessage.isHidden = !self.isDiagnosis
-            cell.btnAction.isHidden = true
-            
-            if self.isDiagnosis {
-                cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-                cell.btnLike.index = indexPath.row
-                cell.btnLike.isUserInteractionEnabled = false
-                
-                if let _user = UserController.Instance.getUser() as User? {
-                    let hasLiked = post.hasLiked(id: _user.id)
-                    let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
-                    cell.btnLike.setImage(image, for: .normal)
-                    cell.btnLike.tag = hasLiked ? 1 : 0
-                    
-                    let hasCommented = post.hasCommented(id: _user.id)
-                    let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
-                    cell.btnMessage.setImage(image1, for: .normal)
-                }
-                
-                cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-                cell.btnAction.tag = indexPath.row
-            } else {
-//                cell.likeBadgeView.isHidden = true
-//                cell.commentBadgeView.isHidden = true
-            }
+//            if cell.btnPlay.playing {
+//                cell.btnPlay.playing = false
+//            }
             
             let isFullDesc = self.states.contains(post.id)
             cell.lblDescription.delegate = self
@@ -642,14 +471,6 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.lblDescription.text = post.description
             cell.lblDescription.collapsed = !isFullDesc
             cell.showFullDescription = isFullDesc
-            
-            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-            cell.lblLikedDescription.tag = indexPath.row
-            
-            let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
-            cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
-            cell.txtVHashtags.tag = indexPath.row
             
             cell.isExpanded = self.expandedRows.contains(post.id)
             cell.selectionStyle = .none
@@ -837,10 +658,6 @@ extension ProfileViewController : UIScrollViewDelegate {
 extension ProfileViewController {
 
     //MARK: IBActions
-    
-    @IBAction func onEditProfile(sender: AnyObject!) {
-        self.callEditVC()
-    }
     
     @IBAction func onDiagnosisTapped(sender: AnyObject!) {
         self.isDiagnosis = true

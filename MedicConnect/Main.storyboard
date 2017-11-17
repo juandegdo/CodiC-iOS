@@ -1539,28 +1539,14 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                         <color key="textColor" red="0.80784313725490198" green="0.80784313725490198" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYN-12-nAA">
-                                                        <rect key="frame" x="243" y="-11" width="40" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="7dx-8W-FT2"/>
-                                                            <constraint firstAttribute="height" constant="40" id="o96-YM-dzV"/>
-                                                        </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="2" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" image="icon_edit"/>
-                                                        <connections>
-                                                            <action selector="onEditProfileWithSender:" destination="FrV-8f-pub" eventType="touchUpInside" id="6id-kv-Thr"/>
-                                                        </connections>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="kYN-12-nAA" firstAttribute="centerY" secondItem="tMd-Bp-GGA" secondAttribute="centerY" id="HCg-hu-NHO"/>
                                                     <constraint firstItem="tMd-Bp-GGA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nla-Uj-OMU" secondAttribute="leading" id="M7y-KK-FOg"/>
                                                     <constraint firstAttribute="height" constant="18" id="MyF-Zf-j1f"/>
                                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tMd-Bp-GGA" secondAttribute="trailing" constant="56" id="dd0-dj-aEs"/>
                                                     <constraint firstItem="tMd-Bp-GGA" firstAttribute="centerX" secondItem="nla-Uj-OMU" secondAttribute="centerX" id="iV4-Jc-M2V"/>
                                                     <constraint firstItem="tMd-Bp-GGA" firstAttribute="top" secondItem="nla-Uj-OMU" secondAttribute="top" id="qGI-9c-41h"/>
-                                                    <constraint firstItem="kYN-12-nAA" firstAttribute="leading" secondItem="tMd-Bp-GGA" secondAttribute="trailing" constant="12" id="yli-yo-sqn"/>
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intenstivist in Cardiology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CST-tg-YxL">
@@ -4972,7 +4958,7 @@ you a link to reset your password.</string>
                                                         <color key="textColor" red="0.26274509800000001" green="0.28627450980000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vur-6I-yna">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vur-6I-yna">
                                                         <rect key="frame" x="195" y="-10" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="FFR-HC-0YF"/>
@@ -6648,6 +6634,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OAe-nj-vD0"/>
+        <segue reference="OMB-Di-mue"/>
     </inferredMetricsTieBreakers>
 </document>
