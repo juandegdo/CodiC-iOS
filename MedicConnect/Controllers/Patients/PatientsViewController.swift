@@ -130,122 +130,6 @@ extension PatientsViewController {
         self.tvPatients.reloadData()
     }
     
-    func onToggleAction(sender: TVButton) {
-        guard let _ = sender.index as Int?,
-            let _ = sender.refTableView as UITableView? else {
-                return
-        }
-        
-        print("\(sender.index!)")
-        selectedDotsIndex = sender.index!
-//        let post = PostController.Instance.getFollowingPosts()[selectedDotsIndex]
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        
-        let actionReportThisBroadcast = UIAlertAction(title: "Report this broadcast", style: .destructive) { (action) in
-//            guard let _user = UserController.Instance.getUser() as User? else {
-//                return
-//            }
-//
-//            UserService.Instance.report(from: _user.email, subject: "Report this broadcast", msgbody: "User: \(post.user.fullName)\nUrl: \(post.audio)", completion: { (success) in
-//                if success {
-//                    DispatchQueue.main.async {
-//                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcast.\nWe are looking into it.")
-//                    }
-//
-//            });
-        }
-        
-        let actionReportUser = UIAlertAction(title: "Report this user", style: .destructive) { (action) in
-//            guard let _user = UserController.Instance.getUser() as User? else {
-//                return
-//            }
-//
-//            UserService.Instance.report(from: _user.email, subject: "Report this user", msgbody: "User: \(post.user.fullName)", completion: { (success) in
-//                if success {
-//                    DispatchQueue.main.async {
-//                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcaster.\nWe are looking into it.")
-//                    }
-//                }
-//            });
-        }
-        
-        let actionBlockUser = UIAlertAction(title: "Block user", style: .default) { (action) in
-//            UserService.Instance.block(userId: post.user.id , completion: {
-//                (success: Bool) in
-//                if success {
-//                    DispatchQueue.main.async {
-//                        AlertUtil.showOKAlert(self, message: "This user is now blocked.\nGo to Settings to undo this action.")
-//                    }
-//
-//                    self.loadPatients()()
-//                } else {
-//                    sender.makeEnabled(enabled: true)
-//                }
-//            })
-        }
-        
-        let actionTurnOnPost = UIAlertAction(title: "Turn on Post notification", style: .default) { (action) in
-            
-        }
-        
-        let actionCopyShareUrl = UIAlertAction(title: "Copy Share Url", style: .default) { (action) in
-//            UIPasteboard.general.string = post.audio
-        }
-        
-        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        
-        alertController.addAction(actionReportThisBroadcast)
-        alertController.addAction(actionReportUser)
-        alertController.addAction(actionBlockUser)
-        alertController.addAction(actionTurnOnPost)
-        alertController.addAction(actionCopyShareUrl)
-        alertController.addAction(actionCancel)
-        
-        alertController.view.tintColor = UIColor.black
-        
-        present(alertController, animated: false, completion: nil)
-    }
-    
-    func showPatientProfile(user: User) {
-//        if  let _me = UserController.Instance.getUser() as User? {
-//            if _me.id == user.id {
-//                return
-//            }
-//
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//
-//            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
-//                if let blockedby = _me.blockedby as? [User] {
-//                    if blockedby.contains(where: { $0.id == user.id }) {
-//                        return
-//                    }
-//                }
-//
-//                if let blocking = _me.blocking as? [User] {
-//                    if blocking.contains(where: { $0.id == user.id }) {
-//                        return
-//                    }
-//                }
-//
-//                vc.currentUser = user
-//                self.present(vc, animated: false, completion: nil)
-//            }
-//        }
-        
-    }
-    
-    // MARK: Selectors
-    
-    func onSelectUser(sender: UITapGestureRecognizer) {
-//        let index = sender.view?.tag
-//        let post : Post? = PostController.Instance.getFollowingPosts()[index!]
-//
-//        if (post != nil) {
-//            self.callProfileVC(user: (post?.user)!)
-//        }
-    }
-    
 }
 
 extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
@@ -270,17 +154,18 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
         let data = self.searchedPatients[indexPath.row]
         cell.setData(data: data)
         
-        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-        cell.btnAction.index = indexPath.row
-        cell.btnAction.refTableView = tableView
+//        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
+//        cell.btnAction.index = indexPath.row
+//        cell.btnAction.refTableView = tableView
+        cell.btnAction.isHidden = true
         
-        let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
-        cell.imgUserPhoto.addGestureRecognizer(tapGestureOnUserAvatar)
-        cell.imgUserPhoto.tag = indexPath.row
-        
-        let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
-        cell.lblDoctorName.addGestureRecognizer(tapGestureOnUsername)
-        cell.lblDoctorName.tag = indexPath.row
+//        let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
+//        cell.imgUserPhoto.addGestureRecognizer(tapGestureOnUserAvatar)
+//        cell.imgUserPhoto.tag = indexPath.row
+//
+//        let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
+//        cell.lblDoctorName.addGestureRecognizer(tapGestureOnUsername)
+//        cell.lblDoctorName.tag = indexPath.row
         
         let isFullDesc = self.states.contains(data["id"]!)
         cell.lblDescription.delegate = self
@@ -298,7 +183,16 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         
+        guard let _patient = self.patients[indexPath.row] as [String: String]? else {
+            return
+        }
+        
+        let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
+        patientProfileVC.patient = _patient
+        self.navigationController?.pushViewController(patientProfileVC, animated: true)
+
     }
     
     //

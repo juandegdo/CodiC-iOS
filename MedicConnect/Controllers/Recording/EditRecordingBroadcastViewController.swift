@@ -225,7 +225,7 @@ class RecordSlider: UISlider {
     
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         var newBounds = super.trackRect(forBounds: bounds)
-        newBounds.size.height = 5
+        newBounds.size.height = 3
         return newBounds
     }
     

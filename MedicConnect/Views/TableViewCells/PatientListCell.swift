@@ -36,7 +36,7 @@ class PatientListCell: UITableViewCell {
                 let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.lblDescription.font], context: nil)
                 
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 4.0
+                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)!
             }
         }
     }
@@ -53,18 +53,12 @@ class PatientListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
     }
     
     func setData(data: [String: String]) {
         // Set data
         self.lblPatientName.text = data["patientName"]
-        
         self.lblDoctorName.text = data["doctorName"]
         self.lblDate.text = data["date"]
         

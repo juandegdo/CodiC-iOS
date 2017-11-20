@@ -8,12 +8,9 @@
 
 import UIKit
 import AVFoundation
-import AlamofireImage
-import HTHorizontalSelectionList
 
 class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
-//    let homeTypes: [String] = ["Following", "Recommended"]
     let OffsetHeaderStop: CGFloat = 240.0
     let ProfileListCellID = "ProfileListCell"
     
@@ -28,8 +25,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var lblDiagnosisNumber: UILabel!
     @IBOutlet var lblDiagnosisText: UILabel!
-    @IBOutlet var lblNotesNumber: UILabel!
-    @IBOutlet var lblNotesText: UILabel!
+    @IBOutlet var lblConsultNumber: UILabel!
+    @IBOutlet var lblConsultText: UILabel!
     
     // Scroll
     @IBOutlet var mainScrollView: UIScrollView!
@@ -100,7 +97,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         self.initViews()
         
         vcDisappearType = .other
-        NotificationCenter.default.addObserver(self, selector: #selector(DiagnosisViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(ProfileViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
     }
     
@@ -223,18 +220,18 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             
             // Customize Following/Follower
             self.lblDiagnosisNumber.text  = "\(_user.getPosts().count)"
-            self.lblNotesNumber.text  = "0"
+            self.lblConsultNumber.text  = "0"
             
             if self.isDiagnosis {
                 self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
                 self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
-                self.lblNotesNumber.textColor = Constants.ColorLightGray1
-                self.lblNotesText.textColor = Constants.ColorLightGray1
+                self.lblConsultNumber.textColor = Constants.ColorLightGray1
+                self.lblConsultText.textColor = Constants.ColorLightGray1
             } else {
                 self.lblDiagnosisNumber.textColor = Constants.ColorLightGray1
                 self.lblDiagnosisText.textColor = Constants.ColorLightGray1
-                self.lblNotesNumber.textColor = Constants.ColorDarkGray4
-                self.lblNotesText.textColor = Constants.ColorDarkGray4
+                self.lblConsultNumber.textColor = Constants.ColorDarkGray4
+                self.lblConsultText.textColor = Constants.ColorDarkGray4
             }
             
         }
@@ -618,21 +615,10 @@ extension ProfileViewController : UIScrollViewDelegate {
             
             let offset: CGFloat = scrollView.contentOffset.y
             
-            if offset < 0 { // PULL DOWN -----------------
-//                var headerTransform: CATransform3D = CATransform3DIdentity
-//                let headerScaleFactor: CGFloat = -(offset) / self.viewProfileInfo.bounds.height
-//                let headerSizevariation: CGFloat = ((self.viewProfileInfo.bounds.height * (1.0 + headerScaleFactor)) - self.viewProfileInfo.bounds.height) / 2.0
-//                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-//                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-                
-                // Apply Transformations
-//                self.headerView.layer.transform = headerTransform
-//                self.viewProfileInfo.layer.transform = CATransform3DIdentity
-            }
-            else { // SCROLL UP/DOWN ------------
-                
+            if offset < 0 { // SCROLL UP/DOWN ------------
                 self.updateScroll(offset: offset)
             }
+            
         }
         
     }
@@ -643,14 +629,6 @@ extension ProfileViewController : UIScrollViewDelegate {
             self.tableView.setContentOffset(CGPoint.zero, animated: true)
         }
         
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.SegueMedicConnectRecordPopup {
-            if let popupVC = segue.destination as? RecordPopupViewController {
-                popupVC.isDiagnosis = self.isDiagnosis
-            }
-        }
     }
     
 }
@@ -664,7 +642,7 @@ extension ProfileViewController {
         self.updateUI()
     }
     
-    @IBAction func onNotesTapped(sender: AnyObject!) {
+    @IBAction func onConsultsTapped(sender: AnyObject!) {
         self.isDiagnosis = false
         self.updateUI()
     }

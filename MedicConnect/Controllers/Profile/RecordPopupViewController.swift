@@ -12,53 +12,35 @@ import MobileCoreServices
 class RecordPopupViewController: BaseViewController {
     
     @IBOutlet var mBackgroundImageView: UIImageView!
-    @IBOutlet var btnUpload: UIButton!
-    @IBOutlet var btnRecord: UIButton!
+    @IBOutlet var btnRecordConsult: UIButton!
+    @IBOutlet var btnRecordDiagnosis: UIButton!
     
-    var isDiagnosis: Bool = true
     var fileURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.initViews()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
-        
     }
     
     //MARK: Initialize Views
     
     func initViews() {
-        
         // Background captured image
         self.mBackgroundImageView.image = ImageHelper.captureView()
         
-        if isDiagnosis {
-            self.btnRecord.setTitle("record diagnosis", for: .normal)
-            self.btnRecord.setImage(#imageLiteral(resourceName: "icon_record_diagnosis_highlighted"), for: .normal)
-            self.btnUpload.setTitle("upload diagnosis", for: .normal)
-            
-        } else {
-            self.btnRecord.setTitle("record new note", for: .normal)
-            self.btnRecord.setImage(#imageLiteral(resourceName: "icon_record_note_highlighted"), for: .normal)
-            self.btnUpload.setTitle("upload new note", for: .normal)
-            
-        }
     }
     
     //MARK: Private Methods
@@ -76,16 +58,14 @@ extension RecordPopupViewController {
     //MARK: IBActions
     
     @IBAction func onClose(sender: UIButton!) {
-        
         if let _nav = self.navigationController as UINavigationController? {
             _ = _nav.popViewController(animated: false)
         } else {
             self.dismiss(animated: false, completion: nil)
         }
-        
     }
     
-    @IBAction func onRecord(sender: UIButton!) {
+    @IBAction func onRecordDiagnosis(sender: UIButton!) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
@@ -95,12 +75,17 @@ extension RecordPopupViewController {
         self.onClose(sender: nil)
     }
     
+    @IBAction func onRecordConsult(sender: UIButton!) {
+        
+    }
+    
     @IBAction func onUpload(sender: UIButton!) {
         let importMenu = UIDocumentMenuViewController(documentTypes: [kUTTypeAudio as String], in: .import)
         importMenu.delegate = self
         importMenu.popoverPresentationController?.sourceView = sender
         self.present(importMenu, animated: true, completion: nil)
     }
+    
 }
 
 //MARK: - UIDocumentMenuDelegate
@@ -115,6 +100,7 @@ extension RecordPopupViewController: UIDocumentMenuDelegate {
     public func documentMenuWasCancelled(_ documentMenu: UIDocumentMenuViewController) {
         print("document menu cancelled")
     }
+    
 }
 
 //MARK: - UIDocumentPickerDelegate
@@ -127,4 +113,5 @@ extension RecordPopupViewController: UIDocumentPickerDelegate {
     public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         print("document picker cancelled")
     }
+    
 }

@@ -24,7 +24,7 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var lblDuration: UILabel!
 
     // Slider
-    @IBOutlet weak var playSlider: RecordSlider!
+    @IBOutlet weak var playSlider: PlaySlider!
     
     // Constraints
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
@@ -66,13 +66,19 @@ class ProfileListCell: UITableViewCell {
                 let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.lblDescription.font], context: nil)
                 
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 4.0
+                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 0.0
             }
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        // Slider
+        self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
+        self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .highlighted)
+        self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .selected)
+//        self.playSlider.value = self.playSlider.minimumValue
         
     }
     

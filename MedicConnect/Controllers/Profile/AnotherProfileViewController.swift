@@ -8,8 +8,6 @@
 
 import UIKit
 import AVFoundation
-import AlamofireImage
-import MessageUI
 
 class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
@@ -556,21 +554,10 @@ extension AnotherProfileViewController : UIScrollViewDelegate {
             
             let offset: CGFloat = scrollView.contentOffset.y
             
-            
-            if offset < 0 { // PULL DOWN -----------------
-//                var headerTransform: CATransform3D = CATransform3DIdentity
-//                let headerScaleFactor: CGFloat = -(offset) / self.headerView.bounds.height
-//                let headerSizevariation: CGFloat = ((self.headerView.bounds.height * (1.0 + headerScaleFactor)) - self.headerView.bounds.height) / 2.0
-//                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-//                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-//                
-//                // Apply Transformations
-//                self.headerView.layer.transform = headerTransform
-//                self.viewProfileInfo.layer.transform = CATransform3DIdentity
-                
-            } else { // SCROLL UP/DOWN ------------
+            if offset >= 0 { // SCROLL UP/DOWN ------------
                 self.updateScroll(offset: offset)
             }
+            
         }
         
     }

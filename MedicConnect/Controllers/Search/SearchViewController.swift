@@ -253,7 +253,6 @@ extension SearchViewController {
     // Mark: IBActions
     
     @IBAction func onBack(sender: AnyObject) {
-        
         if let _nav = self.navigationController as UINavigationController? {
             _ = _nav.popViewController(animated: false)
         } else {
