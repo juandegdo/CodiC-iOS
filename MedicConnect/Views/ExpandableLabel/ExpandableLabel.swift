@@ -275,20 +275,26 @@ open class ExpandableLabel: UILabel {
     // MARK: Touch Handling
     
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        setLinkHighlighted(touches, event: event, highlighted: true)
+        if !setLinkHighlighted(touches, event: event, highlighted: true) {
+            self.superview?.touchesBegan(touches, with: event)
+        }
     }
     
     open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        setLinkHighlighted(touches, event: event, highlighted: false)
+        if !setLinkHighlighted(touches, event: event, highlighted: false) {
+            self.superview?.touchesCancelled(touches, with: event)
+        }
     }
     
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
+            self.superview?.touchesEnded(touches, with: event)
             return
         }
         
         if !collapsed {
             guard let range = self.expandedLinkTextRange else {
+                self.superview?.touchesEnded(touches, with: event)
                 return
             }
             
@@ -298,12 +304,16 @@ open class ExpandableLabel: UILabel {
                 delegate?.didCollapseLabel(self)
                 linkHighlighted = isHighlighted
                 setNeedsDisplay()
+            } else {
+                self.superview?.touchesEnded(touches, with: event)
             }
         } else {
             if shouldExpand && setLinkHighlighted(touches, event: event, highlighted: false) {
                 delegate?.willExpandLabel(self)
                 collapsed = false
                 delegate?.didExpandLabel(self)
+            } else {
+                self.superview?.touchesEnded(touches, with: event)
             }
         }
     }
@@ -352,7 +362,9 @@ open class ExpandableLabel: UILabel {
     }
     
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        setLinkHighlighted(touches, event: event, highlighted: false)
+        if !setLinkHighlighted(touches, event: event, highlighted: false) {
+            self.superview?.touchesMoved(touches, with: event)
+        }
     }
     
     open func setLessLinkWith(lessLink: String, attributes: [String: AnyObject], position: NSTextAlignment?) {
