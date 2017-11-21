@@ -201,24 +201,10 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     //
     
     func willExpandLabel(_ label: ExpandableLabel) {
-//        CATransaction.begin()
-//        CATransaction.setAnimationDuration(0.1)
-//        self.tvPatients.beginUpdates()
-//
-//        CATransaction.setCompletionBlock {
-//
-//        }
+        self.tvPatients.beginUpdates()
     }
     
     func didExpandLabel(_ label: ExpandableLabel) {
-        CATransaction.begin()
-        CATransaction.setAnimationDuration(2)
-        self.tvPatients.beginUpdates()
-        
-        CATransaction.setCompletionBlock {
-            
-        }
-        
         let point = label.convert(CGPoint.zero, to: self.tvPatients)
         if let indexPath = self.tvPatients.indexPathForRow(at: point) as IndexPath? {
             guard let cell = self.tvPatients.cellForRow(at: indexPath) as? PatientListCell
@@ -230,7 +216,6 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
             cell.showFullDescription = true
         }
         self.tvPatients.endUpdates()
-        CATransaction.commit()
     }
     
     func willCollapseLabel(_ label: ExpandableLabel) {
