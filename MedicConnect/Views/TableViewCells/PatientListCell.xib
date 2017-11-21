@@ -47,7 +47,7 @@
                             <constraint firstAttribute="height" constant="18" id="SkG-jG-4Fw"/>
                         </constraints>
                         <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
-                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                         <color key="textColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -80,20 +80,20 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="zij-9X-00R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="WB6-gP-czz" secondAttribute="trailing" constant="8" id="0KA-6e-BQ7"/>
-                    <constraint firstAttribute="bottom" secondItem="PIO-dQ-Ars" secondAttribute="bottom" constant="14" id="2qe-VV-e1v"/>
-                    <constraint firstItem="gtX-v9-Qgc" firstAttribute="top" secondItem="WB6-gP-czz" secondAttribute="bottom" id="3ni-IB-tE9"/>
+                    <constraint firstItem="gtX-v9-Qgc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="335-d6-WWE"/>
+                    <constraint firstItem="PIO-dQ-Ars" firstAttribute="top" secondItem="JyP-3V-gZU" secondAttribute="bottom" constant="0.5" id="4f9-uu-7Tu"/>
                     <constraint firstItem="JyP-3V-gZU" firstAttribute="leading" secondItem="or8-4a-ZkW" secondAttribute="trailing" constant="14" id="5sy-j8-wAD"/>
                     <constraint firstItem="PIO-dQ-Ars" firstAttribute="leading" secondItem="JyP-3V-gZU" secondAttribute="leading" id="8C8-Cg-LdP"/>
+                    <constraint firstAttribute="bottom" secondItem="PIO-dQ-Ars" secondAttribute="bottom" constant="14" id="8Ut-x5-7QA"/>
                     <constraint firstItem="zij-9X-00R" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="Adz-gV-BDl"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PIO-dQ-Ars" secondAttribute="trailing" constant="8" id="GYW-Me-rC0"/>
-                    <constraint firstItem="or8-4a-ZkW" firstAttribute="top" secondItem="gtX-v9-Qgc" secondAttribute="bottom" constant="8" id="Hhz-pw-d4Q"/>
                     <constraint firstAttribute="trailing" secondItem="zij-9X-00R" secondAttribute="trailing" constant="2" id="KoM-24-hD1"/>
+                    <constraint firstItem="or8-4a-ZkW" firstAttribute="top" secondItem="gtX-v9-Qgc" secondAttribute="bottom" constant="8" id="PS9-JG-XYK"/>
                     <constraint firstItem="WB6-gP-czz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="VMK-R8-Wqr"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JyP-3V-gZU" secondAttribute="trailing" constant="8" id="WTo-Jm-jOp"/>
                     <constraint firstItem="WB6-gP-czz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="37" id="XO4-qB-gC2"/>
                     <constraint firstItem="gtX-v9-Qgc" firstAttribute="leading" secondItem="WB6-gP-czz" secondAttribute="leading" id="cEU-N0-VIz"/>
                     <constraint firstItem="or8-4a-ZkW" firstAttribute="leading" secondItem="WB6-gP-czz" secondAttribute="leading" id="fFC-hz-cFZ"/>
-                    <constraint firstAttribute="bottom" secondItem="gtX-v9-Qgc" secondAttribute="bottom" priority="750" constant="52" id="q20-Sc-bTB"/>
                     <constraint firstItem="zij-9X-00R" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gtX-v9-Qgc" secondAttribute="trailing" constant="2" id="sEm-LA-apg"/>
                     <constraint firstItem="JyP-3V-gZU" firstAttribute="top" secondItem="or8-4a-ZkW" secondAttribute="top" id="znH-zM-7DG"/>
                 </constraints>

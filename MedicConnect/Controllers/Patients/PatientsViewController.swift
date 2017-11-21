@@ -30,6 +30,8 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.loadPatients()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -43,9 +45,8 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.loadPatients()
         vcDisappearType = .other
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -200,10 +201,24 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     //
     
     func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvPatients.beginUpdates()
+//        CATransaction.begin()
+//        CATransaction.setAnimationDuration(0.1)
+//        self.tvPatients.beginUpdates()
+//
+//        CATransaction.setCompletionBlock {
+//
+//        }
     }
     
     func didExpandLabel(_ label: ExpandableLabel) {
+        CATransaction.begin()
+        CATransaction.setAnimationDuration(2)
+        self.tvPatients.beginUpdates()
+        
+        CATransaction.setCompletionBlock {
+            
+        }
+        
         let point = label.convert(CGPoint.zero, to: self.tvPatients)
         if let indexPath = self.tvPatients.indexPathForRow(at: point) as IndexPath? {
             guard let cell = self.tvPatients.cellForRow(at: indexPath) as? PatientListCell
@@ -215,6 +230,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
             cell.showFullDescription = true
         }
         self.tvPatients.endUpdates()
+        CATransaction.commit()
     }
     
     func willCollapseLabel(_ label: ExpandableLabel) {
@@ -264,12 +280,6 @@ extension PatientsViewController : UITextFieldDelegate {
         var txtAfterUpdate: NSString =  NSString(string: self.txFieldSearch.text!)
         txtAfterUpdate = txtAfterUpdate.replacingCharacters(in: range, with: string) as NSString
         txtAfterUpdate = txtAfterUpdate.trimmingCharacters(in: .whitespacesAndNewlines) as NSString
-        
-        // Remote search
-//        if txtAfterUpdate.length > 0 {
-//            self.searchTimer?.invalidate()
-//            self.searchTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(SearchViewController.loadData(searchTimer:)), userInfo: txtAfterUpdate as String, repeats: false)
-//        }
         
         self.loadSearchResult(txtAfterUpdate as String)
         
