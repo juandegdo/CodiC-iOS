@@ -69,14 +69,17 @@ extension RecordPopupViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
-            self.present(vc, animated: false, completion: nil)
+            
+            weak var weakSelf = self
+            self.present(vc, animated: false, completion: {
+                weakSelf?.onClose(sender: nil)
+            })
+            
         }
-        
-        self.onClose(sender: nil)
     }
     
     @IBAction func onRecordConsult(sender: UIButton!) {
-        
+        self.onClose(sender: nil)
     }
     
     @IBAction func onUpload(sender: UIButton!) {
