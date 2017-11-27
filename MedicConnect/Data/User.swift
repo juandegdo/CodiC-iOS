@@ -87,9 +87,13 @@ class User {
         
     }
     
-    func getPosts() -> [Post] {
+    func getPosts(type: String) -> [Post] {
         
-        return self.posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        let posts = self.posts.filter({(post: Post) -> Bool in
+            return post.postType == type
+        })
+        
+        return posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
         
     }
     

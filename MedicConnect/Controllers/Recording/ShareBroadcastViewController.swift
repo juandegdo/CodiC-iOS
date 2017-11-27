@@ -11,6 +11,7 @@ import UIKit
 class ShareBroadcastViewController: BaseViewController {
     
     @IBOutlet var mBackgroundImageView: UIImageView!
+    @IBOutlet var lblDescription: UILabel!
     @IBOutlet var btnEmail: UIButton!
     @IBOutlet var btnMessage: UIButton!
     @IBOutlet var btnOK: UIButton!
@@ -42,6 +43,9 @@ class ShareBroadcastViewController: BaseViewController {
         
         // Background captured image
         self.mBackgroundImageView.image = ImageHelper.captureView()
+        
+        // Record Description
+        self.lblDescription.text = "You’ve successfully\nrecorded a new \(DataManager.Instance.getPostType().lowercased())..."
         
         // OK button highlighted status
         self.btnOK.setBackgroundColor(color: UIColor.init(red: 146/255.0, green: 153/255.0, blue: 157/255.0, alpha: 1.0), forState: .highlighted)

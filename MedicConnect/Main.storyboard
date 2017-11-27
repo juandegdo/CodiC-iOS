@@ -1647,7 +1647,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="juN-0X-UHr">
                                         <rect key="frame" x="0.0" y="240" width="414" height="383"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="383" id="9zv-p0-NIy"/>
                                         </constraints>
@@ -3101,6 +3101,8 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <outlet property="btnSave" destination="Vqt-c8-ubB" id="gg0-sS-RJW"/>
                         <outlet property="hashTagCtrl" destination="93N-tS-07R" id="KRl-QD-O9Y"/>
                         <outlet property="imgAvatar" destination="rvg-xS-CWH" id="D61-vB-Jb8"/>
+                        <outlet property="lblBroadcastTitle" destination="hmN-Ei-HHj" id="dfN-rm-pHL"/>
+                        <outlet property="lblTitle" destination="PFR-fd-QvR" id="Hmk-DV-y3d"/>
                         <outlet property="tfAuthor" destination="U6o-hf-YrS" id="XHD-oT-7bO"/>
                         <outlet property="tfBroadcastName" destination="qf3-Qq-6kY" id="Ya4-Sq-awl"/>
                         <outlet property="tvDescription" destination="aZH-VM-yCi" id="ueK-bo-F00"/>
@@ -3221,7 +3223,7 @@ uploaded a new diagnosis...</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmw-bP-R41">
                                         <rect key="frame" x="0.0" y="205" width="344" height="45"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
-                                        <state key="normal" title="OK">
+                                        <state key="normal" title="SKIP">
                                             <color key="titleColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -3232,6 +3234,7 @@ uploaded a new diagnosis...</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="8d1-BF-mHh" firstAttribute="top" secondItem="Oow-o0-kyO" secondAttribute="bottom" id="1Gy-Wx-O4q"/>
+                                    <constraint firstItem="8d1-BF-mHh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0fB-pr-Agz" secondAttribute="leading" constant="4" id="8x6-Ua-wf9"/>
                                     <constraint firstItem="Oow-o0-kyO" firstAttribute="top" secondItem="0fB-pr-Agz" secondAttribute="top" id="Cg1-Yv-Ojx"/>
                                     <constraint firstItem="50C-3p-bZp" firstAttribute="centerX" secondItem="0fB-pr-Agz" secondAttribute="centerX" id="CsR-9I-Evd"/>
                                     <constraint firstItem="T57-0b-9xz" firstAttribute="centerX" secondItem="0fB-pr-Agz" secondAttribute="centerX" id="FUi-gg-3Vt"/>
@@ -3249,6 +3252,7 @@ uploaded a new diagnosis...</string>
                                     <constraint firstItem="fYs-nT-W4e" firstAttribute="top" secondItem="0fB-pr-Agz" secondAttribute="top" id="if1-bf-MqD"/>
                                     <constraint firstAttribute="height" constant="250" id="mcH-Lg-sys"/>
                                     <constraint firstItem="50C-3p-bZp" firstAttribute="top" secondItem="8d1-BF-mHh" secondAttribute="bottom" constant="8" id="nzL-xX-Eof"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8d1-BF-mHh" secondAttribute="trailing" constant="4" id="pXe-tZ-hqb"/>
                                     <constraint firstItem="fYs-nT-W4e" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0fB-pr-Agz" secondAttribute="leading" constant="20" symbolic="YES" id="sC9-2m-cpq"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -3282,6 +3286,7 @@ uploaded a new diagnosis...</string>
                         <outlet property="btnEmail" destination="jAR-0J-qK5" id="Ut1-hk-7zw"/>
                         <outlet property="btnMessage" destination="TVp-AJ-tHw" id="Ndn-Ji-TWt"/>
                         <outlet property="btnOK" destination="Fmw-bP-R41" id="Sik-SF-s0B"/>
+                        <outlet property="lblDescription" destination="8d1-BF-mHh" id="rn5-hA-ob2"/>
                         <outlet property="mBackgroundImageView" destination="ANn-pt-jsJ" id="1fp-2g-2It"/>
                         <segue destination="Bhl-gR-Iii" kind="unwind" identifier="StopRecordingBroadcast" animates="NO" unwindAction="unWindToPreRecordingWithSegue:" id="f6l-nz-oHo"/>
                     </connections>
@@ -5026,7 +5031,7 @@ you a link to reset your password.</string>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esU-dm-2DL">
                                         <rect key="frame" x="0.0" y="190" width="414" height="482"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="482" id="cgI-tR-iVR"/>
                                         </constraints>
@@ -6678,6 +6683,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vbE-pK-CLR"/>
+        <segue reference="OMB-Di-mue"/>
     </inferredMetricsTieBreakers>
 </document>

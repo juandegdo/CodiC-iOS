@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
             if let _user = UserController.Instance.getUser() {
-                let arrPosts = _user.getPosts()
+                let arrPosts = _user.getPosts(type: "")
                 for post in arrPosts {
                     if post.id == id {
                         vc.currentPost = post

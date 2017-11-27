@@ -13,7 +13,7 @@ class PostService: BaseTaskController {
     
     static let Instance = PostService()
     
-    func sendPost(_ title: String, author: String, description: String, hashtags: [String], audioData: Data, image: UIImage?, fileExtension: String, mimeType: String, completion: @escaping (_ success: Bool) -> Void) {
+    func sendPost(_ title: String, author: String, description: String, hashtags: [String], postType: String, audioData: Data, image: UIImage?, fileExtension: String, mimeType: String, completion: @escaping (_ success: Bool) -> Void) {
         
         guard let _url = URL(string: "\(self.baseURL)\(self.URLPost)") else {
             return
@@ -27,7 +27,8 @@ class PostService: BaseTaskController {
         let parameters = ["title" : title,
                           "author" : author,
                           "description" : description,
-                          "hashtags" : hashtags.count > 0 ? hashtags.joined(separator: ",") : ""]
+                          "hashtags" : hashtags.count > 0 ? hashtags.joined(separator: ",") : "",
+                          "postType" : postType]
         
         Alamofire.upload(multipartFormData: { (multipartFormData ) in
             
@@ -91,6 +92,7 @@ class PostService: BaseTaskController {
                                 let _title = p["title"] as? String,
                                 let _description = p["description"] as? String,
                                 let _userObj = p["user"] as? NSDictionary,
+                                let _postType = p["post_type"] as? String,
                                 let _userId = _userObj["_id"] as? String,
                                 let _name = _userObj["name"] as? String {
                                 
@@ -121,7 +123,7 @@ class PostService: BaseTaskController {
                                 }
                                 
                                 // Create final Post
-                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: _description, user: _user)
+                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: _description, user: _user, postType: _postType)
                                 
                                 // Optional description
                                 
@@ -214,6 +216,7 @@ class PostService: BaseTaskController {
                                 let _commentsCount = _p["comments_count"] as? Int,
                                 let _title = _p["title"] as? String,
                                 let _userObj = _p["user"] as? NSDictionary,
+                                let _postType = _p["post_type"] as? String,
                                 let _userId = _userObj["_id"] as? String,
                                 let _name = _userObj["name"] as? String {
                                 
@@ -245,7 +248,7 @@ class PostService: BaseTaskController {
                                 
                                 
                                 // Create final Post
-                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user)
+                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
                                 
                                 // Optional description
                                 
@@ -567,6 +570,7 @@ class PostService: BaseTaskController {
                                 let _commentsCount = _p["comments_count"] as? Int,
                                 let _title = _p["title"] as? String,
                                 let _userObj = _p["user"] as? NSDictionary,
+                                let _postType = _p["post_type"] as? String,
                                 let _userId = _userObj["_id"] as? String,
                                 let _name = _userObj["name"] as? String {
                                 
@@ -617,7 +621,7 @@ class PostService: BaseTaskController {
                                 
                                 
                                 // Create final Post
-                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user)
+                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
                                 
                                 // Optional description
                                 

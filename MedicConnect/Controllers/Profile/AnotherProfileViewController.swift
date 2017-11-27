@@ -40,6 +40,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     var selectedDotsIndex = 0
     
     var profileType = 0 //0: normal, 1: private, 2: blocked
+    var postType: String = "Diagnosis"
     var expandedRows = Set<String>()
     var states = Set<String>()
     
@@ -132,48 +133,48 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func releasePlayer(onlyState: Bool = false) {
         
-        PlayerController.Instance.invalidateTimer()
-        
-        // Reset player state
-        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
-            _lastPlayed.tickCount = 0
-            _lastPlayed.playing = false
-            PlayerController.Instance.shouldSeek = true
-            
-            if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _index = _lastPlayed.index as Int? {
-                
-                if let _user = self.currentUser {
-                    
-                    let post = _user.getPosts()[_index]
-                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
-                    
-                }
-                
-            }
-            
-        }
-        
-        if let _observer = PlayerController.Instance.playerObserver as Any? {
-            PlayerController.Instance.player?.removeTimeObserver(_observer)
-        }
-        
-        if onlyState {
-            return
-        }
-        
-        // Pause and reset components
-        PlayerController.Instance.player?.pause()
-        PlayerController.Instance.player = nil
-        PlayerController.Instance.lastPlayed = nil
-        
-        if let _user = self.currentUser,
-            let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = _user.getPosts()[_index]
-            post.resetCurrentTime()
-        }
-        
-        PlayerController.Instance.currentIndex = nil        
+//        PlayerController.Instance.invalidateTimer()
+//
+//        // Reset player state
+//        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
+//            _lastPlayed.tickCount = 0
+//            _lastPlayed.playing = false
+//            PlayerController.Instance.shouldSeek = true
+//
+//            if let _player = PlayerController.Instance.player as AVPlayer?,
+//                let _index = _lastPlayed.index as Int? {
+//
+//                if let _user = self.currentUser {
+//
+//                    let post = _user.getPosts()[_index]
+//                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
+//
+//                }
+//
+//            }
+//
+//        }
+//
+//        if let _observer = PlayerController.Instance.playerObserver as Any? {
+//            PlayerController.Instance.player?.removeTimeObserver(_observer)
+//        }
+//
+//        if onlyState {
+//            return
+//        }
+//
+//        // Pause and reset components
+//        PlayerController.Instance.player?.pause()
+//        PlayerController.Instance.player = nil
+//        PlayerController.Instance.lastPlayed = nil
+//
+//        if let _user = self.currentUser,
+//            let _index = PlayerController.Instance.currentIndex as Int? {
+//            let post = _user.getPosts()[_index]
+//            post.resetCurrentTime()
+//        }
+//
+//        PlayerController.Instance.currentIndex = nil
     }
     
     func updateUI(user: User) {
@@ -213,8 +214,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
             self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant
             self.tableViewHeightConstraint.constant = self.view.frame.height - 64.0
             self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
-        }
-        else {
+        } else {
             self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
             self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
             self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
@@ -232,122 +232,122 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func onPlayAudio(sender: SVGPlayButton) {
         
-        guard let _index = sender.index as Int? else {
-            return
-        }
-        
-        guard let _user = self.currentUser else {
-            return
-        }
-        
-        let post = _user.getPosts()[_index]
-        
-        self.releasePlayer(onlyState: true)
-        
-        if let _url = URL(string: post.audio ) as URL? {
-            if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
-                
-                PlayerController.Instance.lastPlayed = sender
-                
-                PlayerController.Instance.shouldSeek = false
-                _player.rate = 1.0
-                PlayerController.Instance.currentTime = post.getCurrentTime()
-                _player.play()
-                
-                PlayerController.Instance.addObserver()
-                
-            } else {
-                
-                let playerItem = AVPlayerItem(url: _url)
-                PlayerController.Instance.player = AVPlayer(playerItem:playerItem)
-                
-                if let _player = PlayerController.Instance.player as AVPlayer? {
-                    
-                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
-                    
-                    PlayerController.Instance.lastPlayed = sender
-                    PlayerController.Instance.currentIndex = _index
-                    
-                    _player.rate = 1.0
-                    PlayerController.Instance.currentTime = post.getCurrentTime()
-                    _player.play()
-                    
-                    PlayerController.Instance.addObserver()
-                    
-                    if Float(_player.currentTime().value) == 0.0 {
-                        PostService.Instance.incrementPost(id: post.id, completion: { (success, play_count) in
-                            if success, let play_count = play_count {
-                                print("Post incremented")
-                                post.playCount = play_count
-                                if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                                    cell.setData(post: post)
-                                }
-                            }
-                        })
-                        
-                    }
-                    
-                }
-                
-            }
-            
-        }
+//        guard let _index = sender.index as Int? else {
+//            return
+//        }
+//
+//        guard let _user = self.currentUser else {
+//            return
+//        }
+//
+//        let post = _user.getPosts()[_index]
+//
+//        self.releasePlayer(onlyState: true)
+//
+//        if let _url = URL(string: post.audio ) as URL? {
+//            if let _player = PlayerController.Instance.player as AVPlayer?,
+//                let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
+//
+//                PlayerController.Instance.lastPlayed = sender
+//
+//                PlayerController.Instance.shouldSeek = false
+//                _player.rate = 1.0
+//                PlayerController.Instance.currentTime = post.getCurrentTime()
+//                _player.play()
+//
+//                PlayerController.Instance.addObserver()
+//
+//            } else {
+//
+//                let playerItem = AVPlayerItem(url: _url)
+//                PlayerController.Instance.player = AVPlayer(playerItem:playerItem)
+//
+//                if let _player = PlayerController.Instance.player as AVPlayer? {
+//
+//                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+//
+//                    PlayerController.Instance.lastPlayed = sender
+//                    PlayerController.Instance.currentIndex = _index
+//
+//                    _player.rate = 1.0
+//                    PlayerController.Instance.currentTime = post.getCurrentTime()
+//                    _player.play()
+//
+//                    PlayerController.Instance.addObserver()
+//
+//                    if Float(_player.currentTime().value) == 0.0 {
+//                        PostService.Instance.incrementPost(id: post.id, completion: { (success, play_count) in
+//                            if success, let play_count = play_count {
+//                                print("Post incremented")
+//                                post.playCount = play_count
+//                                if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
+//                                    cell.setData(post: post)
+//                                }
+//                            }
+//                        })
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
         
     }
     
     func willEnterBackground() {
-        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-            return
-        }
-        
-        _player.pause()
-        
-        if let sender = PlayerController.Instance.lastPlayed {
-            sender.playing = false
-            guard let _index = sender.index as Int? else {
-                return
-            }
-            
-            guard let _user = self.currentUser else {
-                return
-            }
-            
-            let post = _user.getPosts()[_index]
-            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
-        }
-        
-        PlayerController.Instance.lastPlayed?.tickCount = 0
-        PlayerController.Instance.lastPlayed = nil
-        PlayerController.Instance.shouldSeek = true
-        
-        PlayerController.Instance.scheduleReset()
+//        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+//            return
+//        }
+//
+//        _player.pause()
+//
+//        if let sender = PlayerController.Instance.lastPlayed {
+//            sender.playing = false
+//            guard let _index = sender.index as Int? else {
+//                return
+//            }
+//
+//            guard let _user = self.currentUser else {
+//                return
+//            }
+//
+//            let post = _user.getPosts()[_index]
+//            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+//        }
+//
+//        PlayerController.Instance.lastPlayed?.tickCount = 0
+//        PlayerController.Instance.lastPlayed = nil
+//        PlayerController.Instance.shouldSeek = true
+//
+//        PlayerController.Instance.scheduleReset()
     }
     
     
     func onPauseAudio(sender: SVGPlayButton) {
         
-        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-            return
-        }
-        
-        _player.pause()
-        PlayerController.Instance.lastPlayed?.tickCount = 0
-        PlayerController.Instance.lastPlayed = nil
-        PlayerController.Instance.shouldSeek = true
-        
-        PlayerController.Instance.scheduleReset()
-        
-        guard let _index = sender.index as Int? else {
-            return
-        }
-        
-        guard let _user = self.currentUser else {
-            return
-        }
-        
-        let post = _user.getPosts()[_index]
-        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+//        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+//            return
+//        }
+//
+//        _player.pause()
+//        PlayerController.Instance.lastPlayed?.tickCount = 0
+//        PlayerController.Instance.lastPlayed = nil
+//        PlayerController.Instance.shouldSeek = true
+//
+//        PlayerController.Instance.scheduleReset()
+//
+//        guard let _index = sender.index as Int? else {
+//            return
+//        }
+//
+//        guard let _user = self.currentUser else {
+//            return
+//        }
+//
+//        let post = _user.getPosts()[_index]
+//        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
         
     }
     
@@ -366,7 +366,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             if let _user = self.currentUser {
                 if profileType == 0 {
-                    return _user.getPosts().count
+                    return _user.getPosts(type: self.postType).count
                 } else {
                     return 1
                 }
@@ -412,7 +412,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return cell
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             cell.setData(post: post)
             
 //            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
@@ -455,7 +455,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             
             switch cell.isExpanded {
             case true:
@@ -483,7 +483,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.expandedRows.remove(post.id)
             
             cell.isExpanded = false
@@ -512,7 +512,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.states.insert(post.id)
             
             cell.showFullDescription = true
@@ -534,7 +534,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.states.remove(post.id)
             
             cell.showFullDescription = false

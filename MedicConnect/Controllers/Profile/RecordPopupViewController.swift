@@ -70,6 +70,8 @@ extension RecordPopupViewController {
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
+            DataManager.Instance.setPostType(postType: "Diagnosis")
+            
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
                 weakSelf?.onClose(sender: nil)
@@ -79,7 +81,18 @@ extension RecordPopupViewController {
     }
     
     @IBAction func onRecordConsult(sender: UIButton!) {
-        self.onClose(sender: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+            
+            DataManager.Instance.setPostType(postType: "Consult")
+            
+            weak var weakSelf = self
+            self.present(vc, animated: false, completion: {
+                weakSelf?.onClose(sender: nil)
+            })
+            
+        }
     }
     
     @IBAction func onUpload(sender: UIButton!) {

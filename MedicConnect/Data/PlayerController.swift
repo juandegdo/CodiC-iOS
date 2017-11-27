@@ -15,8 +15,9 @@ class PlayerController {
     
     var player: AVPlayer?
     var currentIndex: Int?
-    var lastPlayed: SVGPlayButton?
-    var playingProgressBar: YLProgressBar?
+    var lastPlayed: PlaySlider?
+    var elapsedTimeLabel: UILabel?
+    var durationLabel: UILabel?
     var playerObserver: Any?
     
     var currentTime: CMTime?
@@ -32,7 +33,7 @@ class PlayerController {
         
         self.playerObserver = _player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 10), queue: DispatchQueue.main) { (CMTime) -> Void in
             
-            guard let _lastPlayed = self.lastPlayed as SVGPlayButton? else {
+            guard let _lastPlayed = self.lastPlayed as PlaySlider? else {
                 return
             }
             
@@ -46,7 +47,7 @@ class PlayerController {
             
             //  Checks if we're updating the correct player.
             if _currentIndex != _playerIndex {
-                _lastPlayed.progressStrokeEnd = 0.0
+                _lastPlayed.setValue(0.0, animated: false)
                 return
             }
             
@@ -63,35 +64,29 @@ class PlayerController {
                 
                 let duration = Int(_player.currentItem!.duration.value) / Int(_player.currentItem!.duration.timescale)
                 
-                // Restore current tick count from audio
-                _lastPlayed.tickCount = currentTime
-                
-                // Increment tick count
-                _lastPlayed.tickCount += 0.1
-                
                 // Update progress
-                let progress = CGFloat(_lastPlayed.tickCount) / CGFloat(duration)
-                _lastPlayed.progressStrokeEnd = progress
+                let progress = CGFloat(currentTime) / CGFloat(duration)
+                _lastPlayed.setValue(Float(progress), animated: false)
                 
                 // Update playing progress bar on Playlist
-                if let _playingProgressBar = self.playingProgressBar as YLProgressBar? {
-                    _playingProgressBar.progress = progress
-                }
+//                if let _playingProgressBar = self.playingProgressBar as YLProgressBar? {
+//                    _playingProgressBar.progress = progress
+//                }
                 
                 // Update state
-                if !_lastPlayed.playing && _lastPlayed.progressStrokeEnd > 0 {
+                if !_lastPlayed.playing && _lastPlayed.value > 0 {
                     _lastPlayed.playing = true
                 }
                 
             } else {
                 
                 // Reset progress while we're not ready to play
-                _lastPlayed.progressStrokeEnd = 0.0
+                _lastPlayed.setValue(0.0, animated: false)
                 
                 // Update playing progress bar on Playlist
-                if let _playingProgressBar = self.playingProgressBar as YLProgressBar? {
-                    _playingProgressBar.progress = 0.0
-                }
+//                if let _playingProgressBar = self.playingProgressBar as YLProgressBar? {
+//                    _playingProgressBar.progress = 0.0
+//                }
             }
             
         }
@@ -99,7 +94,6 @@ class PlayerController {
     }
     
     func scheduleReset() {
-        
         self.timerReset = Timer.scheduledTimer(timeInterval: 60,
                                                target: self,
                                                selector: #selector(self.resetTimer),
@@ -108,12 +102,10 @@ class PlayerController {
     }
     
     func invalidateTimer() {
-        
         self.timerReset?.invalidate()
     }
     
     @objc func resetTimer() {
-        
         self.player = nil
     }
     

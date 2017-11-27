@@ -135,7 +135,8 @@ class NotificationService: BaseTaskController {
                                     let _createdAt = _broadcastObj["createdAt"] as? String,
                                     let _playCount = _broadcastObj["play_count"] as? Int,
                                     let _commentsCount = _broadcastObj["comments_count"] as? Int,
-                                    let _title = _broadcastObj["title"] as? String {
+                                    let _title = _broadcastObj["title"] as? String,
+                                    let _postType = _broadcastObj["post_type"] as? String {
                                     
                                     // Create Meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -145,7 +146,7 @@ class NotificationService: BaseTaskController {
                                     }
                                     
                                     // Create final Post
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user)
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
                                     
                                     // Optional description
                                     

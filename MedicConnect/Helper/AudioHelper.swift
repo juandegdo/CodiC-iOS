@@ -14,7 +14,8 @@ class AudioHelper {
         
         do {
             
-            try AVAudioSession.sharedInstance().overrideOutputAudioPort(AVAudioSessionPortOverride.speaker)
+            try AVAudioSession.sharedInstance().overrideOutputAudioPort(mode)
+//            try AVAudioSession.sharedInstance().setActive(true)
             
         } catch {
             print(error)

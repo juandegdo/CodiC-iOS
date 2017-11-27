@@ -160,14 +160,6 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
 //        cell.btnAction.refTableView = tableView
         cell.btnAction.isHidden = true
         
-//        let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
-//        cell.imgUserPhoto.addGestureRecognizer(tapGestureOnUserAvatar)
-//        cell.imgUserPhoto.tag = indexPath.row
-//
-//        let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
-//        cell.lblDoctorName.addGestureRecognizer(tapGestureOnUsername)
-//        cell.lblDoctorName.tag = indexPath.row
-        
         let isFullDesc = self.states.contains(data["id"]!)
         cell.lblDescription.delegate = self
         cell.lblDescription.shouldCollapse = true

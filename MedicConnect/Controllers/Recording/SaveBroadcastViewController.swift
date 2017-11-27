@@ -18,10 +18,13 @@ class SaveBroadcastViewController: BaseViewController {
     var isLiveBroadCast: Bool = false
     var fileURL: URL?
     
+    @IBOutlet var lblTitle: UILabel!
+    
     @IBOutlet var imgAvatar: UIImageView!
     @IBOutlet var btnAddPicture: UIButton!
     
     @IBOutlet var tfAuthor: UITextField!
+    @IBOutlet var lblBroadcastTitle: UILabel!
     @IBOutlet var tfBroadcastName: UITextField!
     @IBOutlet var tvDescription: RadContentHeightTextView!
     @IBOutlet var hashTagCtrl: TLTagsControl!
@@ -55,6 +58,11 @@ class SaveBroadcastViewController: BaseViewController {
     //MARK: Initialize views
     
     func initViews() {
+        
+        // Title
+        self.lblTitle.text = "Save \(DataManager.Instance.getPostType())"
+        self.lblBroadcastTitle.text = "\(DataManager.Instance.getPostType()) Title"
+        self.btnSave.setTitle("SAVE \(DataManager.Instance.getPostType().uppercased())", for: .normal)
         
         // Avatar
         self.imgAvatar.image = UIImage.init(named: "icon_save_plus")
@@ -164,36 +172,36 @@ extension SaveBroadcastViewController {
     
     @IBAction func onSave(sender: UIButton) {
         
+        let postType = DataManager.Instance.getPostType()
         let title = self.tfBroadcastName.text!
         guard  title.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your broadcast a name!")
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your \(postType.lowercased()) a name!")
             return
         }
+        
         self.startIndicating()
         
         var audioFilename: URL
         if (self.fileURL != nil) {
             audioFilename = self.fileURL!
-        }
-        else {
+        } else {
             audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         }
+        
         let fileExtension = audioFilename.pathExtension
         let fileMimeType = fileExtension.mimeTypeForPathExtension()
         
         do {
             let audioData = try Data(contentsOf: audioFilename)
             
-            
             self.btnSave.isEnabled = false
             
-            PostService.Instance.sendPost(title, author: self.tfAuthor.text!, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
+            PostService.Instance.sendPost(title, author: self.tfAuthor.text!, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
                 (success: Bool) in
                 
                 // As we just posted a new video, it's a good thing to refresh user info.
                 UserService.Instance.getMe(completion: {
                     (user: User?) in
-                    
                     self.stopIndicating()
                     self.btnSave.isEnabled = true
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)

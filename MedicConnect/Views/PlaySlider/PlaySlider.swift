@@ -11,13 +11,18 @@ import UIKit
 class PlaySlider: UISlider {
 
     let trackHeight: CGFloat = 3.0;
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    public var index: Int?
+    
+    public var playing: Bool = false {
+        didSet {
+            if playing {
+//                presentForPlaying()
+            } else {
+//                presentForPaused()
+            }
+        }
     }
-    */
     
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         var newBounds = super.trackRect(forBounds: bounds)

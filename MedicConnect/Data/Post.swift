@@ -24,12 +24,13 @@ class Post {
     var commentsCount: Int
     var commentedUsers: [String] = []
     var hashtags: [String] = []
+    var postType: String
     
     fileprivate var currentTime: CMTime = CMTime(seconds: 0.0, preferredTimescale: CMTimeScale(1.0))
     fileprivate var currentProgress: CGFloat = 0.0
     fileprivate var lastPlayedAt: Double = DateUtil.getDistantPast()
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, user: User) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, user: User, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -39,10 +40,11 @@ class Post {
         self.title = title
         self.description = description
         self.user = user
+        self.postType = postType
         
     }
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, author: String) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, author: String, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -52,10 +54,11 @@ class Post {
         self.title = title
         self.description = ""
         self.user = User(fullName: author, email: "", password: "")
+        self.postType = postType
         
     }
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -65,10 +68,11 @@ class Post {
         self.title = title
         self.description = description
         self.user = User(email: "", password: "")
+        self.postType = postType
         
     }
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, user: User) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, user: User, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -78,6 +82,7 @@ class Post {
         self.title = title
         self.description = ""
         self.user = user
+        self.postType = postType
         
     }
     

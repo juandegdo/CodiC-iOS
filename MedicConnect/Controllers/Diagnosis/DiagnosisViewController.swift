@@ -139,161 +139,161 @@ extension DiagnosisViewController {
     
     func releasePlayer(onlyState: Bool = false) {
         
-        PlayerController.Instance.invalidateTimer()
-        
-        // Reset player state
-        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
-            _lastPlayed.tickCount = 0
-            _lastPlayed.playing = false
-            PlayerController.Instance.shouldSeek = true
-            
-            if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _ = _lastPlayed.refTableView as UITableView?,
-                let _index = _lastPlayed.index as Int? {
-                
-                let post = PostController.Instance.getFollowingPosts()[_index]
-                post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
-            }
-            
-        }
-        
-        if let _observer = PlayerController.Instance.playerObserver as Any? {
-            PlayerController.Instance.player?.removeTimeObserver(_observer)
-        }
-        
-        if onlyState {
-            return
-        }
-        
-        // Pause and reset components
-        PlayerController.Instance.player?.pause()
-        PlayerController.Instance.player = nil
-        PlayerController.Instance.lastPlayed = nil
-        
-        //TODO: get current list
-        if let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = PostController.Instance.getFollowingPosts()[_index]
-            post.resetCurrentTime()
-        }
-        
-        PlayerController.Instance.currentIndex = nil
+//        PlayerController.Instance.invalidateTimer()
+//
+//        // Reset player state
+//        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
+//            _lastPlayed.tickCount = 0
+//            _lastPlayed.playing = false
+//            PlayerController.Instance.shouldSeek = true
+//
+//            if let _player = PlayerController.Instance.player as AVPlayer?,
+//                let _ = _lastPlayed.refTableView as UITableView?,
+//                let _index = _lastPlayed.index as Int? {
+//
+//                let post = PostController.Instance.getFollowingPosts()[_index]
+//                post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
+//            }
+//
+//        }
+//
+//        if let _observer = PlayerController.Instance.playerObserver as Any? {
+//            PlayerController.Instance.player?.removeTimeObserver(_observer)
+//        }
+//
+//        if onlyState {
+//            return
+//        }
+//
+//        // Pause and reset components
+//        PlayerController.Instance.player?.pause()
+//        PlayerController.Instance.player = nil
+//        PlayerController.Instance.lastPlayed = nil
+//
+//        //TODO: get current list
+//        if let _index = PlayerController.Instance.currentIndex as Int? {
+//            let post = PostController.Instance.getFollowingPosts()[_index]
+//            post.resetCurrentTime()
+//        }
+//
+//        PlayerController.Instance.currentIndex = nil
     }
     
     func onPlayAudio(sender: SVGPlayButton) {
         
-        guard let _index = sender.index as Int?,
-            let _refTableView = sender.refTableView as UITableView? else {
-                return
-        }
-        
-        let post = PostController.Instance.getFollowingPosts()[_index]
-        
-        self.releasePlayer(onlyState: true)
-        
-        if let _url = URL(string: post.audio ) as URL? {
-            if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
-                
-                PlayerController.Instance.lastPlayed = sender
-                
-                PlayerController.Instance.shouldSeek = false
-                _player.rate = 1.0
-                PlayerController.Instance.currentTime = post.getCurrentTime()
-                print("Playing with current time: \(post.getCurrentTime())")
-                _player.play()
-                
-                PlayerController.Instance.addObserver()
-                
-            } else {
-                
-                let playerItem = AVPlayerItem(url: _url)
-                PlayerController.Instance.player = AVPlayer(playerItem:playerItem)
-                
-                if let _player = PlayerController.Instance.player as AVPlayer? {
-                    
-                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
-                    
-                    PlayerController.Instance.lastPlayed = sender
-                    PlayerController.Instance.currentIndex = _index
-                    
-                    _player.rate = 1.0
-                    PlayerController.Instance.currentTime = post.getCurrentTime()
-                    print("Playing with current time: \(post.getCurrentTime())")
-                    _player.play()
-                    
-                    PlayerController.Instance.addObserver()
-                    
-                    // Increment play count
-                    if Float(_player.currentTime().value) == 0.0 {
-                        
-                        PostService.Instance.incrementPost(id: post.id, completion: { (success, play_count) in
-                            if success, let play_count = play_count {
-                                print("Post incremented")
-                                post.playCount = play_count
-                                if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
-                                    cell.setData(post: post)
-                                }
-                            }
-                        })
-                        
-                    }
-                    
-                }
-                
-            }
-            
-        }
+//        guard let _index = sender.index as Int?,
+//            let _refTableView = sender.refTableView as UITableView? else {
+//                return
+//        }
+//
+//        let post = PostController.Instance.getFollowingPosts()[_index]
+//
+//        self.releasePlayer(onlyState: true)
+//
+//        if let _url = URL(string: post.audio ) as URL? {
+//            if let _player = PlayerController.Instance.player as AVPlayer?,
+//                let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
+//
+//                PlayerController.Instance.lastPlayed = sender
+//
+//                PlayerController.Instance.shouldSeek = false
+//                _player.rate = 1.0
+//                PlayerController.Instance.currentTime = post.getCurrentTime()
+//                print("Playing with current time: \(post.getCurrentTime())")
+//                _player.play()
+//
+//                PlayerController.Instance.addObserver()
+//
+//            } else {
+//
+//                let playerItem = AVPlayerItem(url: _url)
+//                PlayerController.Instance.player = AVPlayer(playerItem:playerItem)
+//
+//                if let _player = PlayerController.Instance.player as AVPlayer? {
+//
+//                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+//
+//                    PlayerController.Instance.lastPlayed = sender
+//                    PlayerController.Instance.currentIndex = _index
+//
+//                    _player.rate = 1.0
+//                    PlayerController.Instance.currentTime = post.getCurrentTime()
+//                    print("Playing with current time: \(post.getCurrentTime())")
+//                    _player.play()
+//
+//                    PlayerController.Instance.addObserver()
+//
+//                    // Increment play count
+//                    if Float(_player.currentTime().value) == 0.0 {
+//
+//                        PostService.Instance.incrementPost(id: post.id, completion: { (success, play_count) in
+//                            if success, let play_count = play_count {
+//                                print("Post incremented")
+//                                post.playCount = play_count
+//                                if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
+//                                    cell.setData(post: post)
+//                                }
+//                            }
+//                        })
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        }
         
     }
     
     
     func willEnterBackground() {
-        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-            return
-        }
-        
-        _player.pause()
-        
-        
-        if let sender = PlayerController.Instance.lastPlayed {
-            sender.playing = false
-            guard let _index = PlayerController.Instance.currentIndex as Int?,
-                let _ = sender.refTableView as UITableView? else {
-                    return
-            }
-            
-            let post = PostController.Instance.getFollowingPosts()[_index]
-            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
-            
-        }
-        
-        PlayerController.Instance.lastPlayed?.tickCount = 0
-        PlayerController.Instance.lastPlayed = nil
-        PlayerController.Instance.shouldSeek = true
-        
-        PlayerController.Instance.scheduleReset()
+//        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+//            return
+//        }
+//
+//        _player.pause()
+//
+//
+//        if let sender = PlayerController.Instance.lastPlayed {
+//            sender.playing = false
+//            guard let _index = PlayerController.Instance.currentIndex as Int?,
+//                let _ = sender.refTableView as UITableView? else {
+//                    return
+//            }
+//
+//            let post = PostController.Instance.getFollowingPosts()[_index]
+//            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+//
+//        }
+//
+//        PlayerController.Instance.lastPlayed?.tickCount = 0
+//        PlayerController.Instance.lastPlayed = nil
+//        PlayerController.Instance.shouldSeek = true
+//
+//        PlayerController.Instance.scheduleReset()
     }
     
     func onPauseAudio(sender: SVGPlayButton) {
         
-        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-            return
-        }
-        
-        _player.pause()
-        PlayerController.Instance.lastPlayed?.tickCount = 0
-        PlayerController.Instance.lastPlayed = nil
-        PlayerController.Instance.shouldSeek = true
-        
-        PlayerController.Instance.scheduleReset()
-        
-        guard let _index = sender.index as Int?,
-            let _ = sender.refTableView as UITableView? else {
-                return
-        }
-        
-        let post = PostController.Instance.getFollowingPosts()[_index]
-        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+//        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+//            return
+//        }
+//
+//        _player.pause()
+//        PlayerController.Instance.lastPlayed?.tickCount = 0
+//        PlayerController.Instance.lastPlayed = nil
+//        PlayerController.Instance.shouldSeek = true
+//
+//        PlayerController.Instance.scheduleReset()
+//
+//        guard let _index = sender.index as Int?,
+//            let _ = sender.refTableView as UITableView? else {
+//                return
+//        }
+//
+//        let post = PostController.Instance.getFollowingPosts()[_index]
+//        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
     }
     
     func onToggleFollowing(sender: TVButton) {

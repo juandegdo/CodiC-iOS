@@ -39,7 +39,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
-    var isDiagnosis: Bool = true
+    var postType: String = "Diagnosis"
     var vcDisappearType : ViewControllerDisappearType = .other
     
     var expandedRows = Set<String>()
@@ -159,8 +159,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         PlayerController.Instance.invalidateTimer()
         
         // Reset player state
-        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
-            _lastPlayed.tickCount = 0
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider? {
+            _lastPlayed.setValue(0.0, animated: false)
             _lastPlayed.playing = false
             PlayerController.Instance.shouldSeek = true
             
@@ -169,8 +169,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                 
                 if let _user = UserController.Instance.getUser() as User? {
                     
-                    let post = _user.getPosts()[_index]
-                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
+                    let post = _user.getPosts(type: self.postType)[_index]
+                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value), setLastPlayed: false)
                     
                 }
                 
@@ -180,6 +180,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
         if let _observer = PlayerController.Instance.playerObserver as Any? {
             PlayerController.Instance.player?.removeTimeObserver(_observer)
+            PlayerController.Instance.playerObserver = nil
         }
         
         if onlyState {
@@ -193,8 +194,11 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
         if let _user = UserController.Instance.getUser() as User?,
             let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = _user.getPosts()[_index]
+            let post = _user.getPosts(type: self.postType)[_index]
             post.resetCurrentTime()
+            
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
         PlayerController.Instance.currentIndex = nil
@@ -219,10 +223,10 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
 //            self.lblTitle.text = _user.title
             
             // Customize Following/Follower
-            self.lblDiagnosisNumber.text  = "\(_user.getPosts().count)"
-            self.lblConsultNumber.text  = "0"
+            self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: "Diagnosis").count)"
+            self.lblConsultNumber.text  = "\(_user.getPosts(type: "Consult").count)"
             
-            if self.isDiagnosis {
+            if self.postType == "Diagnosis" {
                 self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
                 self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
                 self.lblConsultNumber.textColor = Constants.ColorLightGray1
@@ -241,9 +245,9 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
-    func onPlayAudio(sender: SVGPlayButton) {
+    func onPlayAudio(sender: UIButton) {
         
-        guard let _index = sender.index as Int? else {
+        guard let _index = sender.tag as Int? else {
             return
         }
         
@@ -251,19 +255,28 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             return
         }
         
-        let post = _user.getPosts()[_index]
+        if let _lastPlayed = PlayerController.Instance.lastPlayed,
+            _lastPlayed.playing == true {
+            self.onPauseAudio(sender: sender)
+            return
+        }
+        
+        let post = _user.getPosts(type: self.postType)[_index]
         
         self.releasePlayer(onlyState: true)
         
         if let _url = URL(string: post.audio ) as URL? {
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
+            
             if let _player = PlayerController.Instance.player as AVPlayer?,
                 let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
                 
-                PlayerController.Instance.lastPlayed = sender
-                
+                PlayerController.Instance.lastPlayed = cell?.playSlider
                 PlayerController.Instance.shouldSeek = false
-                _player.rate = 1.0
                 PlayerController.Instance.currentTime = post.getCurrentTime()
+                
+                _player.rate = 1.0
                 _player.play()
                 
                 PlayerController.Instance.addObserver()
@@ -277,11 +290,11 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                     
                     AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
                     
-                    PlayerController.Instance.lastPlayed = sender
+                    PlayerController.Instance.lastPlayed = cell?.playSlider
                     PlayerController.Instance.currentIndex = _index
+                    PlayerController.Instance.currentTime = post.getCurrentTime()
                     
                     _player.rate = 1.0
-                    PlayerController.Instance.currentTime = post.getCurrentTime()
                     _player.play()
                     
                     PlayerController.Instance.addObserver()
@@ -291,9 +304,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                             if success, let play_count = play_count {
                                 print("Post incremented")
                                 post.playCount = play_count
-                                if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                                    cell.setData(post: post)
-                                }
+                                cell?.setData(post: post)
                             }
                         })
                         
@@ -305,6 +316,42 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             
         }
         
+    }
+    
+    func onPauseAudio(sender: UIButton) {
+        
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.pause()
+        
+        sender.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider? {
+            if let _observer = PlayerController.Instance.playerObserver as Any? {
+                PlayerController.Instance.player?.removeTimeObserver(_observer)
+                PlayerController.Instance.playerObserver = nil
+            }
+            
+            _lastPlayed.playing = false
+            
+            guard let _index = sender.tag as Int? else {
+                return
+            }
+            
+            guard let _user = UserController.Instance.getUser() as User? else {
+                return
+            }
+            
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value))
+        }
+        
+    }
+    
+    func playerDidFinishPlaying(note: NSNotification) {
+        self.releasePlayer()
     }
     
     func willEnterBackground() {
@@ -324,47 +371,15 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                 return
             }
             
-            let post = _user.getPosts()[_index]
-            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(sender.value))
         }
         
-        PlayerController.Instance.lastPlayed?.tickCount = 0
+        PlayerController.Instance.lastPlayed?.setValue(Float(0.0), animated: false)
         PlayerController.Instance.lastPlayed = nil
         PlayerController.Instance.shouldSeek = true
-        
         PlayerController.Instance.scheduleReset()
         
-    }
-    
-    func onPauseAudio(sender: SVGPlayButton) {
-        
-        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-            return
-        }
-        
-        _player.pause()
-        PlayerController.Instance.lastPlayed?.tickCount = 0
-        PlayerController.Instance.lastPlayed = nil
-        PlayerController.Instance.shouldSeek = true
-        
-        PlayerController.Instance.scheduleReset()
-        
-        guard let _index = sender.index as Int? else {
-            return
-        }
-        
-        guard let _user = UserController.Instance.getUser() as User? else {
-            return
-        }
-        
-        let post = _user.getPosts()[_index]
-        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
-        
-    }
-    
-    func playerDidFinishPlaying(note: NSNotification) {
-        
-        self.releasePlayer()
     }
     
     // MARK: Scroll Ralated
@@ -378,8 +393,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             self.tableViewHeightConstraint.constant = self.view.frame.height - 64
             
             self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
-        }
-        else {
+        } else {
             self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
             self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
             self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
@@ -400,12 +414,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         if (tableView == self.tableView) {
             
             if let _user = UserController.Instance.getUser() as User? {
-                if self.isDiagnosis {
-                    return _user.getPosts().count
-                } else {
-                    return 0
-                }
-                
+                return _user.getPosts(type: self.postType).count
             } else {
                 return 0
             }
@@ -448,18 +457,8 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             cell.setData(post: post)
-                        
-//            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
-//            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
-//            cell.btnPlay.index = indexPath.row
-//            cell.btnPlay.refTableView = tableView
-//            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
-            
-//            if cell.btnPlay.playing {
-//                cell.btnPlay.playing = false
-//            }
             
             let isFullDesc = self.states.contains(post.id)
             cell.lblDescription.delegate = self
@@ -468,6 +467,12 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.lblDescription.text = post.description
             cell.lblDescription.collapsed = !isFullDesc
             cell.showFullDescription = isFullDesc
+            
+            cell.btnPlay.tag = indexPath.row
+            cell.btnPlay.addTarget(self, action: #selector(ProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
+            
+            cell.playSlider.index = indexPath.row
+            cell.playSlider.setValue(Float(post.getCurrentProgress()), animated: false)
             
             cell.isExpanded = self.expandedRows.contains(post.id)
             cell.selectionStyle = .none
@@ -491,7 +496,9 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            self.releasePlayer()
+            
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             
             switch cell.isExpanded {
             case true:
@@ -519,7 +526,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.expandedRows.remove(post.id)
             
             cell.isExpanded = false
@@ -533,12 +540,11 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             if tableView == self.tableView {
-                
                 if let _user = UserController.Instance.getUser() as User? {
+                    self.releasePlayer()
                     
-                    let _post = _user.getPosts()[indexPath.row]
+                    let _post = _user.getPosts(type: self.postType)[indexPath.row]
                     PostService.Instance.deletePost(id: _post.id, completion: {
                         (success: Bool) in
                     })
@@ -548,9 +554,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                     self.tableView.reloadData()
                     
                 }
-                
             }
-            
         }
         
     }
@@ -573,7 +577,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.states.insert(post.id)
             
             cell.showFullDescription = true
@@ -595,7 +599,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.states.remove(post.id)
             
             cell.showFullDescription = false
@@ -612,13 +616,11 @@ extension ProfileViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView == self.mainScrollView {
-            
             let offset: CGFloat = scrollView.contentOffset.y
             
-            if offset < 0 { // SCROLL UP/DOWN ------------
+            if offset >= 0 { // SCROLL UP/DOWN ------------
                 self.updateScroll(offset: offset)
             }
-            
         }
         
     }
@@ -638,17 +640,31 @@ extension ProfileViewController {
     //MARK: IBActions
     
     @IBAction func onDiagnosisTapped(sender: AnyObject!) {
-        self.isDiagnosis = true
-        self.updateUI()
+        if (self.postType == "Consult") {
+            self.postType = "Diagnosis"
+            self.expandedRows = Set<String>()
+            self.states = Set<String>()
+            
+            self.releasePlayer()
+            self.updateUI()
+        }
     }
     
     @IBAction func onConsultsTapped(sender: AnyObject!) {
-        self.isDiagnosis = false
-        self.updateUI()
+        if (self.postType == "Diagnosis") {
+            self.postType = "Consult"
+            self.expandedRows = Set<String>()
+            self.states = Set<String>()
+            
+            self.releasePlayer()
+            self.updateUI()
+        }
     }
     
     @IBAction func onRecord(sender: AnyObject!) {
         vcDisappearType = .record
+        self.releasePlayer()
+        
         self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordPopup, sender: nil)
     }
     
