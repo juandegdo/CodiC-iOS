@@ -29,8 +29,12 @@ class PostController {
     
     //MARK: Following posts
     
-    func getFollowingPosts() -> [Post] {
-        return self.followingPosts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+    func getFollowingPosts(type: String) -> [Post] {
+        let posts = self.followingPosts.filter({(post: Post) -> Bool in
+            return post.postType == type
+        })
+        
+        return posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
     }
     
     func setFollowingPosts(_ followingPosts: [Post]) {

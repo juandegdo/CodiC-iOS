@@ -13,6 +13,7 @@ import Crashlytics
 class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
 
     let ConsultCellID = "PlaylistCell"
+    let postType = "Consult"
     
     @IBOutlet var tvConsults: UITableView!
     
@@ -51,7 +52,7 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        self.loadMe()
+        self.loadMe()
         
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(DiagnosisViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
@@ -295,7 +296,7 @@ extension ConsultsViewController {
                 return
         }
         
-        let post = PostController.Instance.getFollowingPosts()[_index]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
         let userId = post.user.id
         
         sender.makeEnabled(enabled: false)
@@ -337,7 +338,7 @@ extension ConsultsViewController {
         
         print("\(sender.index!)")
         selectedDotsIndex = sender.index!
-        let post = PostController.Instance.getFollowingPosts()[selectedDotsIndex]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[selectedDotsIndex]
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
@@ -419,7 +420,7 @@ extension ConsultsViewController {
                 return
         }
         
-        let post = PostController.Instance.getFollowingPosts()[_index]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
         
         guard let _user = UserController.Instance.getUser() as User? else {
             return
@@ -526,7 +527,7 @@ extension ConsultsViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
-            let post : Post? = PostController.Instance.getFollowingPosts()[sender.tag]
+            let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[sender.tag]
             vc.currentPost = post
             
             self.present(vc, animated: false, completion: nil)
@@ -536,7 +537,7 @@ extension ConsultsViewController {
     
     func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
-        let post : Post? = PostController.Instance.getFollowingPosts()[index!]
+        let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
         
         if (post != nil) {
             self.callProfileVC(user: (post?.user)!)
@@ -549,7 +550,7 @@ extension ConsultsViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "LikesViewController") as? LikesViewController {
             let index = sender.view?.tag
-            let post : Post? = PostController.Instance.getFollowingPosts()[index!]
+            let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
             
             if (post != nil) {
                 vc.currentPost = post
@@ -602,7 +603,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         
         let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: ConsultCellID) as! PlaylistCell
         
-        let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         cell.setData(post: post)
         
         cell.btnShare.tag = indexPath.row
@@ -678,7 +679,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
             else { return }
         
-        let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         
         switch cell.isExpanded {
         case true:
@@ -700,7 +701,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
             else { return }
         
-        let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         self.expandedRows.remove(post.id)
         
         cell.isExpanded = false
@@ -711,7 +712,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
-        return PostController.Instance.getFollowingPosts().count
+        return PostController.Instance.getFollowingPosts(type: self.postType).count
     }
     
     //
@@ -728,7 +729,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
             guard let cell = self.tvConsults.cellForRow(at: indexPath) as? PlaylistCell
                 else { return }
             
-            let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+            let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
             self.states.insert(post.id)
             
             cell.showFullDescription = true
@@ -746,7 +747,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
             guard let cell = self.tvConsults.cellForRow(at: indexPath) as? PlaylistCell
                 else { return }
             
-            let post = PostController.Instance.getFollowingPosts()[indexPath.row]
+            let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
             self.states.remove(post.id)
             
             cell.showFullDescription = false
