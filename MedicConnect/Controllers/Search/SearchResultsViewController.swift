@@ -515,15 +515,15 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
             cell.btnMessage.tag = indexPath.row
             cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
             
-            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
-            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
-            cell.btnPlay.index = indexPath.row
-            cell.btnPlay.refTableView = tableView
-            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
-            
-            if cell.btnPlay.playing {
-                cell.btnPlay.playing = false
-            }
+//            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
+//            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
+//            cell.btnPlay.index = indexPath.row
+//            cell.btnPlay.refTableView = tableView
+//            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
+//
+//            if cell.btnPlay.playing {
+//                cell.btnPlay.playing = false
+//            }
             
             cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
             cell.btnLike.index = indexPath.row

@@ -114,14 +114,14 @@ extension PatientsViewController {
                      "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"]
         ]
         
-        searchedPatients = patients
+        searchedPatients = []
         self.tvPatients.reloadData()
     }
     
     func loadSearchResult(_ keyword: String) {
         // Local search
         if keyword == "" {
-            searchedPatients = patients
+            searchedPatients = []
         } else {
             searchedPatients = patients.filter({(patient:[String: String]) -> Bool in
                 return patient["patientName"]!.contains(keyword)

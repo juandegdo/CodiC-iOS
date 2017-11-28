@@ -48,7 +48,7 @@
                             <constraint firstAttribute="height" constant="21" id="CZ8-Lf-fTK"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
-                        <color key="textColor" red="0.58823529411764708" green="0.7803921568627451" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.4549019608" green="0.71764705880000002" blue="0.74901960779999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXa-Vd-uEY">
@@ -76,11 +76,11 @@
                         <state key="normal" image="icon_playlist_forward"/>
                     </button>
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Tjd-Oa-PA5" customClass="PlaySlider" customModule="Medic_Connect" customModuleProvider="target">
-                        <rect key="frame" x="-2" y="128" width="379" height="31"/>
+                        <rect key="frame" x="0.0" y="128" width="375" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="NQf-IB-cw3"/>
                         </constraints>
-                        <color key="minimumTrackTintColor" red="0.52156862745098043" green="0.74117647058823533" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="minimumTrackTintColor" red="0.4549019608" green="0.71764705880000002" blue="0.74901960779999999" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                         <color key="maximumTrackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </slider>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNQ-iX-474">
@@ -112,7 +112,7 @@
                     <constraint firstItem="BUK-L1-LQL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="G1l-W9-WrD"/>
                     <constraint firstItem="vC3-Iy-HDQ" firstAttribute="top" secondItem="UuY-LI-OfG" secondAttribute="bottom" constant="6" id="KOa-bs-a4N"/>
                     <constraint firstItem="3FL-ag-Z49" firstAttribute="leading" secondItem="OXa-Vd-uEY" secondAttribute="trailing" constant="24" id="Mjq-EN-uwo"/>
-                    <constraint firstAttribute="trailing" secondItem="Tjd-Oa-PA5" secondAttribute="trailing" id="QJG-eo-zUU"/>
+                    <constraint firstAttribute="trailing" secondItem="Tjd-Oa-PA5" secondAttribute="trailing" constant="2" id="QJG-eo-zUU"/>
                     <constraint firstItem="UuY-LI-OfG" firstAttribute="leading" secondItem="BUK-L1-LQL" secondAttribute="leading" id="RBz-vw-6rA"/>
                     <constraint firstItem="3FL-ag-Z49" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RR3-1f-Aj6"/>
                     <constraint firstAttribute="bottom" secondItem="kqc-hW-lde" secondAttribute="bottom" constant="4" id="SeB-e2-jZ2"/>
@@ -124,7 +124,7 @@
                     <constraint firstItem="vbR-Lq-Z6z" firstAttribute="leading" secondItem="3FL-ag-Z49" secondAttribute="trailing" constant="24" id="dmg-gu-9Ef"/>
                     <constraint firstItem="UuY-LI-OfG" firstAttribute="top" secondItem="BUK-L1-LQL" secondAttribute="bottom" constant="-3" id="fJF-3G-qli"/>
                     <constraint firstItem="hNQ-iX-474" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="oM3-JD-9JP"/>
-                    <constraint firstItem="Tjd-Oa-PA5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vzK-bi-bER"/>
+                    <constraint firstItem="Tjd-Oa-PA5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="vzK-bi-bER"/>
                 </constraints>
             </tableViewCellContentView>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>

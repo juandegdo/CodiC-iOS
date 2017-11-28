@@ -41,24 +41,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
     var postType: String = "Diagnosis"
     var vcDisappearType : ViewControllerDisappearType = .other
-    
     var expandedRows = Set<String>()
     var states = Set<String>()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        // Show Tutorial Screen
-//        if (UserDefaultsUtil.LoadFirstLoad() % 10 == 0) {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if let vc = storyboard.instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController {
-//                vc.type = .profile
-//                self.present(vc, animated: false, completion: nil)
-//            }
-//            
-//            UserDefaultsUtil.SaveFirstLoad(firstLoad: UserDefaultsUtil.LoadFirstLoad() + 1)
-//        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,10 +69,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         let nc = NotificationCenter.default
         
         nc.addObserver(self, selector: #selector(self.updatedProfileSettings), name: updatedProfileNotification, object: nil)
-    }
-    
-    func updatedProfileSettings() {
-        refreshData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -154,6 +134,51 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
+    func updatedProfileSettings() {
+        refreshData()
+    }
+    
+    func updateUI() {
+        
+        if let _user = UserController.Instance.getUser() as User? {
+            
+            // Customize Avatar
+            _ = UIFont(name: "Avenir-Heavy", size: 18.0) as UIFont? ?? UIFont.systemFont(ofSize: 18.0)
+            
+            if let imgURL = URL(string: _user.photo) as URL? {
+                self.imgAvatar.af_setImage(withURL: imgURL)
+            } else {
+                self.imgAvatar.image = nil
+            }
+            
+            // Customize User information
+            self.lblUsername.text = _user.fullName
+            //            self.lblLocation.text = _user.location
+            //            self.lblTitle.text = _user.title
+            
+            // Customize Following/Follower
+            self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: "Diagnosis").count)"
+            self.lblConsultNumber.text  = "\(_user.getPosts(type: "Consult").count)"
+            
+            if self.postType == "Diagnosis" {
+                self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
+                self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
+                self.lblConsultNumber.textColor = Constants.ColorLightGray1
+                self.lblConsultText.textColor = Constants.ColorLightGray1
+            } else {
+                self.lblDiagnosisNumber.textColor = Constants.ColorLightGray1
+                self.lblDiagnosisText.textColor = Constants.ColorLightGray1
+                self.lblConsultNumber.textColor = Constants.ColorDarkGray4
+                self.lblConsultText.textColor = Constants.ColorDarkGray4
+            }
+            
+        }
+        
+        self.tableView.reloadData()
+        self.updateScroll(offset: self.mainScrollView.contentOffset.y)
+        
+    }
+    
     func releasePlayer(onlyState: Bool = false) {
         
         PlayerController.Instance.invalidateTimer()
@@ -191,47 +216,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         PlayerController.Instance.lastPlayed = nil
         PlayerController.Instance.elapsedTimeLabel = nil
         PlayerController.Instance.currentIndex = nil
-        
-    }
-    
-    func updateUI() {
-        
-        if let _user = UserController.Instance.getUser() as User? {
-            
-            // Customize Avatar
-            _ = UIFont(name: "Avenir-Heavy", size: 18.0) as UIFont? ?? UIFont.systemFont(ofSize: 18.0)
-            
-            if let imgURL = URL(string: _user.photo) as URL? {
-                self.imgAvatar.af_setImage(withURL: imgURL)
-            } else {
-                self.imgAvatar.image = nil
-            }
-            
-            // Customize User information
-            self.lblUsername.text = _user.fullName
-//            self.lblLocation.text = _user.location
-//            self.lblTitle.text = _user.title
-            
-            // Customize Following/Follower
-            self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: "Diagnosis").count)"
-            self.lblConsultNumber.text  = "\(_user.getPosts(type: "Consult").count)"
-            
-            if self.postType == "Diagnosis" {
-                self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
-                self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
-                self.lblConsultNumber.textColor = Constants.ColorLightGray1
-                self.lblConsultText.textColor = Constants.ColorLightGray1
-            } else {
-                self.lblDiagnosisNumber.textColor = Constants.ColorLightGray1
-                self.lblDiagnosisText.textColor = Constants.ColorLightGray1
-                self.lblConsultNumber.textColor = Constants.ColorDarkGray4
-                self.lblConsultText.textColor = Constants.ColorDarkGray4
-            }
-            
-        }
-        
-        self.tableView.reloadData()
-        self.updateScroll(offset: self.mainScrollView.contentOffset.y)
         
     }
     
@@ -294,7 +278,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                             if success, let play_count = play_count {
                                 print("Post incremented")
                                 post.playCount = play_count
-//                                cell?.setData(post: post)
+                                // cell?.setData(post: post)
                             }
                         })
                     }
@@ -314,7 +298,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         }
         
         _player.pause()
-        
         sender.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         
         if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider? {
@@ -479,13 +462,11 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         
         if (tableView == self.tableView) {
-            
             if let _user = UserController.Instance.getUser() as User? {
                 return _user.getPosts(type: self.postType).count
             } else {
                 return 0
             }
-            
         }
         
         return 0

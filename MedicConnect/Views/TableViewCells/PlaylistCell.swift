@@ -16,13 +16,14 @@ class PlaylistCell: UITableViewCell {
     @IBOutlet var imgUserAvatar: UIImageView!
     
     // Buttons
-    @IBOutlet var btnPlay: SVGPlayButton!
-    @IBOutlet var btnFollowing: TVButton!
     @IBOutlet var btnAction: TVButton!
     @IBOutlet var btnLike: TVButton!
-    @IBOutlet var btnShare: UIButton!
     @IBOutlet var btnMessage: TVButton!
+    @IBOutlet var btnShare: UIButton!
     @IBOutlet var btnPlaylist: TVButton!
+    @IBOutlet var btnPlay: UIButton!
+    @IBOutlet var btnBackward: UIButton!
+    @IBOutlet var btnForward: UIButton!
     
     // BadgeViews
     @IBOutlet var likeBadgeView: GIBadgeView!
@@ -39,36 +40,49 @@ class PlaylistCell: UITableViewCell {
     @IBOutlet var lblBroadcast: UILabel!
     @IBOutlet var lblDescription: ExpandableLabel!
     @IBOutlet var lblDate: UILabel!
-    @IBOutlet var lblPlaynumbers: UILabel!
     @IBOutlet var lblLikedDescription: UILabel!
+    @IBOutlet var lblElapsedTime: UILabel!
+    @IBOutlet var lblDuration: UILabel!
     
     // TextView
     @IBOutlet weak var txtVHashtags: UITextView!
     
-    var placeholderImage: UIImage?
+    // Slider
+    @IBOutlet weak var playSlider: PlaySlider!
     
     // Fonts
     let likeBadgeViewFont = UIFont(name: "Avenir-Book", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 8.0)
     let commentBadgeViewFont = UIFont(name: "Avenir-Book", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 8.0)
-    let placeholderImageFont = UIFont(name: "Avenir-Heavy", size: 25.0) as UIFont? ?? UIFont.systemFont(ofSize: 25.0)
     
     // Expand/Collpase
     var isExpanded:Bool = false {
         didSet {
             if !isExpanded {
-                self.constOfBtnPlaylistBottom.constant = 4
+                self.constOfBtnPlaylistBottom.constant = 1
                 self.lblLikedDescription.isHidden = true
                 self.txtVHashtags.isHidden = true
+                self.btnPlay.isHidden = true
+                self.btnBackward.isHidden = true
+                self.btnForward.isHidden = true
+                self.lblElapsedTime.isHidden = true
+                self.lblDuration.isHidden = true
+                self.playSlider.isHidden = true
                 
             } else {
                 let constraintRect = CGSize(width: self.txtVHashtags.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.txtVHashtags.font!], context: nil)
                 
-                self.constOfTxtVHashtagsHeight.constant = (boundingBox?.height)! + 16.0
-                self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + 20 // 90
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
+                self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + 16 + 65
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
                     self.lblLikedDescription.isHidden = false
                     self.txtVHashtags.isHidden = false
+                    self.btnPlay.isHidden = false
+                    self.btnBackward.isHidden = false
+                    self.btnForward.isHidden = false
+                    self.lblElapsedTime.isHidden = false
+                    self.lblDuration.isHidden = false
+                    self.playSlider.isHidden = false
                 }
             }
         }
@@ -84,27 +98,23 @@ class PlaylistCell: UITableViewCell {
                 let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.lblDescription.font], context: nil)
                 
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 4.0
+                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)!
             }
         }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        self.btnPlay.playColor = UIColor.black
-        self.btnPlay.pauseColor = UIColor.black
-        self.btnPlay.progressTrackColor = Constants.ColorLightGray
-        
-        self.btnFollowing.isHidden = true
-        
         self.constOfBtnPlaylistWidth.constant = 0
+        
+        // Slider
+        self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
+        self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .highlighted)
+        self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .selected)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
-        self.placeholderImage = nil
         
         self.lblDescription.collapsed = true
         self.lblDescription.text = nil
@@ -132,14 +142,9 @@ class PlaylistCell: UITableViewCell {
         
         // Set core data
         self.lblUsername.text = post.user.fullName
-//        self.lblDescription.text = post.description
         
         // Set Broadcast Label
         self.lblBroadcast.text = post.title
-        
-        // Set Play numbers Label
-        let helperString = post.playCount == 1 ? "Play" : "Plays"
-        self.lblPlaynumbers.text = "\(post.playCount) \(helperString)"
         
         // Set date label
         self.lblDate.text = post.getFormattedDate().uppercased()
@@ -203,28 +208,9 @@ class PlaylistCell: UITableViewCell {
         self.commentBadgeView.badgeValue = post.commentsCount
                 
         // Customize Avatar
-        
-//        if self.placeholderImage == nil {
-//            self.placeholderImage = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: Constants.ColorOrange, text: post.user.getInitials(), font: placeholderImageFont, size: CGSize(width: 86, height: 86))
-//        }
         self.imgUserAvatar.image = nil
         if let imgURL = URL(string: post.user.photo) as URL? {
             self.imgUserAvatar.af_setImage(withURL: imgURL)
-//            self.imgUserAvatar.af_setImage(withURL: imgURL, placeholderImage: self.placeholderImage)
-        } else {
-            self.imgUserAvatar.image = nil
-//            self.imgUserAvatar.image = self.placeholderImage
-        }
-        
-    }
-    
-    func toggleFollowData() {
-        
-        // Just setting title (not tags) so we don't change internal controlling variables - we just want to make the transition seem smoother.
-        if self.btnFollowing.tag == 0 {
-            self.btnFollowing.setTitle(NSLocalizedString("FOLLOWING", comment: "comment"), for: .normal)
-        } else {
-            self.btnFollowing.setTitle(NSLocalizedString("FOLLOW", comment: "comment"), for: .normal)
         }
         
     }
