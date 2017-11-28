@@ -159,28 +159,26 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         PlayerController.Instance.invalidateTimer()
         
         // Reset player state
-        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider? {
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider?,
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel as UILabel? {
             _lastPlayed.setValue(0.0, animated: false)
             _lastPlayed.playing = false
-            PlayerController.Instance.shouldSeek = true
-            
-            if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _index = _lastPlayed.index as Int? {
-                
-                if let _user = UserController.Instance.getUser() as User? {
-                    
-                    let post = _user.getPosts(type: self.postType)[_index]
-                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value), setLastPlayed: false)
-                    
-                }
-                
-            }
-            
+            _elapsedLabel.text = "0:00"
         }
         
         if let _observer = PlayerController.Instance.playerObserver as Any? {
             PlayerController.Instance.player?.removeTimeObserver(_observer)
             PlayerController.Instance.playerObserver = nil
+            PlayerController.Instance.player?.seek(to: kCMTimeZero)
+        }
+        
+        if let _user = UserController.Instance.getUser() as User?,
+            let _index = PlayerController.Instance.currentIndex as Int? {
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
+            
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
         if onlyState {
@@ -191,17 +189,9 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         PlayerController.Instance.player?.pause()
         PlayerController.Instance.player = nil
         PlayerController.Instance.lastPlayed = nil
-        
-        if let _user = UserController.Instance.getUser() as User?,
-            let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = _user.getPosts(type: self.postType)[_index]
-            post.resetCurrentTime()
-            
-            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
-            cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
-        }
-        
+        PlayerController.Instance.elapsedTimeLabel = nil
         PlayerController.Instance.currentIndex = nil
+        
     }
     
     func updateUI() {
@@ -263,8 +253,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
         let post = _user.getPosts(type: self.postType)[_index]
         
-        self.releasePlayer(onlyState: true)
-        
         if let _url = URL(string: post.audio ) as URL? {
             let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
             sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
@@ -273,8 +261,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                 let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
                 
                 PlayerController.Instance.lastPlayed = cell?.playSlider
+                PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
                 PlayerController.Instance.shouldSeek = false
-                PlayerController.Instance.currentTime = post.getCurrentTime()
                 
                 _player.rate = 1.0
                 _player.play()
@@ -291,7 +279,9 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                     AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
                     
                     PlayerController.Instance.lastPlayed = cell?.playSlider
+                    PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
                     PlayerController.Instance.currentIndex = _index
+                    PlayerController.Instance.shouldSeek = true
                     PlayerController.Instance.currentTime = post.getCurrentTime()
                     
                     _player.rate = 1.0
@@ -304,10 +294,9 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
                             if success, let play_count = play_count {
                                 print("Post incremented")
                                 post.playCount = play_count
-                                cell?.setData(post: post)
+//                                cell?.setData(post: post)
                             }
                         })
-                        
                     }
                     
                 }
@@ -350,8 +339,84 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
+    func onBackwardAudio(sender: UIButton) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        var time = CMTimeGetSeconds(_player.currentTime())
+        if time == 0 { return }
+        time = time - 15 >= 0 ? time - 15 : 0
+        
+        self.seekToTime(time: time)
+    }
+    
+    func onForwardAudio(sender: UIButton) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        var time = CMTimeGetSeconds(_player.currentTime())
+        let duration = CMTimeGetSeconds((_player.currentItem?.duration)!)
+        if time == duration { return }
+        time = time + 15 <= duration ? time + 15 : duration
+        
+        self.seekToTime(time: time)
+    }
+    
+    func onSeekSlider(sender: UISlider) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        let duration = CMTimeGetSeconds((_player.currentItem?.duration)!)
+        let time = duration * Float64(sender.value)
+        
+        self.seekToTime(time: time)
+    }
+    
+    func seekToTime(time: Float64) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.seek(to: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed,
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel,
+            _lastPlayed.playing == false {
+            
+            _lastPlayed.setValue(Float(time / CMTimeGetSeconds((_player.currentItem?.duration)!)), animated: false)
+            _elapsedLabel.text = TimeInterval(time).durationText
+            
+            guard let _index = _lastPlayed.index as Int? else {
+                return
+            }
+            
+            guard let _user = UserController.Instance.getUser() as User? else {
+                return
+            }
+            
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), progress: CGFloat(_lastPlayed.value))
+            
+        }
+    }
+    
     func playerDidFinishPlaying(note: NSNotification) {
-        self.releasePlayer()
+        self.releasePlayer(onlyState: true)
     }
     
     func willEnterBackground() {
@@ -377,6 +442,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
         PlayerController.Instance.lastPlayed?.setValue(Float(0.0), animated: false)
         PlayerController.Instance.lastPlayed = nil
+        PlayerController.Instance.elapsedTimeLabel?.text = "0:00"
+        PlayerController.Instance.elapsedTimeLabel = nil
         PlayerController.Instance.shouldSeek = true
         PlayerController.Instance.scheduleReset()
         
@@ -469,10 +536,25 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.showFullDescription = isFullDesc
             
             cell.btnPlay.tag = indexPath.row
-            cell.btnPlay.addTarget(self, action: #selector(ProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
+            if cell.btnPlay.allTargets.count == 0 {
+                cell.btnPlay.addTarget(self, action: #selector(ProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
+            }
+            
+            cell.btnBackward.tag = indexPath.row
+            if cell.btnBackward.allTargets.count == 0 {
+                cell.btnBackward.addTarget(self, action: #selector(ProfileViewController.onBackwardAudio(sender:)), for: .touchUpInside)
+            }
+            
+            cell.btnForward.tag = indexPath.row
+            if cell.btnForward.allTargets.count == 0 {
+                cell.btnForward.addTarget(self, action: #selector(ProfileViewController.onForwardAudio(sender:)), for: .touchUpInside)
+            }
             
             cell.playSlider.index = indexPath.row
             cell.playSlider.setValue(Float(post.getCurrentProgress()), animated: false)
+            if cell.playSlider.allTargets.count == 0 {
+                cell.playSlider.addTarget(self, action: #selector(ProfileViewController.onSeekSlider(sender:)), for: .valueChanged)
+            }
             
             cell.isExpanded = self.expandedRows.contains(post.id)
             cell.selectionStyle = .none
@@ -497,7 +579,8 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             }
             
             self.releasePlayer()
-            
+            self.tableView.beginUpdates()
+
             let post = _user.getPosts(type: self.postType)[indexPath.row]
             
             switch cell.isExpanded {
@@ -510,7 +593,15 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             
             cell.isExpanded = !cell.isExpanded
             
-            self.tableView.beginUpdates()
+            if let _url = URL(string: post.audio ) as URL?,
+                cell.isExpanded {
+                DispatchQueue.main.async {
+                    let asset = AVURLAsset.init(url: _url)
+                    cell.lblElapsedTime.text = "0:00"
+                    cell.lblDuration.text = TimeInterval(CMTimeGetSeconds(asset.duration)).durationText
+                }
+            }
+            
             self.tableView.endUpdates()
         }
         
@@ -526,12 +617,12 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 return
             }
             
+            self.tableView.beginUpdates()
+            
             let post = _user.getPosts(type: self.postType)[indexPath.row]
             self.expandedRows.remove(post.id)
-            
             cell.isExpanded = false
             
-            self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
         
@@ -571,9 +662,10 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
         let point = label.convert(CGPoint.zero, to: self.tableView)
         if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
             guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { return }
+                else { self.tableView.endUpdates(); return }
             
             guard let _user = UserController.Instance.getUser() as User? else {
+                self.tableView.endUpdates()
                 return
             }
             
@@ -593,9 +685,10 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
         let point = label.convert(CGPoint.zero, to: self.tableView)
         if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
             guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { return }
+                else { self.tableView.endUpdates(); return }
             
             guard let _user = UserController.Instance.getUser() as User? else {
+                self.tableView.endUpdates()
                 return
             }
             

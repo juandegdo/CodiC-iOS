@@ -61,17 +61,16 @@ class PlayerController {
                 }
                 
                 let currentTime = CGFloat(_player.currentTime().value) / CGFloat(_player.currentTime().timescale)
-                
-                let duration = Int(_player.currentItem!.duration.value) / Int(_player.currentItem!.duration.timescale)
+                let duration = CGFloat(_player.currentItem!.duration.value) / CGFloat(_player.currentItem!.duration.timescale)
                 
                 // Update progress
                 let progress = CGFloat(currentTime) / CGFloat(duration)
                 _lastPlayed.setValue(Float(progress), animated: false)
                 
-                // Update playing progress bar on Playlist
-//                if let _playingProgressBar = self.playingProgressBar as YLProgressBar? {
-//                    _playingProgressBar.progress = progress
-//                }
+                // Update elapsed time
+                if let _elapsedTimeLabel = self.elapsedTimeLabel as UILabel? {
+                    _elapsedTimeLabel.text = TimeInterval(currentTime).durationText
+                }
                 
                 // Update state
                 if !_lastPlayed.playing && _lastPlayed.value > 0 {
@@ -79,14 +78,9 @@ class PlayerController {
                 }
                 
             } else {
-                
                 // Reset progress while we're not ready to play
                 _lastPlayed.setValue(0.0, animated: false)
                 
-                // Update playing progress bar on Playlist
-//                if let _playingProgressBar = self.playingProgressBar as YLProgressBar? {
-//                    _playingProgressBar.progress = 0.0
-//                }
             }
             
         }

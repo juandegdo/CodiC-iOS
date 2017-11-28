@@ -107,11 +107,12 @@ class Post {
     
     func getCurrentTime() -> CMTime {
         
-        if self.getLastPlayedMinutesAgo() == 0 {
-            return CMTime(seconds: 0.0, preferredTimescale: CMTimeScale(1.0))
-        } else {
-            return self.currentTime
-        }
+//        if self.getLastPlayedMinutesAgo() == 0 {
+//            return CMTime(seconds: 0.0, preferredTimescale: CMTimeScale(1.0))
+//        } else {
+//            return self.currentTime
+//        }
+        return self.currentTime
         
     }
     

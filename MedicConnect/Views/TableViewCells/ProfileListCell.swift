@@ -78,8 +78,6 @@ class ProfileListCell: UITableViewCell {
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .highlighted)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .selected)
-//        self.playSlider.value = self.playSlider.minimumValue
-        
     }
     
     override func prepareForReuse() {
