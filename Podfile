@@ -7,7 +7,7 @@ target 'MedicConnect' do
 
   # Pods for MedicConnect
 
-pod 'ACFloatingTextfield'
+pod 'ACFloatingTextfield-Swift', '~> 1.7'
 pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'AFImageHelper'
