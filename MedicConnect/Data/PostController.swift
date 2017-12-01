@@ -20,7 +20,7 @@ class PostController {
     //MARK: Recommended posts
     
     func getRecommendedPosts() -> [Post] {
-        return self.recommendedPosts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        return self.recommendedPosts.reversed()
     }
     
     func setRecommendedPosts(_ recommendedPosts: [Post]) {
@@ -34,7 +34,7 @@ class PostController {
             return post.postType == type
         })
         
-        return posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        return posts.reversed()
     }
     
     func setFollowingPosts(_ followingPosts: [Post]) {
@@ -44,7 +44,7 @@ class PostController {
     //MARK: Hashtag posts
     
     func getHashtagPosts() -> [Post] {
-        return self.hashtagPosts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        return self.hashtagPosts.reversed()
     }
     
     func setHashtagPosts(_ hashtagPosts: [Post]) {
@@ -54,7 +54,7 @@ class PostController {
     //MARK: Trending hashtags
     
     func getTrendingHashtags() -> [String] {
-        return self.trendingHashtags
+        return self.trendingHashtags.reversed()
     }
     
     func setTrendingHashtags(_ trendingHashtags: [String]) {

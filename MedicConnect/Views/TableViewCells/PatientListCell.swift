@@ -13,38 +13,10 @@ class PatientListCell: UITableViewCell {
     // ImageViews
     @IBOutlet var imgUserPhoto: RadAvatar!
     
-    // Buttons
-    @IBOutlet var btnAction: TVButton!
-    
-    // Constraints
-    @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
-    
     // Labels
     @IBOutlet var lblPatientName: UILabel!
-    @IBOutlet var lblDescription: ExpandableLabel!
     @IBOutlet var lblDoctorName: UILabel!
     @IBOutlet var lblDate: UILabel!
-    
-    // Descriptioin Expand/Collpase
-    var showFullDescription:Bool = false {
-        didSet {
-            if !showFullDescription {
-                self.constOfLblDescriptionHeight.constant = 18
-            } else {
-                let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.lblDescription.font], context: nil)
-                
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)!
-            }
-        }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        self.lblDescription.collapsed = true
-        self.lblDescription.text = nil
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

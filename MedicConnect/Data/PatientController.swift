@@ -21,7 +21,7 @@ class PatientController {
     }
     
     func setPatients(_ patients: [Patient]) {
-        self.patients = patients.sorted(by: { $0.birthdate < $1.birthdate })
+        self.patients = patients
     }
     
 }

@@ -21,7 +21,7 @@ class CommentController {
     }
     
     func setComments(_ comments: [Comment]) {
-        self.comments = comments.sorted(by: { $0.date < $1.date })
+        self.comments = comments
     }
     
 }

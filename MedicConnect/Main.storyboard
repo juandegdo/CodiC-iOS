@@ -34,17 +34,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="wJy-sc-Htf">
-                                <rect key="frame" x="132" y="282" width="150" height="62"/>
+                                <rect key="frame" x="59.666666666666657" y="267" width="295" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="wJy-sc-Htf" secondAttribute="height" multiplier="75:31" id="LP9-xr-Tz1"/>
-                                    <constraint firstAttribute="width" constant="150" id="SzW-dh-FXB"/>
+                                    <constraint firstAttribute="width" secondItem="wJy-sc-Htf" secondAttribute="height" multiplier="59:9" id="LP9-xr-Tz1"/>
+                                    <constraint firstAttribute="width" constant="295" id="SzW-dh-FXB"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wJy-sc-Htf" firstAttribute="centerX" secondItem="9Sa-ac-Vl7" secondAttribute="centerX" id="Zlc-gE-2gS"/>
-                            <constraint firstItem="wJy-sc-Htf" firstAttribute="bottom" secondItem="9Sa-ac-Vl7" secondAttribute="centerY" constant="-24" id="hdH-Ig-xcm"/>
+                            <constraint firstItem="wJy-sc-Htf" firstAttribute="bottom" secondItem="9Sa-ac-Vl7" secondAttribute="centerY" constant="-56" id="hdH-Ig-xcm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xdz-dz-zWo"/>
@@ -6678,7 +6678,7 @@ you a link to reset your password.</string>
         <image name="icon_social_twitter_on" width="38" height="38"/>
         <image name="icon_textview_rectangle" width="16" height="16"/>
         <image name="icon_user_profile" width="41" height="51"/>
-        <image name="splash_logo" width="150" height="62"/>
+        <image name="splash_logo" width="295" height="44"/>
         <image name="tab_icon_consults" width="33" height="30"/>
         <image name="tab_icon_diagnosis" width="33" height="40"/>
         <image name="tab_icon_home" width="37" height="28"/>

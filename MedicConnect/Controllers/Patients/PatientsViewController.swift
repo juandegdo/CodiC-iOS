@@ -9,7 +9,7 @@
 import UIKit
 import IQKeyboardManager
 
-class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     let PatientCellID = "PatientListCell"
     
@@ -21,14 +21,11 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     
     var vcDisappearType : ViewControllerDisappearType = .other
     var searchedPatients: [Patient] = []
-    var selectedDotsIndex = 0
-    var states = Set<String>()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         vcDisappearType = .other
-//        IQKeyboardManager.shared().isEnabled = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -39,7 +36,6 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        IQKeyboardManager.shared().isEnabled = true
         NotificationCenter.default.removeObserver(self)
         
         if let tabvc = self.tabBarController as UITabBarController? {
@@ -70,7 +66,7 @@ extension PatientsViewController {
         self.tvPatients.register(nibPatientCell, forCellReuseIdentifier: PatientCellID)
         
         self.tvPatients.tableFooterView = UIView()
-        self.tvPatients.estimatedRowHeight = 106.0
+        self.tvPatients.estimatedRowHeight = 95.0
         self.tvPatients.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -83,17 +79,15 @@ extension PatientsViewController {
             UIView.animate(withDuration: 1, animations: {
                 self.view.layoutIfNeeded()
             })
-            
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         constOfTableViewBottom.constant = 0
+        
         UIView.animate(withDuration: 1, animations: {
             self.view.layoutIfNeeded()
         })
-        
-//        isFirstKeyboardShow = false
     }
     
     func loadPatients() {
@@ -138,21 +132,9 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PatientListCell = tableView.dequeueReusableCell(withIdentifier: PatientCellID) as! PatientListCell
-        
         let patient = self.searchedPatients[indexPath.row]
+        
         cell.setData(patient)
-        
-        cell.btnAction.isHidden = true
-        
-//        let isFullDesc = self.states.contains(patient.id)
-//        cell.lblDescription.delegate = self
-//        cell.lblDescription.shouldCollapse = true
-//        cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-//        cell.lblDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-//        cell.lblDescription.collapsed = !isFullDesc
-//        cell.showFullDescription = isFullDesc
-        cell.showFullDescription = false
-        
         cell.selectionStyle = .none
         
         return cell
@@ -173,45 +155,6 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
 
     }
     
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvPatients.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvPatients)
-        if let indexPath = self.tvPatients.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvPatients.cellForRow(at: indexPath) as? PatientListCell
-                else { return }
-            
-            let patient = searchedPatients[indexPath.row]
-            self.states.insert(patient.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tvPatients.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tvPatients.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvPatients)
-        if let indexPath = self.tvPatients.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvPatients.cellForRow(at: indexPath) as? PatientListCell
-                else { return }
-            
-            let patient = searchedPatients[indexPath.row]
-            self.states.remove(patient.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tvPatients.endUpdates()
-    }
 }
 
 extension PatientsViewController {
