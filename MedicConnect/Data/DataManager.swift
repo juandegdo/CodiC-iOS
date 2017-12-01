@@ -13,7 +13,7 @@ class DataManager {
     static let Instance = DataManager()
     
     var theLastTabIndex: Int = 0
-    var postType: String = "Diagnosis"
+    var postType: String = Constants.PostTypeDiagnosis
     
     // MARK: Saved Tab Index
         

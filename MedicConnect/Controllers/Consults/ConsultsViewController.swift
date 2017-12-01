@@ -13,7 +13,7 @@ import Crashlytics
 class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
 
     let ConsultCellID = "PlaylistCell"
-    let postType = "Consult"
+    let postType = Constants.PostTypeConsult
     
     @IBOutlet var tvConsults: UITableView!
     
@@ -619,30 +619,36 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         cell.setData(post: post)
         
-        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-        cell.btnAction.index = indexPath.row
-        cell.btnAction.refTableView = tableView
+        // Hide buttons for Consults
+        cell.btnAction.isHidden = true
+        cell.btnLike.isHidden = true
+        cell.btnMessage.isHidden = true
+        cell.btnShare.isHidden = true
         
-        cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-        cell.btnLike.index = indexPath.row
-        cell.btnLike.refTableView = tableView
+//        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
+//        cell.btnAction.index = indexPath.row
+//        cell.btnAction.refTableView = tableView
+//
+//        cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
+//        cell.btnLike.index = indexPath.row
+//        cell.btnLike.refTableView = tableView
+//
+//        cell.btnMessage.tag = indexPath.row
+//        cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
+//
+//        cell.btnShare.tag = indexPath.row
+//        cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
         
-        cell.btnMessage.tag = indexPath.row
-        cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
-        
-        cell.btnShare.tag = indexPath.row
-        cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
-        
-        if let _user = UserController.Instance.getUser() as User? {
-            let hasLiked = post.hasLiked(id: _user.id)
-            let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
-            cell.btnLike.setImage(image, for: .normal)
-            cell.btnLike.tag = hasLiked ? 1 : 0
-            
-            let hasCommented = post.hasCommented(id: _user.id)
-            let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
-            cell.btnMessage.setImage(image1, for: .normal)
-        }
+//        if let _user = UserController.Instance.getUser() as User? {
+//            let hasLiked = post.hasLiked(id: _user.id)
+//            let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
+//            cell.btnLike.setImage(image, for: .normal)
+//            cell.btnLike.tag = hasLiked ? 1 : 0
+//
+//            let hasCommented = post.hasCommented(id: _user.id)
+//            let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
+//            cell.btnMessage.setImage(image1, for: .normal)
+//        }
         
         let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
         cell.imgUserAvatar.addGestureRecognizer(tapGestureOnUserAvatar)
@@ -660,9 +666,9 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblDescription.collapsed = !isFullDesc
         cell.showFullDescription = isFullDesc
         
-        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-        cell.lblLikedDescription.tag = indexPath.row
+//        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
+//        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
+//        cell.lblLikedDescription.tag = indexPath.row
         
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)

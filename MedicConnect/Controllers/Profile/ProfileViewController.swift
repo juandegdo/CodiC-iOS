@@ -39,7 +39,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
-    var postType: String = "Diagnosis"
+    var postType: String = Constants.PostTypeDiagnosis
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
     var states = Set<String>()
@@ -157,10 +157,10 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             self.lblTitle.text = _user.title
             
             // Customize Following/Follower
-            self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: "Diagnosis").count)"
-            self.lblConsultNumber.text  = "\(_user.getPosts(type: "Consult").count)"
+            self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
+            self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
             
-            if self.postType == "Diagnosis" {
+            if self.postType == Constants.PostTypeDiagnosis {
                 self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
                 self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
                 self.lblConsultNumber.textColor = Constants.ColorLightGray1
@@ -721,8 +721,8 @@ extension ProfileViewController {
     //MARK: IBActions
     
     @IBAction func onDiagnosisTapped(sender: AnyObject!) {
-        if (self.postType == "Consult") {
-            self.postType = "Diagnosis"
+        if (self.postType == Constants.PostTypeConsult) {
+            self.postType = Constants.PostTypeDiagnosis
             self.expandedRows = Set<String>()
             self.states = Set<String>()
             
@@ -732,8 +732,8 @@ extension ProfileViewController {
     }
     
     @IBAction func onConsultsTapped(sender: AnyObject!) {
-        if (self.postType == "Diagnosis") {
-            self.postType = "Consult"
+        if (self.postType == Constants.PostTypeDiagnosis) {
+            self.postType = Constants.PostTypeConsult
             self.expandedRows = Set<String>()
             self.states = Set<String>()
             

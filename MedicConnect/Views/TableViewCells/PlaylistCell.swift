@@ -33,6 +33,7 @@ class PlaylistCell: UITableViewCell {
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
     @IBOutlet var constOfBtnPlaylistWidth: NSLayoutConstraint!
     @IBOutlet var constOfBtnPlaylistBottom: NSLayoutConstraint!
+    @IBOutlet var constOfTxtVHashtagsTop: NSLayoutConstraint!
     @IBOutlet var constOfTxtVHashtagsHeight: NSLayoutConstraint!
     
     // Labels
@@ -54,8 +55,10 @@ class PlaylistCell: UITableViewCell {
     let likeBadgeViewFont = UIFont(name: "Avenir-Book", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 8.0)
     let commentBadgeViewFont = UIFont(name: "Avenir-Book", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 8.0)
     
+    var postType: String = ""
+    
     // Expand/Collpase
-    var isExpanded:Bool = false {
+    var isExpanded: Bool = false {
         didSet {
             if !isExpanded {
                 self.constOfBtnPlaylistBottom.constant = 1
@@ -71,11 +74,15 @@ class PlaylistCell: UITableViewCell {
             } else {
                 let constraintRect = CGSize(width: self.txtVHashtags.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.txtVHashtags.font!], context: nil)
+                let topSpace: CGFloat = self.postType == Constants.PostTypeConsult ? -16 : 16
                 
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
-                self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + 16 + 65
+                self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + topSpace + 65
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-                    self.lblLikedDescription.isHidden = false
+                    if self.postType != Constants.PostTypeConsult {
+                        self.lblLikedDescription.isHidden = false
+                    }
+                    
                     self.txtVHashtags.isHidden = false
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
@@ -89,7 +96,7 @@ class PlaylistCell: UITableViewCell {
     }
     
     // Descriptioin Expand/Collpase
-    var showFullDescription:Bool = false {
+    var showFullDescription: Bool = false {
         didSet {
             if !showFullDescription {
                 self.constOfLblDescriptionHeight.constant = 18
@@ -139,6 +146,10 @@ class PlaylistCell: UITableViewCell {
     }
         
     func setData(post: Post) {
+        
+        // Set post type
+        self.postType = post.postType
+        self.constOfTxtVHashtagsTop.constant = self.postType == Constants.PostTypeConsult ? -16 : 16
         
         // Set core data
         self.lblUsername.text = "Dr. \(post.user.fullName)"

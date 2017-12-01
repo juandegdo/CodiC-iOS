@@ -207,10 +207,10 @@
                     <constraint firstItem="u2t-vH-4YL" firstAttribute="centerY" secondItem="5BW-SD-kPu" secondAttribute="centerY" id="W0h-va-4wr"/>
                     <constraint firstItem="aJe-xx-5oi" firstAttribute="top" secondItem="9su-jJ-NTv" secondAttribute="bottom" id="Ww5-f3-jRc"/>
                     <constraint firstItem="ca7-P3-rJC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mp5-NQ-lPz" secondAttribute="trailing" id="X6V-m7-dnF"/>
-                    <constraint firstItem="9su-jJ-NTv" firstAttribute="top" secondItem="4u0-gy-cC2" secondAttribute="bottom" constant="2" id="aUr-re-wEM"/>
                     <constraint firstItem="ELS-ub-nr1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="b7r-w5-uGW"/>
                     <constraint firstItem="4u0-gy-cC2" firstAttribute="top" secondItem="5BW-SD-kPu" secondAttribute="bottom" constant="-2" id="bAj-FO-a8O"/>
                     <constraint firstItem="u2t-vH-4YL" firstAttribute="centerY" secondItem="B8T-A0-tyS" secondAttribute="centerY" id="bfy-Kp-nt6"/>
+                    <constraint firstItem="9su-jJ-NTv" firstAttribute="top" secondItem="5BW-SD-kPu" secondAttribute="bottom" constant="16" id="crP-Ue-WGe"/>
                     <constraint firstItem="fxs-EX-4Xa" firstAttribute="top" secondItem="gUB-RY-ucK" secondAttribute="bottom" constant="1" id="fre-oY-f3q"/>
                     <constraint firstItem="gUB-RY-ucK" firstAttribute="leading" secondItem="Mp5-NQ-lPz" secondAttribute="leading" id="hYk-AH-Gif"/>
                     <constraint firstAttribute="trailing" secondItem="ca7-P3-rJC" secondAttribute="trailing" id="lg7-k8-0kF"/>
@@ -245,6 +245,7 @@
                 <outlet property="constOfBtnPlaylistWidth" destination="FDq-5j-wRT" id="ezp-ga-FS5"/>
                 <outlet property="constOfLblDescriptionHeight" destination="Se9-Qv-G2Q" id="0cf-RR-bOk"/>
                 <outlet property="constOfTxtVHashtagsHeight" destination="aX3-EN-Klk" id="rut-sl-Fke"/>
+                <outlet property="constOfTxtVHashtagsTop" destination="crP-Ue-WGe" id="5la-R1-I68"/>
                 <outlet property="imgUserAvatar" destination="Rdt-ye-f9q" id="9Zi-Fd-LhR"/>
                 <outlet property="lblBroadcast" destination="Mp5-NQ-lPz" id="wTT-kB-Bct"/>
                 <outlet property="lblDate" destination="gUB-RY-ucK" id="bSu-ei-J4U"/>

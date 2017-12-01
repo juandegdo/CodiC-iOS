@@ -40,7 +40,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     var selectedDotsIndex = 0
     
     var profileType = 0 //0: normal, 1: private, 2: blocked
-    var postType: String = "Diagnosis"
+    var postType: String = Constants.PostTypeDiagnosis
     var expandedRows = Set<String>()
     var states = Set<String>()
     

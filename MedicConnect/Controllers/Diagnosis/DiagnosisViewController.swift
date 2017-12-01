@@ -21,7 +21,7 @@ public enum ViewControllerDisappearType {
 class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
     
     let DiagnosisCellID = "PlaylistCell"
-    let postType = "Diagnosis"
+    let postType = Constants.PostTypeDiagnosis
     
     @IBOutlet var tvDiagnoses: UITableView!
     
