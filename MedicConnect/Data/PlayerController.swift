@@ -72,6 +72,11 @@ class PlayerController {
                     _elapsedTimeLabel.text = TimeInterval(currentTime).durationText
                 }
                 
+                // Update duration time
+                if let _durationLabel = self.durationLabel as UILabel? {
+                    _durationLabel.text = TimeInterval(duration).durationText
+                }
+                
                 // Update state
                 if !_lastPlayed.playing && _lastPlayed.value > 0 {
                     _lastPlayed.playing = true

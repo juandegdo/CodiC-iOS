@@ -44,7 +44,7 @@ class ProfileListCell: UITableViewCell {
                 
             } else {
                 self.constOfLblDateBottom.constant = 55 + 20
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
                     self.btnForward.isHidden = false

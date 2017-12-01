@@ -74,7 +74,7 @@ class PlaylistCell: UITableViewCell {
                 
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
                 self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + 16 + 65
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.lblLikedDescription.isHidden = false
                     self.txtVHashtags.isHidden = false
                     self.btnPlay.isHidden = false

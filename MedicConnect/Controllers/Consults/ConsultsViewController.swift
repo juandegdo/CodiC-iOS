@@ -111,10 +111,12 @@ extension ConsultsViewController {
         
         // Reset player state
         if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider?,
-            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel as UILabel? {
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel as UILabel?,
+            let _durationLabel = PlayerController.Instance.durationLabel as UILabel? {
             _lastPlayed.setValue(0.0, animated: false)
             _lastPlayed.playing = false
             _elapsedLabel.text = "0:00"
+            _durationLabel.text = "0:00"
         }
         
         if let _observer = PlayerController.Instance.playerObserver as Any? {
@@ -140,6 +142,7 @@ extension ConsultsViewController {
         PlayerController.Instance.player = nil
         PlayerController.Instance.lastPlayed = nil
         PlayerController.Instance.elapsedTimeLabel = nil
+        PlayerController.Instance.durationLabel = nil
         PlayerController.Instance.currentIndex = nil
         
     }
@@ -167,6 +170,7 @@ extension ConsultsViewController {
                 
                 PlayerController.Instance.lastPlayed = cell?.playSlider
                 PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
+                PlayerController.Instance.durationLabel = cell?.lblDuration
                 PlayerController.Instance.shouldSeek = false
                 
                 _player.rate = 1.0
@@ -185,6 +189,7 @@ extension ConsultsViewController {
                     
                     PlayerController.Instance.lastPlayed = cell?.playSlider
                     PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
+                    PlayerController.Instance.durationLabel = cell?.lblDuration
                     PlayerController.Instance.currentIndex = _index
                     PlayerController.Instance.shouldSeek = true
                     PlayerController.Instance.currentTime = post.getCurrentTime()
@@ -337,6 +342,8 @@ extension ConsultsViewController {
         PlayerController.Instance.lastPlayed = nil
         PlayerController.Instance.elapsedTimeLabel?.text = "0:00"
         PlayerController.Instance.elapsedTimeLabel = nil
+        PlayerController.Instance.durationLabel?.text = "0:00"
+        PlayerController.Instance.durationLabel = nil
         PlayerController.Instance.shouldSeek = true
         PlayerController.Instance.scheduleReset()
         
@@ -722,14 +729,14 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         
         cell.isExpanded = !cell.isExpanded
         
-        if let _url = URL(string: post.audio ) as URL?,
-            cell.isExpanded {
-            DispatchQueue.main.async {
-                let asset = AVURLAsset.init(url: _url)
-                cell.lblElapsedTime.text = "0:00"
-                cell.lblDuration.text = TimeInterval(CMTimeGetSeconds(asset.duration)).durationText
-            }
-        }
+//        if let _url = URL(string: post.audio ) as URL?,
+//            cell.isExpanded {
+//            DispatchQueue.main.async {
+//                let asset = AVURLAsset.init(url: _url)
+//                cell.lblElapsedTime.text = "0:00"
+//                cell.lblDuration.text = TimeInterval(CMTimeGetSeconds(asset.duration)).durationText
+//            }
+//        }
         
         self.tvConsults.endUpdates()
         
