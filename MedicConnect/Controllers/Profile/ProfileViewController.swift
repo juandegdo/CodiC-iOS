@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Crashlytics
 
 class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
@@ -127,7 +128,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         UserService.Instance.getMe(completion: {
             (user: User?) in
             
-            if let _ = user as User? {
+            if let _user = user as User? {
+                self.logUser(user: _user)
                 self.updateUI()
             }
         })
@@ -177,6 +179,14 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         self.tableView.reloadData()
         self.updateScroll(offset: self.mainScrollView.contentOffset.y)
         
+    }
+    
+    func logUser(user : User) {
+        // TODO: Use the current user's information
+        // You can call any combination of these three methods
+        Crashlytics.sharedInstance().setUserEmail(user.email)
+        Crashlytics.sharedInstance().setUserIdentifier(user.id)
+        Crashlytics.sharedInstance().setUserName(user.fullName)
     }
     
     func releasePlayer(onlyState: Bool = false) {
@@ -743,6 +753,9 @@ extension ProfileViewController {
     }
     
     @IBAction func onRecord(sender: AnyObject!) {
+        // Force crash
+        Crashlytics.sharedInstance().crash()
+
         vcDisappearType = .record
         self.releasePlayer()
         
