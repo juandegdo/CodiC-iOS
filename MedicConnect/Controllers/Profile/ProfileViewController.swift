@@ -754,7 +754,7 @@ extension ProfileViewController {
     
     @IBAction func onRecord(sender: AnyObject!) {
         // Force crash
-        Crashlytics.sharedInstance().crash()
+//        Crashlytics.sharedInstance().crash()
 
         vcDisappearType = .record
         self.releasePlayer()
