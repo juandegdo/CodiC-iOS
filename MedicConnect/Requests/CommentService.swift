@@ -123,8 +123,16 @@ class CommentService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _userObj["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _userObj["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _userObj["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _userObj["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 // Create final Post

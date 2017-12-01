@@ -153,8 +153,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             
             // Customize User information
             self.lblUsername.text = "Dr. \(_user.fullName)"
-//            self.lblLocation.text = _user.location
-//            self.lblTitle.text = _user.title
+            self.lblLocation.text = _user.location
+            self.lblTitle.text = _user.title
             
             // Customize Following/Follower
             self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: "Diagnosis").count)"

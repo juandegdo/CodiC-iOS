@@ -63,9 +63,8 @@ class CreatePatientViewController: BaseViewController {
         
         let datePickerView:UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.date
-        self.tfBirthdate.inputView = datePickerView
-        
         datePickerView.addTarget(self, action: #selector(CreatePatientViewController.datePickerValueChanged), for:.valueChanged)
+        self.tfBirthdate.inputView = datePickerView
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")

@@ -144,13 +144,14 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
         
         cell.btnAction.isHidden = true
         
-        let isFullDesc = self.states.contains(patient.id)
-        cell.lblDescription.delegate = self
-        cell.lblDescription.shouldCollapse = true
-        cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-        cell.lblDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-        cell.lblDescription.collapsed = !isFullDesc
-        cell.showFullDescription = isFullDesc
+//        let isFullDesc = self.states.contains(patient.id)
+//        cell.lblDescription.delegate = self
+//        cell.lblDescription.shouldCollapse = true
+//        cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
+//        cell.lblDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+//        cell.lblDescription.collapsed = !isFullDesc
+//        cell.showFullDescription = isFullDesc
+        cell.showFullDescription = false
         
         cell.selectionStyle = .none
         

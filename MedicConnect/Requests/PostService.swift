@@ -117,8 +117,16 @@ class PostService: BaseTaskController {
                                     _user.follower = _userFollowers
                                 }
                                 
-                                if let _userDescription = _userObj["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _userObj["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _userObj["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _userObj["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 // Create final Post
@@ -241,10 +249,17 @@ class PostService: BaseTaskController {
                                     _user.follower = _userFollowers
                                 }
                                 
-                                if let _userDescription = _userObj["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _userObj["title"] as? String {
+                                    _user.title = _title
                                 }
                                 
+                                if let _msp = _userObj["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _userObj["location"] as? String {
+                                    _user.location = _location
+                                }
                                 
                                 // Create final Post
                                 let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
@@ -439,8 +454,16 @@ class PostService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _u["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _u["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _u["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _u["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 likes.append(_user)
@@ -614,10 +637,17 @@ class PostService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _userObj["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _userObj["title"] as? String {
+                                    _user.title = _title
                                 }
                                 
+                                if let _msp = _userObj["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _userObj["location"] as? String {
+                                    _user.location = _location
+                                }
                                 
                                 // Create final Post
                                 let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)

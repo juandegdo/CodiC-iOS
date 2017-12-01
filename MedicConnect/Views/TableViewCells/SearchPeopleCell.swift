@@ -46,25 +46,16 @@ class SearchPeopleCell: UITableViewCell {
     func setPeopleData(user: User) {
         
         // Customize Avatar
-        
-//        if self.placeholderImage == nil {
-//            self.placeholderImage = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: Constants.ColorOrange, text: user.getInitials(), font: avatarFont, size: CGSize(width: 55, height: 55))
-//        }
-        
         if let imgURL = URL(string: user.photo) as URL? {
             self.imgUserPhoto.af_setImage(withURL: imgURL)
-//            self.imgUserPhoto.af_setImage(withURL: imgURL, placeholderImage: self.placeholderImage)
-            
         } else {
             self.imgUserPhoto.image = nil
-//            self.imgUserPhoto.image = self.placeholderImage
-            
         }
         
         // Customize User Data
         
         self.lblUsername.text = user.fullName
-        self.lblUserDescription.text = user.description
+        self.lblUserDescription.text = user.title
         
     }
     

@@ -157,7 +157,12 @@ class UserService: BaseTaskController {
             return
         }
         
-        let parameters = ["name" : user.fullName, "description" : user.description, "phone" : user.phoneNumber]
+        let parameters = ["name" : user.fullName,
+                          "title" : user.title,
+                          "msp" : user.msp,
+                          "location" : user.location,
+                          "phone" : user.phoneNumber,
+                          "email" : user.email]
         
         var urlRequest = URLRequest(url: _url)
         urlRequest.httpMethod = "PUT"
@@ -357,16 +362,24 @@ class UserService: BaseTaskController {
                             _user.photo = _userPhoto
                         }
                         
-                        if let _userDescription = _dic["description"] as? String {
-                            _user.description = _userDescription
+                        if let _title = _dic["title"] as? String {
+                            _user.title = _title
                         }
                         
-                        if let _isPrivate = _dic["isprivate"] as? Int {
-                            _user.isprivate = (_isPrivate == 0) ? false : true
+                        if let _msp = _dic["msp"] as? String {
+                            _user.msp = _msp
+                        }
+                        
+                        if let _location = _dic["location"] as? String {
+                            _user.location = _location
                         }
                         
                         if let _phone = _dic["phone"] as? String {
                             _user.phoneNumber = _phone
+                        }
+                        
+                        if let _isPrivate = _dic["isprivate"] as? Int {
+                            _user.isprivate = (_isPrivate == 0) ? false : true
                         }
                         
                         if let _deviceToken = _dic["deviceToken"] as? String {
@@ -445,8 +458,16 @@ class UserService: BaseTaskController {
                                     
                                     let blockedby = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        blockedby.description = _description
+                                    if let _title = f["title"] as? String {
+                                        blockedby.title = _title
+                                    }
+                                    
+                                    if let _msp = f["msp"] as? String {
+                                        blockedby.msp = _msp
+                                    }
+                                    
+                                    if let _location = f["location"] as? String {
+                                        blockedby.location = _location
                                     }
                                     
                                     if let _private = f["isprivate"] as? Int {
@@ -474,8 +495,16 @@ class UserService: BaseTaskController {
                                     
                                     let blocking = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        blocking.description = _description
+                                    if let _title = f["title"] as? String {
+                                        blocking.title = _title
+                                    }
+                                    
+                                    if let _msp = f["msp"] as? String {
+                                        blocking.msp = _msp
+                                    }
+                                    
+                                    if let _location = f["location"] as? String {
+                                        blocking.location = _location
                                     }
                                     
                                     if let _private = f["isprivate"] as? Int {
@@ -503,8 +532,14 @@ class UserService: BaseTaskController {
                                     
                                     let follow = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        follow.description = _description
+                                    if let _title = f["title"] as? String {
+                                        follow.title = _title
+                                    }
+                                    if let _msp = f["msp"] as? String {
+                                        follow.msp = _msp
+                                    }
+                                    if let _location = f["location"] as? String {
+                                        follow.location = _location
                                     }
                                     if let _private = f["isprivate"] as? Int {
                                         follow.isprivate = (_private == 0) ? false : true
@@ -537,8 +572,14 @@ class UserService: BaseTaskController {
                                     
                                     let follow = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        follow.description = _description
+                                    if let _title = f["title"] as? String {
+                                        follow.title = _title
+                                    }
+                                    if let _msp = f["msp"] as? String {
+                                        follow.msp = _msp
+                                    }
+                                    if let _location = f["location"] as? String {
+                                        follow.location = _location
                                     }
                                     if let _private = f["isprivate"] as? Int {
                                         follow.isprivate = (_private == 0) ? false : true
@@ -564,8 +605,16 @@ class UserService: BaseTaskController {
                                     
                                     let request = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        request.description = _description
+                                    if let _title = f["title"] as? String {
+                                        request.title = _title
+                                    }
+                                    
+                                    if let _msp = f["msp"] as? String {
+                                        request.msp = _msp
+                                    }
+                                    
+                                    if let _location = f["location"] as? String {
+                                        request.location = _location
                                     }
                                     
                                     if let _private = f["isprivate"] as? Int {
@@ -592,8 +641,16 @@ class UserService: BaseTaskController {
                                     
                                     let request = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        request.description = _description
+                                    if let _title = f["title"] as? String {
+                                        request.title = _title
+                                    }
+                                    
+                                    if let _msp = f["msp"] as? String {
+                                        request.msp = _msp
+                                    }
+                                    
+                                    if let _location = f["location"] as? String {
+                                        request.location = _location
                                     }
                                     
                                     if let _private = f["isprivate"] as? Int {
@@ -652,8 +709,16 @@ class UserService: BaseTaskController {
                             _user.photo = _userPhoto
                         }
                         
-                        if let _userDescription = _dic["description"] as? String {
-                            _user.description = _userDescription
+                        if let _title = _dic["title"] as? String {
+                            _user.title = _title
+                        }
+                        
+                        if let _msp = _dic["msp"] as? String {
+                            _user.msp = _msp
+                        }
+                        
+                        if let _location = _dic["location"] as? String {
+                            _user.location = _location
                         }
                         
                         if let _isPrivate = _dic["isprivate"] as? Int {
@@ -732,8 +797,16 @@ class UserService: BaseTaskController {
                                     
                                     let follow = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        follow.description = _description
+                                    if let _title = f["title"] as? String {
+                                        follow.title = _title
+                                    }
+                                    
+                                    if let _msp = f["msp"] as? String {
+                                        follow.msp = _msp
+                                    }
+                                    
+                                    if let _location = f["location"] as? String {
+                                        follow.location = _location
                                     }
                                     
                                     if let _private = f["isprivate"] as? Int {
@@ -761,8 +834,16 @@ class UserService: BaseTaskController {
                                     
                                     let follow = User(id: _id, fullName: _name)
                                     
-                                    if let _description = f["description"] as? String {
-                                        follow.description = _description
+                                    if let _title = f["title"] as? String {
+                                        follow.title = _title
+                                    }
+                                    
+                                    if let _msp = f["msp"] as? String {
+                                        follow.msp = _msp
+                                    }
+                                    
+                                    if let _location = f["location"] as? String {
+                                        follow.location = _location
                                     }
                                     
                                     if let _private = f["isprivate"] as? Int {
@@ -812,7 +893,6 @@ class UserService: BaseTaskController {
     func getAll(name: String, completion: @escaping (_ success: BaseTaskController.Response) -> Void) {
         
         //TODO: Discuss best practice for page and limit with backend dev.
-//        if  let _me = UserController.Instance.getUser() as User?,
         
         guard let _ = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) as String? else {
             return
@@ -869,8 +949,16 @@ class UserService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _dic["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _dic["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _dic["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _dic["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 if let _isprivate = _dic["isprivate"] as? Int {
@@ -974,8 +1062,16 @@ class UserService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _userObj["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _userObj["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _userObj["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _userObj["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 // Create final Post
@@ -1092,8 +1188,16 @@ class UserService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _u["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _u["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _u["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _u["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 users.append(_user)
@@ -1176,8 +1280,16 @@ class UserService: BaseTaskController {
                                     _user.requesting = _requesting
                                 }
                                 
-                                if let _userDescription = _u["description"] as? String {
-                                    _user.description = _userDescription
+                                if let _title = _u["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _u["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _u["location"] as? String {
+                                    _user.location = _location
                                 }
                                 
                                 if let _playCount = _u["play_count"] as? Int {

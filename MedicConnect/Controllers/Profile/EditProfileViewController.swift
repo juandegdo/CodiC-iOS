@@ -87,11 +87,11 @@ class EditProfileViewController: BaseViewController {
             }
             
             self.tfName.text = _user.fullName
-//            self.tfTitle.text = _user.title
-//            self.tfMSP.text = _user.msp
-//            self.tfLocation.text = _user.location
-            self.tfEmail.text = _user.email
+            self.tfTitle.text = _user.title
+            self.tfMSP.text = _user.msp
+            self.tfLocation.text = _user.location
             self.tfPhoneNumber.text = _user.phoneNumber
+            self.tfEmail.text = _user.email
             
         }
         
@@ -205,11 +205,42 @@ extension EditProfileViewController {
         
         if let _user = UserController.Instance.getUser() as User? {
             
-            _user.fullName = self.tfName.text!
-//            _user.title = self.tfTitle.text!
-//            _user.msp = self.tfMSP.text!
-//            _user.location = self.tfLocation.text!
-            _user.phoneNumber = self.tfPhoneNumber.text!
+            var profileFilled = true
+            
+            if self.tfName.text != "" {
+                _user.fullName = self.tfName.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfTitle.text != "" {
+                _user.title = self.tfTitle.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfMSP.text != "" {
+                _user.msp = self.tfMSP.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfLocation.text != "" {
+                _user.location = self.tfLocation.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfPhoneNumber.text != "" {
+                _user.phoneNumber = self.tfPhoneNumber.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if !profileFilled {
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill out the form!")
+                return
+            }
             
             //SwiftSpinner.show("Updating user...")
             self.btnSave.isEnabled = false

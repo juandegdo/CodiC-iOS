@@ -1530,8 +1530,8 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nla-Uj-OMU">
                                                 <rect key="frame" x="12" y="131" width="390" height="18"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vancover, BC" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMd-Bp-GGA">
-                                                        <rect key="frame" x="159" y="0.0" width="72" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMd-Bp-GGA">
+                                                        <rect key="frame" x="195" y="0.0" width="0.0" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="SZ0-ve-3Uu"/>
                                                         </constraints>
@@ -1549,8 +1549,11 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                     <constraint firstItem="tMd-Bp-GGA" firstAttribute="top" secondItem="nla-Uj-OMU" secondAttribute="top" id="qGI-9c-41h"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intenstivist in Cardiology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CST-tg-YxL">
-                                                <rect key="frame" x="135" y="153" width="144" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CST-tg-YxL">
+                                                <rect key="frame" x="207" y="153" width="0.0" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="G8k-Fz-Bib"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                 <color key="textColor" red="0.65098039215686276" green="0.65490196078431373" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1943,7 +1946,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -3388,7 +3391,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fyy-tg-cAn">
-                                        <rect key="frame" x="156.66666666666666" y="32" width="102" height="20"/>
+                                        <rect key="frame" x="156.66666666666666" y="32" width="101.99999999999997" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="CFw-uz-kJa"/>
                                         </constraints>
@@ -3494,7 +3497,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utY-pZ-6xd">
-                                        <rect key="frame" x="135.66666666666666" y="32" width="144.33333333333331" height="20"/>
+                                        <rect key="frame" x="135.66666666666663" y="32" width="144.33333333333337" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="q3M-cD-ENX"/>
                                         </constraints>
@@ -4241,7 +4244,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#hashtag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDX-MR-0cR">
-                                        <rect key="frame" x="170.66666666666666" y="32" width="74.333333333333329" height="20"/>
+                                        <rect key="frame" x="170.66666666666666" y="32" width="74.333333333333343" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="K7N-8E-1hT"/>
                                         </constraints>
@@ -4327,7 +4330,7 @@ uploaded a new diagnosis...</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBG-wa-FSn">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBG-wa-FSn">
                                         <rect key="frame" x="0.0" y="22" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="8ev-GI-K0h"/>
@@ -4448,7 +4451,7 @@ uploaded a new diagnosis...</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -4472,7 +4475,7 @@ uploaded a new diagnosis...</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" secureTextEntry="YES"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -6684,6 +6687,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OMB-Di-mue"/>
+        <segue reference="vbE-pK-CLR"/>
     </inferredMetricsTieBreakers>
 </document>

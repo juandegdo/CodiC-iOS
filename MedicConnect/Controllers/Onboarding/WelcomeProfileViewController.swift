@@ -112,22 +112,36 @@ extension WelcomeProfileViewController {
         
         if let _user = UserController.Instance.getUser() as User? {
             
-            // TODO: Update user object on server side
-//            if self.tfTitle.text != "" {
-//                _user.title = self.tfTitle.text!
-//            }
-//            
-//            if self.tfMSP.text != "" {
-//                _user.msp = self.tfMSP.text!
-//            }
-//            
-//            if self.tfLocation.text != "" {
-//                _user.location = self.tfLocation.text!
-//            }
-//            
-//            if self.tfPhoneNumber.text != "" {
-//                _user.phoneNumber = self.tfPhoneNumber.text!
-//            }
+            var profileFilled = true
+            
+            if self.tfTitle.text != "" {
+                _user.title = self.tfTitle.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfMSP.text != "" {
+                _user.msp = self.tfMSP.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfLocation.text != "" {
+                _user.location = self.tfLocation.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if self.tfPhoneNumber.text != "" {
+                _user.phoneNumber = self.tfPhoneNumber.text!
+            } else {
+                profileFilled = false
+            }
+            
+            if !profileFilled {
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill out the form!")
+                return
+            }
             
             UserService.Instance.editUser(user: _user, completion: {
                 (success: Bool, message: String) in

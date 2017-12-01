@@ -32,18 +32,15 @@ class BlockedUserTableViewCell: UITableViewCell {
     }
     
     func configureCell(user: User) {
-//        m_userImage = user.photo
-//        let placeHolderImage = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: Constants.ColorOrange, text: user.getInitials(), font: placeholderImageFont, size: CGSize(width: 86, height: 86))
         
         if let imgURL = URL(string: user.photo) as URL? {
             self.m_userImage.af_setImage(withURL: imgURL)
-//            self.m_userImage.af_setImage(withURL: imgURL, placeholderImage: placeHolderImage)
         } else {
-            self.m_userImage.image = nil //placeHolderImage
+            self.m_userImage.image = nil
         }
         
         m_userName.text = user.fullName
-        m_userDescription.text = user.description
+        m_userDescription.text = user.title
         
     }
 

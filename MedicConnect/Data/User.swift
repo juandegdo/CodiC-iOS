@@ -16,7 +16,9 @@ class User {
     var password: String
     var photo: String = ""
     var phoneNumber: String = ""
-    var description: String = ""
+    var title: String = ""
+    var msp: String = ""
+    var location: String = ""
     var posts: [Post] = []
     var following: [AnyObject] = []
     var follower: [AnyObject] = []
