@@ -144,6 +144,7 @@ class BaseViewController: UIViewController {
         CommentController.Instance.setComments([])
         LikeController.Instance.setPostLikes([])
         NotificationController.Instance.setNotifications([])
+        PatientController.Instance.setPatients([])
         UserDefaultsUtil.DeleteToken()
         
     }

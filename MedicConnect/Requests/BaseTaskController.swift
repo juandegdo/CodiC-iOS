@@ -18,7 +18,7 @@ class BaseTaskController {
     let URLPost = "/post"
     let URLComment = "/comment"
     let URLNotification = "/notification"
-    let URLPlaylist = "/playlist"
+    let URLPatient = "/patients"
     let URLReport = "/report"
     let URLSearch = "/search"
     
@@ -47,12 +47,11 @@ class BaseTaskController {
     
     let URLMakeNotiFilterSuffix = "/setnotificationfilter"
     
-    let URLAddToPlaylistSuffix = "/addtoplaylist"
-    let URLRemovePlaylistUserSuffix = "/removeplaylistuser"
-    let URLGetPlaylistSuffix = "/getplaylist"
-    
     let URLGetTrendingHashtagsSuffix = "/gettrendinghashtags"
     let URLGetPostsFromHashtagSuffix = "/getpostsfromhashtag"
+    
+    let URLAddPatientSuffix = "/addpatient"
+    let URLGetPatientsSuffix = "/getpatients"
     
     var simpleManager: SessionManager?
     var manager: SessionManager?

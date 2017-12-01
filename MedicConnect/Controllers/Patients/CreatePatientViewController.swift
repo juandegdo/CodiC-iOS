@@ -19,6 +19,7 @@ class CreatePatientViewController: BaseViewController {
     @IBOutlet var btnSave: UIButton!
     
     var alertWindow: UIWindow!
+    var birthDate: Date!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,18 +61,17 @@ class CreatePatientViewController: BaseViewController {
         // Birthdate
         self.tfBirthdate.placeholder = NSLocalizedString("Birthdate", comment: "comment")
         
+        let datePickerView:UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePickerMode.date
+        self.tfBirthdate.inputView = datePickerView
+        
+        datePickerView.addTarget(self, action: #selector(CreatePatientViewController.datePickerValueChanged), for:.valueChanged)
+        
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
         
         // Address
         self.tfAddress.placeholder = NSLocalizedString("Address", comment: "comment")
-        
-        // Save Button
-//        self.btnSave.layer.cornerRadius = 3
-//        self.btnSave.clipsToBounds = true
-//        self.btnSave.layer.borderColor = UIColor.init(red: 255/255.0, green: 13/255.0, blue: 13/255.0, alpha: 1.0).cgColor
-//        self.btnSave.layer.borderWidth = 1
-//        self.btnSave.setBackgroundColor(color: UIColor.init(white: 0.5, alpha: 1.0), forState: .highlighted)
         
     }
     
@@ -105,7 +105,46 @@ extension CreatePatientViewController {
     }
     
     @IBAction func onSaveChange(sender: AnyObject!) {
-        self.onBack(sender: nil)
+        guard  self.tfName.text?.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient name!")
+            return
+        }
+        
+        guard  self.tfPHN.text?.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient number!")
+            return
+        }
+        
+        guard  self.tfBirthdate.text?.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient birthdate!")
+            return
+        }
+        
+        guard  self.tfPhoneNumber.text?.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient phone number!")
+            return
+        }
+        
+        guard  self.tfAddress.text?.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient address!")
+            return
+        }
+        
+        PatientService.Instance.addPatient(self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool) in
+            
+            self.onBack(sender: nil)
+            
+        }
+        
+    }
+    
+    @IBAction func datePickerValueChanged(sender:UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        self.birthDate = sender.date
+        self.tfBirthdate.text = dateFormatter.string(from: sender.date)
+        
     }
     
 }

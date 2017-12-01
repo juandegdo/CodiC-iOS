@@ -101,13 +101,6 @@ class EditProfileViewController: BaseViewController {
         self.btnChangePicture.layer.borderColor = UIColor.init(red: 113/255.0, green: 127/255.0, blue: 134/255.0, alpha: 1.0).cgColor
         self.btnChangePicture.layer.borderWidth = 1
         
-        // Save Button
-//        self.btnSave.layer.cornerRadius = 3
-//        self.btnSave.clipsToBounds = true
-//        self.btnSave.layer.borderColor = UIColor.init(red: 255/255.0, green: 13/255.0, blue: 13/255.0, alpha: 1.0).cgColor
-//        self.btnSave.layer.borderWidth = 1
-//        self.btnSave.setBackgroundColor(color: UIColor.init(white: 0.5, alpha: 1.0), forState: .highlighted)
-        
     }
     
     func uploadImage() {

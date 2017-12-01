@@ -634,7 +634,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patients" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHh-FT-Wbm">
-                                        <rect key="frame" x="175.66666666666666" y="32" width="63.666666666666657" height="20"/>
+                                        <rect key="frame" x="175.66666666666666" y="32" width="64" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="xkH-ov-k3w"/>
                                         </constraints>
@@ -786,6 +786,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="I80-io-Ke4"/>
                     <connections>
+                        <outlet property="constOfTableViewBottom" destination="r1p-95-Mi2" id="Nyf-Gh-CUe"/>
                         <outlet property="tvPatients" destination="eaE-6Z-It4" id="GSg-Mn-ndP"/>
                         <outlet property="txFieldSearch" destination="ot5-u1-z8h" id="yeM-7w-s4d"/>
                         <outlet property="viewNotificationAlert" destination="Tq9-FA-Yhi" id="hou-Vh-gl8"/>
@@ -2341,7 +2342,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCc-fw-M6X">
-                                        <rect key="frame" x="168.33333333333334" y="32" width="78.333333333333343" height="20"/>
+                                        <rect key="frame" x="168.66666666666666" y="32" width="78" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="b6Z-0M-WLs"/>
                                         </constraints>
@@ -2422,7 +2423,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JC8-OM-DIX">
-                                                <rect key="frame" x="207.33333333333334" y="233" width="0.0" height="22"/>
+                                                <rect key="frame" x="207.66666666666666" y="233" width="0.0" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="tAK-ko-k1o"/>
                                                 </constraints>
@@ -2431,7 +2432,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to PAUSE or STOP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V7w-Ow-RJm">
-                                                <rect key="frame" x="94.333333333333329" y="269" width="226.66666666666669" height="21"/>
+                                                <rect key="frame" x="94.666666666666671" y="269" width="226.33333333333331" height="21"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                 <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2480,7 +2481,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvX-0u-0P6">
-                                        <rect key="frame" x="168.33333333333334" y="32" width="78.333333333333343" height="20"/>
+                                        <rect key="frame" x="168.66666666666666" y="32" width="78" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="DZZ-vu-zD7"/>
                                         </constraints>
@@ -2556,7 +2557,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the button to keep recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wqq-yb-b3H">
-                                <rect key="frame" x="96.000000000000014" y="333" width="222.33333333333337" height="21"/>
+                                <rect key="frame" x="96" y="333" width="222" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="myv-aB-irz"/>
                                 </constraints>
@@ -2708,7 +2709,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgd-ei-ICp">
-                                        <rect key="frame" x="168.33333333333334" y="32" width="78.333333333333343" height="20"/>
+                                        <rect key="frame" x="168.66666666666666" y="32" width="78" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="UgK-3V-aM2"/>
                                         </constraints>
@@ -2818,7 +2819,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Diagnosis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFR-fd-QvR">
-                                        <rect key="frame" x="146.33333333333334" y="32" width="121.66666666666666" height="20"/>
+                                        <rect key="frame" x="146.66666666666666" y="32" width="121.33333333333334" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="6FZ-Nh-tKi"/>
                                         </constraints>
@@ -3387,7 +3388,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fyy-tg-cAn">
-                                        <rect key="frame" x="156.33333333333334" y="32" width="101.33333333333334" height="20"/>
+                                        <rect key="frame" x="156.66666666666666" y="32" width="100.99999999999997" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="CFw-uz-kJa"/>
                                         </constraints>
@@ -3493,7 +3494,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utY-pZ-6xd">
-                                        <rect key="frame" x="135.33333333333337" y="32" width="143.66666666666663" height="20"/>
+                                        <rect key="frame" x="135.66666666666663" y="32" width="143.33333333333337" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="q3M-cD-ENX"/>
                                         </constraints>
@@ -4240,7 +4241,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#hashtag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDX-MR-0cR">
-                                        <rect key="frame" x="170.33333333333334" y="32" width="73.666666666666657" height="20"/>
+                                        <rect key="frame" x="170.66666666666666" y="32" width="73.333333333333343" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="K7N-8E-1hT"/>
                                         </constraints>
@@ -4899,7 +4900,7 @@ you a link to reset your password.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlt-fC-WBd">
-                                        <rect key="frame" x="181.66666666666666" y="32" width="50.666666666666657" height="20"/>
+                                        <rect key="frame" x="181.66666666666666" y="32" width="51" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="uFW-tF-kg5"/>
@@ -5820,7 +5821,7 @@ you a link to reset your password.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Patient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSe-1R-Mzs">
-                                        <rect key="frame" x="150" y="32" width="114.66666666666669" height="20"/>
+                                        <rect key="frame" x="150.33333333333334" y="32" width="114.66666666666666" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Ro7-BV-tDs"/>
                                         </constraints>
@@ -5859,7 +5860,7 @@ you a link to reset your password.</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" textContentType="name"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -5883,7 +5884,7 @@ you a link to reset your password.</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -5931,7 +5932,7 @@ you a link to reset your password.</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" textContentType="tel"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -5955,7 +5956,7 @@ you a link to reset your password.</string>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="location"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
                                                                 <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -6349,7 +6350,7 @@ you a link to reset your password.</string>
                                                 <rect key="frame" x="12" y="51" width="390" height="18"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-rm-npz">
-                                                        <rect key="frame" x="178.33333333333334" y="0.0" width="34.333333333333343" height="18"/>
+                                                        <rect key="frame" x="178.66666666666666" y="0.0" width="34" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="uK2-Mo-G8P"/>
                                                         </constraints>
@@ -6377,7 +6378,7 @@ you a link to reset your password.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SF5-lg-x9g">
-                                                <rect key="frame" x="190.33333333333334" y="89.666666666666657" width="34" height="19.333333333333329"/>
+                                                <rect key="frame" x="190.66666666666666" y="89.666666666666657" width="34" height="19.333333333333329"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="gce-hA-x7W"/>
                                                 </constraints>
@@ -6386,7 +6387,7 @@ you a link to reset your password.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrT-D3-n0o">
-                                                <rect key="frame" x="190.33333333333334" y="129" width="34" height="19.333333333333343"/>
+                                                <rect key="frame" x="190.66666666666666" y="129" width="34" height="19.666666666666657"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="fLv-pb-vbL"/>
                                                 </constraints>
@@ -6683,6 +6684,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OMB-Di-mue"/>
+        <segue reference="dMz-5h-amD"/>
     </inferredMetricsTieBreakers>
 </document>

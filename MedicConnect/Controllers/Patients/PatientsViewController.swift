@@ -7,11 +7,7 @@
 //
 
 import UIKit
-import AVFoundation
-import MessageUI
-
-import Fabric
-import Crashlytics
+import IQKeyboardManager
 
 class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
     
@@ -21,17 +17,34 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     @IBOutlet var txFieldSearch: UITextField!
     @IBOutlet var tvPatients: UITableView!
     
-    var vcDisappearType : ViewControllerDisappearType = .other
+    @IBOutlet var constOfTableViewBottom: NSLayoutConstraint!
     
-    var patients: [[String: String]] = []
-    var searchedPatients: [[String: String]] = []
+    var vcDisappearType : ViewControllerDisappearType = .other
+    var searchedPatients: [Patient] = []
     var selectedDotsIndex = 0
     var states = Set<String>()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.loadPatients()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        vcDisappearType = .other
+//        IQKeyboardManager.shared().isEnabled = false
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        self.loadPatients()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        IQKeyboardManager.shared().isEnabled = true
+        NotificationCenter.default.removeObserver(self)
+        
+        if let tabvc = self.tabBarController as UITabBarController? {
+            DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,30 +52,16 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
         self.initViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        vcDisappearType = .other
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if let tabvc = self.tabBarController as UITabBarController? {
-            DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
-        }
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: Private Functions
+}
+
+extension PatientsViewController {
+    
+    // MARK: Private methods
     
     func initViews() {
         // Initialize Table Views
@@ -73,49 +72,37 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate, E
         self.tvPatients.tableFooterView = UIView()
         self.tvPatients.estimatedRowHeight = 106.0
         self.tvPatients.rowHeight = UITableViewAutomaticDimension
+        
     }
     
-}
-
-extension PatientsViewController {
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let bottomMargin = keyboardSize.height - 55.0
+            constOfTableViewBottom.constant = bottomMargin
+            
+            UIView.animate(withDuration: 1, animations: {
+                self.view.layoutIfNeeded()
+            })
+            
+        }
+    }
     
-    // MARK: Private methods
+    func keyboardWillHide(notification: NSNotification) {
+        constOfTableViewBottom.constant = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.view.layoutIfNeeded()
+        })
+        
+//        isFirstKeyboardShow = false
+    }
     
     func loadPatients() {
-        patients = [["id": "1",
-                     "patientName": "Patient Name  #1234567890",
-                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                     "doctorName": "Dr. Dave Loewen",
-                     "date": "October 20 2017",
-                     "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"],
-                    ["id": "2",
-                     "patientName": "Patient Name  #2340238234",
-                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                     "doctorName": "Dr. Jeff Harder",
-                     "date": "October 20 2017",
-                     "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507822955506"],
-                    ["id": "3",
-                     "patientName": "Patient Name  #549430284",
-                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                     "doctorName": "Dr. Dave Loewen",
-                     "date": "October 20 2017",
-                     "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"],
-                    ["id": "4",
-                     "patientName": "Patient Name  #734390439",
-                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                     "doctorName": "Dr. Jeff Harder",
-                     "date": "October 20 2017",
-                     "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507822955506"],
-                    ["id": "5",
-                     "patientName": "Patient Name  #09293283",
-                     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-                     "doctorName": "Dr. Dave Loewen",
-                     "date": "October 20 2017",
-                     "photoURL": "https://s3-us-west-2.amazonaws.com/medic-image/radioish1507784695841"]
-        ]
+        // Load Patients
         
-        searchedPatients = []
-        self.tvPatients.reloadData()
+        PatientService.Instance.getPatients(completion: { (success: Bool) in
+            self.loadSearchResult(self.txFieldSearch.text!)
+        })
+        
     }
     
     func loadSearchResult(_ keyword: String) {
@@ -123,8 +110,8 @@ extension PatientsViewController {
         if keyword == "" {
             searchedPatients = []
         } else {
-            searchedPatients = patients.filter({(patient:[String: String]) -> Bool in
-                return patient["patientName"]!.contains(keyword)
+            searchedPatients = PatientController.Instance.getPatients().filter({(patient: Patient) -> Bool in
+                return patient.patientNumber.contains(keyword)
             })
         }
         
@@ -152,19 +139,16 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PatientListCell = tableView.dequeueReusableCell(withIdentifier: PatientCellID) as! PatientListCell
         
-        let data = self.searchedPatients[indexPath.row]
-        cell.setData(data: data)
+        let patient = self.searchedPatients[indexPath.row]
+        cell.setData(patient)
         
-//        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-//        cell.btnAction.index = indexPath.row
-//        cell.btnAction.refTableView = tableView
         cell.btnAction.isHidden = true
         
-        let isFullDesc = self.states.contains(data["id"]!)
+        let isFullDesc = self.states.contains(patient.id)
         cell.lblDescription.delegate = self
         cell.lblDescription.shouldCollapse = true
         cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-        cell.lblDescription.text = data["description"]
+        cell.lblDescription.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
         cell.lblDescription.collapsed = !isFullDesc
         cell.showFullDescription = isFullDesc
         
@@ -178,7 +162,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        guard let _patient = self.patients[indexPath.row] as [String: String]? else {
+        guard let _patient = self.searchedPatients[indexPath.row] as Patient? else {
             return
         }
         
@@ -203,7 +187,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
                 else { return }
             
             let patient = searchedPatients[indexPath.row]
-            self.states.insert(patient["id"]!)
+            self.states.insert(patient.id)
             
             cell.showFullDescription = true
         }
@@ -221,7 +205,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
                 else { return }
             
             let patient = searchedPatients[indexPath.row]
-            self.states.remove(patient["id"]!)
+            self.states.remove(patient.id)
             
             cell.showFullDescription = false
         }
@@ -249,6 +233,10 @@ extension PatientsViewController : UITextFieldDelegate {
     // UITextfield delegate methods
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
     }
     

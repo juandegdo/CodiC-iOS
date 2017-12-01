@@ -978,7 +978,6 @@ class UserService: BaseTaskController {
                                     _user.description = _userDescription
                                 }
                                 
-                                
                                 // Create final Post
                                 let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
                                 

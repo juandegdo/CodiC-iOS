@@ -19,7 +19,6 @@ class PostService: BaseTaskController {
             return
         }
         
-        
         let token = UserDefaultsUtil.LoadToken()
         let bearer = "Bearer \(token)"
         let headers = ["Authorization" : bearer, "user-agent" : UIDevice.current.identifierForVendor!.uuidString.sha1()]

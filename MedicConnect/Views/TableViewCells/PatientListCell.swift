@@ -24,8 +24,6 @@ class PatientListCell: UITableViewCell {
     @IBOutlet var lblDescription: ExpandableLabel!
     @IBOutlet var lblDoctorName: UILabel!
     @IBOutlet var lblDate: UILabel!
-
-    var placeholderImage: UIImage?
     
     // Descriptioin Expand/Collpase
     var showFullDescription:Bool = false {
@@ -44,8 +42,6 @@ class PatientListCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        self.placeholderImage = nil
-        
         self.lblDescription.collapsed = true
         self.lblDescription.text = nil
     }
@@ -56,17 +52,17 @@ class PatientListCell: UITableViewCell {
         
     }
     
-    func setData(data: [String: String]) {
+    func setData(_ patient: Patient) {
         // Set data
-        self.lblPatientName.text = data["patientName"]
-        self.lblDoctorName.text = data["doctorName"]
-        self.lblDate.text = data["date"]
+        self.lblPatientName.text = "\(patient.name) #\(patient.patientNumber)"
+        self.lblDoctorName.text = "Dr. \(patient.user.fullName)"
+        self.lblDate.text = patient.getFormattedDate().replacingOccurrences(of: ",", with: "")
         
         self.imgUserPhoto.image = nil
-        if let imgURL = URL(string: data["photoURL"]!) as URL? {
-            self.imgUserPhoto.af_setImage(withURL: imgURL)
-        } else {
-            self.imgUserPhoto.image = nil
+        if let _user = patient.user as User? {
+            if let imgURL = URL(string: _user.photo) as URL? {
+                self.imgUserPhoto.af_setImage(withURL: imgURL)
+            }
         }
     }
 

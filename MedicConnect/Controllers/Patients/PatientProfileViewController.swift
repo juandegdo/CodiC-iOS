@@ -15,7 +15,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     let PatientNotesCellID = "PatientNotesCell"
     let postType = "Note"
     
-    var patient: [String: String] = [:]
+    var patient: Patient? = nil
     
     // Header
     @IBOutlet var headerLabel: UILabel!
@@ -121,15 +121,13 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     }
     
     func updateUI() {
-        if !patient.isEmpty {
+        if let _patient = self.patient as Patient? {
             // Customize Patient information
-            self.lblPatientName.text = patient["patientName"]
-            self.lblBirthday.text = "April 29 1954"
-            self.lblAddress.text = "1357 Highland Dr. Fernie ABC 123"
-            self.lblPhoneNumber.text = "+1.305.450.7756"
-            
-            self.lblPaitentNumber.text = patient["patientName"]
-            
+            self.lblPatientName.text = _patient.name
+            self.lblBirthday.text = _patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+            self.lblAddress.text = _patient.address
+            self.lblPhoneNumber.text = _patient.phoneNumber
+            self.lblPaitentNumber.text = "PHN # \(_patient.patientNumber)"
         }
         
         self.tableView.reloadData()
@@ -265,8 +263,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             self.tableViewHeightConstraint.constant = self.view.frame.height - 64
             
             self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
-        }
-        else {
+        } else {
             self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
             self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
             self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)

@@ -16,7 +16,7 @@
 		45A7B1E968F7EC644C84BD83 /* Pods_MedicConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB8CB135971FDBA662C5F09 /* Pods_MedicConnectUITests.framework */; };
 		650E28881F71B64B0096A3F0 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 650E28871F71B64B0096A3F0 /* SCSiriWaveformView.m */; };
 		651952AD1F42413D00AA6627 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651952AC1F42413D00AA6627 /* TutorialViewController.swift */; };
-		651952AF1F426A3300AA6627 /* PlaylistService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651952AE1F426A3300AA6627 /* PlaylistService.swift */; };
+		651952AF1F426A3300AA6627 /* PatientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651952AE1F426A3300AA6627 /* PatientService.swift */; };
 		6522BF141F732EAF00E40759 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF131F732EAF00E40759 /* SearchService.swift */; };
 		6522BF161F732F7C00E40759 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF151F732F7C00E40759 /* SearchController.swift */; };
 		6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */; };
@@ -46,6 +46,8 @@
 		65A289801F3BD86900547D72 /* EVTTabPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */; };
 		65A289831F3E5BEE00547D72 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A289821F3E5BEE00547D72 /* SplashViewController.swift */; };
 		65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */; };
+		65C915D61FCF1687002AC31B /* PatientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C915D51FCF1687002AC31B /* PatientController.swift */; };
+		65C915D81FCF1696002AC31B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C915D71FCF1696002AC31B /* Patient.swift */; };
 		65D250191F8E812700279713 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250181F8E812700279713 /* DiagnosisViewController.swift */; };
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
@@ -171,7 +173,7 @@
 		650E28861F71B64B0096A3F0 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
 		650E28871F71B64B0096A3F0 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
 		651952AC1F42413D00AA6627 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
-		651952AE1F426A3300AA6627 /* PlaylistService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistService.swift; sourceTree = "<group>"; };
+		651952AE1F426A3300AA6627 /* PatientService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientService.swift; sourceTree = "<group>"; };
 		6522BF131F732EAF00E40759 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		6522BF151F732F7C00E40759 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,8 @@
 		65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVTTabPageScrollView.m; sourceTree = "<group>"; };
 		65A289821F3E5BEE00547D72 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultsViewController.swift; sourceTree = "<group>"; };
+		65C915D51FCF1687002AC31B /* PatientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientController.swift; sourceTree = "<group>"; };
+		65C915D71FCF1696002AC31B /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		65D250181F8E812700279713 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -541,10 +545,10 @@
 			children = (
 				D206583C1E5BCCD4003875E4 /* BaseTaskController.swift */,
 				D206583D1E5BCCD4003875E4 /* UserService.swift */,
+				651952AE1F426A3300AA6627 /* PatientService.swift */,
 				D24B18251E7F5360002E35E2 /* PostService.swift */,
 				00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */,
 				005642951EFEDA3000B42A42 /* NotificationService.swift */,
-				651952AE1F426A3300AA6627 /* PlaylistService.swift */,
 				6522BF131F732EAF00E40759 /* SearchService.swift */,
 			);
 			path = Requests;
@@ -574,9 +578,11 @@
 				D21BC8F91DEA2C56008F5443 /* Constants.swift */,
 				D2F0C6C11DF30A7000475696 /* DataManager.swift */,
 				D25EB15E1E845DA20082A9D5 /* Meta.swift */,
+				65C915D71FCF1696002AC31B /* Patient.swift */,
 				D25EB15C1E845D5F0082A9D5 /* Post.swift */,
 				D20658441E5BCEB4003875E4 /* User.swift */,
 				D2301FDA1E5FBD03006C636A /* UserController.swift */,
+				65C915D51FCF1687002AC31B /* PatientController.swift */,
 				D225D11A1E84BDC600B5793A /* PostController.swift */,
 				D2AFD0071E99426C00246477 /* PlayerController.swift */,
 				00CFBD8E1EF83BEE000A4D1E /* CommentController.swift */,
@@ -1133,6 +1139,7 @@
 				A9E4451D1F0A699000F49C7E /* playlist.xcdatamodeld in Sources */,
 				65A289801F3BD86900547D72 /* EVTTabPageScrollView.m in Sources */,
 				00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */,
+				65C915D61FCF1687002AC31B /* PatientController.swift in Sources */,
 				D29891F21E613DBA004C0FC1 /* ProfileViewController.swift in Sources */,
 				65A289831F3E5BEE00547D72 /* SplashViewController.swift in Sources */,
 				A9E444B91F096C9700F49C7E /* BlockedUserTableViewCell.swift in Sources */,
@@ -1183,10 +1190,11 @@
 				65A289771F3BC97B00547D72 /* SearchTagCell.swift in Sources */,
 				D2F55A921DEB74F40038A392 /* FollowingCell.swift in Sources */,
 				D279AD4C1E13295B001714FC /* CommentsViewController.swift in Sources */,
-				651952AF1F426A3300AA6627 /* PlaylistService.swift in Sources */,
+				651952AF1F426A3300AA6627 /* PatientService.swift in Sources */,
 				D2F0C6CC1DF322B800475696 /* RadPopUpVC.m in Sources */,
 				D25EB15F1E845DA20082A9D5 /* Meta.swift in Sources */,
 				65A289731F3BC95300547D72 /* SearchPeopleCell.swift in Sources */,
+				65C915D81FCF1696002AC31B /* Patient.swift in Sources */,
 				D29891F31E613DBA004C0FC1 /* WelcomeProfileViewController.swift in Sources */,
 				65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */,
 				D2301FD51E5FAC4B006C636A /* WelcomeViewController.swift in Sources */,

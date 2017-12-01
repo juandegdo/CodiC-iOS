@@ -141,7 +141,7 @@ class PlaylistCell: UITableViewCell {
     func setData(post: Post) {
         
         // Set core data
-        self.lblUsername.text = post.user.fullName
+        self.lblUsername.text = "Dr. \(post.user.fullName)"
         
         // Set Broadcast Label
         self.lblBroadcast.text = post.title

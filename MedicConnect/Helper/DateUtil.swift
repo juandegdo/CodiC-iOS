@@ -127,6 +127,16 @@ class DateUtil {
         return "\(startString) to \(endString)"
     }
     
+    class func GetBirthDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let longFormatWithoutYear = DateFormatter.dateFormat(fromTemplate: "MMMM d yyyy", options: 0, locale: dateFormatter.locale)
+        dateFormatter.dateFormat = longFormatWithoutYear
+        
+        return dateFormatter.string(from: date).capitalized
+    }
+    
     class func GetDate(_ dateTime: Double = Date().timeIntervalSince1970) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
