@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import ACFloatingTextfield
+import ACFloatingTextfield_Swift
 
 class SignInViewController: BaseViewController, UITextFieldDelegate {
     
-    @IBOutlet var tfEmail: ACFloatingTextField!
-    @IBOutlet var tfPassword: ACFloatingTextField!
+    @IBOutlet var tfEmail: ACFloatingTextfield!
+    @IBOutlet var tfPassword: ACFloatingTextfield!
     @IBOutlet var btnSignin: UIButton!
     
     override func viewDidLoad() {

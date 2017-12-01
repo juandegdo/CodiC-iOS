@@ -7,12 +7,12 @@
 //
 
 import UIKit
-import ACFloatingTextfield
+import ACFloatingTextfield_Swift
 
 class ResetPasswordViewController: UIViewController {
 
-    @IBOutlet weak var txtPassword: ACFloatingTextField!
-    @IBOutlet weak var txtConfirm: ACFloatingTextField!
+    @IBOutlet weak var txtPassword: ACFloatingTextfield!
+    @IBOutlet weak var txtConfirm: ACFloatingTextfield!
     @IBOutlet weak var btnReset: UIButton!
     
     public var token: String = ""

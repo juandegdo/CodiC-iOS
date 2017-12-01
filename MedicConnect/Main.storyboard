@@ -110,7 +110,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mYu-lO-qbt" customClass="ACFloatingTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mYu-lO-qbt" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                 <rect key="frame" x="25" y="105" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="rfo-1J-cmc"/>
@@ -136,7 +136,7 @@
                                                     <outlet property="delegate" destination="cXk-ZN-lTr" id="2sz-lz-DK6"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="818-aL-fzN" customClass="ACFloatingTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="818-aL-fzN" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                 <rect key="frame" x="25" y="187" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="bUv-ir-MuX"/>
@@ -380,7 +380,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hhT-vs-kHL">
                                                 <rect key="frame" x="25" y="118.66666666666666" width="364" height="223.99999999999997"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6go-Ra-sgA" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6go-Ra-sgA" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -404,7 +404,7 @@
                                                             <outlet property="delegate" destination="9Gq-tl-fyt" id="bsV-zN-5bK"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8D-64-SFs" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8D-64-SFs" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="58" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -428,7 +428,7 @@
                                                             <outlet property="delegate" destination="9Gq-tl-fyt" id="g7O-ff-yJU"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MK3-zx-TRG" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MK3-zx-TRG" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="116.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -452,7 +452,7 @@
                                                             <outlet property="delegate" destination="9Gq-tl-fyt" id="w1n-cD-KvR"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zmo-IG-nx6" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zmo-IG-nx6" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="174.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -1842,7 +1842,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="rr7-GX-ohY">
                                                 <rect key="frame" x="25" y="122" width="364" height="325"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u6W-qP-ZJc" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u6W-qP-ZJc" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
@@ -1866,7 +1866,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                             <outlet property="delegate" destination="dIj-Ko-9ku" id="rtj-Ii-YEX"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkF-2w-0vo" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xkF-2w-0vo" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="55" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1890,7 +1890,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                             <outlet property="delegate" destination="dIj-Ko-9ku" id="ms6-i1-f8M"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZZt-Vn-MV5" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZZt-Vn-MV5" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="110" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1914,7 +1914,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                             <outlet property="delegate" destination="dIj-Ko-9ku" id="tju-hH-WNc"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jm-Rw-Eha" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jm-Rw-Eha" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="165" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1938,7 +1938,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                             <outlet property="delegate" destination="dIj-Ko-9ku" id="1TH-YV-5w8"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gth-v9-jSC" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gth-v9-jSC" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="220" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1962,7 +1962,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                             <outlet property="delegate" destination="dIj-Ko-9ku" id="3jo-7u-mB5"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcJ-0H-xm3" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcJ-0H-xm3" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="275" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -3388,7 +3388,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fyy-tg-cAn">
-                                        <rect key="frame" x="156.66666666666666" y="32" width="100.99999999999997" height="20"/>
+                                        <rect key="frame" x="156.66666666666666" y="32" width="102" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="CFw-uz-kJa"/>
                                         </constraints>
@@ -3494,7 +3494,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utY-pZ-6xd">
-                                        <rect key="frame" x="135.66666666666663" y="32" width="143.33333333333337" height="20"/>
+                                        <rect key="frame" x="135.66666666666666" y="32" width="144.33333333333331" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="q3M-cD-ENX"/>
                                         </constraints>
@@ -4241,7 +4241,7 @@ uploaded a new diagnosis...</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#hashtag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDX-MR-0cR">
-                                        <rect key="frame" x="170.66666666666666" y="32" width="73.333333333333343" height="20"/>
+                                        <rect key="frame" x="170.66666666666666" y="32" width="74.333333333333329" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="K7N-8E-1hT"/>
                                         </constraints>
@@ -4395,7 +4395,7 @@ uploaded a new diagnosis...</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Ptn-2j-ZGI">
                                                 <rect key="frame" x="25" y="178.66666666666663" width="364" height="218"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WwQ-EB-3dp" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WwQ-EB-3dp" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -4419,7 +4419,7 @@ uploaded a new diagnosis...</string>
                                                             <outlet property="delegate" destination="DZR-Zp-gfd" id="mZx-g8-8Tc"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7sO-Iv-B8b" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7sO-Iv-B8b" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="56.000000000000028" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -4443,7 +4443,7 @@ uploaded a new diagnosis...</string>
                                                             <outlet property="delegate" destination="DZR-Zp-gfd" id="syo-xb-ZaC"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vq7-ZI-lhX" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vq7-ZI-lhX" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="112.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -4467,7 +4467,7 @@ uploaded a new diagnosis...</string>
                                                             <outlet property="delegate" destination="DZR-Zp-gfd" id="37H-Y6-EnC"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jof-5y-n19" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jof-5y-n19" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="168.00000000000003" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -4775,7 +4775,7 @@ you a link to reset your password.</string>
                                                 <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eF-xU-qJ3" customClass="ACFloatingTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eF-xU-qJ3" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                 <rect key="frame" x="25" y="255" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="t4C-vC-bMd"/>
@@ -5162,7 +5162,7 @@ you a link to reset your password.</string>
                                                 <color key="textColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOP-mY-85q" customClass="ACFloatingTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOP-mY-85q" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                 <rect key="frame" x="25" y="219" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="1z0-LW-QZf"/>
@@ -5198,7 +5198,7 @@ you a link to reset your password.</string>
                                                     <action selector="onResetPassword:" destination="Ml5-ez-YjT" eventType="touchUpInside" id="Kv7-zK-ZIg"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRG-fD-X1w" customClass="ACFloatingTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRG-fD-X1w" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                 <rect key="frame" x="25" y="294" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7ZZ-Pg-U4w"/>
@@ -5855,7 +5855,7 @@ you a link to reset your password.</string>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IRJ-5D-L8i">
                                                 <rect key="frame" x="25" y="98" width="364" height="270"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EWL-Yk-9Vi" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EWL-Yk-9Vi" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -5879,7 +5879,7 @@ you a link to reset your password.</string>
                                                             <outlet property="delegate" destination="CUC-y6-FQ3" id="CGE-A5-26t"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7R6-hJ-s6B" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7R6-hJ-s6B" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="55" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -5903,7 +5903,7 @@ you a link to reset your password.</string>
                                                             <outlet property="delegate" destination="CUC-y6-FQ3" id="8sp-HZ-9w4"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4DE-UP-kgt" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4DE-UP-kgt" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="110" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -5927,7 +5927,7 @@ you a link to reset your password.</string>
                                                             <outlet property="delegate" destination="CUC-y6-FQ3" id="FtW-YJ-OXF"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DR4-pE-pUh" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DR4-pE-pUh" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="165" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -5951,7 +5951,7 @@ you a link to reset your password.</string>
                                                             <outlet property="delegate" destination="CUC-y6-FQ3" id="YCj-ul-X4b"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghX-sG-3bN" customClass="ACFloatingTextField">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ghX-sG-3bN" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
                                                         <rect key="frame" x="0.0" y="220" width="364" height="50"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -6684,6 +6684,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dMz-5h-amD"/>
+        <segue reference="OMB-Di-mue"/>
     </inferredMetricsTieBreakers>
 </document>

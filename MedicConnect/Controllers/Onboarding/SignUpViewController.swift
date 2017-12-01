@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import ACFloatingTextfield
+import ACFloatingTextfield_Swift
 
 class SignUpViewController: BaseViewController, UITextFieldDelegate {
     
-    @IBOutlet var tfName: ACFloatingTextField!
-    @IBOutlet var tfEmail: ACFloatingTextField!
-    @IBOutlet var tfPassword: ACFloatingTextField!
-    @IBOutlet var tfConfirm: ACFloatingTextField!
+    @IBOutlet var tfName: ACFloatingTextfield!
+    @IBOutlet var tfEmail: ACFloatingTextfield!
+    @IBOutlet var tfPassword: ACFloatingTextfield!
+    @IBOutlet var tfConfirm: ACFloatingTextfield!
     @IBOutlet var btnSignup: UIButton!
     @IBOutlet var pageControl: UIPageControl!
     

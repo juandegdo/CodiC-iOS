@@ -7,19 +7,17 @@
 //
 
 import UIKit
-import AVFoundation
-import ACFloatingTextfield
-import Alamofire
+import ACFloatingTextfield_Swift
 
 class WelcomeProfileViewController: BaseViewController, UINavigationControllerDelegate {
     
     @IBOutlet var btnAvatarImage: UIButton!
     @IBOutlet var btnSave: UIButton!
     
-    @IBOutlet var tfTitle: ACFloatingTextField!
-    @IBOutlet var tfMSP: ACFloatingTextField!
-    @IBOutlet var tfLocation: ACFloatingTextField!
-    @IBOutlet var tfPhoneNumber: ACFloatingTextField!
+    @IBOutlet var tfTitle: ACFloatingTextfield!
+    @IBOutlet var tfMSP: ACFloatingTextfield!
+    @IBOutlet var tfLocation: ACFloatingTextfield!
+    @IBOutlet var tfPhoneNumber: ACFloatingTextfield!
     
     @IBOutlet var pageControl: UIPageControl!
     

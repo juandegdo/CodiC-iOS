@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import ACFloatingTextfield
+import ACFloatingTextfield_Swift
 
 class CreatePatientViewController: BaseViewController {
     
-    @IBOutlet var tfName: ACFloatingTextField!
-    @IBOutlet var tfPHN: ACFloatingTextField!
-    @IBOutlet var tfBirthdate: ACFloatingTextField!
-    @IBOutlet var tfPhoneNumber: ACFloatingTextField!
-    @IBOutlet var tfAddress: ACFloatingTextField!
+    @IBOutlet var tfName: ACFloatingTextfield!
+    @IBOutlet var tfPHN: ACFloatingTextfield!
+    @IBOutlet var tfBirthdate: ACFloatingTextfield!
+    @IBOutlet var tfPhoneNumber: ACFloatingTextfield!
+    @IBOutlet var tfAddress: ACFloatingTextfield!
     @IBOutlet var btnSave: UIButton!
     
     var alertWindow: UIWindow!

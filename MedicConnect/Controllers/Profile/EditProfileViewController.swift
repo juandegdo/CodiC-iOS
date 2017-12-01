@@ -7,19 +7,19 @@
 //
 
 import UIKit
-import ACFloatingTextfield
+import ACFloatingTextfield_Swift
 
 let updatedProfileNotification = NSNotification.Name(rawValue:"userUpdated")
 
 class EditProfileViewController: BaseViewController {
     
     @IBOutlet var imgAvatar: RadAvatar!
-    @IBOutlet var tfName: ACFloatingTextField!
-    @IBOutlet var tfTitle: ACFloatingTextField!
-    @IBOutlet var tfMSP: ACFloatingTextField!
-    @IBOutlet var tfLocation: ACFloatingTextField!
-    @IBOutlet var tfPhoneNumber: ACFloatingTextField!
-    @IBOutlet var tfEmail: ACFloatingTextField!
+    @IBOutlet var tfName: ACFloatingTextfield!
+    @IBOutlet var tfTitle: ACFloatingTextfield!
+    @IBOutlet var tfMSP: ACFloatingTextfield!
+    @IBOutlet var tfLocation: ACFloatingTextfield!
+    @IBOutlet var tfPhoneNumber: ACFloatingTextfield!
+    @IBOutlet var tfEmail: ACFloatingTextfield!
     @IBOutlet var btnChangePicture: UIButton!
     @IBOutlet var btnSave: UIButton!
     

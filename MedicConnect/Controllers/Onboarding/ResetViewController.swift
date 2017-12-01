@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import ACFloatingTextfield
+import ACFloatingTextfield_Swift
 
 class ResetViewController: BaseViewController {
     
-    @IBOutlet var txFieldEmail: ACFloatingTextField!
+    @IBOutlet var txFieldEmail: ACFloatingTextfield!
     @IBOutlet var btnSend: UIButton!
     
     override func viewDidLoad() {
