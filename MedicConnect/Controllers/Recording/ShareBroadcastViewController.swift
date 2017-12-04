@@ -12,9 +12,15 @@ class ShareBroadcastViewController: BaseViewController {
     
     @IBOutlet var mBackgroundImageView: UIImageView!
     @IBOutlet var lblDescription: UILabel!
+    @IBOutlet var lblQuestion: UILabel!
+    
     @IBOutlet var btnEmail: UIButton!
     @IBOutlet var btnMessage: UIButton!
-    @IBOutlet var btnOK: UIButton!
+    @IBOutlet var btnDocument: UIButton!
+    
+    @IBOutlet var btnSkip: UIButton!
+    @IBOutlet var btnYes: UIButton!
+    @IBOutlet var viewYes: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +51,25 @@ class ShareBroadcastViewController: BaseViewController {
         self.mBackgroundImageView.image = ImageHelper.captureView()
         
         // Record Description
-        self.lblDescription.text = "You’ve successfully\nrecorded a new \(DataManager.Instance.getPostType().lowercased())..."
+        self.lblDescription.text = "You’ve successfully\nrecorded a new \(DataManager.Instance.getPostType().lowercased())."
         
-        // OK button highlighted status
-        self.btnOK.setBackgroundColor(color: UIColor.init(red: 146/255.0, green: 153/255.0, blue: 157/255.0, alpha: 1.0), forState: .highlighted)
+        if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
+            // Diagnosis
+            self.lblQuestion.text = "Would you like to share it?"
+            self.btnDocument.isHidden = true
+            self.viewYes.isHidden = true
+            
+        } else {
+            // Consult
+            self.lblQuestion.text = "Would you like to create\na synopsis document?"
+            self.btnEmail.isHidden = true
+            self.btnMessage.isHidden = true
+            
+        }
+        
+        // Buttons highlighted status
+        self.btnSkip.setBackgroundColor(color: UIColor.init(red: 146/255.0, green: 153/255.0, blue: 157/255.0, alpha: 1.0), forState: .highlighted)
+        self.btnYes.setBackgroundColor(color: UIColor.init(red: 146/255.0, green: 153/255.0, blue: 157/255.0, alpha: 1.0), forState: .highlighted)
     
     }
 }
@@ -70,7 +91,11 @@ extension ShareBroadcastViewController {
         
     }
     
-    @IBAction func onOK(sender: UIButton) {
+    @IBAction func onSkip(sender: UIButton) {
+        self.onClose(sender: sender)
+    }
+    
+    @IBAction func onYes(sender: UIButton) {
         self.onClose(sender: sender)
     }
 
