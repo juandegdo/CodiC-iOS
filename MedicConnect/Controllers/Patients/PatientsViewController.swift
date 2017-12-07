@@ -105,7 +105,9 @@ extension PatientsViewController {
             searchedPatients = []
         } else {
             searchedPatients = PatientController.Instance.getPatients().filter({(patient: Patient) -> Bool in
-                return patient.patientNumber.contains(keyword)
+                return patient.patientNumber.contains(keyword) ||
+                    patient.name.lowercased().contains(keyword.lowercased()) ||
+                    patient.user.fullName.lowercased().contains(keyword.lowercased())
             })
         }
         
