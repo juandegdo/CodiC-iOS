@@ -70,7 +70,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             
             switch (section) {
             case 0:
-                return 6
+                return 4
             case 1:
                 return 3
             case 2:
@@ -102,16 +102,16 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 else if indexPath.row == 1 {
                     cell.setCellWithTitle(title: NSLocalizedString("Change Password", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
+//                else if indexPath.row == 2 {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Blocked Users", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
+//                }
+//                else if indexPath.row == 3 {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Reset Tutorial", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
+//                }
                 else if indexPath.row == 2 {
-                    cell.setCellWithTitle(title: NSLocalizedString("Blocked Users", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }
-                else if indexPath.row == 3 {
-                    cell.setCellWithTitle(title: NSLocalizedString("Reset Tutorial", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
-                }
-                else if indexPath.row == 4 {
                     cell.setCellWithTitle(title: NSLocalizedString("Logout", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
-                else if indexPath.row == 5 {
+                else if indexPath.row == 3 {
                     cell.setCellWithTitle(title: NSLocalizedString("Delete Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
                 
@@ -171,27 +171,27 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChangePasswordVC")
                     present(vc, animated: false, completion: nil)
                     
+//                } else if indexPath.row == 2 {
+//                    print("Blocked users")
+//
+//                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BlockedUsersVCId")
+//                    present(vc, animated: false, completion: nil)
+//
+//                } else if indexPath.row == 3 {
+//                    print("Reset Tutorial")
+//
+//                    // Reset Tutorial
+//                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to reset tutorial?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+//                        // OK completion block
+//                        // Set FirstLoad to 0 to show tutorials for new users
+//                        UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
+//
+//                    }, cancelCompletionBlock: {
+//                        // Cancel completion block
+//
+//                    })
+//
                 } else if indexPath.row == 2 {
-                    print("Blocked users")
-                    
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BlockedUsersVCId")
-                    present(vc, animated: false, completion: nil)
-                    
-                } else if indexPath.row == 3 {
-                    print("Reset Tutorial")
-                    
-                    // Reset Tutorial
-                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to reset tutorial?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
-                        // OK completion block
-                        // Set FirstLoad to 0 to show tutorials for new users
-                        UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
-                        
-                    }, cancelCompletionBlock: {
-                        // Cancel completion block
-                        
-                    })
-                    
-                } else if indexPath.row == 4 {
                     
                     // Logout
                     AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to logout?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
@@ -204,7 +204,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                         
                     })
                     
-                } else if indexPath.row == 5 {
+                } else if indexPath.row == 3 {
                     
                     // Delete account
                     AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete your account?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
