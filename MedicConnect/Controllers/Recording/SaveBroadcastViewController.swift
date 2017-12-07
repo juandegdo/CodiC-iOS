@@ -170,6 +170,16 @@ extension SaveBroadcastViewController {
         UIApplication.shared.endIgnoringInteractionEvents()
     }
     
+    @IBAction func onClose(sender: UIButton) {
+
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
+        
+    }
+    
     @IBAction func onSave(sender: UIButton) {
         
         let postType = DataManager.Instance.getPostType()

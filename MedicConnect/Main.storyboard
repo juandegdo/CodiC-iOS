@@ -2801,27 +2801,13 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <constraint firstAttribute="width" constant="40" id="Nf5-pf-7C2"/>
                                             <constraint firstAttribute="height" constant="40" id="duT-4M-dDy"/>
                                         </constraints>
-                                        <state key="normal" image="icon_notification"/>
+                                        <state key="normal" image="icon_close_grey"/>
                                         <connections>
-                                            <action selector="onNotificationsWithSender:" destination="QbM-bR-Xg1" eventType="touchUpInside" id="IYC-NY-R9F"/>
+                                            <action selector="onCloseWithSender:" destination="QbM-bR-Xg1" eventType="touchUpInside" id="18c-vq-O8Y"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r95-oj-7EV">
-                                        <rect key="frame" x="22" y="42" width="7" height="7"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="7" id="NGD-rl-33z"/>
-                                            <constraint firstAttribute="height" constant="7" id="pp0-zp-PVs"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <real key="value" value="3.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Diagnosis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFR-fd-QvR">
-                                        <rect key="frame" x="146.66666666666666" y="32" width="121.33333333333334" height="20"/>
+                                        <rect key="frame" x="146.66666666666666" y="32" width="122.33333333333333" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="6FZ-Nh-tKi"/>
                                         </constraints>
@@ -2845,12 +2831,10 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="vpJ-5b-yNX" secondAttribute="trailing" id="1Pg-W2-GHj"/>
                                     <constraint firstAttribute="height" constant="64" id="FJh-08-qja"/>
-                                    <constraint firstItem="r95-oj-7EV" firstAttribute="trailing" secondItem="qcO-GH-03U" secondAttribute="trailing" constant="-11" id="UHe-Jb-1Tt"/>
                                     <constraint firstItem="PFR-fd-QvR" firstAttribute="centerX" secondItem="7Vm-iJ-YUM" secondAttribute="centerX" id="XBf-EF-BrF"/>
                                     <constraint firstItem="qcO-GH-03U" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" constant="22" id="YxI-jp-LI8"/>
                                     <constraint firstItem="qcO-GH-03U" firstAttribute="leading" secondItem="7Vm-iJ-YUM" secondAttribute="leading" id="j2u-EG-GJz"/>
                                     <constraint firstItem="PFR-fd-QvR" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" constant="32" id="jej-ni-1a1"/>
-                                    <constraint firstItem="r95-oj-7EV" firstAttribute="bottom" secondItem="qcO-GH-03U" secondAttribute="bottom" constant="-13" id="pPT-N0-rt2"/>
                                     <constraint firstItem="vpJ-5b-yNX" firstAttribute="top" secondItem="7Vm-iJ-YUM" secondAttribute="top" constant="22" id="urA-ed-s78"/>
                                 </constraints>
                             </view>
@@ -3110,7 +3094,6 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <outlet property="tfBroadcastName" destination="qf3-Qq-6kY" id="Ya4-Sq-awl"/>
                         <outlet property="tvDescription" destination="aZH-VM-yCi" id="ueK-bo-F00"/>
                         <outlet property="viewAuthorContraint" destination="vDE-NK-vzV" id="QlA-jF-1V1"/>
-                        <outlet property="viewNotificationAlert" destination="r95-oj-7EV" id="HRZ-ZJ-SDT"/>
                         <segue destination="kIS-Sn-N8T" kind="unwind" identifier="StopRecordingBroadcast" animates="NO" unwindAction="unWindToPreRecordingWithSegue:" id="ZGr-tJ-joM"/>
                         <segue destination="XbM-PQ-f3v" kind="show" identifier="ShareBroadcast" animates="NO" id="DbY-Qb-ZIx"/>
                     </connections>
