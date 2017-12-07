@@ -55,10 +55,10 @@ extension SettingsDetailViewController : UIWebViewDelegate {
             if url == "https://radioishapp.com/privacy" {
                 self.strTitle = "Privacy Policy"
                 openContents()
-            }else if url == "https://radioishapp.com/conduct" {
+            } else if url == "https://radioishapp.com/conduct" {
                 self.strTitle = "Code of Conduct"
                 openContents()
-            }else if url == "https://radioishapp.com/support" {
+            } else if url == "https://radioishapp.com/support" {
                 self.sendEmail(subject: "Contact Us", msgbody: "")
             }
         }

@@ -74,7 +74,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             case 1:
                 return 3
             case 2:
-                return 4
+                return 3
                 
             default:
                 break
@@ -129,16 +129,17 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 
             } else if indexPath.section == 2 {
                 
+//                if (indexPath.row == 0) {
+//                    cell.setCellWithTitle(title: NSLocalizedString("About", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
+//                }
+//                else
                 if (indexPath.row == 0) {
-                    cell.setCellWithTitle(title: NSLocalizedString("About", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }
-                else if (indexPath.row == 1) {
                     cell.setCellWithTitle(title: NSLocalizedString("Privacy Policy", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
-                else if (indexPath.row == 2) {
+                else if (indexPath.row == 1) {
                     cell.setCellWithTitle(title: NSLocalizedString("Terms of Use", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
-                else if (indexPath.row == 3) {
+                else if (indexPath.row == 2) {
                     cell.setCellWithTitle(title: NSLocalizedString("Contact Us", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
                 
@@ -232,20 +233,21 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
             } else if indexPath.section == 2 { // Information
                 
-                if (indexPath.row == 3) {
+                if (indexPath.row == 2) {
                     self.sendEmail(emailAddress: "info@radioishapp.com")
                     
                 } else if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
-                    
+//                    if (indexPath.row == 0) {
+//                        vc.strTitle = "About"
+//                    } else
                     if (indexPath.row == 0) {
-                        vc.strTitle = "About"
-                    } else if (indexPath.row == 1) {
                         vc.strTitle = "Privacy Policy"
-                    }else if (indexPath.row == 2) {
+                    }else if (indexPath.row == 1) {
                         vc.strTitle = "Terms of Use"
                     }
                     
                     present(vc, animated: false, completion: nil)
+                    
                 }
             }
         }
