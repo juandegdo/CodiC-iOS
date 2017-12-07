@@ -627,9 +627,10 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         cell.setData(post: post)
         
-        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-        cell.btnAction.index = indexPath.row
-        cell.btnAction.refTableView = tableView
+//        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
+//        cell.btnAction.index = indexPath.row
+//        cell.btnAction.refTableView = tableView
+        cell.btnAction.isHidden = true
         
         cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
         cell.btnLike.index = indexPath.row
