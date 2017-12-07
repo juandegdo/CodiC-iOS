@@ -153,6 +153,7 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
         
         let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
         patientProfileVC.patient = _patient
+        patientProfileVC.fromAdd = false
         self.navigationController?.pushViewController(patientProfileVC, animated: true)
 
     }

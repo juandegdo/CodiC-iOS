@@ -16,6 +16,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     let postType = "Note"
     
     var patient: Patient? = nil
+    var fromAdd: Bool = false
     
     // Header
     @IBOutlet var headerLabel: UILabel!
@@ -508,7 +509,11 @@ extension PatientProfileViewController {
     
     @IBAction func onBack(sender: AnyObject) {
         if let _nav = self.navigationController as UINavigationController? {
-            _ = _nav.popViewController(animated: false)
+            if self.fromAdd == true {
+                _nav.popToRootViewController(animated: false)
+            } else {
+                _nav.popViewController(animated: false)
+            }
         } else {
             self.dismiss(animated: false, completion: nil)
         }

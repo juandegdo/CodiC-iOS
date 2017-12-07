@@ -129,9 +129,16 @@ extension CreatePatientViewController {
             return
         }
         
-        PatientService.Instance.addPatient(self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool) in
+        PatientService.Instance.addPatient(self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool, patient: Patient?) in
             
-            self.onBack(sender: nil)
+            if patient != nil {
+                DispatchQueue.main.async {
+                    let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
+                    patientProfileVC.patient = patient
+                    patientProfileVC.fromAdd = true
+                    self.navigationController?.pushViewController(patientProfileVC, animated: true)
+                }
+            }
             
         }
         
