@@ -16,11 +16,12 @@ class PostController {
     fileprivate var followingPosts: [Post] = []
     fileprivate var hashtagPosts: [Post] = []
     fileprivate var trendingHashtags: [String] = []
+    fileprivate var patientNotes: [Post] = []
     
     //MARK: Recommended posts
     
     func getRecommendedPosts() -> [Post] {
-        return self.recommendedPosts.reversed()
+        return self.recommendedPosts
     }
     
     func setRecommendedPosts(_ recommendedPosts: [Post]) {
@@ -34,7 +35,7 @@ class PostController {
             return post.postType == type
         })
         
-        return posts.reversed()
+        return posts
     }
     
     func setFollowingPosts(_ followingPosts: [Post]) {
@@ -44,7 +45,7 @@ class PostController {
     //MARK: Hashtag posts
     
     func getHashtagPosts() -> [Post] {
-        return self.hashtagPosts.reversed()
+        return self.hashtagPosts
     }
     
     func setHashtagPosts(_ hashtagPosts: [Post]) {
@@ -54,11 +55,21 @@ class PostController {
     //MARK: Trending hashtags
     
     func getTrendingHashtags() -> [String] {
-        return self.trendingHashtags.reversed()
+        return self.trendingHashtags
     }
     
     func setTrendingHashtags(_ trendingHashtags: [String]) {
         self.trendingHashtags = trendingHashtags
+    }
+    
+    //MARK: Patient Notes
+    
+    func getPatientNotes() -> [Post] {
+        return self.patientNotes
+    }
+    
+    func setPatientNotes(_ patientNotes: [Post]) {
+        self.patientNotes = patientNotes
     }
     
 }

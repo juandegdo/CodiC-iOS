@@ -362,6 +362,153 @@ class PostService: BaseTaskController {
         }
     }
     
+    func getNotesByPatientId(id: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetNotesByPatientIdSuffix)/\(id)"
+        
+        manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    completion(false)
+                    return
+                }
+                
+                var posts: [Post] = []
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
+                }
+                
+                if response.response?.statusCode == 200 {
+                    
+                    if let _posts = response.result.value as? NSArray {
+                        
+                        for p in _posts {
+                            
+                            if let _p = p as? NSDictionary,
+                                let _id = _p["_id"] as? String,
+                                let _audio = _p["audio"] as? String,
+                                let _createdAt = _p["createdAt"] as? String,
+                                let _playCount = _p["play_count"] as? Int,
+                                let _commentsCount = _p["comments_count"] as? Int,
+                                let _title = _p["title"] as? String,
+                                let _userObj = _p["user"] as? NSDictionary,
+                                let _postType = _p["post_type"] as? String,
+                                let _patientId = _p["patientId"] as? String,
+                                let _userId = _userObj["_id"] as? String,
+                                let _name = _userObj["name"] as? String {
+                                
+                                // Create Meta
+                                let _meta = Meta(createdAt: _createdAt)
+                                
+                                if let _updatedAt = _p["updatedAt"] as? String {
+                                    _meta.updatedAt = _updatedAt
+                                }
+                                
+                                // Create User
+                                let _user = User(id: _userId, fullName: _name, email: "")
+                                
+                                if let _userPhoto = _userObj["photo"] as? String {
+                                    _user.photo = _userPhoto
+                                }
+                                
+                                if let _userFollowing = _userObj["following"] as? [AnyObject] {
+                                    _user.following = _userFollowing
+                                }
+                                
+                                if let _userFollowers = _userObj["followers"] as? [AnyObject] {
+                                    _user.follower = _userFollowers
+                                }
+                                
+                                if let _blocking = _userObj["blocking"] as? [AnyObject] {
+                                    _user.blocking = _blocking
+                                }
+                                
+                                if let _blockedBy = _userObj["blockedby"] as? [String] {
+                                    _user.blockedby = _blockedBy as [AnyObject]
+                                    if let _user = UserController.Instance.getUser() as User?, _blockedBy.contains(_user.id) {
+                                        continue
+                                    }
+                                }
+                                
+                                if let _requested = _userObj["requested"] as? [AnyObject] {
+                                    _user.requested = _requested
+                                }
+                                
+                                if let _requesting = _userObj["requesting"] as? [AnyObject] {
+                                    _user.requesting = _requesting
+                                }
+                                
+                                if let _title = _userObj["title"] as? String {
+                                    _user.title = _title
+                                }
+                                
+                                if let _msp = _userObj["msp"] as? String {
+                                    _user.msp = _msp
+                                }
+                                
+                                if let _location = _userObj["location"] as? String {
+                                    _user.location = _location
+                                }
+                                
+                                // Create final Post
+                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType, patientId: _patientId)
+                                
+                                // Optional description
+                                
+                                if let _description = _p["description"] as? String {
+                                    post.description = _description
+                                }
+                                
+                                // Optional likes
+                                
+                                if let _likes = _p["likes"] as? [String] {
+                                    post.likes = _likes
+                                }
+                                
+                                // Optional like description
+                                
+                                if let _likeDescription = _p["like_description"] as? String {
+                                    post.likeDescription = _likeDescription
+                                }
+                                
+                                // Optional commentedUsers
+                                
+                                if let _commentedUsers = _p["commented_users"] as? [String] {
+                                    post.commentedUsers = _commentedUsers
+                                }
+                                
+                                // Optional hashtags
+                                
+                                if let _hashtags = _p["hashtags"] as? [String] {
+                                    post.hashtags = _hashtags
+                                }
+                                
+                                posts.append(post)
+                                
+                            }
+                            
+                        }
+                        
+                        PostController.Instance.setPatientNotes(posts)
+                        completion(true)
+                        
+                    } else {
+                        print("No posts.")
+                        PostController.Instance.setPatientNotes([])
+                        completion(false)
+                    }
+                    
+                } else {
+                    PostController.Instance.setPatientNotes([])
+                    completion(false)
+                }
+                
+        }
+        
+    }
+    
     func getPost(postId: String, completion: @escaping (_ post: Post?) -> Void) {
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetPostSuffix)/\(postId)"
         

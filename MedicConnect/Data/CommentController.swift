@@ -17,7 +17,7 @@ class CommentController {
     //MARK: Comments
     
     func getComments() -> [Comment] {
-        return self.comments.reversed()
+        return self.comments
     }
     
     func setComments(_ comments: [Comment]) {

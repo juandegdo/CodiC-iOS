@@ -15,7 +15,6 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     let PatientNotesCellID = "ProfileListCell"
     
     var patient: Patient? = nil
-    var user: User? = nil
     var fromAdd: Bool = false
     
     // Header
@@ -46,6 +45,9 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Clear Previous Patient Notes
+        PostController.Instance.setPatientNotes([])
         
         // Initialize Table Views
         self.tableView.register(UINib(nibName: PatientNotesCellID, bundle: nil), forCellReuseIdentifier: PatientNotesCellID)
@@ -79,6 +81,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
         // Update UI with basic patient info
         self.updateUI()
+        
         // Load patient notes
         self.refreshData()
         
@@ -86,27 +89,24 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func refreshData() {
         
-        if let _patient = self.patient as Patient?,
-            let _user = _patient.user as User? {
+        if let _patient = self.patient as Patient? {
             
-            // Fetch all user data (primarily we only had basic info)
-            UserService.Instance.getUser(forId: _user.id, completion: {
-                (user: User?) in
+            // Fetch all patient notes
+            PostService.Instance.getNotesByPatientId(id: _patient.id, completion: { (success) in
                 
-                if (user as User?) != nil {
-                    self.user = user
-//                    self.updateUI()
-                    
+                if (success) {
                     self.tableView.reloadData()
                     self.updateScroll(offset: self.mainScrollView.contentOffset.y)
                 }
                 
             })
+            
         }
         
     }
     
     func updateUI() {
+        
         if let _patient = self.patient as Patient? {
             // Customize Patient information
             self.lblPatientName.text = _patient.name
@@ -115,14 +115,13 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             self.lblPhoneNumber.text = _patient.phoneNumber
             self.lblPaitentNumber.text = "PHN # \(_patient.patientNumber)"
             
-            if let _currentUser = UserController.Instance.getUser() as User?,
-                let _user = self.patient?.user as User?,
-                _currentUser.id != _user.id {
-                self.btnRecord.isHidden = true
-            }
+//            if let _currentUser = UserController.Instance.getUser() as User?,
+//                let _user = self.patient?.user as User?,
+//                _currentUser.id != _user.id {
+//                self.btnRecord.isHidden = true
+//            }
         }
         
-//        self.tableView.reloadData()
         self.updateScroll(offset: self.mainScrollView.contentOffset.y)
         
     }
@@ -147,9 +146,8 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             PlayerController.Instance.player?.seek(to: kCMTimeZero)
         }
         
-        if let _user = self.user as User?,
-            let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+        if let _index = PlayerController.Instance.currentIndex as Int? {
+            let post = PostController.Instance.getPatientNotes()[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
             let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
@@ -176,7 +174,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             return
         }
         
-        guard let _user = self.user as User? else {
+        guard (self.patient as Patient?) != nil else {
             return
         }
         
@@ -186,7 +184,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             return
         }
         
-        let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+        let post = PostController.Instance.getPatientNotes()[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
             let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
@@ -265,11 +263,11 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
                 return
             }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            let post = PostController.Instance.getPatientNotes()[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value))
         }
         
@@ -341,11 +339,11 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
                 return
             }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            let post = PostController.Instance.getPatientNotes()[_index]
             post.setPlayed(time: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), progress: CGFloat(_lastPlayed.value))
             
         }
@@ -368,11 +366,11 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
                 return
             }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            let post = PostController.Instance.getPatientNotes()[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(sender.value))
         }
         
@@ -415,8 +413,8 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         if (tableView == self.tableView) {
-            if let _user = self.user as User? {
-                return _user.getPatientNotes(id: (self.patient?.id)!).count
+            if (self.patient as Patient?) != nil {
+                return PostController.Instance.getPatientNotes().count
             } else {
                 return 0
             }
@@ -453,11 +451,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             let cell: ProfileListCell = tableView.dequeueReusableCell(withIdentifier: PatientNotesCellID, for: indexPath) as! ProfileListCell
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return cell
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+            let post = PostController.Instance.getPatientNotes()[indexPath.row]
             cell.setData(post: post)
             
             let isFullDesc = self.states.contains(post.id)
@@ -507,13 +505,13 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
             self.releasePlayer()
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+            let post = PostController.Instance.getPatientNotes()[indexPath.row]
             
             switch cell.isExpanded {
             case true:
@@ -537,11 +535,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+            let post = PostController.Instance.getPatientNotes()[indexPath.row]
             self.expandedRows.remove(post.id)
             
             cell.isExpanded = false
@@ -558,9 +556,9 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             if tableView == self.tableView {
                 
-                if let _user = self.user as User? {
+                if (self.patient as Patient?) != nil {
                     
-                    let _post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+                    let _post = PostController.Instance.getPatientNotes()[indexPath.row]
                     PostService.Instance.deletePost(id: _post.id, completion: {
                         (success: Bool) in
                     })
@@ -591,11 +589,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+            let post = PostController.Instance.getPatientNotes()[indexPath.row]
             self.states.insert(post.id)
             
             cell.showFullDescription = true
@@ -613,11 +611,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = self.user as User? else {
+            guard (self.patient as Patient?) != nil else {
                 return
             }
             
-            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+            let post = PostController.Instance.getPatientNotes()[indexPath.row]
             self.states.remove(post.id)
             
             cell.showFullDescription = false

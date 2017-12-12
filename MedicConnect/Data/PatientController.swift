@@ -17,7 +17,7 @@ class PatientController {
     //MARK: Patients
     
     func getPatients() -> [Patient] {
-        return self.patients.reversed()
+        return self.patients
     }
     
     func setPatients(_ patients: [Patient]) {

@@ -17,7 +17,7 @@ class NotificationController {
     //MARK: Recommended posts
     
     func getNotifications() -> [Notification] {
-        return self.notifications //.reversed()
+        return self.notifications
     }
     
     func setNotifications(_ notifications: [Notification]) {

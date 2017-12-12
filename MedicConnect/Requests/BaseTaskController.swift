@@ -49,6 +49,7 @@ class BaseTaskController {
     
     let URLGetTrendingHashtagsSuffix = "/gettrendinghashtags"
     let URLGetPostsFromHashtagSuffix = "/getpostsfromhashtag"
+    let URLGetNotesByPatientIdSuffix = "/getnotesbypatientid"
     
     let URLAddPatientSuffix = "/addpatient"
     let URLGetPatientsSuffix = "/getpatients"
