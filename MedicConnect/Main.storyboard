@@ -2807,7 +2807,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Diagnosis" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PFR-fd-QvR">
-                                        <rect key="frame" x="146.66666666666666" y="32" width="122.33333333333333" height="20"/>
+                                        <rect key="frame" x="146.66666666666666" y="32" width="122.33333333333334" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="6FZ-Nh-tKi"/>
                                         </constraints>
@@ -5572,7 +5572,7 @@ you a link to reset your password.</string>
         <!--Navigation Controller-->
         <scene sceneID="wnz-Si-kTX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Egh-hb-14Z" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="messageNavController" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Egh-hb-14Z" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1005" title="" image="tab_icon_message" id="7g2-45-kPc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="m4D-66-fJC">
@@ -6718,6 +6718,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dMz-5h-amD"/>
+        <segue reference="OAe-nj-vD0"/>
     </inferredMetricsTieBreakers>
 </document>

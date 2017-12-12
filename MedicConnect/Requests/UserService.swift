@@ -393,14 +393,15 @@ class UserService: BaseTaskController {
                         if let _posts = _dic["posts"] as? [[String : AnyObject]] {
                             
                             for p in _posts {
-                                                            
+                                
                                 if let _id = p["_id"] as? String,
                                     let _audio = p["audio"] as? String,
                                     let _createdAt = p["createdAt"] as? String,
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String,
-                                    let _postType = p["post_type"] as? String {
+                                    let _postType = p["post_type"] as? String,
+                                    let _patientId = p["patientId"] as? String {
                                     
                                     // Create meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -409,7 +410,7 @@ class UserService: BaseTaskController {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType)
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType, patientId: _patientId)
                                     
                                     // Optional description
                                     
@@ -735,7 +736,8 @@ class UserService: BaseTaskController {
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String,
-                                    let _postType = p["post_type"] as? String {
+                                    let _postType = p["post_type"] as? String,
+                                    let _patientId = p["patientId"] as? String {
                                     
                                     // Create meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -744,7 +746,7 @@ class UserService: BaseTaskController {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType)
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType, patientId: _patientId)
                                     
                                     // Optional description
                                     
@@ -900,8 +902,6 @@ class UserService: BaseTaskController {
         
         let url = "\(self.baseURL)\(self.URLUser)/all?skip=0&limit=100"
         
-        var users: [User] = []
-        
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
                 
@@ -913,6 +913,8 @@ class UserService: BaseTaskController {
                 if response.response?.statusCode == 200 {
                     
                     if let _dicArray = response.result.value as? NSArray {
+                        var users: [User] = []
+                        
                         for d in _dicArray {
                             
                             if let _dic = d as? NSDictionary,
@@ -1018,6 +1020,7 @@ class UserService: BaseTaskController {
                                 let _title = _p["title"] as? String,
                                 let _userObj = _p["user"] as? NSDictionary,
                                 let _postType = _p["post_type"] as? String,
+                                let _patientId = _p["patientId"] as? String,
                                 let _userId = _userObj["_id"] as? String,
                                 let _name = _userObj["name"] as? String {
                                 
@@ -1075,7 +1078,7 @@ class UserService: BaseTaskController {
                                 }
                                 
                                 // Create final Post
-                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
+                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType, patientId: _patientId)
                                 
                                 // Optional description
                                 

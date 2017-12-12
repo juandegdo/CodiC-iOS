@@ -68,8 +68,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         let nc = NotificationCenter.default
-        
         nc.addObserver(self, selector: #selector(self.updatedProfileSettings), name: updatedProfileNotification, object: nil)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {

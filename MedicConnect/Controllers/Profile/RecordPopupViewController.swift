@@ -71,6 +71,7 @@ extension RecordPopupViewController {
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)
+            DataManager.Instance.setPatientId(patientId: "")
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
@@ -86,6 +87,7 @@ extension RecordPopupViewController {
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPatientId(patientId: "")
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {

@@ -14,6 +14,7 @@ class DataManager {
     
     var theLastTabIndex: Int = 0
     var postType: String = Constants.PostTypeDiagnosis
+    var patientId: String = ""
     
     // MARK: Saved Tab Index
         
@@ -33,6 +34,16 @@ class DataManager {
     
     func setPostType(postType: String) {
         self.postType = postType
+    }
+    
+    // MARK: Patient Id
+    
+    func getPatientId() -> String {
+        return self.patientId
+    }
+    
+    func setPatientId(patientId: String) {
+        self.patientId = patientId
     }
     
 }

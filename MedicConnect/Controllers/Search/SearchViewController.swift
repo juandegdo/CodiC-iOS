@@ -212,7 +212,7 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: false)
         
         if let _followingUser = self.getUserForRow(inTableView: tableView, row: indexPath.row) as User? {
-            self.callProfileVC(user: _followingUser)
+//            self.callProfileVC(user: _followingUser)
         }
     }
     
@@ -221,19 +221,21 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchPeopleCellID) as! FollowingCell
         
         // Set button actions
-        cell.btnFavorite.index = indexPath.row
-        cell.btnFavorite.refTableView = tableView
-        cell.btnFavorite.addTarget(self, action: #selector(SearchViewController.onFavorites(sender:)), for: .touchUpInside)
-        cell.btnFavorite.makeEnabled(enabled: true)
+//        cell.btnFavorite.index = indexPath.row
+//        cell.btnFavorite.refTableView = tableView
+//        cell.btnFavorite.addTarget(self, action: #selector(SearchViewController.onFavorites(sender:)), for: .touchUpInside)
+//        cell.btnFavorite.makeEnabled(enabled: true)
+        cell.btnFavorite.isHidden = true
+        cell.btnAction.isHidden = true
         
         // Set cell data
         if let user = self.getUserForRow(inTableView: tableView, row: indexPath.row) as User? {
-            if let _user = UserController.Instance.getUser() as User? {
-                let hasFollowed = (_user.following as! [User]).contains(where: { $0.id == user.id })
-                let image = hasFollowed ? UIImage(named: "icon_favorites") : UIImage(named: "icon_favorites_off")
-                cell.btnFavorite.setImage(image, for: .normal)
-                cell.btnFavorite.tag = hasFollowed ? 1 : 0
-            }
+//            if let _user = UserController.Instance.getUser() as User? {
+//                let hasFollowed = (_user.following as! [User]).contains(where: { $0.id == user.id })
+//                let image = hasFollowed ? UIImage(named: "icon_favorites") : UIImage(named: "icon_favorites_off")
+//                cell.btnFavorite.setImage(image, for: .normal)
+//                cell.btnFavorite.tag = hasFollowed ? 1 : 0
+//            }
             
             cell.setFollowData(user: user)
         }

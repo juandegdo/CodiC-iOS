@@ -44,8 +44,8 @@ class FollowingCell: UITableViewCell {
         
         // Customize User Data
         self.lblUserName.text = user.fullName
-//        self.lblUserTitle.text = user.title
-//        self.lblUserLocation.text = user.location
+        self.lblUserTitle.text = user.title
+        self.lblUserLocation.text = user.location
         
     }
     

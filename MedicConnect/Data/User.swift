@@ -92,10 +92,26 @@ class User {
     func getPosts(type: String) -> [Post] {
         
         let posts = self.posts.filter({(post: Post) -> Bool in
-            return post.postType == type
+            if type == Constants.PostTypeConsult {
+                return post.postType == type || post.postType == Constants.PostTypeNote
+            } else {
+                return post.postType == type
+            }
         })
         
-        return posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+//        return posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        return posts
+        
+    }
+    
+    func getPatientNotes(id: String) -> [Post] {
+        
+        let posts = self.posts.filter({(post: Post) -> Bool in
+            return post.postType == Constants.PostTypeNote && post.patientId == id
+        })
+        
+//        return posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        return posts
         
     }
     

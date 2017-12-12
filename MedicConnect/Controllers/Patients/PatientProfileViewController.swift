@@ -12,10 +12,10 @@ import AVFoundation
 class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
     let OffsetHeaderStop: CGFloat = 180.0
-    let PatientNotesCellID = "PatientNotesCell"
-    let postType = "Note"
+    let PatientNotesCellID = "ProfileListCell"
     
     var patient: Patient? = nil
+    var user: User? = nil
     var fromAdd: Bool = false
     
     // Header
@@ -47,22 +47,21 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.updateUI()
-        
         // Initialize Table Views
         self.tableView.register(UINib(nibName: PatientNotesCellID, bundle: nil), forCellReuseIdentifier: PatientNotesCellID)
         self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedRowHeight = 100.0
+        self.tableView.estimatedRowHeight = 110.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.initViews()
         
         NotificationCenter.default.addObserver(self, selector: #selector(PatientProfileViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,49 +75,35 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     // MARK: Private methods
     
-    func releasePlayer(onlyState: Bool = false) {
-//        PlayerController.Instance.invalidateTimer()
-//
-//        // Reset player state
-//        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
-//            _lastPlayed.tickCount = 0
-//            _lastPlayed.playing = false
-//            PlayerController.Instance.shouldSeek = true
-//
-//            if let _player = PlayerController.Instance.player as AVPlayer?,
-//                let _index = _lastPlayed.index as Int? {
-//
-//                if let _user = UserController.Instance.getUser() as User? {
-//
-//                    let post = _user.getPosts()[_index]
-//                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
-//
-//                }
-//
-//            }
-//
-//        }
-//
-//        if let _observer = PlayerController.Instance.playerObserver as Any? {
-//            PlayerController.Instance.player?.removeTimeObserver(_observer)
-//        }
-//
-//        if onlyState {
-//            return
-//        }
-//
-//        // Pause and reset components
-//        PlayerController.Instance.player?.pause()
-//        PlayerController.Instance.player = nil
-//        PlayerController.Instance.lastPlayed = nil
-//
-//        if let _user = UserController.Instance.getUser() as User?,
-//            let _index = PlayerController.Instance.currentIndex as Int? {
-//            let post = _user.getPosts()[_index]
-//            post.resetCurrentTime()
-//        }
-//
-//        PlayerController.Instance.currentIndex = nil
+    func initViews() {
+        
+        // Update UI with basic patient info
+        self.updateUI()
+        // Load patient notes
+        self.refreshData()
+        
+    }
+    
+    func refreshData() {
+        
+        if let _patient = self.patient as Patient?,
+            let _user = _patient.user as User? {
+            
+            // Fetch all user data (primarily we only had basic info)
+            UserService.Instance.getUser(forId: _user.id, completion: {
+                (user: User?) in
+                
+                if (user as User?) != nil {
+                    self.user = user
+//                    self.updateUI()
+                    
+                    self.tableView.reloadData()
+                    self.updateScroll(offset: self.mainScrollView.contentOffset.y)
+                }
+                
+            })
+        }
+        
     }
     
     func updateUI() {
@@ -129,128 +114,277 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             self.lblAddress.text = _patient.address
             self.lblPhoneNumber.text = _patient.phoneNumber
             self.lblPaitentNumber.text = "PHN # \(_patient.patientNumber)"
+            
+            if let _currentUser = UserController.Instance.getUser() as User?,
+                let _user = self.patient?.user as User?,
+                _currentUser.id != _user.id {
+                self.btnRecord.isHidden = true
+            }
         }
         
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
         self.updateScroll(offset: self.mainScrollView.contentOffset.y)
         
     }
     
+    func releasePlayer(onlyState: Bool = false) {
+        
+        PlayerController.Instance.invalidateTimer()
+        
+        // Reset player state
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider?,
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel as UILabel?,
+            let _durationLabel = PlayerController.Instance.durationLabel as UILabel? {
+            _lastPlayed.setValue(0.0, animated: false)
+            _lastPlayed.playing = false
+            _elapsedLabel.text = "0:00"
+            _durationLabel.text = "0:00"
+        }
+        
+        if let _observer = PlayerController.Instance.playerObserver as Any? {
+            PlayerController.Instance.player?.removeTimeObserver(_observer)
+            PlayerController.Instance.playerObserver = nil
+            PlayerController.Instance.player?.seek(to: kCMTimeZero)
+        }
+        
+        if let _user = self.user as User?,
+            let _index = PlayerController.Instance.currentIndex as Int? {
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
+            
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
+        }
+        
+        if onlyState {
+            return
+        }
+        
+        // Pause and reset components
+        PlayerController.Instance.player?.pause()
+        PlayerController.Instance.player = nil
+        PlayerController.Instance.lastPlayed = nil
+        PlayerController.Instance.elapsedTimeLabel = nil
+        PlayerController.Instance.durationLabel = nil
+        PlayerController.Instance.currentIndex = nil
+        
+    }
+    
     func onPlayAudio(sender: SVGPlayButton) {
-//        guard let _index = sender.index as Int? else {
-//            return
-//        }
-//
-//        guard let _user = UserController.Instance.getUser() as User? else {
-//            return
-//        }
-//
-//        let post = _user.getPosts()[_index]
-//
-//        self.releasePlayer(onlyState: true)
-//
-//        if let _url = URL(string: post.audio ) as URL? {
-//            if let _player = PlayerController.Instance.player as AVPlayer?,
-//                let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
-//
-//                PlayerController.Instance.lastPlayed = sender
-//
-//                PlayerController.Instance.shouldSeek = false
-//                _player.rate = 1.0
-//                PlayerController.Instance.currentTime = post.getCurrentTime()
-//                _player.play()
-//
-//                PlayerController.Instance.addObserver()
-//
-//            } else {
-//                let playerItem = AVPlayerItem(url: _url)
-//                PlayerController.Instance.player = AVPlayer(playerItem:playerItem)
-//
-//                if let _player = PlayerController.Instance.player as AVPlayer? {
-//
-//                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
-//
-//                    PlayerController.Instance.lastPlayed = sender
-//                    PlayerController.Instance.currentIndex = _index
-//
-//                    _player.rate = 1.0
-//                    PlayerController.Instance.currentTime = post.getCurrentTime()
-//                    _player.play()
-//
-//                    PlayerController.Instance.addObserver()
-//
-//                    if Float(_player.currentTime().value) == 0.0 {
-//                        PostService.Instance.incrementPost(id: post.id, completion: { (success, play_count) in
-//                            if success, let play_count = play_count {
-//                                print("Post incremented")
-//                                post.playCount = play_count
-//                                if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-//                                    cell.setData(post: post)
-//                                }
-//                            }
-//                        })
-//                    }
-//                }
-//            }
-//        }
-    }
-    
-    func willEnterBackground() {
-//        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-//            return
-//        }
-//
-//        _player.pause()
-//
-//        if let sender = PlayerController.Instance.lastPlayed {
-//            sender.playing = false
-//            guard let _index = sender.index as Int? else {
-//                return
-//            }
-//
-//            guard let _user = UserController.Instance.getUser() as User? else {
-//                return
-//            }
-//
-//            let post = _user.getPosts()[_index]
-//            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
-//        }
-//
-//        PlayerController.Instance.lastPlayed?.tickCount = 0
-//        PlayerController.Instance.lastPlayed = nil
-//        PlayerController.Instance.shouldSeek = true
-//
-//        PlayerController.Instance.scheduleReset()
+        
+        guard let _index = sender.tag as Int? else {
+            return
+        }
+        
+        guard let _user = self.user as User? else {
+            return
+        }
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed,
+            _lastPlayed.playing == true {
+            self.onPauseAudio(sender: sender)
+            return
+        }
+        
+        let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+        
+        if let _url = URL(string: post.audio ) as URL? {
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
+            
+            if let _player = PlayerController.Instance.player as AVPlayer?,
+                let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
+                
+                PlayerController.Instance.lastPlayed = cell?.playSlider
+                PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
+                PlayerController.Instance.durationLabel = cell?.lblDuration
+                PlayerController.Instance.shouldSeek = false
+                
+                _player.rate = 1.0
+                _player.play()
+                
+                PlayerController.Instance.addObserver()
+                
+            } else {
+                
+                let playerItem = AVPlayerItem(url: _url)
+                PlayerController.Instance.player = AVPlayer(playerItem:playerItem)
+                
+                if let _player = PlayerController.Instance.player as AVPlayer? {
+                    
+                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+                    
+                    PlayerController.Instance.lastPlayed = cell?.playSlider
+                    PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
+                    PlayerController.Instance.durationLabel = cell?.lblDuration
+                    PlayerController.Instance.currentIndex = _index
+                    PlayerController.Instance.shouldSeek = true
+                    PlayerController.Instance.currentTime = post.getCurrentTime()
+                    
+                    _player.rate = 1.0
+                    _player.play()
+                    
+                    PlayerController.Instance.addObserver()
+                    
+                    if Float(_player.currentTime().value) == 0.0 {
+                        PostService.Instance.incrementPost(id: post.id, completion: { (success, play_count) in
+                            if success, let play_count = play_count {
+                                print("Post incremented")
+                                post.playCount = play_count
+                                // cell?.setData(post: post)
+                            }
+                        })
+                    }
+                    
+                }
+                
+            }
+            
+        }
         
     }
     
-    func onPauseAudio(sender: SVGPlayButton) {
-//        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-//            return
-//        }
-//
-//        _player.pause()
-//        PlayerController.Instance.lastPlayed?.tickCount = 0
-//        PlayerController.Instance.lastPlayed = nil
-//        PlayerController.Instance.shouldSeek = true
-//
-//        PlayerController.Instance.scheduleReset()
-//
-//        guard let _index = sender.index as Int? else {
-//            return
-//        }
-//
-//        guard let _user = UserController.Instance.getUser() as User? else {
-//            return
-//        }
-//
-//        let post = _user.getPosts()[_index]
-//        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+    func onPauseAudio(sender: UIButton) {
         
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.pause()
+        sender.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider? {
+            if let _observer = PlayerController.Instance.playerObserver as Any? {
+                PlayerController.Instance.player?.removeTimeObserver(_observer)
+                PlayerController.Instance.playerObserver = nil
+            }
+            
+            _lastPlayed.playing = false
+            
+            guard let _index = sender.tag as Int? else {
+                return
+            }
+            
+            guard let _user = self.user as User? else {
+                return
+            }
+            
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value))
+        }
+        
+    }
+    
+    func onBackwardAudio(sender: UIButton) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        var time = CMTimeGetSeconds(_player.currentTime())
+        if time == 0 { return }
+        time = time - 15 >= 0 ? time - 15 : 0
+        
+        self.seekToTime(time: time)
+    }
+    
+    func onForwardAudio(sender: UIButton) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        var time = CMTimeGetSeconds(_player.currentTime())
+        let duration = CMTimeGetSeconds((_player.currentItem?.duration)!)
+        if time == duration { return }
+        time = time + 15 <= duration ? time + 15 : duration
+        
+        self.seekToTime(time: time)
+    }
+    
+    func onSeekSlider(sender: UISlider) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        let duration = CMTimeGetSeconds((_player.currentItem?.duration)!)
+        let time = duration * Float64(sender.value)
+        
+        self.seekToTime(time: time)
+    }
+    
+    func seekToTime(time: Float64) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.seek(to: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed,
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel,
+            _lastPlayed.playing == false {
+            
+            _lastPlayed.setValue(Float(time / CMTimeGetSeconds((_player.currentItem?.duration)!)), animated: false)
+            _elapsedLabel.text = TimeInterval(time).durationText
+            
+            guard let _index = _lastPlayed.index as Int? else {
+                return
+            }
+            
+            guard let _user = self.user as User? else {
+                return
+            }
+            
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            post.setPlayed(time: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), progress: CGFloat(_lastPlayed.value))
+            
+        }
     }
     
     func playerDidFinishPlaying(note: NSNotification) {
-        self.releasePlayer()
+        self.releasePlayer(onlyState: true)
+    }
+    
+    func willEnterBackground() {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.pause()
+        
+        if let sender = PlayerController.Instance.lastPlayed {
+            sender.playing = false
+            guard let _index = sender.index as Int? else {
+                return
+            }
+            
+            guard let _user = self.user as User? else {
+                return
+            }
+            
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[_index]
+            post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(sender.value))
+        }
+        
+        PlayerController.Instance.lastPlayed?.setValue(Float(0.0), animated: false)
+        PlayerController.Instance.lastPlayed = nil
+        PlayerController.Instance.elapsedTimeLabel?.text = "0:00"
+        PlayerController.Instance.elapsedTimeLabel = nil
+        PlayerController.Instance.durationLabel?.text = "0:00"
+        PlayerController.Instance.durationLabel = nil
+        PlayerController.Instance.shouldSeek = true
+        PlayerController.Instance.scheduleReset()
+        
     }
     
     // MARK: Scroll Ralated
@@ -281,7 +415,11 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         if (tableView == self.tableView) {
-            return 0;
+            if let _user = self.user as User? {
+                return _user.getPatientNotes(id: (self.patient?.id)!).count
+            } else {
+                return 0
+            }
         }
         
         return 0
@@ -313,34 +451,45 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
         
         if tableView == self.tableView {
             
-            let cell: PatientNotesCell = tableView.dequeueReusableCell(withIdentifier: PatientNotesCellID, for: indexPath) as! PatientNotesCell
+            let cell: ProfileListCell = tableView.dequeueReusableCell(withIdentifier: PatientNotesCellID, for: indexPath) as! ProfileListCell
             
-//            guard let _user = UserController.Instance.getUser() as User? else {
-//                return cell
-//            }
-//
-//            let post = _user.getPosts()[indexPath.row]
-//            cell.setData(post: post)
-//
-////            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
-////            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
-////            cell.btnPlay.index = indexPath.row
-////            cell.btnPlay.refTableView = tableView
-////            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
-//
-////            if cell.btnPlay.playing {
-////                cell.btnPlay.playing = false
-////            }
-//
-//            let isFullDesc = self.states.contains(post.id)
-//            cell.lblDescription.delegate = self
-//            cell.lblDescription.shouldCollapse = true
-//            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-//            cell.lblDescription.text = post.description
-//            cell.lblDescription.collapsed = !isFullDesc
-//            cell.showFullDescription = isFullDesc
-//
-//            cell.isExpanded = self.expandedRows.contains(post.id)
+            guard let _user = self.user as User? else {
+                return cell
+            }
+            
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
+            cell.setData(post: post)
+            
+            let isFullDesc = self.states.contains(post.id)
+            cell.lblDescription.delegate = self
+            cell.lblDescription.shouldCollapse = true
+            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
+            cell.lblDescription.text = post.description
+            cell.lblDescription.collapsed = !isFullDesc
+            cell.showFullDescription = isFullDesc
+            
+            cell.btnPlay.tag = indexPath.row
+            if cell.btnPlay.allTargets.count == 0 {
+                cell.btnPlay.addTarget(self, action: #selector(ProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
+            }
+            
+            cell.btnBackward.tag = indexPath.row
+            if cell.btnBackward.allTargets.count == 0 {
+                cell.btnBackward.addTarget(self, action: #selector(ProfileViewController.onBackwardAudio(sender:)), for: .touchUpInside)
+            }
+            
+            cell.btnForward.tag = indexPath.row
+            if cell.btnForward.allTargets.count == 0 {
+                cell.btnForward.addTarget(self, action: #selector(ProfileViewController.onForwardAudio(sender:)), for: .touchUpInside)
+            }
+            
+            cell.playSlider.index = indexPath.row
+            cell.playSlider.setValue(Float(post.getCurrentProgress()), animated: false)
+            if cell.playSlider.allTargets.count == 0 {
+                cell.playSlider.addTarget(self, action: #selector(ProfileViewController.onSeekSlider(sender:)), for: .valueChanged)
+            }
+            
+            cell.isExpanded = self.expandedRows.contains(post.id)
             cell.selectionStyle = .none
             
             return cell
@@ -358,20 +507,22 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = UserController.Instance.getUser() as User? else {
+            guard let _user = self.user as User? else {
                 return
             }
             
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
+            self.releasePlayer()
+            
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
             
             switch cell.isExpanded {
             case true:
                 self.expandedRows.remove(post.id)
-                
+
             case false:
                 self.expandedRows.insert(post.id)
             }
-            
+
             cell.isExpanded = !cell.isExpanded
             
             self.tableView.beginUpdates()
@@ -386,11 +537,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = UserController.Instance.getUser() as User? else {
+            guard let _user = self.user as User? else {
                 return
             }
             
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
             self.expandedRows.remove(post.id)
             
             cell.isExpanded = false
@@ -407,9 +558,9 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             if tableView == self.tableView {
                 
-                if let _user = UserController.Instance.getUser() as User? {
+                if let _user = self.user as User? {
                     
-                    let _post = _user.getPosts(type: self.postType)[indexPath.row]
+                    let _post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
                     PostService.Instance.deletePost(id: _post.id, completion: {
                         (success: Bool) in
                     })
@@ -440,11 +591,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = UserController.Instance.getUser() as User? else {
+            guard let _user = self.user as User? else {
                 return
             }
             
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
             self.states.insert(post.id)
             
             cell.showFullDescription = true
@@ -462,11 +613,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
                 else { return }
             
-            guard let _user = UserController.Instance.getUser() as User? else {
+            guard let _user = self.user as User? else {
                 return
             }
             
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
+            let post = _user.getPatientNotes(id: (self.patient?.id)!)[indexPath.row]
             self.states.remove(post.id)
             
             cell.showFullDescription = false
@@ -483,7 +634,6 @@ extension PatientProfileViewController : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView == self.mainScrollView {
-            
             let offset: CGFloat = scrollView.contentOffset.y
             
             if offset >= 0 { // PULL DOWN -----------------
@@ -524,8 +674,19 @@ extension PatientProfileViewController {
     }
     
     @IBAction func onRecord(sender: AnyObject!) {
-//        vcDisappearType = .record
-//        self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordPopup, sender: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+            
+            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+            DataManager.Instance.setPatientId(patientId: (patient?.id)!)
+            
+//            weak var weakSelf = self
+            self.present(vc, animated: false, completion: {
+//                weakSelf?.onClose(sender: nil)
+            })
+            
+        }
     }
     
 }

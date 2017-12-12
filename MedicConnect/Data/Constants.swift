@@ -62,5 +62,6 @@ class Constants {
     
     static let PostTypeDiagnosis = "Diagnosis"
     static let PostTypeConsult = "Consult"
+    static let PostTypeNote = "Note"
     
 }
