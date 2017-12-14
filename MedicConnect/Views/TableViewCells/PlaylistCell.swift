@@ -32,6 +32,7 @@ class PlaylistCell: UITableViewCell {
     // Constraints
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
     @IBOutlet var constOfBtnPlaylistWidth: NSLayoutConstraint!
+    @IBOutlet var constOfBtnPlaylistHeight: NSLayoutConstraint!
     @IBOutlet var constOfBtnPlaylistBottom: NSLayoutConstraint!
     @IBOutlet var constOfTxtVHashtagsTop: NSLayoutConstraint!
     @IBOutlet var constOfTxtVHashtagsHeight: NSLayoutConstraint!
@@ -61,7 +62,7 @@ class PlaylistCell: UITableViewCell {
     var isExpanded: Bool = false {
         didSet {
             if !isExpanded {
-                self.constOfBtnPlaylistBottom.constant = 1
+                self.constOfBtnPlaylistBottom.constant = 9
                 self.lblLikedDescription.isHidden = true
                 self.txtVHashtags.isHidden = true
                 self.btnPlay.isHidden = true
@@ -74,7 +75,7 @@ class PlaylistCell: UITableViewCell {
             } else {
                 let constraintRect = CGSize(width: self.txtVHashtags.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.txtVHashtags.font!], context: nil)
-                let topSpace: CGFloat = self.postType == Constants.PostTypeConsult ? -16 : 16
+                let topSpace: CGFloat = self.postType == Constants.PostTypeConsult ? 16 : 16
                 
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
                 self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + topSpace + 65
@@ -149,7 +150,7 @@ class PlaylistCell: UITableViewCell {
         
         // Set post type
         self.postType = post.postType
-        self.constOfTxtVHashtagsTop.constant = self.postType == Constants.PostTypeConsult ? -16 : 16
+        self.constOfTxtVHashtagsTop.constant = self.postType == Constants.PostTypeConsult ? 16 : 16
         
         // Set core data
         self.lblUsername.text = "Dr. \(post.user.fullName)"

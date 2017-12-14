@@ -68,7 +68,7 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, E
         self.tvConsults.register(nibConsultCell, forCellReuseIdentifier: ConsultCellID)
         
         self.tvConsults.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tvConsults.frame.size.width, height: 20.0))
-        self.tvConsults.estimatedRowHeight = 132.0
+        self.tvConsults.estimatedRowHeight = 100.0
         self.tvConsults.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -349,139 +349,32 @@ extension ConsultsViewController {
         
     }
     
-    func onToggleAction(sender: TVButton) {
-        guard let _ = sender.index as Int?,
-            let _ = sender.refTableView as UITableView? else {
-                return
+    // MARK: Selectors
+    
+    func onSelectUser(sender: UITapGestureRecognizer) {
+        let index = sender.view?.tag
+        let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
+        
+        if (post != nil) {
+            self.callProfileVC(user: (post?.user)!)
         }
-        
-        print("\(sender.index!)")
-        selectedDotsIndex = sender.index!
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[selectedDotsIndex]
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        
-        let actionReportThisBroadcast = UIAlertAction(title: "Report this broadcast", style: .destructive) { (action) in
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                return
-            }
-            
-            UserService.Instance.report(from: _user.email, subject: "Report this broadcast", msgbody: "User: \(post.user.fullName)\nUrl: \(post.audio)", completion: { (success) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcast.\nWe are looking into it.")
-                    }
-                }
-                
-            });
-            
-        }
-        let actionReportUser = UIAlertAction(title: "Report this user", style: .destructive) { (action) in
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                return
-            }
-            
-            UserService.Instance.report(from: _user.email, subject: "Report this user", msgbody: "User: \(post.user.fullName)", completion: { (success) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcaster.\nWe are looking into it.")
-                    }
-                }
-                
-            });
-            
-        }
-        let actionBlockUser = UIAlertAction(title: "Block user", style: .default) { (action) in
-            UserService.Instance.block(userId: post.user.id , completion: {
-                (success: Bool) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "This user is now blocked.\nGo to Settings to undo this action.")
-                    }
-                    
-                    self.loadMe()
-                } else {
-                    sender.makeEnabled(enabled: true)
-                }
-                
-            })
-        }
-        let actionTurnOnPost = UIAlertAction(title: "Turn on Post notification", style: .default) { (action) in
-            
-        }
-        let actionCopyShareUrl = UIAlertAction(title: "Copy Share Url", style: .default) { (action) in
-            UIPasteboard.general.string = post.audio
-        }
-        
-        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        
-        alertController.addAction(actionReportThisBroadcast)
-        alertController.addAction(actionReportUser)
-        alertController.addAction(actionBlockUser)
-        alertController.addAction(actionTurnOnPost)
-        alertController.addAction(actionCopyShareUrl)
-        alertController.addAction(actionCancel)
-        
-        alertController.view.tintColor = UIColor.black
-        
-        present(alertController, animated: false, completion: nil)
     }
     
-    func onToggleLike(sender: TVButton) {
+    func onSelectHashtag(sender: UITapGestureRecognizer) {
+        let myTextView = sender.view as! UITextView //sender is TextView
+        let _pos: CGPoint = sender.location(in: myTextView)
         
-        guard let _index = sender.index as Int?,
-            let _refTableView = sender.refTableView as UITableView? else {
-                return
-        }
+        //eliminate scroll offset
+        //        pos.y += _tv.contentOffset.y;
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+        //get location in text from textposition at point
+        let tapPos = myTextView.closestPosition(to: _pos)
         
-        guard let _user = UserController.Instance.getUser() as User? else {
-            return
-        }
-        
-        sender.makeEnabled(enabled: false)
-        if sender.tag == 1 {
-            PostService.Instance.unlike(postId: post.id, completion: { (success, like_description) in
-                sender.makeEnabled(enabled: true)
-                
-                if success, let like_description = like_description {
-                    print("Post succesfully unliked")
-                    
-                    post.removeLike(id: _user.id)
-                    post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
-                        cell.setData(post: post)
-                        
-                        cell.btnLike.setImage(UIImage(named: "icon_broadcast_like"), for: .normal)
-                        cell.btnLike.tag = 0
-                    }
-                }
-            })
-            
-        } else {
-            PostService.Instance.like(postId: post.id, completion: { (success, like_description) in
-                sender.makeEnabled(enabled: true)
-                
-                if success, let like_description = like_description {
-                    print("Post succesfully liked")
-                    
-                    post.addLike(id: _user.id)
-                    post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
-                        cell.setData(post: post)
-                        
-                        cell.btnLike.setImage(UIImage(named: "icon_broadcast_liked"), for: .normal)
-                        cell.btnLike.tag = 1
-                    }
-                }
-            })
-            
+        //fetch the word at this position (or nil, if not available)
+        if let wordRange = myTextView.tokenizer.rangeEnclosingPosition(tapPos!, with: UITextGranularity.word, inDirection: UITextLayoutDirection.right.rawValue),
+            let tappedHashtag = myTextView.text(in: wordRange) {
+            NSLog("Word: \(String(describing: tappedHashtag))")
+            self.callSearchResultVC(hashtag: tappedHashtag)
         }
         
     }
@@ -525,72 +418,6 @@ extension ConsultsViewController {
         }
     }
     
-    // MARK: Selectors
-    
-    func onSelectShare(sender: UIButton) {
-        
-        vcDisappearType = .share
-        
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcastPopup, sender: nil)
-        
-    }
-    
-    func onSelectComment(sender: UIButton) {
-        vcDisappearType = .comment
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
-            let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[sender.tag]
-            vc.currentPost = post
-            
-            self.present(vc, animated: false, completion: nil)
-        }
-        
-    }
-    
-    func onSelectUser(sender: UITapGestureRecognizer) {
-        let index = sender.view?.tag
-        let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
-        
-        if (post != nil) {
-            self.callProfileVC(user: (post?.user)!)
-        }
-    }
-    
-    func onSelectLikeDescription(sender: UITapGestureRecognizer) {
-        vcDisappearType = .like
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "LikesViewController") as? LikesViewController {
-            let index = sender.view?.tag
-            let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
-            
-            if (post != nil) {
-                vc.currentPost = post
-                self.present(vc, animated: false, completion: nil)
-            }
-        }
-    }
-    
-    func onSelectHashtag (sender: UITapGestureRecognizer) {
-        let myTextView = sender.view as! UITextView //sender is TextView
-        let _pos: CGPoint = sender.location(in: myTextView)
-        
-        //eliminate scroll offset
-        //        pos.y += _tv.contentOffset.y;
-        
-        //get location in text from textposition at point
-        let tapPos = myTextView.closestPosition(to: _pos)
-        
-        //fetch the word at this position (or nil, if not available)
-        if let wordRange = myTextView.tokenizer.rangeEnclosingPosition(tapPos!, with: UITextGranularity.word, inDirection: UITextLayoutDirection.right.rawValue),
-            let tappedHashtag = myTextView.text(in: wordRange) {
-            NSLog("Word: \(String(describing: tappedHashtag))")
-            self.callSearchResultVC(hashtag: tappedHashtag)
-        }
-        
-    }
-    
     func logUser(user : User) {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
@@ -625,30 +452,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.btnMessage.isHidden = true
         cell.btnShare.isHidden = true
         
-//        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-//        cell.btnAction.index = indexPath.row
-//        cell.btnAction.refTableView = tableView
-//
-//        cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-//        cell.btnLike.index = indexPath.row
-//        cell.btnLike.refTableView = tableView
-//
-//        cell.btnMessage.tag = indexPath.row
-//        cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
-//
-//        cell.btnShare.tag = indexPath.row
-//        cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
-        
-//        if let _user = UserController.Instance.getUser() as User? {
-//            let hasLiked = post.hasLiked(id: _user.id)
-//            let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
-//            cell.btnLike.setImage(image, for: .normal)
-//            cell.btnLike.tag = hasLiked ? 1 : 0
-//
-//            let hasCommented = post.hasCommented(id: _user.id)
-//            let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
-//            cell.btnMessage.setImage(image1, for: .normal)
-//        }
+        cell.constOfBtnPlaylistHeight.constant = 0
         
         let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
         cell.imgUserAvatar.addGestureRecognizer(tapGestureOnUserAvatar)
@@ -665,10 +469,6 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblDescription.text = post.description
         cell.lblDescription.collapsed = !isFullDesc
         cell.showFullDescription = isFullDesc
-        
-//        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-//        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-//        cell.lblLikedDescription.tag = indexPath.row
         
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)

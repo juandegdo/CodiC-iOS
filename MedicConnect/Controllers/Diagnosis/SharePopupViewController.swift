@@ -12,8 +12,6 @@ class SharePopupViewController: BaseViewController {
     
     @IBOutlet var mBackgroundImageView: UIImageView!
     @IBOutlet var tvCaption: UITextView!
-    @IBOutlet var btnFacebook: UIButton!
-    @IBOutlet var btnTwitter: UIButton!
     @IBOutlet var btnEmail: UIButton!
     @IBOutlet var btnMessage: UIButton!
     
