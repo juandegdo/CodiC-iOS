@@ -193,4 +193,37 @@ class PatientService: BaseTaskController {
         
     }
     
+    func getPatientIdByPHN(PHN: String, completion: @escaping (_ success: Bool, _ patientId: String?) -> Void) {
+        
+        let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientIdByPHNSuffix)/\(PHN)"
+        
+        manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
+                }
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    completion(false, nil)
+                    return
+                }
+                
+                if response.response?.statusCode == 200 {
+                    
+                    if let result = response.result.value as? [String : AnyObject],
+                        let patientId = result["id"] as? String  {
+                        completion(true, patientId)
+                    } else {
+                        completion(false, nil)
+                    }
+                    
+                } else {
+                    completion(false, nil)
+                }
+                
+        }
+        
+    }
+    
 }

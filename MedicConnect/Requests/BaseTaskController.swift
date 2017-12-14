@@ -53,6 +53,9 @@ class BaseTaskController {
     
     let URLAddPatientSuffix = "/addpatient"
     let URLGetPatientsSuffix = "/getpatients"
+    let URLGetPatientIdByPHNSuffix = "/getpatientid"
+    
+    let URLGetUserIdByMSPSuffix = "/getuseridbymsp"
     
     var simpleManager: SessionManager?
     var manager: SessionManager?

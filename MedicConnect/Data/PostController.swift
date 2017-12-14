@@ -32,8 +32,18 @@ class PostController {
     
     func getFollowingPosts(type: String) -> [Post] {
         let posts = self.followingPosts.filter({(post: Post) -> Bool in
-            return post.postType == type
+            if type == Constants.PostTypeConsult {
+                return post.postType == type || post.postType == Constants.PostTypeNote
+            } else {
+                return post.postType == type
+            }
         })
+        
+        if type == Constants.PostTypeDiagnosis {
+            return posts.sorted(by: { (a, b) -> Bool in
+                a.title.lowercased() < b.title.lowercased()
+            })
+        }
         
         return posts
     }

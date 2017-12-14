@@ -150,6 +150,8 @@ extension EditProfileViewController : UITextFieldDelegate {
             return newLength <= Constants.MaxFullNameLength
         } else if (textField == self.tfPhoneNumber) { /// phone number
             return newLength <= Constants.MaxPhoneNumberLength
+        } else if (textField == self.tfMSP) { /// msp
+            return newLength <= Constants.MaxMSPLength
         }
         
         return true

@@ -678,10 +678,10 @@ extension PatientProfileViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
+            DataManager.Instance.setReferringUserId(referringUserId: "")
             
-//            weak var weakSelf = self
             self.present(vc, animated: false, completion: {
-//                weakSelf?.onClose(sender: nil)
+                
             })
             
         }

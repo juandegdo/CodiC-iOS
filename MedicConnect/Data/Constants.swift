@@ -59,6 +59,8 @@ class Constants {
     static let MaxPhoneNumberLength = 15
     static let MaxFullNameLength = 100
     static let MaxDescriptionLength = 500
+    static let MaxPHNLength = 10
+    static let MaxMSPLength = 5
     
     static let PostTypeDiagnosis = "Diagnosis"
     static let PostTypeConsult = "Consult"

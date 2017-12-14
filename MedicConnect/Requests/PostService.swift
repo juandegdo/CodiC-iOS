@@ -34,6 +34,11 @@ class PostService: BaseTaskController {
             parameters["patientId"] = patientId
         }
         
+        if let referringUserId = DataManager.Instance.getReferringUserId() as String?,
+            referringUserId != "" {
+            parameters["referringUser"] = referringUserId
+        }
+        
         Alamofire.upload(multipartFormData: { (multipartFormData ) in
             
             multipartFormData.append(audioData, withName: "audio", fileName: "\(Date().timeIntervalSinceReferenceDate).\(fileExtension)", mimeType: "\(mimeType)")
@@ -44,10 +49,10 @@ class PostService: BaseTaskController {
                 multipartFormData.append(_imageData, withName: "image", fileName: "\(Date().timeIntervalSinceReferenceDate).png", mimeType: "image/png")
             }
             
-            
             for (key, value) in parameters {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
+            
         }, with: urlRequest) { (result) in
             switch result {
             case .success(let upload, _, _):

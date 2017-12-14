@@ -50,6 +50,7 @@
 		65C915D81FCF1696002AC31B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C915D71FCF1696002AC31B /* Patient.swift */; };
 		65D250191F8E812700279713 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250181F8E812700279713 /* DiagnosisViewController.swift */; };
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
+		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
 		9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */; };
 		A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A358721F0742D7005B8011 /* SettingsDetailViewController.swift */; };
@@ -208,6 +209,7 @@
 		65C915D71FCF1696002AC31B /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		65D250181F8E812700279713 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
 		6D8CF7F78CFE7BB69B7329A8 /* Pods-MedicConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnectTests/Pods-MedicConnectTests.release.xcconfig"; sourceTree = "<group>"; };
 		94CC90B0ADCB7E73FB76698B /* Pods-MedicConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.release.xcconfig"; sourceTree = "<group>"; };
@@ -443,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */,
+				65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */,
 			);
 			path = Consults;
 			sourceTree = "<group>";
@@ -1268,6 +1271,7 @@
 				D24473571DF4C2E8006AC4D5 /* SaveBroadcastViewController.swift in Sources */,
 				A9E444F71F0A454A00F49C7E /* Reachability.m in Sources */,
 				A9E444B71F09683D00F49C7E /* BlockedUsersViewController.swift in Sources */,
+				65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */,
 				D21BC8FD1DEA32AD008F5443 /* ImageHelper.swift in Sources */,
 				657B12801FC3316F0059B16E /* PlaySlider.swift in Sources */,
 				D20658431E5BCD39003875E4 /* KeychainUtil.swift in Sources */,

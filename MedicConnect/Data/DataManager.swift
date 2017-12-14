@@ -15,6 +15,7 @@ class DataManager {
     var theLastTabIndex: Int = 0
     var postType: String = Constants.PostTypeDiagnosis
     var patientId: String = ""
+    var referringUserId: String = ""
     
     // MARK: Saved Tab Index
         
@@ -44,6 +45,16 @@ class DataManager {
     
     func setPatientId(patientId: String) {
         self.patientId = patientId
+    }
+    
+    // MARK: Referring User Id
+    
+    func getReferringUserId() -> String {
+        return self.referringUserId
+    }
+    
+    func setReferringUserId(referringUserId: String) {
+        self.referringUserId = referringUserId
     }
     
 }

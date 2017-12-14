@@ -1493,4 +1493,37 @@ class UserService: BaseTaskController {
         
     }
     
+    func getUserIdByMSP(MSP: String, completion: @escaping (_ success: Bool, _ userId: String?) -> Void) {
+        
+        let url = "\(self.baseURL)\(self.URLUser)\(self.URLGetUserIdByMSPSuffix)/\(MSP)"
+        
+        manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
+                }
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    completion(false, nil)
+                    return
+                }
+                
+                if response.response?.statusCode == 200 {
+                    
+                    if let result = response.result.value as? [String : AnyObject],
+                        let userId = result["id"] as? String  {
+                        completion(true, userId)
+                    } else {
+                        completion(false, nil)
+                    }
+                    
+                } else {
+                    completion(false, nil)
+                }
+                
+        }
+        
+    }
+    
 }

@@ -20,6 +20,9 @@ class CreatePatientViewController: BaseViewController {
     
     var alertWindow: UIWindow!
     var birthDate: Date!
+    var fromRecord: Bool = false
+    var patientNumber: String = ""
+    var isSaved: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +60,7 @@ class CreatePatientViewController: BaseViewController {
         
         // PHN
         self.tfPHN.placeholder = NSLocalizedString("PHN#", comment: "comment")
+        self.tfPHN.text = self.patientNumber
         
         // Birthdate
         self.tfBirthdate.placeholder = NSLocalizedString("Birthdate", comment: "comment")
@@ -97,7 +101,11 @@ extension CreatePatientViewController {
     
     @IBAction func onBack(sender: AnyObject!) {
         if let _nav = self.navigationController as UINavigationController? {
-            _ = _nav.popViewController(animated: false)
+            if self.fromRecord == true && isSaved == true {
+                _nav.popToRootViewController(animated: false)
+            } else {
+                _nav.popViewController(animated: false)
+            }
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -132,11 +140,33 @@ extension CreatePatientViewController {
         PatientService.Instance.addPatient(self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool, patient: Patient?) in
             
             if patient != nil {
+                self.isSaved = true
+                
                 DispatchQueue.main.async {
-                    let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
-                    patientProfileVC.patient = patient
-                    patientProfileVC.fromAdd = true
-                    self.navigationController?.pushViewController(patientProfileVC, animated: true)
+                    if self.fromRecord == true {
+                        // Go to record screen
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        
+                        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+                            
+                            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+                            DataManager.Instance.setPatientId(patientId: (patient?.id)!)
+                            DataManager.Instance.setReferringUserId(referringUserId: "")
+                            
+                            weak var weakSelf = self
+                            self.present(vc, animated: false, completion: {
+                                weakSelf?.onBack(sender: nil)
+                            })
+                            
+                        }
+                        
+                    } else {
+                        // Go to patient profile
+                        let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
+                        patientProfileVC.patient = patient
+                        patientProfileVC.fromAdd = true
+                        self.navigationController?.pushViewController(patientProfileVC, animated: true)
+                    }
                 }
             }
             

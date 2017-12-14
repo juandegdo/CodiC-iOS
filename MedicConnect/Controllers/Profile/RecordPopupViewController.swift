@@ -72,6 +72,7 @@ extension RecordPopupViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)
             DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setReferringUserId(referringUserId: "")
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
@@ -84,15 +85,9 @@ extension RecordPopupViewController {
     @IBAction func onRecordConsult(sender: UIButton!) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+        if let vc = storyboard.instantiateViewController(withIdentifier: "ConsultReferringViewController") as? ConsultReferringViewController {
             
-            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
-            DataManager.Instance.setPatientId(patientId: "")
-            
-            weak var weakSelf = self
-            self.present(vc, animated: false, completion: {
-                weakSelf?.onClose(sender: nil)
-            })
+            self.navigationController?.pushViewController(vc, animated: true)
             
         }
     }
