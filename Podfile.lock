@@ -63,7 +63,7 @@ CHECKOUT OPTIONS:
     :commit: 4b0c9c95560dac009bbfb28908377137b50321b5
     :git: https://github.com/voltaesaito/PICollectionPageView.git
   TLTagsControl:
-    :commit: 48a7624d406d8c1825fc5731eb56d35df5f2ca12
+    :commit: 872997c0b69c8ab3eda9e4f9715b0ebb734135bd
     :git: https://github.com/danielyang112/TLTagsControl.git
 
 SPEC CHECKSUMS:
