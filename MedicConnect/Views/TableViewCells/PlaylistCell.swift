@@ -153,7 +153,7 @@ class PlaylistCell: UITableViewCell {
         self.constOfTxtVHashtagsTop.constant = self.postType == Constants.PostTypeConsult ? 16 : 16
         
         // Set core data
-        self.lblUsername.text = "Dr. \(post.user.fullName)"
+        self.lblUsername.text = "\(post.user.fullName)"
         
         // Set Broadcast Label
         self.lblBroadcast.text = post.title

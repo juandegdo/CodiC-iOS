@@ -185,7 +185,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         }
         
         // Customize User Info
-        self.lblUsername.text = "Dr. \(user.fullName)"
+        self.lblUsername.text = "\(user.fullName)"
         self.lblLocation.text = user.location
         self.lblTitle.text = user.title
         

@@ -27,7 +27,7 @@ class PatientListCell: UITableViewCell {
     func setData(_ patient: Patient) {
         // Set data
         self.lblPatientName.text = "\(patient.name) #\(patient.patientNumber)"
-        self.lblDoctorName.text = "Dr. \(patient.user.fullName)"
+        self.lblDoctorName.text = "\(patient.user.fullName)"
         self.lblDate.text = patient.getFormattedDate().replacingOccurrences(of: ",", with: "")
         
         self.imgUserPhoto.image = nil
