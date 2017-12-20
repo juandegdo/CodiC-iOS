@@ -6447,6 +6447,7 @@ you a link to reset your password.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="443" id="B6B-pl-oeI"/>
                                         </constraints>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Wuv-ve-f5c" id="uEu-XE-cPb"/>
                                             <outlet property="delegate" destination="Wuv-ve-f5c" id="Ufq-oV-OzS"/>
@@ -6891,6 +6892,6 @@ you a link to reset your password.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OAe-nj-vD0"/>
+        <segue reference="dMz-5h-amD"/>
     </inferredMetricsTieBreakers>
 </document>

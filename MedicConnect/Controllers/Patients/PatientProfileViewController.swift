@@ -12,7 +12,7 @@ import AVFoundation
 class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate {
     
     let OffsetHeaderStop: CGFloat = 180.0
-    let PatientNotesCellID = "ProfileListCell"
+    let PatientNotesCellID = "PatientNotesCell"
     
     var patient: Patient? = nil
     var fromAdd: Bool = false
@@ -52,7 +52,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
         // Initialize Table Views
         self.tableView.register(UINib(nibName: PatientNotesCellID, bundle: nil), forCellReuseIdentifier: PatientNotesCellID)
         self.tableView.tableFooterView = UIView()
-        self.tableView.estimatedRowHeight = 110.0
+        self.tableView.estimatedRowHeight = 125.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -114,12 +114,6 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             self.lblAddress.text = _patient.address
             self.lblPhoneNumber.text = _patient.phoneNumber
             self.lblPaitentNumber.text = "PHN # \(_patient.patientNumber)"
-            
-//            if let _currentUser = UserController.Instance.getUser() as User?,
-//                let _user = self.patient?.user as User?,
-//                _currentUser.id != _user.id {
-//                self.btnRecord.isHidden = true
-//            }
         }
         
         self.updateScroll(offset: self.mainScrollView.contentOffset.y)
@@ -150,7 +144,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
             let post = PostController.Instance.getPatientNotes()[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
-            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PatientNotesCell
             cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
@@ -187,7 +181,7 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
         let post = PostController.Instance.getPatientNotes()[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
-            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PatientNotesCell
             sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
             
             if let _player = PlayerController.Instance.player as AVPlayer?,
@@ -449,7 +443,7 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
         
         if tableView == self.tableView {
             
-            let cell: ProfileListCell = tableView.dequeueReusableCell(withIdentifier: PatientNotesCellID, for: indexPath) as! ProfileListCell
+            let cell: PatientNotesCell = tableView.dequeueReusableCell(withIdentifier: PatientNotesCellID, for: indexPath) as! PatientNotesCell
             
             guard (self.patient as Patient?) != nil else {
                 return cell
@@ -502,7 +496,7 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            guard let cell = tableView.cellForRow(at: indexPath) as? ProfileListCell
+            guard let cell = tableView.cellForRow(at: indexPath) as? PatientNotesCell
                 else { return }
             
             guard (self.patient as Patient?) != nil else {
@@ -532,7 +526,7 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            guard let cell = tableView.cellForRow(at: indexPath) as? ProfileListCell
+            guard let cell = tableView.cellForRow(at: indexPath) as? PatientNotesCell
                 else { return }
             
             guard (self.patient as Patient?) != nil else {
@@ -586,7 +580,7 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
     func didExpandLabel(_ label: ExpandableLabel) {
         let point = label.convert(CGPoint.zero, to: self.tableView)
         if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? PatientNotesCell
                 else { return }
             
             guard (self.patient as Patient?) != nil else {
@@ -608,7 +602,7 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
     func didCollapseLabel(_ label: ExpandableLabel) {
         let point = label.convert(CGPoint.zero, to: self.tableView)
         if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
+            guard let cell = self.tableView.cellForRow(at: indexPath) as? PatientNotesCell
                 else { return }
             
             guard (self.patient as Patient?) != nil else {
