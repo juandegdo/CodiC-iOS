@@ -528,7 +528,7 @@ extension DiagnosisViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as? SearchResultsViewController {
-            vc.hashtag = "#\(hashtag)"
+            vc.hashtag = hashtag
             self.present(vc, animated: false, completion: nil)
         }
     }

@@ -25,7 +25,7 @@ class SearchService: BaseTaskController {
         }
         
         let url = "\(self.baseURL)\(self.URLSearch)"
-        let parameters = ["keyword" : "#\(keyword)"]
+        let parameters = ["keyword" : keyword]
         
         manager!.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
             .responseJSON { response in
