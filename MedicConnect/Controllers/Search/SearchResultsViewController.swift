@@ -24,8 +24,6 @@ class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        LikeController.Instance.setPostLikes([])
-        
         initViews()
     }
     
@@ -567,9 +565,9 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
             cell.lblDescription.collapsed = !isFullDesc
             cell.showFullDescription = isFullDesc
             
-            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-            cell.lblLikedDescription.tag = indexPath.row
+//            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
+//            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
+//            cell.lblLikedDescription.tag = indexPath.row
             
             cell.isExpanded = self.expandedRows.contains(post.id)
             cell.selectionStyle = .none

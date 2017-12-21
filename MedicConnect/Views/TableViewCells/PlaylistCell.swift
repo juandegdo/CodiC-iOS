@@ -75,12 +75,12 @@ class PlaylistCell: UITableViewCell {
             } else {
                 let constraintRect = CGSize(width: self.txtVHashtags.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.txtVHashtags.font!], context: nil)
-                let topSpace: CGFloat = self.postType == Constants.PostTypeConsult ? 16 : 16
+                let topSpace: CGFloat = self.postType == Constants.PostTypeDiagnosis ? 16 : 8
                 
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
                 self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + topSpace + 65
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-                    if self.postType != Constants.PostTypeConsult {
+                    if self.postType == Constants.PostTypeDiagnosis {
                         self.lblLikedDescription.isHidden = false
                     }
                     
@@ -150,7 +150,7 @@ class PlaylistCell: UITableViewCell {
         
         // Set post type
         self.postType = post.postType
-        self.constOfTxtVHashtagsTop.constant = self.postType == Constants.PostTypeConsult ? 16 : 16
+        self.constOfTxtVHashtagsTop.constant = self.postType == Constants.PostTypeDiagnosis ? 16 : 8
         
         // Set core data
         self.lblUsername.text = "\(post.user.fullName)"
@@ -161,26 +161,32 @@ class PlaylistCell: UITableViewCell {
         // Set date label
         self.lblDate.text = post.getFormattedDate().uppercased()
         
-        // Set like description label
-        if let likeDescription = post.likeDescription as String?, !likeDescription.isEmpty {
-            let blackFont: UIFont = UIFont(name: "Avenir-Black", size: 11.0) as UIFont? ?? UIFont.systemFont(ofSize: 11.0)
-            let bookFont: UIFont = UIFont(name: "Avenir-Book", size: 11.0) as UIFont? ?? UIFont.systemFont(ofSize: 11.0)
+        if self.postType == Constants.PostTypeDiagnosis {
+            // Set like description label
+            if let likeDescription = post.likeDescription as String?, !likeDescription.isEmpty {
+                let blackFont: UIFont = UIFont(name: "Avenir-Black", size: 11.0) as UIFont? ?? UIFont.systemFont(ofSize: 11.0)
+                let bookFont: UIFont = UIFont(name: "Avenir-Book", size: 11.0) as UIFont? ?? UIFont.systemFont(ofSize: 11.0)
+                
+                let nsText = likeDescription as NSString
+                let textRange = NSMakeRange(0, nsText.length)
+                let attributedString = NSMutableAttributedString(string: likeDescription, attributes: [NSFontAttributeName : blackFont])
+                
+                nsText.enumerateSubstrings(in: textRange, options: .byWords, using: {
+                    (substring, substringRange, _, _) in
+                    if (substring == "Liked" || substring == "by" || substring == "and") {
+                        attributedString.addAttribute(NSFontAttributeName, value: bookFont, range: substringRange)
+                    }
+                })
+                
+                self.lblLikedDescription.attributedText = attributedString
+                
+            } else {
+                self.lblLikedDescription.text = "Liked by 0 users"
+            }
             
-            let nsText = likeDescription as NSString
-            let textRange = NSMakeRange(0, nsText.length)
-            let attributedString = NSMutableAttributedString(string: likeDescription, attributes: [NSFontAttributeName : blackFont])
-            
-            nsText.enumerateSubstrings(in: textRange, options: .byWords, using: {
-                (substring, substringRange, _, _) in
-                if (substring == "Liked" || substring == "by" || substring == "and") {
-                    attributedString.addAttribute(NSFontAttributeName, value: bookFont, range: substringRange)
-                }
-            })
-            
-            self.lblLikedDescription.attributedText = attributedString
-            
+            self.lblLikedDescription.isHidden = false
         } else {
-            self.lblLikedDescription.text = "Liked by 0 users"
+            self.lblLikedDescription.isHidden = true
         }
         
         // Set hashtags textview

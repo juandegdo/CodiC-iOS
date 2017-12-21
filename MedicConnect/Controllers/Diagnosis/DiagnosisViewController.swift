@@ -669,9 +669,9 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblDescription.collapsed = !isFullDesc
         cell.showFullDescription = isFullDesc
         
-        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-        cell.lblLikedDescription.tag = indexPath.row
+//        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
+//        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
+//        cell.lblLikedDescription.tag = indexPath.row
         
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
