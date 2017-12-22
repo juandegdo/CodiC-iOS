@@ -544,30 +544,24 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
         
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            
-            if tableView == self.tableView {
-                
-                if (self.patient as Patient?) != nil {
-                    
-                    let _post = PostController.Instance.getPatientNotes()[indexPath.row]
-                    PostService.Instance.deletePost(id: _post.id, completion: {
-                        (success: Bool) in
-                    })
-                    
-                    let _ = UserController.Instance.deletePost(id: _post.id)
-                    tableView.setEditing(false, animated: true)
-                    self.tableView.reloadData()
-                    
-                }
-                
-            }
-            
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete {
+//            if tableView == self.tableView {
+//                if (self.patient as Patient?) != nil {
+//                    let _post = PostController.Instance.getPatientNotes()[indexPath.row]
+//                    PostService.Instance.deletePost(id: _post.id, completion: {
+//                        (success: Bool) in
+//                    })
+//
+//                    let _ = UserController.Instance.deletePost(id: _post.id)
+//                    tableView.setEditing(false, animated: true)
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        }
+//
+//    }
     
     //
     // MARK: ExpandableLabel Delegate
