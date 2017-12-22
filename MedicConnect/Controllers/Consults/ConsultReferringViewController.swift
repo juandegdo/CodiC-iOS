@@ -13,6 +13,17 @@ class ConsultReferringViewController: UIViewController {
     @IBOutlet weak var tfPatientNumber: UITextField!
     @IBOutlet weak var tfDoctorMSPNumber: UITextField!
     
+    @IBOutlet weak var lblPHNError: UILabel!
+    @IBOutlet weak var lblMSPError: UILabel!
+    
+    @IBOutlet weak var btnRecord: UIButton!
+    
+    var selectedTextField: String = ""
+    var patientID: String = ""
+    var referUserID: String = ""
+    
+    let debouncer = Debouncer(interval: 1.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,9 +60,15 @@ class ConsultReferringViewController: UIViewController {
         
         self.tfPatientNumber.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
         self.tfPatientNumber.leftViewMode = .always
+        self.tfPatientNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         self.tfDoctorMSPNumber.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
         self.tfDoctorMSPNumber.leftViewMode = .always
+        self.tfDoctorMSPNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        // Hide error labels
+        self.lblPHNError.isHidden = true
+        self.lblMSPError.isHidden = true
         
     }
     
@@ -64,18 +81,27 @@ class ConsultReferringViewController: UIViewController {
             vc.fromRecord = true
             vc.patientNumber = patientNumber
             
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: false)
         }
     }
     
-    func presentRecordScreen(_ patientId: String, _ userId: String ) {
+    func presentErrorPopup(_ popupType: ErrorPopupType) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let vc = storyboard.instantiateViewController(withIdentifier: "ErrorPopupViewController") as? ErrorPopupViewController {
+            vc.popupType = popupType
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+    }
+    
+    func presentRecordScreen() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
-            DataManager.Instance.setPatientId(patientId: patientId)
-            DataManager.Instance.setReferringUserId(referringUserId: userId)
+            DataManager.Instance.setPatientId(patientId: patientID)
+            DataManager.Instance.setReferringUserId(referringUserId: referUserID)
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
@@ -95,12 +121,65 @@ extension ConsultReferringViewController : UITextFieldDelegate {
         
         if (textField == self.tfPatientNumber) {
             return newLength <= Constants.MaxPHNLength
-        } else if (textField == self.tfDoctorMSPNumber) { /// phone number
+        } else if (textField == self.tfDoctorMSPNumber) {
             return newLength <= Constants.MaxMSPLength
         }
         
         return true
         
+    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
+        // When the user performs a repeating action, such as entering text, invoke the `call` method
+        textField.textColor = UIColor.black
+        
+        debouncer.call()
+        debouncer.callback = {
+            // Send the debounced network request here
+            if (textField.text!.count > 0) {
+                if (textField == self.tfPatientNumber) {
+                    // Check if patient exists
+                    self.btnRecord.isUserInteractionEnabled = false
+                    PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId) in
+                        self.btnRecord.isUserInteractionEnabled = true
+                        
+                        if success == true && PHN == self.tfPatientNumber.text! {
+                            if patientId == nil || patientId == "" {
+                                self.lblPHNError.isHidden = false
+                                self.tfPatientNumber.textColor = UIColor.red
+                            } else {
+                                self.patientID = patientId!
+                                self.lblPHNError.isHidden = true
+                                self.tfPatientNumber.textColor = UIColor.black
+                            }
+                        } else if success == false {
+                            self.lblPHNError.isHidden = false
+                            self.tfPatientNumber.textColor = UIColor.red
+                        }
+                    }
+                } else if (textField == self.tfDoctorMSPNumber) {
+                    // Check if MSP number exists
+                    self.btnRecord.isEnabled = false
+                    UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId) in
+                        self.btnRecord.isEnabled = true
+                        
+                        if success == true && MSP == self.tfDoctorMSPNumber.text! {
+                            if userId == nil || userId == "" {
+                                self.lblMSPError.isHidden = false
+                                self.tfDoctorMSPNumber.textColor = UIColor.red
+                            } else {
+                                self.referUserID = userId!
+                                self.lblMSPError.isHidden = true
+                                self.tfDoctorMSPNumber.textColor = UIColor.black
+                            }
+                        } else if success == false {
+                            self.lblMSPError.isHidden = false
+                            self.tfDoctorMSPNumber.textColor = UIColor.red
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -111,7 +190,7 @@ extension ConsultReferringViewController {
     @IBAction func onBack(sender: UIButton!) {
         
         if let _nav = self.navigationController as UINavigationController? {
-            _nav.popToRootViewController(animated: true)
+            _nav.popToRootViewController(animated: false)
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -124,41 +203,35 @@ extension ConsultReferringViewController {
     
     @IBAction func onRecordConsult(sender: UIButton!) {
         // Go to Record screen
-        if self.tfPatientNumber.text?.count == 0 {
-            self.presentCreatePatient("")
+        var errorType: ErrorPopupType = .none
+        if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) && (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
+            errorType = .noMSPAndPHN
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setReferringUserId(referringUserId: "")
+            
+        } else if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
+            errorType = .noPHN
+            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+            DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setReferringUserId(referringUserId: self.referUserID)
+            
+        } else if (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
+            errorType = .noMSP
+            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+            DataManager.Instance.setPatientId(patientId: self.patientID)
+            DataManager.Instance.setReferringUserId(referringUserId: "")
+            
+        }
+        
+        if (errorType != .none) {
+            // Show Error Popup
+            self.presentErrorPopup(errorType)
             return
         }
         
-        PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, patientId) in
-            
-            if success == true {
-                if patientId == nil || patientId == "" {
-                    // Not found
-                    DispatchQueue.main.async {
-                        self.presentCreatePatient(self.tfPatientNumber.text!)
-                    }
-                    
-                } else {
-                    // Found
-                    if self.tfDoctorMSPNumber.text?.count == 0 {
-                        DispatchQueue.main.async {
-                            self.presentRecordScreen(patientId!, "")
-                        }
-                    } else {
-                        // Check if MSP number exists
-                        UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, userId) in
-                            
-                            if success == true {
-                                // Show recording screen
-                                DispatchQueue.main.async {
-                                    self.presentRecordScreen(patientId!, userId!)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // Show record screen
+        self.presentRecordScreen()
         
     }
 }

@@ -34,6 +34,7 @@
 		657B12801FC3316F0059B16E /* PlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B127F1FC3316F0059B16E /* PlaySlider.swift */; };
 		657B12831FC38E4C0059B16E /* PatientNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B12811FC38E4C0059B16E /* PatientNotesCell.swift */; };
 		657B12841FC38E4C0059B16E /* PatientNotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657B12821FC38E4C0059B16E /* PatientNotesCell.xib */; };
+		658AFB241FEB23900055B70C /* ErrorPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */; };
 		659C70CE1F2014BF0045F6CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C70CD1F2014BF0045F6CF /* AlertController.swift */; };
 		65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896D1F3A935400547D72 /* LikesViewController.swift */; };
 		65A289701F3A95D600547D72 /* LikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896F1F3A95D600547D72 /* LikeController.swift */; };
@@ -43,13 +44,13 @@
 		65A289781F3BC97B00547D72 /* SearchTagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A289761F3BC97B00547D72 /* SearchTagCell.xib */; };
 		65A2897B1F3BC98E00547D72 /* SearchPlaceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A289791F3BC98E00547D72 /* SearchPlaceCell.swift */; };
 		65A2897C1F3BC98E00547D72 /* SearchPlaceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A2897A1F3BC98E00547D72 /* SearchPlaceCell.xib */; };
-		65A289801F3BD86900547D72 /* EVTTabPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */; };
 		65A289831F3E5BEE00547D72 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A289821F3E5BEE00547D72 /* SplashViewController.swift */; };
 		65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */; };
 		65C915D61FCF1687002AC31B /* PatientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C915D51FCF1687002AC31B /* PatientController.swift */; };
 		65C915D81FCF1696002AC31B /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C915D71FCF1696002AC31B /* Patient.swift */; };
 		65D250191F8E812700279713 /* DiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D250181F8E812700279713 /* DiagnosisViewController.swift */; };
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
+		65D4B94F1FEC82D9005D9C45 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */; };
 		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
 		9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */; };
@@ -130,11 +131,8 @@
 		D2F0C6C01DF3059800475696 /* PreRecordingBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C6BF1DF3059800475696 /* PreRecordingBroadcastViewController.swift */; };
 		D2F0C6C21DF30A7000475696 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C6C11DF30A7000475696 /* DataManager.swift */; };
 		D2F0C6C41DF3120F00475696 /* RecordingBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C6C31DF3120F00475696 /* RecordingBroadcastViewController.swift */; };
-		D2F0C6C71DF3223700475696 /* RadPopUpVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F0C6C61DF3223700475696 /* RadPopUpVC.xib */; };
-		D2F0C6CC1DF322B800475696 /* RadPopUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F0C6CB1DF322B800475696 /* RadPopUpVC.m */; };
 		D2F2A9F31E285F0000DA2434 /* InvitePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2A9F21E285F0000DA2434 /* InvitePopupViewController.swift */; };
 		D2F55A6E1DEB1A690038A392 /* SharePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */; };
-		D2F55A891DEB23D90038A392 /* RadShadowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F55A831DEB23D90038A392 /* RadShadowButton.m */; };
 		D2F55A8A1DEB23D90038A392 /* RadTableBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F55A851DEB23D90038A392 /* RadTableBackgroundView.m */; };
 		D2F55A8B1DEB23D90038A392 /* RadTableBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F55A861DEB23D90038A392 /* RadTableBackgroundView.xib */; };
 		D2F55A921DEB74F40038A392 /* FollowingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F55A911DEB74F40038A392 /* FollowingCell.swift */; };
@@ -192,6 +190,7 @@
 		657B127F1FC3316F0059B16E /* PlaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySlider.swift; sourceTree = "<group>"; };
 		657B12811FC38E4C0059B16E /* PatientNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNotesCell.swift; sourceTree = "<group>"; };
 		657B12821FC38E4C0059B16E /* PatientNotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientNotesCell.xib; sourceTree = "<group>"; };
+		658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPopupViewController.swift; sourceTree = "<group>"; };
 		659C70CD1F2014BF0045F6CF /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		65A2896D1F3A935400547D72 /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		65A2896F1F3A95D600547D72 /* LikeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeController.swift; sourceTree = "<group>"; };
@@ -201,14 +200,13 @@
 		65A289761F3BC97B00547D72 /* SearchTagCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchTagCell.xib; sourceTree = "<group>"; };
 		65A289791F3BC98E00547D72 /* SearchPlaceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchPlaceCell.swift; sourceTree = "<group>"; };
 		65A2897A1F3BC98E00547D72 /* SearchPlaceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchPlaceCell.xib; sourceTree = "<group>"; };
-		65A2897E1F3BD86900547D72 /* EVTTabPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EVTTabPageScrollView.h; sourceTree = "<group>"; };
-		65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EVTTabPageScrollView.m; sourceTree = "<group>"; };
 		65A289821F3E5BEE00547D72 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		65C698351FBDE1EE00F594C8 /* ConsultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultsViewController.swift; sourceTree = "<group>"; };
 		65C915D51FCF1687002AC31B /* PatientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientController.swift; sourceTree = "<group>"; };
 		65C915D71FCF1696002AC31B /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		65D250181F8E812700279713 /* DiagnosisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiagnosisViewController.swift; sourceTree = "<group>"; };
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
+		65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
 		6D8CF7F78CFE7BB69B7329A8 /* Pods-MedicConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnectTests/Pods-MedicConnectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -304,13 +302,8 @@
 		D2F0C6BF1DF3059800475696 /* PreRecordingBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreRecordingBroadcastViewController.swift; sourceTree = "<group>"; };
 		D2F0C6C11DF30A7000475696 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		D2F0C6C31DF3120F00475696 /* RecordingBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingBroadcastViewController.swift; sourceTree = "<group>"; };
-		D2F0C6C61DF3223700475696 /* RadPopUpVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadPopUpVC.xib; sourceTree = "<group>"; };
-		D2F0C6CA1DF322B800475696 /* RadPopUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadPopUpVC.h; sourceTree = "<group>"; };
-		D2F0C6CB1DF322B800475696 /* RadPopUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadPopUpVC.m; sourceTree = "<group>"; };
 		D2F2A9F21E285F0000DA2434 /* InvitePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitePopupViewController.swift; sourceTree = "<group>"; };
 		D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharePopupViewController.swift; sourceTree = "<group>"; };
-		D2F55A821DEB23D90038A392 /* RadShadowButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadShadowButton.h; sourceTree = "<group>"; };
-		D2F55A831DEB23D90038A392 /* RadShadowButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadShadowButton.m; sourceTree = "<group>"; };
 		D2F55A841DEB23D90038A392 /* RadTableBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadTableBackgroundView.h; sourceTree = "<group>"; };
 		D2F55A851DEB23D90038A392 /* RadTableBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadTableBackgroundView.m; sourceTree = "<group>"; };
 		D2F55A861DEB23D90038A392 /* RadTableBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadTableBackgroundView.xib; sourceTree = "<group>"; };
@@ -474,13 +467,15 @@
 			path = PlaySlider;
 			sourceTree = "<group>";
 		};
-		65A2897D1F3BD85E00547D72 /* EVTTabPageScrollView */ = {
+		658AFB221FEB22E80055B70C /* Popups */ = {
 			isa = PBXGroup;
 			children = (
-				65A2897E1F3BD86900547D72 /* EVTTabPageScrollView.h */,
-				65A2897F1F3BD86900547D72 /* EVTTabPageScrollView.m */,
+				658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */,
+				D2F2A9F21E285F0000DA2434 /* InvitePopupViewController.swift */,
+				654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */,
+				D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */,
 			);
-			path = EVTTabPageScrollView;
+			path = Popups;
 			sourceTree = "<group>";
 		};
 		65A289811F3E5BC400547D72 /* Onboarding */ = {
@@ -602,8 +597,6 @@
 				65D250181F8E812700279713 /* DiagnosisViewController.swift */,
 				D279AD4B1E13295B001714FC /* CommentsViewController.swift */,
 				65A2896D1F3A935400547D72 /* LikesViewController.swift */,
-				D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */,
-				D2F2A9F21E285F0000DA2434 /* InvitePopupViewController.swift */,
 			);
 			path = Diagnosis;
 			sourceTree = "<group>";
@@ -612,10 +605,8 @@
 			isa = PBXGroup;
 			children = (
 				657B127E1FC331270059B16E /* PlaySlider */,
-				65A2897D1F3BD85E00547D72 /* EVTTabPageScrollView */,
 				654FDF7F1F62060B009D4BA1 /* ExpandableLabel */,
 				D2F55A7D1DEB23D90038A392 /* Others */,
-				D2F0C6C51DF3222B00475696 /* RadPopUpVC */,
 				D206582E1E5BB9DB003875E4 /* RadTabBarController */,
 				650E28851F71B5960096A3F0 /* SCSiriWaveformView */,
 				654C972C1FBDDB9F00490627 /* TableViewCells */,
@@ -631,6 +622,7 @@
 				00C748411EFD179200BD3EAE /* NotificationUtil.swift */,
 				D2EB58B61E93E5A700D94194 /* AudioHelper.swift */,
 				D25EB1601E8478B40082A9D5 /* DateUtil.swift */,
+				65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */,
 				D21BC8FC1DEA32AD008F5443 /* ImageHelper.swift */,
 				D20658421E5BCD39003875E4 /* KeychainUtil.swift */,
 				D20658401E5BCD30003875E4 /* UserDefaultsUtil.swift */,
@@ -713,6 +705,7 @@
 				D21BC8F31DEA17A9008F5443 /* Diagnosis */,
 				65D2501A1F8E8B6300279713 /* Message */,
 				D2A9E7301E0A09CE0032C2CA /* Notifications */,
+				658AFB221FEB22E80055B70C /* Popups */,
 				D2F0C6BE1DF3058100475696 /* Recording */,
 				D2C1A83E1E15E70C00E213F4 /* Search */,
 				D213CB191E0CA7A2004BEA3C /* Settings */,
@@ -753,7 +746,6 @@
 				D29891EE1E613DBA004C0FC1 /* ProfileViewController.swift */,
 				D2E87DD11EA441DB00996DBC /* AnotherProfileViewController.swift */,
 				D29891EC1E613DBA004C0FC1 /* EditProfileViewController.swift */,
-				654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -770,22 +762,10 @@
 			path = Recording;
 			sourceTree = "<group>";
 		};
-		D2F0C6C51DF3222B00475696 /* RadPopUpVC */ = {
-			isa = PBXGroup;
-			children = (
-				D2F0C6CA1DF322B800475696 /* RadPopUpVC.h */,
-				D2F0C6CB1DF322B800475696 /* RadPopUpVC.m */,
-				D2F0C6C61DF3223700475696 /* RadPopUpVC.xib */,
-			);
-			path = RadPopUpVC;
-			sourceTree = "<group>";
-		};
 		D2F55A7D1DEB23D90038A392 /* Others */ = {
 			isa = PBXGroup;
 			children = (
 				D2F55A931DEB77AB0038A392 /* RadAvatar.swift */,
-				D2F55A821DEB23D90038A392 /* RadShadowButton.h */,
-				D2F55A831DEB23D90038A392 /* RadShadowButton.m */,
 				D255B9951DECECC500C4778F /* RadContentHeightTextView.h */,
 				D255B9961DECECC500C4778F /* RadContentHeightTextView.m */,
 				D2F55A841DEB23D90038A392 /* RadTableBackgroundView.h */,
@@ -935,7 +915,6 @@
 				D2941E651E109E7D00CB7552 /* ChangePasswordListCell.xib in Resources */,
 				A9A358781F07447F005B8011 /* Code_of_conduct_HTML.html in Resources */,
 				65A289781F3BC97B00547D72 /* SearchTagCell.xib in Resources */,
-				D2F0C6C71DF3223700475696 /* RadPopUpVC.xib in Resources */,
 				D2F55A8B1DEB23D90038A392 /* RadTableBackgroundView.xib in Resources */,
 				A9A3587A1F07447F005B8011 /* Terms_of_service_HTML.html in Resources */,
 				652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */,
@@ -1188,15 +1167,14 @@
 				D21BC8F81DEA2867008F5443 /* PlaylistCell.swift in Sources */,
 				D29891F11E613DBA004C0FC1 /* FavoritesViewController.swift in Sources */,
 				A9E4451D1F0A699000F49C7E /* playlist.xcdatamodeld in Sources */,
-				65A289801F3BD86900547D72 /* EVTTabPageScrollView.m in Sources */,
 				00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */,
 				65C915D61FCF1687002AC31B /* PatientController.swift in Sources */,
 				D29891F21E613DBA004C0FC1 /* ProfileViewController.swift in Sources */,
 				65A289831F3E5BEE00547D72 /* SplashViewController.swift in Sources */,
 				A9E444B91F096C9700F49C7E /* BlockedUserTableViewCell.swift in Sources */,
 				D206583E1E5BCCD4003875E4 /* BaseTaskController.swift in Sources */,
+				65D4B94F1FEC82D9005D9C45 /* Debouncer.swift in Sources */,
 				659C70CE1F2014BF0045F6CF /* AlertController.swift in Sources */,
-				D2F55A891DEB23D90038A392 /* RadShadowButton.m in Sources */,
 				6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */,
 				D2F0C6C01DF3059800475696 /* PreRecordingBroadcastViewController.swift in Sources */,
 				D2E87DD21EA441DB00996DBC /* AnotherProfileViewController.swift in Sources */,
@@ -1242,7 +1220,6 @@
 				D2F55A921DEB74F40038A392 /* FollowingCell.swift in Sources */,
 				D279AD4C1E13295B001714FC /* CommentsViewController.swift in Sources */,
 				651952AF1F426A3300AA6627 /* PatientService.swift in Sources */,
-				D2F0C6CC1DF322B800475696 /* RadPopUpVC.m in Sources */,
 				D25EB15F1E845DA20082A9D5 /* Meta.swift in Sources */,
 				65A289731F3BC95300547D72 /* SearchPeopleCell.swift in Sources */,
 				65C915D81FCF1696002AC31B /* Patient.swift in Sources */,
@@ -1252,6 +1229,7 @@
 				A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */,
 				D206583A1E5BBDDA003875E4 /* SignUpViewController.swift in Sources */,
 				A9C741D71F0FDCC700894651 /* PrivateUserTableViewCell.swift in Sources */,
+				658AFB241FEB23900055B70C /* ErrorPopupViewController.swift in Sources */,
 				D279AD521E1334CB001714FC /* Comment.swift in Sources */,
 				D21BC8FA1DEA2C56008F5443 /* Constants.swift in Sources */,
 				D255B9971DECECC500C4778F /* RadContentHeightTextView.m in Sources */,

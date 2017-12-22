@@ -1493,7 +1493,7 @@ class UserService: BaseTaskController {
         
     }
     
-    func getUserIdByMSP(MSP: String, completion: @escaping (_ success: Bool, _ userId: String?) -> Void) {
+    func getUserIdByMSP(MSP: String, completion: @escaping (_ success: Bool, _ MSP: String? , _ userId: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLGetUserIdByMSPSuffix)/\(MSP)"
         
@@ -1505,7 +1505,7 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
-                    completion(false, nil)
+                    completion(false, nil, nil)
                     return
                 }
                 
@@ -1513,13 +1513,13 @@ class UserService: BaseTaskController {
                     
                     if let result = response.result.value as? [String : AnyObject],
                         let userId = result["id"] as? String  {
-                        completion(true, userId)
+                        completion(true, MSP, userId)
                     } else {
-                        completion(false, nil)
+                        completion(false, nil, nil)
                     }
                     
                 } else {
-                    completion(false, nil)
+                    completion(false, nil, nil)
                 }
                 
         }

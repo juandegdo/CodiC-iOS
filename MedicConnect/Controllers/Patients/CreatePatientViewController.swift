@@ -165,7 +165,7 @@ extension CreatePatientViewController {
                         let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
                         patientProfileVC.patient = patient
                         patientProfileVC.fromAdd = true
-                        self.navigationController?.pushViewController(patientProfileVC, animated: true)
+                        self.navigationController?.pushViewController(patientProfileVC, animated: false)
                     }
                 }
             }
