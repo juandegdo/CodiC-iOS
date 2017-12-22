@@ -34,9 +34,9 @@ class PostService: BaseTaskController {
             parameters["patientId"] = patientId
         }
         
-        if let referringUserId = DataManager.Instance.getReferringUserId() as String?,
-            referringUserId != "" {
-            parameters["referringUser"] = referringUserId
+        let referringUserIds = DataManager.Instance.getReferringUserIds()
+        if referringUserIds.count > 0 {
+            parameters["referringUsers"] = referringUserIds.joined(separator: ",")
         }
         
         Alamofire.upload(multipartFormData: { (multipartFormData ) in

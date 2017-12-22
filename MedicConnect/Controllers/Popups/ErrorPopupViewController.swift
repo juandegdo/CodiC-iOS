@@ -118,6 +118,8 @@ extension ErrorPopupViewController {
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
+            DataManager.Instance.setFromPatientProfile(false)
+            
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
                 weakSelf?.isYes = true

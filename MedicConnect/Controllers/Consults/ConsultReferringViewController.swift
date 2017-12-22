@@ -18,7 +18,6 @@ class ConsultReferringViewController: UIViewController {
     
     @IBOutlet weak var btnRecord: UIButton!
     
-    var selectedTextField: String = ""
     var patientID: String = ""
     var referUserID: String = ""
     
@@ -101,7 +100,8 @@ class ConsultReferringViewController: UIViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: patientID)
-            DataManager.Instance.setReferringUserId(referringUserId: referUserID)
+            DataManager.Instance.setReferringUserIds(referringUserIds: [referUserID])
+            DataManager.Instance.setFromPatientProfile(false)
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
@@ -208,19 +208,19 @@ extension ConsultReferringViewController {
             errorType = .noMSPAndPHN
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
             DataManager.Instance.setPatientId(patientId: "")
-            DataManager.Instance.setReferringUserId(referringUserId: "")
+            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
             
         } else if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
             errorType = .noPHN
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: "")
-            DataManager.Instance.setReferringUserId(referringUserId: self.referUserID)
+            DataManager.Instance.setReferringUserIds(referringUserIds: [self.referUserID])
             
         } else if (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
             errorType = .noMSP
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: self.patientID)
-            DataManager.Instance.setReferringUserId(referringUserId: "")
+            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
             
         }
         

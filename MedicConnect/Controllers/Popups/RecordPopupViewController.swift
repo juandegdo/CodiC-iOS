@@ -72,7 +72,8 @@ extension RecordPopupViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)
             DataManager.Instance.setPatientId(patientId: "")
-            DataManager.Instance.setReferringUserId(referringUserId: "")
+            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+            DataManager.Instance.setFromPatientProfile(false)
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {

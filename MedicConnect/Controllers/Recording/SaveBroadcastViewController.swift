@@ -167,6 +167,7 @@ extension SaveBroadcastViewController {
     
     func stopIndicating() {
         activityIndicatorView.stopAnimating()
+        activityIndicatorView.removeFromSuperview()
         UIApplication.shared.endIgnoringInteractionEvents()
     }
     
@@ -189,37 +190,67 @@ extension SaveBroadcastViewController {
             return
         }
         
-        self.startIndicating()
-        
+        let fromPatientProfile = DataManager.Instance.getFromPatientProfile()
+        if !fromPatientProfile {
+            self.startIndicating()
+        }
+
         var audioFilename: URL
         if (self.fileURL != nil) {
             audioFilename = self.fileURL!
         } else {
             audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         }
-        
+
         let fileExtension = audioFilename.pathExtension
         let fileMimeType = fileExtension.mimeTypeForPathExtension()
-        
+
         do {
             let audioData = try Data(contentsOf: audioFilename)
             
-            self.btnSave.isEnabled = false
-            
-            PostService.Instance.sendPost(title, author: self.tfAuthor.text!, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
-                (success: Bool) in
+            if fromPatientProfile {
+                // From Patient Profile
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
+                    
+                    let noteInfo = ["title" : title,
+                                    "author" : self.tfAuthor.text!,
+                                    "description" : self.tvDescription.text!,
+                                    "hashtags" : hashTagCtrl.tags as! [String],
+                                    "postType" : postType,
+                                    "audioData" : audioData,
+                                    "fileExtension": fileExtension,
+                                    "mimeType": fileMimeType] as [String : Any]
+                    
+                    vc.noteInfo = noteInfo
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
                 
-                // As we just posted a new video, it's a good thing to refresh user info.
-                UserService.Instance.getMe(completion: {
-                    (user: User?) in
-                    self.stopIndicating()
-                    self.btnSave.isEnabled = true
-                    self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
+            } else {
+                // From other screens
+                self.btnSave.isEnabled = false
+                
+                PostService.Instance.sendPost(title, author: self.tfAuthor.text!, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
+                    (success: Bool) in
+                    
+                    // As we just posted a new video, it's a good thing to refresh user info.
+                    UserService.Instance.getMe(completion: {
+                        (user: User?) in
+                        self.stopIndicating()
+                        self.btnSave.isEnabled = true
+                        self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
+                    })
+                    
                 })
-                
-            })            
+            }
+            
+
+            
         } catch let error {
-            self.stopIndicating()
+            if !fromPatientProfile {
+                self.stopIndicating()
+            }
+            
             print(error.localizedDescription)
         }
         
