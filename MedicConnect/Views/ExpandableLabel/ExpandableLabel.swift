@@ -122,7 +122,7 @@ open class ExpandableLabel: UILabel {
         self.isUserInteractionEnabled = true
         self.lineBreakMode = .byClipping
         self.numberOfLines = 3
-        self.expandedAttributedLink = nil
+        self.expandedAttributedLink = NSAttributedString(string: "Less", attributes: [.font: UIFont.boldSystemFont(ofSize: font.pointSize)])
         self.collapsedAttributedLink = NSAttributedString(string: "More", attributes: [.font: UIFont.boldSystemFont(ofSize: font.pointSize)])
         self.ellipsis = NSAttributedString(string: "...")
     }

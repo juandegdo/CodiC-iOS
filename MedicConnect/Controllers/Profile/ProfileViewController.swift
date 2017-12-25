@@ -526,12 +526,21 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.setData(post: post)
             
             let isFullDesc = self.states.contains(post.id)
+//            cell.lblDescription.delegate = self
+//            cell.lblDescription.shouldCollapse = true
+//            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
+//            cell.lblDescription.text = post.description
+//            cell.lblDescription.collapsed = !isFullDesc
+//            cell.showFullDescription = isFullDesc
+            
+//            cell.lblDescription.setLessLinkWith(lessLink: "Less", attributes: [.foregroundColor:UIColor.red], position: NSTextAlignment.left)
+            
             cell.lblDescription.delegate = self
             cell.lblDescription.shouldCollapse = true
+//            cell.lblDescription.textReplacementType = currentSource.textReplacementType
             cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-            cell.lblDescription.text = post.description
             cell.lblDescription.collapsed = !isFullDesc
-            cell.showFullDescription = isFullDesc
+            cell.lblDescription.text = post.description
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {
