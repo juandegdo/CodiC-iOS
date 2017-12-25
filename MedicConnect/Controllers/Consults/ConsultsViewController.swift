@@ -147,7 +147,7 @@ extension ConsultsViewController {
         
     }
     
-    func onPlayAudio(sender: UIButton) {
+    @objc func onPlayAudio(sender: UIButton) {
         
         guard let _index = sender.tag as Int? else {
             return
@@ -244,7 +244,7 @@ extension ConsultsViewController {
         
     }
     
-    func onBackwardAudio(sender: UIButton) {
+    @objc func onBackwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -260,7 +260,7 @@ extension ConsultsViewController {
         self.seekToTime(time: time)
     }
     
-    func onForwardAudio(sender: UIButton) {
+    @objc func onForwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -277,7 +277,7 @@ extension ConsultsViewController {
         self.seekToTime(time: time)
     }
     
-    func onSeekSlider(sender: UISlider) {
+    @objc func onSeekSlider(sender: UISlider) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -316,11 +316,11 @@ extension ConsultsViewController {
         }
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         self.releasePlayer(onlyState: true)
     }
     
-    func willEnterBackground() {
+    @objc func willEnterBackground() {
         
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
@@ -351,7 +351,7 @@ extension ConsultsViewController {
     
     // MARK: Selectors
     
-    func onSelectUser(sender: UITapGestureRecognizer) {
+    @objc func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
         let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
         
@@ -360,7 +360,7 @@ extension ConsultsViewController {
         }
     }
     
-    func onSelectHashtag(sender: UITapGestureRecognizer) {
+    @objc func onSelectHashtag(sender: UITapGestureRecognizer) {
         let myTextView = sender.view as! UITextView //sender is TextView
         let _pos: CGPoint = sender.location(in: myTextView)
         

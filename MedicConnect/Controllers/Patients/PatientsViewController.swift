@@ -71,7 +71,7 @@ extension PatientsViewController {
         
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let bottomMargin = keyboardSize.height - 55.0
             constOfTableViewBottom.constant = bottomMargin
@@ -82,7 +82,7 @@ extension PatientsViewController {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         constOfTableViewBottom.constant = 0
         
         UIView.animate(withDuration: 1, animations: {

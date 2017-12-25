@@ -110,7 +110,7 @@ extension PatientNoteReferViewController : UITextFieldDelegate {
         
     }
     
-    func textFieldDidChange(_ textField: UITextField) {
+    @objc func textFieldDidChange(_ textField: UITextField) {
         // When the user performs a repeating action, such as entering text, invoke the `call` method
         textField.textColor = UIColor.black
         

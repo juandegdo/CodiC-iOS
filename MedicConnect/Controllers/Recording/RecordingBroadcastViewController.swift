@@ -113,7 +113,7 @@ class RecordingBroadcastViewController: BaseViewController {
     
     }
     
-    func updateSeekBar() {
+    @objc func updateSeekBar() {
         
         if let _audioRecorder = self.audioRecorder as AVAudioRecorder? {
             _audioRecorder.updateMeters()

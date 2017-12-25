@@ -39,14 +39,14 @@ class EditRecordingBroadcastViewController: BaseViewController {
         
     }
     
-    func willEnterForeground(){
+    @objc func willEnterForeground(){
         if (self.audioPlayer != nil && self.audioPlayer?.isPlaying == false) {
             self.btnPause.isHidden = true
             self.btnPlay.isHidden = false
         }
     }
     
-    func willEnterBackground(){
+    @objc func willEnterBackground(){
         if (self.audioPlayer != nil) {
             
             self.btnPause.isHidden = false
@@ -118,7 +118,7 @@ class EditRecordingBroadcastViewController: BaseViewController {
         }
     }
     
-    func updateSeekBar() {
+    @objc func updateSeekBar() {
         
         if let _audioPlayer = self.audioPlayer as AVAudioPlayer? {
             let progress = _audioPlayer.currentTime

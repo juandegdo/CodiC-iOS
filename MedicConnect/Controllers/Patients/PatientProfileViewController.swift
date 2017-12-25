@@ -343,11 +343,11 @@ class PatientProfileViewController: BaseViewController, ExpandableLabelDelegate 
         }
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         self.releasePlayer(onlyState: true)
     }
     
-    func willEnterBackground() {
+    @objc func willEnterBackground() {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }

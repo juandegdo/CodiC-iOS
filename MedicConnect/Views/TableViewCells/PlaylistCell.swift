@@ -74,7 +74,7 @@ class PlaylistCell: UITableViewCell {
                 
             } else {
                 let constraintRect = CGSize(width: self.txtVHashtags.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.txtVHashtags.font!], context: nil)
+                let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.txtVHashtags.font!], context: nil)
                 let topSpace: CGFloat = self.postType == Constants.PostTypeDiagnosis ? 16 : 8
                 
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
@@ -104,7 +104,7 @@ class PlaylistCell: UITableViewCell {
                 
             } else {
                 let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.lblDescription.font], context: nil)
+                let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
                 
                 self.constOfLblDescriptionHeight.constant = (boundingBox?.height)!
             }
@@ -169,12 +169,12 @@ class PlaylistCell: UITableViewCell {
                 
                 let nsText = likeDescription as NSString
                 let textRange = NSMakeRange(0, nsText.length)
-                let attributedString = NSMutableAttributedString(string: likeDescription, attributes: [NSFontAttributeName : blackFont])
+                let attributedString = NSMutableAttributedString(string: likeDescription, attributes: [NSAttributedStringKey.font : blackFont])
                 
                 nsText.enumerateSubstrings(in: textRange, options: .byWords, using: {
                     (substring, substringRange, _, _) in
                     if (substring == "Liked" || substring == "by" || substring == "and") {
-                        attributedString.addAttribute(NSFontAttributeName, value: bookFont, range: substringRange)
+                        attributedString.addAttribute(NSAttributedStringKey.font, value: bookFont, range: substringRange)
                     }
                 })
                 
@@ -185,45 +185,45 @@ class PlaylistCell: UITableViewCell {
             }
             
             self.lblLikedDescription.isHidden = false
+            
+            // Customize badge
+            if self.likeBadgeView == nil {
+                self.likeBadgeView = GIBadgeView()
+                //self.likeBadgeView.setMinimumSize(10.0)
+                self.likeBadgeView.font = likeBadgeViewFont
+                self.likeBadgeView.textColor = Constants.ColorDarkGray2
+                self.likeBadgeView.backgroundColor = UIColor.white
+                self.likeBadgeView.topOffset = 26.0
+                self.likeBadgeView.rightOffset = 11.0
+                self.btnLike.addSubview(self.likeBadgeView)
+                
+                let tapGestureOnLikeBadge = UITapGestureRecognizer(target: self, action: #selector(LikeBadgeTapped))
+                likeBadgeView.addGestureRecognizer(tapGestureOnLikeBadge)
+            }
+            
+            self.likeBadgeView.badgeValue = post.likes.count
+            
+            if self.commentBadgeView == nil {
+                self.commentBadgeView = GIBadgeView()
+                //commentBadgeView(10.0)
+                self.commentBadgeView.font = commentBadgeViewFont
+                self.commentBadgeView.textColor = Constants.ColorDarkGray2
+                self.commentBadgeView.backgroundColor = UIColor.white
+                self.commentBadgeView.topOffset = 26.0
+                self.commentBadgeView.rightOffset = 11.0
+                self.btnMessage.addSubview(self.commentBadgeView)
+                
+                let tapGestureOnCommentBadge = UITapGestureRecognizer(target: self, action: #selector(CommentsBadgeTapped))
+                commentBadgeView.addGestureRecognizer(tapGestureOnCommentBadge)
+            }
+            
+            self.commentBadgeView.badgeValue = post.commentsCount
         } else {
             self.lblLikedDescription.isHidden = true
         }
         
         // Set hashtags textview
         self.txtVHashtags.text = post.hashtags.count > 0 ? post.hashtags.joined(separator: " ") : ""
-        
-        // Customize badge
-        if self.likeBadgeView == nil {
-            self.likeBadgeView = GIBadgeView()
-            //self.likeBadgeView.setMinimumSize(10.0)
-            self.likeBadgeView.font = likeBadgeViewFont
-            self.likeBadgeView.textColor = Constants.ColorDarkGray2
-            self.likeBadgeView.backgroundColor = UIColor.white
-            self.likeBadgeView.topOffset = 26.0
-            self.likeBadgeView.rightOffset = 11.0
-            self.btnLike.addSubview(self.likeBadgeView)
-            
-            let tapGestureOnLikeBadge = UITapGestureRecognizer(target: self, action: #selector(LikeBadgeTapped))
-            likeBadgeView.addGestureRecognizer(tapGestureOnLikeBadge)
-        }
-        
-        self.likeBadgeView.badgeValue = post.likes.count
-        
-        if self.commentBadgeView == nil {
-            self.commentBadgeView = GIBadgeView()
-            //commentBadgeView(10.0)
-            self.commentBadgeView.font = commentBadgeViewFont
-            self.commentBadgeView.textColor = Constants.ColorDarkGray2
-            self.commentBadgeView.backgroundColor = UIColor.white
-            self.commentBadgeView.topOffset = 26.0
-            self.commentBadgeView.rightOffset = 11.0
-            self.btnMessage.addSubview(self.commentBadgeView)
-            
-            let tapGestureOnCommentBadge = UITapGestureRecognizer(target: self, action: #selector(CommentsBadgeTapped))
-            commentBadgeView.addGestureRecognizer(tapGestureOnCommentBadge)
-        }
-        
-        self.commentBadgeView.badgeValue = post.commentsCount
                 
         // Customize Avatar
         self.imgUserAvatar.image = nil
@@ -236,11 +236,11 @@ class PlaylistCell: UITableViewCell {
 }
 
 extension PlaylistCell {
-    func LikeBadgeTapped() {
+    @objc func LikeBadgeTapped() {
         btnLike.sendActions(for: .touchUpInside)
     }
     
-    func CommentsBadgeTapped() {
+    @objc func CommentsBadgeTapped() {
         btnMessage.sendActions(for: .touchUpInside)
     }
 }

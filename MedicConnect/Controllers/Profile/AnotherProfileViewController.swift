@@ -296,7 +296,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
     }
     
-    func willEnterBackground() {
+    @objc func willEnterBackground() {
 //        guard let _player = PlayerController.Instance.player as AVPlayer? else {
 //            return
 //        }
@@ -351,7 +351,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         
         self.releasePlayer()
         

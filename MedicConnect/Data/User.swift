@@ -84,7 +84,7 @@ class User {
         if self.fullName.isEmpty {
             return ""
         } else {
-            return separated.reduce("") { $0.0 + String($0.1.first!) }
+            return separated.reduce("") { $0 + String($1.first!) }
         }
         
     }

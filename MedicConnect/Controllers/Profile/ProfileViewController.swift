@@ -136,7 +136,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
-    func updatedProfileSettings() {
+    @objc func updatedProfileSettings() {
         refreshData()
     }
     
@@ -232,7 +232,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
-    func onPlayAudio(sender: UIButton) {
+    @objc func onPlayAudio(sender: UIButton) {
         
         guard let _index = sender.tag as Int? else {
             return
@@ -337,7 +337,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
-    func onBackwardAudio(sender: UIButton) {
+    @objc func onBackwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -353,7 +353,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         self.seekToTime(time: time)
     }
     
-    func onForwardAudio(sender: UIButton) {
+    @objc func onForwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -370,7 +370,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         self.seekToTime(time: time)
     }
     
-    func onSeekSlider(sender: UISlider) {
+    @objc func onSeekSlider(sender: UISlider) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -413,11 +413,11 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         }
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         self.releasePlayer(onlyState: true)
     }
     
-    func willEnterBackground() {
+    @objc func willEnterBackground() {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }

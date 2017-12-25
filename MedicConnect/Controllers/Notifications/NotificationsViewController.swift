@@ -186,7 +186,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
      
      - Parameter sender: Button containing user information.
      */
-    func setFollow(sender: TVButton) {
+    @objc func setFollow(sender: TVButton) {
         
         self.view.endEditing(true)
         
@@ -216,7 +216,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
      
      - Parameter sender: Button containing user information.
      */
-    func setUnfollow(sender: TVButton) {
+    @objc func setUnfollow(sender: TVButton) {
         
         self.view.endEditing(true)
         
@@ -273,7 +273,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func acceptRequest(sender: TVButton) {
+    @objc func acceptRequest(sender: TVButton) {
         sender.makeEnabled(enabled: false)
         
         let row = sender.index
@@ -289,7 +289,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func declineRequest(sender: TVButton) {
+    @objc func declineRequest(sender: TVButton) {
         sender.makeEnabled(enabled: false)
         
         let row = sender.index

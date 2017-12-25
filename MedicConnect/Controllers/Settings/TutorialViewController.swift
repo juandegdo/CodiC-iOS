@@ -71,7 +71,7 @@ class TutorialViewController: BaseViewController {
     }
 
     // MARK: - Tap Gesture
-    func onTapImage(sender: UITapGestureRecognizer) {
+    @objc func onTapImage(sender: UITapGestureRecognizer) {
         // Image Tapped, Show next tutorial image
         if self.ivBackground.tag < self.tutorialImages.count - 1 {
             let nextIndex = self.ivBackground.tag + 1

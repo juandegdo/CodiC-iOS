@@ -193,7 +193,7 @@ class PatientService: BaseTaskController {
         
     }
     
-    func getPatientIdByPHN(PHN: String, completion: @escaping (_ success: Bool,_ PHN: String?, _ patientId: String?) -> Void) {
+    func getPatientIdByPHN(PHN: String, completion: @escaping (_ success: Bool, _ PHN: String?, _ patientId: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientIdByPHNSuffix)/\(PHN)"
         
@@ -219,7 +219,6 @@ class PatientService: BaseTaskController {
                     }
                     
                 } else {
-                    print("Response: \(response.response?.statusCode)")
                     completion(false, nil, nil)
                 }
                 

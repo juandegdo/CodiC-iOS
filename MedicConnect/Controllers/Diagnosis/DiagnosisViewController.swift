@@ -155,7 +155,7 @@ extension DiagnosisViewController {
         
     }
     
-    func onPlayAudio(sender: UIButton) {
+    @objc func onPlayAudio(sender: UIButton) {
         
         guard let _index = sender.tag as Int? else {
             return
@@ -252,7 +252,7 @@ extension DiagnosisViewController {
         
     }
     
-    func onBackwardAudio(sender: UIButton) {
+    @objc func onBackwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -268,7 +268,7 @@ extension DiagnosisViewController {
         self.seekToTime(time: time)
     }
     
-    func onForwardAudio(sender: UIButton) {
+    @objc func onForwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -285,7 +285,7 @@ extension DiagnosisViewController {
         self.seekToTime(time: time)
     }
     
-    func onSeekSlider(sender: UISlider) {
+    @objc func onSeekSlider(sender: UISlider) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -324,11 +324,11 @@ extension DiagnosisViewController {
         }
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         self.releasePlayer(onlyState: true)
     }
     
-    func willEnterBackground() {
+    @objc func willEnterBackground() {
         
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
@@ -440,7 +440,7 @@ extension DiagnosisViewController {
         present(alertController, animated: false, completion: nil)
     }
     
-    func onToggleLike(sender: TVButton) {
+    @objc func onToggleLike(sender: TVButton) {
         
         guard let _index = sender.index as Int?,
             let _refTableView = sender.refTableView as UITableView? else {
@@ -535,7 +535,7 @@ extension DiagnosisViewController {
     
     // MARK: Selectors
     
-    func onSelectShare(sender: UIButton) {
+    @objc func onSelectShare(sender: UIButton) {
         
         vcDisappearType = .share
         
@@ -543,7 +543,7 @@ extension DiagnosisViewController {
         
     }
     
-    func onSelectComment(sender: UIButton) {
+    @objc func onSelectComment(sender: UIButton) {
         vcDisappearType = .comment
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -556,7 +556,7 @@ extension DiagnosisViewController {
         
     }
     
-    func onSelectUser(sender: UITapGestureRecognizer) {
+    @objc func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
         let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
         
@@ -580,7 +580,7 @@ extension DiagnosisViewController {
         }
     }
     
-    func onSelectHashtag (sender: UITapGestureRecognizer) {
+    @objc func onSelectHashtag (sender: UITapGestureRecognizer) {
         let myTextView = sender.view as! UITextView //sender is TextView
         let _pos: CGPoint = sender.location(in: myTextView)
         

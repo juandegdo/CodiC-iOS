@@ -39,7 +39,7 @@ class BaseViewController: UIViewController {
     
     // MARK: General Message Alert
     
-    func updateNotificationIcon() {
+    @objc func updateNotificationIcon() {
         // Show/Hide new notification mark
         if self.viewNotificationAlert != nil {
             self.viewNotificationAlert.isHidden = !NotificationUtil.hasNewNotification

@@ -31,7 +31,7 @@ open class AlertAction : NSObject, NSCopying {
     open var title: String
     open var style: AlertActionStyle
     var handler: ((AlertAction?) -> Void)!
-    open var enabled: Bool {
+    @objc open var enabled: Bool {
         didSet {
             if (oldValue != enabled) {
                 NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: AlertActionEnabledDidChangeNotification), object: nil)
@@ -673,7 +673,7 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
     }
     
     // Close Button Tapped Action
-    func closeTapped(_ sender: UIButton) {
+    @objc func closeTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         
         if (actions.count > 0) {
@@ -685,7 +685,7 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
     }
     
     // Button Tapped Action
-    func buttonTapped(_ sender: UIButton) {
+    @objc func buttonTapped(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         
         sender.isSelected = true
@@ -696,7 +696,7 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
     }
     
     // Handle ContainerView tap gesture
-    func handleContainerViewTapGesture(_ sender: AnyObject) {
+    @objc func handleContainerViewTapGesture(_ sender: AnyObject) {
         // cancel action
         let action = actions[cancelButtonTag - 1] as! AlertAction
         if (action.handler != nil) {
@@ -725,7 +725,7 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
         }
     }
     
-    func handleKeyboardWillShowNotification(_ notification: Foundation.Notification) {
+    @objc func handleKeyboardWillShowNotification(_ notification: Foundation.Notification) {
         if let userInfo = notification.userInfo as? [String: NSValue],
             let keyboardSize = userInfo[UIKeyboardFrameEndUserInfoKey]?.cgRectValue.size {
             var _keyboardSize = keyboardSize
@@ -743,7 +743,7 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
         }
     }
     
-    func handleKeyboardWillHideNotification(_ notification: Foundation.Notification) {
+    @objc func handleKeyboardWillHideNotification(_ notification: Foundation.Notification) {
         keyboardHeight = 0.0
         reloadAlertViewHeight()
         containerViewBottomSpaceConstraint?.constant = keyboardHeight

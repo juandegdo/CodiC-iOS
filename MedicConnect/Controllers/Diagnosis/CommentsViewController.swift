@@ -73,7 +73,7 @@ class CommentsViewController: BaseViewController {
         self.tvComments.rowHeight = UITableViewAutomaticDimension
         
         let appendFont: UIFont = UIFont(name: "Avenir-Oblique", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 12.0)
-        let appendAttributes = [ NSForegroundColorAttributeName : UIColor.lightGray, NSFontAttributeName : appendFont ]
+        let appendAttributes = [ NSAttributedStringKey.foregroundColor : UIColor.lightGray, NSAttributedStringKey.font : appendFont ]
         let appendString = NSMutableAttributedString(string: "Type your comment", attributes: appendAttributes)
         self.commentTextView.attributedPlaceholder = appendString
         
@@ -95,7 +95,7 @@ class CommentsViewController: BaseViewController {
         }
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             let bottomMargin = keyboardSize.height + (isFirstKeyboardShow ? 44.0 : 0)
             lbcBottomMargin.constant = bottomMargin
@@ -107,7 +107,7 @@ class CommentsViewController: BaseViewController {
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    @objc func keyboardWillHide(notification: NSNotification) {
         lbcBottomMargin.constant = 0
         UIView.animate(withDuration: 1, animations: {
             self.view.layoutIfNeeded()

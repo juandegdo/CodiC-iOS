@@ -38,7 +38,7 @@ class ConferenceViewController: BaseViewController {
     func initViews() {
         
         // Set Segmented Control font
-        let attr = NSDictionary(object: UIFont(name: "Avenir-Black", size: 12.0)!, forKey: NSFontAttributeName as NSCopying)
+        let attr = NSDictionary(object: UIFont(name: "Avenir-Black", size: 12.0)!, forKey: NSAttributedStringKey.font as NSCopying)
         UISegmentedControl.appearance().setTitleTextAttributes(attr as [NSObject : AnyObject] , for: .normal)
         
         // Initialize Table Views

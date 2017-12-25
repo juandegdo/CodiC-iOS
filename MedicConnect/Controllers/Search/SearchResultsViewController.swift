@@ -133,7 +133,7 @@ class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
 //        PlayerController.Instance.currentIndex = nil
     }
     
-    func willEnterBackground() {
+    @objc func willEnterBackground() {
 //        guard let _player = PlayerController.Instance.player as AVPlayer? else {
 //            return
 //        }
@@ -160,7 +160,7 @@ class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
 //        PlayerController.Instance.scheduleReset()
     }
     
-    func playerDidFinishPlaying(note: NSNotification) {
+    @objc func playerDidFinishPlaying(note: NSNotification) {
         
         self.releasePlayer()
         
@@ -299,7 +299,7 @@ extension SearchResultsViewController {
 //        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
     }
     
-    func onToggleAction(sender: TVButton) {
+    @objc func onToggleAction(sender: TVButton) {
         guard let _ = sender.index as Int?,
             let _ = sender.refTableView as UITableView? else {
                 return
@@ -387,7 +387,7 @@ extension SearchResultsViewController {
         present(alertController, animated: false, completion: nil)
     }
     
-    func onToggleLike(sender: TVButton) {
+    @objc func onToggleLike(sender: TVButton) {
         
         guard let _index = sender.index as Int?,
             let _refTableView = sender.refTableView as UITableView? else {
@@ -443,13 +443,13 @@ extension SearchResultsViewController {
     
     // MARK: Selectors
     
-    func onSelectShare(sender: UIButton) {
+    @objc func onSelectShare(sender: UIButton) {
         
         self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcastPopup, sender: nil)
         
     }
     
-    func onSelectComment(sender: UIButton) {
+    @objc func onSelectComment(sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
@@ -461,7 +461,7 @@ extension SearchResultsViewController {
         
     }
     
-    func onSelectUser(sender: UITapGestureRecognizer) {
+    @objc func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
         
         guard let post = PostController.Instance.getHashtagPosts()[index!] as Post? else {

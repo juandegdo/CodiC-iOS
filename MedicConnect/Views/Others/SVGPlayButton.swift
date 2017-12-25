@@ -226,7 +226,7 @@ private let kInnerRadiusScaleFactor = CGFloat(0.025)
         self.progressStrokeEnd = 0
     }
     
-    func touchUpInsideHandler() {
+    @objc func touchUpInsideHandler() {
         if playing {
             if let willPause = self.willPause {
                 willPause()

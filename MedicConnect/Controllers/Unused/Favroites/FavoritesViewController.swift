@@ -149,7 +149,7 @@ class FavoritesViewController: BaseViewController {
      
      - Parameter sender: Button containing user information.
      */
-    func setUnfollow(sender: TVButton) {
+    @objc func setUnfollow(sender: TVButton) {
         
         sender.makeEnabled(enabled: false)
         
