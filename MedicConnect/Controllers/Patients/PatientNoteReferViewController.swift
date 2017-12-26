@@ -79,6 +79,15 @@ class PatientNoteReferViewController: UIViewController {
             textField.leftViewMode = .always
             textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             
+            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 8, y: 16.5, width: 11, height: 11))
+            ivCheck.image = UIImage.init(named: "icon_save_done_new")
+            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 27, height: 44))
+            view.addSubview(ivCheck)
+            
+            textField.rightView = view
+            textField.rightViewMode = .always
+            textField.rightView?.isHidden = true
+            
             // Hide error label
             errorLabel.isHidden = true
         }
@@ -124,6 +133,15 @@ extension PatientNoteReferViewController : UITextFieldDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         // When the user performs a repeating action, such as entering text, invoke the `call` method
         textField.textColor = UIColor.black
+        textField.rightView?.isHidden = true
+        
+        if textField.superview! == self.view1 {
+            self.userIDs["view1"] = ""
+        } else if textField.superview! == self.view2 {
+            self.userIDs["view2"] = ""
+        } else if textField.superview! == self.view3 {
+            self.userIDs["view3"] = ""
+        }
         
         debouncer.call()
         debouncer.callback = {
@@ -157,6 +175,8 @@ extension PatientNoteReferViewController : UITextFieldDelegate {
                             label.isHidden = false
                             textField.textColor = UIColor.red
                         }
+                        
+                        textField.rightView?.isHidden = !label.isHidden
                     }
                     
                 }
@@ -232,33 +252,22 @@ extension PatientNoteReferViewController {
         if (view2.isHidden) {
             let textField: UITextField = view1.viewWithTag(10) as! UITextField
             let label: UILabel = view1.viewWithTag(11) as! UILabel
-            view2.isHidden = !label.isHidden || textField.text!.count == 0
+            view2.isHidden = !(label.isHidden && !(textField.rightView?.isHidden)!)
         } else if (view3.isHidden) {
             let textField1: UITextField = view1.viewWithTag(10) as! UITextField
             let label1: UILabel = view1.viewWithTag(11) as! UILabel
             let textField2: UITextField = view2.viewWithTag(10) as! UITextField
             let label2: UILabel = view2.viewWithTag(11) as! UILabel
-            view3.isHidden = (!label1.isHidden || textField1.text!.count == 0) && (!label2.isHidden || textField2.text!.count == 0)
+            view3.isHidden = !(label1.isHidden && !(textField1.rightView?.isHidden)! && label2.isHidden && !(textField2.rightView?.isHidden)!)
         }
     }
     
     @IBAction func onSaveNote(sender: UIButton!) {
         // Save Note
         var doctorIds: [String] = []
-        let views: [UIView] = [view1, view2, view3]
-        
-        for view in views {
-            let textField: UITextField = view.viewWithTag(10) as! UITextField
-            let errorLabel: UILabel = view.viewWithTag(11) as! UILabel
-            
-            if errorLabel.isHidden && textField.text!.count > 0 {
-                if view == self.view1 {
-                    doctorIds.append(self.userIDs["view1"]!)
-                } else if view == self.view2 {
-                    doctorIds.append(self.userIDs["view2"]!)
-                } else if view == self.view3 {
-                    doctorIds.append(self.userIDs["view3"]!)
-                }
+        for (_, value) in self.userIDs {
+            if value != "" {
+                doctorIds.append(value)
             }
         }
         
