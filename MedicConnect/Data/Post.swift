@@ -31,7 +31,7 @@ class Post {
     fileprivate var currentProgress: CGFloat = 0.0
     fileprivate var lastPlayedAt: Double = DateUtil.getDistantPast()
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, user: User, postType: String, patientId: String) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, user: User, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -42,11 +42,10 @@ class Post {
         self.description = description
         self.user = user
         self.postType = postType
-        self.patientId = patientId
         
     }
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, author: String, postType: String, patientId: String) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, author: String, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -57,11 +56,10 @@ class Post {
         self.description = ""
         self.user = User(fullName: author, email: "", password: "")
         self.postType = postType
-        self.patientId = patientId
         
     }
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, postType: String, patientId: String) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, description: String, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -72,11 +70,10 @@ class Post {
         self.description = description
         self.user = User(email: "", password: "")
         self.postType = postType
-        self.patientId = patientId
         
     }
     
-    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, user: User, postType: String, patientId: String) {
+    init(id: String, audio: String, meta: Meta, playCount: Int, commentsCount: Int, title: String, user: User, postType: String) {
         
         self.id = id
         self.audio = audio
@@ -87,7 +84,6 @@ class Post {
         self.description = ""
         self.user = user
         self.postType = postType
-        self.patientId = patientId
         
     }
     

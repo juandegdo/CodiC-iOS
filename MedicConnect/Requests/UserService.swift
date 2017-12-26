@@ -400,8 +400,7 @@ class UserService: BaseTaskController {
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String,
-                                    let _postType = p["post_type"] as? String,
-                                    let _patientId = p["patientId"] as? String {
+                                    let _postType = p["post_type"] as? String {
                                     
                                     // Create meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -410,7 +409,7 @@ class UserService: BaseTaskController {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType, patientId: _patientId)
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType)
                                     
                                     // Optional description
                                     
@@ -440,6 +439,12 @@ class UserService: BaseTaskController {
                                     
                                     if let _hashtags = p["hashtags"] as? [String] {
                                         post.hashtags = _hashtags
+                                    }
+                                    
+                                    // Optional patient id
+                                    
+                                    if let _patientId = p["patientId"] as? String {
+                                        post.patientId = _patientId
                                     }
                                     
                                     _user.posts.append(post)
@@ -736,8 +741,7 @@ class UserService: BaseTaskController {
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String,
-                                    let _postType = p["post_type"] as? String,
-                                    let _patientId = p["patientId"] as? String {
+                                    let _postType = p["post_type"] as? String {
                                     
                                     // Create meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -746,7 +750,7 @@ class UserService: BaseTaskController {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType, patientId: _patientId)
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType)
                                     
                                     // Optional description
                                     
@@ -776,6 +780,12 @@ class UserService: BaseTaskController {
                                     
                                     if let _hashtags = p["hashtags"] as? [String] {
                                         post.hashtags = _hashtags
+                                    }
+                                    
+                                    // Optional patient id
+                                    
+                                    if let _patientId = p["patientId"] as? String {
+                                        post.patientId = _patientId
                                     }
                                     
                                     _user.posts.append(post)
@@ -1020,7 +1030,6 @@ class UserService: BaseTaskController {
                                 let _title = _p["title"] as? String,
                                 let _userObj = _p["user"] as? NSDictionary,
                                 let _postType = _p["post_type"] as? String,
-                                let _patientId = _p["patientId"] as? String,
                                 let _userId = _userObj["_id"] as? String,
                                 let _name = _userObj["name"] as? String {
                                 
@@ -1078,7 +1087,7 @@ class UserService: BaseTaskController {
                                 }
                                 
                                 // Create final Post
-                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType, patientId: _patientId)
+                                let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, user: _user, postType: _postType)
                                 
                                 // Optional description
                                 
@@ -1108,6 +1117,12 @@ class UserService: BaseTaskController {
                                 
                                 if let _hashtags = _p["hashtags"] as? [String] {
                                     post.hashtags = _hashtags
+                                }
+                                
+                                // Optional patient id
+                                
+                                if let _patientId = _p["patientId"] as? String {
+                                    post.patientId = _patientId
                                 }
 
                                 posts.append(post)

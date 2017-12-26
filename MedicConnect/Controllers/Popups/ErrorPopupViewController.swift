@@ -119,6 +119,10 @@ extension ErrorPopupViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if fromPatientNote == true {
+            let lenght = self.navigationController?.viewControllers.count
+            let patientNoteVC: PatientNoteReferViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientNoteReferViewController : nil
+            patientNoteVC?.isSaveNote = true
+            
             self.onClose(sender: nil)
             
         }  else {

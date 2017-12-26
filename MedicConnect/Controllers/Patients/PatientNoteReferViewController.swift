@@ -21,6 +21,7 @@ class PatientNoteReferViewController: UIViewController {
     
     var noteInfo: [String: Any] = [:]
     var userIDs: [String: String] = ["view1": "", "view2" : "", "view3": ""]
+    var isSaveNote: Bool = false
     
     let debouncer = Debouncer(interval: 1.0)
     
@@ -45,6 +46,15 @@ class PatientNoteReferViewController: UIViewController {
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Check if Yes is clicked on error popup
+        if isSaveNote {
+            self.saveNote()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -175,6 +185,39 @@ extension PatientNoteReferViewController {
         UIApplication.shared.endIgnoringInteractionEvents()
     }
     
+    func saveNote() {
+        
+        // Save Note
+        self.startIndicating()
+        self.btnSaveNote.isEnabled = false
+        
+        PostService.Instance.sendPost(noteInfo["title"] as! String,
+                                      author: noteInfo["author"] as! String,
+                                      description: noteInfo["description"] as! String,
+                                      hashtags: noteInfo["hashtags"] as! [String],
+                                      postType: noteInfo["postType"] as! String,
+                                      audioData: noteInfo["audioData"] as! Data,
+                                      image: nil,
+                                      fileExtension: noteInfo["fileExtension"] as! String,
+                                      mimeType: noteInfo["mimeType"] as! String,
+                                      completion: { (success: Bool) in
+                                        
+                                        // As we just posted a new audio, it's a good thing to refresh user info.
+                                        UserService.Instance.getMe(completion: {
+                                            (user: User?) in
+                                            DispatchQueue.main.async {
+                                                self.stopIndicating()
+                                                self.btnSaveNote.isEnabled = true
+                                                
+                                                // Go to share post screen
+                                                self.presentSharePopup()
+                                            }
+                                        })
+                                        
+        })
+        
+    }
+    
     @IBAction func onBack(sender: UIButton!) {
         
         if let _nav = self.navigationController as UINavigationController? {
@@ -227,36 +270,7 @@ extension PatientNoteReferViewController {
             return
         }
         
-        // Save Note
-        self.startIndicating()
-        
-        self.btnSaveNote.isEnabled = false
-        
-        PostService.Instance.sendPost(noteInfo["title"] as! String,
-                                      author: noteInfo["author"] as! String,
-                                      description: noteInfo["author"] as! String,
-                                      hashtags: noteInfo["hashtags"] as! [String],
-                                      postType: noteInfo["postType"] as! String,
-                                      audioData: noteInfo["audioData"] as! Data,
-                                      image: nil,
-                                      fileExtension: noteInfo["fileExtension"] as! String,
-                                      mimeType: noteInfo["mimeType"] as! String,
-                                      completion: { (success: Bool) in
-            
-            // As we just posted a new audio, it's a good thing to refresh user info.
-            UserService.Instance.getMe(completion: {
-                (user: User?) in
-                self.stopIndicating()
-                self.btnSaveNote.isEnabled = true
-                
-                // Go to share post screen
-                DispatchQueue.main.async {
-                    self.presentSharePopup()
-                }
-            })
-            
-        })
-
+        self.saveNote()
         
     }
 }
