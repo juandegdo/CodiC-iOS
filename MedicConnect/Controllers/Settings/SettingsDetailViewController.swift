@@ -52,13 +52,13 @@ class SettingsDetailViewController: UIViewController {
 extension SettingsDetailViewController : UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if let url = request.url?.absoluteString {
-            if url == "https://radioishapp.com/privacy" {
+            if url == "https://www.medicconnect.com/privacy" {
                 self.strTitle = "Privacy Policy"
                 openContents()
-            } else if url == "https://radioishapp.com/conduct" {
+            } else if url == "https://www.medicconnect.com/conduct" {
                 self.strTitle = "Code of Conduct"
                 openContents()
-            } else if url == "https://radioishapp.com/support" {
+            } else if url == "https://www.medicconnect.com/support" {
                 self.sendEmail(subject: "Contact Us", msgbody: "")
             }
         }
@@ -71,7 +71,7 @@ extension SettingsDetailViewController : MFMailComposeViewControllerDelegate {
     func sendEmail(subject: String, msgbody: String){
         let mailComposer = MFMailComposeViewController()
         mailComposer.mailComposeDelegate = self
-        mailComposer.setToRecipients(["info@radioishapp.com"])
+        mailComposer.setToRecipients(["info@medicconnect.com"])
         mailComposer.setSubject( subject )
         mailComposer.setMessageBody(msgbody, isHTML: false)
         
