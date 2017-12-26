@@ -87,7 +87,6 @@
 		D21BC8FD1DEA32AD008F5443 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21BC8FC1DEA32AD008F5443 /* ImageHelper.swift */; };
 		D21BC8FF1DEA3F0D008F5443 /* PlaylistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */; };
 		D225D11B1E84BDC600B5793A /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225D11A1E84BDC600B5793A /* PostController.swift */; };
-		D2301FD51E5FAC4B006C636A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2301FD41E5FAC4B006C636A /* WelcomeViewController.swift */; };
 		D2301FDB1E5FBD03006C636A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2301FDA1E5FBD03006C636A /* UserController.swift */; };
 		D2301FDD1E5FC212006C636A /* WelcomeLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2301FDC1E5FC212006C636A /* WelcomeLastViewController.swift */; };
 		D2301FDF1E5FC71A006C636A /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2301FDE1E5FC71A006C636A /* AlertUtil.swift */; };
@@ -252,7 +251,6 @@
 		D21BC8FC1DEA32AD008F5443 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistCell.xib; sourceTree = "<group>"; };
 		D225D11A1E84BDC600B5793A /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
-		D2301FD41E5FAC4B006C636A /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		D2301FDA1E5FBD03006C636A /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		D2301FDC1E5FC212006C636A /* WelcomeLastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeLastViewController.swift; sourceTree = "<group>"; };
 		D2301FDE1E5FC71A006C636A /* AlertUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
@@ -487,7 +485,6 @@
 				65A289821F3E5BEE00547D72 /* SplashViewController.swift */,
 				D270B80F1DE5237300458C2E /* SignInViewController.swift */,
 				D20658391E5BBDDA003875E4 /* SignUpViewController.swift */,
-				D2301FD41E5FAC4B006C636A /* WelcomeViewController.swift */,
 				D29891EF1E613DBA004C0FC1 /* WelcomeProfileViewController.swift */,
 				D2301FDC1E5FC212006C636A /* WelcomeLastViewController.swift */,
 			);
@@ -1229,7 +1226,6 @@
 				65C915D81FCF1696002AC31B /* Patient.swift in Sources */,
 				D29891F31E613DBA004C0FC1 /* WelcomeProfileViewController.swift in Sources */,
 				65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */,
-				D2301FD51E5FAC4B006C636A /* WelcomeViewController.swift in Sources */,
 				A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */,
 				D206583A1E5BBDDA003875E4 /* SignUpViewController.swift in Sources */,
 				A9C741D71F0FDCC700894651 /* PrivateUserTableViewCell.swift in Sources */,

@@ -86,6 +86,7 @@ class PatientNoteReferViewController: UIViewController {
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "ErrorPopupViewController") as? ErrorPopupViewController {
             vc.popupType = popupType
+            vc.fromPatientNote = true
             self.navigationController?.pushViewController(vc, animated: false)
         }
     }

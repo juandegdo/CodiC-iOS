@@ -29,6 +29,7 @@ class ErrorPopupViewController: BaseViewController {
     
     var popupType: ErrorPopupType = .none
     var isYes: Bool = false
+    var fromPatientNote: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +95,7 @@ class ErrorPopupViewController: BaseViewController {
             } else {
                 _nav.popViewController(animated: false)
             }
+            
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -116,16 +118,21 @@ extension ErrorPopupViewController {
     @IBAction func onYes(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+        if fromPatientNote == true {
+            self.onClose(sender: nil)
             
-            DataManager.Instance.setFromPatientProfile(false)
-            
-            weak var weakSelf = self
-            self.present(vc, animated: false, completion: {
-                weakSelf?.isYes = true
-                weakSelf?.close()
-            })
-            
+        }  else {
+            if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+                
+                DataManager.Instance.setFromPatientProfile(false)
+                
+                weak var weakSelf = self
+                self.present(vc, animated: false, completion: {
+                    weakSelf?.isYes = true
+                    weakSelf?.close()
+                })
+                
+            }
         }
     }
     

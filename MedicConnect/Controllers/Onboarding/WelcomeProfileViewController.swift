@@ -112,34 +112,31 @@ extension WelcomeProfileViewController {
         
         if let _user = UserController.Instance.getUser() as User? {
             
-            var profileFilled = true
-            
             if self.tfTitle.text != "" {
                 _user.title = self.tfTitle.text!
             } else {
-                profileFilled = false
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your title!")
+                return
             }
             
             if self.tfMSP.text != "" {
                 _user.msp = self.tfMSP.text!
             } else {
-                profileFilled = false
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your MSP number!")
+                return
             }
             
             if self.tfLocation.text != "" {
                 _user.location = self.tfLocation.text!
             } else {
-                profileFilled = false
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your location!")
+                return
             }
             
             if self.tfPhoneNumber.text != "" {
                 _user.phoneNumber = self.tfPhoneNumber.text!
             } else {
-                profileFilled = false
-            }
-            
-            if !profileFilled {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill out the form!")
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your phone number!")
                 return
             }
             
@@ -150,7 +147,6 @@ extension WelcomeProfileViewController {
                         AlertUtil.showOKAlert(self, message: message)
                     }
                 }
-                
             })
             
             if let _image = self.avatarImageView.image {
@@ -177,7 +173,9 @@ extension WelcomeProfileViewController {
                 })
                 
             } else {
+                
                 self.navigationController?.popToRootViewController(animated: false)
+                
             }
             
         } else {
