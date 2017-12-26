@@ -69,6 +69,21 @@ class ConsultReferringViewController: UIViewController {
         self.lblPHNError.isHidden = true
         self.lblMSPError.isHidden = true
         
+        // Add checkmarks on right views
+        for textField in [self.tfPatientNumber, self.tfDoctorMSPNumber] {
+            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 8, y: 16.5, width: 11, height: 11))
+            ivCheck.image = UIImage.init(named: "icon_save_done_new")
+            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 27, height: 44))
+            view.addSubview(ivCheck)
+            
+            textField?.rightView = view
+            textField?.rightViewMode = .always
+        }
+        
+        // Hide checkmarks
+        self.tfPatientNumber.rightView?.isHidden = true
+        self.tfDoctorMSPNumber.rightView?.isHidden = true
+        
     }
     
     // MARK: Private Methods
@@ -132,6 +147,7 @@ extension ConsultReferringViewController : UITextFieldDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         // When the user performs a repeating action, such as entering text, invoke the `call` method
         textField.textColor = UIColor.black
+        textField.rightView?.isHidden = true
         
         debouncer.call()
         debouncer.callback = {
@@ -156,6 +172,8 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                             self.lblPHNError.isHidden = false
                             self.tfPatientNumber.textColor = UIColor.red
                         }
+                        
+                        self.tfPatientNumber.rightView?.isHidden = !self.lblPHNError.isHidden
                     }
                 } else if (textField == self.tfDoctorMSPNumber) {
                     // Check if MSP number exists
@@ -176,6 +194,8 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                             self.lblMSPError.isHidden = false
                             self.tfDoctorMSPNumber.textColor = UIColor.red
                         }
+                        
+                        self.tfDoctorMSPNumber.rightView?.isHidden = !self.lblMSPError.isHidden
                     }
                 }
             }
