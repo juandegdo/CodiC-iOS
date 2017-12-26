@@ -9,7 +9,7 @@
 import UIKit
 import ACFloatingTextfield_Swift
 
-class SignUpViewController: BaseViewController, UITextFieldDelegate {
+class SignUpViewController: BaseViewController {
     
     @IBOutlet var tfName: ACFloatingTextfield!
     @IBOutlet var tfEmail: ACFloatingTextfield!

@@ -6681,7 +6681,7 @@ you a link to reset your password.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Consult" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VOU-pw-Y9X">
-                                        <rect key="frame" x="145.66666666666666" y="32" width="122.99999999999997" height="20"/>
+                                        <rect key="frame" x="145.66666666666666" y="32" width="124" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Cbx-zQ-bga"/>
                                         </constraints>
