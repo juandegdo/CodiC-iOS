@@ -122,8 +122,9 @@ open class ExpandableLabel: UILabel {
         self.isUserInteractionEnabled = true
         self.lineBreakMode = .byClipping
         self.numberOfLines = 3
-        self.expandedAttributedLink = NSAttributedString(string: "Less", attributes: [.font: UIFont.boldSystemFont(ofSize: font.pointSize)])
-        self.collapsedAttributedLink = NSAttributedString(string: "More", attributes: [.font: UIFont.boldSystemFont(ofSize: font.pointSize)])
+        let font: UIFont = UIFont(name: "Avenir-Heavy", size: 13.0) as UIFont? ?? UIFont.systemFont(ofSize: 13.0)
+        self.expandedAttributedLink = NSAttributedString(string: "Less", attributes: [.font: font])
+        self.collapsedAttributedLink = NSAttributedString(string: "More", attributes: [.font: font])
         self.ellipsis = NSAttributedString(string: "...")
     }
     

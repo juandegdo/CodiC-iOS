@@ -66,7 +66,7 @@ class ProfileListCell: UITableViewCell {
                 let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
                 let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
                 
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)!
+                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 4
             }
         }
     }
