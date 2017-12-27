@@ -5164,55 +5164,77 @@ you a link to reset your password.</string>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHD-Y2-zJ4">
-                                <rect key="frame" x="0.0" y="94" width="414" height="642"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ekq-Y2-8Am">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FV3-A3-cSo">
-                                                <rect key="frame" x="68" y="0.0" width="278" height="45"/>
+                                                <rect key="frame" x="87.000000000000014" y="16" width="241.33333333333337" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="bua-R3-aLV"/>
+                                                    <constraint firstAttribute="height" constant="40" id="bua-R3-aLV"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="40"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="35"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter a new password for your Medic Connect account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZeP-JH-NLm">
-                                                <rect key="frame" x="82" y="70" width="250" height="129"/>
+                                                <rect key="frame" x="82" y="116.00000000000001" width="250" height="46.666666666666671"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="129" id="NVG-h6-Zam"/>
                                                     <constraint firstAttribute="width" constant="250" id="xw3-0V-pjX"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                                <color key="textColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                <color key="textColor" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="0.92484595070422537" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bOP-mY-85q" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
-                                                <rect key="frame" x="25" y="219" width="364" height="50"/>
+                                                <rect key="frame" x="25" y="212.66666666666669" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="1z0-LW-QZf"/>
                                                 </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                                <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                        <color key="value" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.57647058823529407" green="0.57647058823529407" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                        <color key="value" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
-                                                        <color key="value" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.47058823529411764" green="0.47058823529411764" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
-                                                        <color key="value" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
+                                                        <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRG-fD-X1w" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
+                                                <rect key="frame" x="25" y="287" width="364" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="7ZZ-Pg-U4w"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                        <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                        <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                        <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
+                                                        <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zZp-41-8yZ">
-                                                <rect key="frame" x="25" y="394" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="387.66666666666669" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="g3r-2e-gwl"/>
                                                 </constraints>
@@ -5224,45 +5246,22 @@ you a link to reset your password.</string>
                                                     <action selector="onResetPassword:" destination="Ml5-ez-YjT" eventType="touchUpInside" id="Kv7-zK-ZIg"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRG-fD-X1w" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
-                                                <rect key="frame" x="25" y="294" width="364" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="7ZZ-Pg-U4w"/>
-                                                </constraints>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
-                                                        <color key="value" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
-                                                        <color key="value" white="1" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
-                                                        <color key="value" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
-                                                        <color key="value" white="1" alpha="0.29999999999999999" colorSpace="calibratedWhite"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="bOP-mY-85q" firstAttribute="leading" secondItem="ekq-Y2-8Am" secondAttribute="leading" constant="25" id="3Pg-jR-NAH"/>
                                             <constraint firstAttribute="trailing" secondItem="zZp-41-8yZ" secondAttribute="trailing" constant="25" id="Gxq-fe-eBU"/>
-                                            <constraint firstItem="ZeP-JH-NLm" firstAttribute="top" secondItem="FV3-A3-cSo" secondAttribute="bottom" constant="25" id="LMo-QL-hMk"/>
+                                            <constraint firstItem="ZeP-JH-NLm" firstAttribute="top" secondItem="FV3-A3-cSo" secondAttribute="bottom" constant="60" id="LMo-QL-hMk"/>
                                             <constraint firstItem="zZp-41-8yZ" firstAttribute="leading" secondItem="ekq-Y2-8Am" secondAttribute="leading" constant="25" id="OV6-rc-S6I"/>
                                             <constraint firstAttribute="height" constant="500" id="Pc2-mc-WIG"/>
                                             <constraint firstItem="FV3-A3-cSo" firstAttribute="centerX" secondItem="ekq-Y2-8Am" secondAttribute="centerX" id="USH-dt-nxY"/>
                                             <constraint firstAttribute="trailing" secondItem="bOP-mY-85q" secondAttribute="trailing" constant="25" id="UTi-pb-wmE"/>
                                             <constraint firstAttribute="trailing" secondItem="VRG-fD-X1w" secondAttribute="trailing" constant="25" id="Xcg-Nc-hgF"/>
                                             <constraint firstItem="VRG-fD-X1w" firstAttribute="top" secondItem="bOP-mY-85q" secondAttribute="bottom" constant="25" id="bMX-Mk-SE8"/>
-                                            <constraint firstItem="FV3-A3-cSo" firstAttribute="top" secondItem="ekq-Y2-8Am" secondAttribute="top" id="bdh-06-IfN"/>
+                                            <constraint firstItem="FV3-A3-cSo" firstAttribute="top" secondItem="ekq-Y2-8Am" secondAttribute="top" constant="16" id="bdh-06-IfN"/>
                                             <constraint firstItem="zZp-41-8yZ" firstAttribute="top" secondItem="VRG-fD-X1w" secondAttribute="bottom" constant="50" id="hfO-hr-bNW"/>
                                             <constraint firstItem="ZeP-JH-NLm" firstAttribute="centerX" secondItem="ekq-Y2-8Am" secondAttribute="centerX" id="obq-wt-LBS"/>
-                                            <constraint firstItem="bOP-mY-85q" firstAttribute="top" secondItem="ZeP-JH-NLm" secondAttribute="bottom" constant="20" id="sA5-Yx-2Az"/>
+                                            <constraint firstItem="bOP-mY-85q" firstAttribute="top" secondItem="ZeP-JH-NLm" secondAttribute="bottom" constant="50" id="sA5-Yx-2Az"/>
                                             <constraint firstItem="VRG-fD-X1w" firstAttribute="leading" secondItem="ekq-Y2-8Am" secondAttribute="leading" constant="25" id="umF-ML-ksT"/>
                                         </constraints>
                                     </view>
@@ -5282,7 +5281,7 @@ you a link to reset your password.</string>
                             <constraint firstItem="VNF-yG-2dC" firstAttribute="top" secondItem="E2q-er-rEc" secondAttribute="top" id="0fu-sg-kCj"/>
                             <constraint firstItem="xcY-OV-GIh" firstAttribute="leading" secondItem="E2q-er-rEc" secondAttribute="leading" id="1bo-Jy-5HQ"/>
                             <constraint firstItem="VNF-yG-2dC" firstAttribute="leading" secondItem="E2q-er-rEc" secondAttribute="leading" id="2i2-m6-1Vl"/>
-                            <constraint firstItem="JHD-Y2-zJ4" firstAttribute="top" secondItem="VNF-yG-2dC" secondAttribute="bottom" constant="30" id="7bq-pw-wKa"/>
+                            <constraint firstItem="JHD-Y2-zJ4" firstAttribute="top" secondItem="VNF-yG-2dC" secondAttribute="bottom" id="7bq-pw-wKa"/>
                             <constraint firstItem="M5m-80-9TE" firstAttribute="top" secondItem="xcY-OV-GIh" secondAttribute="bottom" id="Mfi-EK-kXF"/>
                             <constraint firstItem="M5m-80-9TE" firstAttribute="top" secondItem="JHD-Y2-zJ4" secondAttribute="bottom" id="OeI-VG-9nk"/>
                             <constraint firstAttribute="trailing" secondItem="JHD-Y2-zJ4" secondAttribute="trailing" id="hxS-Ak-Dmc"/>
