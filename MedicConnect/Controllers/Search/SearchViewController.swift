@@ -211,9 +211,9 @@ extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-//        if let _followingUser = self.getUserForRow(inTableView: tableView, row: indexPath.row) as User? {
-//            self.callProfileVC(user: _followingUser)
-//        }
+        if let _user = self.getUserForRow(inTableView: tableView, row: indexPath.row) as User? {
+            self.callProfileVC(user: _user)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

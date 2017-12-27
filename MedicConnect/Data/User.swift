@@ -92,7 +92,9 @@ class User {
     func getPosts(type: String) -> [Post] {
         
         let posts = self.posts.filter({(post: Post) -> Bool in
-            if type == Constants.PostTypeConsult {
+            if type == Constants.PostTypeAll {
+                return true
+            } else if type == Constants.PostTypeConsult {
                 return post.postType == type || post.postType == Constants.PostTypeNote
             } else {
                 return post.postType == type

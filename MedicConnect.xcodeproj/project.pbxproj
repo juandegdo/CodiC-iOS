@@ -393,6 +393,7 @@
 			children = (
 				65691C401FA958770071C162 /* Conference */,
 				65D2501D1F8EB31C00279713 /* Favorites */,
+				65D2501A1F8E8B6300279713 /* Message */,
 			);
 			path = Unused;
 			sourceTree = "<group>";
@@ -703,7 +704,6 @@
 				65488DAA1F944204005C1EA8 /* Patients */,
 				654C972D1FBDDDC200490627 /* Consults */,
 				D21BC8F31DEA17A9008F5443 /* Diagnosis */,
-				65D2501A1F8E8B6300279713 /* Message */,
 				D2A9E7301E0A09CE0032C2CA /* Notifications */,
 				658AFB221FEB22E80055B70C /* Popups */,
 				D2F0C6BE1DF3058100475696 /* Recording */,

@@ -3321,7 +3321,7 @@ uploaded a new diagnosis.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ub7-hW-clp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Bhl-gR-Iii" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="8583" y="388"/>
+            <point key="canvasLocation" x="8587" y="387"/>
         </scene>
         <!--Tutorial View Controller-->
         <scene sceneID="Asx-dV-26P">
@@ -5014,8 +5014,8 @@ you a link to reset your password.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZZ-r0-gdB">
                                                 <rect key="frame" x="12" y="131" width="390" height="18"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vancover, BC" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQo-GD-IJJ">
-                                                        <rect key="frame" x="159" y="0.0" width="72" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQo-GD-IJJ">
+                                                        <rect key="frame" x="195" y="0.0" width="0.0" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="rnO-f2-eo4"/>
                                                         </constraints>
@@ -5033,8 +5033,11 @@ you a link to reset your password.</string>
                                                     <constraint firstItem="WQo-GD-IJJ" firstAttribute="centerX" secondItem="sZZ-r0-gdB" secondAttribute="centerX" id="h1W-48-AKd"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intenstivist in Cardiology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xay-gq-0hz">
-                                                <rect key="frame" x="135" y="153" width="144" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xay-gq-0hz">
+                                                <rect key="frame" x="207" y="153" width="0.0" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="2eQ-5f-Xnc"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
                                                 <color key="textColor" red="0.65098039220000004" green="0.65490196079999996" blue="0.66274509800000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>

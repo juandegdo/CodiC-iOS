@@ -584,13 +584,13 @@ extension DiagnosisViewController {
         let myTextView = sender.view as! UITextView //sender is TextView
         let _pos: CGPoint = sender.location(in: myTextView)
         
-        //eliminate scroll offset
-        //        pos.y += _tv.contentOffset.y;
+        // eliminate scroll offset
+//        pos.y += _tv.contentOffset.y;
         
-        //get location in text from textposition at point
+        // get location in text from textposition at point
         let tapPos = myTextView.closestPosition(to: _pos)
         
-        //fetch the word at this position (or nil, if not available)
+        // fetch the word at this position (or nil, if not available)
         if let wordRange = myTextView.tokenizer.rangeEnclosingPosition(tapPos!, with: UITextGranularity.word, inDirection: UITextLayoutDirection.right.rawValue),
             let tappedHashtag = myTextView.text(in: wordRange) {
             NSLog("Word: \(String(describing: tappedHashtag))")
@@ -737,15 +737,6 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         }
         
         cell.isExpanded = !cell.isExpanded
-        
-//        if let _url = URL(string: post.audio ) as URL?,
-//            cell.isExpanded {
-//            DispatchQueue.main.async {
-//                let asset = AVURLAsset.init(url: _url)
-//                cell.lblElapsedTime.text = "0:00"
-//                cell.lblDuration.text = TimeInterval(CMTimeGetSeconds(asset.duration)).durationText
-//            }
-//        }
         
         self.tvDiagnoses.endUpdates()
         

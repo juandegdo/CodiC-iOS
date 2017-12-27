@@ -89,7 +89,7 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
             DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
         }
         
-        if (vcDisappearType == .other) {
+        if (vcDisappearType == .other || vcDisappearType == .record) {
             self.releasePlayer()
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
@@ -188,6 +188,8 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         Crashlytics.sharedInstance().setUserIdentifier(user.id)
         Crashlytics.sharedInstance().setUserName(user.fullName)
     }
+    
+    // MARK: Player Functions
     
     func releasePlayer(onlyState: Bool = false) {
         
@@ -475,14 +477,16 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         return scrollView
         
     }
+    
+}
+
+extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
 
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         
         if (tableView == self.tableView) {
             if let _user = UserController.Instance.getUser() as User? {
                 return _user.getPosts(type: self.postType).count
-            } else {
-                return 0
             }
         }
         
@@ -490,10 +494,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
         
     }
     
-}
-
-extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
-
     // MARK: UITableView Datasource methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -541,6 +541,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
             cell.lblDescription.collapsed = !isFullDesc
             cell.lblDescription.text = post.description
+            cell.showFullDescription = isFullDesc
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {
@@ -599,15 +600,6 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             }
             
             cell.isExpanded = !cell.isExpanded
-            
-//            if let _url = URL(string: post.audio ) as URL?,
-//                cell.isExpanded {
-//                DispatchQueue.main.async {
-//                    let asset = AVURLAsset.init(url: _url)
-//                    cell.lblElapsedTime.text = "0:00"
-//                    cell.lblDuration.text = TimeInterval(CMTimeGetSeconds(asset.duration)).durationText
-//                }
-//            }
             
             self.tableView.endUpdates()
         }
@@ -762,9 +754,6 @@ extension ProfileViewController {
     }
     
     @IBAction func onRecord(sender: AnyObject!) {
-        // Force crash
-//        Crashlytics.sharedInstance().crash()
-
         vcDisappearType = .record
         self.releasePlayer()
         

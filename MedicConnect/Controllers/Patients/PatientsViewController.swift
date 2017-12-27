@@ -114,6 +114,47 @@ extension PatientsViewController {
         self.tvPatients.reloadData()
     }
     
+    // MARK: Selectors
+    
+    @objc func onSelectUser(sender: UITapGestureRecognizer) {
+        let index = sender.view?.tag
+        let patient: Patient? = self.searchedPatients[index!]
+        
+        if (patient != nil) {
+            self.callProfileVC(user: (patient?.user)!)
+        }
+    }
+    
+    func callProfileVC(user: User) {
+        
+        if  let _me = UserController.Instance.getUser() as User? {
+            if _me.id == user.id {
+                return
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+                
+                if let blockedby = _me.blockedby as? [User] {
+                    if blockedby.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                if let blocking = _me.blocking as? [User] {
+                    if blocking.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                
+                vc.currentUser = user
+                self.present(vc, animated: false, completion: nil)
+                
+            }
+        }
+        
+    }
+    
 }
 
 extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
@@ -137,6 +178,15 @@ extension PatientsViewController : UITableViewDataSource, UITableViewDelegate {
         let patient = self.searchedPatients[indexPath.row]
         
         cell.setData(patient)
+        
+        let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
+        cell.imgUserPhoto.addGestureRecognizer(tapGestureOnUserAvatar)
+        cell.imgUserPhoto.tag = indexPath.row
+        
+        let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
+        cell.lblDoctorName.addGestureRecognizer(tapGestureOnUsername)
+        cell.lblDoctorName.tag = indexPath.row
+        
         cell.selectionStyle = .none
         
         return cell
