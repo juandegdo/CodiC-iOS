@@ -89,7 +89,7 @@ class Post {
     
     func getFormattedDate() -> String {
         let dDate = DateUtil.ParseStringDateToDouble(self.meta.createdAt) as NSDate
-        let formattedDate = dDate.dateTimeAgo() as String? ?? ""
+        let formattedDate = DateUtil.GetDateTime(dDate.timeIntervalSince1970) as String? ?? ""
         
         return formattedDate
     }

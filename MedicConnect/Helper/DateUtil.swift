@@ -152,7 +152,7 @@ class DateUtil {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        let longFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", options: 0, locale: dateFormatter.locale)
+        let longFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm:ss yyyy-MM-dd'Z'", options: 0, locale: dateFormatter.locale)
         dateFormatter.dateFormat = longFormat
         
         let date = Date(timeIntervalSince1970: dateTime as TimeInterval)
