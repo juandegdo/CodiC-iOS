@@ -89,6 +89,8 @@ extension CreatePatientViewController : UITextFieldDelegate {
             return newLength <= Constants.MaxFullNameLength
         } else if (textField == self.tfPhoneNumber) { /// phone number
             return newLength <= Constants.MaxPhoneNumberLength
+        } else if (textField == self.tfPHN) {
+            return newLength <= Constants.MaxPHNLength
         }
         
         return true
