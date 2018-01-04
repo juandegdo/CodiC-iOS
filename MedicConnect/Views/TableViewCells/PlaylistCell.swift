@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireImage
 import Sheriff
+import TTTAttributedLabel
 
 class PlaylistCell: UITableViewCell {
     
@@ -41,6 +42,7 @@ class PlaylistCell: UITableViewCell {
     @IBOutlet var lblUsername: UILabel!
     @IBOutlet var lblBroadcast: UILabel!
     @IBOutlet var lblDescription: ExpandableLabel!
+    @IBOutlet var lblDesc: TTTAttributedLabel!
     @IBOutlet var lblDate: UILabel!
     @IBOutlet var lblLikedDescription: UILabel!
     @IBOutlet var lblElapsedTime: UILabel!
@@ -55,14 +57,28 @@ class PlaylistCell: UITableViewCell {
     // Fonts
     let likeBadgeViewFont = UIFont(name: "Avenir-Book", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 8.0)
     let commentBadgeViewFont = UIFont(name: "Avenir-Book", size: 12.0) as UIFont? ?? UIFont.systemFont(ofSize: 8.0)
+    let appendAttributes = [ NSAttributedStringKey.foregroundColor : UIColor.lightGray, NSAttributedStringKey.font : UIFont(name: "Avenir-Heavy", size: 13.0) as UIFont? ?? UIFont.systemFont(ofSize: 13.0) ]
     
     var postType: String = ""
+    var postDescription: String = ""
     
     // Expand/Collpase
     var isExpanded: Bool = false {
         didSet {
             if !isExpanded {
+                self.clipsToBounds = true
+                
+                // set truncation token to description label
+//                self.lblDesc.numberOfLines = 1
+//                self.lblDesc.attributedTruncationToken = NSAttributedString(string: "  More", attributes: appendAttributes)
+                
+                self.lblDescription.numberOfLines = 1
+                self.lblDescription.shouldExpand = true
+                self.lblDescription.text = self.postDescription
+                self.lblDescription.collapsed = true
+                
                 self.constOfBtnPlaylistBottom.constant = 9
+                self.constOfLblDescriptionHeight.constant = 18
                 self.lblLikedDescription.isHidden = true
                 self.txtVHashtags.isHidden = true
                 self.btnPlay.isHidden = true
@@ -73,16 +89,33 @@ class PlaylistCell: UITableViewCell {
                 self.playSlider.isHidden = true
                 
             } else {
+                self.clipsToBounds = false
+                
+                let constRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
+                let boundBox = self.postDescription.boundingRect(with: constRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
+                self.constOfLblDescriptionHeight.constant = ceil(boundBox.height)
+                self.lblDescription.shouldCollapse = true
+                self.lblDescription.text = self.postDescription
+                self.lblDescription.collapsed = false
+//                self.lblDesc.numberOfLines = 0
+//                self.lblDesc.sizeToFit()
+                
                 let constraintRect = CGSize(width: self.txtVHashtags.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.txtVHashtags.font!], context: nil)
+                let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text!.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.txtVHashtags.font!], context: nil)
                 let topSpace: CGFloat = self.postType == Constants.PostTypeDiagnosis ? 16 : 8
                 
-                self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? (boundingBox?.height)! : (boundingBox?.height)! + 16.0
+                self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? ceil(boundingBox.height) : ceil(boundingBox.height) + 16.0
                 self.constOfBtnPlaylistBottom.constant = self.constOfTxtVHashtagsHeight.constant + topSpace + 65
+                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     if self.postType == Constants.PostTypeDiagnosis {
                         self.lblLikedDescription.isHidden = false
                     }
+                    
+                    // set truncation token to description label
+//                    self.lblDesc.numberOfLines = 0
+//                    self.lblDesc.attributedTruncationToken = NSAttributedString(string: "  Less", attributes: self.appendAttributes)
+                    self.lblDescription.numberOfLines = 0
                     
                     self.txtVHashtags.isHidden = false
                     self.btnPlay.isHidden = false
@@ -92,21 +125,6 @@ class PlaylistCell: UITableViewCell {
                     self.lblDuration.isHidden = false
                     self.playSlider.isHidden = false
                 }
-            }
-        }
-    }
-    
-    // Descriptioin Expand/Collpase
-    var showFullDescription: Bool = false {
-        didSet {
-            if !showFullDescription {
-                self.constOfLblDescriptionHeight.constant = 18
-                
-            } else {
-                let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
-                
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 4
             }
         }
     }
@@ -138,13 +156,6 @@ class PlaylistCell: UITableViewCell {
         }
         
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-        
-    }
         
     func setData(post: Post) {
         
@@ -160,6 +171,10 @@ class PlaylistCell: UITableViewCell {
         
         // Set date label
         self.lblDate.text = post.getFormattedDate().uppercased()
+        
+        // Set description
+        self.postDescription = post.description
+//        self.lblDesc.text = post.description
         
         if self.postType == Constants.PostTypeDiagnosis {
             // Set like description label

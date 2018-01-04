@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
+class SearchResultsViewController: BaseViewController {
     
     let SearchPostCellID = "PlaylistCell"
     
@@ -19,7 +19,6 @@ class SearchResultsViewController: BaseViewController, ExpandableLabelDelegate {
     var hashtag : String = ""
     var selectedDotsIndex = 0
     var expandedRows = Set<String>()
-    var states = Set<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -557,13 +556,7 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
             cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
             cell.lblUsername.tag = indexPath.row
             
-            let isFullDesc = self.states.contains(post.id)
-            cell.lblDescription.delegate = self
-            cell.lblDescription.shouldCollapse = true
-            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-            cell.lblDescription.text = post.description
-            cell.lblDescription.collapsed = !isFullDesc
-            cell.showFullDescription = isFullDesc
+            cell.lblDescription.isUserInteractionEnabled = false
             
 //            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
 //            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
@@ -627,44 +620,5 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
         
     }
     
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvPosts.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvPosts)
-        if let indexPath = self.tvPosts.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvPosts.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getHashtagPosts()[indexPath.row]
-            self.states.insert(post.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tvPosts.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tvPosts.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvPosts)
-        if let indexPath = self.tvPosts.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvPosts.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getHashtagPosts()[indexPath.row]
-            self.states.remove(post.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tvPosts.endUpdates()
-    }
 }
 

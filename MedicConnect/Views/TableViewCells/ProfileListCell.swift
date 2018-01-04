@@ -30,11 +30,21 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
     @IBOutlet var constOfLblDateBottom: NSLayoutConstraint!
     
+    var postDescription: String = ""
+    
     // Expand/Collpase
     var isExpanded:Bool = false {
         didSet {
             if !isExpanded {
+                self.clipsToBounds = true
+                
+                self.lblDescription.numberOfLines = 1
+                self.lblDescription.shouldExpand = true
+                self.lblDescription.text = self.postDescription
+                self.lblDescription.collapsed = true
+                
                 self.constOfLblDateBottom.constant = 20
+                self.constOfLblDescriptionHeight.constant = 18
                 self.btnPlay.isHidden = true
                 self.btnBackward.isHidden = true
                 self.btnForward.isHidden = true
@@ -43,8 +53,20 @@ class ProfileListCell: UITableViewCell {
                 self.playSlider.isHidden = true
                 
             } else {
+                self.clipsToBounds = false
+                
+                let constRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
+                let boundBox = self.postDescription.boundingRect(with: constRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
+                self.constOfLblDescriptionHeight.constant = ceil(boundBox.height)
+                self.lblDescription.shouldCollapse = true
+                self.lblDescription.text = self.postDescription
+                self.lblDescription.collapsed = false
+                
                 self.constOfLblDateBottom.constant = 55 + 20
+                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                    self.lblDescription.numberOfLines = 0
+                    
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
                     self.btnForward.isHidden = false
@@ -52,21 +74,6 @@ class ProfileListCell: UITableViewCell {
                     self.lblDuration.isHidden = false
                     self.playSlider.isHidden = false
                 }
-            }
-        }
-    }
-    
-    // Descriptioin Expand/Collpase
-    var showFullDescription:Bool = false {
-        didSet {
-            if !showFullDescription {
-                self.constOfLblDescriptionHeight.constant = 18
-                
-            } else {
-                let constraintRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundingBox = self.lblDescription.text?.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
-                
-                self.constOfLblDescriptionHeight.constant = (boundingBox?.height)! + 4
             }
         }
     }
@@ -99,6 +106,7 @@ class ProfileListCell: UITableViewCell {
         // Set Broadcast Label
         self.lblBroadcast.text = post.title
         self.lblDate.text = post.getFormattedDate().uppercased()
+        self.postDescription = post.description
         
     }
     

@@ -28,6 +28,7 @@ pod 'PICollectionPageView', :git => 'https://github.com/voltaesaito/PICollection
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Masonry'
+pod 'TTTAttributedLabel'
 
   target 'MedicConnectTests' do
     inherit! :search_paths

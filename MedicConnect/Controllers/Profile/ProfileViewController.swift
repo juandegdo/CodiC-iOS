@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Crashlytics
 
-class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
+class ProfileViewController: BaseViewController {
     
     let OffsetHeaderStop: CGFloat = 240.0
     let ProfileListCellID = "ProfileListCell"
@@ -43,7 +43,6 @@ class ProfileViewController: BaseViewController, ExpandableLabelDelegate {
     var postType: String = Constants.PostTypeDiagnosis
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
-    var states = Set<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -525,23 +524,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             let post = _user.getPosts(type: self.postType)[indexPath.row]
             cell.setData(post: post)
             
-            let isFullDesc = self.states.contains(post.id)
-//            cell.lblDescription.delegate = self
-//            cell.lblDescription.shouldCollapse = true
-//            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-//            cell.lblDescription.text = post.description
-//            cell.lblDescription.collapsed = !isFullDesc
-//            cell.showFullDescription = isFullDesc
-            
-//            cell.lblDescription.setLessLinkWith(lessLink: "Less", attributes: [.foregroundColor:UIColor.red], position: NSTextAlignment.left)
-            
-            cell.lblDescription.delegate = self
-            cell.lblDescription.shouldCollapse = true
-//            cell.lblDescription.textReplacementType = currentSource.textReplacementType
-            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-            cell.lblDescription.collapsed = !isFullDesc
-            cell.lblDescription.text = post.description
-            cell.showFullDescription = isFullDesc
+            cell.lblDescription.isUserInteractionEnabled = false
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {
@@ -649,56 +632,6 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tableView.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tableView)
-        if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { self.tableView.endUpdates(); return }
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                self.tableView.endUpdates()
-                return
-            }
-            
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
-            self.states.insert(post.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tableView.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tableView.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tableView)
-        if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { self.tableView.endUpdates(); return }
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                self.tableView.endUpdates()
-                return
-            }
-            
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
-            self.states.remove(post.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tableView.endUpdates()
-    }
-    
 }
 
 extension ProfileViewController : UIScrollViewDelegate {
@@ -735,7 +668,6 @@ extension ProfileViewController {
         if (self.postType == Constants.PostTypeConsult) {
             self.postType = Constants.PostTypeDiagnosis
             self.expandedRows = Set<String>()
-            self.states = Set<String>()
             
             self.releasePlayer()
             self.updateUI()
@@ -746,7 +678,6 @@ extension ProfileViewController {
         if (self.postType == Constants.PostTypeDiagnosis) {
             self.postType = Constants.PostTypeConsult
             self.expandedRows = Set<String>()
-            self.states = Set<String>()
             
             self.releasePlayer()
             self.updateUI()

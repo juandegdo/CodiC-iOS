@@ -18,7 +18,7 @@ public enum ViewControllerDisappearType {
     case record
 }
 
-class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     let DiagnosisCellID = "PlaylistCell"
     let postType = Constants.PostTypeDiagnosis
@@ -28,7 +28,6 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate, 
     var vcDisappearType : ViewControllerDisappearType = .other
     var selectedDotsIndex = 0
     var expandedRows = Set<String>()
-    var states = Set<String>()
     var selectedRowIndex = -1
     
     override func viewDidLoad() {
@@ -661,13 +660,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
         cell.lblUsername.tag = indexPath.row
         
-        let isFullDesc = self.states.contains(post.id)
-        cell.lblDescription.delegate = self
-        cell.lblDescription.shouldCollapse = true
-        cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-        cell.lblDescription.text = post.description
-        cell.lblDescription.collapsed = !isFullDesc
-        cell.showFullDescription = isFullDesc
+        cell.lblDescription.isUserInteractionEnabled = false
         
 //        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
 //        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
@@ -761,43 +754,4 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         return PostController.Instance.getFollowingPosts(type: self.postType).count
     }
     
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvDiagnoses.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvDiagnoses)
-        if let indexPath = self.tvDiagnoses.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvDiagnoses.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
-            self.states.insert(post.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tvDiagnoses.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tvDiagnoses.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvDiagnoses)
-        if let indexPath = self.tvDiagnoses.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvDiagnoses.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
-            self.states.remove(post.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tvDiagnoses.endUpdates()
-    }
 }

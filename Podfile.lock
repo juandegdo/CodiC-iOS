@@ -13,7 +13,7 @@ PODS:
   - HTHorizontalSelectionList (0.7.4):
     - M13BadgeView (~> 1.0.4)
   - IQDropDownTextField (1.1.1)
-  - IQKeyboardManager (5.0.6)
+  - IQKeyboardManager (5.0.7)
   - M13BadgeView (1.0.4)
   - Masonry (1.1.0)
   - NSDate+TimeAgo (1.0.6)
@@ -21,6 +21,7 @@ PODS:
   - Sheriff (0.3.2)
   - SZTextView (1.3.0)
   - TLTagsControl (1.0.0)
+  - TTTAttributedLabel (2.0.0)
   - UITextView+Placeholder (1.2.0)
   - YLProgressBar (3.10.2)
 
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - Sheriff
   - SZTextView
   - TLTagsControl (from `https://github.com/danielyang112/TLTagsControl.git`)
+  - TTTAttributedLabel
   - UITextView+Placeholder
   - YLProgressBar
 
@@ -78,7 +80,7 @@ SPEC CHECKSUMS:
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   HTHorizontalSelectionList: c38792f4bc87f941ab6c07b02a40abf111c68249
   IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
-  IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
+  IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   M13BadgeView: 700dd0714fdc837c0cf1c8c004454963ec22441f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
@@ -86,9 +88,10 @@ SPEC CHECKSUMS:
   Sheriff: d3d03fe6d35aa781e3f42d48f3fb53ed7d04958d
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   TLTagsControl: 34ab7d25f282aa2b8b42e73cc71b96ffe9fa7a15
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
   YLProgressBar: 365b6c5e934be18b661f79413db33c993c8e8251
 
-PODFILE CHECKSUM: c60823573395b747a40a53752c5c699181528f4d
+PODFILE CHECKSUM: 7c8437a69e9467c635ae634e8a7a3f7c3caa3661
 
 COCOAPODS: 1.3.1

@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate {
+class AnotherProfileViewController: BaseViewController {
     
     let OffsetHeaderStop: CGFloat = 190.0
     let ProfileListCellID = "ProfileListCell"
@@ -41,7 +41,6 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     var profileType = 0 //0: normal, 1: private, 2: blocked
     var postType: String = Constants.PostTypeAll
     var expandedRows = Set<String>()
-    var states = Set<String>()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -492,13 +491,7 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
             let post = _user.getPosts(type: self.postType)[indexPath.row]
             cell.setData(post: post)
             
-            let isFullDesc = self.states.contains(post.id)
-            cell.lblDescription.delegate = self
-            cell.lblDescription.shouldCollapse = true
-            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-            cell.lblDescription.text = post.description
-            cell.lblDescription.collapsed = !isFullDesc
-            cell.showFullDescription = isFullDesc
+            cell.lblDescription.isUserInteractionEnabled = false
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {
@@ -582,56 +575,6 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
             self.tableView.endUpdates()
         }
         
-    }
-    
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tableView.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tableView)
-        if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { self.tableView.endUpdates(); return }
-            
-            guard let _user = self.currentUser else {
-                self.tableView.endUpdates()
-                return
-            }
-            
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
-            self.states.insert(post.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tableView.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tableView.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tableView)
-        if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { self.tableView.endUpdates(); return }
-            
-            guard let _user = self.currentUser else {
-                self.tableView.endUpdates()
-                return
-            }
-            
-            let post = _user.getPosts(type: self.postType)[indexPath.row]
-            self.states.remove(post.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tableView.endUpdates()
     }
     
 }

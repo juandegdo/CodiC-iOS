@@ -146,6 +146,7 @@ open class ExpandableLabel: UILabel {
             if let attributedText = attributedText?.copyWithAddedFontAttribute(font).copyWithParagraphAttribute(font), attributedText.length > 0 {
                 self.collapsedText = getCollapsedText(for: attributedText, link: (linkHighlighted) ? collapsedAttributedLink.copyWithHighlightedColor() : self.collapsedAttributedLink)
                 self.expandedText = getExpandedText(for: attributedText, link: (linkHighlighted) ? expandedAttributedLink?.copyWithHighlightedColor() : self.expandedAttributedLink)
+//                print("\(String(describing: self.expandedText?.string))")
                 super.attributedText = (self.collapsed) ? self.collapsedText : self.expandedText
             } else {
                 self.expandedText = nil
@@ -176,9 +177,9 @@ open class ExpandableLabel: UILabel {
             let fits = self.textFitsWidth(lineTextWithAddedLink)
             if fits {
                 lineTextWithLink = lineTextWithAddedLink
-                let lineTextWithLastWordRemovedRect = lineTextWithLastWordRemoved.boundingRect(for: self.frame.size.width)
-                let wordRect = linkName.boundingRect(for: self.frame.size.width)
-                let width = lineTextWithLastWordRemoved.string == "" ? self.frame.width : wordRect.size.width
+                let lineTextWithLastWordRemovedRect = lineTextWithLastWordRemoved.boundingRect(for: Constants.ScreenWidth - 63.0)
+                let wordRect = linkName.boundingRect(for: Constants.ScreenWidth - 63.0)
+                let width = lineTextWithLastWordRemoved.string == "" ? Constants.ScreenWidth - 63.0 : wordRect.size.width
                 self.linkRect = CGRect(x: lineTextWithLastWordRemovedRect.size.width, y: self.font.lineHeight * CGFloat(lineIndex.index), width: width, height: wordRect.size.height)
                 stop.pointee = true
             }
@@ -225,7 +226,7 @@ open class ExpandableLabel: UILabel {
     
     fileprivate func getCollapsedText(for text: NSAttributedString?, link: NSAttributedString) -> NSAttributedString? {
         guard let text = text else { return nil }
-        let lines = text.lines(for: frame.size.width)
+        let lines = text.lines(for: Constants.ScreenWidth - 63.0)
         if collapsedNumberOfLines > 0 && collapsedNumberOfLines < lines.count {
             let lastLineRef = lines[collapsedNumberOfLines-1] as CTLine
             var lineIndex: LineIndexTuple?
@@ -286,12 +287,13 @@ open class ExpandableLabel: UILabel {
     }
     
     fileprivate func textFitsWidth(_ text: NSAttributedString) -> Bool {
-        return (text.boundingRect(for: frame.size.width).size.height <= font.lineHeight) as Bool
+        return (text.boundingRect(for: Constants.ScreenWidth - 63.0).size.height <= font.lineHeight) as Bool
     }
     
     fileprivate func textWillBeTruncated(_ text: NSAttributedString) -> Bool {
-        let lines = text.lines(for: frame.size.width)
-        return collapsedNumberOfLines > 0 && collapsedNumberOfLines < lines.count
+        let lines = text.lines(for: Constants.ScreenWidth - 63.0)
+//        return collapsedNumberOfLines > 0 && collapsedNumberOfLines < lines.count
+        return collapsedNumberOfLines < lines.count
     }
     
     // MARK: Touch Handling
@@ -394,7 +396,7 @@ open class ExpandableLabel: UILabel {
     fileprivate func textClicked(touches: Set<UITouch>?, event: UIEvent?) -> Bool {
         let touch = event?.allTouches?.first
         let location = touch?.location(in: self)
-        let textRect = self.attributedText?.boundingRect(for: self.frame.width)
+        let textRect = self.attributedText?.boundingRect(for: Constants.ScreenWidth - 63.0)
         if let location = location, let textRect = textRect {
             let finger = CGRect(x: location.x-touchSize.width/2, y: location.y-touchSize.height/2, width: touchSize.width, height: touchSize.height)
             if finger.intersects(textRect) {

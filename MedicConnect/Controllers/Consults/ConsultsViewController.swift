@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import Crashlytics
 
-class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
     let ConsultCellID = "PlaylistCell"
     let postType = Constants.PostTypeConsult
@@ -20,7 +20,6 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate, E
     var vcDisappearType : ViewControllerDisappearType = .other
     var selectedDotsIndex = 0
     var expandedRows = Set<String>()
-    var states = Set<String>()
     var selectedRowIndex = -1
     
     override func viewDidLoad() {
@@ -462,13 +461,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
         cell.lblUsername.tag = indexPath.row
         
-        let isFullDesc = self.states.contains(post.id)
-        cell.lblDescription.delegate = self
-        cell.lblDescription.shouldCollapse = true
-        cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-        cell.lblDescription.text = post.description
-        cell.lblDescription.collapsed = !isFullDesc
-        cell.showFullDescription = isFullDesc
+        cell.lblDescription.isUserInteractionEnabled = false
         
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
@@ -556,46 +549,6 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         return PostController.Instance.getFollowingPosts(type: self.postType).count
-    }
-    
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tvConsults.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvConsults)
-        if let indexPath = self.tvConsults.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvConsults.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
-            self.states.insert(post.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tvConsults.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tvConsults.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tvConsults)
-        if let indexPath = self.tvConsults.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tvConsults.cellForRow(at: indexPath) as? PlaylistCell
-                else { return }
-            
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
-            self.states.remove(post.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tvConsults.endUpdates()
     }
 
 }
