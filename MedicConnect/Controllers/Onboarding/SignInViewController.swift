@@ -42,7 +42,7 @@ class SignInViewController: BaseViewController, UITextFieldDelegate {
     
     //MARK: - Notification Observer
     @objc func openResetPassword(_ notification: NSNotification) {
-        if let token = notification.userInfo?["token"] as? String, let tokenOnDevice = UserDefaultsUtil.LoadForgotPasswordToken(), token == tokenOnDevice{
+        if let token = notification.userInfo?["token"] as? String, let tokenOnDevice = UserDefaultsUtil.LoadForgotPasswordToken(), token == tokenOnDevice {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
             vc.token = token
             self.navigationController?.pushViewController(vc, animated: false)

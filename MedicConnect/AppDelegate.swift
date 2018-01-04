@@ -18,12 +18,15 @@ import AVFoundation
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
+    var launchedURL: URL? = nil
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         Fabric.with([Crashlytics.self])
-        // TODO: Move this to where you establish a user session
-
+        
+        // Check launched URL for reset password
+        self.launchedURL = launchOptions?[UIApplicationLaunchOptionsKey.url] as? URL
+        
         // IQKeyboardManager Settings
         IQKeyboardManager.shared().isEnabled = true
         IQKeyboardManager.shared().isEnableAutoToolbar = true
@@ -51,11 +54,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if url.absoluteString.lowercased().contains("medicconnectlink"){
-            let notificationName = "goToResetPassword"
-            let data:[String: String] = ["token": url.lastPathComponent]
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationName), object: nil, userInfo: data)
-            
+        if url.absoluteString.lowercased().contains("medicconnectlink") && UserDefaultsUtil.LoadToken().isEmpty {
+            self.openLink(url: url, fromLaunch: false)
             return true
         }
         
@@ -79,6 +79,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if self.launchedURL != nil && UserDefaultsUtil.LoadToken().isEmpty {
+            self.openLink(url: self.launchedURL!, fromLaunch: true)
+            self.launchedURL = nil
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -142,6 +146,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Convert token to string
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
+        UserController.Instance.setDeviceToken(deviceTokenString)
+        
+        if let _me = UserController.Instance.getUser() as User? {
+            
+            UserService.Instance.putDeviceToken(deviceToken: deviceTokenString) { (success) in
+                if (success) {
+                    _me.deviceToken = deviceTokenString
+                }
+            }
+            
+        }
+        
+        // Persist it in your backend in case it's new
+    }
+    
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
+        
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("Handle push from foreground")
+        if  let _ = UserController.Instance.getUser() as User? {
+            NotificationUtil.updateNotificationAlert(hasNewAlert: true)
+        }
+        completionHandler([.alert,.sound])
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if let _ = response.notification.request.content.userInfo as? [String : AnyObject] {
+            // Getting user info
+            if  let _ = UserController.Instance.getUser() as User? {
+                NotificationUtil.updateNotificationAlert(hasNewAlert: true)
+            }
+        }
+        completionHandler()
+    }
+    
+    // MARK: - Private Methods
+    
+    func openLink(url: URL, fromLaunch: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (fromLaunch ? 0.8 : 0.0)) {
+            let notificationName = "goToResetPassword"
+            let data:[String: String] = ["token": url.lastPathComponent]
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: notificationName), object: nil, userInfo: data)
+        }
+    }
+    
     func callNotificationVC() {
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationVC")
         if let vvc = self.window?.visibleViewController() {
@@ -191,54 +252,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
     }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        
-    }
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // Convert token to string
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print(deviceTokenString)
-        UserController.Instance.setDeviceToken(deviceTokenString)
-        
-        if let _me = UserController.Instance.getUser() as User? {
-            
-            UserService.Instance.putDeviceToken(deviceToken: deviceTokenString) { (success) in
-                if (success) {
-                    _me.deviceToken = deviceTokenString
-                }
-            }
-            
-        }
-        
-        // Persist it in your backend in case it's new
-    }
-    
-    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
-        
-    }
-    
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Handle push from foreground")
-        if  let _ = UserController.Instance.getUser() as User? {
-            NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-        }
-        completionHandler([.alert,.sound])
-    }
-    
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let _ = response.notification.request.content.userInfo as? [String : AnyObject] {
-            // Getting user info
-            if  let _ = UserController.Instance.getUser() as User? {
-                NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-            }
-        }
-        completionHandler()
-    }
-    
     
     // MARK: - Core Data stack
     
