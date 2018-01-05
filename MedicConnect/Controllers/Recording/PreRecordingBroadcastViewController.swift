@@ -43,9 +43,7 @@ extension PreRecordingBroadcastViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(goAction)
         
-        if let w = UIApplication.shared.delegate?.window, let vc = w?.rootViewController {
-            vc.present(alertController, animated: false, completion: nil)
-        }
+        self.present(alertController, animated: false, completion: nil)
     }
     
     @IBAction func onRecordBroadcast(sender: AnyObject) {
@@ -56,16 +54,13 @@ extension PreRecordingBroadcastViewController {
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() {
                 (allowed) in
-                DispatchQueue.global(qos: .background).async {
-                    // Background Thread
-                    DispatchQueue.main.async {
-                        // Run UI Updates
-                        if(allowed){
-                            self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordingBroadcast, sender: nil)
-                        }else{
-                            try? recordingSession.setActive(false)
-                            self.processMicrophoneSettings()
-                        }
+                DispatchQueue.main.async {
+                    // Run UI Updates
+                    if (allowed) {
+                        self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordingBroadcast, sender: nil)
+                    } else {
+                        try? recordingSession.setActive(false)
+                        self.processMicrophoneSettings()
                     }
                 }
             }
