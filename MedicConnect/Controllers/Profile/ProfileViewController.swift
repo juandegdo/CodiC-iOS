@@ -666,20 +666,20 @@ extension ProfileViewController {
     
     @IBAction func onDiagnosisTapped(sender: AnyObject!) {
         if (self.postType == Constants.PostTypeConsult) {
+            self.releasePlayer()
+            
             self.postType = Constants.PostTypeDiagnosis
             self.expandedRows = Set<String>()
-            
-            self.releasePlayer()
             self.updateUI()
         }
     }
     
     @IBAction func onConsultsTapped(sender: AnyObject!) {
         if (self.postType == Constants.PostTypeDiagnosis) {
+            self.releasePlayer()
+            
             self.postType = Constants.PostTypeConsult
             self.expandedRows = Set<String>()
-            
-            self.releasePlayer()
             self.updateUI()
         }
     }

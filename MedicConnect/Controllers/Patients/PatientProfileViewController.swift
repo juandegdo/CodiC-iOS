@@ -161,7 +161,7 @@ class PatientProfileViewController: BaseViewController {
         
     }
     
-    func onPlayAudio(sender: SVGPlayButton) {
+    @objc func onPlayAudio(sender: SVGPlayButton) {
         
         guard let _index = sender.tag as Int? else {
             return
@@ -266,7 +266,7 @@ class PatientProfileViewController: BaseViewController {
         
     }
     
-    func onBackwardAudio(sender: UIButton) {
+    @objc func onBackwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -282,7 +282,7 @@ class PatientProfileViewController: BaseViewController {
         self.seekToTime(time: time)
     }
     
-    func onForwardAudio(sender: UIButton) {
+    @objc func onForwardAudio(sender: UIButton) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -299,7 +299,7 @@ class PatientProfileViewController: BaseViewController {
         self.seekToTime(time: time)
     }
     
-    func onSeekSlider(sender: UISlider) {
+    @objc func onSeekSlider(sender: UISlider) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -455,23 +455,23 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {
-                cell.btnPlay.addTarget(self, action: #selector(ProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
+                cell.btnPlay.addTarget(self, action: #selector(PatientProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
             }
             
             cell.btnBackward.tag = indexPath.row
             if cell.btnBackward.allTargets.count == 0 {
-                cell.btnBackward.addTarget(self, action: #selector(ProfileViewController.onBackwardAudio(sender:)), for: .touchUpInside)
+                cell.btnBackward.addTarget(self, action: #selector(PatientProfileViewController.onBackwardAudio(sender:)), for: .touchUpInside)
             }
             
             cell.btnForward.tag = indexPath.row
             if cell.btnForward.allTargets.count == 0 {
-                cell.btnForward.addTarget(self, action: #selector(ProfileViewController.onForwardAudio(sender:)), for: .touchUpInside)
+                cell.btnForward.addTarget(self, action: #selector(PatientProfileViewController.onForwardAudio(sender:)), for: .touchUpInside)
             }
             
             cell.playSlider.index = indexPath.row
             cell.playSlider.setValue(Float(post.getCurrentProgress()), animated: false)
             if cell.playSlider.allTargets.count == 0 {
-                cell.playSlider.addTarget(self, action: #selector(ProfileViewController.onSeekSlider(sender:)), for: .valueChanged)
+                cell.playSlider.addTarget(self, action: #selector(PatientProfileViewController.onSeekSlider(sender:)), for: .valueChanged)
             }
             
             cell.isExpanded = self.expandedRows.contains(post.id)
