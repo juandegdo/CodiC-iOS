@@ -180,6 +180,18 @@ class PostService: BaseTaskController {
                                     post.patientId = _patientId
                                 }
                                 
+                                // Optional referring users
+                                
+                                if let _referringUsers = p["referring_user"] as? [String] {
+                                    post.referringUsers = _referringUsers
+                                }
+                                
+                                // Optional deleted users
+                                
+                                if let _deletedUsers = p["deleted_users"] as? [String] {
+                                    post.deletedUsers = _deletedUsers
+                                }
+                                
                                 posts.append(post)
                                 
                             }
@@ -316,6 +328,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _patientId = _p["patientId"] as? String {
                                     post.patientId = _patientId
+                                }
+                                
+                                // Optional referring users
+                                
+                                if let _referringUsers = _p["referring_user"] as? [String] {
+                                    post.referringUsers = _referringUsers
+                                }
+                                
+                                // Optional deleted users
+                                
+                                if let _deletedUsers = _p["deleted_users"] as? [String] {
+                                    post.deletedUsers = _deletedUsers
                                 }
                                 
                                 posts.append(post)
@@ -503,6 +527,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _patientId = _p["patientId"] as? String {
                                     post.patientId = _patientId
+                                }
+                                
+                                // Optional referring users
+                                
+                                if let _referringUsers = _p["referring_user"] as? [String] {
+                                    post.referringUsers = _referringUsers
+                                }
+                                
+                                // Optional deleted users
+                                
+                                if let _deletedUsers = _p["deleted_users"] as? [String] {
+                                    post.deletedUsers = _deletedUsers
                                 }
                                 
                                 posts.append(post)
@@ -860,6 +896,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _patientId = _p["patientId"] as? String {
                                     post.patientId = _patientId
+                                }
+                                
+                                // Optional referring users
+                                
+                                if let _referringUsers = _p["referring_user"] as? [String] {
+                                    post.referringUsers = _referringUsers
+                                }
+                                
+                                // Optional deleted users
+                                
+                                if let _deletedUsers = _p["deleted_users"] as? [String] {
+                                    post.deletedUsers = _deletedUsers
                                 }
                                 
                                 posts.append(post)

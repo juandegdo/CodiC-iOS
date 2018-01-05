@@ -182,6 +182,18 @@ class NotificationService: BaseTaskController {
                                         post.patientId = _patientId
                                     }
                                     
+                                    // Optional referring users
+                                    
+                                    if let _referringUsers = _broadcastObj["referring_user"] as? [String] {
+                                        post.referringUsers = _referringUsers
+                                    }
+                                    
+                                    // Optional deleted users
+                                    
+                                    if let _deletedUsers = _broadcastObj["deleted_users"] as? [String] {
+                                        post.deletedUsers = _deletedUsers
+                                    }
+                                    
                                     notification.broadcast = post
                                     
                                 }

@@ -26,6 +26,8 @@ class Post {
     var hashtags: [String] = []
     var postType: String
     var patientId: String = ""
+    var referringUsers: [String] = []
+    var deletedUsers: [String] = []
     
     fileprivate var currentTime: CMTime = CMTime(seconds: 0.0, preferredTimescale: CMTimeScale(1.0))
     fileprivate var currentProgress: CGFloat = 0.0

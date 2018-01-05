@@ -125,14 +125,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             self.callCommentVC(id: postId)
                         }
                         break
-                    case .broadcast, .newFollower:
-                        if let userId = dictInfo["user"] as? String {
-                            UserService.Instance.getUser(forId: userId, completion: { (user) in
-                                if let user = user {
-                                    self.callProfileVC(user: user)
-                                }
-                            })
-                        }
+                    case .broadcast:
+                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
+//                        if let userId = dictInfo["user"] as? String {
+//                            UserService.Instance.getUser(forId: userId, completion: { (user) in
+//                                if let user = user {
+//                                    self.callProfileVC(user: user)
+//                                }
+//                            })
+//                        }
                         break
                     default:
                         self.callNotificationVC()

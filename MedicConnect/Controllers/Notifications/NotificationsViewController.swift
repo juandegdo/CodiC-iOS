@@ -25,7 +25,7 @@ class NotificationsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.loadNotifications()
+        self.loadNotifications()
         self.markAllAsRead()
     }
     
@@ -53,8 +53,7 @@ class NotificationsViewController: BaseViewController {
         
         NotificationService.Instance.markAllAsRead(completion: { (allRead) in
             if (allRead) {
-//                UIApplication.shared.applicationIconBadgeNumber = 0
-//                NotificationUtil.updateNotificationAlert(hasNewAlert: false)
+                
             }
         })
     }
@@ -72,9 +71,9 @@ class NotificationsViewController: BaseViewController {
     func callProfileVC(user: User) {
         
         if  let _me = UserController.Instance.getUser() as User? {
-            if _me.id == user.id {
-                return
-            }
+//            if _me.id == user.id {
+//                return
+//            }
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
@@ -152,24 +151,29 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
             
             cell.setNotificationData(notification: NotificationController.Instance.getNotifications()[indexPath.row])
             
-
-            cell.btnFollowing.index = indexPath.row
-            cell.btnFollowing.refTableView = tableView
-            cell.btnFollowing.addTarget(self, action: #selector(NotificationsViewController.setUnfollow(sender:)), for: .touchUpInside)
-            cell.btnFollowing.makeEnabled(enabled: true)
+            cell.btnFollowing.isHidden = true
+//            cell.btnFollowing.index = indexPath.row
+//            cell.btnFollowing.refTableView = tableView
+//            cell.btnFollowing.addTarget(self, action: #selector(NotificationsViewController.setUnfollow(sender:)), for: .touchUpInside)
+//            cell.btnFollowing.makeEnabled(enabled: true)
             
-            cell.btnUnFollow.index = indexPath.row
-            cell.btnUnFollow.refTableView = tableView
-            cell.btnUnFollow.addTarget(self, action: #selector(NotificationsViewController.setFollow(sender:)), for: .touchUpInside)
-            cell.btnUnFollow.makeEnabled(enabled: true)
+            cell.btnUnFollow.isHidden = true
+//            cell.btnUnFollow.index = indexPath.row
+//            cell.btnUnFollow.refTableView = tableView
+//            cell.btnUnFollow.addTarget(self, action: #selector(NotificationsViewController.setFollow(sender:)), for: .touchUpInside)
+//            cell.btnUnFollow.makeEnabled(enabled: true)
             
-            cell.btnAccept.index = indexPath.row
-            cell.btnAccept.addTarget(self, action: #selector(acceptRequest(sender:)),for: .touchUpInside)
-            cell.btnFollowing.makeEnabled(enabled: true)
+            cell.btnAccept.isHidden = true
+//            cell.btnAccept.index = indexPath.row
+//            cell.btnAccept.addTarget(self, action: #selector(acceptRequest(sender:)),for: .touchUpInside)
+//            cell.btnFollowing.makeEnabled(enabled: true)
             
-            cell.btnDecline.index = indexPath.row
-            cell.btnDecline.addTarget(self, action: #selector(declineRequest(sender:)),for: .touchUpInside)
-            cell.btnUnFollow.makeEnabled(enabled: true)
+            cell.btnDecline.isHidden = true
+//            cell.btnDecline.index = indexPath.row
+//            cell.btnDecline.addTarget(self, action: #selector(declineRequest(sender:)),for: .touchUpInside)
+//            cell.btnUnFollow.makeEnabled(enabled: true)
+            
+            cell.btnRequested.isHidden = true
             
             return cell
             
@@ -311,11 +315,11 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
         if notification.notificationType == .comment {
             callCommentVC(post: notification.broadcast!)
-        }else if notification.notificationType == .like {
+        } else if notification.notificationType == .like {
             NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-        }
-        else{
-            callProfileVC(user: notification.fromUser)
+        } else {
+//            callProfileVC(user: notification.fromUser)
+            callProfileVC(user: UserController.Instance.getUser())
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
