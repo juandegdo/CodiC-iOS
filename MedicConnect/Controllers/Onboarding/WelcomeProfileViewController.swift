@@ -18,12 +18,14 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
     @IBOutlet var tfMSP: ACFloatingTextfield!
     @IBOutlet var tfLocation: ACFloatingTextfield!
     @IBOutlet var tfPhoneNumber: ACFloatingTextfield!
+    @IBOutlet var lblMSPError: UILabel!
     
     @IBOutlet var pageControl: UIPageControl!
-    
     @IBOutlet var avatarImageView: UIImageView!
     
     var avatarImage: UIImage?
+    
+    let debouncer = Debouncer(interval: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +40,19 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
         // Avatar Image View
         self.avatarImageView.layer.borderColor  = UIColor.white.cgColor
         
-        // Name
+        // Title
         self.tfTitle.placeholder = NSLocalizedString("Title", comment: "comment")
         
-        // Email
+        // MSP
         self.tfMSP.placeholder = NSLocalizedString("MSP #", comment: "comment")
+        self.tfMSP.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        // Pasword
+        self.lblMSPError.isHidden = true
+        
+        // Location
         self.tfLocation.placeholder = NSLocalizedString("Location", comment: "comment")
         
-        // Pasword
+        // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
         
         // Page Control
@@ -79,6 +84,32 @@ extension WelcomeProfileViewController : UITextFieldDelegate {
         
         return true
         
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // When the user performs a repeating action, such as entering text, invoke the `call` method
+        debouncer.call()
+        debouncer.callback = {
+            // Send the debounced network request here
+            if (textField == self.tfMSP && textField.text!.count > 0) {
+                // Check if patient exists
+                self.btnSave.isUserInteractionEnabled = false
+                
+                UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId) in
+                    self.btnSave.isEnabled = true
+                    
+                    if success == true && MSP == self.tfMSP.text! {
+                        if userId == nil || userId == "" {
+                            self.lblMSPError.isHidden = true
+                        } else {
+                            self.lblMSPError.isHidden = false
+                        }
+                    } else if success == false {
+                        self.lblMSPError.isHidden = true
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -117,9 +148,7 @@ extension WelcomeProfileViewController {
         }
         alertController.addAction(cancelAction)
         
-        self.present(alertController, animated: true) {
-        }
-        
+        self.present(alertController, animated: true) {}
         
     }
     
@@ -135,6 +164,10 @@ extension WelcomeProfileViewController {
             }
             
             if self.tfMSP.text != "" {
+                if !self.lblMSPError.isHidden {
+                    return
+                }
+                
                 _user.msp = self.tfMSP.text!
             } else {
                 AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your MSP number!")

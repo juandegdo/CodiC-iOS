@@ -1986,6 +1986,12 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                     <constraint firstAttribute="height" constant="325" id="hUE-s7-1GP"/>
                                                 </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This MSP is already being used!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66f-1R-s3H">
+                                                <rect key="frame" x="219.33333333333337" y="250.66666666666666" width="169.66666666666663" height="16.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0SI-WT-oeU">
                                                 <rect key="frame" x="25" y="507" width="364" height="45"/>
                                                 <constraints>
@@ -2022,7 +2028,9 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <constraint firstAttribute="trailing" secondItem="rr7-GX-ohY" secondAttribute="trailing" constant="25" id="A6M-oQ-FU7"/>
                                             <constraint firstItem="MHJ-SD-LYz" firstAttribute="top" secondItem="1o1-55-x0b" secondAttribute="top" constant="18" id="AXD-9p-8ac"/>
                                             <constraint firstItem="MHJ-SD-LYz" firstAttribute="leading" secondItem="1o1-55-x0b" secondAttribute="leading" constant="22" id="An6-p6-Zeo"/>
+                                            <constraint firstItem="66f-1R-s3H" firstAttribute="centerY" secondItem="ZZt-Vn-MV5" secondAttribute="centerY" constant="2" id="L99-rq-gc6"/>
                                             <constraint firstItem="rr7-GX-ohY" firstAttribute="top" secondItem="MHJ-SD-LYz" secondAttribute="bottom" constant="20" id="YPV-te-PHd"/>
+                                            <constraint firstItem="66f-1R-s3H" firstAttribute="trailing" secondItem="rr7-GX-ohY" secondAttribute="trailing" id="bGK-uI-Nde"/>
                                             <constraint firstItem="lSW-Xg-LHz" firstAttribute="leading" secondItem="MHJ-SD-LYz" secondAttribute="trailing" constant="18" id="fsS-s9-X1l"/>
                                             <constraint firstAttribute="height" constant="600" id="kz2-54-ek9"/>
                                             <constraint firstItem="rr7-GX-ohY" firstAttribute="leading" secondItem="1o1-55-x0b" secondAttribute="leading" constant="25" id="l62-OH-pzA"/>
@@ -2061,6 +2069,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <outlet property="btnChangePicture" destination="lSW-Xg-LHz" id="gT2-eD-INC"/>
                         <outlet property="btnSave" destination="0SI-WT-oeU" id="TRm-8f-6yF"/>
                         <outlet property="imgAvatar" destination="MHJ-SD-LYz" id="VOK-TF-6Mk"/>
+                        <outlet property="lblMSPError" destination="66f-1R-s3H" id="koV-od-Vmt"/>
                         <outlet property="tfEmail" destination="gcJ-0H-xm3" id="0Yb-Ep-uuH"/>
                         <outlet property="tfLocation" destination="5jm-Rw-Eha" id="4gB-PG-NB2"/>
                         <outlet property="tfMSP" destination="ZZt-Vn-MV5" id="QZ4-wr-iz9"/>
@@ -4522,6 +4531,12 @@ uploaded a new diagnosis.</string>
                                                     <constraint firstAttribute="height" constant="218" id="MKw-ed-ogn"/>
                                                 </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This MSP is already being used!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYi-gX-XUy">
+                                                <rect key="frame" x="219.33333333333337" y="253.33333333333329" width="169.66666666666663" height="16.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2x-Id-t5o">
                                                 <rect key="frame" x="25" y="453.66666666666663" width="364" height="45"/>
                                                 <constraints>
@@ -4548,10 +4563,12 @@ uploaded a new diagnosis.</string>
                                             <constraint firstItem="qJ1-5h-g23" firstAttribute="leading" secondItem="dC0-Km-o8L" secondAttribute="leading" id="QYF-xg-7jS"/>
                                             <constraint firstAttribute="height" constant="530" id="TEv-9v-4mL"/>
                                             <constraint firstItem="gA3-4j-FPx" firstAttribute="centerX" secondItem="zoW-dF-i8I" secondAttribute="centerX" id="arJ-tO-6wA"/>
+                                            <constraint firstItem="LYi-gX-XUy" firstAttribute="trailing" secondItem="Ptn-2j-ZGI" secondAttribute="trailing" id="awi-6h-nli"/>
                                             <constraint firstItem="a2x-Id-t5o" firstAttribute="top" secondItem="Ptn-2j-ZGI" secondAttribute="bottom" constant="57" id="chV-km-O5v"/>
                                             <constraint firstItem="Ptn-2j-ZGI" firstAttribute="top" secondItem="dC0-Km-o8L" secondAttribute="bottom" constant="6" id="eoD-ny-g7u"/>
                                             <constraint firstItem="qJ1-5h-g23" firstAttribute="top" secondItem="dC0-Km-o8L" secondAttribute="top" id="nOF-6p-hpw"/>
                                             <constraint firstItem="zqG-x3-FgA" firstAttribute="centerX" secondItem="zoW-dF-i8I" secondAttribute="centerX" id="stw-L4-Qel"/>
+                                            <constraint firstItem="LYi-gX-XUy" firstAttribute="centerY" secondItem="7sO-Iv-B8b" secondAttribute="centerY" constant="2" id="tnr-QJ-X3b"/>
                                             <constraint firstItem="zqG-x3-FgA" firstAttribute="top" secondItem="gA3-4j-FPx" secondAttribute="bottom" constant="12" id="xh7-46-Vtg"/>
                                             <constraint firstItem="Ptn-2j-ZGI" firstAttribute="leading" secondItem="zoW-dF-i8I" secondAttribute="leading" constant="25" id="yyb-b4-XUm"/>
                                             <constraint firstItem="dC0-Km-o8L" firstAttribute="top" secondItem="zqG-x3-FgA" secondAttribute="bottom" constant="12" id="z7e-v4-LAB"/>
@@ -4598,6 +4615,7 @@ uploaded a new diagnosis.</string>
                         <outlet property="avatarImageView" destination="qJ1-5h-g23" id="N2Y-RJ-0vl"/>
                         <outlet property="btnAvatarImage" destination="dC0-Km-o8L" id="iiB-9d-P7T"/>
                         <outlet property="btnSave" destination="a2x-Id-t5o" id="YkL-ZS-xdH"/>
+                        <outlet property="lblMSPError" destination="LYi-gX-XUy" id="vfG-vN-N5C"/>
                         <outlet property="pageControl" destination="YzN-ow-qBJ" id="2Gr-zp-Dsc"/>
                         <outlet property="tfLocation" destination="Vq7-ZI-lhX" id="Mfc-s8-vqG"/>
                         <outlet property="tfMSP" destination="7sO-Iv-B8b" id="YIG-GR-582"/>
