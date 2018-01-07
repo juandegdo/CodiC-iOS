@@ -6774,6 +6774,12 @@ you a link to reset your password.</string>
                                     <constraint firstItem="2lT-p0-DF9" firstAttribute="leading" secondItem="8te-dN-hdo" secondAttribute="leading" constant="2" id="xbg-Nw-ep2"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect Doctor MSP #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSw-bi-rTQ">
+                                <rect key="frame" x="243" y="307" width="146" height="19.666666666666686"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Mq-7s-fnw">
                                 <rect key="frame" x="196" y="337" width="22" height="17"/>
                                 <constraints>
@@ -6818,12 +6824,20 @@ you a link to reset your password.</string>
                                     <action selector="onRecordConsultWithSender:" destination="lqe-eh-LPZ" eventType="touchUpInside" id="TaF-n6-Tsf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Incorrect Doctor MSP #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TSw-bi-rTQ">
-                                <rect key="frame" x="243" y="307" width="146" height="19.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6U-x3-biI">
+                                <rect key="frame" x="25" y="506" width="364" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="V2z-HQ-gPB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="12"/>
+                                <state key="normal" title="SKIP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSkipWithSender:" destination="lqe-eh-LPZ" eventType="touchUpInside" id="ykw-sw-E7e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.57647058823529407" green="0.79607843137254897" blue="0.792156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -6837,13 +6851,16 @@ you a link to reset your password.</string>
                             <constraint firstItem="Qj5-gA-fWl" firstAttribute="top" secondItem="4w1-GM-BkE" secondAttribute="top" id="Qm0-AP-ofB"/>
                             <constraint firstItem="YHZ-mX-fb3" firstAttribute="centerX" secondItem="4w1-GM-BkE" secondAttribute="centerX" id="TS4-Ma-w9U"/>
                             <constraint firstItem="TSw-bi-rTQ" firstAttribute="top" secondItem="8te-dN-hdo" secondAttribute="bottom" constant="2" id="VaA-dt-6X6"/>
+                            <constraint firstItem="z6U-x3-biI" firstAttribute="leading" secondItem="4w1-GM-BkE" secondAttribute="leading" constant="25" id="caz-An-HCe"/>
                             <constraint firstItem="noR-y0-LQP" firstAttribute="top" secondItem="YHZ-mX-fb3" secondAttribute="bottom" constant="32" id="dWf-ku-sN1"/>
                             <constraint firstItem="8te-dN-hdo" firstAttribute="top" secondItem="bj6-xG-O71" secondAttribute="bottom" constant="25" id="eIA-96-9ju"/>
                             <constraint firstItem="bj6-xG-O71" firstAttribute="top" secondItem="Qj5-gA-fWl" secondAttribute="bottom" constant="86" id="kmh-Oc-5yB"/>
+                            <constraint firstItem="z6U-x3-biI" firstAttribute="top" secondItem="noR-y0-LQP" secondAttribute="bottom" constant="30" id="lEL-Xy-Su1"/>
                             <constraint firstAttribute="trailing" secondItem="8te-dN-hdo" secondAttribute="trailing" constant="25" id="lNb-6G-JOd"/>
                             <constraint firstAttribute="trailing" secondItem="bj6-xG-O71" secondAttribute="trailing" constant="25" id="qJ4-qK-Rag"/>
                             <constraint firstItem="TSw-bi-rTQ" firstAttribute="trailing" secondItem="8te-dN-hdo" secondAttribute="trailing" id="t3T-J5-GwR"/>
                             <constraint firstItem="bj6-xG-O71" firstAttribute="leading" secondItem="4w1-GM-BkE" secondAttribute="leading" constant="25" id="uLh-oU-vgo"/>
+                            <constraint firstAttribute="trailing" secondItem="z6U-x3-biI" secondAttribute="trailing" constant="25" id="ujP-FV-Vzn"/>
                             <constraint firstItem="YHZ-mX-fb3" firstAttribute="top" secondItem="8Mq-7s-fnw" secondAttribute="bottom" constant="6" id="wDG-ZU-MkC"/>
                             <constraint firstItem="8Mq-7s-fnw" firstAttribute="top" secondItem="8te-dN-hdo" secondAttribute="bottom" constant="32" id="wka-a4-dio"/>
                             <constraint firstItem="8Mq-7s-fnw" firstAttribute="centerX" secondItem="4w1-GM-BkE" secondAttribute="centerX" id="xpl-Zg-cnb"/>
@@ -7273,6 +7290,20 @@ uploaded a new diagnosis.</string>
                                     <action selector="onSaveNoteWithSender:" destination="eLa-Yw-sK8" eventType="touchUpInside" id="SOe-db-T70"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usn-y8-Vvv">
+                                <rect key="frame" x="25" y="646" width="364" height="44"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="MmE-YT-5nf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="12"/>
+                                <state key="normal" title="SKIP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSkipWithSender:" destination="eLa-Yw-sK8" eventType="touchUpInside" id="6AV-Ky-BOh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.57647058819999997" green="0.79607843140000001" blue="0.79215686269999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -7280,8 +7311,10 @@ uploaded a new diagnosis.</string>
                             <constraint firstItem="oZ8-Iw-Q9Z" firstAttribute="top" secondItem="QqN-B8-F2q" secondAttribute="top" constant="150" id="I0S-lK-PIg"/>
                             <constraint firstItem="oZ8-Iw-Q9Z" firstAttribute="leading" secondItem="QqN-B8-F2q" secondAttribute="leading" constant="25" id="KBt-V4-QPA"/>
                             <constraint firstItem="VQn-Tu-TMe" firstAttribute="centerX" secondItem="0gm-dJ-kjh" secondAttribute="centerX" constant="-78" id="Zcs-fZ-yFX"/>
+                            <constraint firstAttribute="trailing" secondItem="Usn-y8-Vvv" secondAttribute="trailing" constant="25" id="cXf-t3-eAt"/>
                             <constraint firstItem="0gm-dJ-kjh" firstAttribute="top" secondItem="Puc-my-4OE" secondAttribute="bottom" id="d2O-K3-vkz"/>
                             <constraint firstAttribute="trailing" secondItem="Puc-my-4OE" secondAttribute="trailing" constant="25" id="dD1-zw-DJz"/>
+                            <constraint firstItem="Usn-y8-Vvv" firstAttribute="top" secondItem="7MQ-ED-8y6" secondAttribute="bottom" constant="30" id="dte-Wg-vzk"/>
                             <constraint firstItem="2dt-qY-gyI" firstAttribute="top" secondItem="QqN-B8-F2q" secondAttribute="top" id="dxE-yz-n0a"/>
                             <constraint firstItem="0gm-dJ-kjh" firstAttribute="centerX" secondItem="QqN-B8-F2q" secondAttribute="centerX" id="fUC-9a-QPs"/>
                             <constraint firstItem="2dt-qY-gyI" firstAttribute="leading" secondItem="QqN-B8-F2q" secondAttribute="leading" id="fpi-eh-9AN"/>
@@ -7290,6 +7323,7 @@ uploaded a new diagnosis.</string>
                             <constraint firstAttribute="trailing" secondItem="2dt-qY-gyI" secondAttribute="trailing" id="n3D-Vf-bX4"/>
                             <constraint firstItem="VQn-Tu-TMe" firstAttribute="centerY" secondItem="0gm-dJ-kjh" secondAttribute="centerY" constant="-1" id="ndE-wb-hdW"/>
                             <constraint firstItem="Puc-my-4OE" firstAttribute="top" secondItem="oZ8-Iw-Q9Z" secondAttribute="bottom" constant="6" id="ql6-E0-VwW"/>
+                            <constraint firstItem="Usn-y8-Vvv" firstAttribute="leading" secondItem="QqN-B8-F2q" secondAttribute="leading" constant="25" id="t3a-xZ-hzV"/>
                             <constraint firstItem="7MQ-ED-8y6" firstAttribute="leading" secondItem="QqN-B8-F2q" secondAttribute="leading" constant="25" id="tXS-RA-ilg"/>
                         </constraints>
                     </view>

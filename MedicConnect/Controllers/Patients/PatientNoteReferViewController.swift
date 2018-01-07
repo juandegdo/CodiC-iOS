@@ -282,4 +282,11 @@ extension PatientNoteReferViewController {
         self.saveNote()
         
     }
+    
+    @IBAction func onSkip(sender: UIButton!) {
+        // Skip referring users
+        DataManager.Instance.setReferringUserIds(referringUserIds: [])
+        self.saveNote()
+    }
+    
 }

@@ -254,4 +254,15 @@ extension ConsultReferringViewController {
         self.presentRecordScreen()
         
     }
+    
+    @IBAction func onSkip(sender: UIButton!) {
+        // Skip
+        DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+        DataManager.Instance.setPatientId(patientId: "")
+        DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+        
+        // Show record screen
+        self.presentRecordScreen()
+    }
+    
 }
