@@ -5753,9 +5753,9 @@ you a link to reset your password.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-sk-eQe">
-                                <rect key="frame" x="224" y="562" width="164" height="40"/>
+                                <rect key="frame" x="226" y="558" width="164" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="amZ-tH-7EB"/>
+                                    <constraint firstAttribute="height" constant="48" id="amZ-tH-7EB"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="164" id="g70-ME-yuU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
@@ -5768,10 +5768,10 @@ you a link to reset your password.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-7j-iiZ">
-                                <rect key="frame" x="228" y="508" width="160" height="40"/>
+                                <rect key="frame" x="226" y="504" width="164" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="7kL-HM-kqc"/>
-                                    <constraint firstAttribute="height" constant="40" id="Qv6-s3-Tle"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="164" id="7kL-HM-kqc"/>
+                                    <constraint firstAttribute="height" constant="48" id="Qv6-s3-Tle"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
@@ -5787,14 +5787,14 @@ you a link to reset your password.</string>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ogO-dR-xml" secondAttribute="trailing" id="205-gu-RmB"/>
                             <constraint firstItem="qkd-AQ-Fc9" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="3Pz-Um-nOg"/>
-                            <constraint firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" constant="26" id="3no-DV-RFd"/>
+                            <constraint firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" constant="24" id="3no-DV-RFd"/>
                             <constraint firstAttribute="bottom" secondItem="qkd-AQ-Fc9" secondAttribute="bottom" id="4vY-Ql-h4e"/>
                             <constraint firstAttribute="bottom" secondItem="ogO-dR-xml" secondAttribute="bottom" id="5GH-xs-fAh"/>
                             <constraint firstItem="o5x-7j-iiZ" firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" id="BW8-4O-GL2"/>
                             <constraint firstAttribute="trailing" secondItem="qkd-AQ-Fc9" secondAttribute="trailing" id="L9A-i8-Bg4"/>
                             <constraint firstItem="o5x-7j-iiZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gq-oE-VHy" secondAttribute="leading" constant="20" symbolic="YES" id="Mic-cB-IIV"/>
                             <constraint firstAttribute="trailing" secondItem="986-Dy-vE3" secondAttribute="trailing" constant="15" id="Qt9-y0-HRO"/>
-                            <constraint firstItem="986-Dy-vE3" firstAttribute="top" secondItem="6jj-sk-eQe" secondAttribute="bottom" constant="16" id="Xv7-cK-L0g"/>
+                            <constraint firstItem="986-Dy-vE3" firstAttribute="top" secondItem="6jj-sk-eQe" secondAttribute="bottom" constant="12" id="Xv7-cK-L0g"/>
                             <constraint firstItem="qkd-AQ-Fc9" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="YQg-F3-yfJ"/>
                             <constraint firstItem="MSI-9p-7ye" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="ZfL-Bn-sOu"/>
                             <constraint firstItem="6jj-sk-eQe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gq-oE-VHy" secondAttribute="leading" constant="20" symbolic="YES" id="bFQ-bq-pcR"/>
@@ -5802,7 +5802,7 @@ you a link to reset your password.</string>
                             <constraint firstAttribute="trailing" secondItem="MSI-9p-7ye" secondAttribute="trailing" id="iNF-ze-Svj"/>
                             <constraint firstAttribute="bottom" secondItem="MSI-9p-7ye" secondAttribute="bottom" id="jN3-N0-URn"/>
                             <constraint firstItem="ogO-dR-xml" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="lJm-px-hrM"/>
-                            <constraint firstItem="6jj-sk-eQe" firstAttribute="top" secondItem="o5x-7j-iiZ" secondAttribute="bottom" constant="14" id="lWE-XX-iRm"/>
+                            <constraint firstItem="6jj-sk-eQe" firstAttribute="top" secondItem="o5x-7j-iiZ" secondAttribute="bottom" constant="6" id="lWE-XX-iRm"/>
                             <constraint firstItem="MSI-9p-7ye" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="tVn-mv-zvf"/>
                             <constraint firstItem="ogO-dR-xml" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="v7J-Ou-DiH"/>
                         </constraints>
@@ -7365,8 +7365,8 @@ uploaded a new diagnosis.</string>
         <image name="icon_playlist_prev_off" width="29" height="18"/>
         <image name="icon_plus" width="29" height="26"/>
         <image name="icon_profile_add" width="58" height="58"/>
-        <image name="icon_record_consult" width="35" height="35"/>
-        <image name="icon_record_diagnosis" width="36" height="36"/>
+        <image name="icon_record_consult" width="41" height="41"/>
+        <image name="icon_record_diagnosis" width="40" height="41"/>
         <image name="icon_recording_btn" width="93" height="93"/>
         <image name="icon_recording_next_off" width="29" height="18"/>
         <image name="icon_recording_pause_off" width="20" height="26"/>

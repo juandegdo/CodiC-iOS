@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icon_record_diagnosis_highlighted.png",
+      "filename" : "icon_record_diagnosis.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icon_record_diagnosis_highlighted@2x.png",
+      "filename" : "icon_record_diagnosis@2x.png",
       "scale" : "2x"
     },
     {
