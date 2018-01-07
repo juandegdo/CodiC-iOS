@@ -6008,6 +6008,12 @@ you a link to reset your password.</string>
                                                     <constraint firstAttribute="height" constant="270" id="Tbx-bi-VON"/>
                                                 </constraints>
                                             </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This patient already exists!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtH-VO-aze">
+                                                <rect key="frame" x="247.66666666666663" y="171.66666666666666" width="141.33333333333337" height="16.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" red="0.88627450980392153" green="0.30196078431372547" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KsA-NB-6m1">
                                                 <rect key="frame" x="25" y="466" width="364" height="45"/>
                                                 <constraints>
@@ -6026,7 +6032,9 @@ you a link to reset your password.</string>
                                         <constraints>
                                             <constraint firstItem="KsA-NB-6m1" firstAttribute="top" secondItem="IRJ-5D-L8i" secondAttribute="bottom" constant="98" id="0b8-93-oDM"/>
                                             <constraint firstItem="KsA-NB-6m1" firstAttribute="leading" secondItem="Iw7-zE-dmO" secondAttribute="leading" constant="25" id="64g-G9-UN0"/>
+                                            <constraint firstItem="AtH-VO-aze" firstAttribute="trailing" secondItem="IRJ-5D-L8i" secondAttribute="trailing" id="ABA-D4-DV5"/>
                                             <constraint firstItem="eY6-48-KpK" firstAttribute="centerX" secondItem="Iw7-zE-dmO" secondAttribute="centerX" id="Arj-Jz-dw3"/>
+                                            <constraint firstItem="AtH-VO-aze" firstAttribute="centerY" secondItem="7R6-hJ-s6B" secondAttribute="centerY" constant="2" id="LBo-dK-rOz"/>
                                             <constraint firstAttribute="height" constant="600" id="boC-fT-ZSh"/>
                                             <constraint firstItem="IRJ-5D-L8i" firstAttribute="leading" secondItem="Iw7-zE-dmO" secondAttribute="leading" constant="25" id="cd5-IS-sxR"/>
                                             <constraint firstItem="IRJ-5D-L8i" firstAttribute="top" secondItem="eY6-48-KpK" secondAttribute="bottom" constant="16" id="h4M-jS-CBK"/>
@@ -6063,6 +6071,7 @@ you a link to reset your password.</string>
                     </view>
                     <connections>
                         <outlet property="btnSave" destination="KsA-NB-6m1" id="WFF-l6-q7y"/>
+                        <outlet property="lblPHNError" destination="AtH-VO-aze" id="gRO-Qt-5pn"/>
                         <outlet property="tfAddress" destination="ghX-sG-3bN" id="cPx-x0-WGk"/>
                         <outlet property="tfBirthdate" destination="4DE-UP-kgt" id="9Ki-dI-sPW"/>
                         <outlet property="tfName" destination="EWL-Yk-9Vi" id="5Nb-9F-7k6"/>

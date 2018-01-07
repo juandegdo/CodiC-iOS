@@ -16,13 +16,15 @@ class CreatePatientViewController: BaseViewController {
     @IBOutlet var tfBirthdate: ACFloatingTextfield!
     @IBOutlet var tfPhoneNumber: ACFloatingTextfield!
     @IBOutlet var tfAddress: ACFloatingTextfield!
+    @IBOutlet var lblPHNError: UILabel!
     @IBOutlet var btnSave: UIButton!
     
-    var alertWindow: UIWindow!
     var birthDate: Date!
     var fromRecord: Bool = false
     var patientNumber: String = ""
     var isSaved: Bool = false
+    
+    let debouncer = Debouncer(interval: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +63,9 @@ class CreatePatientViewController: BaseViewController {
         // PHN
         self.tfPHN.placeholder = NSLocalizedString("PHN#", comment: "comment")
         self.tfPHN.text = self.patientNumber
+        self.tfPHN.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        self.lblPHNError.isHidden = true
         
         // Birthdate
         self.tfBirthdate.placeholder = NSLocalizedString("Birthdate", comment: "comment")
@@ -95,6 +100,31 @@ extension CreatePatientViewController : UITextFieldDelegate {
         
         return true
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        // When the user performs a repeating action, such as entering text, invoke the `call` method
+        debouncer.call()
+        debouncer.callback = {
+            // Send the debounced network request here
+            if (textField == self.tfPHN && textField.text!.count > 0) {
+                // Check if patient exists
+                self.btnSave.isUserInteractionEnabled = false
+                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId) in
+                    self.btnSave.isUserInteractionEnabled = true
+                    
+                    if success == true && PHN == self.tfPHN.text! {
+                        if patientId == nil || patientId == "" {
+                            self.lblPHNError.isHidden = true
+                        } else {
+                            self.lblPHNError.isHidden = false
+                        }
+                    } else if success == false {
+                        self.lblPHNError.isHidden = true
+                    }
+                }
+            }
+        }
+    }
 }
 
 extension CreatePatientViewController {
@@ -121,6 +151,10 @@ extension CreatePatientViewController {
         
         guard  self.tfPHN.text?.count != 0 else {
             AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient number!")
+            return
+        }
+        
+        if !self.lblPHNError.isHidden {
             return
         }
         
