@@ -27,14 +27,16 @@
     self.tabBar.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
     [self.tabBar setTintColor:COLOR_TABBAR_TINT];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoProfileScreen:) name:@"gotoProfileScreen" object:nil];
+    
 }
 
 -(void)gotoProfileScreen:(NSNotification *)notification {
-    self.selectedIndex = 1;
+    self.selectedIndex = 0;
     
-    UINavigationController *nc = self.viewControllers[1];
-    [nc dismissViewControllerAnimated:FALSE completion:nil];
-    [nc popToRootViewControllerAnimated:false];
+    UINavigationController *nc = self.viewControllers[0];
+    [nc dismissViewControllerAnimated:NO completion:nil];
+    [nc popToRootViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
