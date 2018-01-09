@@ -170,7 +170,7 @@ class PlaylistCell: UITableViewCell {
         self.lblBroadcast.text = post.title
         
         // Set date label
-        self.lblDate.text = post.getFormattedDate().uppercased()
+        self.lblDate.text = post.getFormattedDate()
         
         // Set description
         self.postDescription = post.description

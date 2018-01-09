@@ -105,7 +105,7 @@ class ProfileListCell: UITableViewCell {
     func setData(post: Post) {
         // Set Broadcast Label
         self.lblBroadcast.text = post.title
-        self.lblDate.text = post.getFormattedDate().uppercased()
+        self.lblDate.text = post.getFormattedDate()
         self.postDescription = post.description
         
     }

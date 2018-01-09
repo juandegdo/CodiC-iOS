@@ -152,11 +152,10 @@ class DateUtil {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        let longFormat = DateFormatter.dateFormat(fromTemplate: "HH:mm:ss yyyy-MM-dd'Z'", options: 0, locale: dateFormatter.locale)
-        dateFormatter.dateFormat = longFormat
+        dateFormatter.dateFormat = "MMMM d, yyyy' @ 'h:mma"
         
         let date = Date(timeIntervalSince1970: dateTime as TimeInterval)
-        return dateFormatter.string(from: date).capitalized
+        return dateFormatter.string(from: date)
     }
 
     class func GetYear(_ dateTime: Double = Date().timeIntervalSince1970) -> String {

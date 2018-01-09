@@ -107,7 +107,7 @@ class PatientNotesCell: UITableViewCell {
         // Set Patient Note Info
         self.lblBroadcast.text = post.title
         self.lblDoctorName.text = post.user.fullName
-        self.lblDate.text = post.getFormattedDate().uppercased()
+        self.lblDate.text = post.getFormattedDate()
         self.postDescription = post.description
         
         // Customize Avatar
