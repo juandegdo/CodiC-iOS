@@ -7,11 +7,12 @@
 //
 
 import UIKit
-import Sheriff
+import SwiftGifOrigin
 
 class ProfileListCell: UITableViewCell {
     
     // Buttons
+    @IBOutlet var btnSynopsis: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnBackward: UIButton!
     @IBOutlet var btnForward: UIButton!
@@ -22,9 +23,12 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var lblDate: UILabel!
     @IBOutlet var lblElapsedTime: UILabel!
     @IBOutlet var lblDuration: UILabel!
-
+    
+    // ImageViews
+    @IBOutlet var ivProgressCircle: UIImageView!
+    
     // Slider
-    @IBOutlet weak var playSlider: PlaySlider!
+    @IBOutlet var playSlider: PlaySlider!
     
     // Constraints
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
@@ -85,6 +89,10 @@ class ProfileListCell: UITableViewCell {
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .highlighted)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .selected)
+        
+        // Spinning Circle
+        self.ivProgressCircle.loadGif(name: "progress_circle")
+        
     }
     
     override func prepareForReuse() {
@@ -107,6 +115,22 @@ class ProfileListCell: UITableViewCell {
         self.lblBroadcast.text = post.title
         self.lblDate.text = post.getFormattedDate()
         self.postDescription = post.description
+        
+        if post.orderNumber == "" {
+            self.btnSynopsis.isHidden = true
+            self.ivProgressCircle.isHidden = true
+            
+        } else {
+            self.btnSynopsis.isHidden = false
+            
+            if post.transcriptionUrl == "" {
+                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_inactive"), for: .normal)
+                self.ivProgressCircle.isHidden = false
+            } else {
+                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_active"), for: .normal)
+                self.ivProgressCircle.isHidden = true
+            }
+        }
         
     }
     

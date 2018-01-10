@@ -110,10 +110,11 @@ class PatientNoteReferViewController: UIViewController {
         }
     }
     
-    func presentSharePopup() {
+    func presentSharePopup(_ postId: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
+            vc.postId = postId
             self.navigationController?.pushViewController(vc, animated: false)
         }
     }
@@ -220,7 +221,7 @@ extension PatientNoteReferViewController {
                                       image: nil,
                                       fileExtension: noteInfo["fileExtension"] as! String,
                                       mimeType: noteInfo["mimeType"] as! String,
-                                      completion: { (success: Bool) in
+                                      completion: { (success: Bool, postId: String?) in
                                         
                                         // As we just posted a new audio, it's a good thing to refresh user info.
                                         UserService.Instance.getMe(completion: {
@@ -230,7 +231,7 @@ extension PatientNoteReferViewController {
                                                 self.btnSaveNote.isEnabled = true
                                                 
                                                 // Go to share post screen
-                                                self.presentSharePopup()
+                                                self.presentSharePopup(postId!)
                                             }
                                         })
                                         

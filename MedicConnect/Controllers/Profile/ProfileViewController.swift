@@ -40,6 +40,7 @@ class ProfileViewController: BaseViewController {
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
+    var firstLoad: Bool = true
     var postType: String = Constants.PostTypeDiagnosis
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
@@ -104,8 +105,12 @@ class ProfileViewController: BaseViewController {
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
         
         self.updateUI()
-        self.refreshData()
         self.loadAll()
+        
+        if (!self.firstLoad) {
+            self.refreshData()
+            self.firstLoad = false
+        }
         
     }
     
@@ -386,6 +391,26 @@ class ProfileViewController: BaseViewController {
         self.seekToTime(time: time)
     }
     
+    @objc func onSynopsis(sender: UIButton) {
+        
+        guard let _index = sender.tag as Int? else {
+            return
+        }
+        
+        guard let _user = UserController.Instance.getUser() as User? else {
+            return
+        }
+        
+        let post = _user.getPosts(type: self.postType)[_index]
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Synopsis"
+            vc.strSynopsisUrl = post.transcriptionUrl
+            present(vc, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
     func seekToTime(time: Float64) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
@@ -525,6 +550,13 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.setData(post: post)
             
             cell.lblDescription.isUserInteractionEnabled = false
+            
+            cell.btnSynopsis.tag = indexPath.row
+            if post.transcriptionUrl == "" {
+                cell.btnSynopsis.removeTarget(self, action: #selector(ProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
+            } else if cell.btnSynopsis.allTargets.count == 0 {
+                cell.btnSynopsis.addTarget(self, action: #selector(ProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
+            }
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {

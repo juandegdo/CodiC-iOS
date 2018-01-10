@@ -113,9 +113,6 @@ class ConsultReferringViewController: UIViewController {
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
-            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
-            DataManager.Instance.setPatientId(patientId: patientID)
-            DataManager.Instance.setReferringUserIds(referringUserIds: [referUserID])
             DataManager.Instance.setFromPatientProfile(false)
             
             weak var weakSelf = self
@@ -228,7 +225,7 @@ extension ConsultReferringViewController {
             errorType = .noMSPAndPHN
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
             DataManager.Instance.setPatientId(patientId: "")
-            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+            DataManager.Instance.setReferringUserIds(referringUserIds: [])
             
         } else if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
             errorType = .noPHN
@@ -240,7 +237,7 @@ extension ConsultReferringViewController {
             errorType = .noMSP
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: self.patientID)
-            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+            DataManager.Instance.setReferringUserIds(referringUserIds: [])
             
         }
         
@@ -249,6 +246,10 @@ extension ConsultReferringViewController {
             self.presentErrorPopup(errorType)
             return
         }
+        
+        DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+        DataManager.Instance.setPatientId(patientId: patientID)
+        DataManager.Instance.setReferringUserIds(referringUserIds: [referUserID])
         
         // Show record screen
         self.presentRecordScreen()
@@ -259,7 +260,7 @@ extension ConsultReferringViewController {
         // Skip
         DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
         DataManager.Instance.setPatientId(patientId: "")
-        DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+        DataManager.Instance.setReferringUserIds(referringUserIds: [])
         
         // Show record screen
         self.presentRecordScreen()

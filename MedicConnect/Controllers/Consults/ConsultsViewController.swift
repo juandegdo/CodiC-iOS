@@ -291,6 +291,22 @@ extension ConsultsViewController {
         self.seekToTime(time: time)
     }
     
+    @objc func onSynopsis(sender: UIButton) {
+        
+        guard let _index = sender.tag as Int? else {
+            return
+        }
+        
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Synopsis"
+            vc.strSynopsisUrl = post.transcriptionUrl
+            present(vc, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
     func seekToTime(time: Float64) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
@@ -462,6 +478,13 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.lblUsername.tag = indexPath.row
         
         cell.lblDescription.isUserInteractionEnabled = false
+        
+        cell.btnSynopsis.tag = indexPath.row
+        if post.transcriptionUrl == "" {
+            cell.btnSynopsis.removeTarget(self, action: #selector(onSynopsis(sender:)), for: .touchUpInside)
+        } else if cell.btnSynopsis.allTargets.count == 0 {
+            cell.btnSynopsis.addTarget(self, action: #selector(onSynopsis(sender:)), for: .touchUpInside)
+        }
         
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)

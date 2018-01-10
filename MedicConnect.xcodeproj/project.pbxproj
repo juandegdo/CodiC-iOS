@@ -27,6 +27,7 @@
 		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
+		655013A320065B4800D88443 /* progress_circle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655013A220065B4700D88443 /* progress_circle.gif */; };
 		65691C421FA958960071C162 /* ConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65691C411FA958960071C162 /* ConferenceViewController.swift */; };
 		65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */; };
 		65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */; };
@@ -183,6 +184,7 @@
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
+		655013A220065B4700D88443 /* progress_circle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = progress_circle.gif; sourceTree = "<group>"; };
 		65691C411FA958960071C162 /* ConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceViewController.swift; sourceTree = "<group>"; };
 		65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallHistoryAudioCell.swift; sourceTree = "<group>"; };
 		65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallHistoryAudioCell.xib; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 				D270B7E11DE51F7600458C2E /* LaunchScreen.storyboard */,
 				D270B7E41DE51F7600458C2E /* Info.plist */,
 				A9E4451B1F0A699000F49C7E /* playlist.xcdatamodeld */,
+				655013A220065B4700D88443 /* progress_circle.gif */,
 			);
 			path = MedicConnect;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				D2A634561E1DE05500E51AA0 /* FollowingCell.xib in Resources */,
 				D270B7E31DE51F7600458C2E /* LaunchScreen.storyboard in Resources */,
 				A9A358791F07447F005B8011 /* Privacy_policy_HTML.html in Resources */,
+				655013A320065B4800D88443 /* progress_circle.gif in Resources */,
 				653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */,
 				D270B7E01DE51F7600458C2E /* Assets.xcassets in Resources */,
 				D2F55A9C1DEBB8BB0038A392 /* ProfileListCell.xib in Resources */,
@@ -986,6 +990,7 @@
 				"${BUILT_PRODUCTS_DIR}/PICollectionPageView/PICollectionPageView.framework",
 				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Sheriff/Sheriff.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
 				"${BUILT_PRODUCTS_DIR}/TLTagsControl/TLTagsControl.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
@@ -1009,6 +1014,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PICollectionPageView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sheriff.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLTagsControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",

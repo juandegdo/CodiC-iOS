@@ -231,15 +231,31 @@ extension SaveBroadcastViewController {
                 self.btnSave.isEnabled = false
                 
                 PostService.Instance.sendPost(title, author: self.tfAuthor.text!, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
-                    (success: Bool) in
+                    (success: Bool, postId: String?) in
                     
-                    // As we just posted a new video, it's a good thing to refresh user info.
-                    UserService.Instance.getMe(completion: {
-                        (user: User?) in
-                        self.stopIndicating()
-                        self.btnSave.isEnabled = true
-                        self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
-                    })
+                    if success && postType == Constants.PostTypeDiagnosis {
+                        // As we just posted a new video, it's a good thing to refresh user info.
+                        UserService.Instance.getMe(completion: {
+                            (user: User?) in
+                            DispatchQueue.main.async {
+                                self.stopIndicating()
+                                self.btnSave.isEnabled = true
+                                self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
+                            }
+                        })
+                    } else {
+                        DispatchQueue.main.async {
+                            self.stopIndicating()
+                            self.btnSave.isEnabled = true
+                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            if let vc = storyboard.instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
+                                vc.postId = postId
+                                self.navigationController?.pushViewController(vc, animated: false)
+                            }
+//                            self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
+                        }
+                    }
                     
                 })
             }

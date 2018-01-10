@@ -22,6 +22,8 @@ class ShareBroadcastViewController: BaseViewController {
     @IBOutlet var btnYes: UIButton!
     @IBOutlet var viewYes: UIView!
     
+    var postId: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +62,7 @@ class ShareBroadcastViewController: BaseViewController {
             self.viewYes.isHidden = true
             
         } else {
-            // Consult
+            // Consult or Patient Note
             self.lblQuestion.text = "Would you like to create\na synopsis document?"
             self.btnEmail.isHidden = true
             self.btnMessage.isHidden = true
@@ -92,11 +94,53 @@ extension ShareBroadcastViewController {
     }
     
     @IBAction func onSkip(sender: UIButton) {
-        self.onClose(sender: sender)
+        if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
+            // Diagnosis
+            self.onClose(sender: sender)
+        } else {
+            // Consult or Patient Note
+//            self.btnSkip.isEnabled = false
+//            self.btnYes.isEnabled = false
+//
+//            UserService.Instance.getMe(completion: {
+//                (user: User?) in
+//                DispatchQueue.main.async {
+//                    self.onClose(sender: sender)
+//                }
+//            })
+            
+            self.onClose(sender: sender)
+        }
     }
     
     @IBAction func onYes(sender: UIButton) {
-        self.onClose(sender: sender)
+        if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
+            // Diagnosis
+            self.onClose(sender: sender)
+        } else {
+            // Consult or Patient Note
+            self.btnSkip.isEnabled = false
+            self.btnYes.isEnabled = false
+            
+            PostService.Instance.placeOrder(postId: self.postId!, completion: { (success: Bool) in
+                
+                if success {
+                    UserService.Instance.getMe(completion: {
+                        (user: User?) in
+                        DispatchQueue.main.async {
+                            self.onClose(sender: sender)
+                        }
+                    })
+                    
+                } else {
+                    DispatchQueue.main.async {
+                        self.btnSkip.isEnabled = true
+                        self.btnYes.isEnabled = true
+                    }
+                }
+                
+            })
+        }
     }
 
 }

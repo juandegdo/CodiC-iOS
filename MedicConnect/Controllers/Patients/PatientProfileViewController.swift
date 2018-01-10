@@ -314,6 +314,26 @@ class PatientProfileViewController: BaseViewController {
         self.seekToTime(time: time)
     }
     
+    @objc func onSynopsis(sender: UIButton) {
+        
+        guard let _index = sender.tag as Int? else {
+            return
+        }
+        
+        guard (self.patient as Patient?) != nil else {
+            return
+        }
+        
+        let post = PostController.Instance.getPatientNotes()[_index]
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Synopsis"
+            vc.strSynopsisUrl = post.transcriptionUrl
+            present(vc, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
     func seekToTime(time: Float64) {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
@@ -452,6 +472,13 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             cell.setData(post: post)
             
             cell.lblDescription.isUserInteractionEnabled = false
+            
+            cell.btnSynopsis.tag = indexPath.row
+            if post.transcriptionUrl == "" {
+                cell.btnSynopsis.removeTarget(self, action: #selector(onSynopsis(sender:)), for: .touchUpInside)
+            } else if cell.btnSynopsis.allTargets.count == 0 {
+                cell.btnSynopsis.addTarget(self, action: #selector(onSynopsis(sender:)), for: .touchUpInside)
+            }
             
             cell.btnPlay.tag = indexPath.row
             if cell.btnPlay.allTargets.count == 0 {
@@ -592,7 +619,7 @@ extension PatientProfileViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
-            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+            DataManager.Instance.setReferringUserIds(referringUserIds: [])
             DataManager.Instance.setFromPatientProfile(true)
             
             self.present(vc, animated: false, completion: {

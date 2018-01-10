@@ -19,7 +19,7 @@ class NotificationService: BaseTaskController {
             .responseJSON { response in
                 
                 if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
+//                    print("Response: \(response.result.value!)")
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
@@ -41,7 +41,7 @@ class NotificationService: BaseTaskController {
             .responseJSON { response in
                 
                 if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
+//                    print("Response: \(response.result.value!)")
                 }
                 if let err = response.result.error as NSError?, err.code == -1009 {
                     completion(false)
@@ -66,7 +66,7 @@ class NotificationService: BaseTaskController {
                 var notifications: [Notification] = []
                 
                 if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
+//                    print("Response: \(response.result.value!)")
                 }
                 
                 if response.response?.statusCode == 200 {
@@ -192,6 +192,18 @@ class NotificationService: BaseTaskController {
                                     
                                     if let _deletedUsers = _broadcastObj["deleted_users"] as? [String] {
                                         post.deletedUsers = _deletedUsers
+                                    }
+                                    
+                                    // Optional order number
+                                    
+                                    if let _orderNumber = _broadcastObj["order_number"] as? String {
+                                        post.orderNumber = _orderNumber
+                                    }
+                                    
+                                    // Optional transcription url
+                                    
+                                    if let _transcriptionUrl = _broadcastObj["transcription_url"] as? String {
+                                        post.transcriptionUrl = _transcriptionUrl
                                     }
                                     
                                     notification.broadcast = post

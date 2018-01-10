@@ -13,7 +13,7 @@ class PostService: BaseTaskController {
     
     static let Instance = PostService()
     
-    func sendPost(_ title: String, author: String, description: String, hashtags: [String], postType: String, audioData: Data, image: UIImage?, fileExtension: String, mimeType: String, completion: @escaping (_ success: Bool) -> Void) {
+    func sendPost(_ title: String, author: String, description: String, hashtags: [String], postType: String, audioData: Data, image: UIImage?, fileExtension: String, mimeType: String, completion: @escaping (_ success: Bool, _ postId: String?) -> Void) {
         
         guard let _url = URL(string: "\(self.baseURL)\(self.URLPost)") else {
             return
@@ -61,16 +61,40 @@ class PostService: BaseTaskController {
                     print("\n=======================\n")
                     debugPrint(response)
                     print("\n=======================\n")
-                    completion(true)
+                    
+                    if let value = response.result.value as? Dictionary<String, Any> {
+                        completion(response.response?.statusCode == 200, value["postId"] as? String)
+                    } else {
+                        completion(response.response?.statusCode == 200, nil)
+                    }
                 }
                 
             case .failure(let encodingError):
                 print("\n=======================\n")
                 print(encodingError)
                 print("\n=======================\n")
-                completion(false)
+                completion(false, nil)
             }
         }
+    }
+    
+    func placeOrder(postId: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        let url = "\(self.baseURL)\(self.URLPost)\(self.URLPlaceOrderSuffix)"
+        let params = ["postId" : postId]
+        
+        manager!.request(url, method: .post, parameters: params, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    completion(false)
+                    return
+                }
+                
+                completion(response.response?.statusCode == 200)
+                
+        }
+        
     }
     
     func getPosts(completion: @escaping (_ success: Bool) -> Void) {
@@ -190,6 +214,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _deletedUsers = p["deleted_users"] as? [String] {
                                     post.deletedUsers = _deletedUsers
+                                }
+                                
+                                // Optional order number
+                                
+                                if let _orderNumber = p["order_number"] as? String {
+                                    post.orderNumber = _orderNumber
+                                }
+                                
+                                // Optional transcription url
+                                
+                                if let _transcriptionUrl = p["transcription_url"] as? String {
+                                    post.transcriptionUrl = _transcriptionUrl
                                 }
                                 
                                 posts.append(post)
@@ -340,6 +376,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _deletedUsers = _p["deleted_users"] as? [String] {
                                     post.deletedUsers = _deletedUsers
+                                }
+                                
+                                // Optional order number
+                                
+                                if let _orderNumber = _p["order_number"] as? String {
+                                    post.orderNumber = _orderNumber
+                                }
+                                
+                                // Optional transcription url
+                                
+                                if let _transcriptionUrl = _p["transcription_url"] as? String {
+                                    post.transcriptionUrl = _transcriptionUrl
                                 }
                                 
                                 posts.append(post)
@@ -539,6 +587,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _deletedUsers = _p["deleted_users"] as? [String] {
                                     post.deletedUsers = _deletedUsers
+                                }
+                                
+                                // Optional order number
+                                
+                                if let _orderNumber = _p["order_number"] as? String {
+                                    post.orderNumber = _orderNumber
+                                }
+                                
+                                // Optional transcription url
+                                
+                                if let _transcriptionUrl = _p["transcription_url"] as? String {
+                                    post.transcriptionUrl = _transcriptionUrl
                                 }
                                 
                                 posts.append(post)
@@ -908,6 +968,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _deletedUsers = _p["deleted_users"] as? [String] {
                                     post.deletedUsers = _deletedUsers
+                                }
+                                
+                                // Optional order number
+                                
+                                if let _orderNumber = _p["order_number"] as? String {
+                                    post.orderNumber = _orderNumber
+                                }
+                                
+                                // Optional transcription url
+                                
+                                if let _transcriptionUrl = _p["transcription_url"] as? String {
+                                    post.transcriptionUrl = _transcriptionUrl
                                 }
                                 
                                 posts.append(post)

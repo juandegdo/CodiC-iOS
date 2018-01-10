@@ -187,7 +187,7 @@ extension CreatePatientViewController {
                             
                             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
                             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
-                            DataManager.Instance.setReferringUserIds(referringUserIds: [""])
+                            DataManager.Instance.setReferringUserIds(referringUserIds: [])
                             DataManager.Instance.setFromPatientProfile(false)
                             
                             weak var weakSelf = self

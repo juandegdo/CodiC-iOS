@@ -12,6 +12,7 @@ import MessageUI
 class SettingsDetailViewController: UIViewController {
 
     var strTitle: String?
+    var strSynopsisUrl: String?
     
     let contentDict = ["Privacy Policy":"Privacy_policy_HTML", "Code of Conduct": "Code_of_conduct_HTML", "Terms of Use": "Terms_of_service_HTML"]
     
@@ -29,7 +30,10 @@ class SettingsDetailViewController: UIViewController {
         if let titleText = strTitle {
             self.m_lblTitle.text = titleText
             
-            if let contentPath = contentDict[titleText] {
+            if let synopsisUrl = self.strSynopsisUrl as String? {
+                let request = URLRequest(url: URL.init(string: synopsisUrl)!)
+                self.m_contentWebView.loadRequest(request)
+            } else if let contentPath = contentDict[titleText] {
                 let url = Bundle.main.url(forResource: contentPath, withExtension: "html")
                 let request = URLRequest(url: url!)
                 self.m_contentWebView.loadRequest(request)

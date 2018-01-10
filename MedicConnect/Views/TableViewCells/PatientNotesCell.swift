@@ -12,8 +12,10 @@ class PatientNotesCell: UITableViewCell {
 
     // ImageViews
     @IBOutlet var imgUserAvatar: UIImageView!
+    @IBOutlet var ivProgressCircle: UIImageView!
     
     // Buttons
+    @IBOutlet var btnSynopsis: UIButton!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnBackward: UIButton!
     @IBOutlet var btnForward: UIButton!
@@ -86,6 +88,10 @@ class PatientNotesCell: UITableViewCell {
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .highlighted)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .selected)
+        
+        // Spinning Circle
+        self.ivProgressCircle.loadGif(name: "progress_circle")
+        
     }
     
     override func prepareForReuse() {
@@ -114,6 +120,22 @@ class PatientNotesCell: UITableViewCell {
         self.imgUserAvatar.image = nil
         if let imgURL = URL(string: post.user.photo) as URL? {
             self.imgUserAvatar.af_setImage(withURL: imgURL)
+        }
+        
+        if post.orderNumber == "" {
+            self.btnSynopsis.isHidden = true
+            self.ivProgressCircle.isHidden = true
+            
+        } else {
+            self.btnSynopsis.isHidden = false
+            
+            if post.transcriptionUrl == "" {
+                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_inactive"), for: .normal)
+                self.ivProgressCircle.isHidden = false
+            } else {
+                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_active"), for: .normal)
+                self.ivProgressCircle.isHidden = true
+            }
         }
     }
     

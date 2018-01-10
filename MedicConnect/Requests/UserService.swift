@@ -347,6 +347,10 @@ class UserService: BaseTaskController {
                     completion(nil)
                     return
                 }
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
+                }
                                 
                 if response.response?.statusCode == 200 {
                     
@@ -457,6 +461,18 @@ class UserService: BaseTaskController {
                                     
                                     if let _deletedUsers = p["deleted_users"] as? [String] {
                                         post.deletedUsers = _deletedUsers
+                                    }
+                                    
+                                    // Optional order number
+                                    
+                                    if let _orderNumber = p["order_number"] as? String {
+                                        post.orderNumber = _orderNumber
+                                    }
+                                    
+                                    // Optional transcription url
+                                    
+                                    if let _transcriptionUrl = p["transcription_url"] as? String {
+                                        post.transcriptionUrl = _transcriptionUrl
                                     }
                                     
                                     _user.posts.append(post)
@@ -812,6 +828,18 @@ class UserService: BaseTaskController {
                                         post.deletedUsers = _deletedUsers
                                     }
                                     
+                                    // Optional order number
+                                    
+                                    if let _orderNumber = p["order_number"] as? String {
+                                        post.orderNumber = _orderNumber
+                                    }
+                                    
+                                    // Optional transcription url
+                                    
+                                    if let _transcriptionUrl = p["transcription_url"] as? String {
+                                        post.transcriptionUrl = _transcriptionUrl
+                                    }
+                                    
                                     _user.posts.append(post)
                                     
                                 }
@@ -1035,9 +1063,9 @@ class UserService: BaseTaskController {
                 
                 var posts: [Post] = []
                 
-                if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
-                }
+//                if let _ = response.result.value {
+//                    print("Response: \(response.result.value!)")
+//                }
                 
                 if response.response?.statusCode == 200 {
                     
@@ -1159,6 +1187,18 @@ class UserService: BaseTaskController {
                                 
                                 if let _deletedUsers = _p["deleted_users"] as? [String] {
                                     post.deletedUsers = _deletedUsers
+                                }
+                                
+                                // Optional order number
+                                
+                                if let _orderNumber = _p["order_number"] as? String {
+                                    post.orderNumber = _orderNumber
+                                }
+                                
+                                // Optional transcription url
+                                
+                                if let _transcriptionUrl = _p["transcription_url"] as? String {
+                                    post.transcriptionUrl = _transcriptionUrl
                                 }
 
                                 posts.append(post)

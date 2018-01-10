@@ -15,9 +15,11 @@ class PlaylistCell: UITableViewCell {
     
     // ImageViews
     @IBOutlet var imgUserAvatar: UIImageView!
+    @IBOutlet var ivProgressCircle: UIImageView!
     
     // Buttons
     @IBOutlet var btnAction: TVButton!
+    @IBOutlet var btnSynopsis: UIButton!
     @IBOutlet var btnLike: TVButton!
     @IBOutlet var btnMessage: TVButton!
     @IBOutlet var btnShare: UIButton!
@@ -137,6 +139,10 @@ class PlaylistCell: UITableViewCell {
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .highlighted)
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .selected)
+        
+        // Spinning Circle
+        self.ivProgressCircle.loadGif(name: "progress_circle")
+        
     }
     
     override func prepareForReuse() {
@@ -175,6 +181,22 @@ class PlaylistCell: UITableViewCell {
         // Set description
         self.postDescription = post.description
 //        self.lblDesc.text = post.description
+        
+        if post.orderNumber == "" {
+            self.btnSynopsis.isHidden = true
+            self.ivProgressCircle.isHidden = true
+            
+        } else {
+            self.btnSynopsis.isHidden = false
+            
+            if post.transcriptionUrl == "" {
+                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_inactive"), for: .normal)
+                self.ivProgressCircle.isHidden = false
+            } else {
+                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_active"), for: .normal)
+                self.ivProgressCircle.isHidden = true
+            }
+        }
         
         if self.postType == Constants.PostTypeDiagnosis {
             // Set like description label
