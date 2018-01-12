@@ -109,8 +109,9 @@ class ProfileViewController: BaseViewController {
         
         if (!self.firstLoad) {
             self.refreshData()
-            self.firstLoad = false
         }
+        
+        self.firstLoad = false
         
     }
     
