@@ -1,15 +1,15 @@
 //
-//  CreatePatientViewController.swift
+//  EditPatientViewController.swift
 //  MedicConnect
 //
-//  Created by Daniel Yang on 2017-10-31.
-//  Copyright © 2017 Loewen. All rights reserved.
+//  Created by Daniel Yang on 2018-01-12.
+//  Copyright © 2018 Loewen. All rights reserved.
 //
 
 import UIKit
 import ACFloatingTextfield_Swift
 
-class CreatePatientViewController: BaseViewController {
+class EditPatientViewController: BaseViewController {
     
     @IBOutlet var lblTitle: UILabel!
     
@@ -21,10 +21,8 @@ class CreatePatientViewController: BaseViewController {
     @IBOutlet var lblPHNError: UILabel!
     @IBOutlet var btnSave: UIButton!
     
+    var patient: Patient?
     var birthDate: Date!
-    var fromRecord: Bool = false
-    var patientNumber: String = ""
-    var isSaved: Bool = false
     
     let debouncer = Debouncer(interval: 1.0)
     
@@ -61,10 +59,11 @@ class CreatePatientViewController: BaseViewController {
     func initViews() {
         // Name
         self.tfName.placeholder = NSLocalizedString("Name", comment: "comment")
+        self.tfName.text = self.patient?.name
         
         // PHN
         self.tfPHN.placeholder = NSLocalizedString("PHN#", comment: "comment")
-        self.tfPHN.text = self.patientNumber
+        self.tfPHN.text = self.patient?.patientNumber
         self.tfPHN.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         self.lblPHNError.isHidden = true
@@ -72,22 +71,30 @@ class CreatePatientViewController: BaseViewController {
         // Birthdate
         self.tfBirthdate.placeholder = NSLocalizedString("Birthdate", comment: "comment")
         
+        self.birthDate = DateUtil.ParseStringDateToDouble((self.patient?.birthdate)!)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        self.tfBirthdate.text = dateFormatter.string(from: self.birthDate)
+        
         let datePickerView:UIDatePicker = UIDatePicker()
         datePickerView.datePickerMode = UIDatePickerMode.date
-        datePickerView.addTarget(self, action: #selector(CreatePatientViewController.datePickerValueChanged), for:.valueChanged)
+        datePickerView.addTarget(self, action: #selector(EditPatientViewController.datePickerValueChanged), for:.valueChanged)
         self.tfBirthdate.inputView = datePickerView
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
+        self.tfPhoneNumber.text = self.patient?.phoneNumber
         
         // Address
         self.tfAddress.placeholder = NSLocalizedString("Address", comment: "comment")
+        self.tfAddress.text = self.patient?.address
         
     }
     
 }
 
-extension CreatePatientViewController : UITextFieldDelegate {
+extension EditPatientViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         let newLength = text.count + string.count - range.length
@@ -109,6 +116,12 @@ extension CreatePatientViewController : UITextFieldDelegate {
         debouncer.callback = {
             // Send the debounced network request here
             if (textField == self.tfPHN && textField.text!.count > 0) {
+                if textField.text! == self.patient?.patientNumber {
+                    self.lblPHNError.isHidden = true
+                    self.btnSave.isUserInteractionEnabled = true
+                    return
+                }
+                
                 // Check if patient exists
                 self.btnSave.isUserInteractionEnabled = false
                 PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId) in
@@ -129,17 +142,15 @@ extension CreatePatientViewController : UITextFieldDelegate {
     }
 }
 
-extension CreatePatientViewController {
+extension EditPatientViewController {
     
     // MARK: IBActions
     
     @IBAction func onBack(sender: AnyObject!) {
         if let _nav = self.navigationController as UINavigationController? {
-            if self.fromRecord == true && isSaved == true {
-                _nav.popToRootViewController(animated: false)
-            } else {
-                _nav.popViewController(animated: false)
-            }
+            //            if self.btnSave.isUserInteractionEnabled {
+            _nav.popViewController(animated: false)
+            //            }
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -175,38 +186,20 @@ extension CreatePatientViewController {
             return
         }
         
-        PatientService.Instance.addPatient(self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool, patient: Patient?) in
+        PatientService.Instance.editPatient((self.patient?.id)!, name: self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool, patient: Patient?) in
             
-            if patient != nil {
-                self.isSaved = true
-                
-                DispatchQueue.main.async {
-                    if self.fromRecord == true {
-                        // Go to record screen
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if success && patient != nil {
+                PatientService.Instance.getPatients(completion: { (success: Bool) in
+                    if success {
+                        let lenght = self.navigationController?.viewControllers.count
+                        let patientProfileVVC: PatientProfileViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientProfileViewController : nil
+                        patientProfileVVC?.patient = patient
                         
-                        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
-                            
-                            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
-                            DataManager.Instance.setPatientId(patientId: (patient?.id)!)
-                            DataManager.Instance.setReferringUserIds(referringUserIds: [])
-                            DataManager.Instance.setFromPatientProfile(false)
-                            
-                            weak var weakSelf = self
-                            self.present(vc, animated: false, completion: {
-                                weakSelf?.onBack(sender: nil)
-                            })
-                            
+                        DispatchQueue.main.async {
+                            self.onBack(sender: nil)
                         }
-                        
-                    } else {
-                        // Go to patient profile
-                        let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
-                        patientProfileVC.patient = patient
-                        patientProfileVC.fromAdd = true
-                        self.navigationController?.pushViewController(patientProfileVC, animated: false)
                     }
-                }
+                })
             }
             
         }

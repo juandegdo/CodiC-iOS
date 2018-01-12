@@ -6090,6 +6090,7 @@ you a link to reset your password.</string>
                     <connections>
                         <outlet property="btnSave" destination="KsA-NB-6m1" id="WFF-l6-q7y"/>
                         <outlet property="lblPHNError" destination="AtH-VO-aze" id="gRO-Qt-5pn"/>
+                        <outlet property="lblTitle" destination="qSe-1R-Mzs" id="VUr-PD-fos"/>
                         <outlet property="tfAddress" destination="ghX-sG-3bN" id="cPx-x0-WGk"/>
                         <outlet property="tfBirthdate" destination="4DE-UP-kgt" id="9Ki-dI-sPW"/>
                         <outlet property="tfName" destination="EWL-Yk-9Vi" id="5Nb-9F-7k6"/>
@@ -6343,6 +6344,9 @@ you a link to reset your password.</string>
                                             <constraint firstAttribute="height" constant="40" id="eVE-Oa-a2s"/>
                                         </constraints>
                                         <state key="normal" image="icon_setting"/>
+                                        <connections>
+                                            <action selector="onSettingsWithSender:" destination="Wuv-ve-f5c" eventType="touchUpInside" id="gsb-bn-bsH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -7364,7 +7368,273 @@ uploaded a new diagnosis.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQu-kJ-XMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3680" y="117"/>
+            <point key="canvasLocation" x="3706" y="-580"/>
+        </scene>
+        <!--Edit Patient View Controller-->
+        <scene sceneID="5RR-IK-oht">
+            <objects>
+                <viewController storyboardIdentifier="EditPatientViewController" id="uQa-BF-zP4" customClass="EditPatientViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1dA-y0-ALf"/>
+                        <viewControllerLayoutGuide type="bottom" id="kgC-gY-ct5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1eD-Nf-6u7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_light_green" translatesAutoresizingMaskIntoConstraints="NO" id="slE-qY-Irl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.1137254902" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idw-HE-Lfu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8u-Dz-diA">
+                                        <rect key="frame" x="0.0" y="22" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="4xx-yV-dYh"/>
+                                            <constraint firstAttribute="height" constant="40" id="Zju-8j-vO2"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_back"/>
+                                        <connections>
+                                            <action selector="onBackWithSender:" destination="uQa-BF-zP4" eventType="touchUpInside" id="ahn-Hv-4Pj"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Patient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPD-lW-jNw">
+                                        <rect key="frame" x="161.33333333333334" y="32" width="93" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="hAh-bB-cee"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="f8u-Dz-diA" firstAttribute="top" secondItem="idw-HE-Lfu" secondAttribute="top" constant="22" id="5Kz-OR-Xfl"/>
+                                    <constraint firstItem="f8u-Dz-diA" firstAttribute="leading" secondItem="idw-HE-Lfu" secondAttribute="leading" id="BhI-2y-gBd"/>
+                                    <constraint firstItem="UPD-lW-jNw" firstAttribute="top" secondItem="idw-HE-Lfu" secondAttribute="top" constant="32" id="CcW-Tp-SfU"/>
+                                    <constraint firstItem="UPD-lW-jNw" firstAttribute="centerX" secondItem="idw-HE-Lfu" secondAttribute="centerX" id="GRt-bB-Xaj"/>
+                                    <constraint firstAttribute="height" constant="64" id="jgK-n3-h0z"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RKs-BN-rNZ">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fl9-ni-fVh">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_patient_plus" translatesAutoresizingMaskIntoConstraints="NO" id="9MM-wI-EHP">
+                                                <rect key="frame" x="165" y="18" width="84" height="64"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="84" id="A22-u6-rWu"/>
+                                                    <constraint firstAttribute="height" constant="64" id="oaA-cN-btl"/>
+                                                </constraints>
+                                            </imageView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9FQ-gN-Mo9">
+                                                <rect key="frame" x="25" y="98" width="364" height="270"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="stE-7y-BlQ" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
+                                                        <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" textContentType="name"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uQa-BF-zP4" id="Et8-B8-bQy"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dfb-gW-pKU" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
+                                                        <rect key="frame" x="0.0" y="55" width="364" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uQa-BF-zP4" id="Z2i-bx-bKl"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TPM-Nv-7se" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
+                                                        <rect key="frame" x="0.0" y="110" width="364" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uQa-BF-zP4" id="zsc-x1-qfd"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RGN-Cw-83Y" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
+                                                        <rect key="frame" x="0.0" y="165" width="364" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" textContentType="tel"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uQa-BF-zP4" id="kzR-Lj-HcA"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vnd-Fw-NDr" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
+                                                        <rect key="frame" x="0.0" y="220" width="364" height="50"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" textContentType="location"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedLineColor">
+                                                                <color key="value" red="0.57647058819999997" green="0.57647058819999997" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="color" keyPath="selectedPlaceHolderColor">
+                                                                <color key="value" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="uQa-BF-zP4" id="lYC-mr-hDX"/>
+                                                        </connections>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="270" id="qjB-9a-HCq"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This patient already exists!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raW-ki-jdv">
+                                                <rect key="frame" x="247.66666666666663" y="171.66666666666666" width="141.33333333333337" height="16.666666666666657"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ciA-0e-Tau">
+                                                <rect key="frame" x="25" y="466" width="364" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="45" id="zhc-R0-PM1"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="12"/>
+                                                <state key="normal" title="EDIT PATIENT" backgroundImage="bg_rounded_btn_green">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onSaveChangeWithSender:" destination="uQa-BF-zP4" eventType="touchUpInside" id="yLa-0L-4O3"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="raW-ki-jdv" firstAttribute="centerY" secondItem="Dfb-gW-pKU" secondAttribute="centerY" constant="2" id="8yY-RT-LK2"/>
+                                            <constraint firstItem="ciA-0e-Tau" firstAttribute="leading" secondItem="fl9-ni-fVh" secondAttribute="leading" constant="25" id="CQn-8M-YrI"/>
+                                            <constraint firstItem="9MM-wI-EHP" firstAttribute="centerX" secondItem="fl9-ni-fVh" secondAttribute="centerX" id="KLl-L3-BvA"/>
+                                            <constraint firstAttribute="height" constant="600" id="MYh-qL-lCh"/>
+                                            <constraint firstItem="ciA-0e-Tau" firstAttribute="top" secondItem="9FQ-gN-Mo9" secondAttribute="bottom" constant="98" id="OOt-eT-QRk"/>
+                                            <constraint firstItem="raW-ki-jdv" firstAttribute="trailing" secondItem="9FQ-gN-Mo9" secondAttribute="trailing" id="SRt-wi-6hb"/>
+                                            <constraint firstAttribute="trailing" secondItem="9FQ-gN-Mo9" secondAttribute="trailing" constant="25" id="SX5-Yg-QNK"/>
+                                            <constraint firstItem="9FQ-gN-Mo9" firstAttribute="leading" secondItem="fl9-ni-fVh" secondAttribute="leading" constant="25" id="U89-3l-OGt"/>
+                                            <constraint firstItem="9MM-wI-EHP" firstAttribute="top" secondItem="fl9-ni-fVh" secondAttribute="top" constant="18" id="Uu0-pL-t40"/>
+                                            <constraint firstItem="9FQ-gN-Mo9" firstAttribute="top" secondItem="9MM-wI-EHP" secondAttribute="bottom" constant="16" id="fbv-7c-Kgb"/>
+                                            <constraint firstAttribute="trailing" secondItem="ciA-0e-Tau" secondAttribute="trailing" constant="25" id="zsL-ei-4qJ"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fl9-ni-fVh" secondAttribute="trailing" id="9TF-VT-Mfj"/>
+                                    <constraint firstItem="fl9-ni-fVh" firstAttribute="top" secondItem="RKs-BN-rNZ" secondAttribute="top" id="EPy-sK-zk5"/>
+                                    <constraint firstAttribute="bottom" secondItem="fl9-ni-fVh" secondAttribute="bottom" id="HVc-t3-e0B"/>
+                                    <constraint firstItem="fl9-ni-fVh" firstAttribute="leading" secondItem="RKs-BN-rNZ" secondAttribute="leading" id="Yof-Xt-9Nf"/>
+                                    <constraint firstItem="fl9-ni-fVh" firstAttribute="width" secondItem="RKs-BN-rNZ" secondAttribute="width" id="mcR-UU-dHe"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="idw-HE-Lfu" secondAttribute="trailing" id="8As-73-JzY"/>
+                            <constraint firstItem="idw-HE-Lfu" firstAttribute="top" secondItem="1eD-Nf-6u7" secondAttribute="top" id="BGa-QO-tA0"/>
+                            <constraint firstItem="RKs-BN-rNZ" firstAttribute="leading" secondItem="1eD-Nf-6u7" secondAttribute="leading" id="LpZ-jp-6b6"/>
+                            <constraint firstItem="slE-qY-Irl" firstAttribute="leading" secondItem="1eD-Nf-6u7" secondAttribute="leading" id="TRc-dU-hp4"/>
+                            <constraint firstAttribute="bottom" secondItem="slE-qY-Irl" secondAttribute="bottom" id="VYR-Op-GgT"/>
+                            <constraint firstAttribute="trailing" secondItem="RKs-BN-rNZ" secondAttribute="trailing" id="Wni-NC-Lnc"/>
+                            <constraint firstAttribute="trailing" secondItem="slE-qY-Irl" secondAttribute="trailing" id="bVc-H7-LmH"/>
+                            <constraint firstAttribute="bottom" secondItem="RKs-BN-rNZ" secondAttribute="bottom" id="qbi-CP-aIC"/>
+                            <constraint firstItem="slE-qY-Irl" firstAttribute="top" secondItem="1eD-Nf-6u7" secondAttribute="top" id="s7z-yP-LLZ"/>
+                            <constraint firstItem="idw-HE-Lfu" firstAttribute="leading" secondItem="1eD-Nf-6u7" secondAttribute="leading" id="sdo-bp-AtS"/>
+                            <constraint firstItem="RKs-BN-rNZ" firstAttribute="top" secondItem="idw-HE-Lfu" secondAttribute="bottom" id="xuf-EL-31e"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnSave" destination="ciA-0e-Tau" id="tpL-OL-Dq1"/>
+                        <outlet property="lblPHNError" destination="raW-ki-jdv" id="fML-eZ-bSs"/>
+                        <outlet property="lblTitle" destination="UPD-lW-jNw" id="452-eG-2RD"/>
+                        <outlet property="tfAddress" destination="Vnd-Fw-NDr" id="zYL-6K-JtM"/>
+                        <outlet property="tfBirthdate" destination="TPM-Nv-7se" id="NDe-v0-7Qr"/>
+                        <outlet property="tfName" destination="stE-7y-BlQ" id="JMV-MP-MEN"/>
+                        <outlet property="tfPHN" destination="Dfb-gW-pKU" id="oie-In-Kru"/>
+                        <outlet property="tfPhoneNumber" destination="RGN-Cw-83Y" id="gNi-vU-RnQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fqe-s2-wH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3706" y="117"/>
         </scene>
     </scenes>
     <resources>

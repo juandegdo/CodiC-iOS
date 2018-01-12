@@ -79,6 +79,73 @@ class PatientService: BaseTaskController {
         
     }
     
+    func editPatient(_ patientId: String, name: String, patientNumber: String, birthDate: Date, phoneNumber: String, address: String, completion: @escaping (_ success: Bool, _ patient: Patient?) -> Void) {
+        
+        let url = "\(self.baseURL)\(self.URLPatient)\(self.URLEditPatientSuffix)/\(patientId)"
+        let parameters = ["name" : name,
+                          "patient_number" : patientNumber,
+                          "birthday" : birthDate,
+                          "phone_number" : phoneNumber,
+                          "address" : address] as [String : Any]
+        
+        manager!.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
+                }
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    completion(false, nil)
+                    return
+                }
+                
+                if response.response?.statusCode == 200 {
+                    
+                    if let result = response.result.value as? [String : AnyObject] {
+                        
+                        if  let _p = result["patient"] as? [String: AnyObject],
+                            let _id = _p["_id"] as? String,
+                            let _name = _p["name"] as? String,
+                            let _patientNumber = _p["patient_number"] as? String,
+                            let _birthdate = _p["birthday"] as? String,
+                            let _phoneNumber = _p["phone_number"] as? String,
+                            let _address = _p["address"] as? String,
+                            let _createdAt = _p["createdAt"] as? String,
+                            let _user = UserController.Instance.getUser() as User? {
+                            
+                            // Create final Patient
+                            // Create Meta
+                            let _meta = Meta(createdAt: _createdAt)
+                            
+                            if let _updatedAt = _p["updatedAt"] as? String {
+                                _meta.updatedAt = _updatedAt
+                            }
+                            
+                            let patient = Patient(id: _id, name: _name, patientNumber: _patientNumber, birthdate: _birthdate, phoneNumber: _phoneNumber, address: _address, meta: _meta, user: _user)
+                            
+                            completion(true, patient)
+                            
+                        } else {
+                            completion(false, nil)
+                        }
+                        
+                    } else {
+                        
+                        completion(false, nil)
+                        
+                    }
+                    
+                } else {
+                    
+                    completion(false, nil)
+                    
+                }
+                
+        }
+        
+    }
+    
     func getPatients(_ skip : Int = 0, limit: Int = 1000, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientsSuffix)?skip=\(skip)&limit=\(limit)"

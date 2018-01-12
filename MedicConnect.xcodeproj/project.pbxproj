@@ -28,6 +28,7 @@
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
 		655013A320065B4800D88443 /* progress_circle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655013A220065B4700D88443 /* progress_circle.gif */; };
+		6561037A20090C47000E79FC /* EditPatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6561037920090C47000E79FC /* EditPatientViewController.swift */; };
 		65691C421FA958960071C162 /* ConferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65691C411FA958960071C162 /* ConferenceViewController.swift */; };
 		65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */; };
 		65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */; };
@@ -185,6 +186,7 @@
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
 		655013A220065B4700D88443 /* progress_circle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = progress_circle.gif; sourceTree = "<group>"; };
+		6561037920090C47000E79FC /* EditPatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPatientViewController.swift; sourceTree = "<group>"; };
 		65691C411FA958960071C162 /* ConferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceViewController.swift; sourceTree = "<group>"; };
 		65691C431FA95BA60071C162 /* CallHistoryAudioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallHistoryAudioCell.swift; sourceTree = "<group>"; };
 		65691C441FA95BA60071C162 /* CallHistoryAudioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallHistoryAudioCell.xib; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				65488DAB1F944239005C1EA8 /* PatientsViewController.swift */,
 				656C1E991FAD3E7A00F33697 /* PatientProfileViewController.swift */,
 				652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */,
+				6561037920090C47000E79FC /* EditPatientViewController.swift */,
 				65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */,
 			);
 			path = Patients;
@@ -1251,6 +1254,7 @@
 				D2941E631E109BCA00CB7552 /* ChangePasswordListCell.swift in Sources */,
 				D2EB58B51E93C10C00D94194 /* SVGPlayButton.swift in Sources */,
 				D21AB5111DF48A9000AA92A7 /* EditRecordingBroadcastViewController.swift in Sources */,
+				6561037A20090C47000E79FC /* EditPatientViewController.swift in Sources */,
 				D225D11B1E84BDC600B5793A /* PostController.swift in Sources */,
 				D2EB58B71E93E5A700D94194 /* AudioHelper.swift in Sources */,
 				656C1E9A1FAD3E7A00F33697 /* PatientProfileViewController.swift in Sources */,

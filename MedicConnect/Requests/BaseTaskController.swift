@@ -54,6 +54,7 @@ class BaseTaskController {
     let URLGetNotesByPatientIdSuffix = "/getnotesbypatientid"
     
     let URLAddPatientSuffix = "/addpatient"
+    let URLEditPatientSuffix = "/editpatient"
     let URLGetPatientsSuffix = "/getpatients"
     let URLGetPatientIdByPHNSuffix = "/getpatientid"
     

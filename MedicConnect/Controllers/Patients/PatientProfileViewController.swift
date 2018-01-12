@@ -609,6 +609,13 @@ extension PatientProfileViewController {
     }
     
     @IBAction func onPatientEdit(sender: AnyObject!) {
+        // Show Edit Patient Screen
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let vc = storyboard.instantiateViewController(withIdentifier: "EditPatientViewController") as? EditPatientViewController {
+            vc.patient = self.patient
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
         
     }
     
