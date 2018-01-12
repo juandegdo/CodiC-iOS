@@ -189,8 +189,8 @@ extension EditPatientViewController {
         PatientService.Instance.editPatient((self.patient?.id)!, name: self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool, patient: Patient?) in
             
             if success && patient != nil {
-                PatientService.Instance.getPatients(completion: { (success: Bool) in
-                    if success {
+//                PatientService.Instance.getPatients(completion: { (success: Bool) in
+//                    if success {
                         let lenght = self.navigationController?.viewControllers.count
                         let patientProfileVVC: PatientProfileViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientProfileViewController : nil
                         patientProfileVVC?.patient = patient
@@ -198,8 +198,8 @@ extension EditPatientViewController {
                         DispatchQueue.main.async {
                             self.onBack(sender: nil)
                         }
-                    }
-                })
+//                    }
+//                })
             }
             
         }

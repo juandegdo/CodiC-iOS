@@ -135,11 +135,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //                            })
 //                        }
                         break
+                    case .transcribed:
+                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
+                        
+                        break
                     default:
                         self.callNotificationVC()
                         break
                     }
                 }
+            } else if let topVC = self.window?.visibleViewController() as? ProfileViewController {
+                // Reload profile view
+                topVC.initViews()
+                
             } else if let topVC = self.window?.visibleViewController() as? NotificationsViewController {
                 // Notification controller is currently presenting
                 topVC.loadNotifications()
