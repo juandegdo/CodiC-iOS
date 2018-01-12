@@ -243,6 +243,10 @@ extension PatientsViewController : UITextFieldDelegate {
         txtAfterUpdate = txtAfterUpdate.replacingCharacters(in: range, with: string) as NSString
         txtAfterUpdate = txtAfterUpdate.trimmingCharacters(in: .whitespacesAndNewlines) as NSString
         
+        if (CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: txtAfterUpdate as String)) && txtAfterUpdate.length > Constants.MaxPHNLength) {
+            return false
+        }
+        
         self.loadSearchResult(txtAfterUpdate as String)
         
         return true
