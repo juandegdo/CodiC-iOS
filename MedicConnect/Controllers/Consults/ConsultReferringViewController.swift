@@ -174,9 +174,9 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                     }
                 } else if (textField == self.tfDoctorMSPNumber) {
                     // Check if MSP number exists
-                    self.btnRecord.isEnabled = false
+                    self.btnRecord.isUserInteractionEnabled = false
                     UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId) in
-                        self.btnRecord.isEnabled = true
+                        self.btnRecord.isUserInteractionEnabled = true
                         
                         if success == true && MSP == self.tfDoctorMSPNumber.text! {
                             if userId == nil || userId == "" {

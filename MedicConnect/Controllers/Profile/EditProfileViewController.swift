@@ -183,7 +183,7 @@ extension EditProfileViewController : UITextFieldDelegate {
                 self.btnSave.isUserInteractionEnabled = false
                 
                 UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId) in
-                    self.btnSave.isEnabled = true
+                    self.btnSave.isUserInteractionEnabled = true
                     
                     if success == true && MSP == self.tfMSP.text! {
                         if userId == nil || userId == "" {

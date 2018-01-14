@@ -149,12 +149,12 @@ extension PatientNoteReferViewController : UITextFieldDelegate {
             // Send the debounced network request here
             if (textField.text!.count > 0) {
                 // Check if MSP number exists
-                self.btnSaveNote.isEnabled = false
+                self.btnSaveNote.isUserInteractionEnabled = false
                 UserService.Instance.getUserIdByMSP(MSP: textField.text!) { (success, MSP, userId) in
                     let label: UILabel = textField.superview!.viewWithTag(11) as! UILabel
                     
                     DispatchQueue.main.async {
-                        self.btnSaveNote.isEnabled = true
+                        self.btnSaveNote.isUserInteractionEnabled = true
                         
                         if success == true && MSP == textField.text! {
                             if userId == nil || userId == "" {
