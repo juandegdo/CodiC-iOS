@@ -1760,42 +1760,6 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <action selector="onBackWithSender:" destination="dIj-Ko-9ku" eventType="touchUpInside" id="qRa-nP-ihx"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bIU-sf-rnT">
-                                        <rect key="frame" x="369" y="22" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="sn1-bI-Noz"/>
-                                            <constraint firstAttribute="height" constant="40" id="zaz-Lr-kGn"/>
-                                        </constraints>
-                                        <state key="normal" image="icon_setting"/>
-                                        <connections>
-                                            <action selector="onSettingsWithSender:" destination="dIj-Ko-9ku" eventType="touchUpInside" id="YiB-vS-SGM"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ET-6p-Nv1">
-                                        <rect key="frame" x="40" y="22" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="OWc-uP-M8p"/>
-                                            <constraint firstAttribute="height" constant="40" id="vYG-2M-gac"/>
-                                        </constraints>
-                                        <state key="normal" image="icon_notification"/>
-                                        <connections>
-                                            <action selector="onNotificationsWithSender:" destination="dIj-Ko-9ku" eventType="touchUpInside" id="hwZ-gA-3VY"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9G-8R-H1k">
-                                        <rect key="frame" x="62" y="42" width="7" height="7"/>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="7" id="3Hc-XN-dDF"/>
-                                            <constraint firstAttribute="height" constant="7" id="dML-vO-cpP"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <real key="value" value="3.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Profile" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEg-dO-oPf">
                                         <rect key="frame" x="163.33333333333334" y="32" width="87.666666666666657" height="20"/>
                                         <constraints>
@@ -1809,15 +1773,9 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="04l-jb-B6D"/>
                                     <constraint firstItem="uVE-58-hTm" firstAttribute="leading" secondItem="hxT-RE-0ED" secondAttribute="leading" id="4VA-tc-yLo"/>
-                                    <constraint firstItem="O9G-8R-H1k" firstAttribute="bottom" secondItem="4ET-6p-Nv1" secondAttribute="bottom" constant="-13" id="5Cq-Y5-Zdj"/>
                                     <constraint firstItem="NEg-dO-oPf" firstAttribute="centerX" secondItem="hxT-RE-0ED" secondAttribute="centerX" id="9EB-Pi-FHi"/>
-                                    <constraint firstItem="O9G-8R-H1k" firstAttribute="trailing" secondItem="4ET-6p-Nv1" secondAttribute="trailing" constant="-11" id="Fh0-9M-38w"/>
-                                    <constraint firstItem="bIU-sf-rnT" firstAttribute="top" secondItem="hxT-RE-0ED" secondAttribute="top" constant="22" id="IDb-Dc-wAL"/>
                                     <constraint firstItem="uVE-58-hTm" firstAttribute="top" secondItem="hxT-RE-0ED" secondAttribute="top" constant="22" id="Yy7-P7-sFz"/>
                                     <constraint firstItem="NEg-dO-oPf" firstAttribute="top" secondItem="hxT-RE-0ED" secondAttribute="top" constant="32" id="Zri-ys-V0Z"/>
-                                    <constraint firstItem="4ET-6p-Nv1" firstAttribute="centerY" secondItem="bIU-sf-rnT" secondAttribute="centerY" id="o6O-4T-xF7"/>
-                                    <constraint firstItem="4ET-6p-Nv1" firstAttribute="leading" secondItem="uVE-58-hTm" secondAttribute="trailing" id="vof-0S-jg0"/>
-                                    <constraint firstAttribute="trailing" secondItem="bIU-sf-rnT" secondAttribute="trailing" constant="5" id="zgN-dp-DDi"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhx-WM-U9d">
@@ -2076,7 +2034,6 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <outlet property="tfName" destination="u6W-qP-ZJc" id="bD5-0H-MDM"/>
                         <outlet property="tfPhoneNumber" destination="gth-v9-jSC" id="8g5-Yr-Nab"/>
                         <outlet property="tfTitle" destination="xkF-2w-0vo" id="aH9-da-puR"/>
-                        <outlet property="viewNotificationAlert" destination="O9G-8R-H1k" id="TvF-aW-Eyg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KAr-SC-tPo" userLabel="First Responder" sceneMemberID="firstResponder"/>
