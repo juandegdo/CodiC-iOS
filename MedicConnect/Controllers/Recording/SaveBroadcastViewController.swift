@@ -253,7 +253,6 @@ extension SaveBroadcastViewController {
                                 vc.postId = postId
                                 self.navigationController?.pushViewController(vc, animated: false)
                             }
-//                            self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
                         }
                     }
                     

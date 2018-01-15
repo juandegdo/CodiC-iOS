@@ -55,7 +55,7 @@
                         </constraints>
                         <state key="normal" image="icon_broadcast_action"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast Name" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Mp5-NQ-lPz">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Broadcast Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="Mp5-NQ-lPz">
                         <rect key="frame" x="51" y="37" width="111.5" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Cup-Jh-psd"/>
@@ -235,7 +235,6 @@
                     <constraint firstAttribute="trailing" secondItem="4u0-gy-cC2" secondAttribute="trailing" constant="14" id="UJl-K2-5kN"/>
                     <constraint firstItem="u2t-vH-4YL" firstAttribute="centerY" secondItem="5BW-SD-kPu" secondAttribute="centerY" id="W0h-va-4wr"/>
                     <constraint firstItem="aJe-xx-5oi" firstAttribute="top" secondItem="9su-jJ-NTv" secondAttribute="bottom" id="Ww5-f3-jRc"/>
-                    <constraint firstItem="ca7-P3-rJC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mp5-NQ-lPz" secondAttribute="trailing" id="X6V-m7-dnF"/>
                     <constraint firstItem="ELS-ub-nr1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="b7r-w5-uGW"/>
                     <constraint firstItem="4u0-gy-cC2" firstAttribute="top" secondItem="5BW-SD-kPu" secondAttribute="bottom" constant="-2" id="bAj-FO-a8O"/>
                     <constraint firstItem="u2t-vH-4YL" firstAttribute="centerY" secondItem="B8T-A0-tyS" secondAttribute="centerY" id="bfy-Kp-nt6"/>
@@ -254,6 +253,7 @@
                     <constraint firstAttribute="trailing" secondItem="fxs-EX-4Xa" secondAttribute="trailing" constant="12" id="uE4-v1-uKY"/>
                     <constraint firstItem="B8T-A0-tyS" firstAttribute="centerY" secondItem="hy5-og-rMa" secondAttribute="centerY" id="w4P-7Y-rel"/>
                     <constraint firstItem="ca7-P3-rJC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="xqi-xi-JKJ"/>
+                    <constraint firstItem="4wr-dJ-cie" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mp5-NQ-lPz" secondAttribute="trailing" id="yiv-tA-a09"/>
                     <constraint firstItem="yVY-hU-fkK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="zli-0h-LcN"/>
                 </constraints>
             </tableViewCellContentView>
