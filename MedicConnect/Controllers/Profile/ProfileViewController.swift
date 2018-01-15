@@ -163,7 +163,7 @@ class ProfileViewController: BaseViewController {
             self.lblLocation.text = _user.location
             self.lblTitle.text = _user.title
             
-            // Customize Following/Follower
+            // Customize Diagnosis and Consults count
             self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
             self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
             
@@ -658,6 +658,10 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                     let _ = UserController.Instance.deletePost(id: _post.id)
                     tableView.setEditing(false, animated: true)
                     self.tableView.reloadData()
+                    
+                    // Reset diagnosis and consults count
+                    self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
+                    self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
                     
                 }
             }
