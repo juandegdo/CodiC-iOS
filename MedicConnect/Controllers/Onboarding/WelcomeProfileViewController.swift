@@ -188,43 +188,58 @@ extension WelcomeProfileViewController {
                 return
             }
             
+            self.btnSave.isEnabled = false
+            
             UserService.Instance.editUser(user: _user, completion: {
                 (success: Bool, message: String) in
-                if !success {
+                if success {
+                    if let _image = self.avatarImageView.image {
+                        
+                        UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
+                            (success: Bool) in
+                            print("\(success) uploading image.")
+                            
+                            if success {
+                                UserService.Instance.getMe(completion: {
+                                    (user: User?) in
+                                    
+                                    DispatchQueue.main.async {
+                                        self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
+                                    }
+                                    
+                                    print("\(success) refreshing user info.")
+                                    
+                                })
+                            } else {
+                                self.btnSave.isEnabled = true
+                                AlertUtil.showOKAlert(self, message: "Uplading your profile image failed. Try again.")
+                            }
+                        })
+                        
+                    } else {
+                        UserService.Instance.getMe(completion: {
+                            (user: User?) in
+                            
+                            DispatchQueue.main.async {
+                                self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
+                            }
+                            
+                            print("\(success) refreshing user info.")
+                            
+                        })
+//                        DispatchQueue.main.async {
+//                            self.navigationController?.popToRootViewController(animated: false)
+//                        }
+                    }
+                    
+                } else {
+                    self.btnSave.isEnabled = true
+                    
                     if !message.isEmpty {
                         AlertUtil.showOKAlert(self, message: message)
                     }
                 }
             })
-            
-            if let _image = self.avatarImageView.image {
-                
-                self.btnSave.isEnabled = false
-                UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
-                    (success: Bool) in
-                    print("\(success) uploading image.")
-                    
-                    if success {
-                        UserService.Instance.getMe(completion: {
-                            (user: User?) in
-                            
-                            self.btnSave.isEnabled = true
-                            
-                            self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
-                            
-                            print("\(success) refreshing user info.")
-                            
-                        })
-                    } else {
-                        AlertUtil.showOKAlert(self, message: "Uplading your profile image failed. Try again.")
-                    }
-                })
-                
-            } else {
-                
-                self.navigationController?.popToRootViewController(animated: false)
-                
-            }
             
         } else {
             print("No user found")
