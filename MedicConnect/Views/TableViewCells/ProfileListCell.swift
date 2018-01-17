@@ -114,7 +114,7 @@ class ProfileListCell: UITableViewCell {
         // Set Broadcast Label
         self.lblBroadcast.text = post.title
         self.lblDate.text = post.getFormattedDate()
-        self.postDescription = post.description
+        self.postDescription = post.descriptions
         
         if post.orderNumber == "" {
             self.btnSynopsis.isHidden = true

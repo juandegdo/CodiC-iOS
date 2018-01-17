@@ -159,7 +159,7 @@ class NotificationService: BaseTaskController {
                                     // Optional description
                                     
                                     if let _description = _broadcastObj["description"] as? String {
-                                        post.description = _description
+                                        post.descriptions = _description
                                     }
                                     
                                     // Optional likes

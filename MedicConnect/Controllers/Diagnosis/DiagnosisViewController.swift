@@ -20,15 +20,19 @@ public enum ViewControllerDisappearType {
 
 class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
     
+    @IBOutlet var tvDiagnoses: UITableView!
+    
     let DiagnosisCellID = "PlaylistCell"
     let postType = Constants.PostTypeDiagnosis
-    
-    @IBOutlet var tvDiagnoses: UITableView!
     
     var vcDisappearType : ViewControllerDisappearType = .other
     var selectedDotsIndex = 0
     var expandedRows = Set<String>()
-    var selectedRowIndex = -1
+    var selectedIndexPath: IndexPath? = nil
+    
+    let collation = UILocalizedIndexedCollation.current()
+    var diagnosisWithSections = [[Post]]()
+    var sectionTitles = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,8 +73,7 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     func initViews() {
         
-        // Initialize Table Views
-        
+        // Initialize Table View
         let nibDiagnosisCell = UINib(nibName: DiagnosisCellID, bundle: nil)
         self.tvDiagnoses.register(nibDiagnosisCell, forCellReuseIdentifier: DiagnosisCellID)
         
@@ -92,7 +95,12 @@ extension DiagnosisViewController {
         UserService.Instance.getTimeline(completion: {
             (success: Bool) in
             if success {
-                self.selectedRowIndex = (self.tvDiagnoses.indexPathForSelectedRow != nil) ? self.tvDiagnoses.indexPathForSelectedRow!.row : -1
+                // Initialize Data
+                let (arrayDiagnoses, arrayTitles) = self.collation.partitionObjects(array: PostController.Instance.getFollowingPosts(type: self.postType), collationStringSelector: #selector(getter: Post.title))
+                self.diagnosisWithSections = arrayDiagnoses as! [[Post]]
+                self.sectionTitles = arrayTitles
+                
+                self.selectedIndexPath = (self.tvDiagnoses.indexPathForSelectedRow != nil) ? self.tvDiagnoses.indexPathForSelectedRow : nil
                 self.tvDiagnoses.reloadData()
             }
         })
@@ -136,7 +144,7 @@ extension DiagnosisViewController {
             let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
-            let cell = self.tvDiagnoses.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell
+            let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell
             cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
@@ -169,7 +177,7 @@ extension DiagnosisViewController {
         let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
-            let cell = self.tvDiagnoses.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell
+            let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell
             sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
             
             if let _player = PlayerController.Instance.player as AVPlayer?,
@@ -462,7 +470,7 @@ extension DiagnosisViewController {
                     
                     post.removeLike(id: _user.id)
                     post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
+                    if let cell = _refTableView.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell {
                         cell.setData(post: post)
                         
                         cell.btnLike.setImage(UIImage(named: "icon_broadcast_like"), for: .normal)
@@ -480,7 +488,7 @@ extension DiagnosisViewController {
                     
                     post.addLike(id: _user.id)
                     post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
+                    if let cell = _refTableView.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell {
                         cell.setData(post: post)
                         
                         cell.btnLike.setImage(UIImage(named: "icon_broadcast_liked"), for: .normal)
@@ -612,33 +620,36 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableView DataSource Methods
     func numberOfSections(in tableView: UITableView) -> Int {
         tableView.backgroundView = nil
-        return 1
+        return sectionTitles.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.numberOfRows(inTableView: tableView, section: section)
+        return diagnosisWithSections[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: DiagnosisCellID) as! PlaylistCell
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+//        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+        let post = diagnosisWithSections[indexPath.section][indexPath.row]
         cell.setData(post: post)
         
+        let index = self.indexFromPath(indexPath: indexPath)
+        
 //        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-//        cell.btnAction.index = indexPath.row
+//        cell.btnAction.index = index
 //        cell.btnAction.refTableView = tableView
         cell.btnAction.isHidden = true
         
         cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-        cell.btnLike.index = indexPath.row
+        cell.btnLike.index = index
         cell.btnLike.refTableView = tableView
         
-        cell.btnMessage.tag = indexPath.row
+        cell.btnMessage.tag = index
         cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
         
-        cell.btnShare.tag = indexPath.row
+        cell.btnShare.tag = index
         cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
         
         if let _user = UserController.Instance.getUser() as User? {
@@ -654,38 +665,38 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
         cell.imgUserAvatar.addGestureRecognizer(tapGestureOnUserAvatar)
-        cell.imgUserAvatar.tag = indexPath.row
+        cell.imgUserAvatar.tag = index
         
         let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
         cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
-        cell.lblUsername.tag = indexPath.row
+        cell.lblUsername.tag = index
         
         cell.lblDescription.isUserInteractionEnabled = false
         
 //        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
 //        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-//        cell.lblLikedDescription.tag = indexPath.row
+//        cell.lblLikedDescription.tag = index
         
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
-        cell.txtVHashtags.tag = indexPath.row
+        cell.txtVHashtags.tag = index
         
-        cell.btnPlay.tag = indexPath.row
+        cell.btnPlay.tag = index
         if cell.btnPlay.allTargets.count == 0 {
             cell.btnPlay.addTarget(self, action: #selector(onPlayAudio(sender:)), for: .touchUpInside)
         }
         
-        cell.btnBackward.tag = indexPath.row
+        cell.btnBackward.tag = index
         if cell.btnBackward.allTargets.count == 0 {
             cell.btnBackward.addTarget(self, action: #selector(onBackwardAudio(sender:)), for: .touchUpInside)
         }
         
-        cell.btnForward.tag = indexPath.row
+        cell.btnForward.tag = index
         if cell.btnForward.allTargets.count == 0 {
             cell.btnForward.addTarget(self, action: #selector(onForwardAudio(sender:)), for: .touchUpInside)
         }
         
-        cell.playSlider.index = indexPath.row
+        cell.playSlider.index = index
         cell.playSlider.setValue(Float(post.getCurrentProgress()), animated: false)
         if cell.playSlider.allTargets.count == 0 {
             cell.playSlider.addTarget(self, action: #selector(onSeekSlider(sender:)), for: .valueChanged)
@@ -698,6 +709,10 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sectionTitles
+    }
+    
     // MARK: UITableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -708,7 +723,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         self.releasePlayer()
         self.tvDiagnoses.beginUpdates()
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[self.indexFromPath(indexPath: indexPath)]
         
         switch cell.isExpanded {
         case true:
@@ -716,13 +731,13 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
             
         case false:
             do {
-                if self.selectedRowIndex > -1 {
-                    guard let oldCell = tableView.cellForRow(at: IndexPath.init(row: self.selectedRowIndex, section: 0)) as? PlaylistCell
+                if self.selectedIndexPath != nil {
+                    guard let oldCell = tableView.cellForRow(at: self.selectedIndexPath!) as? PlaylistCell
                         else { return }
                     
                     oldCell.isExpanded = false
                     self.expandedRows.removeAll()
-                    self.selectedRowIndex = -1
+                    self.selectedIndexPath = nil
                 }
                 
                 self.expandedRows.insert(post.id)
@@ -742,7 +757,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         self.tvDiagnoses.beginUpdates()
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+        let post = PostController.Instance.getFollowingPosts(type: self.postType)[self.indexFromPath(indexPath: indexPath)]
         self.expandedRows.remove(post.id)
         cell.isExpanded = false
         
@@ -750,8 +765,64 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    func numberOfRows(inTableView: UITableView, section: Int) -> Int {
-        return PostController.Instance.getFollowingPosts(type: self.postType).count
+    func indexFromPath(indexPath: IndexPath) -> Int {
+        var index: Int = 0
+        var sectionIndex: Int = 0
+
+        for section in self.diagnosisWithSections {
+            if sectionIndex == indexPath.section {
+                index += indexPath.row
+                break;
+            } else {
+                index += section.count
+                sectionIndex += 1
+            }
+        }
+        
+        return index
     }
     
+    func pathFromIndex(index: Int) -> IndexPath {
+        var indexPath: IndexPath? = nil
+        var sectionIndex: Int = 0
+        var kIndex = index
+        
+        for section in self.diagnosisWithSections {
+            if kIndex < section.count {
+                indexPath = IndexPath.init(row: kIndex, section: sectionIndex)
+                break
+            } else {
+                kIndex -= section.count
+                sectionIndex += 1
+            }
+        }
+        
+        return indexPath!
+    }
+    
+}
+
+extension UILocalizedIndexedCollation {
+    //func for partition array in sections
+    func partitionObjects(array:[AnyObject], collationStringSelector:Selector) -> ([AnyObject], [String]) {
+        var unsortedSections = [[AnyObject]]()
+        //1. Create a array to hold the data for each section
+        for _ in self.sectionTitles {
+            unsortedSections.append([]) //appending an empty array
+        }
+        //2. Put each objects into a section
+        for item in array {
+            let index:Int = self.section(for: item, collationStringSelector:collationStringSelector)
+            unsortedSections[index].append(item)
+        }
+        //3. sorting the array of each sections
+        var sectionTitles = [String]()
+        var sections = [AnyObject]()
+        for index in 0 ..< unsortedSections.count { if unsortedSections[index].count > 0 {
+            sectionTitles.append(self.sectionTitles[index])
+            sections.append(self.sortedArray(from: unsortedSections[index], collationStringSelector: collationStringSelector) as AnyObject)
+            }
+        }
+        return (sections, sectionTitles)
+    }
 }

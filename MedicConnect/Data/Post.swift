@@ -10,14 +10,14 @@ import Foundation
 import AVFoundation
 import NSDate_TimeAgo
 
-class Post {
+class Post: NSObject {
     
     var id: String
     var audio: String
     var meta: Meta
     var playCount: Int
-    var title: String
-    var description: String
+    @objc var title: String
+    var descriptions: String
     var user: User
     var likes: [String] = []
     var likeDescription: String = ""
@@ -43,7 +43,7 @@ class Post {
         self.playCount = playCount
         self.commentsCount = commentsCount
         self.title = title
-        self.description = description
+        self.descriptions = description
         self.user = user
         self.postType = postType
         
@@ -57,7 +57,7 @@ class Post {
         self.playCount = playCount
         self.commentsCount = commentsCount
         self.title = title
-        self.description = ""
+        self.descriptions = ""
         self.user = User(fullName: author, email: "", password: "")
         self.postType = postType
         
@@ -71,7 +71,7 @@ class Post {
         self.playCount = playCount
         self.commentsCount = commentsCount
         self.title = title
-        self.description = description
+        self.descriptions = description
         self.user = User(email: "", password: "")
         self.postType = postType
         
@@ -85,7 +85,7 @@ class Post {
         self.playCount = playCount
         self.commentsCount = commentsCount
         self.title = title
-        self.description = ""
+        self.descriptions = ""
         self.user = user
         self.postType = postType
         

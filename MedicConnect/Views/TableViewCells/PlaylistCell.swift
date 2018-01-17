@@ -179,8 +179,8 @@ class PlaylistCell: UITableViewCell {
         self.lblDate.text = post.getFormattedDate()
         
         // Set description
-        self.postDescription = post.description
-//        self.lblDesc.text = post.description
+        self.postDescription = post.descriptions
+//        self.lblDesc.text = post.descriptions
         
         if post.orderNumber == "" {
             self.btnSynopsis.isHidden = true

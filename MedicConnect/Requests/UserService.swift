@@ -418,7 +418,7 @@ class UserService: BaseTaskController {
                                     // Optional description
                                     
                                     if let _description = p["description"] as? String {
-                                        post.description = _description
+                                        post.descriptions = _description
                                     }
                                     
                                     // Optional likes
@@ -783,7 +783,7 @@ class UserService: BaseTaskController {
                                     // Optional description
                                     
                                     if let _description = p["description"] as? String {
-                                        post.description = _description
+                                        post.descriptions = _description
                                     }
                                     
                                     // Optional likes
@@ -1144,7 +1144,7 @@ class UserService: BaseTaskController {
                                 // Optional description
                                 
                                 if let _description = _p["description"] as? String {
-                                    post.description = _description
+                                    post.descriptions = _description
                                 }
                                 
                                 // Optional likes
