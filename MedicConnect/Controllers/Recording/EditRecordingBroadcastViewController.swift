@@ -198,7 +198,12 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onSave(sender: UIButton) {
         self.stop()
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectSaveBroadcast, sender: nil)
+        
+        if DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis {
+            self.performSegue(withIdentifier: Constants.SegueMedicConnectSaveDiagnosis, sender: nil)
+        } else {
+            self.performSegue(withIdentifier: Constants.SegueMedicConnectSaveConsult, sender: nil)
+        }
         
     }
     

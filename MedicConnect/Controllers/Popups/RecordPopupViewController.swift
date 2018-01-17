@@ -43,15 +43,6 @@ class RecordPopupViewController: BaseViewController {
         
     }
     
-    //MARK: Private Methods
-    func uploadFile(_ url: URL) {
-        self.fileURL = url
-        
-        let destinationVC = self.storyboard!.instantiateViewController(withIdentifier: "saveBroadcastVC") as! SaveBroadcastViewController
-        destinationVC.fileURL = self.fileURL
-        self.navigationController?.pushViewController(destinationVC, animated: true)
-    }
-    
 }
 
 extension RecordPopupViewController {
@@ -73,7 +64,6 @@ extension RecordPopupViewController {
             DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)
             DataManager.Instance.setPatientId(patientId: "")
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
-            DataManager.Instance.setFromPatientProfile(false)
             
             weak var weakSelf = self
             self.present(vc, animated: false, completion: {
@@ -91,41 +81,6 @@ extension RecordPopupViewController {
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
-    }
-    
-    @IBAction func onUpload(sender: UIButton!) {
-        let importMenu = UIDocumentMenuViewController(documentTypes: [kUTTypeAudio as String], in: .import)
-        importMenu.delegate = self
-        importMenu.popoverPresentationController?.sourceView = sender
-        self.present(importMenu, animated: true, completion: nil)
-    }
-    
-}
-
-//MARK: - UIDocumentMenuDelegate
-extension RecordPopupViewController: UIDocumentMenuDelegate {
-    
-    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        print("document pick")
-        documentPicker.delegate = self
-        self.present(documentPicker, animated: true, completion: nil)
-    }
-    
-    public func documentMenuWasCancelled(_ documentMenu: UIDocumentMenuViewController) {
-        print("document menu cancelled")
-    }
-    
-}
-
-//MARK: - UIDocumentPickerDelegate
-extension RecordPopupViewController: UIDocumentPickerDelegate {
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        self.uploadFile(url)
-    }
-    
-    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("document picker cancelled")
     }
     
 }

@@ -229,13 +229,13 @@ extension ConsultReferringViewController {
             
         } else if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
             errorType = .noPHN
-            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
             DataManager.Instance.setPatientId(patientId: "")
             DataManager.Instance.setReferringUserIds(referringUserIds: [self.referUserID])
             
         } else if (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
             errorType = .noMSP
-            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
             DataManager.Instance.setPatientId(patientId: self.patientID)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
             
@@ -247,7 +247,7 @@ extension ConsultReferringViewController {
             return
         }
         
-        DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+        DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
         DataManager.Instance.setPatientId(patientId: patientID)
         DataManager.Instance.setReferringUserIds(referringUserIds: [referUserID])
         

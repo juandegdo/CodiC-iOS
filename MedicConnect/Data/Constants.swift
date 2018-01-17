@@ -21,7 +21,8 @@ class Constants {
     static let SegueMedicConnectRecordingBroadcast = "RecordingBroadcast"
     static let SegueMedicConnectEditBroadcast = "EditRecordingBroadcast"
     static let SegueMedicConnectStopBroadcast = "StopRecordingBroadcast"
-    static let SegueMedicConnectSaveBroadcast = "SaveBroadcast"
+    static let SegueMedicConnectSaveDiagnosis = "SaveDiagnosis"
+    static let SegueMedicConnectSaveConsult = "SaveConsult"
     static let SegueMedicConnectShareBroadcast = "ShareBroadcast"
     static let SegueMedicConnectAddPatient = "AddPatient"
     

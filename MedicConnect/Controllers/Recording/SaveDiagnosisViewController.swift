@@ -1,36 +1,28 @@
 //
-//  SaveBroadcastViewController.swift
+//  SaveDiagnosisViewController.swift
 //  MedicConnect
 //
-//  Created by alessandro on 12/4/16.
-//  Copyright © 2016 Loewen. All rights reserved.
+//  Created by Daniel Yang on 2018-01-17.
+//  Copyright © 2018 Loewen. All rights reserved.
 //
 
 import UIKit
-import IQDropDownTextField
 import TLTagsControl
 import MobileCoreServices
 
-class SaveBroadcastViewController: BaseViewController {
-
+class SaveDiagnosisViewController: BaseViewController {
+    
     var activityIndicatorView = UIActivityIndicatorView()
-    
-    var isLiveBroadCast: Bool = false
     var fileURL: URL?
-    
-    @IBOutlet var lblTitle: UILabel!
     
     @IBOutlet var imgAvatar: UIImageView!
     @IBOutlet var btnAddPicture: UIButton!
     
-    @IBOutlet var tfAuthor: UITextField!
-    @IBOutlet var lblBroadcastTitle: UILabel!
     @IBOutlet var tfBroadcastName: UITextField!
     @IBOutlet var tvDescription: RadContentHeightTextView!
     @IBOutlet var hashTagCtrl: TLTagsControl!
-    @IBOutlet var viewAuthorContraint: NSLayoutConstraint!
-    @IBOutlet var alertWindow: UIWindow!
     @IBOutlet var btnSave: UIButton!
+    @IBOutlet var alertWindow: UIWindow!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,32 +51,20 @@ class SaveBroadcastViewController: BaseViewController {
     
     func initViews() {
         
-        // Title
-        self.lblTitle.text = "Save \(DataManager.Instance.getPostType())"
-        self.lblBroadcastTitle.text = "\(DataManager.Instance.getPostType()) Title"
-        self.btnSave.setTitle("SAVE \(DataManager.Instance.getPostType().uppercased())", for: .normal)
-        
         // Avatar
         self.imgAvatar.image = UIImage.init(named: "icon_save_plus")
         self.imgAvatar.contentMode = .center
         self.imgAvatar.layer.borderWidth = 1.0
         self.imgAvatar.layer.borderColor = UIColor.init(red: 112/255.0, green: 183/255.0, blue: 191/255.0, alpha: 1.0).cgColor
         
-        if let _user = UserController.Instance.getUser() as User? {
-            self.tfAuthor.text = _user.fullName
-        }
-        
         // Add Picture Button
         self.btnAddPicture.layer.borderWidth = 1.5
         self.btnAddPicture.layer.borderColor = UIColor(red:113.0/255, green:127.0/255, blue:134.0/255, alpha:1.0).cgColor
         
-        // Author
-        self.viewAuthorContraint.constant = self.isLiveBroadCast ? 0 : 147
-    
         // Description
         self.tvDescription.minHeight = 30
         self.tvDescription.maxHeight = 150
-    
+        
         // Hashtags
         self.hashTagCtrl.tagsBackgroundColor = UIColor(red: 205/255, green: 212/255, blue: 215/255, alpha: 1.0)
         self.hashTagCtrl.tagsTextColor = UIColor.white
@@ -101,7 +81,7 @@ class SaveBroadcastViewController: BaseViewController {
     
 }
 
-extension SaveBroadcastViewController : UITextFieldDelegate {
+extension SaveDiagnosisViewController : UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         guard let text = textField.text else { return true }
@@ -116,7 +96,7 @@ extension SaveBroadcastViewController : UITextFieldDelegate {
     }
 }
 
-extension SaveBroadcastViewController : UITextViewDelegate {
+extension SaveDiagnosisViewController : UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         guard let description = textView.text else { return true }
         
@@ -125,7 +105,7 @@ extension SaveBroadcastViewController : UITextViewDelegate {
     }
 }
 
-extension SaveBroadcastViewController : UINavigationControllerDelegate {
+extension SaveDiagnosisViewController : UINavigationControllerDelegate {
     //MARK: UIImagePickerControllerDelegate
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
@@ -133,7 +113,7 @@ extension SaveBroadcastViewController : UINavigationControllerDelegate {
     
 }
 
-extension SaveBroadcastViewController : UIImagePickerControllerDelegate {
+extension SaveDiagnosisViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
@@ -151,7 +131,7 @@ extension SaveBroadcastViewController : UIImagePickerControllerDelegate {
     
 }
 
-extension SaveBroadcastViewController {
+extension SaveDiagnosisViewController {
     
     //MARK: IBActions
     
@@ -172,7 +152,7 @@ extension SaveBroadcastViewController {
     }
     
     @IBAction func onClose(sender: UIButton) {
-
+        
         if let _nav = self.navigationController as UINavigationController? {
             _nav.dismiss(animated: false, completion: nil)
         } else {
@@ -190,82 +170,52 @@ extension SaveBroadcastViewController {
             return
         }
         
-        let fromPatientProfile = DataManager.Instance.getFromPatientProfile()
-        if !fromPatientProfile {
-            self.startIndicating()
+        var author = ""
+        if let _user = UserController.Instance.getUser() as User? {
+            author = _user.fullName
         }
-
+        
+        self.startIndicating()
+        
         var audioFilename: URL
         if (self.fileURL != nil) {
             audioFilename = self.fileURL!
         } else {
             audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         }
-
+        
         let fileExtension = audioFilename.pathExtension
         let fileMimeType = fileExtension.mimeTypeForPathExtension()
-
+        
         do {
             let audioData = try Data(contentsOf: audioFilename)
+            self.btnSave.isEnabled = false
             
-            if fromPatientProfile {
-                // From Patient Profile
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
-                    
-                    let noteInfo = ["title" : title,
-                                    "author" : self.tfAuthor.text!,
-                                    "description" : self.tvDescription.text!,
-                                    "hashtags" : hashTagCtrl.tags as! [String],
-                                    "postType" : postType,
-                                    "audioData" : audioData,
-                                    "fileExtension": fileExtension,
-                                    "mimeType": fileMimeType] as [String : Any]
-                    
-                    vc.noteInfo = noteInfo
-                    self.navigationController?.pushViewController(vc, animated: false)
-                }
+            PostService.Instance.sendPost(title, author: author, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
+                (success: Bool, postId: String?) in
                 
-            } else {
-                // From other screens
-                self.btnSave.isEnabled = false
-                
-                PostService.Instance.sendPost(title, author: self.tfAuthor.text!, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
-                    (success: Bool, postId: String?) in
-                    
-                    if success && postType == Constants.PostTypeDiagnosis {
-                        // As we just posted a new video, it's a good thing to refresh user info.
-                        UserService.Instance.getMe(completion: {
-                            (user: User?) in
-                            DispatchQueue.main.async {
-                                self.stopIndicating()
-                                self.btnSave.isEnabled = true
-                                self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
-                            }
-                        })
-                    } else {
+                if success {
+                    // As we just posted a new video, it's a good thing to refresh user info.
+                    UserService.Instance.getMe(completion: {
+                        (user: User?) in
                         DispatchQueue.main.async {
                             self.stopIndicating()
                             self.btnSave.isEnabled = true
-                            
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            if let vc = storyboard.instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
-                                vc.postId = postId
-                                self.navigationController?.pushViewController(vc, animated: false)
-                            }
+                            self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcast, sender: nil)
                         }
+                    })
+                } else {
+                    DispatchQueue.main.async {
+                        self.stopIndicating()
+                        self.btnSave.isEnabled = true
                     }
-                    
-                })
-            }
-            
-
+                }
+                
+            })
             
         } catch let error {
-            if !fromPatientProfile {
-                self.stopIndicating()
-            }
-            
+            self.stopIndicating()
+            self.btnSave.isEnabled = false
             print(error.localizedDescription)
         }
         
