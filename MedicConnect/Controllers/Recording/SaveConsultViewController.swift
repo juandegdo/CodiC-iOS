@@ -144,6 +144,16 @@ extension SaveConsultViewController {
             return
         }
         
+        guard  self.tfDiagnosticCode.text!.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your \(postType.lowercased()) a diagnostic code!")
+            return
+        }
+        
+        guard  self.tfBillingCode.text!.count != 0 else {
+            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your \(postType.lowercased()) a billing code!")
+            return
+        }
+        
         var author = ""
         if let _user = UserController.Instance.getUser() as User? {
             author = _user.fullName
