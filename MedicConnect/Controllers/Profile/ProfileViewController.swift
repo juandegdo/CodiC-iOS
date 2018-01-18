@@ -69,6 +69,7 @@ class ProfileViewController: BaseViewController {
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(self.updatedProfileSettings), name: updatedProfileNotification, object: nil)
+        nc.addObserver(self, selector: #selector(self.updateTab), name: NSNotification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
         
     }
     
@@ -95,6 +96,10 @@ class ProfileViewController: BaseViewController {
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         }
         
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: Private methods
@@ -143,6 +148,14 @@ class ProfileViewController: BaseViewController {
     
     @objc func updatedProfileSettings() {
         refreshData()
+    }
+    
+    @objc func updateTab() {
+        if (DataManager.Instance.getPostType() != Constants.PostTypeNote && self.postType != DataManager.Instance.getPostType()) {
+            self.postType = DataManager.Instance.getPostType()
+            self.expandedRows = Set<String>()
+            self.updateUI()
+        }
     }
     
     func updateUI() {

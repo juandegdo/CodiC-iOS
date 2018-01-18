@@ -8,6 +8,8 @@
 
 import UIKit
 
+let NotificationDidRecordingFinish = "NotificationDidRecordingFinish"
+
 class ShareBroadcastViewController: BaseViewController {
     
     @IBOutlet var mBackgroundImageView: UIImageView!
@@ -25,6 +27,7 @@ class ShareBroadcastViewController: BaseViewController {
     @IBOutlet var constOfPopupHeight: NSLayoutConstraint!
     
     var postId: String?
+    var fromYes: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +89,11 @@ extension ShareBroadcastViewController {
     
     @IBAction func onClose(sender: UIButton) {
         if let _nav = self.navigationController as UINavigationController? {
-            _nav.dismiss(animated: false, completion: nil)
+            if fromYes {
+                _nav.popToRootViewController(animated: false)
+            } else {
+                _nav.dismiss(animated: false, completion: nil)
+            }
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -104,16 +111,6 @@ extension ShareBroadcastViewController {
             self.onClose(sender: sender)
         } else {
             // Consult or Patient Note
-//            self.btnSkip.isEnabled = false
-//            self.btnYes.isEnabled = false
-//
-//            UserService.Instance.getMe(completion: {
-//                (user: User?) in
-//                DispatchQueue.main.async {
-//                    self.onClose(sender: sender)
-//                }
-//            })
-            
             self.onClose(sender: sender)
         }
     }
@@ -121,7 +118,10 @@ extension ShareBroadcastViewController {
     @IBAction func onYes(sender: UIButton) {
         if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
             // Diagnosis
+            self.fromYes = true
             self.onClose(sender: sender)
+            
+            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
         } else {
             // Consult or Patient Note
             self.btnSkip.isEnabled = false
