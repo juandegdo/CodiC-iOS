@@ -74,14 +74,15 @@ class PatientNoteReferViewController: UIViewController {
         for view in views {
             let textField: UITextField = view.viewWithTag(10) as! UITextField
             let errorLabel: UILabel = view.viewWithTag(11) as! UILabel
+            let nameLabel: UILabel = view.viewWithTag(12) as! UILabel
             
             textField.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
             textField.leftViewMode = .always
             textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
             
-            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 8, y: 16.5, width: 11, height: 11))
+            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 7, y: 16.5, width: 11, height: 11))
             ivCheck.image = UIImage.init(named: "icon_save_done_new")
-            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 27, height: 44))
+            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 25, height: 44))
             view.addSubview(ivCheck)
             
             textField.rightView = view
@@ -90,6 +91,8 @@ class PatientNoteReferViewController: UIViewController {
             
             // Hide error label
             errorLabel.isHidden = true
+            
+            nameLabel.text = ""
         }
         
         // Hide the other 2 fields
@@ -144,13 +147,16 @@ extension PatientNoteReferViewController : UITextFieldDelegate {
             self.userIDs["view3"] = ""
         }
         
+        let nameLabel: UILabel = textField.superview!.viewWithTag(12) as! UILabel
+        nameLabel.text = ""
+        
         debouncer.call()
         debouncer.callback = {
             // Send the debounced network request here
             if (textField.text!.count > 0) {
                 // Check if MSP number exists
                 self.btnSaveNote.isUserInteractionEnabled = false
-                UserService.Instance.getUserIdByMSP(MSP: textField.text!) { (success, MSP, userId) in
+                UserService.Instance.getUserIdByMSP(MSP: textField.text!) { (success, MSP, userId, name) in
                     let label: UILabel = textField.superview!.viewWithTag(11) as! UILabel
                     
                     DispatchQueue.main.async {
@@ -169,6 +175,7 @@ extension PatientNoteReferViewController : UITextFieldDelegate {
                                     self.userIDs["view3"] = userId
                                 }
                                 
+                                nameLabel.text = name!
                                 label.isHidden = true
                                 textField.textColor = UIColor.black
                             }

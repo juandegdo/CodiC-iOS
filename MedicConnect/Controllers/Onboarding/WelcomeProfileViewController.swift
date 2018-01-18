@@ -95,7 +95,7 @@ extension WelcomeProfileViewController : UITextFieldDelegate {
                 // Check if patient exists
                 self.btnSave.isUserInteractionEnabled = false
                 
-                UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId) in
+                UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId, name) in
                     self.btnSave.isUserInteractionEnabled = true
                     
                     if success == true && MSP == self.tfMSP.text! {

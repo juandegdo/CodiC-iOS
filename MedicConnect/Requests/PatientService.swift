@@ -260,7 +260,7 @@ class PatientService: BaseTaskController {
         
     }
     
-    func getPatientIdByPHN(PHN: String, completion: @escaping (_ success: Bool, _ PHN: String?, _ patientId: String?) -> Void) {
+    func getPatientIdByPHN(PHN: String, completion: @escaping (_ success: Bool, _ PHN: String?, _ patientId: String?, _ patientName: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientIdByPHNSuffix)/\(PHN)"
         
@@ -272,21 +272,22 @@ class PatientService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
-                    completion(false, nil, nil)
+                    completion(false, nil, nil, nil)
                     return
                 }
                 
                 if response.response?.statusCode == 200 {
                     
                     if let result = response.result.value as? [String : AnyObject],
-                        let patientId = result["id"] as? String  {
-                        completion(true, PHN, patientId)
+                        let patientId = result["id"] as? String,
+                        let patientName = result["name"] as? String {
+                        completion(true, PHN, patientId, patientName)
                     } else {
-                        completion(false, nil, nil)
+                        completion(false, nil, nil, nil)
                     }
                     
                 } else {
-                    completion(false, nil, nil)
+                    completion(false, nil, nil, nil)
                 }
                 
         }

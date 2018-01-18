@@ -124,7 +124,7 @@ extension EditPatientViewController : UITextFieldDelegate {
                 
                 // Check if patient exists
                 self.btnSave.isUserInteractionEnabled = false
-                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId) in
+                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId, patientName) in
                     self.btnSave.isUserInteractionEnabled = true
                     
                     if success == true && PHN == self.tfPHN.text! {

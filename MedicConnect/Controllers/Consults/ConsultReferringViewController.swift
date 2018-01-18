@@ -14,7 +14,9 @@ class ConsultReferringViewController: UIViewController {
     @IBOutlet weak var tfDoctorMSPNumber: UITextField!
     
     @IBOutlet weak var lblPHNError: UILabel!
+    @IBOutlet weak var lblPatientName: UILabel!
     @IBOutlet weak var lblMSPError: UILabel!
+    @IBOutlet weak var lblDoctorName: UILabel!
     
     @IBOutlet weak var btnRecord: UIButton!
     
@@ -69,11 +71,14 @@ class ConsultReferringViewController: UIViewController {
         self.lblPHNError.isHidden = true
         self.lblMSPError.isHidden = true
         
+        self.lblPatientName.text = ""
+        self.lblDoctorName.text = ""
+        
         // Add checkmarks on right views
         for textField in [self.tfPatientNumber, self.tfDoctorMSPNumber] {
-            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 8, y: 16.5, width: 11, height: 11))
+            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 7, y: 16.5, width: 11, height: 11))
             ivCheck.image = UIImage.init(named: "icon_save_done_new")
-            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 27, height: 44))
+            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 25, height: 44))
             view.addSubview(ivCheck)
             
             textField?.rightView = view
@@ -146,6 +151,12 @@ extension ConsultReferringViewController : UITextFieldDelegate {
         textField.textColor = UIColor.black
         textField.rightView?.isHidden = true
         
+        if (textField == self.tfPatientNumber) {
+            self.lblPatientName.text = ""
+        } else {
+            self.lblDoctorName.text = ""
+        }
+        
         debouncer.call()
         debouncer.callback = {
             // Send the debounced network request here
@@ -153,7 +164,7 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                 if (textField == self.tfPatientNumber) {
                     // Check if patient exists
                     self.btnRecord.isUserInteractionEnabled = false
-                    PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId) in
+                    PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId, patientName) in
                         self.btnRecord.isUserInteractionEnabled = true
                         
                         if success == true && PHN == self.tfPatientNumber.text! {
@@ -162,6 +173,7 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                                 self.tfPatientNumber.textColor = UIColor.red
                             } else {
                                 self.patientID = patientId!
+                                self.lblPatientName.text = patientName!
                                 self.lblPHNError.isHidden = true
                                 self.tfPatientNumber.textColor = UIColor.black
                             }
@@ -175,7 +187,7 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                 } else if (textField == self.tfDoctorMSPNumber) {
                     // Check if MSP number exists
                     self.btnRecord.isUserInteractionEnabled = false
-                    UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId) in
+                    UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId, name) in
                         self.btnRecord.isUserInteractionEnabled = true
                         
                         if success == true && MSP == self.tfDoctorMSPNumber.text! {
@@ -184,6 +196,7 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                                 self.tfDoctorMSPNumber.textColor = UIColor.red
                             } else {
                                 self.referUserID = userId!
+                                self.lblDoctorName.text = name!
                                 self.lblMSPError.isHidden = true
                                 self.tfDoctorMSPNumber.textColor = UIColor.black
                             }
