@@ -13,7 +13,7 @@ class PostService: BaseTaskController {
     
     static let Instance = PostService()
     
-    func sendPost(_ title: String, author: String, description: String, hashtags: [String], postType: String, audioData: Data, image: UIImage?, fileExtension: String, mimeType: String, completion: @escaping (_ success: Bool, _ postId: String?) -> Void) {
+    func sendPost(_ title: String, author: String, description: String, hashtags: [String], postType: String, diagnosticCode: String, billingCode: String, audioData: Data, image: UIImage?, fileExtension: String, mimeType: String, completion: @escaping (_ success: Bool, _ postId: String?) -> Void) {
         
         guard let _url = URL(string: "\(self.baseURL)\(self.URLPost)") else {
             return
@@ -29,8 +29,13 @@ class PostService: BaseTaskController {
                           "hashtags" : hashtags.count > 0 ? hashtags.joined(separator: ",") : "",
                           "postType" : postType]
         
+        if (postType != Constants.PostTypeDiagnosis) {
+            parameters["diagnosticCode"] = diagnosticCode
+            parameters["billingCode"] = billingCode
+        }
+        
         let patientId = DataManager.Instance.getPatientId()
-        if (postType == Constants.PostTypeNote && patientId != "") {
+        if (postType != Constants.PostTypeDiagnosis && patientId != "") {
             parameters["patientId"] = patientId
         }
         

@@ -177,6 +177,8 @@ extension SaveConsultViewController {
                                     "description" : self.tvDescription.text!,
                                     "hashtags" : hashTagCtrl.tags as! [String],
                                     "postType" : postType,
+                                    "diagnosticCode" : self.tfDiagnosticCode.text!,
+                                    "billingCode" : self.tfBillingCode.text!,
                                     "audioData" : audioData,
                                     "fileExtension": fileExtension,
                                     "mimeType": fileMimeType] as [String : Any]
@@ -189,7 +191,7 @@ extension SaveConsultViewController {
                 // From other screens
                 self.btnSave.isEnabled = false
                 
-                PostService.Instance.sendPost(title, author: author, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
+                PostService.Instance.sendPost(title, author: author, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, diagnosticCode: self.tfDiagnosticCode.text!, billingCode: self.tfBillingCode.text!, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
                     (success: Bool, postId: String?) in
                     
                     if success {

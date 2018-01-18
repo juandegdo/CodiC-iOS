@@ -224,6 +224,8 @@ extension PatientNoteReferViewController {
                                       description: noteInfo["description"] as! String,
                                       hashtags: noteInfo["hashtags"] as! [String],
                                       postType: noteInfo["postType"] as! String,
+                                      diagnosticCode: noteInfo["diagnosticCode"] as! String,
+                                      billingCode: noteInfo["billingCode"] as! String,
                                       audioData: noteInfo["audioData"] as! Data,
                                       image: nil,
                                       fileExtension: noteInfo["fileExtension"] as! String,

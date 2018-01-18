@@ -116,12 +116,15 @@ extension ShareBroadcastViewController {
     }
     
     @IBAction func onYes(sender: UIButton) {
+        if (DataManager.Instance.getPostType() != Constants.PostTypeNote) {
+            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
+        }
+        
         if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
             // Diagnosis
             self.fromYes = true
             self.onClose(sender: sender)
             
-            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
         } else {
             // Consult or Patient Note
             self.btnSkip.isEnabled = false

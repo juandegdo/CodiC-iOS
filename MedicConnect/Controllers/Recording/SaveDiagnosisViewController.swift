@@ -177,7 +177,7 @@ extension SaveDiagnosisViewController {
             let audioData = try Data(contentsOf: audioFilename)
             self.btnSave.isEnabled = false
             
-            PostService.Instance.sendPost(title, author: author, description: "Diagnosis", hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
+            PostService.Instance.sendPost(title, author: author, description: "Diagnosis", hashtags: hashTagCtrl.tags as! [String], postType: postType, diagnosticCode: "", billingCode: "", audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
                 (success: Bool, postId: String?) in
                 
                 if success {
