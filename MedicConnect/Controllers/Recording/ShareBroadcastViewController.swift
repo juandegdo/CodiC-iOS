@@ -22,6 +22,8 @@ class ShareBroadcastViewController: BaseViewController {
     @IBOutlet var btnYes: UIButton!
     @IBOutlet var viewYes: UIView!
     
+    @IBOutlet var constOfPopupHeight: NSLayoutConstraint!
+    
     var postId: String?
     
     override func viewDidLoad() {
@@ -57,12 +59,15 @@ class ShareBroadcastViewController: BaseViewController {
         
         if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
             // Diagnosis
-            self.lblQuestion.text = "Would you like to share it?"
+            self.constOfPopupHeight.constant = 200
+            self.lblQuestion.text = "Would you like to record\nanother diagnosis?"
+            self.btnEmail.isHidden = true
+            self.btnMessage.isHidden = true
             self.btnDocument.isHidden = true
-            self.viewYes.isHidden = true
             
         } else {
             // Consult or Patient Note
+            self.constOfPopupHeight.constant = 250
             self.lblQuestion.text = "Would you like to create\na synopsis document?"
             self.btnEmail.isHidden = true
             self.btnMessage.isHidden = true

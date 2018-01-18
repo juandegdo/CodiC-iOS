@@ -3082,9 +3082,9 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="8d1-BF-mHh">
-                                        <rect key="frame" x="82.666666666666686" y="53" width="180" height="41"/>
+                                        <rect key="frame" x="84.666666666666686" y="53" width="176" height="41"/>
                                         <string key="text">You’ve successfully 
-uploaded a new diagnosis.</string>
+recorded a new diagnosis.</string>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <color key="textColor" red="0.23137254901960785" green="0.23137254901960785" blue="0.29803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -3240,6 +3240,7 @@ uploaded a new diagnosis.</string>
                         <outlet property="btnMessage" destination="TVp-AJ-tHw" id="Ndn-Ji-TWt"/>
                         <outlet property="btnSkip" destination="Fmw-bP-R41" id="gaX-Du-it6"/>
                         <outlet property="btnYes" destination="ncG-e3-MiU" id="p3F-Rd-fP2"/>
+                        <outlet property="constOfPopupHeight" destination="mcH-Lg-sys" id="4WA-7X-LqR"/>
                         <outlet property="lblDescription" destination="8d1-BF-mHh" id="rn5-hA-ob2"/>
                         <outlet property="lblQuestion" destination="50C-3p-bZp" id="LF7-v3-meF"/>
                         <outlet property="mBackgroundImageView" destination="ANn-pt-jsJ" id="1fp-2g-2It"/>
