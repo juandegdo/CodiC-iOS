@@ -73,7 +73,7 @@ class EditProfileViewController: BaseViewController {
         self.lblMSPError.isHidden = true
         
         // Location
-        self.tfLocation.placeholder = NSLocalizedString("Referring Site", comment: "comment")
+        self.tfLocation.placeholder = NSLocalizedString("Site", comment: "comment")
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")

@@ -11,7 +11,7 @@ import AVFoundation
 
 class SearchResultsViewController: BaseViewController {
     
-    let SearchPostCellID = "PlaylistCell"
+    let SearchPostCellID = "DiagnosisCell"
     
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var tvPosts: UITableView!
@@ -75,7 +75,7 @@ class SearchResultsViewController: BaseViewController {
         // Initialize Table View
         self.tvPosts.register(UINib(nibName: SearchPostCellID, bundle: nil), forCellReuseIdentifier: SearchPostCellID)
         self.tvPosts.tableFooterView = UIView()
-        self.tvPosts.estimatedRowHeight = 125.0
+        self.tvPosts.estimatedRowHeight = 68.0
         self.tvPosts.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -260,7 +260,7 @@ extension SearchResultsViewController {
 //                            if success, let play_count = play_count {
 //                                print("Post incremented")
 //                                post.playCount = play_count
-//                                if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
+//                                if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? DiagnosisCell {
 //                                    cell.setData(post: post)
 //                                }
 //                            }
@@ -298,94 +298,6 @@ extension SearchResultsViewController {
 //        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
     }
     
-    @objc func onToggleAction(sender: TVButton) {
-        guard let _ = sender.index as Int?,
-            let _ = sender.refTableView as UITableView? else {
-                return
-        }
-        
-        print("\(sender.index!)")
-        selectedDotsIndex = sender.index!
-        let post = PostController.Instance.getHashtagPosts()[selectedDotsIndex]
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        
-        let actionReportThisBroadcast = UIAlertAction(title: "Report this broadcast", style: .destructive) { (action) in
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                return
-            }
-            
-            UserService.Instance.report(from: _user.email, subject: "Report this broadcast", msgbody: "User: \(post.user.fullName)\nUrl: \(post.audio)", completion: { (success) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcast.\nWe are looking into it.")
-                    }
-                }
-                
-            });
-            
-        }
-        let actionReportUser = UIAlertAction(title: "Report this user", style: .destructive) { (action) in
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                return
-            }
-            
-            UserService.Instance.report(from: _user.email, subject: "Report this user", msgbody: "User: \(post.user.fullName)", completion: { (success) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcaster.\nWe are looking into it.")
-                    }
-                }
-                
-            });
-            
-        }
-        let actionBlockUser = UIAlertAction(title: "Block user", style: .default) { (action) in
-            UserService.Instance.block(userId: post.user.id , completion: {
-                (success: Bool) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "This user is now blocked.\nGo to Settings to undo this action.")
-                    }
-                    
-                    UserService.Instance.getMe(completion: {
-                        (user: User?) in
-                        if (user as User?) != nil {
-                            self.loadPosts()
-                        }
-                    })
-                } else {
-                    sender.makeEnabled(enabled: true)
-                }
-                
-            })
-        }
-        let actionTurnOnPost = UIAlertAction(title: "Turn on Post notification", style: .default) { (action) in
-            
-        }
-        let actionCopyShareUrl = UIAlertAction(title: "Copy Share Url", style: .default) { (action) in
-            UIPasteboard.general.string = post.audio
-        }
-        
-        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        
-        alertController.addAction(actionReportThisBroadcast)
-        alertController.addAction(actionReportUser)
-        alertController.addAction(actionBlockUser)
-        alertController.addAction(actionTurnOnPost)
-        alertController.addAction(actionCopyShareUrl)
-        alertController.addAction(actionCancel)
-        
-        alertController.view.tintColor = UIColor.black
-        
-        present(alertController, animated: false, completion: nil)
-    }
-    
     @objc func onToggleLike(sender: TVButton) {
         
         guard let _index = sender.index as Int?,
@@ -409,7 +321,7 @@ extension SearchResultsViewController {
                     
                     post.removeLike(id: _user.id)
                     post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
+                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? DiagnosisCell {
                         cell.setData(post: post)
                         
                         cell.btnLike.setImage(UIImage(named: "icon_broadcast_like"), for: .normal)
@@ -427,7 +339,7 @@ extension SearchResultsViewController {
                     
                     post.addLike(id: _user.id)
                     post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell {
+                    if let cell = _refTableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? DiagnosisCell {
                         cell.setData(post: post)
                         
                         cell.btnLike.setImage(UIImage(named: "icon_broadcast_liked"), for: .normal)
@@ -501,16 +413,20 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
         
         if tableView == self.tvPosts {
             
-            let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: SearchPostCellID) as! PlaylistCell
+            let cell: DiagnosisCell = tableView.dequeueReusableCell(withIdentifier: SearchPostCellID) as! DiagnosisCell
             
             let post = PostController.Instance.getHashtagPosts()[indexPath.row]
             cell.setData(post: post)
             
-            cell.btnShare.tag = indexPath.row
-            cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
+            cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
+            cell.btnLike.index = indexPath.row
+            cell.btnLike.refTableView = tableView
             
             cell.btnMessage.tag = indexPath.row
             cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
+            
+            cell.btnShare.tag = indexPath.row
+            cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
             
 //            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
 //            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
@@ -522,17 +438,6 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
 //                cell.btnPlay.playing = false
 //            }
             
-            cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-            cell.btnLike.index = indexPath.row
-            cell.btnLike.refTableView = tableView
-            
-            cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-            cell.btnAction.index = indexPath.row
-            cell.btnAction.refTableView = tableView
-            
-            cell.btnPlaylist.index = indexPath.row
-            cell.btnPlaylist.refTableView = tableView
-            
             if let _user = UserController.Instance.getUser() as User? {
                 let hasLiked = post.hasLiked(id: _user.id)
                 let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
@@ -543,9 +448,6 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
                 let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
                 cell.btnMessage.setImage(image1, for: .normal)
                 
-//                let hasAddedToPlaylist = playlist.contains(where: { $0.id == post.id })
-//                let image2 = hasAddedToPlaylist ? UIImage(named: "icon_broadcast_playlisted") : UIImage(named: "icon_broadcast_playlist")
-//                cell.btnPlaylist.setImage(image2, for: .normal)
             }
             
             let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
@@ -555,8 +457,6 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
             let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
             cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
             cell.lblUsername.tag = indexPath.row
-            
-            cell.lblDescription.isUserInteractionEnabled = false
             
 //            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
 //            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
@@ -579,7 +479,7 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
         
         if tableView == self.tvPosts {
             
-            guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+            guard let cell = tableView.cellForRow(at: indexPath) as? DiagnosisCell
                 else { return }
             
             let post = PostController.Instance.getHashtagPosts()[indexPath.row]
@@ -605,7 +505,7 @@ extension SearchResultsViewController : UITableViewDataSource, UITableViewDelega
         
         if tableView == self.tvPosts {
             
-            guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+            guard let cell = tableView.cellForRow(at: indexPath) as? DiagnosisCell
                 else { return }
             
             let post = PostController.Instance.getHashtagPosts()[indexPath.row]

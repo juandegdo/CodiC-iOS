@@ -19,7 +19,6 @@ class SaveDiagnosisViewController: BaseViewController {
     @IBOutlet var btnAddPicture: UIButton!
     
     @IBOutlet var tfBroadcastName: UITextField!
-    @IBOutlet var tvDescription: RadContentHeightTextView!
     @IBOutlet var hashTagCtrl: TLTagsControl!
     @IBOutlet var btnSave: UIButton!
     @IBOutlet var alertWindow: UIWindow!
@@ -61,10 +60,6 @@ class SaveDiagnosisViewController: BaseViewController {
         self.btnAddPicture.layer.borderWidth = 1.5
         self.btnAddPicture.layer.borderColor = UIColor(red:113.0/255, green:127.0/255, blue:134.0/255, alpha:1.0).cgColor
         
-        // Description
-        self.tvDescription.minHeight = 30
-        self.tvDescription.maxHeight = 150
-        
         // Hashtags
         self.hashTagCtrl.tagsBackgroundColor = UIColor(red: 205/255, green: 212/255, blue: 215/255, alpha: 1.0)
         self.hashTagCtrl.tagsTextColor = UIColor.white
@@ -93,15 +88,6 @@ extension SaveDiagnosisViewController : UITextFieldDelegate {
             return true
         }
         
-    }
-}
-
-extension SaveDiagnosisViewController : UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard let description = textView.text else { return true }
-        
-        let newLength = description.count + text.count - range.length
-        return newLength <= Constants.MaxDescriptionLength
     }
 }
 
@@ -191,7 +177,7 @@ extension SaveDiagnosisViewController {
             let audioData = try Data(contentsOf: audioFilename)
             self.btnSave.isEnabled = false
             
-            PostService.Instance.sendPost(title, author: author, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
+            PostService.Instance.sendPost(title, author: author, description: "Diagnosis", hashtags: hashTagCtrl.tags as! [String], postType: postType, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
                 (success: Bool, postId: String?) in
                 
                 if success {

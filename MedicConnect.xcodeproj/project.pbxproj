@@ -25,6 +25,8 @@
 		652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */; };
 		653D8122200FF31800136E1B /* SaveDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8121200FF31800136E1B /* SaveDiagnosisViewController.swift */; };
 		653D8124200FF32F00136E1B /* SaveConsultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8123200FF32F00136E1B /* SaveConsultViewController.swift */; };
+		653D8127201024D300136E1B /* DiagnosisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8125201024D300136E1B /* DiagnosisCell.swift */; };
+		653D8128201024D300136E1B /* DiagnosisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653D8126201024D300136E1B /* DiagnosisCell.xib */; };
 		653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 653E7C631FBA067C00B41A5C /* Main.storyboard */; };
 		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
@@ -86,10 +88,10 @@
 		D213CB231E0CB002004BEA3C /* SettingHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D213CB221E0CB002004BEA3C /* SettingHeaderCell.swift */; };
 		D213CB251E0CB043004BEA3C /* SettingHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D213CB241E0CB043004BEA3C /* SettingHeaderCell.xib */; };
 		D21AB5111DF48A9000AA92A7 /* EditRecordingBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21AB5101DF48A9000AA92A7 /* EditRecordingBroadcastViewController.swift */; };
-		D21BC8F81DEA2867008F5443 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21BC8F71DEA2867008F5443 /* PlaylistCell.swift */; };
+		D21BC8F81DEA2867008F5443 /* ConsultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21BC8F71DEA2867008F5443 /* ConsultCell.swift */; };
 		D21BC8FA1DEA2C56008F5443 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21BC8F91DEA2C56008F5443 /* Constants.swift */; };
 		D21BC8FD1DEA32AD008F5443 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D21BC8FC1DEA32AD008F5443 /* ImageHelper.swift */; };
-		D21BC8FF1DEA3F0D008F5443 /* PlaylistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */; };
+		D21BC8FF1DEA3F0D008F5443 /* ConsultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D21BC8FE1DEA3F0D008F5443 /* ConsultCell.xib */; };
 		D225D11B1E84BDC600B5793A /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225D11A1E84BDC600B5793A /* PostController.swift */; };
 		D2301FDB1E5FBD03006C636A /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2301FDA1E5FBD03006C636A /* UserController.swift */; };
 		D2301FDD1E5FC212006C636A /* WelcomeLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2301FDC1E5FC212006C636A /* WelcomeLastViewController.swift */; };
@@ -184,6 +186,8 @@
 		652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
 		653D8121200FF31800136E1B /* SaveDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiagnosisViewController.swift; sourceTree = "<group>"; };
 		653D8123200FF32F00136E1B /* SaveConsultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConsultViewController.swift; sourceTree = "<group>"; };
+		653D8125201024D300136E1B /* DiagnosisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisCell.swift; sourceTree = "<group>"; };
+		653D8126201024D300136E1B /* DiagnosisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiagnosisCell.xib; sourceTree = "<group>"; };
 		653E7C631FBA067C00B41A5C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
@@ -253,10 +257,10 @@
 		D213CB221E0CB002004BEA3C /* SettingHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingHeaderCell.swift; sourceTree = "<group>"; };
 		D213CB241E0CB043004BEA3C /* SettingHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingHeaderCell.xib; sourceTree = "<group>"; };
 		D21AB5101DF48A9000AA92A7 /* EditRecordingBroadcastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRecordingBroadcastViewController.swift; sourceTree = "<group>"; };
-		D21BC8F71DEA2867008F5443 /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
+		D21BC8F71DEA2867008F5443 /* ConsultCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultCell.swift; sourceTree = "<group>"; };
 		D21BC8F91DEA2C56008F5443 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D21BC8FC1DEA32AD008F5443 /* ImageHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
-		D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistCell.xib; sourceTree = "<group>"; };
+		D21BC8FE1DEA3F0D008F5443 /* ConsultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultCell.xib; sourceTree = "<group>"; };
 		D225D11A1E84BDC600B5793A /* PostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		D2301FDA1E5FBD03006C636A /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 		D2301FDC1E5FC212006C636A /* WelcomeLastViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeLastViewController.swift; sourceTree = "<group>"; };
@@ -423,8 +427,10 @@
 				652A1C341FA9242A009B7765 /* PatientListCell.xib */,
 				657B12811FC38E4C0059B16E /* PatientNotesCell.swift */,
 				657B12821FC38E4C0059B16E /* PatientNotesCell.xib */,
-				D21BC8F71DEA2867008F5443 /* PlaylistCell.swift */,
-				D21BC8FE1DEA3F0D008F5443 /* PlaylistCell.xib */,
+				D21BC8F71DEA2867008F5443 /* ConsultCell.swift */,
+				D21BC8FE1DEA3F0D008F5443 /* ConsultCell.xib */,
+				653D8125201024D300136E1B /* DiagnosisCell.swift */,
+				653D8126201024D300136E1B /* DiagnosisCell.xib */,
 				A9C741D51F0FDCC600894651 /* PrivateUserTableViewCell.swift */,
 				A9C741D61F0FDCC600894651 /* PrivateUserTableViewCell.xib */,
 				D2F55A951DEBB8920038A392 /* ProfileListCell.swift */,
@@ -926,6 +932,7 @@
 				D2941E651E109E7D00CB7552 /* ChangePasswordListCell.xib in Resources */,
 				A9A358781F07447F005B8011 /* Code_of_conduct_HTML.html in Resources */,
 				65A289781F3BC97B00547D72 /* SearchTagCell.xib in Resources */,
+				653D8128201024D300136E1B /* DiagnosisCell.xib in Resources */,
 				D2F55A8B1DEB23D90038A392 /* RadTableBackgroundView.xib in Resources */,
 				A9A3587A1F07447F005B8011 /* Terms_of_service_HTML.html in Resources */,
 				652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */,
@@ -934,7 +941,7 @@
 				65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */,
 				657B12841FC38E4C0059B16E /* PatientNotesCell.xib in Resources */,
 				D279AD501E132A26001714FC /* CommentsListCell.xib in Resources */,
-				D21BC8FF1DEA3F0D008F5443 /* PlaylistCell.xib in Resources */,
+				D21BC8FF1DEA3F0D008F5443 /* ConsultCell.xib in Resources */,
 				D213CB251E0CB043004BEA3C /* SettingHeaderCell.xib in Resources */,
 				D2A9E7381E0A18E70032C2CA /* NotificationListCell.xib in Resources */,
 				65A2897C1F3BC98E00547D72 /* SearchPlaceCell.xib in Resources */,
@@ -1179,7 +1186,8 @@
 				D2F55A6E1DEB1A690038A392 /* SharePopupViewController.swift in Sources */,
 				65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */,
 				D2941E611E10993300CB7552 /* ChangePasswordViewController.swift in Sources */,
-				D21BC8F81DEA2867008F5443 /* PlaylistCell.swift in Sources */,
+				D21BC8F81DEA2867008F5443 /* ConsultCell.swift in Sources */,
+				653D8127201024D300136E1B /* DiagnosisCell.swift in Sources */,
 				D29891F11E613DBA004C0FC1 /* FavoritesViewController.swift in Sources */,
 				A9E4451D1F0A699000F49C7E /* playlist.xcdatamodeld in Sources */,
 				00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */,

@@ -50,7 +50,7 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
         self.lblMSPError.isHidden = true
         
         // Location
-        self.tfLocation.placeholder = NSLocalizedString("Referring Site", comment: "comment")
+        self.tfLocation.placeholder = NSLocalizedString("Site", comment: "comment")
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
@@ -177,7 +177,7 @@ extension WelcomeProfileViewController {
             if self.tfLocation.text != "" {
                 _user.location = self.tfLocation.text!
             } else {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your referring site!")
+                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your site!")
                 return
             }
             

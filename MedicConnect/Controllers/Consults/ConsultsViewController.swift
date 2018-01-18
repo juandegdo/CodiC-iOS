@@ -12,13 +12,12 @@ import Crashlytics
 
 class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
-    let ConsultCellID = "PlaylistCell"
+    let ConsultCellID = "ConsultCell"
     let postType = Constants.PostTypeConsult
     
     @IBOutlet var tvConsults: UITableView!
     
     var vcDisappearType : ViewControllerDisappearType = .other
-    var selectedDotsIndex = 0
     var expandedRows = Set<String>()
     var selectedRowIndex = -1
     
@@ -128,7 +127,7 @@ extension ConsultsViewController {
             let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
-            let cell = self.tvConsults.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell
+            let cell = self.tvConsults.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ConsultCell
             cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
@@ -161,7 +160,7 @@ extension ConsultsViewController {
         let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
-            let cell = self.tvConsults.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? PlaylistCell
+            let cell = self.tvConsults.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ConsultCell
             sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
             
             if let _player = PlayerController.Instance.player as AVPlayer?,
@@ -456,18 +455,10 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: ConsultCellID) as! PlaylistCell
+        let cell: ConsultCell = tableView.dequeueReusableCell(withIdentifier: ConsultCellID) as! ConsultCell
         
         let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         cell.setData(post: post)
-        
-        // Hide buttons for Consults
-        cell.btnAction.isHidden = true
-        cell.btnLike.isHidden = true
-        cell.btnMessage.isHidden = true
-        cell.btnShare.isHidden = true
-        
-        cell.constOfBtnPlaylistHeight.constant = 0
         
         let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
         cell.imgUserAvatar.addGestureRecognizer(tapGestureOnUserAvatar)
@@ -522,7 +513,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ConsultCell
             else { return }
         
         self.releasePlayer()
@@ -537,7 +528,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         case false:
             do {
                 if self.selectedRowIndex > -1 {
-                    guard let oldCell = tableView.cellForRow(at: IndexPath.init(row: self.selectedRowIndex, section: 0)) as? PlaylistCell
+                    guard let oldCell = tableView.cellForRow(at: IndexPath.init(row: self.selectedRowIndex, section: 0)) as? ConsultCell
                         else { return }
                     
                     oldCell.isExpanded = false
@@ -557,7 +548,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? ConsultCell
             else { return }
         
         self.tvConsults.beginUpdates()

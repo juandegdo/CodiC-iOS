@@ -22,11 +22,10 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet var tvDiagnoses: UITableView!
     
-    let DiagnosisCellID = "PlaylistCell"
+    let DiagnosisCellID = "DiagnosisCell"
     let postType = Constants.PostTypeDiagnosis
     
     var vcDisappearType : ViewControllerDisappearType = .other
-    var selectedDotsIndex = 0
     var expandedRows = Set<String>()
     var selectedIndexPath: IndexPath? = nil
     
@@ -78,7 +77,7 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
         self.tvDiagnoses.register(nibDiagnosisCell, forCellReuseIdentifier: DiagnosisCellID)
         
         self.tvDiagnoses.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tvDiagnoses.frame.size.width, height: 20.0))
-        self.tvDiagnoses.estimatedRowHeight = 132.0
+        self.tvDiagnoses.estimatedRowHeight = 68.0
         self.tvDiagnoses.rowHeight = UITableViewAutomaticDimension
         
     }
@@ -144,7 +143,7 @@ extension DiagnosisViewController {
             let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
-            let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell
+            let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? DiagnosisCell
             cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
@@ -177,7 +176,7 @@ extension DiagnosisViewController {
         let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
-            let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell
+            let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? DiagnosisCell
             sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
             
             if let _player = PlayerController.Instance.player as AVPlayer?,
@@ -364,89 +363,6 @@ extension DiagnosisViewController {
         
     }
     
-    func onToggleAction(sender: TVButton) {
-        guard let _ = sender.index as Int?,
-            let _ = sender.refTableView as UITableView? else {
-                return
-        }
-        
-        print("\(sender.index!)")
-        selectedDotsIndex = sender.index!
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[selectedDotsIndex]
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        
-        let actionReportThisBroadcast = UIAlertAction(title: "Report this broadcast", style: .destructive) { (action) in
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                return
-            }
-            
-            UserService.Instance.report(from: _user.email, subject: "Report this broadcast", msgbody: "User: \(post.user.fullName)\nUrl: \(post.audio)", completion: { (success) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcast.\nWe are looking into it.")
-                    }
-                }
-                
-            });
-            
-        }
-        let actionReportUser = UIAlertAction(title: "Report this user", style: .destructive) { (action) in
-            
-            guard let _user = UserController.Instance.getUser() as User? else {
-                return
-            }
-            
-            UserService.Instance.report(from: _user.email, subject: "Report this user", msgbody: "User: \(post.user.fullName)", completion: { (success) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcaster.\nWe are looking into it.")
-                    }
-                }
-                
-            });
-            
-        }
-        let actionBlockUser = UIAlertAction(title: "Block user", style: .default) { (action) in
-            UserService.Instance.block(userId: post.user.id , completion: {
-                (success: Bool) in
-                
-                if success {
-                    DispatchQueue.main.async {
-                        AlertUtil.showOKAlert(self, message: "This user is now blocked.\nGo to Settings to undo this action.")
-                    }
-                    
-                    self.loadMe()
-                } else {
-                    sender.makeEnabled(enabled: true)
-                }
-                
-            })
-        }
-        let actionTurnOnPost = UIAlertAction(title: "Turn on Post notification", style: .default) { (action) in
-            
-        }
-        let actionCopyShareUrl = UIAlertAction(title: "Copy Share Url", style: .default) { (action) in
-            UIPasteboard.general.string = post.audio
-        }
-        
-        let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        
-        alertController.addAction(actionReportThisBroadcast)
-        alertController.addAction(actionReportUser)
-        alertController.addAction(actionBlockUser)
-        alertController.addAction(actionTurnOnPost)
-        alertController.addAction(actionCopyShareUrl)
-        alertController.addAction(actionCancel)
-        
-        alertController.view.tintColor = UIColor.black
-        
-        present(alertController, animated: false, completion: nil)
-    }
-    
     @objc func onToggleLike(sender: TVButton) {
         
         guard let _index = sender.index as Int?,
@@ -470,7 +386,7 @@ extension DiagnosisViewController {
                     
                     post.removeLike(id: _user.id)
                     post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell {
+                    if let cell = _refTableView.cellForRow(at: self.pathFromIndex(index: _index)) as? DiagnosisCell {
                         cell.setData(post: post)
                         
                         cell.btnLike.setImage(UIImage(named: "icon_broadcast_like"), for: .normal)
@@ -488,7 +404,7 @@ extension DiagnosisViewController {
                     
                     post.addLike(id: _user.id)
                     post.likeDescription = like_description
-                    if let cell = _refTableView.cellForRow(at: self.pathFromIndex(index: _index)) as? PlaylistCell {
+                    if let cell = _refTableView.cellForRow(at: self.pathFromIndex(index: _index)) as? DiagnosisCell {
                         cell.setData(post: post)
                         
                         cell.btnLike.setImage(UIImage(named: "icon_broadcast_liked"), for: .normal)
@@ -543,9 +459,7 @@ extension DiagnosisViewController {
     // MARK: Selectors
     
     @objc func onSelectShare(sender: UIButton) {
-        
         vcDisappearType = .share
-        
         self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcastPopup, sender: nil)
         
     }
@@ -629,18 +543,13 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell: PlaylistCell = tableView.dequeueReusableCell(withIdentifier: DiagnosisCellID) as! PlaylistCell
+        let cell: DiagnosisCell = tableView.dequeueReusableCell(withIdentifier: DiagnosisCellID) as! DiagnosisCell
         
 //        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
         let post = diagnosisWithSections[indexPath.section][indexPath.row]
         cell.setData(post: post)
         
         let index = self.indexFromPath(indexPath: indexPath)
-        
-//        cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-//        cell.btnAction.index = index
-//        cell.btnAction.refTableView = tableView
-        cell.btnAction.isHidden = true
         
         cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
         cell.btnLike.index = index
@@ -670,8 +579,6 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         let tapGestureOnUsername = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
         cell.lblUsername.addGestureRecognizer(tapGestureOnUsername)
         cell.lblUsername.tag = index
-        
-        cell.lblDescription.isUserInteractionEnabled = false
         
 //        let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
 //        cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
@@ -717,7 +624,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? DiagnosisCell
             else { return }
         
         self.releasePlayer()
@@ -732,7 +639,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         case false:
             do {
                 if self.selectedIndexPath != nil {
-                    guard let oldCell = tableView.cellForRow(at: self.selectedIndexPath!) as? PlaylistCell
+                    guard let oldCell = tableView.cellForRow(at: self.selectedIndexPath!) as? DiagnosisCell
                         else { return }
                     
                     oldCell.isExpanded = false
@@ -752,7 +659,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        guard let cell = tableView.cellForRow(at: indexPath) as? PlaylistCell
+        guard let cell = tableView.cellForRow(at: indexPath) as? DiagnosisCell
             else { return }
         
         self.tvDiagnoses.beginUpdates()
