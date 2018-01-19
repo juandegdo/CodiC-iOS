@@ -27,6 +27,8 @@
 		653D8124200FF32F00136E1B /* SaveConsultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8123200FF32F00136E1B /* SaveConsultViewController.swift */; };
 		653D8127201024D300136E1B /* DiagnosisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8125201024D300136E1B /* DiagnosisCell.swift */; };
 		653D8128201024D300136E1B /* DiagnosisCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653D8126201024D300136E1B /* DiagnosisCell.xib */; };
+		653D81302012347800136E1B /* ExpandingMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D812E2012347800136E1B /* ExpandingMenuItem.swift */; };
+		653D81312012347800136E1B /* ExpandingMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D812F2012347800136E1B /* ExpandingMenuButton.swift */; };
 		653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 653E7C631FBA067C00B41A5C /* Main.storyboard */; };
 		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
@@ -188,6 +190,8 @@
 		653D8123200FF32F00136E1B /* SaveConsultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConsultViewController.swift; sourceTree = "<group>"; };
 		653D8125201024D300136E1B /* DiagnosisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisCell.swift; sourceTree = "<group>"; };
 		653D8126201024D300136E1B /* DiagnosisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiagnosisCell.xib; sourceTree = "<group>"; };
+		653D812E2012347800136E1B /* ExpandingMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuItem.swift; path = "MedicConnect/Views/New Group/ExpandingMenuItem.swift"; sourceTree = SOURCE_ROOT; };
+		653D812F2012347800136E1B /* ExpandingMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuButton.swift; path = "MedicConnect/Views/New Group/ExpandingMenuButton.swift"; sourceTree = SOURCE_ROOT; };
 		653E7C631FBA067C00B41A5C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +389,16 @@
 				650E28871F71B64B0096A3F0 /* SCSiriWaveformView.m */,
 			);
 			path = SCSiriWaveformView;
+			sourceTree = "<group>";
+		};
+		653D812B2012342800136E1B /* ExpandingMenu */ = {
+			isa = PBXGroup;
+			children = (
+				653D812F2012347800136E1B /* ExpandingMenuButton.swift */,
+				653D812E2012347800136E1B /* ExpandingMenuItem.swift */,
+			);
+			name = ExpandingMenu;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		65488DAA1F944204005C1EA8 /* Patients */ = {
@@ -620,6 +634,7 @@
 			children = (
 				657B127E1FC331270059B16E /* PlaySlider */,
 				654FDF7F1F62060B009D4BA1 /* ExpandableLabel */,
+				653D812B2012342800136E1B /* ExpandingMenu */,
 				D2F55A7D1DEB23D90038A392 /* Others */,
 				D206582E1E5BB9DB003875E4 /* RadTabBarController */,
 				650E28851F71B5960096A3F0 /* SCSiriWaveformView */,
@@ -1177,6 +1192,7 @@
 				D2AFD0081E99426C00246477 /* PlayerController.swift in Sources */,
 				654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */,
 				654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */,
+				653D81312012347800136E1B /* ExpandingMenuButton.swift in Sources */,
 				D20658331E5BB9ED003875E4 /* RadTabBar.m in Sources */,
 				D29891F51E651075004C0FC1 /* ResetViewController.swift in Sources */,
 				005642961EFEDA3000B42A42 /* NotificationService.swift in Sources */,
@@ -1268,6 +1284,7 @@
 				D2EB58B51E93C10C00D94194 /* SVGPlayButton.swift in Sources */,
 				D21AB5111DF48A9000AA92A7 /* EditRecordingBroadcastViewController.swift in Sources */,
 				6561037A20090C47000E79FC /* EditPatientViewController.swift in Sources */,
+				653D81302012347800136E1B /* ExpandingMenuItem.swift in Sources */,
 				D225D11B1E84BDC600B5793A /* PostController.swift in Sources */,
 				D2EB58B71E93E5A700D94194 /* AudioHelper.swift in Sources */,
 				656C1E9A1FAD3E7A00F33697 /* PatientProfileViewController.swift in Sources */,

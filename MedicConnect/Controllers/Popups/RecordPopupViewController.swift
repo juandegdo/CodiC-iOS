@@ -15,8 +15,6 @@ class RecordPopupViewController: BaseViewController {
     @IBOutlet var btnRecordConsult: UIButton!
     @IBOutlet var btnRecordDiagnosis: UIButton!
     
-    var fileURL: URL?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initViews()

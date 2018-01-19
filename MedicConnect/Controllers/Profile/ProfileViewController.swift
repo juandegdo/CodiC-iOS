@@ -45,6 +45,8 @@ class ProfileViewController: BaseViewController {
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
     
+    var menuButton: ExpandingMenuButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,6 +68,8 @@ class ProfileViewController: BaseViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.estimatedRowHeight = 110.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        configureExpandingMenuButton()
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(self.updatedProfileSettings), name: updatedProfileNotification, object: nil)
@@ -118,6 +122,56 @@ class ProfileViewController: BaseViewController {
         
         self.firstLoad = false
         
+    }
+    
+    fileprivate func configureExpandingMenuButton() {
+        self.btnRecord.isHidden = true
+        
+        let menuButtonSize: CGSize = CGSize(width: 58.0, height: 58.0)
+        self.menuButton = ExpandingMenuButton(frame: CGRect(origin: CGPoint.zero, size: menuButtonSize), centerImage: UIImage(named: "icon_profile_add")!, centerHighlightedImage: UIImage(named: "icon_profile_add")!)
+        menuButton!.center = CGPoint(x: self.view.bounds.width - 44.0, y: self.view.bounds.height - 34.0 - CGFloat(TABBAR_HEIGHT))
+        self.view.addSubview(menuButton!)
+        
+        let item1 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Record New Consult", image: UIImage(named: "icon_record_consult")!, highlightedImage: UIImage(named: "icon_record_consult")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            // Consult
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if let vc = storyboard.instantiateViewController(withIdentifier: "ConsultReferringViewController") as? ConsultReferringViewController {
+                
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+        }
+        
+        let item2 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Record New Diagnosis", image: UIImage(named: "icon_record_diagnosis")!, highlightedImage: UIImage(named: "icon_record_diagnosis")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            // Diagnosis
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+                
+                DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)
+                DataManager.Instance.setPatientId(patientId: "")
+                DataManager.Instance.setReferringUserIds(referringUserIds: [])
+                
+                self.present(vc, animated: false, completion: nil)
+                
+            }
+        }
+        
+        menuButton!.addMenuItems([item1, item2])
+        
+        menuButton!.willPresentMenuItems = { (menu) -> Void in
+            self.vcDisappearType = .record
+            self.releasePlayer()
+            
+            self.menuButton!.removeFromSuperview()
+            UIApplication.shared.keyWindow?.addSubview(self.menuButton!)
+        }
+        
+        menuButton!.didDismissMenuItems = { (menu) -> Void in
+            self.menuButton!.removeFromSuperview()
+            self.view.addSubview(self.menuButton!)
+        }
     }
     
     func loadAll() {

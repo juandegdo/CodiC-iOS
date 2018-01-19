@@ -7945,8 +7945,8 @@ uploaded a new diagnosis.</string>
         <image name="icon_playlist_prev_off" width="29" height="18"/>
         <image name="icon_plus" width="29" height="26"/>
         <image name="icon_profile_add" width="58" height="58"/>
-        <image name="icon_record_consult" width="41" height="41"/>
-        <image name="icon_record_diagnosis" width="40" height="41"/>
+        <image name="icon_record_consult" width="44" height="45"/>
+        <image name="icon_record_diagnosis" width="45" height="45"/>
         <image name="icon_recording_btn" width="93" height="93"/>
         <image name="icon_recording_next_off" width="29" height="18"/>
         <image name="icon_recording_pause_off" width="20" height="26"/>
@@ -7975,6 +7975,6 @@ uploaded a new diagnosis.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DbY-Qb-ZIx"/>
-        <segue reference="OAe-nj-vD0"/>
+        <segue reference="vbE-pK-CLR"/>
     </inferredMetricsTieBreakers>
 </document>
