@@ -3576,20 +3576,38 @@ recorded a new diagnosis.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiO-uo-FGg">
-                                        <rect key="frame" x="50" y="32" width="314" height="20"/>
+                                        <rect key="frame" x="167.33333333333334" y="32" width="80" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Pmg-Tp-iqt"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Ww-fMj">
+                                        <rect key="frame" x="350" y="22" width="64" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HvB-6B-8Ha"/>
+                                            <constraint firstAttribute="width" constant="64" id="vBF-I0-8hy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnSaveClicked:" destination="blF-Iv-w30" eventType="touchUpInside" id="8RB-cz-LYZ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="fiO-uo-FGg" secondAttribute="bottom" constant="12" id="2ra-Z1-WYu"/>
                                     <constraint firstAttribute="height" constant="64" id="3NG-LN-E6f"/>
+                                    <constraint firstItem="dCc-Ww-fMj" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="22" id="73X-4h-h1Q"/>
                                     <constraint firstItem="2dc-3y-gB2" firstAttribute="leading" secondItem="4xe-F3-Xqz" secondAttribute="leading" id="C2k-mP-mXb"/>
                                     <constraint firstItem="fiO-uo-FGg" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="32" id="Heg-gN-1EK"/>
-                                    <constraint firstAttribute="trailing" secondItem="fiO-uo-FGg" secondAttribute="trailing" constant="50" id="U83-Dx-ZcQ"/>
                                     <constraint firstItem="2dc-3y-gB2" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="22" id="cCp-rn-rgf"/>
-                                    <constraint firstItem="fiO-uo-FGg" firstAttribute="leading" secondItem="2dc-3y-gB2" secondAttribute="trailing" constant="10" id="y2b-YI-ccf"/>
+                                    <constraint firstItem="fiO-uo-FGg" firstAttribute="centerX" secondItem="4xe-F3-Xqz" secondAttribute="centerX" id="lDr-Tv-mCM"/>
+                                    <constraint firstAttribute="trailing" secondItem="dCc-Ww-fMj" secondAttribute="trailing" id="x0C-Jg-w9f"/>
                                 </constraints>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-vF-8Dj">
@@ -3616,6 +3634,7 @@ recorded a new diagnosis.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="m_btnSave" destination="dCc-Ww-fMj" id="9S6-co-AxC"/>
                         <outlet property="m_contentWebView" destination="CZA-vF-8Dj" id="sSr-0I-rhg"/>
                         <outlet property="m_lblTitle" destination="fiO-uo-FGg" id="ckl-8z-6tP"/>
                     </connections>
