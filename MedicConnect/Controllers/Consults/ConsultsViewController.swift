@@ -14,12 +14,25 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
 
     let ConsultCellID = "ConsultCell"
     let postType = Constants.PostTypeConsult
+    let OffsetHeaderStop: CGFloat = 50
     
+    // Scroll
+    @IBOutlet var mainScrollView: UIScrollView!
     @IBOutlet var tvConsults: UITableView!
+    
+    // Search
+    @IBOutlet var viewSearch: UIView!
+    @IBOutlet var txFieldSearch: UITextField!
+    
+    // Constraints
+    @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
     var selectedRowIndex = -1
+    var searchResult: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +51,9 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -46,6 +62,9 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
         if let tabvc = self.tabBarController as UITabBarController? {
             DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
         }
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         if (vcDisappearType == .other) {
             self.releasePlayer()
@@ -56,18 +75,44 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
         
     }
     
+    // MARK: Keyboard Functions
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let bottomMargin = keyboardSize.height - 55.0
+            self.tableViewHeightConstraint.constant = self.tableViewHeightConstraint.constant - bottomMargin
+            
+            UIView.animate(withDuration: 1, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let bottomMargin = keyboardSize.height - 55.0
+            self.tableViewHeightConstraint.constant = self.tableViewHeightConstraint.constant + bottomMargin
+        
+            UIView.animate(withDuration: 1, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
     // MARK: Private Functions
     
     func initViews() {
         
         // Initialize Table Views
-        
         let nibConsultCell = UINib(nibName: ConsultCellID, bundle: nil)
         self.tvConsults.register(nibConsultCell, forCellReuseIdentifier: ConsultCellID)
         
         self.tvConsults.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tvConsults.frame.size.width, height: 20.0))
         self.tvConsults.estimatedRowHeight = 100.0
         self.tvConsults.rowHeight = UITableViewAutomaticDimension
+        
+        // Hide search bar in the beginning
+        self.mainScrollView.contentOffset = CGPoint.init(x: 0, y: OffsetHeaderStop)
         
     }
     
@@ -76,19 +121,6 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
 extension ConsultsViewController {
     
     // MARK: Private methods
-    
-    func loadPosts() {
-        
-        // Load Timeline
-        UserService.Instance.getTimeline(completion: {
-            (success: Bool) in
-            if success {
-                self.selectedRowIndex = (self.tvConsults.indexPathForSelectedRow != nil) ? self.tvConsults.indexPathForSelectedRow!.row : -1
-                self.tvConsults.reloadData()
-            }
-        })
-        
-    }
     
     func loadMe() {
         
@@ -101,6 +133,35 @@ extension ConsultsViewController {
             }
         })
         
+    }
+    
+    func loadPosts() {
+        
+        // Load Timeline
+        UserService.Instance.getTimeline(completion: {
+            (success: Bool) in
+            if success {
+                self.selectedRowIndex = (self.tvConsults.indexPathForSelectedRow != nil) ? self.tvConsults.indexPathForSelectedRow!.row : -1
+                self.loadSearchResult(self.txFieldSearch.text!)
+                self.updateScroll(offset: self.mainScrollView.contentOffset.y)
+            }
+        })
+        
+    }
+    
+    func loadSearchResult(_ keyword: String) {
+        // Local search
+        if keyword == "" {
+            searchResult = PostController.Instance.getFollowingPosts(type: self.postType)
+        } else {
+            searchResult = PostController.Instance.getFollowingPosts(type: self.postType).filter({(post: Post) -> Bool in
+                return post.title.lowercased().contains(keyword.lowercased()) ||
+                    post.descriptions.lowercased().contains(keyword.lowercased()) ||
+                    post.user.fullName.lowercased().contains(keyword.lowercased())
+            })
+        }
+        
+        self.tvConsults.reloadData()
     }
     
     func releasePlayer(onlyState: Bool = false) {
@@ -124,7 +185,7 @@ extension ConsultsViewController {
         }
         
         if let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
             let cell = self.tvConsults.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ConsultCell
@@ -157,7 +218,7 @@ extension ConsultsViewController {
             return
         }
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+        let post = searchResult[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
             let cell = self.tvConsults.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ConsultCell
@@ -236,7 +297,7 @@ extension ConsultsViewController {
                 return
             }
             
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value))
         }
         
@@ -296,7 +357,7 @@ extension ConsultsViewController {
             return
         }
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+        let post = searchResult[_index]
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
             vc.strTitle = "Synopsis"
             vc.strSynopsisUrl = post.transcriptionUrl
@@ -324,7 +385,7 @@ extension ConsultsViewController {
                 return
             }
             
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), progress: CGFloat(_lastPlayed.value))
             
         }
@@ -348,7 +409,7 @@ extension ConsultsViewController {
                 return
             }
             
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(sender.value))
         }
         
@@ -367,7 +428,7 @@ extension ConsultsViewController {
     
     @objc func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
-        let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
+        let post : Post? = searchResult[index!]
         
         if (post != nil) {
             self.callProfileVC(user: (post?.user)!)
@@ -439,6 +500,33 @@ extension ConsultsViewController {
         Crashlytics.sharedInstance().setUserIdentifier(user.id)
         Crashlytics.sharedInstance().setUserName(user.fullName)
     }
+    
+    // MARK: Scroll Ralated
+    
+    func updateScroll(offset: CGFloat) {
+        // ScrollViews Frame
+        if (offset >= OffsetHeaderStop) {
+            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64
+            
+            self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
+        } else {
+            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
+            self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
+            
+        }
+        
+    }
+    
+    func getCurrentScroll() -> UIScrollView {
+        
+        let scrollView: UIScrollView = self.tvConsults
+        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height - 64.0 + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
+        return scrollView
+        
+    }
+    
 }
 
 extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
@@ -457,7 +545,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         
         let cell: ConsultCell = tableView.dequeueReusableCell(withIdentifier: ConsultCellID) as! ConsultCell
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+        let post = searchResult[indexPath.row]
         cell.setData(post: post)
         
         let tapGestureOnUserAvatar = UITapGestureRecognizer(target: self, action: #selector(onSelectUser(sender:)))
@@ -519,7 +607,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         self.releasePlayer()
         self.tvConsults.beginUpdates()
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+        let post = searchResult[indexPath.row]
         
         switch cell.isExpanded {
         case true:
@@ -553,7 +641,7 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         
         self.tvConsults.beginUpdates()
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+        let post = searchResult[indexPath.row]
         self.expandedRows.remove(post.id)
         cell.isExpanded = false
         
@@ -562,7 +650,69 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
-        return PostController.Instance.getFollowingPosts(type: self.postType).count
+        return searchResult.count
     }
 
+}
+
+extension ConsultsViewController : UIScrollViewDelegate {
+    
+    // MARK: UIScrollViewDelegate methods
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView == self.mainScrollView {
+            let offset: CGFloat = scrollView.contentOffset.y
+            
+            if offset >= 0 { // SCROLL UP/DOWN ------------
+                self.updateScroll(offset: offset)
+            }
+        }
+        
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        if scrollView == self.mainScrollView {
+            self.tvConsults.setContentOffset(CGPoint.zero, animated: true)
+        }
+        
+    }
+    
+}
+
+extension ConsultsViewController {
+    
+    // MARK: IBActions
+    
+    @IBAction func onSearchTapped(sender: AnyObject) {
+        if (!self.txFieldSearch.isFirstResponder) {
+            self.txFieldSearch.becomeFirstResponder()
+        }
+    }
+
+}
+
+extension ConsultsViewController : UITextFieldDelegate {
+    // UITextfield delegate methods
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        var txtAfterUpdate: NSString =  NSString(string: self.txFieldSearch.text!)
+        txtAfterUpdate = txtAfterUpdate.replacingCharacters(in: range, with: string) as NSString
+        txtAfterUpdate = txtAfterUpdate.trimmingCharacters(in: .whitespacesAndNewlines) as NSString
+        
+        self.loadSearchResult(txtAfterUpdate as String)
+        
+        return true
+    }
+    
 }

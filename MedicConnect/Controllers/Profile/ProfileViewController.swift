@@ -32,7 +32,6 @@ class ProfileViewController: BaseViewController {
     // Scroll
     @IBOutlet var mainScrollView: UIScrollView!
     @IBOutlet var tableView: UITableView!
-    
     @IBOutlet var btnRecord: UIButton!
     
     // Constraints

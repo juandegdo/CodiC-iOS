@@ -20,10 +20,22 @@ public enum ViewControllerDisappearType {
 
 class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
     
+    // Scroll
+    @IBOutlet var mainScrollView: UIScrollView!
     @IBOutlet var tvDiagnoses: UITableView!
+    
+    // Search
+    @IBOutlet var viewSearch: UIView!
+    @IBOutlet var txFieldSearch: UITextField!
+    
+    // Constraints
+    @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
     let DiagnosisCellID = "DiagnosisCell"
     let postType = Constants.PostTypeDiagnosis
+    let OffsetHeaderStop: CGFloat = 50
     
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
@@ -32,6 +44,7 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
     let collation = UILocalizedIndexedCollation.current()
     var diagnosisWithSections = [[Post]]()
     var sectionTitles = [String]()
+    var searchResult: [Post] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +63,9 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,13 +75,39 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
             DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
         }
         
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         if (vcDisappearType == .other) {
             self.releasePlayer()
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         }
         
-        
+    }
+    
+    // MARK: Keyboard Functions
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let bottomMargin = keyboardSize.height - 55.0
+            self.tableViewHeightConstraint.constant = self.tableViewHeightConstraint.constant - bottomMargin
+            
+            UIView.animate(withDuration: 1, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let bottomMargin = keyboardSize.height - 55.0
+            self.tableViewHeightConstraint.constant = self.tableViewHeightConstraint.constant + bottomMargin
+            
+            UIView.animate(withDuration: 1, animations: {
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     // MARK: Private Functions
@@ -80,6 +122,9 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
         self.tvDiagnoses.estimatedRowHeight = 68.0
         self.tvDiagnoses.rowHeight = UITableViewAutomaticDimension
         
+        // Hide search bar in the beginning
+        self.mainScrollView.contentOffset = CGPoint.init(x: 0, y: OffsetHeaderStop)
+        
     }
     
 }
@@ -87,24 +132,6 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
 extension DiagnosisViewController {
     
     // MARK: Private methods
-    
-    func loadPosts() {
-        
-        // Load Timeline
-        UserService.Instance.getTimeline(completion: {
-            (success: Bool) in
-            if success {
-                // Initialize Data
-                let (arrayDiagnoses, arrayTitles) = self.collation.partitionObjects(array: PostController.Instance.getFollowingPosts(type: self.postType), collationStringSelector: #selector(getter: Post.title))
-                self.diagnosisWithSections = arrayDiagnoses as! [[Post]]
-                self.sectionTitles = arrayTitles
-                
-                self.selectedIndexPath = (self.tvDiagnoses.indexPathForSelectedRow != nil) ? self.tvDiagnoses.indexPathForSelectedRow : nil
-                self.tvDiagnoses.reloadData()
-            }
-        })
-        
-    }
     
     func loadMe() {
         
@@ -117,6 +144,40 @@ extension DiagnosisViewController {
             }
         })
         
+    }
+    
+    func loadPosts() {
+        
+        // Load Timeline
+        UserService.Instance.getTimeline(completion: {
+            (success: Bool) in
+            if success {
+                self.selectedIndexPath = (self.tvDiagnoses.indexPathForSelectedRow != nil) ? self.tvDiagnoses.indexPathForSelectedRow : nil
+                self.loadSearchResult(self.txFieldSearch.text!)
+                self.updateScroll(offset: self.mainScrollView.contentOffset.y)
+            }
+        })
+        
+    }
+    
+    func loadSearchResult(_ keyword: String) {
+        // Local search
+        if keyword == "" {
+            searchResult = PostController.Instance.getFollowingPosts(type: self.postType)
+        } else {
+            searchResult = PostController.Instance.getFollowingPosts(type: self.postType).filter({(post: Post) -> Bool in
+                return post.title.lowercased().contains(keyword.lowercased()) ||
+                    post.descriptions.lowercased().contains(keyword.lowercased()) ||
+                    post.user.fullName.lowercased().contains(keyword.lowercased())
+            })
+        }
+        
+        // Initialize Data
+        let (arrayDiagnoses, arrayTitles) = self.collation.partitionObjects(array: searchResult, collationStringSelector: #selector(getter: Post.title))
+        self.diagnosisWithSections = arrayDiagnoses as! [[Post]]
+        self.sectionTitles = arrayTitles
+        
+        self.tvDiagnoses.reloadData()
     }
     
     func releasePlayer(onlyState: Bool = false) {
@@ -140,7 +201,7 @@ extension DiagnosisViewController {
         }
         
         if let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
             
             let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? DiagnosisCell
@@ -173,7 +234,7 @@ extension DiagnosisViewController {
             return
         }
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+        let post = searchResult[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
             let cell = self.tvDiagnoses.cellForRow(at: self.pathFromIndex(index: _index)) as? DiagnosisCell
@@ -252,7 +313,7 @@ extension DiagnosisViewController {
                 return
             }
             
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value))
         }
         
@@ -324,7 +385,7 @@ extension DiagnosisViewController {
                 return
             }
             
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), progress: CGFloat(_lastPlayed.value))
             
         }
@@ -348,7 +409,7 @@ extension DiagnosisViewController {
                 return
             }
             
-            let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+            let post = searchResult[_index]
             post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(sender.value))
         }
         
@@ -370,7 +431,7 @@ extension DiagnosisViewController {
                 return
         }
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[_index]
+        let post = searchResult[_index]
         
         guard let _user = UserController.Instance.getUser() as User? else {
             return
@@ -469,7 +530,7 @@ extension DiagnosisViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
-            let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[sender.tag]
+            let post : Post? = searchResult[sender.tag]
             vc.currentPost = post
             
             self.present(vc, animated: false, completion: nil)
@@ -479,7 +540,7 @@ extension DiagnosisViewController {
     
     @objc func onSelectUser(sender: UITapGestureRecognizer) {
         let index = sender.view?.tag
-        let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
+        let post : Post? = searchResult[index!]
         
         if (post != nil) {
             self.callProfileVC(user: (post?.user)!)
@@ -492,7 +553,7 @@ extension DiagnosisViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let vc = storyboard.instantiateViewController(withIdentifier: "LikesViewController") as? LikesViewController {
             let index = sender.view?.tag
-            let post : Post? = PostController.Instance.getFollowingPosts(type: self.postType)[index!]
+            let post : Post? = searchResult[index!]
             
             if (post != nil) {
                 vc.currentPost = post
@@ -527,6 +588,32 @@ extension DiagnosisViewController {
         Crashlytics.sharedInstance().setUserIdentifier(user.id)
         Crashlytics.sharedInstance().setUserName(user.fullName)
     }
+    
+    // MARK: Scroll Ralated
+    
+    func updateScroll(offset: CGFloat) {
+        // ScrollViews Frame
+        if (offset >= OffsetHeaderStop) {
+            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64
+            
+            self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
+        } else {
+            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
+            self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
+            
+        }
+        
+    }
+    
+    func getCurrentScroll() -> UIScrollView {
+        
+        let scrollView: UIScrollView = self.tvDiagnoses
+        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height - 64.0 + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
+        return scrollView
+        
+    }
 }
 
 extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
@@ -545,7 +632,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         let cell: DiagnosisCell = tableView.dequeueReusableCell(withIdentifier: DiagnosisCellID) as! DiagnosisCell
         
-//        let post = PostController.Instance.getFollowingPosts(type: self.postType)[indexPath.row]
+//        let post = searchResult[indexPath.row]
         let post = diagnosisWithSections[indexPath.section][indexPath.row]
         cell.setData(post: post)
         
@@ -630,7 +717,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         self.releasePlayer()
         self.tvDiagnoses.beginUpdates()
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[self.indexFromPath(indexPath: indexPath)]
+        let post = searchResult[self.indexFromPath(indexPath: indexPath)]
         
         switch cell.isExpanded {
         case true:
@@ -664,7 +751,7 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         self.tvDiagnoses.beginUpdates()
         
-        let post = PostController.Instance.getFollowingPosts(type: self.postType)[self.indexFromPath(indexPath: indexPath)]
+        let post = searchResult[self.indexFromPath(indexPath: indexPath)]
         self.expandedRows.remove(post.id)
         cell.isExpanded = false
         
@@ -705,6 +792,69 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         }
         
         return indexPath!
+    }
+    
+}
+
+extension DiagnosisViewController : UIScrollViewDelegate {
+    
+    // MARK: UIScrollViewDelegate methods
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView == self.mainScrollView {
+            let offset: CGFloat = scrollView.contentOffset.y
+            
+            if offset >= 0 { // SCROLL UP/DOWN ------------
+                self.updateScroll(offset: offset)
+            }
+        }
+        
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        if scrollView == self.mainScrollView {
+            self.tvDiagnoses.setContentOffset(CGPoint.zero, animated: true)
+        }
+        
+    }
+    
+}
+
+extension DiagnosisViewController {
+    
+    // MARK: IBActions
+    
+    @IBAction func onSearchTapped(sender: AnyObject) {
+        if (!self.txFieldSearch.isFirstResponder) {
+            self.txFieldSearch.becomeFirstResponder()
+        }
+    }
+    
+}
+
+extension DiagnosisViewController : UITextFieldDelegate {
+    
+    // UITextfield delegate methods
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        var txtAfterUpdate: NSString =  NSString(string: self.txFieldSearch.text!)
+        txtAfterUpdate = txtAfterUpdate.replacingCharacters(in: range, with: string) as NSString
+        txtAfterUpdate = txtAfterUpdate.trimmingCharacters(in: .whitespacesAndNewlines) as NSString
+        
+        self.loadSearchResult(txtAfterUpdate as String)
+        
+        return true
     }
     
 }
