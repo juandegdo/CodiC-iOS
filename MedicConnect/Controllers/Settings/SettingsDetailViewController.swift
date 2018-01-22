@@ -28,11 +28,14 @@ class SettingsDetailViewController: UIViewController {
         
         // Hide Save button
         self.m_btnSave.isHidden = true
+        
+        openContents()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        openContents()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -131,6 +134,10 @@ extension SettingsDetailViewController : UIWebViewDelegate {
         if (self.strSynopsisUrl as String?) != nil {
             // Synopsis Document
             self.m_btnSave.isHidden = false
+            
+            // Enable zoom
+            self.m_contentWebView.scrollView.minimumZoomScale = 1.0
+            self.m_contentWebView.scrollView.maximumZoomScale = 5.0
         }
     }
 }

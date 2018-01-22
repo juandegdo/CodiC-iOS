@@ -119,7 +119,6 @@ class EditProfileViewController: BaseViewController {
                 self.btnSave.makeEnabled(enabled: false)
                 UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
                     (success: Bool) in
-                    
                     print("\(success) uploading image.")
                     
                     UserService.Instance.getMe(completion: {

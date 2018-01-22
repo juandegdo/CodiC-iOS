@@ -227,9 +227,6 @@ extension WelcomeProfileViewController {
                             print("\(success) refreshing user info.")
                             
                         })
-//                        DispatchQueue.main.async {
-//                            self.navigationController?.popToRootViewController(animated: false)
-//                        }
                     }
                     
                 } else {
