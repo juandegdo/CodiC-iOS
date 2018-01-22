@@ -20,8 +20,8 @@ public struct AnimationOptions : OptionSet {
     
     public static let MenuButtonRotation = AnimationOptions(rawValue: 16)
     
-    public static let Default: AnimationOptions = [MenuItemRotation, MenuItemBound, MenuItemMoving, MenuButtonRotation]
-    public static let All: AnimationOptions = [MenuItemRotation, MenuItemBound, MenuItemMoving, MenuItemFade, MenuButtonRotation]
+    public static let Default: AnimationOptions = [MenuItemBound, MenuItemMoving]
+    public static let All: AnimationOptions = [MenuItemBound, MenuItemMoving, MenuItemFade]
 }
 
 open class ExpandingMenuButton: UIView, UIGestureRecognizerDelegate {
