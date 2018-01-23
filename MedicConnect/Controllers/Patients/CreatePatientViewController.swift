@@ -78,10 +78,10 @@ class CreatePatientViewController: BaseViewController {
         self.tfBirthdate.inputView = datePickerView
         
         // Phone Number
-        self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
+        self.tfPhoneNumber.placeholder = NSLocalizedString("Phone # (optional)", comment: "comment")
         
         // Address
-        self.tfAddress.placeholder = NSLocalizedString("Address", comment: "comment")
+        self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
         
     }
     
@@ -162,16 +162,6 @@ extension CreatePatientViewController {
         
         guard  self.tfBirthdate.text?.count != 0 else {
             AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient birthdate!")
-            return
-        }
-        
-        guard  self.tfPhoneNumber.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient phone number!")
-            return
-        }
-        
-        guard  self.tfAddress.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient address!")
             return
         }
         
