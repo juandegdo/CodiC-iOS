@@ -43,6 +43,15 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Clear search field and results
+        self.txFieldSearch.text = ""
+        self.loadSearchResult(self.txFieldSearch.text!)
+        
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.initViews()
