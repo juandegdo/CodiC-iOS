@@ -15,6 +15,8 @@ class SaveConsultViewController: BaseViewController {
     var activityIndicatorView = UIActivityIndicatorView()
     var fileURL: URL?
     
+    let billingCodes = ["1470", "1472"]
+    
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var lblPostTitle: UILabel!
     @IBOutlet var lblPostDescription: UILabel!
@@ -65,6 +67,12 @@ class SaveConsultViewController: BaseViewController {
         self.tvDescription.minHeight = 30
         self.tvDescription.maxHeight = 150
         
+        // Billing Code
+        let billingCodePicker = UIPickerView()
+        billingCodePicker.delegate = self
+        billingCodePicker.dataSource = self
+        self.tfBillingCode.inputView = billingCodePicker
+        
         // Hashtags
         self.hashTagCtrl.tagsBackgroundColor = UIColor(red: 205/255, green: 212/255, blue: 215/255, alpha: 1.0)
         self.hashTagCtrl.tagsTextColor = UIColor.white
@@ -103,6 +111,28 @@ extension SaveConsultViewController : UITextViewDelegate {
         let newLength = description.count + text.count - range.length
         return newLength <= Constants.MaxDescriptionLength
     }
+}
+
+extension SaveConsultViewController : UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    // MARK: UIPickerView Delegation
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return billingCodes.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return billingCodes[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.tfBillingCode.text = billingCodes[row]
+    }
+
 }
 
 extension SaveConsultViewController {
