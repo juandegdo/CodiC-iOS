@@ -83,11 +83,11 @@ class EditPatientViewController: BaseViewController {
         self.tfBirthdate.inputView = datePickerView
         
         // Phone Number
-        self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
+        self.tfPhoneNumber.placeholder = NSLocalizedString("Phone # (optional)", comment: "comment")
         self.tfPhoneNumber.text = self.patient?.phoneNumber
         
         // Address
-        self.tfAddress.placeholder = NSLocalizedString("Address", comment: "comment")
+        self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
         self.tfAddress.text = self.patient?.address
         
     }
@@ -176,30 +176,16 @@ extension EditPatientViewController {
             return
         }
         
-        guard  self.tfPhoneNumber.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient phone number!")
-            return
-        }
-        
-        guard  self.tfAddress.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient address!")
-            return
-        }
-        
         PatientService.Instance.editPatient((self.patient?.id)!, name: self.tfName.text!, patientNumber: self.tfPHN.text!, birthDate: self.birthDate, phoneNumber: self.tfPhoneNumber.text!, address: self.tfAddress.text!) { (success: Bool, patient: Patient?) in
             
             if success && patient != nil {
-//                PatientService.Instance.getPatients(completion: { (success: Bool) in
-//                    if success {
-                        let lenght = self.navigationController?.viewControllers.count
-                        let patientProfileVVC: PatientProfileViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientProfileViewController : nil
-                        patientProfileVVC?.patient = patient
-                        
-                        DispatchQueue.main.async {
-                            self.onBack(sender: nil)
-                        }
-//                    }
-//                })
+                let lenght = self.navigationController?.viewControllers.count
+                let patientProfileVVC: PatientProfileViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientProfileViewController : nil
+                patientProfileVVC?.patient = patient
+                
+                DispatchQueue.main.async {
+                    self.onBack(sender: nil)
+                }
             }
             
         }
