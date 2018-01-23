@@ -35,6 +35,8 @@ class NotificationsViewController: BaseViewController {
         // Initialize Table Views
         self.tvNotifications.register(UINib(nibName: NotificationListCellID, bundle: nil), forCellReuseIdentifier: NotificationListCellID)
         self.tvNotifications.tableFooterView = UIView()
+        self.tvNotifications.estimatedRowHeight = 70
+        self.tvNotifications.rowHeight = UITableViewAutomaticDimension
         
     }
     
@@ -326,13 +328,4 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if tableView == self.tvNotifications {
-            return 70
-        }
-        
-        return 0.0
-        
-    }
 }
