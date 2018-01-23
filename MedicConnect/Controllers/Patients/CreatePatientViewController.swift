@@ -79,6 +79,7 @@ class CreatePatientViewController: BaseViewController {
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone # (optional)", comment: "comment")
+        self.tfPhoneNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // Address
         self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
@@ -104,29 +105,36 @@ extension CreatePatientViewController : UITextFieldDelegate {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        // When the user performs a repeating action, such as entering text, invoke the `call` method
-        debouncer.call()
-        debouncer.callback = {
-            // Send the debounced network request here
-            if (textField == self.tfPHN && textField.text!.count > 0) {
-                // Check if patient exists
-                self.btnSave.isUserInteractionEnabled = false
-                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId, patientName) in
-                    self.btnSave.isUserInteractionEnabled = true
-                    
-                    if success == true && PHN == self.tfPHN.text! {
-                        if patientId == nil || patientId == "" {
+        if textField == self.tfPhoneNumber {
+            // Format phone number
+            textField.text = StringUtil.formatPhoneNumber(numberString: textField.text!)
+            
+        } else {
+            // When the user performs a repeating action, such as entering text, invoke the `call` method
+            debouncer.call()
+            debouncer.callback = {
+                // Send the debounced network request here
+                if (textField == self.tfPHN && textField.text!.count > 0) {
+                    // Check if patient exists
+                    self.btnSave.isUserInteractionEnabled = false
+                    PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId, patientName) in
+                        self.btnSave.isUserInteractionEnabled = true
+                        
+                        if success == true && PHN == self.tfPHN.text! {
+                            if patientId == nil || patientId == "" {
+                                self.lblPHNError.isHidden = true
+                            } else {
+                                self.lblPHNError.isHidden = false
+                            }
+                        } else if success == false {
                             self.lblPHNError.isHidden = true
-                        } else {
-                            self.lblPHNError.isHidden = false
                         }
-                    } else if success == false {
-                        self.lblPHNError.isHidden = true
                     }
                 }
             }
         }
     }
+    
 }
 
 extension CreatePatientViewController {

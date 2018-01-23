@@ -57,7 +57,7 @@ class Constants {
     static let ScreenHeight = UIScreen.main.bounds.size.height
     static let ScreenWidth = UIScreen.main.bounds.size.width
     
-    static let MaxPhoneNumberLength = 15
+    static let MaxPhoneNumberLength = 12
     static let MaxFullNameLength = 100
     static let MaxDescriptionLength = 500
     static let MaxPHNLength = 10

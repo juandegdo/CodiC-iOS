@@ -62,6 +62,7 @@
 		65D4B94F1FEC82D9005D9C45 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */; };
 		65D4B9511FED0E4C005D9C45 /* PatientNoteReferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */; };
 		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
+		65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0D1F12017F142008A79CB /* VSTextField.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
 		9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */; };
 		A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A358721F0742D7005B8011 /* SettingsDetailViewController.swift */; };
@@ -191,8 +192,8 @@
 		653D8123200FF32F00136E1B /* SaveConsultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConsultViewController.swift; sourceTree = "<group>"; };
 		653D8125201024D300136E1B /* DiagnosisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisCell.swift; sourceTree = "<group>"; };
 		653D8126201024D300136E1B /* DiagnosisCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiagnosisCell.xib; sourceTree = "<group>"; };
-		653D812E2012347800136E1B /* ExpandingMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuItem.swift; path = "MedicConnect/Views/New Group/ExpandingMenuItem.swift"; sourceTree = SOURCE_ROOT; };
-		653D812F2012347800136E1B /* ExpandingMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuButton.swift; path = "MedicConnect/Views/New Group/ExpandingMenuButton.swift"; sourceTree = SOURCE_ROOT; };
+		653D812E2012347800136E1B /* ExpandingMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuItem.swift; path = MedicConnect/Views/ExpandingMenu/ExpandingMenuItem.swift; sourceTree = SOURCE_ROOT; };
+		653D812F2012347800136E1B /* ExpandingMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuButton.swift; path = MedicConnect/Views/ExpandingMenu/ExpandingMenuButton.swift; sourceTree = SOURCE_ROOT; };
 		653E7C631FBA067C00B41A5C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +227,7 @@
 		65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNoteReferViewController.swift; sourceTree = "<group>"; };
 		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
+		65E0D1F12017F142008A79CB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VSTextField.swift; path = MedicConnect/Views/VSTextField/VSTextField.swift; sourceTree = SOURCE_ROOT; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
 		6D8CF7F78CFE7BB69B7329A8 /* Pods-MedicConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnectTests/Pods-MedicConnectTests.release.xcconfig"; sourceTree = "<group>"; };
 		94CC90B0ADCB7E73FB76698B /* Pods-MedicConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.release.xcconfig"; sourceTree = "<group>"; };
@@ -539,6 +541,15 @@
 			path = Favroites;
 			sourceTree = "<group>";
 		};
+		65E0D1F02017F117008A79CB /* VSTextField */ = {
+			isa = PBXGroup;
+			children = (
+				65E0D1F12017F142008A79CB /* VSTextField.swift */,
+			);
+			name = VSTextField;
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
 		A9A358741F07446B005B8011 /* htmls */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +653,7 @@
 				D206582E1E5BB9DB003875E4 /* RadTabBarController */,
 				650E28851F71B5960096A3F0 /* SCSiriWaveformView */,
 				654C972C1FBDDB9F00490627 /* TableViewCells */,
+				65E0D1F02017F117008A79CB /* VSTextField */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1019,6 +1031,7 @@
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/NSDate+TimeAgo/NSDate_TimeAgo.framework",
 				"${BUILT_PRODUCTS_DIR}/PICollectionPageView/PICollectionPageView.framework",
+				"${BUILT_PRODUCTS_DIR}/PhoneNumberKit/PhoneNumberKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Sheriff/Sheriff.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
@@ -1043,6 +1056,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NSDate_TimeAgo.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PICollectionPageView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PhoneNumberKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sheriff.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
@@ -1204,6 +1218,7 @@
 				D20658341E5BB9ED003875E4 /* RadTabBarController.m in Sources */,
 				D2F55A6E1DEB1A690038A392 /* SharePopupViewController.swift in Sources */,
 				65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */,
+				65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */,
 				D2941E611E10993300CB7552 /* ChangePasswordViewController.swift in Sources */,
 				D21BC8F81DEA2867008F5443 /* ConsultCell.swift in Sources */,
 				653D8127201024D300136E1B /* DiagnosisCell.swift in Sources */,

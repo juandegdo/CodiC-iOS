@@ -61,11 +61,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 DAYS AGO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0LP-Ns-idZ">
-                        <rect key="frame" x="77" y="52" width="42" height="10"/>
+                        <rect key="frame" x="77" y="52" width="48" height="10"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="jqw-qH-ip8"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="7"/>
+                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="8"/>
                         <color key="textColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

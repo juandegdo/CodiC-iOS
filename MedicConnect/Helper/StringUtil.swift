@@ -39,4 +39,24 @@ class StringUtil {
         
         return randomString
     }
+    
+    static func formatPhoneNumber(numberString: String) -> String {
+        var phoneNumber = numberString.components(separatedBy: NSCharacterSet.decimalDigits.inverted).joined(separator: "")
+        let tempIndex = phoneNumber.startIndex
+        
+        if phoneNumber.count > 6 {
+            let firstRange = tempIndex ..< phoneNumber.index(tempIndex, offsetBy: 3)
+            let secondRange = phoneNumber.index(tempIndex, offsetBy: 3) ..< phoneNumber.index(tempIndex, offsetBy: 6)
+            let thirdRange = phoneNumber.index(tempIndex, offsetBy: 6) ..< phoneNumber.endIndex
+            phoneNumber = "\(phoneNumber[firstRange])-\(phoneNumber[secondRange])-\(phoneNumber[thirdRange])"
+            
+        } else if phoneNumber.count > 3 {
+            let firstRange = tempIndex ..< phoneNumber.index(tempIndex, offsetBy: 3)
+            let secondRange = phoneNumber.index(tempIndex, offsetBy: 3) ..< phoneNumber.endIndex
+            phoneNumber = "\(phoneNumber[firstRange])-\(phoneNumber[secondRange])"
+            
+        }
+        
+        return phoneNumber
+    }
 }

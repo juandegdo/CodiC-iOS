@@ -54,6 +54,7 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
+        self.tfPhoneNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // Page Control
         self.pageControl.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -87,25 +88,31 @@ extension WelcomeProfileViewController : UITextFieldDelegate {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        // When the user performs a repeating action, such as entering text, invoke the `call` method
-        debouncer.call()
-        debouncer.callback = {
-            // Send the debounced network request here
-            if (textField == self.tfMSP && textField.text!.count > 0) {
-                // Check if patient exists
-                self.btnSave.isUserInteractionEnabled = false
-                
-                UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId, name) in
-                    self.btnSave.isUserInteractionEnabled = true
+        if textField == self.tfPhoneNumber {
+            // Format phone number
+            textField.text = StringUtil.formatPhoneNumber(numberString: textField.text!)
+            
+        } else {
+            // When the user performs a repeating action, such as entering text, invoke the `call` method
+            debouncer.call()
+            debouncer.callback = {
+                // Send the debounced network request here
+                if (textField == self.tfMSP && textField.text!.count > 0) {
+                    // Check if patient exists
+                    self.btnSave.isUserInteractionEnabled = false
                     
-                    if success == true && MSP == self.tfMSP.text! {
-                        if userId == nil || userId == "" {
+                    UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId, name) in
+                        self.btnSave.isUserInteractionEnabled = true
+                        
+                        if success == true && MSP == self.tfMSP.text! {
+                            if userId == nil || userId == "" {
+                                self.lblMSPError.isHidden = true
+                            } else {
+                                self.lblMSPError.isHidden = false
+                            }
+                        } else if success == false {
                             self.lblMSPError.isHidden = true
-                        } else {
-                            self.lblMSPError.isHidden = false
                         }
-                    } else if success == false {
-                        self.lblMSPError.isHidden = true
                     }
                 }
             }

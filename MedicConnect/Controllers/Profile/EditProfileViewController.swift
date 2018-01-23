@@ -77,6 +77,7 @@ class EditProfileViewController: BaseViewController {
         
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
+        self.tfPhoneNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         // Email
         self.tfEmail.placeholder = NSLocalizedString("Email", comment: "comment")
@@ -164,34 +165,40 @@ extension EditProfileViewController : UITextFieldDelegate {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        // When the user performs a repeating action, such as entering text, invoke the `call` method
-        debouncer.call()
-        debouncer.callback = {
-            // Send the debounced network request here
-            if (textField == self.tfMSP && textField.text!.count > 0) {
-                if let _user = UserController.Instance.getUser() as User? {
-                    if _user.msp == textField.text! {
-                        self.lblMSPError.isHidden = true
+        if textField == self.tfPhoneNumber {
+            // Format phone number
+            textField.text = StringUtil.formatPhoneNumber(numberString: textField.text!)
+            
+        } else {
+            // When the user performs a repeating action, such as entering text, invoke the `call` method
+            debouncer.call()
+            debouncer.callback = {
+                // Send the debounced network request here
+                if (textField == self.tfMSP && textField.text!.count > 0) {
+                    if let _user = UserController.Instance.getUser() as User? {
+                        if _user.msp == textField.text! {
+                            self.lblMSPError.isHidden = true
+                            self.btnSave.isUserInteractionEnabled = true
+                            
+                            return
+                        }
+                    }
+                    
+                    // Check if patient exists
+                    self.btnSave.isUserInteractionEnabled = false
+                    
+                    UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId, name) in
                         self.btnSave.isUserInteractionEnabled = true
                         
-                        return
-                    }
-                }
-                
-                // Check if patient exists
-                self.btnSave.isUserInteractionEnabled = false
-                
-                UserService.Instance.getUserIdByMSP(MSP: self.tfMSP.text!) { (success, MSP, userId, name) in
-                    self.btnSave.isUserInteractionEnabled = true
-                    
-                    if success == true && MSP == self.tfMSP.text! {
-                        if userId == nil || userId == "" {
+                        if success == true && MSP == self.tfMSP.text! {
+                            if userId == nil || userId == "" {
+                                self.lblMSPError.isHidden = true
+                            } else {
+                                self.lblMSPError.isHidden = false
+                            }
+                        } else if success == false {
                             self.lblMSPError.isHidden = true
-                        } else {
-                            self.lblMSPError.isHidden = false
                         }
-                    } else if success == false {
-                        self.lblMSPError.isHidden = true
                     }
                 }
             }

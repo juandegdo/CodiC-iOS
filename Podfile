@@ -30,6 +30,7 @@ pod 'Crashlytics'
 pod 'Masonry'
 pod 'TTTAttributedLabel'
 pod 'SwiftGifOrigin', '~> 1.6.1'
+pod 'PhoneNumberKit', '~> 2.1'
 
   target 'MedicConnectTests' do
     inherit! :search_paths
