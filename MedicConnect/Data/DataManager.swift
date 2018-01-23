@@ -17,6 +17,7 @@ class DataManager {
     var patientId: String = ""
     var referringUserIds: [String] = []
     var fromPatientProfile: Bool = false
+    var recordDuration: Int = 0
     
     // MARK: Saved Tab Index
         
@@ -66,6 +67,16 @@ class DataManager {
     
     func setFromPatientProfile(_ fromPatientProfile: Bool) {
         self.fromPatientProfile = fromPatientProfile
+    }
+    
+    // MARK: Record Duration
+    
+    func getRecordDuration() -> Int {
+        return self.recordDuration
+    }
+    
+    func setRecordDuration(recordDuration: Int) {
+        self.recordDuration = recordDuration
     }
     
 }

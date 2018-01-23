@@ -106,6 +106,10 @@ extension ShareBroadcastViewController {
     }
     
     @IBAction func onSkip(sender: UIButton) {
+        if (DataManager.Instance.getPostType() != Constants.PostTypeNote) {
+            NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
+        }
+        
         if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
             // Diagnosis
             self.onClose(sender: sender)

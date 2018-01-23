@@ -13,11 +13,14 @@ public enum ErrorPopupType {
     case noMSP
     case noPHN
     case noMSPAndPHN
+    case exceedLimit
 }
 
 class ErrorPopupViewController: BaseViewController {
     
     @IBOutlet var mBackgroundImageView: UIImageView!
+    @IBOutlet var ivAlertImage: UIImageView!
+    @IBOutlet var lblAlertMark: UILabel!
     @IBOutlet var lblDescription: UILabel!
     @IBOutlet var lblQuestion: UILabel!
     
@@ -59,6 +62,14 @@ class ErrorPopupViewController: BaseViewController {
         // Background captured image
         self.mBackgroundImageView.image = ImageHelper.captureView()
         
+        if self.popupType == .exceedLimit {
+            self.ivAlertImage.isHidden = false
+            self.lblAlertMark.isHidden = true
+        } else {
+            self.ivAlertImage.isHidden = true
+            self.lblAlertMark.isHidden = false
+        }
+        
         switch (self.popupType) {
         case .noMSP:
             self.constOfViewHeight.constant = 212.0
@@ -76,6 +87,12 @@ class ErrorPopupViewController: BaseViewController {
             self.constOfViewHeight.constant = 244.0
             self.lblDescription.text = "You didn't enter correct Patient's PHN\nor Doctor's MSP"
             self.lblQuestion.text = "Would you like to\ncontinue without associating this\nconsult with a patient or\nreferring doctor?"
+            break
+            
+        case .exceedLimit:
+            self.constOfViewHeight.constant = 212.0
+            self.lblDescription.text = "The length of your \(DataManager.Instance.getPostType() == Constants.PostTypeConsult ? Constants.PostTypeConsult.lowercased() : "patient \(Constants.PostTypeNote.lowercased())") has\nexceeded 3 minutes."
+            self.lblQuestion.text = "Would you like to\ncontinue recording?"
             break
             
         default:
@@ -100,32 +117,50 @@ class ErrorPopupViewController: BaseViewController {
             self.dismiss(animated: false, completion: nil)
         }
     }
+    
+    func goBackToRecording(continueRecording: Bool) {
+        let lenght = self.navigationController?.viewControllers.count
+        if let recordingVC = self.navigationController?.viewControllers[lenght! - 2] as? RecordingBroadcastViewController {
+            recordingVC.continueRecording = continueRecording
+            self.navigationController?.popViewController(animated: false)
+        }
+    }
+    
 }
 
 extension ErrorPopupViewController {
     //MARK: IBActions
     
     @IBAction func onClose(sender: UIButton!) {
-        self.isYes = false
-        self.close()
+        if self.popupType == .exceedLimit {
+            self.goBackToRecording(continueRecording: false)
+        } else {
+            self.isYes = false
+            self.close()
+        }
     }
     
     @IBAction func onNo(sender: UIButton) {
-        self.isYes = false
-        self.close()
+        self.onClose(sender: nil)
     }
     
     @IBAction func onYes(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if fromPatientNote == true {
+            
             let lenght = self.navigationController?.viewControllers.count
             let patientNoteVC: PatientNoteReferViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientNoteReferViewController : nil
             patientNoteVC?.isSaveNote = true
             
             self.onClose(sender: nil)
             
-        }  else {
+        }  else if self.popupType == .exceedLimit {
+            
+            self.goBackToRecording(continueRecording: true)
+            
+        } else {
+            
             if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
                 
                 DataManager.Instance.setFromPatientProfile(false)
@@ -137,6 +172,7 @@ extension ErrorPopupViewController {
                 })
                 
             }
+            
         }
     }
     

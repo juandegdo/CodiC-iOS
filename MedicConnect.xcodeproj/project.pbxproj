@@ -43,6 +43,7 @@
 		657B12831FC38E4C0059B16E /* PatientNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657B12811FC38E4C0059B16E /* PatientNotesCell.swift */; };
 		657B12841FC38E4C0059B16E /* PatientNotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657B12821FC38E4C0059B16E /* PatientNotesCell.xib */; };
 		658AFB241FEB23900055B70C /* ErrorPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */; };
+		6593AB5A20173A8400E43611 /* RecordExceedPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB5920173A8400E43611 /* RecordExceedPopupViewController.swift */; };
 		659C70CE1F2014BF0045F6CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C70CD1F2014BF0045F6CF /* AlertController.swift */; };
 		65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896D1F3A935400547D72 /* LikesViewController.swift */; };
 		65A289701F3A95D600547D72 /* LikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896F1F3A95D600547D72 /* LikeController.swift */; };
@@ -206,6 +207,7 @@
 		657B12811FC38E4C0059B16E /* PatientNotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNotesCell.swift; sourceTree = "<group>"; };
 		657B12821FC38E4C0059B16E /* PatientNotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientNotesCell.xib; sourceTree = "<group>"; };
 		658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPopupViewController.swift; sourceTree = "<group>"; };
+		6593AB5920173A8400E43611 /* RecordExceedPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordExceedPopupViewController.swift; sourceTree = "<group>"; };
 		659C70CD1F2014BF0045F6CF /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		65A2896D1F3A935400547D72 /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		65A2896F1F3A95D600547D72 /* LikeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeController.swift; sourceTree = "<group>"; };
@@ -503,6 +505,7 @@
 				D2F2A9F21E285F0000DA2434 /* InvitePopupViewController.swift */,
 				654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */,
 				D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */,
+				6593AB5920173A8400E43611 /* RecordExceedPopupViewController.swift */,
 			);
 			path = Popups;
 			sourceTree = "<group>";
@@ -1246,6 +1249,7 @@
 				652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */,
 				65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */,
 				653D8122200FF31800136E1B /* SaveDiagnosisViewController.swift in Sources */,
+				6593AB5A20173A8400E43611 /* RecordExceedPopupViewController.swift in Sources */,
 				D20658451E5BCEB4003875E4 /* User.swift in Sources */,
 				D25EB1611E8478B40082A9D5 /* DateUtil.swift in Sources */,
 				D213CB1D1E0CAA93004BEA3C /* SettingListCell.swift in Sources */,

@@ -2570,6 +2570,9 @@ community. Invite people that you actually like to give it a try ;)</string>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="icon_playlist_next_off"/>
                                         <state key="disabled" image="icon_recording_next_off"/>
+                                        <connections>
+                                            <action selector="onForward:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="Ewo-HB-Qy4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -7024,8 +7027,8 @@ you a link to reset your password.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjT-NW-8PI">
                                 <rect key="frame" x="35" y="140" width="344" height="250"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_save_done_new" translatesAutoresizingMaskIntoConstraints="NO" id="Wv5-Ie-BN6">
-                                        <rect key="frame" x="144.66666666666666" y="0.0" width="55" height="55"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_alert" translatesAutoresizingMaskIntoConstraints="NO" id="Wv5-Ie-BN6">
+                                        <rect key="frame" x="144.66666666666666" y="4" width="55" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Wv5-Ie-BN6" secondAttribute="height" multiplier="1:1" id="NQt-Q3-MPN"/>
                                             <constraint firstAttribute="width" constant="55" id="bF0-aF-5wC"/>
@@ -7130,7 +7133,7 @@ uploaded a new diagnosis.</string>
                                     <constraint firstItem="UXD-4d-CsA" firstAttribute="leading" secondItem="VjT-NW-8PI" secondAttribute="leading" id="2Xh-mD-zeL"/>
                                     <constraint firstItem="oH7-2v-C7X" firstAttribute="top" secondItem="VjT-NW-8PI" secondAttribute="top" constant="4" id="3eb-C5-F2D"/>
                                     <constraint firstItem="tlt-AZ-NRc" firstAttribute="leading" secondItem="VjT-NW-8PI" secondAttribute="leading" id="8zy-LI-bvl"/>
-                                    <constraint firstItem="Wv5-Ie-BN6" firstAttribute="top" secondItem="VjT-NW-8PI" secondAttribute="top" id="Awp-rG-n6J"/>
+                                    <constraint firstItem="Wv5-Ie-BN6" firstAttribute="top" secondItem="VjT-NW-8PI" secondAttribute="top" constant="4" id="Awp-rG-n6J"/>
                                     <constraint firstAttribute="bottom" secondItem="UXD-4d-CsA" secondAttribute="bottom" constant="45" id="FT1-o4-Q8f"/>
                                     <constraint firstItem="yFF-s1-4XO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VjT-NW-8PI" secondAttribute="leading" constant="24" id="Jik-Ro-A0x"/>
                                     <constraint firstItem="94y-Rg-dFd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VjT-NW-8PI" secondAttribute="leading" constant="4" id="K2N-PJ-9hM"/>
@@ -7181,6 +7184,8 @@ uploaded a new diagnosis.</string>
                         <outlet property="btnNo" destination="Ulx-hz-aAR" id="elW-1u-wXN"/>
                         <outlet property="btnYes" destination="ayF-nt-cew" id="NlJ-dF-QfR"/>
                         <outlet property="constOfViewHeight" destination="OuP-WX-rM6" id="FrD-Eb-5Pf"/>
+                        <outlet property="ivAlertImage" destination="Wv5-Ie-BN6" id="9gN-RI-UIu"/>
+                        <outlet property="lblAlertMark" destination="oH7-2v-C7X" id="OKS-r5-6Ac"/>
                         <outlet property="lblDescription" destination="94y-Rg-dFd" id="e0F-s0-gYW"/>
                         <outlet property="lblQuestion" destination="yFF-s1-4XO" id="d55-X6-FmL"/>
                         <outlet property="mBackgroundImageView" destination="lG5-fk-crk" id="TZ5-RS-qRu"/>
@@ -8102,6 +8107,7 @@ uploaded a new diagnosis.</string>
         <image name="bg_rounded_btn_lightblue" width="32" height="34"/>
         <image name="bg_rounded_btn_lightblue1" width="29" height="29"/>
         <image name="bg_search_field" width="9" height="30"/>
+        <image name="icon_alert" width="32" height="32"/>
         <image name="icon_back" width="11" height="23"/>
         <image name="icon_chat_send" width="29" height="29"/>
         <image name="icon_close" width="19" height="18"/>

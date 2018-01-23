@@ -39,22 +39,6 @@ class EditRecordingBroadcastViewController: BaseViewController {
         
     }
     
-    @objc func willEnterForeground(){
-        if (self.audioPlayer != nil && self.audioPlayer?.isPlaying == false) {
-            self.btnPause.isHidden = true
-            self.btnPlay.isHidden = false
-        }
-    }
-    
-    @objc func willEnterBackground(){
-        if (self.audioPlayer != nil) {
-            
-            self.btnPause.isHidden = false
-            self.btnPlay.isHidden = true
-            self.audioPlayer?.stop()
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -71,6 +55,23 @@ class EditRecordingBroadcastViewController: BaseViewController {
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
         
+    }
+    
+    @objc func willEnterForeground(){
+        if (self.audioPlayer != nil && self.audioPlayer?.isPlaying == false) {
+            self.btnPause.isHidden = true
+            self.btnPlay.isHidden = false
+        }
+    }
+    
+    @objc func willEnterBackground(){
+        if (self.audioPlayer != nil) {
+            
+            self.btnPause.isHidden = false
+            self.btnPlay.isHidden = true
+            self.audioPlayer?.stop()
+            self.updateTimer?.invalidate()
+        }
     }
     
     //MARK: Initialize views
@@ -98,6 +99,8 @@ class EditRecordingBroadcastViewController: BaseViewController {
                 let dTotalSeconds = _audioPlayer.duration
                 self.labelLength.text = dTotalSeconds.durationText
                 
+                DataManager.Instance.setRecordDuration(recordDuration: Int(dTotalSeconds.rounded(.awayFromZero)))
+                
                 AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
                 _audioPlayer.prepareToPlay()
                 _audioPlayer.play()
@@ -115,6 +118,10 @@ class EditRecordingBroadcastViewController: BaseViewController {
     func stop() {
         if (self.audioPlayer != nil && self.audioPlayer!.isPlaying) {
             self.audioPlayer!.stop()
+            self.audioPlayer = nil
+            
+            self.updateTimer?.invalidate()
+            self.updateTimer = nil
         }
     }
     
@@ -164,14 +171,25 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onRewind(_ sender: Any) {
         
-        self.audioPlayer?.stop()
-        self.audioPlayer?.play(atTime: 0)
+        if (self.audioPlayer != nil) {
+            self.audioPlayer?.currentTime = 0
+        }
+        
+    }
+    
+    @IBAction func onForward(_ sender: Any) {
+        
+        if (self.audioPlayer != nil) {
+            self.audioPlayer?.currentTime = (self.audioPlayer?.currentTime)! + 15
+        }
         
     }
     
     @IBAction func onPlay(_ sender: Any) {
         
         self.audioPlayer?.play()
+        self.updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(EditRecordingBroadcastViewController.updateSeekBar), userInfo: nil, repeats: true)
+        
         self.btnPlay.isHidden = true
         self.btnPause.isHidden = false
         
@@ -180,6 +198,8 @@ extension EditRecordingBroadcastViewController {
     @IBAction func onPause(_ sender: Any) {
         
         self.audioPlayer?.pause()
+        self.updateTimer?.invalidate()
+        
         self.btnPlay.isHidden = false
         self.btnPause.isHidden = true
         
@@ -222,6 +242,8 @@ extension EditRecordingBroadcastViewController : AVAudioPlayerDelegate {
         
         self.btnPlay.isHidden = false
         self.btnPause.isHidden = true
+        
+        self.updateTimer?.invalidate()
         
     }
 }

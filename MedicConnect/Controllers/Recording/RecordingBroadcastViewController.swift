@@ -18,6 +18,10 @@ class RecordingBroadcastViewController: BaseViewController {
     fileprivate var audioRecorder: AVAudioRecorder?
     fileprivate var updateTimer: Timer?
     
+    let exceedLimit = 180.0
+    var didExceedLimit: Bool = false
+    var continueRecording: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +33,15 @@ class RecordingBroadcastViewController: BaseViewController {
         
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
+        
+        if didExceedLimit {
+            if continueRecording {
+                self.pauseRecording(isPaused: false)
+            } else {
+                self.stopRecording()
+                self.performSegue(withIdentifier: Constants.SegueMedicConnectEditBroadcast, sender: nil)
+            }
+        }
         
     }
     
@@ -101,8 +114,10 @@ class RecordingBroadcastViewController: BaseViewController {
         
         if (isPaused) {
             ar.pause()
+            updateTimer?.invalidate()
         } else {
             ar.record()
+            updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordingBroadcastViewController.updateSeekBar), userInfo: nil, repeats: true)
         }
     }
     
@@ -110,18 +125,34 @@ class RecordingBroadcastViewController: BaseViewController {
         
         audioRecorder?.stop()
         audioRecorder = nil
-    
+        
+        updateTimer?.invalidate()
+        updateTimer = nil
+        
     }
     
     @objc func updateSeekBar() {
         
         if let _audioRecorder = self.audioRecorder as AVAudioRecorder? {
-            _audioRecorder.updateMeters()
-            let normalizedValue:CGFloat = pow(10, CGFloat(_audioRecorder.averagePower(forChannel: 0)) / 40)
-            self.waveformView.update(withLevel: normalizedValue)
-            
-            let progress = _audioRecorder.currentTime
-            self.lblCurrentTime.text = progress.durationText + " sec"
+            if !didExceedLimit && _audioRecorder.currentTime >= exceedLimit {
+                self.pauseRecording(isPaused: true)
+                self.didExceedLimit = true
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                if let vc = storyboard.instantiateViewController(withIdentifier: "ErrorPopupViewController") as? ErrorPopupViewController {
+                    vc.popupType = .exceedLimit
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
+                
+            } else {
+                _audioRecorder.updateMeters()
+                let normalizedValue:CGFloat = pow(10, CGFloat(_audioRecorder.averagePower(forChannel: 0)) / 40)
+                self.waveformView.update(withLevel: normalizedValue)
+                
+                let progress = _audioRecorder.currentTime
+                self.lblCurrentTime.text = progress.durationText + " sec"
+            }
         }
         
     }
@@ -146,7 +177,7 @@ extension RecordingBroadcastViewController {
     //MARK: IBActions
     
     @IBAction func onClose(sender: AnyObject) {
-        stopRecording()
+        self.stopRecording()
         
         if let _nav = self.navigationController as UINavigationController? {
             _nav.dismiss(animated: false, completion: nil)

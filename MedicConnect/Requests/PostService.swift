@@ -44,6 +44,11 @@ class PostService: BaseTaskController {
             parameters["referringUsers"] = referringUserIds.joined(separator: ",")
         }
         
+        let recordDuration = DataManager.Instance.getRecordDuration()
+        if recordDuration > 0 {
+            parameters["audioDuration"] = String(recordDuration)
+        }
+        
         Alamofire.upload(multipartFormData: { (multipartFormData ) in
             
             multipartFormData.append(audioData, withName: "audio", fileName: "\(Date().timeIntervalSinceReferenceDate).\(fileExtension)", mimeType: "\(mimeType)")
