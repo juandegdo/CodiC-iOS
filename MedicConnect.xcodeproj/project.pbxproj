@@ -401,8 +401,7 @@
 				653D812F2012347800136E1B /* ExpandingMenuButton.swift */,
 				653D812E2012347800136E1B /* ExpandingMenuItem.swift */,
 			);
-			name = ExpandingMenu;
-			path = "New Group";
+			path = ExpandingMenu;
 			sourceTree = "<group>";
 		};
 		65488DAA1F944204005C1EA8 /* Patients */ = {
@@ -546,8 +545,7 @@
 			children = (
 				65E0D1F12017F142008A79CB /* VSTextField.swift */,
 			);
-			name = VSTextField;
-			path = "New Group1";
+			path = VSTextField;
 			sourceTree = "<group>";
 		};
 		A9A358741F07446B005B8011 /* htmls */ = {

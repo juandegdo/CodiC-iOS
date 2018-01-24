@@ -64,7 +64,7 @@ class ProfileViewController: BaseViewController {
         
         // Initialize Table Views
         self.tableView.register(UINib(nibName: ProfileListCellID, bundle: nil), forCellReuseIdentifier: ProfileListCellID)
-        self.tableView.tableFooterView = UIView()
+        self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50.0))
         self.tableView.estimatedRowHeight = 110.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -469,11 +469,21 @@ class ProfileViewController: BaseViewController {
         }
         
         let post = _user.getPosts(type: self.postType)[_index]
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
-            vc.strTitle = "Synopsis"
-            vc.strSynopsisUrl = post.transcriptionUrl
-            present(vc, animated: true, completion: nil)
+        if post.transcriptionUrl == "" {
+            // Synopsis Not Exists
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
+                vc.postId = post.id
+                vc.fromList = true
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
             
+        } else {
+            // Synopsis Exists
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+                vc.strTitle = "Synopsis"
+                vc.strSynopsisUrl = post.transcriptionUrl
+                present(vc, animated: true, completion: nil)
+            }
         }
         
     }
@@ -619,9 +629,7 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             cell.lblDescription.isUserInteractionEnabled = false
             
             cell.btnSynopsis.tag = indexPath.row
-            if post.transcriptionUrl == "" {
-                cell.btnSynopsis.removeTarget(self, action: #selector(ProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
-            } else if cell.btnSynopsis.allTargets.count == 0 {
+            if cell.btnSynopsis.allTargets.count == 0 {
                 cell.btnSynopsis.addTarget(self, action: #selector(ProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
             }
             

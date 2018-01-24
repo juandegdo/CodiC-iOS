@@ -116,19 +116,25 @@ class ProfileListCell: UITableViewCell {
         self.lblDate.text = post.getFormattedDate()
         self.postDescription = post.descriptions
         
-        if post.orderNumber == "" {
+        if post.postType == Constants.PostTypeDiagnosis {
             self.btnSynopsis.isHidden = true
             self.ivProgressCircle.isHidden = true
             
         } else {
             self.btnSynopsis.isHidden = false
             
-            if post.transcriptionUrl == "" {
+            if post.orderNumber == "" {
                 self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_inactive"), for: .normal)
-                self.ivProgressCircle.isHidden = false
-            } else {
-                self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_active"), for: .normal)
                 self.ivProgressCircle.isHidden = true
+                
+            } else {
+                if post.transcriptionUrl == "" {
+                    self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_inactive"), for: .normal)
+                    self.ivProgressCircle.isHidden = false
+                } else {
+                    self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_active"), for: .normal)
+                    self.ivProgressCircle.isHidden = true
+                }
             }
         }
         

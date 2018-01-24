@@ -27,7 +27,7 @@ class ShareBroadcastViewController: BaseViewController {
     @IBOutlet var constOfPopupHeight: NSLayoutConstraint!
     
     var postId: String?
-    var fromYes: Bool = false
+    var fromList: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,9 +58,9 @@ class ShareBroadcastViewController: BaseViewController {
         self.mBackgroundImageView.image = ImageHelper.captureView()
         
         // Record Description
-        self.lblDescription.text = "You’ve successfully\nrecorded a new \(DataManager.Instance.getPostType().lowercased())."
+        self.lblDescription.text = !fromList ? "You’ve successfully\nrecorded a new \(DataManager.Instance.getPostType().lowercased())." : ""
         
-        if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
+        if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis && !fromList) {
             // Diagnosis
             self.constOfPopupHeight.constant = 200
             self.lblQuestion.text = "Would you like to record\nanother diagnosis?"
@@ -70,7 +70,7 @@ class ShareBroadcastViewController: BaseViewController {
             
         } else {
             // Consult or Patient Note
-            self.constOfPopupHeight.constant = 250
+            self.constOfPopupHeight.constant = fromList ? 200 : 250
             self.lblQuestion.text = "Would you like to create\na synopsis document?"
             self.btnEmail.isHidden = true
             self.btnMessage.isHidden = true
@@ -89,8 +89,10 @@ extension ShareBroadcastViewController {
     
     @IBAction func onClose(sender: UIButton) {
         if let _nav = self.navigationController as UINavigationController? {
-            if fromYes {
+            if DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis {
                 _nav.popToRootViewController(animated: false)
+            } else if fromList {
+                _nav.popViewController(animated: false)
             } else {
                 _nav.dismiss(animated: false, completion: nil)
             }
@@ -106,7 +108,7 @@ extension ShareBroadcastViewController {
     }
     
     @IBAction func onSkip(sender: UIButton) {
-        if (DataManager.Instance.getPostType() != Constants.PostTypeNote) {
+        if (DataManager.Instance.getPostType() != Constants.PostTypeNote && !fromList) {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
         }
         
@@ -120,13 +122,12 @@ extension ShareBroadcastViewController {
     }
     
     @IBAction func onYes(sender: UIButton) {
-        if (DataManager.Instance.getPostType() != Constants.PostTypeNote) {
+        if (DataManager.Instance.getPostType() != Constants.PostTypeNote && !fromList) {
             NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NotificationDidRecordingFinish), object: nil)
         }
         
         if (DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis) {
             // Diagnosis
-            self.fromYes = true
             self.onClose(sender: sender)
             
         } else {
