@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import MobileCoreServices
 
 class SettingsDetailViewController: UIViewController {
 
@@ -17,7 +18,6 @@ class SettingsDetailViewController: UIViewController {
     let contentDict = ["Privacy Policy":"Privacy_policy_HTML", "Code of Conduct": "Code_of_conduct_HTML", "Terms of Use": "Terms_of_service_HTML"]
     
     var destinationFileUrl: URL!
-    var docController: UIDocumentInteractionController!
     
     @IBOutlet weak var m_lblTitle: UILabel!
     @IBOutlet weak var m_btnSave: UIButton!
@@ -106,10 +106,51 @@ class SettingsDetailViewController: UIViewController {
         self.dismiss(animated: false, completion: nil)
     }
 
-    @IBAction func btnSaveClicked(_ sender: Any) {
-        // present UIDocumentInteractionController
-        self.docController = UIDocumentInteractionController.init(url: self.destinationFileUrl)
-        self.docController.presentOptionsMenu(from: self.m_btnSave.frame, in: self.view, animated: true)
+    @IBAction func btnSaveClicked(_ sender: UIButton) {
+        // Present AlertController
+//        let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+//        let printAction = UIAlertAction.init(title: "Print", style: .default) { (action) in
+//
+//        }
+//        alertController.addAction(printAction)
+//
+//        let submitMSPAction = UIAlertAction.init(title: "Submit to MSP", style: .default) { (action) in
+//
+//        }
+//        alertController.addAction(submitMSPAction)
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//        alertController.addAction(cancelAction)
+//
+//        self.present(alertController, animated: true, completion: nil)
+        
+        let documento = NSData.init(contentsOf: self.destinationFileUrl)
+        let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        if #available(iOS 11.0, *) {
+            activityViewController.excludedActivityTypes = [
+                UIActivityType.airDrop,
+                UIActivityType.message,
+                UIActivityType.mail,
+                UIActivityType.copyToPasteboard,
+                UIActivityType.markupAsPDF,
+                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+            ]
+        } else {
+            // Fallback on earlier versions
+            activityViewController.excludedActivityTypes = [
+                UIActivityType.airDrop,
+                UIActivityType.message,
+                UIActivityType.mail,
+                UIActivityType.copyToPasteboard,
+                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+            ]
+        }
+        
+        self.present(activityViewController, animated: true, completion: nil)
+        
     }
     
 }
