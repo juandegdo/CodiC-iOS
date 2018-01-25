@@ -18,7 +18,7 @@
     // Drawing code
     [super drawRect:rect];
     
-    CGFloat tapItemTopInset = 7.0f;
+    CGFloat tapItemTopInset = 6.0f;
     CGFloat tapItemLeftInset = 0.0f;
     
     if ([UIScreen mainScreen].nativeBounds.size.height == 2436) {

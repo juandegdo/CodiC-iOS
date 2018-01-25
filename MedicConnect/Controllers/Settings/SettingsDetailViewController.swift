@@ -200,3 +200,11 @@ extension SettingsDetailViewController : MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
 }
+
+extension UIWebView {
+    
+    open override var safeAreaInsets: UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 0, 0, 0)
+    }
+    
+}
