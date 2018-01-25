@@ -108,48 +108,60 @@ class SettingsDetailViewController: BaseViewController {
 
     @IBAction func btnSaveClicked(_ sender: UIButton) {
         // Present AlertController
-//        let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-//        let printAction = UIAlertAction.init(title: "Print", style: .default) { (action) in
-//
-//        }
-//        alertController.addAction(printAction)
-//
-//        let submitMSPAction = UIAlertAction.init(title: "Submit to MSP", style: .default) { (action) in
-//
-//        }
-//        alertController.addAction(submitMSPAction)
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-//        alertController.addAction(cancelAction)
-//
-//        self.present(alertController, animated: true, completion: nil)
-        
-        let documento = NSData.init(contentsOf: self.destinationFileUrl)
-        let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        if #available(iOS 11.0, *) {
-            activityViewController.excludedActivityTypes = [
-                UIActivityType.airDrop,
-                UIActivityType.message,
-                UIActivityType.mail,
-                UIActivityType.copyToPasteboard,
-                UIActivityType.markupAsPDF,
-                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
-            ]
-        } else {
-            // Fallback on earlier versions
-            activityViewController.excludedActivityTypes = [
-                UIActivityType.airDrop,
-                UIActivityType.message,
-                UIActivityType.mail,
-                UIActivityType.copyToPasteboard,
-                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
-            ]
+        let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        let printAction = UIAlertAction.init(title: "Print", style: .default) { (action) in
+            // Print
+            if UIPrintInteractionController.canPrint(self.destinationFileUrl) {
+                let printInfo = UIPrintInfo(dictionary: nil)
+                printInfo.jobName = self.destinationFileUrl.lastPathComponent
+                printInfo.outputType = .general
+                
+                let printController = UIPrintInteractionController.shared
+                printController.printInfo = printInfo
+                printController.showsNumberOfCopies = true
+                printController.printingItem = self.destinationFileUrl
+                
+                printController.present(animated: true)
+            }
         }
+        alertController.addAction(printAction)
+
+        let submitMSPAction = UIAlertAction.init(title: "Submit to MSP", style: .default) { (action) in
+
+        }
+        alertController.addAction(submitMSPAction)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(cancelAction)
+
+        self.present(alertController, animated: true, completion: nil)
         
-        self.present(activityViewController, animated: true, completion: nil)
+//        let documento = NSData.init(contentsOf: self.destinationFileUrl)
+//        let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
+//        activityViewController.popoverPresentationController?.sourceView = self.view
+//        if #available(iOS 11.0, *) {
+//            activityViewController.excludedActivityTypes = [
+//                UIActivityType.airDrop,
+//                UIActivityType.message,
+//                UIActivityType.mail,
+//                UIActivityType.copyToPasteboard,
+//                UIActivityType.markupAsPDF,
+//                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+//                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+//            ]
+//        } else {
+//            // Fallback on earlier versions
+//            activityViewController.excludedActivityTypes = [
+//                UIActivityType.airDrop,
+//                UIActivityType.message,
+//                UIActivityType.mail,
+//                UIActivityType.copyToPasteboard,
+//                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
+//                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
+//            ]
+//        }
+//
+//        self.present(activityViewController, animated: true, completion: nil)
         
     }
     
