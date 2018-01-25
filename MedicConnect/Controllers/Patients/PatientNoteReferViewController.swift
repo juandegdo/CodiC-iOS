@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PatientNoteReferViewController: UIViewController {
+class PatientNoteReferViewController: BaseViewController {
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!

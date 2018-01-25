@@ -11,11 +11,18 @@ import UIKit
 class BaseViewController: UIViewController {
     
     @IBOutlet weak var viewNotificationAlert: UIView!
-
+    
+    @IBOutlet weak var constOfNavigationTop: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Update layout for iPhone X
+        if UIScreen.main.nativeBounds.height == 2436 && self.constOfNavigationTop != nil {
+            self.constOfNavigationTop.constant = 24
+        }
         
         // Observe new notification alert
         NotificationCenter.default.addObserver(self, selector: #selector(updateNotificationIcon), name: NSNotification.Name(rawValue: NewNotificationAlertDidChangeNotification), object: nil)

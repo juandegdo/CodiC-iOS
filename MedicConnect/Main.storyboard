@@ -291,8 +291,8 @@
                             <constraint firstAttribute="trailing" secondItem="7LU-ZP-6EL" secondAttribute="trailing" id="7Rs-or-tYb"/>
                             <constraint firstItem="7LU-ZP-6EL" firstAttribute="top" secondItem="eTo-54-Jwl" secondAttribute="top" id="GVs-o3-dMf"/>
                             <constraint firstItem="tFF-qw-i00" firstAttribute="top" secondItem="7LU-ZP-6EL" secondAttribute="bottom" id="K3i-Bc-d0f"/>
-                            <constraint firstItem="dHD-jE-AFF" firstAttribute="top" secondItem="a6a-tj-bCi" secondAttribute="bottom" id="Sif-Uo-aF7"/>
-                            <constraint firstItem="dHD-jE-AFF" firstAttribute="top" secondItem="tFF-qw-i00" secondAttribute="bottom" id="WxI-Rb-tra"/>
+                            <constraint firstAttribute="bottom" secondItem="a6a-tj-bCi" secondAttribute="bottom" id="Sif-Uo-aF7"/>
+                            <constraint firstAttribute="bottom" secondItem="tFF-qw-i00" secondAttribute="bottom" id="WxI-Rb-tra"/>
                             <constraint firstAttribute="trailing" secondItem="a6a-tj-bCi" secondAttribute="trailing" id="Xwf-ja-nb3"/>
                             <constraint firstItem="tFF-qw-i00" firstAttribute="leading" secondItem="eTo-54-Jwl" secondAttribute="leading" id="ccK-E1-pEU"/>
                             <constraint firstItem="a6a-tj-bCi" firstAttribute="top" secondItem="eTo-54-Jwl" secondAttribute="top" id="ioh-IL-VJX"/>
@@ -303,6 +303,7 @@
                     <navigationItem key="navigationItem" id="t7K-yU-q1r"/>
                     <connections>
                         <outlet property="btnSignin" destination="Qh6-xS-9B9" id="a86-0P-Epu"/>
+                        <outlet property="constOfNavigationTop" destination="GVs-o3-dMf" id="GIO-Rv-Uqy"/>
                         <outlet property="tfEmail" destination="mYu-lO-qbt" id="nqB-AE-cDo"/>
                         <outlet property="tfPassword" destination="818-aL-fzN" id="6Am-pK-2SW"/>
                         <segue destination="9Gq-tl-fyt" kind="show" identifier="segueToSignUp" id="dit-dT-Xjt"/>
@@ -572,7 +573,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="x7t-yV-OXC" secondAttribute="trailing" id="1R9-Vl-CPH"/>
-                            <constraint firstItem="yTT-e9-oyL" firstAttribute="top" secondItem="Zel-l3-j6h" secondAttribute="bottom" id="1t4-hI-AEk"/>
+                            <constraint firstAttribute="bottom" secondItem="Zel-l3-j6h" secondAttribute="bottom" id="1t4-hI-AEk"/>
                             <constraint firstItem="Zel-l3-j6h" firstAttribute="leading" secondItem="Rja-7h-8Sa" secondAttribute="leading" id="5wK-KK-1c9"/>
                             <constraint firstAttribute="trailing" secondItem="Zel-l3-j6h" secondAttribute="trailing" id="9O3-ZJ-OcC"/>
                             <constraint firstItem="Zel-l3-j6h" firstAttribute="top" secondItem="Rja-7h-8Sa" secondAttribute="top" id="NEf-oT-El7"/>
@@ -580,11 +581,9 @@
                             <constraint firstItem="paL-tK-ZcA" firstAttribute="centerX" secondItem="Rja-7h-8Sa" secondAttribute="centerX" id="V8v-t6-98c"/>
                             <constraint firstAttribute="trailing" secondItem="3TU-ad-Gqe" secondAttribute="trailing" id="VPV-r4-gwm"/>
                             <constraint firstItem="x7t-yV-OXC" firstAttribute="top" secondItem="3TU-ad-Gqe" secondAttribute="bottom" id="bMS-BF-oAo"/>
-                            <constraint firstAttribute="trailing" secondItem="x7t-yV-OXC" secondAttribute="trailing" id="hgb-50-HUA"/>
                             <constraint firstItem="3TU-ad-Gqe" firstAttribute="top" secondItem="Rja-7h-8Sa" secondAttribute="top" id="iSJ-J5-WTv"/>
-                            <constraint firstItem="yTT-e9-oyL" firstAttribute="top" secondItem="x7t-yV-OXC" secondAttribute="bottom" id="jMN-Vg-DI7"/>
+                            <constraint firstAttribute="bottom" secondItem="x7t-yV-OXC" secondAttribute="bottom" id="jMN-Vg-DI7"/>
                             <constraint firstItem="x7t-yV-OXC" firstAttribute="leading" secondItem="Rja-7h-8Sa" secondAttribute="leading" id="nho-aN-Zw1"/>
-                            <constraint firstItem="x7t-yV-OXC" firstAttribute="leading" secondItem="Rja-7h-8Sa" secondAttribute="leading" id="ol1-ah-bEo"/>
                             <constraint firstItem="3TU-ad-Gqe" firstAttribute="leading" secondItem="Rja-7h-8Sa" secondAttribute="leading" id="pcQ-zc-gVt"/>
                             <constraint firstItem="heE-rO-6qX" firstAttribute="centerX" secondItem="Rja-7h-8Sa" secondAttribute="centerX" id="sDO-Kh-q3l"/>
                             <constraint firstItem="heE-rO-6qX" firstAttribute="width" secondItem="Rja-7h-8Sa" secondAttribute="width" multiplier="0.8" id="zex-kl-FEO"/>
@@ -593,6 +592,7 @@
                     <navigationItem key="navigationItem" id="vSO-WI-n0h"/>
                     <connections>
                         <outlet property="btnSignup" destination="YRm-Fk-KA9" id="2nj-HC-791"/>
+                        <outlet property="constOfNavigationTop" destination="iSJ-J5-WTv" id="YNq-hl-lsT"/>
                         <outlet property="pageControl" destination="paL-tK-ZcA" id="Ybp-oi-0ZX"/>
                         <outlet property="tfConfirm" destination="zmo-IG-nx6" id="MRW-mW-CeX"/>
                         <outlet property="tfEmail" destination="b8D-64-SFs" id="kdY-DT-QNK"/>
@@ -789,6 +789,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="I80-io-Ke4"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="KhP-7l-2ea" id="CHA-QV-h4c"/>
                         <outlet property="constOfTableViewBottom" destination="r1p-95-Mi2" id="Nyf-Gh-CUe"/>
                         <outlet property="tvPatients" destination="eaE-6Z-It4" id="GSg-Mn-ndP"/>
                         <outlet property="txFieldSearch" destination="ot5-u1-z8h" id="yeM-7w-s4d"/>
@@ -893,7 +894,7 @@
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dZ-Zl-B1O">
-                                <rect key="frame" x="35" y="140" width="344" height="255"/>
+                                <rect key="frame" x="35" y="160" width="344" height="255"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHARE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OKq-9k-Byp">
                                         <rect key="frame" x="148" y="15" width="48.666666666666657" height="19"/>
@@ -1077,7 +1078,7 @@
                             <constraint firstAttribute="trailing" secondItem="dJD-Ur-2lz" secondAttribute="trailing" id="Ls6-IR-FJE"/>
                             <constraint firstItem="Qtx-uH-5ww" firstAttribute="leading" secondItem="8xz-9D-ucy" secondAttribute="leading" id="MPH-NB-N7c"/>
                             <constraint firstItem="2dZ-Zl-B1O" firstAttribute="leading" secondItem="8xz-9D-ucy" secondAttribute="leading" constant="35" id="OWH-uQ-aCR"/>
-                            <constraint firstItem="2dZ-Zl-B1O" firstAttribute="top" secondItem="8xz-9D-ucy" secondAttribute="top" constant="140" id="Vt1-ae-OWB"/>
+                            <constraint firstItem="2dZ-Zl-B1O" firstAttribute="top" secondItem="8xz-9D-ucy" secondAttribute="top" constant="160" id="Vt1-ae-OWB"/>
                             <constraint firstAttribute="bottom" secondItem="4xk-QQ-Ffi" secondAttribute="bottom" id="dLF-3A-KK9"/>
                             <constraint firstItem="Qtx-uH-5ww" firstAttribute="top" secondItem="8xz-9D-ucy" secondAttribute="top" id="dqu-ur-6jb"/>
                             <constraint firstItem="4xk-QQ-Ffi" firstAttribute="leading" secondItem="8xz-9D-ucy" secondAttribute="leading" id="ews-bP-5ap"/>
@@ -1132,7 +1133,7 @@
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BE2-eD-xSv">
-                                <rect key="frame" x="54.666666666666657" y="82" width="305" height="300"/>
+                                <rect key="frame" x="54.666666666666657" y="100" width="305" height="300"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0F0-ZB-zYm">
                                         <rect key="frame" x="265" y="0.0" width="40" height="40"/>
@@ -1296,7 +1297,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                             <constraint firstItem="ff8-Ai-KI0" firstAttribute="top" secondItem="SLN-Li-g7d" secondAttribute="top" id="X0s-8k-bHV"/>
                             <constraint firstItem="Oyt-JE-UAo" firstAttribute="leading" secondItem="SLN-Li-g7d" secondAttribute="leading" id="ZgE-yk-x4f"/>
                             <constraint firstItem="3TH-4x-Z35" firstAttribute="leading" secondItem="SLN-Li-g7d" secondAttribute="leading" id="mEJ-Pg-FhW"/>
-                            <constraint firstItem="BE2-eD-xSv" firstAttribute="top" secondItem="SLN-Li-g7d" secondAttribute="top" constant="82" id="qdt-wm-WwY"/>
+                            <constraint firstItem="BE2-eD-xSv" firstAttribute="top" secondItem="SLN-Li-g7d" secondAttribute="top" constant="100" id="qdt-wm-WwY"/>
                             <constraint firstItem="Oyt-JE-UAo" firstAttribute="top" secondItem="SLN-Li-g7d" secondAttribute="top" id="r4O-ks-crx"/>
                             <constraint firstAttribute="trailing" secondItem="Oyt-JE-UAo" secondAttribute="trailing" id="zwZ-wn-h5N"/>
                         </constraints>
@@ -1705,6 +1706,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <navigationItem key="navigationItem" id="Do8-SQ-Vw5"/>
                     <connections>
                         <outlet property="btnRecord" destination="chu-wv-5TT" id="cL7-d8-RVV"/>
+                        <outlet property="constOfNavigationTop" destination="nin-3s-2od" id="TFx-80-ZAi"/>
                         <outlet property="headerLabel" destination="I4h-Cq-DCg" id="i8L-8Z-8IG"/>
                         <outlet property="headerViewHeightConstraint" destination="cZf-mR-CC9" id="DMt-87-sOe"/>
                         <outlet property="imgAvatar" destination="dBF-Kb-Xev" id="SqZ-e9-OGi"/>
@@ -1945,7 +1947,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This MSP is already being used!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66f-1R-s3H">
-                                                <rect key="frame" x="219.33333333333337" y="250.66666666666666" width="169.66666666666663" height="16.666666666666657"/>
+                                                <rect key="frame" x="219.33333333333337" y="250.99999999999997" width="169.66666666666663" height="16.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                 <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2026,6 +2028,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <connections>
                         <outlet property="btnChangePicture" destination="lSW-Xg-LHz" id="gT2-eD-INC"/>
                         <outlet property="btnSave" destination="0SI-WT-oeU" id="TRm-8f-6yF"/>
+                        <outlet property="constOfNavigationTop" destination="xGd-kH-YE0" id="FDw-jA-OYI"/>
                         <outlet property="imgAvatar" destination="MHJ-SD-LYz" id="VOK-TF-6Mk"/>
                         <outlet property="lblMSPError" destination="66f-1R-s3H" id="koV-od-Vmt"/>
                         <outlet property="tfEmail" destination="gcJ-0H-xm3" id="0Yb-Ep-uuH"/>
@@ -2224,14 +2227,14 @@ community. Invite people that you actually like to give it a try ;)</string>
                             <constraint firstItem="iXp-01-gdN" firstAttribute="top" secondItem="Wg9-jM-k7X" secondAttribute="bottom" id="EVr-4m-Z6x"/>
                             <constraint firstItem="Wg9-jM-k7X" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="HrS-FX-X4t"/>
                             <constraint firstAttribute="trailing" secondItem="Wg9-jM-k7X" secondAttribute="trailing" id="Jo5-PG-9Up"/>
-                            <constraint firstItem="9uK-Dc-dpL" firstAttribute="top" secondItem="wVY-ma-WBI" secondAttribute="bottom" id="Juf-ca-WV0"/>
+                            <constraint firstAttribute="bottom" secondItem="wVY-ma-WBI" secondAttribute="bottom" id="Juf-ca-WV0"/>
                             <constraint firstAttribute="trailing" secondItem="iXp-01-gdN" secondAttribute="trailing" id="L5b-Jb-nK3"/>
                             <constraint firstItem="81b-Rg-xNr" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="MgN-rI-nCA"/>
                             <constraint firstAttribute="trailing" secondItem="81b-Rg-xNr" secondAttribute="trailing" id="cZG-Cn-qiZ"/>
                             <constraint firstItem="81b-Rg-xNr" firstAttribute="top" secondItem="fGI-ZW-IBP" secondAttribute="bottom" id="i9Y-M1-iHr"/>
                             <constraint firstItem="fGI-ZW-IBP" firstAttribute="top" secondItem="iXp-01-gdN" secondAttribute="bottom" id="ntc-CE-sFO"/>
                             <constraint firstAttribute="trailing" secondItem="fGI-ZW-IBP" secondAttribute="trailing" id="qtO-gZ-auc"/>
-                            <constraint firstItem="9uK-Dc-dpL" firstAttribute="top" secondItem="81b-Rg-xNr" secondAttribute="bottom" id="sBl-0b-JCV"/>
+                            <constraint firstAttribute="bottom" secondItem="81b-Rg-xNr" secondAttribute="bottom" id="sBl-0b-JCV"/>
                             <constraint firstItem="iXp-01-gdN" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="vEx-I5-4Oh"/>
                             <constraint firstItem="Wg9-jM-k7X" firstAttribute="top" secondItem="eBx-fI-aBV" secondAttribute="top" id="xWg-FR-k5n"/>
                             <constraint firstItem="fGI-ZW-IBP" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="z2A-el-XkS"/>
@@ -2240,6 +2243,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <navigationItem key="navigationItem" id="Iye-PE-mDq"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="xWg-FR-k5n" id="F6D-Mx-Nje"/>
                         <outlet property="scCallType" destination="fzO-fG-2u7" id="4Tw-Im-PVj"/>
                         <outlet property="tvHistory" destination="81b-Rg-xNr" id="W9h-r6-BtP"/>
                         <outlet property="txFieldSearch" destination="wu1-th-6px" id="0UO-Q5-kuo"/>
@@ -2345,6 +2349,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     </view>
                     <navigationItem key="navigationItem" id="FeF-8K-Jic"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="JLS-n3-Wgs" id="PT6-gl-YOA"/>
                         <segue destination="w7X-aX-zW5" kind="show" identifier="RecordingBroadcast" animates="NO" id="p20-ne-j26"/>
                     </connections>
                 </viewController>
@@ -2481,6 +2486,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="qnU-Yd-OMH" id="shc-q4-WUZ"/>
                         <outlet property="lblCurrentTime" destination="JC8-OM-DIX" id="joG-ru-gPY"/>
                         <outlet property="waveformView" destination="dHC-Yr-Md6" id="VSy-nN-cGa"/>
                         <segue destination="Cj2-vr-z5M" kind="unwind" identifier="StopRecordingBroadcast" animates="NO" unwindAction="unWindToPreRecordingWithSegue:" id="O5X-uy-pci"/>
@@ -2504,6 +2510,47 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5T-Oc-OBv" userLabel="Navigation">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTg-Db-S9D">
+                                        <rect key="frame" x="10" y="22" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="I0R-wQ-DUQ"/>
+                                            <constraint firstAttribute="height" constant="40" id="eGs-NF-FOf"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_close"/>
+                                        <connections>
+                                            <action selector="onCloseWithSender:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="aU3-eh-qwQ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgd-ei-ICp">
+                                        <rect key="frame" x="168.66666666666666" y="32" width="78" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="UgK-3V-aM2"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxp-AB-KOO">
+                                        <rect key="frame" x="366" y="22" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="kjg-ch-WFW"/>
+                                            <constraint firstAttribute="height" constant="40" id="mb0-17-HTg"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kxp-AB-KOO" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="top" constant="22" id="Jcx-eN-W2G"/>
+                                    <constraint firstItem="Hgd-ei-ICp" firstAttribute="centerX" secondItem="v5T-Oc-OBv" secondAttribute="centerX" id="KfH-N3-sFV"/>
+                                    <constraint firstItem="Hgd-ei-ICp" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="top" constant="32" id="P6g-is-5M5"/>
+                                    <constraint firstItem="HTg-Db-S9D" firstAttribute="leading" secondItem="v5T-Oc-OBv" secondAttribute="leading" constant="10" id="cZl-A3-bKk"/>
+                                    <constraint firstAttribute="height" constant="64" id="hVX-L1-3od"/>
+                                    <constraint firstAttribute="trailing" secondItem="kxp-AB-KOO" secondAttribute="trailing" constant="8" id="l7E-As-Xw7"/>
+                                    <constraint firstItem="HTg-Db-S9D" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="top" constant="22" id="q63-Rh-qsX"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRo-UP-jrI">
                                 <rect key="frame" x="105" y="89" width="204" height="204"/>
                                 <constraints>
@@ -2658,47 +2705,6 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <constraint firstItem="KD0-DK-vS4" firstAttribute="top" secondItem="xsQ-mm-9zc" secondAttribute="top" id="wam-uX-rVD"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5T-Oc-OBv" userLabel="Navigation">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HTg-Db-S9D">
-                                        <rect key="frame" x="10" y="22" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="I0R-wQ-DUQ"/>
-                                            <constraint firstAttribute="height" constant="40" id="eGs-NF-FOf"/>
-                                        </constraints>
-                                        <state key="normal" image="icon_close"/>
-                                        <connections>
-                                            <action selector="onCloseWithSender:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="aU3-eh-qwQ"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recording" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgd-ei-ICp">
-                                        <rect key="frame" x="168.66666666666666" y="32" width="78" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="UgK-3V-aM2"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
-                                        <color key="textColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxp-AB-KOO">
-                                        <rect key="frame" x="366" y="22" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="kjg-ch-WFW"/>
-                                            <constraint firstAttribute="height" constant="40" id="mb0-17-HTg"/>
-                                        </constraints>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="kxp-AB-KOO" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="top" constant="22" id="Jcx-eN-W2G"/>
-                                    <constraint firstItem="Hgd-ei-ICp" firstAttribute="centerX" secondItem="v5T-Oc-OBv" secondAttribute="centerX" id="KfH-N3-sFV"/>
-                                    <constraint firstItem="Hgd-ei-ICp" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="top" constant="32" id="P6g-is-5M5"/>
-                                    <constraint firstItem="HTg-Db-S9D" firstAttribute="leading" secondItem="v5T-Oc-OBv" secondAttribute="leading" constant="10" id="cZl-A3-bKk"/>
-                                    <constraint firstAttribute="height" constant="64" id="hVX-L1-3od"/>
-                                    <constraint firstAttribute="trailing" secondItem="kxp-AB-KOO" secondAttribute="trailing" constant="8" id="l7E-As-Xw7"/>
-                                    <constraint firstItem="HTg-Db-S9D" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="top" constant="22" id="q63-Rh-qsX"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -2717,7 +2723,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                             <constraint firstItem="xsQ-mm-9zc" firstAttribute="top" secondItem="iMw-Ue-X4h" secondAttribute="bottom" constant="48" id="qP5-Zo-YSW"/>
                             <constraint firstItem="iMw-Ue-X4h" firstAttribute="centerX" secondItem="kUK-wx-d2F" secondAttribute="centerX" id="qQe-KI-RhL"/>
                             <constraint firstItem="dAg-A4-gA0" firstAttribute="top" secondItem="GLf-0f-4kL" secondAttribute="bottom" constant="2" id="rkb-8K-yxV"/>
-                            <constraint firstItem="kCY-7Q-fbx" firstAttribute="top" secondItem="xsQ-mm-9zc" secondAttribute="bottom" constant="28" id="u51-SS-obF"/>
+                            <constraint firstAttribute="bottom" secondItem="xsQ-mm-9zc" secondAttribute="bottom" constant="28" id="u51-SS-obF"/>
                             <constraint firstItem="v5T-Oc-OBv" firstAttribute="leading" secondItem="kUK-wx-d2F" secondAttribute="leading" id="wr8-21-ubH"/>
                             <constraint firstItem="bpM-Ou-p0U" firstAttribute="centerX" secondItem="kUK-wx-d2F" secondAttribute="centerX" id="xwF-qX-d55"/>
                             <constraint firstItem="dAg-A4-gA0" firstAttribute="leading" secondItem="kUK-wx-d2F" secondAttribute="leading" id="z0p-uX-ijK"/>
@@ -2726,6 +2732,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <connections>
                         <outlet property="btnPause" destination="fum-UW-dcS" id="bq1-YA-aYD"/>
                         <outlet property="btnPlay" destination="mEN-9m-RIR" id="Q07-8i-yrS"/>
+                        <outlet property="constOfNavigationTop" destination="Akh-Jo-IUA" id="5JU-77-7fn"/>
                         <outlet property="labelLength" destination="MU4-2z-Hqb" id="WpH-06-dDg"/>
                         <outlet property="lblCurrentTime" destination="iMw-Ue-X4h" id="5Wt-tB-KwD"/>
                         <outlet property="mSlider" destination="MaP-NW-Njc" id="buT-Qy-loD"/>
@@ -2966,6 +2973,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <connections>
                         <outlet property="btnAddPicture" destination="4y1-qJ-BEk" id="iJd-I8-FTa"/>
                         <outlet property="btnSave" destination="Vqt-c8-ubB" id="gg0-sS-RJW"/>
+                        <outlet property="constOfNavigationTop" destination="jMj-V5-aEY" id="A3o-b6-v90"/>
                         <outlet property="hashTagCtrl" destination="93N-tS-07R" id="KRl-QD-O9Y"/>
                         <outlet property="imgAvatar" destination="rvg-xS-CWH" id="D61-vB-Jb8"/>
                         <outlet property="tfBroadcastName" destination="qf3-Qq-6kY" id="Ya4-Sq-awl"/>
@@ -3011,7 +3019,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fB-pr-Agz">
-                                <rect key="frame" x="35" y="140" width="344" height="250"/>
+                                <rect key="frame" x="35" y="160" width="344" height="250"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_save_done_new" translatesAutoresizingMaskIntoConstraints="NO" id="Oow-o0-kyO">
                                         <rect key="frame" x="145" y="0.0" width="55" height="55"/>
@@ -3176,7 +3184,7 @@ recorded a new diagnosis.</string>
                             <constraint firstAttribute="trailing" secondItem="cNp-Vr-g5f" secondAttribute="trailing" id="DA0-Y9-IHr"/>
                             <constraint firstItem="cNp-Vr-g5f" firstAttribute="top" secondItem="Y6W-QD-IPd" secondAttribute="top" id="EXZ-6q-Gd9"/>
                             <constraint firstItem="ANn-pt-jsJ" firstAttribute="top" secondItem="Y6W-QD-IPd" secondAttribute="top" id="X1d-Sw-0dA"/>
-                            <constraint firstItem="0fB-pr-Agz" firstAttribute="top" secondItem="Y6W-QD-IPd" secondAttribute="top" constant="140" id="XBI-Hm-u7N"/>
+                            <constraint firstItem="0fB-pr-Agz" firstAttribute="top" secondItem="Y6W-QD-IPd" secondAttribute="top" constant="160" id="XBI-Hm-u7N"/>
                             <constraint firstItem="cNp-Vr-g5f" firstAttribute="leading" secondItem="Y6W-QD-IPd" secondAttribute="leading" id="XBR-5w-q2F"/>
                             <constraint firstItem="ANn-pt-jsJ" firstAttribute="leading" secondItem="Y6W-QD-IPd" secondAttribute="leading" id="YPo-8S-hm2"/>
                             <constraint firstAttribute="bottom" secondItem="cNp-Vr-g5f" secondAttribute="bottom" id="bVj-wk-xJ9"/>
@@ -3254,7 +3262,7 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="cGm-yq-CLB" firstAttribute="top" secondItem="efP-CD-xnh" secondAttribute="top" id="sja-Lm-R5c"/>
                             <constraint firstAttribute="trailing" secondItem="cGm-yq-CLB" secondAttribute="trailing" id="tgF-re-oZU"/>
                             <constraint firstItem="cGm-yq-CLB" firstAttribute="leading" secondItem="efP-CD-xnh" secondAttribute="leading" id="tzO-6Y-AjM"/>
-                            <constraint firstItem="XA8-oo-hnj" firstAttribute="top" secondItem="cGm-yq-CLB" secondAttribute="bottom" id="v2s-Fd-sp1"/>
+                            <constraint firstAttribute="bottom" secondItem="cGm-yq-CLB" secondAttribute="bottom" id="v2s-Fd-sp1"/>
                         </constraints>
                     </view>
                     <connections>
@@ -3356,15 +3364,16 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="adz-xi-KzH" firstAttribute="top" secondItem="KZX-RU-DYP" secondAttribute="top" id="ELB-G3-ba3"/>
                             <constraint firstAttribute="trailing" secondItem="adz-xi-KzH" secondAttribute="trailing" id="Jni-OL-dJL"/>
                             <constraint firstItem="LXI-yD-OwK" firstAttribute="top" secondItem="Adq-5b-Ssx" secondAttribute="bottom" id="KL2-Vf-qWf"/>
-                            <constraint firstItem="gH8-eT-9M1" firstAttribute="top" secondItem="LXI-yD-OwK" secondAttribute="bottom" id="MH9-C3-lVS"/>
+                            <constraint firstAttribute="bottom" secondItem="LXI-yD-OwK" secondAttribute="bottom" id="MH9-C3-lVS"/>
                             <constraint firstItem="Adq-5b-Ssx" firstAttribute="leading" secondItem="KZX-RU-DYP" secondAttribute="leading" id="UpT-S5-Aci"/>
                             <constraint firstItem="adz-xi-KzH" firstAttribute="leading" secondItem="KZX-RU-DYP" secondAttribute="leading" id="gjb-Jx-DY4"/>
                             <constraint firstItem="Adq-5b-Ssx" firstAttribute="top" secondItem="KZX-RU-DYP" secondAttribute="top" id="kTG-re-3Rm"/>
                             <constraint firstItem="LXI-yD-OwK" firstAttribute="leading" secondItem="KZX-RU-DYP" secondAttribute="leading" id="mST-zH-2hL"/>
-                            <constraint firstItem="gH8-eT-9M1" firstAttribute="top" secondItem="adz-xi-KzH" secondAttribute="bottom" id="tvE-u8-5SD"/>
+                            <constraint firstAttribute="bottom" secondItem="adz-xi-KzH" secondAttribute="bottom" id="tvE-u8-5SD"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="kTG-re-3Rm" id="ucv-1w-rpx"/>
                         <outlet property="tvNotifications" destination="LXI-yD-OwK" id="beD-xI-iZL"/>
                     </connections>
                 </viewController>
@@ -3446,7 +3455,7 @@ recorded a new diagnosis.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LB6-KE-5Wa" firstAttribute="top" secondItem="5Lu-ya-ePh" secondAttribute="bottom" id="CMe-OW-kt3"/>
+                            <constraint firstAttribute="bottom" secondItem="5Lu-ya-ePh" secondAttribute="bottom" id="CMe-OW-kt3"/>
                             <constraint firstItem="5Lu-ya-ePh" firstAttribute="top" secondItem="HIw-1e-xMo" secondAttribute="bottom" id="CgC-Q7-yBI"/>
                             <constraint firstAttribute="trailing" secondItem="5Lu-ya-ePh" secondAttribute="trailing" id="ImP-yI-BQu"/>
                             <constraint firstItem="K07-N7-pif" firstAttribute="top" secondItem="Izv-XD-sa0" secondAttribute="top" id="Jsw-Gu-4HC"/>
@@ -3455,12 +3464,13 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="K07-N7-pif" firstAttribute="leading" secondItem="Izv-XD-sa0" secondAttribute="leading" id="dTd-wJ-6PR"/>
                             <constraint firstAttribute="trailing" secondItem="K07-N7-pif" secondAttribute="trailing" id="fh3-5H-riE"/>
                             <constraint firstAttribute="trailing" secondItem="HIw-1e-xMo" secondAttribute="trailing" id="tbH-vs-V7R"/>
-                            <constraint firstItem="LB6-KE-5Wa" firstAttribute="top" secondItem="K07-N7-pif" secondAttribute="bottom" id="vrP-c3-lZ5"/>
+                            <constraint firstAttribute="bottom" secondItem="K07-N7-pif" secondAttribute="bottom" id="vrP-c3-lZ5"/>
                             <constraint firstItem="5Lu-ya-ePh" firstAttribute="leading" secondItem="Izv-XD-sa0" secondAttribute="leading" id="vub-lg-1Hi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnSave" destination="dku-hO-ZGK" id="quI-Fa-Tzz"/>
+                        <outlet property="constOfNavigationTop" destination="M6H-Em-sIF" id="Xte-CI-wMc"/>
                         <outlet property="tvChangePassword" destination="5Lu-ya-ePh" id="z1F-bB-gaC"/>
                     </connections>
                 </viewController>
@@ -3531,8 +3541,8 @@ recorded a new diagnosis.</string>
                             <constraint firstAttribute="trailing" secondItem="ILR-Td-chK" secondAttribute="trailing" id="97A-DR-GLo"/>
                             <constraint firstItem="i8A-5X-aYf" firstAttribute="top" secondItem="vQR-52-tIO" secondAttribute="bottom" id="H6x-mr-V10"/>
                             <constraint firstItem="vQR-52-tIO" firstAttribute="top" secondItem="1Vg-Rk-Vaz" secondAttribute="top" id="KCG-UD-gGE"/>
-                            <constraint firstItem="itd-9r-728" firstAttribute="top" secondItem="ILR-Td-chK" secondAttribute="bottom" id="Wa4-we-KSb"/>
-                            <constraint firstItem="itd-9r-728" firstAttribute="top" secondItem="i8A-5X-aYf" secondAttribute="bottom" id="ZVV-yg-WPm"/>
+                            <constraint firstAttribute="bottom" secondItem="ILR-Td-chK" secondAttribute="bottom" id="Wa4-we-KSb"/>
+                            <constraint firstAttribute="bottom" secondItem="i8A-5X-aYf" secondAttribute="bottom" id="ZVV-yg-WPm"/>
                             <constraint firstAttribute="trailing" secondItem="vQR-52-tIO" secondAttribute="trailing" id="eVJ-RR-Ts3"/>
                             <constraint firstItem="i8A-5X-aYf" firstAttribute="leading" secondItem="1Vg-Rk-Vaz" secondAttribute="leading" id="jz2-ec-V1a"/>
                             <constraint firstItem="ILR-Td-chK" firstAttribute="top" secondItem="1Vg-Rk-Vaz" secondAttribute="top" id="k9f-mq-0am"/>
@@ -3541,6 +3551,7 @@ recorded a new diagnosis.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="KCG-UD-gGE" id="Xjr-gH-coO"/>
                         <outlet property="tvSettings" destination="i8A-5X-aYf" id="v3R-Ou-gb8"/>
                     </connections>
                 </viewController>
@@ -3579,10 +3590,7 @@ recorded a new diagnosis.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiO-uo-FGg">
-                                        <rect key="frame" x="167.33333333333334" y="32" width="80" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="Pmg-Tp-iqt"/>
-                                        </constraints>
+                                        <rect key="frame" x="175.33333333333334" y="32" width="65" height="20"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -3629,14 +3637,15 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="4xe-F3-Xqz" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Xee-Df-RYj"/>
                             <constraint firstAttribute="trailing" secondItem="CZA-vF-8Dj" secondAttribute="trailing" id="YTd-g2-uzZ"/>
                             <constraint firstItem="CZA-vF-8Dj" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Zpv-4D-KwC"/>
-                            <constraint firstItem="0GA-KH-hCv" firstAttribute="top" secondItem="k1X-cB-qd2" secondAttribute="bottom" id="aZ0-T5-N2m"/>
+                            <constraint firstAttribute="bottom" secondItem="k1X-cB-qd2" secondAttribute="bottom" id="aZ0-T5-N2m"/>
                             <constraint firstItem="k1X-cB-qd2" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="chN-u2-cxu"/>
-                            <constraint firstItem="0GA-KH-hCv" firstAttribute="top" secondItem="CZA-vF-8Dj" secondAttribute="bottom" id="i3a-K0-ETJ"/>
+                            <constraint firstAttribute="bottom" secondItem="CZA-vF-8Dj" secondAttribute="bottom" id="i3a-K0-ETJ"/>
                             <constraint firstAttribute="trailing" secondItem="k1X-cB-qd2" secondAttribute="trailing" id="ntg-mM-08q"/>
                             <constraint firstItem="k1X-cB-qd2" firstAttribute="top" secondItem="1fB-zz-69v" secondAttribute="top" id="sSY-Iy-m0W"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="2Xw-aY-wRh" id="U2M-t8-YMv"/>
                         <outlet property="m_btnSave" destination="dCc-Ww-fMj" id="9S6-co-AxC"/>
                         <outlet property="m_contentWebView" destination="CZA-vF-8Dj" id="sSr-0I-rhg"/>
                         <outlet property="m_lblTitle" destination="fiO-uo-FGg" id="ckl-8z-6tP"/>
@@ -3798,14 +3807,15 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="TMq-Bd-iXK" firstAttribute="top" secondItem="A6J-wg-u9w" secondAttribute="top" id="DRH-He-xQS"/>
                             <constraint firstAttribute="trailing" secondItem="7b9-Qj-mRy" secondAttribute="trailing" id="Nbu-Sb-I3r"/>
                             <constraint firstAttribute="trailing" secondItem="TMq-Bd-iXK" secondAttribute="trailing" id="V99-0b-Ute"/>
-                            <constraint firstItem="bG7-tO-gwK" firstAttribute="top" secondItem="7b9-Qj-mRy" secondAttribute="bottom" id="Xvc-Iq-8lK"/>
+                            <constraint firstAttribute="bottom" secondItem="7b9-Qj-mRy" secondAttribute="bottom" id="Xvc-Iq-8lK"/>
                             <constraint firstItem="7b9-Qj-mRy" firstAttribute="leading" secondItem="A6J-wg-u9w" secondAttribute="leading" id="hpx-rA-TpF"/>
                             <constraint firstItem="TMq-Bd-iXK" firstAttribute="leading" secondItem="A6J-wg-u9w" secondAttribute="leading" id="iB7-bO-KOb"/>
                             <constraint firstItem="Wt7-wM-ips" firstAttribute="leading" secondItem="A6J-wg-u9w" secondAttribute="leading" id="kZE-f0-tir"/>
-                            <constraint firstItem="bG7-tO-gwK" firstAttribute="top" secondItem="Wt7-wM-ips" secondAttribute="bottom" id="xwg-lc-DJg"/>
+                            <constraint firstAttribute="bottom" secondItem="Wt7-wM-ips" secondAttribute="bottom" id="xwg-lc-DJg"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="DRH-He-xQS" id="eqR-7A-WPg"/>
                         <outlet property="m_tblBlockedUsers" destination="Wt7-wM-ips" id="JVB-l5-nS2"/>
                     </connections>
                 </viewController>
@@ -3943,7 +3953,7 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="1Oo-HY-nTE" firstAttribute="top" secondItem="dHS-vt-ZSg" secondAttribute="top" id="BWA-vP-Qfj"/>
                             <constraint firstItem="yC6-zF-yyg" firstAttribute="top" secondItem="xZT-RL-hnh" secondAttribute="bottom" id="N07-zS-Ybo"/>
                             <constraint firstItem="xZT-RL-hnh" firstAttribute="top" secondItem="1Oo-HY-nTE" secondAttribute="bottom" id="NKb-KB-AYH"/>
-                            <constraint firstItem="Txq-Rv-Txg" firstAttribute="top" secondItem="SgM-Re-15L" secondAttribute="bottom" id="UFJ-mz-f1F"/>
+                            <constraint firstAttribute="bottom" secondItem="SgM-Re-15L" secondAttribute="bottom" id="UFJ-mz-f1F"/>
                             <constraint firstItem="yC6-zF-yyg" firstAttribute="leading" secondItem="dHS-vt-ZSg" secondAttribute="leading" id="Unb-Yi-yah"/>
                             <constraint firstItem="SgM-Re-15L" firstAttribute="top" secondItem="dHS-vt-ZSg" secondAttribute="top" id="V2S-Zr-3rV"/>
                             <constraint firstAttribute="trailing" secondItem="yC6-zF-yyg" secondAttribute="trailing" id="Ves-Da-AJG"/>
@@ -3958,6 +3968,7 @@ recorded a new diagnosis.</string>
                     </view>
                     <connections>
                         <outlet property="commentTextView" destination="RcM-rR-Xrc" id="lZ7-Jg-Tpm"/>
+                        <outlet property="constOfNavigationTop" destination="BWA-vP-Qfj" id="lxp-zJ-GfG"/>
                         <outlet property="lbcBottomMargin" destination="hTV-Nm-Chi" id="Jh8-Re-fQP"/>
                         <outlet property="tvComments" destination="xZT-RL-hnh" id="H6G-RS-Osn"/>
                     </connections>
@@ -4084,7 +4095,7 @@ recorded a new diagnosis.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oll-mm-aiD" firstAttribute="top" secondItem="1JX-pd-ZVN" secondAttribute="bottom" id="5pB-fn-Y7q"/>
+                            <constraint firstAttribute="bottom" secondItem="1JX-pd-ZVN" secondAttribute="bottom" id="5pB-fn-Y7q"/>
                             <constraint firstAttribute="trailing" secondItem="q1k-no-0HS" secondAttribute="trailing" id="AKS-49-B3t"/>
                             <constraint firstItem="1JX-pd-ZVN" firstAttribute="leading" secondItem="EHV-ak-DiN" secondAttribute="leading" id="HW5-Uo-8xa"/>
                             <constraint firstAttribute="trailing" secondItem="yIV-Le-H2f" secondAttribute="trailing" id="LCY-Ee-P8d"/>
@@ -4099,6 +4110,7 @@ recorded a new diagnosis.</string>
                     </view>
                     <navigationItem key="navigationItem" id="ULN-Cu-XN0"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="1eD-ap-uYv" id="Kqg-bY-Qau"/>
                         <outlet property="tableView" destination="1JX-pd-ZVN" id="uk3-b7-g5v"/>
                         <outlet property="txFieldSearch" destination="k54-1n-g71" id="wdy-Ye-CKb"/>
                         <outlet property="viewSearch" destination="NGa-H0-0dU" id="rXI-zs-RHU"/>
@@ -4205,7 +4217,7 @@ recorded a new diagnosis.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7f6-0B-IOm" firstAttribute="top" secondItem="XoF-UM-4vc" secondAttribute="bottom" id="3KJ-Eq-EbR"/>
+                            <constraint firstAttribute="bottom" secondItem="XoF-UM-4vc" secondAttribute="bottom" id="3KJ-Eq-EbR"/>
                             <constraint firstItem="XoF-UM-4vc" firstAttribute="top" secondItem="AuJ-YK-5Wg" secondAttribute="top" id="9KD-3n-Yxp"/>
                             <constraint firstItem="BeI-Fq-vrf" firstAttribute="top" secondItem="jHH-fN-KeJ" secondAttribute="bottom" id="BBc-a0-Nxj"/>
                             <constraint firstItem="jHH-fN-KeJ" firstAttribute="leading" secondItem="AuJ-YK-5Wg" secondAttribute="leading" id="BVL-xM-iq4"/>
@@ -4215,10 +4227,11 @@ recorded a new diagnosis.</string>
                             <constraint firstAttribute="trailing" secondItem="BeI-Fq-vrf" secondAttribute="trailing" id="SM3-TB-MwZ"/>
                             <constraint firstAttribute="trailing" secondItem="XoF-UM-4vc" secondAttribute="trailing" id="VyU-cd-yGD"/>
                             <constraint firstAttribute="trailing" secondItem="jHH-fN-KeJ" secondAttribute="trailing" id="kPg-Tg-3cK"/>
-                            <constraint firstItem="7f6-0B-IOm" firstAttribute="top" secondItem="BeI-Fq-vrf" secondAttribute="bottom" id="ur1-Ef-TYx"/>
+                            <constraint firstAttribute="bottom" secondItem="BeI-Fq-vrf" secondAttribute="bottom" id="ur1-Ef-TYx"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="HAe-AN-X4h" id="3jp-AL-M7U"/>
                         <outlet property="lblTitle" destination="SDX-MR-0cR" id="gqL-bu-Vj0"/>
                         <outlet property="tvPosts" destination="BeI-Fq-vrf" id="swJ-iP-Tcq"/>
                     </connections>
@@ -4425,7 +4438,7 @@ recorded a new diagnosis.</string>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This MSP is already being used!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LYi-gX-XUy">
-                                                <rect key="frame" x="219.33333333333337" y="253.33333333333329" width="169.66666666666663" height="16.666666666666657"/>
+                                                <rect key="frame" x="219.33333333333337" y="253.66666666666666" width="169.66666666666663" height="16.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                 <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -4484,7 +4497,7 @@ recorded a new diagnosis.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="d7M-oR-GUK" firstAttribute="top" secondItem="A5q-t6-g3q" secondAttribute="bottom" id="2sE-sH-mv2"/>
+                            <constraint firstAttribute="bottom" secondItem="A5q-t6-g3q" secondAttribute="bottom" id="2sE-sH-mv2"/>
                             <constraint firstItem="d7M-oR-GUK" firstAttribute="top" secondItem="YzN-ow-qBJ" secondAttribute="bottom" constant="15" id="6G9-hP-Y7v"/>
                             <constraint firstItem="A5q-t6-g3q" firstAttribute="top" secondItem="EGB-ey-Num" secondAttribute="bottom" id="8Kt-9r-ffM"/>
                             <constraint firstItem="cnP-dx-uzX" firstAttribute="top" secondItem="gmP-xy-x4Q" secondAttribute="top" id="F1V-Hk-CJP"/>
@@ -4498,9 +4511,7 @@ recorded a new diagnosis.</string>
                             <constraint firstItem="cnP-dx-uzX" firstAttribute="leading" secondItem="gmP-xy-x4Q" secondAttribute="leading" id="cE9-wP-UHv"/>
                             <constraint firstItem="EGB-ey-Num" firstAttribute="top" secondItem="gmP-xy-x4Q" secondAttribute="top" id="cIz-f3-sKX"/>
                             <constraint firstItem="CAE-6X-BMU" firstAttribute="width" secondItem="gmP-xy-x4Q" secondAttribute="width" multiplier="0.8" id="nVh-pm-YTy"/>
-                            <constraint firstItem="d7M-oR-GUK" firstAttribute="top" secondItem="cnP-dx-uzX" secondAttribute="bottom" id="orY-rb-oKM"/>
-                            <constraint firstItem="A5q-t6-g3q" firstAttribute="leading" secondItem="gmP-xy-x4Q" secondAttribute="leading" id="q71-AG-Ptn"/>
-                            <constraint firstAttribute="trailing" secondItem="A5q-t6-g3q" secondAttribute="trailing" id="zIl-oM-bGx"/>
+                            <constraint firstAttribute="bottom" secondItem="cnP-dx-uzX" secondAttribute="bottom" id="orY-rb-oKM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5pt-qF-YzV"/>
@@ -4508,6 +4519,7 @@ recorded a new diagnosis.</string>
                         <outlet property="avatarImageView" destination="qJ1-5h-g23" id="N2Y-RJ-0vl"/>
                         <outlet property="btnAvatarImage" destination="dC0-Km-o8L" id="iiB-9d-P7T"/>
                         <outlet property="btnSave" destination="a2x-Id-t5o" id="YkL-ZS-xdH"/>
+                        <outlet property="constOfNavigationTop" destination="cIz-f3-sKX" id="aof-4T-k7K"/>
                         <outlet property="lblMSPError" destination="LYi-gX-XUy" id="vfG-vN-N5C"/>
                         <outlet property="pageControl" destination="YzN-ow-qBJ" id="2Gr-zp-Dsc"/>
                         <outlet property="tfLocation" destination="Vq7-ZI-lhX" id="Mfc-s8-vqG"/>
@@ -4624,9 +4636,9 @@ set up your account.Tap the link in the
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LtS-F7-QxD" secondAttribute="trailing" id="2rz-17-s9w"/>
-                            <constraint firstItem="gaT-q6-MiD" firstAttribute="top" secondItem="zkU-4g-VWF" secondAttribute="bottom" id="5xm-ZF-GXw"/>
+                            <constraint firstAttribute="bottom" secondItem="zkU-4g-VWF" secondAttribute="bottom" id="5xm-ZF-GXw"/>
                             <constraint firstAttribute="trailing" secondItem="zkU-4g-VWF" secondAttribute="trailing" id="653-gz-vzd"/>
-                            <constraint firstItem="gaT-q6-MiD" firstAttribute="top" secondItem="fmr-zt-L11" secondAttribute="bottom" id="869-WO-4PL"/>
+                            <constraint firstAttribute="bottom" secondItem="fmr-zt-L11" secondAttribute="bottom" id="869-WO-4PL"/>
                             <constraint firstItem="fmr-zt-L11" firstAttribute="top" secondItem="bce-QM-tE9" secondAttribute="top" id="B25-f8-XOm"/>
                             <constraint firstItem="xBK-DA-tXW" firstAttribute="centerX" secondItem="bce-QM-tE9" secondAttribute="centerX" id="EWz-uE-c1w"/>
                             <constraint firstItem="fmr-zt-L11" firstAttribute="leading" secondItem="bce-QM-tE9" secondAttribute="leading" id="M1z-yn-qJp"/>
@@ -4635,15 +4647,14 @@ set up your account.Tap the link in the
                             <constraint firstItem="gaT-q6-MiD" firstAttribute="top" secondItem="GQL-uH-bdq" secondAttribute="bottom" constant="15" id="b7X-iW-UH6"/>
                             <constraint firstItem="zkU-4g-VWF" firstAttribute="leading" secondItem="bce-QM-tE9" secondAttribute="leading" id="b7e-uT-A3A"/>
                             <constraint firstItem="LtS-F7-QxD" firstAttribute="top" secondItem="bce-QM-tE9" secondAttribute="top" id="hre-kb-Inc"/>
-                            <constraint firstAttribute="trailing" secondItem="zkU-4g-VWF" secondAttribute="trailing" id="ifb-CR-6kn"/>
                             <constraint firstAttribute="trailing" secondItem="fmr-zt-L11" secondAttribute="trailing" id="kXK-iA-Zd1"/>
                             <constraint firstItem="LtS-F7-QxD" firstAttribute="leading" secondItem="bce-QM-tE9" secondAttribute="leading" id="old-2n-x3o"/>
                             <constraint firstItem="xBK-DA-tXW" firstAttribute="width" secondItem="bce-QM-tE9" secondAttribute="width" multiplier="0.8" id="q6O-Pk-CXa"/>
-                            <constraint firstItem="zkU-4g-VWF" firstAttribute="leading" secondItem="bce-QM-tE9" secondAttribute="leading" id="xZP-z9-Faa"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zpj-Mw-hs0"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="hre-kb-Inc" id="MA6-gp-moa"/>
                         <outlet property="pageControl" destination="GQL-uH-bdq" id="lww-ME-SjJ"/>
                     </connections>
                 </viewController>
@@ -4782,8 +4793,8 @@ you a link to reset your password.</string>
                         <constraints>
                             <constraint firstItem="mrE-7H-rC8" firstAttribute="top" secondItem="r9a-Rk-bYj" secondAttribute="top" id="1dR-uc-KG8"/>
                             <constraint firstItem="x0M-0X-PtH" firstAttribute="top" secondItem="mrE-7H-rC8" secondAttribute="bottom" id="3CJ-Dv-Fm5"/>
-                            <constraint firstItem="Et2-d8-aZf" firstAttribute="top" secondItem="CdA-sH-B04" secondAttribute="bottom" id="7Tr-Js-qoU"/>
-                            <constraint firstItem="Et2-d8-aZf" firstAttribute="top" secondItem="x0M-0X-PtH" secondAttribute="bottom" id="BNG-qQ-fLr"/>
+                            <constraint firstAttribute="bottom" secondItem="CdA-sH-B04" secondAttribute="bottom" id="7Tr-Js-qoU"/>
+                            <constraint firstAttribute="bottom" secondItem="x0M-0X-PtH" secondAttribute="bottom" id="BNG-qQ-fLr"/>
                             <constraint firstAttribute="trailing" secondItem="CdA-sH-B04" secondAttribute="trailing" id="MbP-nn-bqx"/>
                             <constraint firstItem="x0M-0X-PtH" firstAttribute="leading" secondItem="r9a-Rk-bYj" secondAttribute="leading" id="ULd-sD-zPc"/>
                             <constraint firstAttribute="trailing" secondItem="mrE-7H-rC8" secondAttribute="trailing" id="VM4-go-T7S"/>
@@ -4796,6 +4807,7 @@ you a link to reset your password.</string>
                     <navigationItem key="navigationItem" id="2vC-kZ-HcI"/>
                     <connections>
                         <outlet property="btnSend" destination="j55-UO-ji7" id="EkU-mC-ln5"/>
+                        <outlet property="constOfNavigationTop" destination="1dR-uc-KG8" id="Gnr-ua-sqg"/>
                         <outlet property="txFieldEmail" destination="6eF-xU-qJ3" id="uJh-tA-eMF"/>
                     </connections>
                 </viewController>
@@ -5004,7 +5016,6 @@ you a link to reset your password.</string>
                         <constraints>
                             <constraint firstItem="YgI-kb-zEo" firstAttribute="top" secondItem="0N7-fX-uyU" secondAttribute="bottom" id="BLk-M7-LfZ"/>
                             <constraint firstItem="0N7-fX-uyU" firstAttribute="top" secondItem="zM3-d0-wWk" secondAttribute="top" id="JYR-GA-kVx"/>
-                            <constraint firstAttribute="trailing" secondItem="gBs-P5-nPD" secondAttribute="trailing" id="Ny4-Kg-5ET"/>
                             <constraint firstItem="YgI-kb-zEo" firstAttribute="leading" secondItem="zM3-d0-wWk" secondAttribute="leading" id="ONd-bZ-6ux"/>
                             <constraint firstAttribute="trailing" secondItem="YgI-kb-zEo" secondAttribute="trailing" id="QOx-LG-3x4"/>
                             <constraint firstItem="gBs-P5-nPD" firstAttribute="top" secondItem="zM3-d0-wWk" secondAttribute="top" id="WV6-hG-scG"/>
@@ -5014,14 +5025,14 @@ you a link to reset your password.</string>
                             <constraint firstAttribute="trailing" secondItem="0N7-fX-uyU" secondAttribute="trailing" id="mhG-Sm-2ah"/>
                             <constraint firstItem="gBs-P5-nPD" firstAttribute="leading" secondItem="zM3-d0-wWk" secondAttribute="leading" id="oZf-Ih-JlH"/>
                             <constraint firstItem="0N7-fX-uyU" firstAttribute="leading" secondItem="zM3-d0-wWk" secondAttribute="leading" id="uVe-bV-m9T"/>
-                            <constraint firstItem="gBs-P5-nPD" firstAttribute="leading" secondItem="zM3-d0-wWk" secondAttribute="leading" id="xie-w8-FG1"/>
-                            <constraint firstItem="oQh-GE-cCt" firstAttribute="top" secondItem="YgI-kb-zEo" secondAttribute="bottom" id="ypf-bI-LX1"/>
+                            <constraint firstAttribute="bottom" secondItem="YgI-kb-zEo" secondAttribute="bottom" id="ypf-bI-LX1"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="00I-T7-xFw"/>
                     <connections>
                         <outlet property="btnFavorites" destination="vur-6I-yna" id="6he-WQ-77o"/>
+                        <outlet property="constOfNavigationTop" destination="JYR-GA-kVx" id="QVe-iT-4jx"/>
                         <outlet property="headerLabel" destination="mlt-fC-WBd" id="J62-9G-B0q"/>
                         <outlet property="headerViewHeightConstraint" destination="hGD-vz-Kr5" id="Sfz-PT-hCW"/>
                         <outlet property="imgAvatar" destination="Vm0-Ld-cEB" id="g86-OV-8Wx"/>
@@ -5084,7 +5095,7 @@ you a link to reset your password.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FV3-A3-cSo">
-                                                <rect key="frame" x="87.000000000000014" y="16" width="241.33333333333337" height="40"/>
+                                                <rect key="frame" x="86.999999999999986" y="16" width="241.66666666666663" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="bua-R3-aLV"/>
                                                 </constraints>
@@ -5125,7 +5136,7 @@ you a link to reset your password.</string>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VRG-fD-X1w" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
-                                                <rect key="frame" x="25" y="287" width="364" height="50"/>
+                                                <rect key="frame" x="25" y="287.33333333333331" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="7ZZ-Pg-U4w"/>
                                                 </constraints>
@@ -5196,8 +5207,8 @@ you a link to reset your password.</string>
                             <constraint firstItem="xcY-OV-GIh" firstAttribute="leading" secondItem="E2q-er-rEc" secondAttribute="leading" id="1bo-Jy-5HQ"/>
                             <constraint firstItem="VNF-yG-2dC" firstAttribute="leading" secondItem="E2q-er-rEc" secondAttribute="leading" id="2i2-m6-1Vl"/>
                             <constraint firstItem="JHD-Y2-zJ4" firstAttribute="top" secondItem="VNF-yG-2dC" secondAttribute="bottom" id="7bq-pw-wKa"/>
-                            <constraint firstItem="M5m-80-9TE" firstAttribute="top" secondItem="xcY-OV-GIh" secondAttribute="bottom" id="Mfi-EK-kXF"/>
-                            <constraint firstItem="M5m-80-9TE" firstAttribute="top" secondItem="JHD-Y2-zJ4" secondAttribute="bottom" id="OeI-VG-9nk"/>
+                            <constraint firstAttribute="bottom" secondItem="xcY-OV-GIh" secondAttribute="bottom" id="Mfi-EK-kXF"/>
+                            <constraint firstAttribute="bottom" secondItem="JHD-Y2-zJ4" secondAttribute="bottom" id="OeI-VG-9nk"/>
                             <constraint firstAttribute="trailing" secondItem="JHD-Y2-zJ4" secondAttribute="trailing" id="hxS-Ak-Dmc"/>
                             <constraint firstAttribute="trailing" secondItem="xcY-OV-GIh" secondAttribute="trailing" id="iU0-PY-o6q"/>
                             <constraint firstAttribute="trailing" secondItem="VNF-yG-2dC" secondAttribute="trailing" id="ibY-bE-M88"/>
@@ -5207,6 +5218,7 @@ you a link to reset your password.</string>
                     <navigationItem key="navigationItem" id="E3q-Ns-P29"/>
                     <connections>
                         <outlet property="btnReset" destination="zZp-41-8yZ" id="T0D-Dc-0ZL"/>
+                        <outlet property="constOfNavigationTop" destination="0fu-sg-kCj" id="Ewh-GV-k3a"/>
                         <outlet property="txtConfirm" destination="VRG-fD-X1w" id="RX7-Ya-JD5"/>
                         <outlet property="txtPassword" destination="bOP-mY-85q" id="FGR-E9-aaf"/>
                     </connections>
@@ -5311,11 +5323,11 @@ you a link to reset your password.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yr3-Hx-dPG" firstAttribute="leading" secondItem="hfO-rh-Jyl" secondAttribute="leading" id="2Xr-Zv-E3T"/>
-                            <constraint firstItem="lDt-AJ-pCb" firstAttribute="top" secondItem="yr3-Hx-dPG" secondAttribute="bottom" id="JPq-Lf-YzW"/>
+                            <constraint firstAttribute="bottom" secondItem="yr3-Hx-dPG" secondAttribute="bottom" id="JPq-Lf-YzW"/>
                             <constraint firstItem="ub7-06-nd1" firstAttribute="top" secondItem="hfO-rh-Jyl" secondAttribute="top" id="K4X-zy-ayc"/>
                             <constraint firstItem="8sU-zg-dqb" firstAttribute="leading" secondItem="hfO-rh-Jyl" secondAttribute="leading" id="KQ5-Bm-wFt"/>
                             <constraint firstAttribute="trailing" secondItem="8sU-zg-dqb" secondAttribute="trailing" id="VPo-7K-b0f"/>
-                            <constraint firstItem="lDt-AJ-pCb" firstAttribute="top" secondItem="8sU-zg-dqb" secondAttribute="bottom" id="WRU-fE-cYs"/>
+                            <constraint firstAttribute="bottom" secondItem="8sU-zg-dqb" secondAttribute="bottom" id="WRU-fE-cYs"/>
                             <constraint firstItem="yr3-Hx-dPG" firstAttribute="top" secondItem="hfO-rh-Jyl" secondAttribute="top" id="qMW-ZC-43c"/>
                             <constraint firstItem="8sU-zg-dqb" firstAttribute="top" secondItem="ub7-06-nd1" secondAttribute="bottom" id="t61-XN-Msr"/>
                             <constraint firstAttribute="trailing" secondItem="ub7-06-nd1" secondAttribute="trailing" id="taB-gD-diS"/>
@@ -5324,6 +5336,7 @@ you a link to reset your password.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="K4X-zy-ayc" id="dHC-Px-Ip5"/>
                         <outlet property="tvLikes" destination="8sU-zg-dqb" id="af6-0Y-PXj"/>
                     </connections>
                 </viewController>
@@ -5528,6 +5541,7 @@ you a link to reset your password.</string>
                     </view>
                     <navigationItem key="navigationItem" id="UXb-Vr-A4F"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="vvg-X1-PJV" id="tws-fk-7Px"/>
                         <outlet property="headerViewHeightConstraint" destination="5hT-ex-4LC" id="3dp-3T-HIa"/>
                         <outlet property="mainScrollView" destination="2uV-do-R1F" id="COj-XK-YzW"/>
                         <outlet property="tableViewHeightConstraint" destination="9qy-lh-GKL" id="gY0-D1-FEg"/>
@@ -5692,12 +5706,13 @@ you a link to reset your password.</string>
                             <constraint firstAttribute="trailing" secondItem="sIz-FL-taP" secondAttribute="trailing" id="QKp-bU-gE6"/>
                             <constraint firstItem="aU1-dr-H3u" firstAttribute="leading" secondItem="KV7-G1-uLo" secondAttribute="leading" id="Xy4-0J-xeg"/>
                             <constraint firstAttribute="trailing" secondItem="aU1-dr-H3u" secondAttribute="trailing" id="mbk-rT-aSI"/>
-                            <constraint firstItem="86q-P0-Bi7" firstAttribute="top" secondItem="aU1-dr-H3u" secondAttribute="bottom" id="pCO-ET-mk5"/>
+                            <constraint firstAttribute="bottom" secondItem="aU1-dr-H3u" secondAttribute="bottom" id="pCO-ET-mk5"/>
                             <constraint firstAttribute="trailing" secondItem="fAf-cj-Bw3" secondAttribute="trailing" id="wGy-45-Ywh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="PUN-si-OS6"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="ExU-RJ-T9o" id="7ga-IN-vth"/>
                         <outlet property="tvMessage" destination="aU1-dr-H3u" id="Xq9-cE-ML8"/>
                         <outlet property="viewNotificationAlert" destination="S3T-i1-zXj" id="cGq-aj-UFp"/>
                     </connections>
@@ -6006,7 +6021,7 @@ you a link to reset your password.</string>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This patient already exists!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AtH-VO-aze">
-                                                <rect key="frame" x="247.66666666666663" y="171.66666666666666" width="141.33333333333337" height="16.666666666666657"/>
+                                                <rect key="frame" x="247.66666666666663" y="172" width="141.33333333333337" height="16.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                 <color key="textColor" red="0.88627450980392153" green="0.30196078431372547" blue="0.32941176470588235" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -6068,6 +6083,7 @@ you a link to reset your password.</string>
                     </view>
                     <connections>
                         <outlet property="btnSave" destination="KsA-NB-6m1" id="WFF-l6-q7y"/>
+                        <outlet property="constOfNavigationTop" destination="yI1-Nj-B4s" id="bsn-jL-2Q6"/>
                         <outlet property="lblPHNError" destination="AtH-VO-aze" id="gRO-Qt-5pn"/>
                         <outlet property="lblTitle" destination="qSe-1R-Mzs" id="VUr-PD-fos"/>
                         <outlet property="tfAddress" destination="ghX-sG-3bN" id="cPx-x0-WGk"/>
@@ -6238,8 +6254,8 @@ you a link to reset your password.</string>
                             <constraint firstAttribute="trailing" secondItem="qaJ-dE-aqh" secondAttribute="trailing" id="FKR-Bg-ccS"/>
                             <constraint firstItem="qaJ-dE-aqh" firstAttribute="top" secondItem="W8C-yj-JNf" secondAttribute="bottom" id="HQB-8I-h2h"/>
                             <constraint firstAttribute="trailing" secondItem="CKh-75-iNS" secondAttribute="trailing" id="JZx-wT-8jN"/>
-                            <constraint firstItem="r4E-4k-EvY" firstAttribute="top" secondItem="j1n-n3-2to" secondAttribute="bottom" id="TSV-of-Bun"/>
-                            <constraint firstItem="r4E-4k-EvY" firstAttribute="top" secondItem="qaJ-dE-aqh" secondAttribute="bottom" id="UPD-d9-ThQ"/>
+                            <constraint firstAttribute="bottom" secondItem="j1n-n3-2to" secondAttribute="bottom" id="TSV-of-Bun"/>
+                            <constraint firstAttribute="bottom" secondItem="qaJ-dE-aqh" secondAttribute="bottom" id="UPD-d9-ThQ"/>
                             <constraint firstItem="W8C-yj-JNf" firstAttribute="leading" secondItem="uKU-fZ-Ghp" secondAttribute="leading" id="d9c-jX-6nk"/>
                             <constraint firstItem="W8C-yj-JNf" firstAttribute="top" secondItem="CKh-75-iNS" secondAttribute="bottom" id="kFI-IS-LwR"/>
                             <constraint firstItem="j1n-n3-2to" firstAttribute="leading" secondItem="uKU-fZ-Ghp" secondAttribute="leading" id="rJn-KO-F0t"/>
@@ -6252,6 +6268,7 @@ you a link to reset your password.</string>
                     <navigationItem key="navigationItem" id="YRO-Yt-xIq"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="yUG-9d-dWL" id="tBH-hH-VHd"/>
                         <outlet property="tvFavorites" destination="qaJ-dE-aqh" id="ahr-Vd-tUK"/>
                         <outlet property="txFieldSearch" destination="wpl-lj-B1Y" id="8ki-8u-h8M"/>
                         <outlet property="viewNotificationAlert" destination="Dx0-yq-9Ef" id="rBw-f8-Zyq"/>
@@ -6505,13 +6522,11 @@ you a link to reset your password.</string>
                             <constraint firstItem="6RU-wb-zY1" firstAttribute="leading" secondItem="8LG-GI-4wC" secondAttribute="leading" id="FOB-fO-FB6"/>
                             <constraint firstItem="6xF-eM-bal" firstAttribute="top" secondItem="SBf-rD-N39" secondAttribute="bottom" constant="5" id="JGR-iX-vJk"/>
                             <constraint firstAttribute="trailing" secondItem="6RU-wb-zY1" secondAttribute="trailing" id="Jye-Qc-XOO"/>
-                            <constraint firstItem="6RU-wb-zY1" firstAttribute="leading" secondItem="8LG-GI-4wC" secondAttribute="leading" id="K0V-qe-3WN"/>
-                            <constraint firstAttribute="trailing" secondItem="6RU-wb-zY1" secondAttribute="trailing" id="LoT-YI-KU5"/>
                             <constraint firstAttribute="trailing" secondItem="SBf-rD-N39" secondAttribute="trailing" constant="15" id="MbP-nf-NCi"/>
                             <constraint firstAttribute="trailing" secondItem="zeH-7r-KSY" secondAttribute="trailing" id="S2p-oa-V9z"/>
                             <constraint firstAttribute="trailing" secondItem="pVf-zI-H4M" secondAttribute="trailing" id="bE6-bF-yub"/>
                             <constraint firstItem="pVf-zI-H4M" firstAttribute="top" secondItem="zeH-7r-KSY" secondAttribute="bottom" id="mGc-fT-HBE"/>
-                            <constraint firstItem="6xF-eM-bal" firstAttribute="top" secondItem="pVf-zI-H4M" secondAttribute="bottom" id="noU-xL-cGk"/>
+                            <constraint firstAttribute="bottom" secondItem="pVf-zI-H4M" secondAttribute="bottom" id="noU-xL-cGk"/>
                             <constraint firstItem="6RU-wb-zY1" firstAttribute="top" secondItem="8LG-GI-4wC" secondAttribute="top" id="o9x-gB-0vq"/>
                             <constraint firstItem="zeH-7r-KSY" firstAttribute="leading" secondItem="8LG-GI-4wC" secondAttribute="leading" id="qqV-Xg-Aba"/>
                             <constraint firstItem="yiN-af-TQ0" firstAttribute="top" secondItem="zeH-7r-KSY" secondAttribute="bottom" id="sAb-EX-SEp"/>
@@ -6523,6 +6538,7 @@ you a link to reset your password.</string>
                     <connections>
                         <outlet property="btnPatientEdit" destination="p9E-NX-pyq" id="WH2-La-dfR"/>
                         <outlet property="btnRecord" destination="SBf-rD-N39" id="0wf-eL-Wrj"/>
+                        <outlet property="constOfNavigationTop" destination="y4g-2r-xUh" id="zvc-2d-a8g"/>
                         <outlet property="headerLabel" destination="BWC-Ej-5ru" id="oFm-kL-uMB"/>
                         <outlet property="headerViewHeightConstraint" destination="8lo-99-UFs" id="YgX-R5-W7H"/>
                         <outlet property="lblAddress" destination="dDu-cO-sya" id="npo-kY-fiz"/>
@@ -6738,6 +6754,7 @@ you a link to reset your password.</string>
                     </view>
                     <navigationItem key="navigationItem" id="oq7-eg-Agw"/>
                     <connections>
+                        <outlet property="constOfNavigationTop" destination="nX6-QN-B6x" id="d4w-fQ-PXX"/>
                         <outlet property="headerViewHeightConstraint" destination="Lti-C2-dTU" id="gts-bX-JFb"/>
                         <outlet property="mainScrollView" destination="Gql-nn-1EF" id="C4i-j5-1wo"/>
                         <outlet property="tableViewHeightConstraint" destination="00s-OO-to5" id="bW7-WN-Nm9"/>
@@ -6980,6 +6997,7 @@ you a link to reset your password.</string>
                     </view>
                     <connections>
                         <outlet property="btnRecord" destination="noR-y0-LQP" id="LsP-Bz-Wl1"/>
+                        <outlet property="constOfNavigationTop" destination="Qm0-AP-ofB" id="gOZ-cb-JnI"/>
                         <outlet property="lblDoctorName" destination="L4Y-GK-Dat" id="Ttq-Rj-YVf"/>
                         <outlet property="lblMSPError" destination="TSw-bi-rTQ" id="4ug-SY-F3f"/>
                         <outlet property="lblPHNError" destination="rfB-qp-lD8" id="nUK-Mh-18G"/>
@@ -7025,7 +7043,7 @@ you a link to reset your password.</string>
                                 <color key="backgroundColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VjT-NW-8PI">
-                                <rect key="frame" x="35" y="140" width="344" height="250"/>
+                                <rect key="frame" x="35" y="160" width="344" height="250"/>
                                 <subviews>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_alert" translatesAutoresizingMaskIntoConstraints="NO" id="Wv5-Ie-BN6">
                                         <rect key="frame" x="144.66666666666666" y="4" width="55" height="55"/>
@@ -7167,7 +7185,7 @@ uploaded a new diagnosis.</string>
                             <constraint firstAttribute="bottom" secondItem="s0y-YU-Az5" secondAttribute="bottom" id="3cT-3y-3eZ"/>
                             <constraint firstAttribute="trailing" secondItem="s0y-YU-Az5" secondAttribute="trailing" id="4jc-kL-yLZ"/>
                             <constraint firstAttribute="trailing" secondItem="VjT-NW-8PI" secondAttribute="trailing" constant="35" id="8PH-Im-inX"/>
-                            <constraint firstItem="VjT-NW-8PI" firstAttribute="top" secondItem="40d-BD-WDX" secondAttribute="top" constant="140" id="A6u-xg-fxo"/>
+                            <constraint firstItem="VjT-NW-8PI" firstAttribute="top" secondItem="40d-BD-WDX" secondAttribute="top" constant="160" id="A6u-xg-fxo"/>
                             <constraint firstAttribute="bottom" secondItem="F9x-LS-PJK" secondAttribute="bottom" id="EFb-Dp-wFz"/>
                             <constraint firstItem="F9x-LS-PJK" firstAttribute="leading" secondItem="40d-BD-WDX" secondAttribute="leading" id="FiM-oh-Mzn"/>
                             <constraint firstAttribute="bottom" secondItem="lG5-fk-crk" secondAttribute="bottom" id="MVA-1k-UEt"/>
@@ -7469,6 +7487,7 @@ uploaded a new diagnosis.</string>
                     </view>
                     <connections>
                         <outlet property="btnSaveNote" destination="7MQ-ED-8y6" id="Air-Cw-8Lp"/>
+                        <outlet property="constOfNavigationTop" destination="dxE-yz-n0a" id="v3v-0a-6Y7"/>
                         <outlet property="constOfViewTop" destination="I0S-lK-PIg" id="DRQ-nu-3Wl"/>
                         <outlet property="view1" destination="ldH-OX-AK8" id="uJI-W2-sbF"/>
                         <outlet property="view2" destination="mfx-OV-LQC" id="cDo-KD-IGC"/>
@@ -7510,7 +7529,7 @@ uploaded a new diagnosis.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Patient" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPD-lW-jNw">
-                                        <rect key="frame" x="161.33333333333334" y="32" width="93" height="20"/>
+                                        <rect key="frame" x="160.66666666666666" y="32" width="93" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="hAh-bB-cee"/>
                                         </constraints>
@@ -7670,7 +7689,7 @@ uploaded a new diagnosis.</string>
                                                 </constraints>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This patient already exists!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raW-ki-jdv">
-                                                <rect key="frame" x="247.66666666666663" y="171.66666666666666" width="141.33333333333337" height="16.666666666666657"/>
+                                                <rect key="frame" x="247.66666666666663" y="172" width="141.33333333333337" height="16.666666666666657"/>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
                                                 <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -7732,6 +7751,7 @@ uploaded a new diagnosis.</string>
                     </view>
                     <connections>
                         <outlet property="btnSave" destination="ciA-0e-Tau" id="tpL-OL-Dq1"/>
+                        <outlet property="constOfNavigationTop" destination="BGa-QO-tA0" id="qBM-y8-9xr"/>
                         <outlet property="lblPHNError" destination="raW-ki-jdv" id="fML-eZ-bSs"/>
                         <outlet property="lblTitle" destination="UPD-lW-jNw" id="452-eG-2RD"/>
                         <outlet property="tfAddress" destination="Vnd-Fw-NDr" id="zYL-6K-JtM"/>
@@ -7776,7 +7796,7 @@ uploaded a new diagnosis.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Consult" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7H-d0-z8t">
-                                        <rect key="frame" x="154.66666666666666" y="32" width="104.66666666666666" height="20"/>
+                                        <rect key="frame" x="154.66666666666666" y="32" width="104.99999999999997" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="Cjd-aw-ksN"/>
                                         </constraints>
@@ -8079,6 +8099,7 @@ uploaded a new diagnosis.</string>
                     </view>
                     <connections>
                         <outlet property="btnSave" destination="2ZO-Up-RJI" id="VG7-D7-zLr"/>
+                        <outlet property="constOfNavigationTop" destination="32m-wq-c8Y" id="Sc0-zL-wl1"/>
                         <outlet property="hashTagCtrl" destination="mBl-oQ-bQB" id="fB1-8T-V7n"/>
                         <outlet property="lblPostDescription" destination="yDd-Rr-42b" id="qD6-Kg-6Vv"/>
                         <outlet property="lblPostTitle" destination="bPl-z9-hBK" id="nP8-RU-MwC"/>
@@ -8152,7 +8173,7 @@ uploaded a new diagnosis.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DbY-Qb-ZIx"/>
-        <segue reference="OAe-nj-vD0"/>
+        <segue reference="znu-Px-ld3"/>
+        <segue reference="dMz-5h-amD"/>
     </inferredMetricsTieBreakers>
 </document>

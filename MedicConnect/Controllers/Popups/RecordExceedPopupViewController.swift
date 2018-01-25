@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecordExceedPopupViewController: UIViewController {
+class RecordExceedPopupViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

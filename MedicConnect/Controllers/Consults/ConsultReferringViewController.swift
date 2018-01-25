@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConsultReferringViewController: UIViewController {
+class ConsultReferringViewController: BaseViewController {
 
     @IBOutlet weak var tfPatientNumber: UITextField!
     @IBOutlet weak var tfDoctorMSPNumber: UITextField!

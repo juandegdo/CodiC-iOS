@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 import MobileCoreServices
 
-class SettingsDetailViewController: UIViewController {
+class SettingsDetailViewController: BaseViewController {
 
     var strTitle: String?
     var strSynopsisUrl: String?
