@@ -21,6 +21,11 @@
     CGFloat tapItemTopInset = 7.0f;
     CGFloat tapItemLeftInset = 0.0f;
     
+    if ([UIScreen mainScreen].nativeBounds.size.height == 2436) {
+        // iPhone X
+        tapItemTopInset = tapItemTopInset + 4;
+    }
+    
     // Adjustment the point
     for (UITabBarItem *item in self.items) {
         item.imageInsets = UIEdgeInsetsMake(tapItemTopInset, tapItemLeftInset, -tapItemTopInset, -tapItemLeftInset);
@@ -33,6 +38,10 @@
     CGSize sizeThatFits = [super sizeThatFits:size];
     sizeThatFits.height = TABBAR_HEIGHT;
     
+    if ([UIScreen mainScreen].nativeBounds.size.height == 2436) {
+        // iPhone X
+        sizeThatFits.height = sizeThatFits.height + 26;
+    }
     return sizeThatFits;
 }
 

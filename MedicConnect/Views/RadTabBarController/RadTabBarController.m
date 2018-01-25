@@ -31,7 +31,12 @@
     
 }
 
--(void)gotoProfileScreen:(NSNotification *)notification {
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.tabBar invalidateIntrinsicContentSize];
+}
+
+- (void)gotoProfileScreen:(NSNotification *)notification {
     self.selectedIndex = 0;
     
     UINavigationController *nc = self.viewControllers[0];

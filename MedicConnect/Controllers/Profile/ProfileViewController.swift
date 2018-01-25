@@ -126,9 +126,10 @@ class ProfileViewController: BaseViewController {
     fileprivate func configureExpandingMenuButton() {
         self.btnRecord.isHidden = true
         
+        let tabBarHeight = UIScreen.main.nativeBounds.height == 2436 ? CGFloat(TABBAR_HEIGHT) + 26.0 : CGFloat(TABBAR_HEIGHT)
         let menuButtonSize: CGSize = CGSize(width: 58.0, height: 58.0)
         self.menuButton = ExpandingMenuButton(frame: CGRect(origin: CGPoint.zero, size: menuButtonSize), centerImage: UIImage(named: "icon_profile_add")!, centerHighlightedImage: UIImage(named: "icon_profile_add")!)
-        menuButton!.center = CGPoint(x: self.view.bounds.width - 44.0, y: self.view.bounds.height - 34.0 - CGFloat(TABBAR_HEIGHT))
+        menuButton!.center = CGPoint(x: self.view.bounds.width - 44.0, y: self.view.bounds.height - 34.0 - tabBarHeight)
         self.view.addSubview(menuButton!)
         
         let item1 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Record New Consult", image: UIImage(named: "icon_record_consult")!, highlightedImage: UIImage(named: "icon_record_consult")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
