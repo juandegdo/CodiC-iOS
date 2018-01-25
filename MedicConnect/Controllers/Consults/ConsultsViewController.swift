@@ -82,7 +82,7 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
             let bottomMargin = keyboardSize.height - 55.0
             self.tableViewHeightConstraint.constant = self.tableViewHeightConstraint.constant - bottomMargin
             
-            UIView.animate(withDuration: 1, animations: {
+            UIView.animate(withDuration: notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval, animations: {
                 self.view.layoutIfNeeded()
             })
         }
@@ -93,7 +93,7 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
             let bottomMargin = keyboardSize.height - 55.0
             self.tableViewHeightConstraint.constant = self.tableViewHeightConstraint.constant + bottomMargin
         
-            UIView.animate(withDuration: 1, animations: {
+            UIView.animate(withDuration: notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval, animations: {
                 self.view.layoutIfNeeded()
             })
         }

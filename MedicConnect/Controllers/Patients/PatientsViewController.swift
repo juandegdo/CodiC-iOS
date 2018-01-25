@@ -85,7 +85,7 @@ extension PatientsViewController {
             let bottomMargin = keyboardSize.height - 55.0
             constOfTableViewBottom.constant = bottomMargin
             
-            UIView.animate(withDuration: 1, animations: {
+            UIView.animate(withDuration: notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval, animations: {
                 self.view.layoutIfNeeded()
             })
         }
@@ -94,7 +94,7 @@ extension PatientsViewController {
     @objc func keyboardWillHide(notification: NSNotification) {
         constOfTableViewBottom.constant = 0
         
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval, animations: {
             self.view.layoutIfNeeded()
         })
     }

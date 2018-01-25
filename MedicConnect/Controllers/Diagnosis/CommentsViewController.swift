@@ -20,7 +20,6 @@ class CommentsViewController: BaseViewController {
     @IBOutlet weak var lbcBottomMargin: NSLayoutConstraint!
     
     var currentPost : Post?
-    var isFirstKeyboardShow : Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +42,6 @@ class CommentsViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         // Hide Tabbar
-        isFirstKeyboardShow = true
         self.tabBarController?.tabBar.isHidden = true
         
     }
@@ -59,7 +57,9 @@ class CommentsViewController: BaseViewController {
         
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
+        
         IQKeyboardManager.shared().isEnabled = true
+        
     }
     
     //MARK: Initialize Views
@@ -96,24 +96,27 @@ class CommentsViewController: BaseViewController {
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            let bottomMargin = keyboardSize.height + (isFirstKeyboardShow ? 44.0 : 0)
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            var bottomMargin = keyboardSize.height
+            if UIScreen.main.nativeBounds.height == 2436 {
+                bottomMargin = bottomMargin - 34
+            }
+            
             lbcBottomMargin.constant = bottomMargin
             
-            UIView.animate(withDuration: 1, animations: {
+            UIView.animate(withDuration: notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval, animations: {
                 self.view.layoutIfNeeded()
             })
-            
         }
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         lbcBottomMargin.constant = 0
-        UIView.animate(withDuration: 1, animations: {
+        UIView.animate(withDuration: notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! TimeInterval, animations: {
             self.view.layoutIfNeeded()
         })
         
-        isFirstKeyboardShow = false
     }
     
     func callProfileVC(user: User) {
