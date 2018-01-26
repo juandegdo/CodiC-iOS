@@ -121,6 +121,8 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
         self.tvDiagnoses.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tvDiagnoses.frame.size.width, height: 20.0))
         self.tvDiagnoses.estimatedRowHeight = 68.0
         self.tvDiagnoses.rowHeight = UITableViewAutomaticDimension
+        self.tvDiagnoses.sectionIndexColor = UIColor.init(red: 148 / 255.0, green: 147 / 255.0, blue: 152 / 255.0, alpha: 1.0)
+        self.tvDiagnoses.sectionIndexBackgroundColor = UIColor.clear
         
         // Hide search bar in the beginning
         self.mainScrollView.contentOffset = CGPoint.init(x: 0, y: OffsetHeaderStop)
