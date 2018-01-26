@@ -65,7 +65,7 @@ class ProfileViewController: BaseViewController {
         // Initialize Table Views
         self.tableView.register(UINib(nibName: ProfileListCellID, bundle: nil), forCellReuseIdentifier: ProfileListCellID)
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50.0))
-        self.tableView.estimatedRowHeight = 110.0
+        self.tableView.estimatedRowHeight = 80.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         configureExpandingMenuButton()
@@ -239,11 +239,16 @@ class ProfileViewController: BaseViewController {
                 self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
                 self.lblConsultNumber.textColor = Constants.ColorLightGray1
                 self.lblConsultText.textColor = Constants.ColorLightGray1
+                
+                self.tableView.estimatedRowHeight = 80.0
+                
             } else {
                 self.lblDiagnosisNumber.textColor = Constants.ColorLightGray1
                 self.lblDiagnosisText.textColor = Constants.ColorLightGray1
                 self.lblConsultNumber.textColor = Constants.ColorDarkGray4
                 self.lblConsultText.textColor = Constants.ColorDarkGray4
+                
+                self.tableView.estimatedRowHeight = 110.0
             }
             
         }

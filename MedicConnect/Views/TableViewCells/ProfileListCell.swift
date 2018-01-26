@@ -31,10 +31,13 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var playSlider: PlaySlider!
     
     // Constraints
+    @IBOutlet var constOfLblBroadcastTop: NSLayoutConstraint!
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
+    @IBOutlet var constOfLblDateTop: NSLayoutConstraint!
     @IBOutlet var constOfLblDateBottom: NSLayoutConstraint!
     
     var postDescription: String = ""
+    var postType: String = ""
     
     // Expand/Collpase
     var isExpanded:Bool = false {
@@ -48,7 +51,7 @@ class ProfileListCell: UITableViewCell {
                 self.lblDescription.collapsed = true
                 
                 self.constOfLblDateBottom.constant = 20
-                self.constOfLblDescriptionHeight.constant = 18
+                self.constOfLblDescriptionHeight.constant = self.postType != Constants.PostTypeDiagnosis ? 18 : 0
                 self.btnPlay.isHidden = true
                 self.btnBackward.isHidden = true
                 self.btnForward.isHidden = true
@@ -59,12 +62,17 @@ class ProfileListCell: UITableViewCell {
             } else {
                 self.clipsToBounds = false
                 
-                let constRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
-                let boundBox = self.postDescription.boundingRect(with: constRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
-                self.constOfLblDescriptionHeight.constant = ceil(boundBox.height)
-                self.lblDescription.shouldCollapse = true
-                self.lblDescription.text = self.postDescription
-                self.lblDescription.collapsed = false
+                if self.postType == Constants.PostTypeDiagnosis {
+                    self.constOfLblDescriptionHeight.constant = 0
+                    
+                } else {
+                    let constRect = CGSize(width: self.lblDescription.bounds.size.width, height: .greatestFiniteMagnitude)
+                    let boundBox = self.postDescription.boundingRect(with: constRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.lblDescription.font], context: nil)
+                    self.constOfLblDescriptionHeight.constant = ceil(boundBox.height)
+                    self.lblDescription.shouldCollapse = true
+                    self.lblDescription.text = self.postDescription
+                    self.lblDescription.collapsed = false
+                }
                 
                 self.constOfLblDateBottom.constant = 55 + 20
                 
@@ -111,10 +119,15 @@ class ProfileListCell: UITableViewCell {
     }
 
     func setData(post: Post) {
+        self.postDescription = post.descriptions
+        self.postType = post.postType
+        
         // Set Broadcast Label
         self.lblBroadcast.text = post.title
         self.lblDate.text = post.getFormattedDate()
-        self.postDescription = post.descriptions
+        
+        self.constOfLblBroadcastTop.constant = self.postType != Constants.PostTypeDiagnosis ? 20 : 14
+        self.constOfLblDateTop.constant = self.postType != Constants.PostTypeDiagnosis ? 6 : 0
         
         if post.postType == Constants.PostTypeDiagnosis {
             self.btnSynopsis.isHidden = true

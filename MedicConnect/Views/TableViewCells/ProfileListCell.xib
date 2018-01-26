@@ -156,7 +156,9 @@
                 <outlet property="btnForward" destination="vbR-Lq-Z6z" id="CnB-Rh-MM2"/>
                 <outlet property="btnPlay" destination="3FL-ag-Z49" id="xMv-Mm-7IY"/>
                 <outlet property="btnSynopsis" destination="8bC-YF-Oyc" id="XJ5-5Y-MDw"/>
+                <outlet property="constOfLblBroadcastTop" destination="G1l-W9-WrD" id="40O-st-7Xh"/>
                 <outlet property="constOfLblDateBottom" destination="bls-kZ-NX8" id="zYY-7c-l3G"/>
+                <outlet property="constOfLblDateTop" destination="KOa-bs-a4N" id="Gp3-fT-GZD"/>
                 <outlet property="constOfLblDescriptionHeight" destination="Got-Wf-l9T" id="fpO-J7-EiN"/>
                 <outlet property="ivProgressCircle" destination="Qdm-D8-TRW" id="UAk-L7-7IT"/>
                 <outlet property="lblBroadcast" destination="BUK-L1-LQL" id="0wJ-9p-sZz"/>
