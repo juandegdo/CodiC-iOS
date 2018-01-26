@@ -384,7 +384,7 @@ class AnotherProfileViewController: BaseViewController {
         
         let post = _user.getPosts(type: self.postType)[_index]
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
-            vc.strTitle = "Synopsis"
+            vc.strTitle = "Transcription"
             vc.strSynopsisUrl = post.transcriptionUrl
             present(vc, animated: true, completion: nil)
             

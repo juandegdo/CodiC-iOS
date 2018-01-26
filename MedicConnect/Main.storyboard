@@ -3595,14 +3595,13 @@ recorded a new diagnosis.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Ww-fMj">
-                                        <rect key="frame" x="350" y="22" width="64" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Ww-fMj">
+                                        <rect key="frame" x="364" y="22" width="50" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="HvB-6B-8Ha"/>
-                                            <constraint firstAttribute="width" constant="64" id="vBF-I0-8hy"/>
+                                            <constraint firstAttribute="width" constant="50" id="vBF-I0-8hy"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
-                                        <state key="normal" title="Save">
+                                        <state key="normal" image="icon_upload">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -8163,6 +8162,7 @@ uploaded a new diagnosis.</string>
         <image name="icon_social_twitter_off" width="38" height="38"/>
         <image name="icon_social_twitter_on" width="38" height="38"/>
         <image name="icon_textview_rectangle" width="16" height="16"/>
+        <image name="icon_upload" width="25" height="25"/>
         <image name="icon_user_profile" width="41" height="51"/>
         <image name="splash_logo" width="295" height="44"/>
         <image name="tab_icon_consults" width="33" height="30"/>
