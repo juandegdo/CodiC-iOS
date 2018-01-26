@@ -124,44 +124,36 @@ class SettingsDetailViewController: BaseViewController {
                 printController.present(animated: true)
             }
         }
+        
+        printAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
+        printAction.setValue(UIColor.black, forKey: "titleTextColor")
+        printAction.setValue(UIColor.init(red: 0, green: 122/255.0, blue: 1, alpha: 1), forKey: "imageTintColor")
+        printAction.setValue(UIImage.init(named: "icon_upload"), forKey: "image")
         alertController.addAction(printAction)
 
         let submitMSPAction = UIAlertAction.init(title: "Submit to MSP", style: .default) { (action) in
 
         }
+        
+        submitMSPAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
+        submitMSPAction.setValue(UIColor.black, forKey: "titleTextColor")
+        submitMSPAction.setValue(UIColor.init(red: 0, green: 122/255.0, blue: 1, alpha: 1), forKey: "imageTintColor")
+        submitMSPAction.setValue(UIImage.init(named: "icon_upload"), forKey: "image")
         alertController.addAction(submitMSPAction)
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(cancelAction)
-
+        
         self.present(alertController, animated: true, completion: nil)
         
-//        let documento = NSData.init(contentsOf: self.destinationFileUrl)
-//        let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [documento!], applicationActivities: nil)
-//        activityViewController.popoverPresentationController?.sourceView = self.view
-//        if #available(iOS 11.0, *) {
-//            activityViewController.excludedActivityTypes = [
-//                UIActivityType.airDrop,
-//                UIActivityType.message,
-//                UIActivityType.mail,
-//                UIActivityType.copyToPasteboard,
-//                UIActivityType.markupAsPDF,
-//                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-//                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
-//            ]
-//        } else {
-//            // Fallback on earlier versions
-//            activityViewController.excludedActivityTypes = [
-//                UIActivityType.airDrop,
-//                UIActivityType.message,
-//                UIActivityType.mail,
-//                UIActivityType.copyToPasteboard,
-//                UIActivityType(rawValue: "com.apple.reminders.RemindersEditorExtension"),
-//                UIActivityType(rawValue: "com.apple.mobilenotes.SharingExtension"),
-//            ]
-//        }
-//
-//        self.present(activityViewController, animated: true, completion: nil)
+        // Update AlertController Style
+        let actionViews = alertController.view.value(forKey: "actionViews") as! [UIView]
+        if actionViews.count > 0 {
+            let printView = actionViews[0] as UIView
+            (printView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 70
+            let submitMSPView = actionViews[1] as UIView
+            (submitMSPView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 70
+        }
         
     }
     
