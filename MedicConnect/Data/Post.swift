@@ -98,6 +98,13 @@ class Post: NSObject {
         return formattedDate
     }
     
+    func getFormattedDateOnly() -> String {
+        let dDate = DateUtil.ParseStringDateToDouble(self.meta.createdAt) as NSDate
+        let formattedDate = DateUtil.GetDate(dDate.timeIntervalSince1970) as String? ?? ""
+        
+        return formattedDate
+    }
+    
     func getCurrentProgress() -> CGFloat {
         if self.getLastPlayedMinutesAgo() == 0 {
             return 0.0

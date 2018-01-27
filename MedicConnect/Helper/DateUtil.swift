@@ -141,8 +141,9 @@ class DateUtil {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        let longFormatWithoutYear = DateFormatter.dateFormat(fromTemplate: "EEEE MMM d", options: 0, locale: dateFormatter.locale)
-        dateFormatter.dateFormat = longFormatWithoutYear
+//        let longFormatWithoutYear = DateFormatter.dateFormat(fromTemplate: "EEEE MMM d", options: 0, locale: dateFormatter.locale)
+//        dateFormatter.dateFormat = longFormatWithoutYear
+        dateFormatter.dateFormat = "MMMM d, yyyy"
         
         let date = Date(timeIntervalSince1970: dateTime as TimeInterval)
         return dateFormatter.string(from: date).capitalized
