@@ -128,7 +128,7 @@ class SettingsDetailViewController: BaseViewController {
         printAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
         printAction.setValue(UIColor.black, forKey: "titleTextColor")
         printAction.setValue(UIColor.init(red: 0, green: 122/255.0, blue: 1, alpha: 1), forKey: "imageTintColor")
-        printAction.setValue(UIImage.init(named: "icon_upload"), forKey: "image")
+        printAction.setValue(UIImage.init(named: "icon_print"), forKey: "image")
         alertController.addAction(printAction)
 
         let submitMSPAction = UIAlertAction.init(title: "Submit to MSP", style: .default) { (action) in
@@ -138,7 +138,7 @@ class SettingsDetailViewController: BaseViewController {
         submitMSPAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
         submitMSPAction.setValue(UIColor.black, forKey: "titleTextColor")
         submitMSPAction.setValue(UIColor.init(red: 0, green: 122/255.0, blue: 1, alpha: 1), forKey: "imageTintColor")
-        submitMSPAction.setValue(UIImage.init(named: "icon_upload"), forKey: "image")
+        submitMSPAction.setValue(UIImage.init(named: "icon_submit"), forKey: "image")
         alertController.addAction(submitMSPAction)
 
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
