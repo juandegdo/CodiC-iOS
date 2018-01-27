@@ -478,6 +478,7 @@ class ProfileViewController: BaseViewController {
         if post.transcriptionUrl == "" {
             // Synopsis Not Exists
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
+                DataManager.Instance.setPostType(postType: post.postType)
                 vc.postId = post.id
                 vc.fromList = true
                 self.navigationController?.pushViewController(vc, animated: false)
