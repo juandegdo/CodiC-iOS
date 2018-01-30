@@ -30,6 +30,8 @@ class Post: NSObject {
     var deletedUsers: [String] = []
     var orderNumber: String = ""
     var transcriptionUrl: String = ""
+    var patientName: String = ""
+    var patientPHN: String = ""
     
     fileprivate var currentTime: CMTime = CMTime(seconds: 0.0, preferredTimescale: CMTimeScale(1.0))
     fileprivate var currentProgress: CGFloat = 0.0

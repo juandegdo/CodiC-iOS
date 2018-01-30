@@ -123,14 +123,13 @@ class ConsultCell: UITableViewCell {
         self.lblUsername.text = "\(post.user.fullName)"
         
         // Set Broadcast Label
-        self.lblBroadcast.text = post.title
+        self.lblBroadcast.text = "\(post.patientName) \(post.patientPHN)"
         
         // Set date label
         self.lblDate.text = post.getFormattedDate()
         
         // Set description
         self.postDescription = post.descriptions
-//        self.lblDesc.text = post.descriptions
         
         if post.orderNumber == "" {
             self.btnSynopsis.isHidden = true

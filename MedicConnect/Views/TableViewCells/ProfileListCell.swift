@@ -122,19 +122,22 @@ class ProfileListCell: UITableViewCell {
         self.postDescription = post.descriptions
         self.postType = post.postType
         
-        // Set Broadcast Label
-        self.lblBroadcast.text = post.title
-        
         self.constOfLblBroadcastTop.constant = self.postType != Constants.PostTypeDiagnosis ? 20 : 14
         self.constOfLblDateTop.constant = self.postType != Constants.PostTypeDiagnosis ? 6 : 0
         
         if post.postType == Constants.PostTypeDiagnosis {
+            // Set Broadcast Label
+            self.lblBroadcast.text = post.title
             self.lblDate.text = post.getFormattedDateOnly()
+            
             self.btnSynopsis.isHidden = true
             self.ivProgressCircle.isHidden = true
             
         } else {
+            // Set Broadcast Label
+            self.lblBroadcast.text = "\(post.patientName) \(post.patientPHN)"
             self.lblDate.text = post.getFormattedDate()
+            
             self.btnSynopsis.isHidden = false
             
             if post.orderNumber == "" {

@@ -211,6 +211,18 @@ class NotificationService: BaseTaskController {
                                         post.transcriptionUrl = _transcriptionUrl
                                     }
                                     
+                                    // Optional patient name
+                                    
+                                    if let _patientName = _broadcastObj["patient_name"] as? String {
+                                        post.patientName = _patientName
+                                    }
+                                    
+                                    // Optional patient PHN
+                                    
+                                    if let _patientPHN = _broadcastObj["patient_phn"] as? String {
+                                        post.patientPHN = _patientPHN
+                                    }
+                                    
                                     notification.broadcast = post
                                     
                                 }

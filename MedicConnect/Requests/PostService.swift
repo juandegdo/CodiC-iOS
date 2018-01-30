@@ -244,6 +244,18 @@ class PostService: BaseTaskController {
                                     post.transcriptionUrl = _transcriptionUrl
                                 }
                                 
+                                // Optional patient name
+                                
+                                if let _patientName = p["patient_name"] as? String {
+                                    post.patientName = _patientName
+                                }
+                                
+                                // Optional patient PHN
+                                
+                                if let _patientPHN = p["patient_phn"] as? String {
+                                    post.patientPHN = _patientPHN
+                                }
+                                
                                 posts.append(post)
                                 
                             }
@@ -407,6 +419,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _transcriptionUrl = _p["transcription_url"] as? String {
                                     post.transcriptionUrl = _transcriptionUrl
+                                }
+                                
+                                // Optional patient name
+                                
+                                if let _patientName = _p["patient_name"] as? String {
+                                    post.patientName = _patientName
+                                }
+                                
+                                // Optional patient PHN
+                                
+                                if let _patientPHN = _p["patient_phn"] as? String {
+                                    post.patientPHN = _patientPHN
                                 }
                                 
                                 posts.append(post)
@@ -627,6 +651,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _transcriptionUrl = _p["transcription_url"] as? String {
                                     post.transcriptionUrl = _transcriptionUrl
+                                }
+                                
+                                // Optional patient name
+                                
+                                if let _patientName = _p["patient_name"] as? String {
+                                    post.patientName = _patientName
+                                }
+                                
+                                // Optional patient PHN
+                                
+                                if let _patientPHN = _p["patient_phn"] as? String {
+                                    post.patientPHN = _patientPHN
                                 }
                                 
                                 posts.append(post)
@@ -1023,6 +1059,18 @@ class PostService: BaseTaskController {
                                 
                                 if let _transcriptionUrl = _p["transcription_url"] as? String {
                                     post.transcriptionUrl = _transcriptionUrl
+                                }
+                                
+                                // Optional patient name
+                                
+                                if let _patientName = _p["patient_name"] as? String {
+                                    post.patientName = _patientName
+                                }
+                                
+                                // Optional patient PHN
+                                
+                                if let _patientPHN = _p["patient_phn"] as? String {
+                                    post.patientPHN = _patientPHN
                                 }
                                 
                                 posts.append(post)
