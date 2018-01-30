@@ -8,6 +8,7 @@
 
 import Alamofire
 import Foundation
+import SwiftyJSON
 
 class UserService: BaseTaskController {
     
@@ -28,7 +29,10 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
-                    completion(false, "Please check your internet connection.")
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
+                    completion(false, "")
                     return
                 }
                 
@@ -57,7 +61,7 @@ class UserService: BaseTaskController {
                         let _message = _dic["error"] as? String {
                         completion(false, _message)
                     } else {
-                        completion(false, "\(NSLocalizedString("Internal server error", comment: "comment")) \(String(describing: response.response?.statusCode)). \(NSLocalizedString("Please try again later.", comment: "comment"))")
+                        completion(false, "Server Down")
                     }
                 }
                 
@@ -74,40 +78,41 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
-                    completion(false, "You aren't online!\nGet connected and try again.")
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
+                    completion(false, "")
                     return
                 }
                 let code = response.response?.statusCode
                 if code == 200 {
                     if let _dic = response.result.value as? NSDictionary,
                         let _token = _dic["token"] as? String {
-                        
+
                         UserDefaultsUtil.SaveToken(_token)
-                        
+
                         UserService.Instance.getMe(completion: {
                             (user: User?) in
-                            
+
                             if let _user = user as User? {
                                 UserController.Instance.setUser(_user)
                                 completion(true, "")
                             } else {
                                 completion(false, "Inconsistent server response. Please try again later.")
                             }
-                            
+
                         })
                     } else {
                         completion(false, "Inconsistent server response. Please try again later.")
                     }
-                } else if code == 403 {
-                    completion(false, "Uh oh.. You've entered the wrong username or password. Try again.")
                 } else {
                     if let _dic = response.result.value as? NSDictionary,
                         let _message = _dic["error"] as? String {
                         completion(false, _message)
                     } else {
-                        completion(false, "Oh crap! Looks like our server is down. Hang tight.")
+                        completion(false, "Server Down")
                     }
-                    
+
                 }
                 
         }
@@ -188,14 +193,14 @@ class UserService: BaseTaskController {
                             let _message = _dic["error"] as? String {
                             completion(false, _message)
                         } else {
-                            completion(false, "\(NSLocalizedString("Internal server error", comment: "comment")) \(String(describing: response.response?.statusCode)). \(NSLocalizedString("Please try again later.", comment: "comment"))")
+                            completion(false, "Server Down")
                         }
                     }
                     
                 }
                 
-            case .failure(let encodingError):
-                completion(false, "\(NSLocalizedString("Internal server error", comment: "comment")) \(encodingError.localizedDescription). \(NSLocalizedString("Please try again later.", comment: "comment"))")
+            case .failure:
+                completion(false, "Server Down")
             }
             
         })
@@ -233,14 +238,14 @@ class UserService: BaseTaskController {
                             let _message = _dic["error"] as? String {
                             completion(false, _message)
                         } else {
-                            completion(false, "\(NSLocalizedString("Internal server error", comment: "comment")) \(String(describing: response.response?.statusCode)). \(NSLocalizedString("Please try again later.", comment: "comment"))")
+                            completion(false, "Server Down")
                         }
                     }
                     
                 }
                 
-            case .failure(let encodingError):
-                completion(false, "\(NSLocalizedString("Internal server error", comment: "comment")) \(encodingError.localizedDescription). \(NSLocalizedString("Please try again later.", comment: "comment"))")
+            case .failure:
+                completion(false, "Server Down")
             }
             
         })
@@ -290,7 +295,7 @@ class UserService: BaseTaskController {
                         let _message = _dic["error"] as? String {
                         completion(false, _message)
                     } else {
-                        completion(false, "\(NSLocalizedString("Internal server error", comment: "comment")) \(String(describing: response.response?.statusCode)). \(NSLocalizedString("Please try again later.", comment: "comment"))")
+                        completion(false, "Server Down")
                     }
                 }
                 
@@ -307,6 +312,9 @@ class UserService: BaseTaskController {
                 print(response.result.value ?? "")
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -326,6 +334,9 @@ class UserService: BaseTaskController {
                 print(response.result.value ?? "")
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -344,6 +355,9 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(nil)
                     return
                 }
@@ -725,6 +739,9 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(nil)
                     return
                 }
@@ -941,12 +958,10 @@ class UserService: BaseTaskController {
                         completion(_user)
                         
                     } else {
-                        print("Null 1")
                         completion(nil)
                     }
                     
                 } else {
-                    print("Null 2")
                     completion(nil)
                 }
                 
@@ -968,6 +983,9 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(BaseTaskController.Response.noConnection)
                     return
                 }
@@ -1057,15 +1075,14 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
                 
                 var posts: [Post] = []
-                
-//                if let _ = response.result.value {
-//                    print("Response: \(response.result.value!)")
-//                }
                 
                 if response.response?.statusCode == 200 {
                     
@@ -1211,7 +1228,6 @@ class UserService: BaseTaskController {
                         completion(true)
                         
                     } else {
-                        print("No posts.")
                         PostController.Instance.setFollowingPosts([])
                         completion(false)
                     }
@@ -1233,15 +1249,14 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
                 
                 var users: [User] = []
-                
-                if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
-                }
                 
                 if response.response?.statusCode == 200 {
                     
@@ -1303,7 +1318,6 @@ class UserService: BaseTaskController {
                         completion(true)
                         
                     } else {
-                        print("No posts.")
                         UserController.Instance.setRecommedendUsers([])
                         completion(false)
                     }
@@ -1325,15 +1339,14 @@ class UserService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
                 
                 var users: [User] = []
-                
-                if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
-                }
                 
                 if response.response?.statusCode == 200 {
                     
@@ -1401,7 +1414,6 @@ class UserService: BaseTaskController {
                         completion(true)
                         
                     } else {
-                        print("No posts.")
                         UserController.Instance.setPromotedUsers([])
                         completion(false)
                     }
@@ -1425,6 +1437,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1446,6 +1461,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1467,6 +1485,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1487,6 +1508,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1508,6 +1532,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1530,6 +1557,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1552,6 +1582,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1574,6 +1607,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -1596,6 +1632,9 @@ class UserService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false, nil, nil, nil)
                     return
                 }

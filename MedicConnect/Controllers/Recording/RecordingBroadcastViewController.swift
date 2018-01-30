@@ -189,7 +189,7 @@ extension RecordingBroadcastViewController {
     @IBAction func onStopRecording(sender: AnyObject) {
         self.pauseRecording(isPaused: true)
         
-        AlertUtil.showConfirmAlert(self, message: NSLocalizedString("RECORDING PAUSED\nWould you like to continue recording?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M DONE", comment: "comment"), cancelButtonTitle: NSLocalizedString("CONTINUE", comment: "comment"), okCompletionBlock: {
+        AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to stop\nrecording?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("STOP RECORDING", comment: "comment"), cancelButtonTitle: NSLocalizedString("KEEP RECORDING", comment: "comment"), okCompletionBlock: {
             // OK completion block
             self.stopRecording()
             self.performSegue(withIdentifier: Constants.SegueMedicConnectEditBroadcast, sender: nil)

@@ -27,11 +27,11 @@ class ResetViewController: BaseViewController {
         if let email = self.txFieldEmail.text as String? {
             
             if email.isEmpty {
-                AlertUtil.showOKAlert(self, message: "Please enter email address.")
+                AlertUtil.showSimpleAlert(self, title: "Please enter email address.", message: nil, okButtonTitle: "OK")
                 return
             }
             if !StringUtil.isValidEmail(email) {
-                AlertUtil.showOKAlert(self, message: "Please enter valid email address.")
+                AlertUtil.showSimpleAlert(self, title: "Please enter valid email address.", message: nil, okButtonTitle: "OK")
                 return
             }
             
@@ -45,17 +45,15 @@ class ResetViewController: BaseViewController {
                 self.btnSend.isEnabled = true
                 
                 if success {
-                    AlertUtil.showOKAlert(self, message: "Okay, check your mail. We sent you a link to reset your password.", okCompletionBlock: {
+                    AlertUtil.showOKAlert(self, message: "An email has been sent\nwith a link to reset your password.",  okCompletionBlock: {
                         UserDefaultsUtil.SaveForgotPasswordToken(token: token)
                         _ = self.navigationController?.popViewController(animated: false)
                     })
-                }
-                else {
+                } else {
                     if code == 404 {
-                        AlertUtil.showOKAlert(self, message: "Looks like we don't have that email address on file.")
-                    }
-                    else {
-                        AlertUtil.showOKAlert(self, message: "Something went wrong on server. Please contact administrator.")
+                        AlertUtil.showSimpleAlert(self, title: "The email address you entered\nis not associated with an account.", message: nil, okButtonTitle: "TRY AGAIN")
+                    } else {
+                        AlertUtil.showSimpleAlert(self, title: "Something went wrong on server. Please contact administrator.", message: nil, okButtonTitle: "OK")
                     }
                 }
                 

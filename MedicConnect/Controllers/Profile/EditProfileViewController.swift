@@ -291,7 +291,7 @@ extension EditProfileViewController {
             }
             
             if !profileFilled {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill out the form!")
+                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill out the form!", message: nil, okButtonTitle: "OK")
                 return
             }
             
@@ -306,7 +306,7 @@ extension EditProfileViewController {
                     self.onBack(sender: nil)
                 } else {
                     if !message.isEmpty {
-                        AlertUtil.showOKAlert(self, message: message)
+                        AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                     }
                 }
                 

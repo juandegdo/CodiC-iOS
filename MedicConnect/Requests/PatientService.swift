@@ -29,6 +29,9 @@ class PatientService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false, nil)
                     return
                 }
@@ -96,6 +99,9 @@ class PatientService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false, nil)
                     return
                 }
@@ -154,6 +160,9 @@ class PatientService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -272,6 +281,9 @@ class PatientService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false, nil, nil, nil)
                     return
                 }

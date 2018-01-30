@@ -71,7 +71,7 @@ class ShareBroadcastViewController: BaseViewController {
         } else {
             // Consult or Patient Note
             self.constOfPopupHeight.constant = fromList ? 200 : 250
-            self.lblQuestion.text = "Would you like to create\na synopsis document?"
+            self.lblQuestion.text = "Would you like to transcribe\nthis audio to a text document?"
             self.btnEmail.isHidden = true
             self.btnMessage.isHidden = true
             

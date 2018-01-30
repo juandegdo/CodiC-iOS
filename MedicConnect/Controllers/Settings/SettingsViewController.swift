@@ -182,7 +182,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
 //                    print("Reset Tutorial")
 //
 //                    // Reset Tutorial
-//                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to reset tutorial?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+                    //                    AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to reset tutorial?", comment: "comment"), message: "", okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
 //                        // OK completion block
 //                        // Set FirstLoad to 0 to show tutorials for new users
 //                        UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
@@ -195,7 +195,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 } else if indexPath.row == 2 {
                     
                     // Logout
-                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to logout?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+                    AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to\nlogout?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("LOG OUT", comment: "comment"), cancelButtonTitle: NSLocalizedString("STAY LOGGED IN", comment: "comment"), okCompletionBlock: {
                         // OK completion block
                         self.clearAllData()
                         _ = self.tabBarController?.navigationController?.popToRootViewController(animated: true)
@@ -208,7 +208,12 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 } else if indexPath.row == 3 {
                     
                     // Delete account
-                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete your account?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+                    AlertUtil.showConfirmAlert(self,
+                                               title: NSLocalizedString("Are you sure you want to\ndelete your account?", comment: "comment"),
+                                               message: NSLocalizedString("We won’t delete any Consults\nthat are associated with\nPatient Notes or Diagnosis.", comment: "comment"),
+                                               okButtonTitle: NSLocalizedString("DELETE ACCOUNT", comment: "comment"),
+                                               cancelButtonTitle: NSLocalizedString("KEEP ACCOUNT", comment: "comment"),
+                                               okCompletionBlock: {
                         // OK completion block
                         UserService.Instance.deleteAccount(completion: {
                             (success: Bool, message: String) in
@@ -220,7 +225,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                                 
                             } else {
                                 if !message.isEmpty {
-                                    AlertUtil.showOKAlert(self, message: message)
+                                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                                 }
                             }
                         })
@@ -311,7 +316,7 @@ extension SettingsViewController : MFMailComposeViewControllerDelegate {
     
     func sendEmail(emailAddress: String) {
         if !MFMailComposeViewController.canSendMail() {
-            AlertUtil.showOKAlert(self, message: "Mail services are not available")
+            AlertUtil.showSimpleAlert(self, title: "Mail services are not available", message: nil, okButtonTitle: "OK")
             return
         }
         let composeVC = MFMailComposeViewController()

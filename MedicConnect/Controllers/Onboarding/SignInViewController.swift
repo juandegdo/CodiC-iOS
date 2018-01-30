@@ -46,9 +46,8 @@ class SignInViewController: BaseViewController, UITextFieldDelegate {
             let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
             vc.token = token
             self.navigationController?.pushViewController(vc, animated: false)
-        }
-        else {
-            AlertUtil.showOKAlert(self, message: "Link is not valid.")
+        } else {
+            AlertUtil.showSimpleAlert(self, title: "Reset Password link is not valid.", message: nil, okButtonTitle: "OK")
         }
     }
     
@@ -80,13 +79,13 @@ extension SignInViewController {
         
         // Check if all required fields are filled
         if self.tfEmail.text!.isEmpty || self.tfPassword.text!.isEmpty {
-            AlertUtil.showOKAlert(self, message: "Please fill in all fields")
+            AlertUtil.showSimpleAlert(self, title: "Please enter both your\nemail address and password", message: nil, okButtonTitle: "OK")
             return
         }
         
         // Check if email is valid
         if !StringUtil.isValidEmail(self.tfEmail.text!) {
-            AlertUtil.showOKAlert(self, message: "Please enter a valid email address")
+            AlertUtil.showSimpleAlert(self, title: "Please enter a valid email address", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -106,7 +105,11 @@ extension SignInViewController {
                 
             } else {
                 if !message.isEmpty {
-                    AlertUtil.showOKAlert(self, message: message)
+                    if message == "Server Down" {
+                        AlertUtil.showSimpleAlert(self, title: "Looks like our servers are temporarily down.", message: "We will back up in no time.", okButtonTitle: "OK")
+                    }
+                    
+                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                 }
                 
             }

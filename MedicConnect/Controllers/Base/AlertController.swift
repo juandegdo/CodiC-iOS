@@ -11,6 +11,7 @@
 
 import Foundation
 import UIKit
+import FXBlurView
 
 let AlertActionEnabledDidChangeNotification = "AlertActionEnabledDidChangeNotification"
 
@@ -152,6 +153,10 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
     fileprivate var overlayView = UIView()
     open var overlayColor = UIColor(red:0, green:0, blue:0, alpha:0.5)
     
+    fileprivate var backgroundImageView: UIImageView = UIImageView()
+    fileprivate var blurView: FXBlurView = FXBlurView()
+    fileprivate var masksView: UIView = UIView()
+    
     // ContainerView
     fileprivate var containerView = UIView()
     fileprivate var containerViewBottomSpaceConstraint: NSLayoutConstraint?
@@ -178,13 +183,13 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
     
     // TitleLabel
     open var titleLabel = UILabel()
-    open var titleFont = UIFont(name: "Avenir-Book", size: 18)
+    open var titleFont = UIFont(name: "Avenir-Book", size: 15)
     open var titleTextColor = UIColor(red:77.0/255, green:77.0/255, blue:77.0/255, alpha:1.0)
     
     // MessageView
     open var messageView = UILabel()
-    open var messageFont = UIFont(name: "Avenir-Book", size: 16.0)
-    open var messageTextColor = UIColor(red:59.0/255, green:59.0/255, blue:76.0/255, alpha:1.0)
+    open var messageFont = UIFont(name: "Avenir-Book", size: 15.0)
+    open var messageTextColor = UIColor(red:156.0/255, green:156.0/255, blue:163.0/255, alpha:1.0)
     
     // TextFieldContainerView
     open var textFieldContainerView = UIView()
@@ -224,13 +229,13 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
     // Buttons
     open var buttons = [UIButton]()
     open var buttonFont: [AlertActionStyle : UIFont] = [
-        .default : UIFont(name: "Avenir-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15),
-        .cancel  : UIFont(name: "Avenir-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15),
-        .destructive  : UIFont(name: "Avenir-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15)
+        .default : UIFont(name: "Avenir-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14),
+        .cancel  : UIFont(name: "Avenir-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14),
+        .destructive  : UIFont(name: "Avenir-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
     ]
     open var buttonTextColor: [AlertActionStyle : UIColor] = [
         .default : UIColor(red:163.0/255, green:171.0/255, blue:176.0/255, alpha:1),
-        .cancel  : UIColor(red:249.0/255, green:36.0/255, blue:60.0/255, alpha:1),
+        .cancel  : UIColor(red:143.0/255, green:195.0/255, blue:196.0/255, alpha:1),
         .destructive  : UIColor(red:249.0/255, green:36.0/255, blue:60.0/255, alpha:1)
     ]
     open var buttonBgColor: [AlertActionStyle : UIColor] = [
@@ -332,6 +337,10 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
         // OverlayView
         self.view.addSubview(overlayView)
         
+        overlayView.addSubview(self.backgroundImageView)
+        overlayView.addSubview(self.blurView)
+        overlayView.addSubview(self.masksView)
+        
         // ContainerView
         self.view.addSubview(containerView)
         
@@ -369,6 +378,9 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
         // Layout Constraint
         //------------------------------
         overlayView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        masksView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         alertView.translatesAutoresizingMaskIntoConstraints = false
         textAreaScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -390,6 +402,30 @@ open class AlertController : UIViewController, UITextFieldDelegate, UIViewContro
         let containerViewLeftSpaceConstraint = NSLayoutConstraint(item: containerView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0.0)
         containerViewBottomSpaceConstraint = NSLayoutConstraint(item: containerView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
         self.view.addConstraints([overlayViewTopSpaceConstraint, overlayViewRightSpaceConstraint, overlayViewLeftSpaceConstraint, overlayViewBottomSpaceConstraint, containerViewTopSpaceConstraint, containerViewRightSpaceConstraint, containerViewLeftSpaceConstraint, containerViewBottomSpaceConstraint!])
+        
+        // OverlayView
+        let backImageViewTopSpaceConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .top, relatedBy: .equal, toItem: overlayView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let backImageRightSpaceConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .right, relatedBy: .equal, toItem: overlayView, attribute: .right, multiplier: 1.0, constant: 0.0)
+        let backImageLeftSpaceConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .left, relatedBy: .equal, toItem: overlayView, attribute: .left, multiplier: 1.0, constant: 0.0)
+        let backImageBottomSpaceConstraint = NSLayoutConstraint(item: backgroundImageView, attribute: .bottom, relatedBy: .equal, toItem: overlayView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        
+        let blurViewTopSpaceConstraint = NSLayoutConstraint(item: blurView, attribute: .top, relatedBy: .equal, toItem: overlayView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let blurViewRightSpaceConstraint = NSLayoutConstraint(item: blurView, attribute: .right, relatedBy: .equal, toItem: overlayView, attribute: .right, multiplier: 1.0, constant: 0.0)
+        let blurViewLeftSpaceConstraint = NSLayoutConstraint(item: blurView, attribute: .left, relatedBy: .equal, toItem: overlayView, attribute: .left, multiplier: 1.0, constant: 0.0)
+        let blurViewBottomSpaceConstraint = NSLayoutConstraint(item: blurView, attribute: .bottom, relatedBy: .equal, toItem: overlayView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        
+        let masksViewTopSpaceConstraint = NSLayoutConstraint(item: masksView, attribute: .top, relatedBy: .equal, toItem: overlayView, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let masksViewRightSpaceConstraint = NSLayoutConstraint(item: masksView, attribute: .right, relatedBy: .equal, toItem: overlayView, attribute: .right, multiplier: 1.0, constant: 0.0)
+        let masksViewLeftSpaceConstraint = NSLayoutConstraint(item: masksView, attribute: .left, relatedBy: .equal, toItem: overlayView, attribute: .left, multiplier: 1.0, constant: 0.0)
+        let masksViewBottomSpaceConstraint = NSLayoutConstraint(item: masksView, attribute: .bottom, relatedBy: .equal, toItem: overlayView, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        
+        overlayView.addConstraints([backImageViewTopSpaceConstraint, backImageRightSpaceConstraint, backImageLeftSpaceConstraint, backImageBottomSpaceConstraint, blurViewTopSpaceConstraint, blurViewRightSpaceConstraint, blurViewLeftSpaceConstraint, blurViewBottomSpaceConstraint, masksViewTopSpaceConstraint, masksViewRightSpaceConstraint, masksViewLeftSpaceConstraint, masksViewBottomSpaceConstraint])
+        
+        backgroundImageView.image = ImageHelper.captureView()
+        blurView.blurRadius = 10
+        blurView.tintColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0)
+        blurView.isDynamic = false
+        masksView.backgroundColor = UIColor(red: 29/255, green: 29/255, blue: 38/255, alpha: 0.65)
         
         if (isAlert()) {
             // ContainerView

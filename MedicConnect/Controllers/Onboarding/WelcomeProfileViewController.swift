@@ -166,7 +166,7 @@ extension WelcomeProfileViewController {
             if self.tfTitle.text != "" {
                 _user.title = self.tfTitle.text!
             } else {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your title!")
+                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your title!", message: nil, okButtonTitle: "OK")
                 return
             }
             
@@ -177,21 +177,21 @@ extension WelcomeProfileViewController {
                 
                 _user.msp = self.tfMSP.text!
             } else {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your MSP number!")
+                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your MSP number!", message: nil, okButtonTitle: "OK")
                 return
             }
             
             if self.tfLocation.text != "" {
                 _user.location = self.tfLocation.text!
             } else {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your site!")
+                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your site!", message: nil, okButtonTitle: "OK")
                 return
             }
             
             if self.tfPhoneNumber.text != "" {
                 _user.phoneNumber = self.tfPhoneNumber.text!
             } else {
-                AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to fill in your phone number!")
+                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your phone number!", message: nil, okButtonTitle: "OK")
                 return
             }
             
@@ -219,7 +219,7 @@ extension WelcomeProfileViewController {
                                 })
                             } else {
                                 self.btnSave.isEnabled = true
-                                AlertUtil.showOKAlert(self, message: "Uplading your profile image failed. Try again.")
+                                AlertUtil.showSimpleAlert(self, title: "Uplading your profile image failed. Try again.", message: nil, okButtonTitle: "OK")
                             }
                         })
                         
@@ -240,7 +240,7 @@ extension WelcomeProfileViewController {
                     self.btnSave.isEnabled = true
                     
                     if !message.isEmpty {
-                        AlertUtil.showOKAlert(self, message: message)
+                        AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                     }
                 }
             })

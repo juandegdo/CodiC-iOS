@@ -170,17 +170,17 @@ extension SaveConsultViewController {
         let postType = DataManager.Instance.getPostType()
         let title = self.tfBroadcastName.text!
         guard  title.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your \(postType.lowercased()) a name!")
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a name!", message: nil, okButtonTitle: "OK")
             return
         }
         
         guard  self.tfDiagnosticCode.text!.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your \(postType.lowercased()) a diagnostic code!")
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a diagnostic code!", message: nil, okButtonTitle: "OK")
             return
         }
         
         guard  self.tfBillingCode.text!.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your \(postType.lowercased()) a billing code!")
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a billing code!", message: nil, okButtonTitle: "OK")
             return
         }
         

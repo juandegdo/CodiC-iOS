@@ -38,11 +38,11 @@ class ResetPasswordViewController: BaseViewController {
     
     @IBAction func onResetPassword(_ sender: Any) {
         if (txtPassword.text?.isEmpty)! {
-            AlertUtil.showOKAlert(self, message: "Please enter new password.")
+            AlertUtil.showSimpleAlert(self, title: "Please enter new password.", message: nil, okButtonTitle: "OK")
             return
         }
         if (txtConfirm.text?.isEmpty)! {
-            AlertUtil.showOKAlert(self, message: "Please enter password to confirm.")
+            AlertUtil.showSimpleAlert(self, title: "Please enter password to confirm.", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -50,7 +50,7 @@ class ResetPasswordViewController: BaseViewController {
         let passwordToConfirm = txtConfirm.text
         
         if password != passwordToConfirm {
-            AlertUtil.showOKAlert(self, message: "The passwords you entered don't match. Try again.")
+            AlertUtil.showSimpleAlert(self, title: "The passwords you entered don't match. Try again.", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -66,9 +66,8 @@ class ResetPasswordViewController: BaseViewController {
                     UserDefaultsUtil.DeleteForgotPasswordToken()
                     self.navigationController?.popToRootViewController(animated: false)
                 })
-            }
-            else {
-                AlertUtil.showOKAlert(self, message: "Failed to reset password. Please contact administrator.")
+            } else {
+                AlertUtil.showSimpleAlert(self, title: "Failed to reset password. Please contact administrator.", message: nil, okButtonTitle: "OK")
             }
             
         })

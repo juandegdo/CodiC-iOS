@@ -66,19 +66,19 @@ extension SignUpViewController {
         
         // Check if all required fields are filled
         if self.tfName.text!.isEmpty || self.tfPassword.text!.isEmpty || self.tfConfirm.text!.isEmpty || self.tfEmail.text!.isEmpty {
-            AlertUtil.showOKAlert(self, message: "Please fill in all fields")
+            AlertUtil.showSimpleAlert(self, title: "Please fill in all fields", message: nil, okButtonTitle: "OK")
             return
         }
         
         // Check if email is valid
         if !StringUtil.isValidEmail(self.tfEmail.text!) {
-            AlertUtil.showOKAlert(self, message: "Please enter a valid email address")
+            AlertUtil.showSimpleAlert(self, title: "Please enter a valid email address", message: nil, okButtonTitle: "OK")
             return
         }
         
         // Check if passwords match
         if self.tfPassword.text! != self.tfConfirm.text! {
-            AlertUtil.showOKAlert(self, message: "Yikes! The passwords you've entered don't match.")
+            AlertUtil.showSimpleAlert(self, title: "Yikes! The passwords you've entered don't match.", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -95,7 +95,7 @@ extension SignUpViewController {
                 self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeProfile, sender: nil)
             } else {
                 if !message.isEmpty {
-                    AlertUtil.showOKAlert(self, message: message)
+                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                 }
                 
             }

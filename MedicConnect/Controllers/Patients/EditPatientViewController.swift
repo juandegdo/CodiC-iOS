@@ -165,12 +165,12 @@ extension EditPatientViewController {
     
     @IBAction func onSaveChange(sender: AnyObject!) {
         guard  self.tfName.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient name!")
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your patient name!", message: nil, okButtonTitle: "OK")
             return
         }
         
         guard  self.tfPHN.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient number!")
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your patient number!", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -179,7 +179,7 @@ extension EditPatientViewController {
         }
         
         guard  self.tfBirthdate.text?.count != 0 else {
-            AlertUtil.showOKAlert(self, message: "Oops, it looks like you forgot to give your patient birthdate!")
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your patient birthdate!", message: nil, okButtonTitle: "OK")
             return
         }
         

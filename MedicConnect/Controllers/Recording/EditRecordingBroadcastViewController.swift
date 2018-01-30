@@ -207,7 +207,7 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onDelete(sender: UIButton) {
         
-        AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete recording?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+        AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to delete recording?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
             // OK completion block
             self.onClose(sender: UIButton())
         }, cancelCompletionBlock: {

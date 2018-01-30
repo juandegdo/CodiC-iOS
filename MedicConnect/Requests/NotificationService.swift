@@ -23,6 +23,9 @@ class NotificationService: BaseTaskController {
                 }
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false, nil)
                     return
                 }
@@ -44,6 +47,9 @@ class NotificationService: BaseTaskController {
 //                    print("Response: \(response.result.value!)")
                 }
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
@@ -59,15 +65,14 @@ class NotificationService: BaseTaskController {
             .responseJSON { response in
                 
                 if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
                     completion(false)
                     return
                 }
                 
                 var notifications: [Notification] = []
-                
-                if let _ = response.result.value {
-//                    print("Response: \(response.result.value!)")
-                }
                 
                 if response.response?.statusCode == 200 {
                     
