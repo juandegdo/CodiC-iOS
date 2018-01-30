@@ -61,12 +61,10 @@ class SettingListCell: UITableViewCell {
                 return
             }
             else if tag.section == 1 {
-                //            self.switchCtrl.tag = tag
-                //            self.switchCtrl.isHidden = false
                 self.selectionStyle = UITableViewCellSelectionStyle.none
                 if NotificationUtil.isEnabledPushNotification() {
                     if let _me = UserController.Instance.getUser() {
-                        self.switchCtrl.isOn = ((_me.notificationfilter & (1<<tag.row)) != 0) //(_me.deviceToken != nil)
+                        self.switchCtrl.isOn = ((_me.notificationfilter & (1<<tag.row)) != 0)
                         return
                     }
                 }

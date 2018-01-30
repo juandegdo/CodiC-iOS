@@ -72,7 +72,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             case 0:
                 return 4
             case 1:
-                return 3
+                return 4
             case 2:
                 return 3
                 
@@ -125,6 +125,9 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
                 else if (indexPath.row == 2) {
                     cell.setCellWithTitle(title: NSLocalizedString("New Diagnosis", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+                }
+                else if (indexPath.row == 3) {
+                    cell.setCellWithTitle(title: NSLocalizedString("New Transcription", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 
             } else if indexPath.section == 2 {
