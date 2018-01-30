@@ -45,11 +45,8 @@ class SettingListCell: UITableViewCell {
             
         }
         
-        
         if hasArrow {
-            
             self.imgArrow.isHidden = false
-            
         }
         
         if hasSwitch {

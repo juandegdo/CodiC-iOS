@@ -155,7 +155,8 @@ extension ConsultsViewController {
             searchResult = PostController.Instance.getFollowingPosts(type: self.postType)
         } else {
             searchResult = PostController.Instance.getFollowingPosts(type: self.postType).filter({(post: Post) -> Bool in
-                return post.title.lowercased().contains(keyword.lowercased()) ||
+                return post.patientName.lowercased().contains(keyword.lowercased()) ||
+                    post.patientPHN.contains(keyword) ||
                     post.descriptions.lowercased().contains(keyword.lowercased()) ||
                     post.user.fullName.lowercased().contains(keyword.lowercased())
             })
