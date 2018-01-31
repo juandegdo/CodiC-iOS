@@ -109,7 +109,7 @@ class SettingsDetailViewController: BaseViewController {
     @IBAction func btnSaveClicked(_ sender: UIButton) {
         // Present AlertController
         let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        let printAction = UIAlertAction.init(title: "Print", style: .default) { (action) in
+        let printAction = UIAlertAction.init(title: "PRINT", style: .default) { (action) in
             // Print
             if UIPrintInteractionController.canPrint(self.destinationFileUrl) {
                 let printInfo = UIPrintInfo(dictionary: nil)
@@ -126,22 +126,21 @@ class SettingsDetailViewController: BaseViewController {
         }
         
         printAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
-        printAction.setValue(UIColor.black, forKey: "titleTextColor")
-        printAction.setValue(UIColor.init(red: 0, green: 122/255.0, blue: 1, alpha: 1), forKey: "imageTintColor")
-        printAction.setValue(UIImage.init(named: "icon_print"), forKey: "image")
+        printAction.setValue(UIColor.init(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 1), forKey: "titleTextColor")
+        printAction.setValue(UIImage(named:"icon_print")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         alertController.addAction(printAction)
 
-        let submitMSPAction = UIAlertAction.init(title: "Submit to MSP", style: .default) { (action) in
+        let submitMSPAction = UIAlertAction.init(title: "SUBMIT TO MSP", style: .default) { (action) in
 
         }
         
         submitMSPAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
-        submitMSPAction.setValue(UIColor.black, forKey: "titleTextColor")
-        submitMSPAction.setValue(UIColor.init(red: 0, green: 122/255.0, blue: 1, alpha: 1), forKey: "imageTintColor")
-        submitMSPAction.setValue(UIImage.init(named: "icon_submit"), forKey: "image")
+        submitMSPAction.setValue(UIColor.init(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 1), forKey: "titleTextColor")
+        submitMSPAction.setValue(UIImage(named:"icon_submit")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         alertController.addAction(submitMSPAction)
 
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel)
+        cancelAction.setValue(UIColor.init(red: 143/255.0, green: 195/255.0, blue: 196/255.0, alpha: 1), forKey: "titleTextColor")
         alertController.addAction(cancelAction)
         
         self.present(alertController, animated: true, completion: nil)
@@ -150,9 +149,9 @@ class SettingsDetailViewController: BaseViewController {
         let actionViews = alertController.view.value(forKey: "actionViews") as! [UIView]
         if actionViews.count > 0 {
             let printView = actionViews[0] as UIView
-            (printView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 70
+            (printView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 84
             let submitMSPView = actionViews[1] as UIView
-            (submitMSPView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 70
+            (submitMSPView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 80
         }
         
     }
