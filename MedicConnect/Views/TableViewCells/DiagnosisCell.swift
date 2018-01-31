@@ -195,6 +195,11 @@ class DiagnosisCell: UITableViewCell {
         self.imgUserAvatar.image = nil
         if let imgURL = URL(string: post.user.photo) as URL? {
             self.imgUserAvatar.af_setImage(withURL: imgURL)
+        } else {
+            self.imgUserAvatar.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                         text: post.user.getInitials(),
+                                                                                         font: UIFont(name: "Avenir-Book", size: 14)!,
+                                                                                         size: CGSize(width: 30, height: 30))
         }
         
     }

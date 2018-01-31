@@ -90,7 +90,10 @@ class EditProfileViewController: BaseViewController {
             if let imgURL = URL(string: _user.photo) as URL? {
                 self.imgAvatar.af_setImage(withURL: imgURL)
             } else {
-                self.imgAvatar.image = nil
+                self.imgAvatar.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                         text: _user.getInitials(),
+                                                                                         font: UIFont(name: "Avenir-Book", size: 40)!,
+                                                                                         size: CGSize(width: 84, height: 84))
             }
             
             self.tfName.text = _user.fullName

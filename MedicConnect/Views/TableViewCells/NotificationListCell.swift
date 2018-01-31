@@ -54,16 +54,15 @@ class NotificationListCell: UITableViewCell {
         self.btnAccept.isHidden = true
         self.btnDecline.isHidden = true
         
-        // Customize Avatar
-        _ = UIFont(name: "Avenir-Heavy", size: 13.0) as UIFont? ?? UIFont.systemFont(ofSize: 13.0)
-        
         if let _url = notification.fromUser.photo as String?,
             let imgURL = URL(string: _url) as URL? {
             self.imgUserPhoto.af_setImage(withURL: imgURL)
 //            self.imgUserPhoto.af_setImage(withURL: imgURL, placeholderImage: ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: Constants.ColorOrange, text: notification.fromUser.getInitials(), font: font, size: CGSize(width: 40, height: 40)))
         } else {
-            self.imgUserPhoto.image = nil
-//            self.imgUserPhoto.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: Constants.ColorOrange, text: notification.fromUser.getInitials(), font: font, size: CGSize(width: 40, height: 40))
+            self.imgUserPhoto.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                        text: notification.fromUser.getInitials(),
+                                                                                        font: UIFont(name: "Avenir-Book", size: 18)!,
+                                                                                        size: CGSize(width: 40, height: 40))
         }
         
         self.lblUsername.text = notification.fromUser.fullName

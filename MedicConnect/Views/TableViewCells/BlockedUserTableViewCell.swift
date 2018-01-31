@@ -36,7 +36,10 @@ class BlockedUserTableViewCell: UITableViewCell {
         if let imgURL = URL(string: user.photo) as URL? {
             self.m_userImage.af_setImage(withURL: imgURL)
         } else {
-            self.m_userImage.image = nil
+            self.m_userImage.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                     text: user.getInitials(),
+                                                                                     font: UIFont(name: "Avenir-Book", size: 24)!,
+                                                                                     size: CGSize(width: 60, height: 60))
         }
         
         m_userName.text = user.fullName

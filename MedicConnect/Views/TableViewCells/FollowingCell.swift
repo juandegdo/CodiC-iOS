@@ -39,7 +39,10 @@ class FollowingCell: UITableViewCell {
         if let imgURL = URL(string: user.photo) as URL? {
             self.imgUserPhoto.af_setImage(withURL: imgURL)
         } else {
-            self.imgUserPhoto.image = nil
+            self.imgUserPhoto.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                       text: user.getInitials(),
+                                                                                       font: UIFont(name: "Avenir-Book", size: 20)!,
+                                                                                       size: CGSize(width: 44, height: 44))
         }
         
         // Customize User Data

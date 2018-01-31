@@ -34,6 +34,11 @@ class PatientListCell: UITableViewCell {
         if let _user = patient.user as User? {
             if let imgURL = URL(string: _user.photo) as URL? {
                 self.imgUserPhoto.af_setImage(withURL: imgURL)
+            } else {
+                self.imgUserPhoto.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                            text: _user.getInitials(),
+                                                                                            font: UIFont(name: "Avenir-Book", size: 14)!,
+                                                                                            size: CGSize(width: 30, height: 30))
             }
         }
     }
