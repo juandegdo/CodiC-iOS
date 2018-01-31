@@ -789,6 +789,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="I80-io-Ke4"/>
                     <connections>
+                        <outlet property="btnCreatePatient" destination="ZYh-ub-Mc2" id="tsd-vE-uN6"/>
                         <outlet property="constOfNavigationTop" destination="KhP-7l-2ea" id="CHA-QV-h4c"/>
                         <outlet property="constOfTableViewBottom" destination="r1p-95-Mi2" id="Nyf-Gh-CUe"/>
                         <outlet property="tvPatients" destination="eaE-6Z-It4" id="GSg-Mn-ndP"/>
@@ -8174,6 +8175,6 @@ uploaded a new diagnosis.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="znu-Px-ld3"/>
-        <segue reference="OMB-Di-mue"/>
+        <segue reference="vbE-pK-CLR"/>
     </inferredMetricsTieBreakers>
 </document>

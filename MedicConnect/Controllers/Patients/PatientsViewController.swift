@@ -16,8 +16,11 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate {
     @IBOutlet var viewSearch: UIView!
     @IBOutlet var txFieldSearch: UITextField!
     @IBOutlet var tvPatients: UITableView!
+    @IBOutlet var btnCreatePatient: UIButton!
     
     @IBOutlet var constOfTableViewBottom: NSLayoutConstraint!
+    
+    var menuButton: ExpandingMenuButton?
     
     var vcDisappearType : ViewControllerDisappearType = .other
     var searchedPatients: [Patient] = []
@@ -26,6 +29,8 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate {
         super.viewWillAppear(animated)
         
         vcDisappearType = .other
+        
+        configureExpandingMenuButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -67,6 +72,38 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate {
 extension PatientsViewController {
     
     // MARK: Private methods
+    
+    fileprivate func configureExpandingMenuButton() {
+        self.btnCreatePatient.isHidden = true
+        
+        let tabBarHeight = UIScreen.main.nativeBounds.height == 2436 ? CGFloat(TABBAR_HEIGHT) + 26.0 : CGFloat(TABBAR_HEIGHT)
+        let menuButtonSize: CGSize = CGSize(width: 58.0, height: 58.0)
+        self.menuButton = ExpandingMenuButton(frame: CGRect(origin: CGPoint.zero, size: menuButtonSize), centerImage: UIImage(named: "icon_patient_add")!, centerHighlightedImage: UIImage(named: "icon_patient_add")!)
+        menuButton!.center = CGPoint(x: self.view.bounds.width - 44.0, y: self.view.bounds.height - 34.0 - tabBarHeight)
+        self.view.addSubview(menuButton!)
+        
+        let item1 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Create New Patient File", image: UIImage(named: "icon_record_consult")!, highlightedImage: UIImage(named: "icon_record_consult")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            // Create Form
+            self.performSegue(withIdentifier: Constants.SegueMedicConnectAddPatient, sender: nil)
+        }
+        
+        let item2 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Scan Patient Label", image: UIImage(named: "icon_scan_label")!, highlightedImage: UIImage(named: "icon_scan_label")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            // Scan
+            
+        }
+        
+        menuButton!.addMenuItems([item1, item2])
+        
+        menuButton!.willPresentMenuItems = { (menu) -> Void in
+            self.menuButton!.removeFromSuperview()
+            UIApplication.shared.keyWindow?.addSubview(self.menuButton!)
+        }
+        
+        menuButton!.didDismissMenuItems = { (menu) -> Void in
+            self.menuButton!.removeFromSuperview()
+            self.view.addSubview(self.menuButton!)
+        }
+    }
     
     func initViews() {
         // Initialize Table Views
