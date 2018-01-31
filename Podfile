@@ -31,7 +31,6 @@ pod 'Masonry'
 pod 'TTTAttributedLabel'
 pod 'SwiftGifOrigin', '~> 1.6.1'
 pod 'PhoneNumberKit', '~> 2.1'
-pod 'SwiftyJSON'
 
   target 'MedicConnectTests' do
     inherit! :search_paths
