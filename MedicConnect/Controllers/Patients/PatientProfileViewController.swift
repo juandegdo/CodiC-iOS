@@ -189,7 +189,7 @@ class PatientProfileViewController: BaseViewController {
                 PlayerController.Instance.lastPlayed = cell?.playSlider
                 PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
                 PlayerController.Instance.durationLabel = cell?.lblDuration
-                PlayerController.Instance.shouldSeek = false
+                PlayerController.Instance.shouldSeek = true
                 
                 _player.rate = 1.0
                 _player.play()
@@ -210,7 +210,6 @@ class PatientProfileViewController: BaseViewController {
                     PlayerController.Instance.durationLabel = cell?.lblDuration
                     PlayerController.Instance.currentIndex = _index
                     PlayerController.Instance.shouldSeek = true
-                    PlayerController.Instance.currentTime = post.getCurrentTime()
                     
                     _player.rate = 1.0
                     _player.play()
@@ -524,6 +523,11 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
             }
             
             self.releasePlayer()
+            
+            if PlayerController.Instance.lastPlayed == nil {
+                cell.playSlider.setValue(0.0, animated: false)
+                cell.playSlider.playing = false
+            }
             
             let post = PostController.Instance.getPatientNotes()[indexPath.row]
             

@@ -248,7 +248,7 @@ extension DiagnosisViewController {
                 PlayerController.Instance.lastPlayed = cell?.playSlider
                 PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
                 PlayerController.Instance.durationLabel = cell?.lblDuration
-                PlayerController.Instance.shouldSeek = false
+                PlayerController.Instance.shouldSeek = true
                 
                 _player.rate = 1.0
                 _player.play()
@@ -269,7 +269,6 @@ extension DiagnosisViewController {
                     PlayerController.Instance.durationLabel = cell?.lblDuration
                     PlayerController.Instance.currentIndex = _index
                     PlayerController.Instance.shouldSeek = true
-                    PlayerController.Instance.currentTime = post.getCurrentTime()
                     
                     _player.rate = 1.0
                     _player.play()
@@ -717,6 +716,12 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
             else { return }
         
         self.releasePlayer()
+        
+        if PlayerController.Instance.lastPlayed == nil {
+            cell.playSlider.setValue(0.0, animated: false)
+            cell.playSlider.playing = false
+        }
+        
         self.tvDiagnoses.beginUpdates()
         
         let post = searchResult[self.indexFromPath(indexPath: indexPath)]

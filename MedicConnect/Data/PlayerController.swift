@@ -20,7 +20,6 @@ class PlayerController {
     var durationLabel: UILabel?
     var playerObserver: Any?
     
-    var currentTime: CMTime?
     var shouldSeek: Bool = true
     
     var timerReset: Timer?
@@ -53,19 +52,21 @@ class PlayerController {
             
             if _player.currentItem?.status == .readyToPlay {
                 
-                // Seek player only after it's ready to play
-                if self.shouldSeek {
-                    print("Just seek to: \(self.currentTime!)")
-                    _player.seek(to: self.currentTime!)
-                    self.shouldSeek = false
-                }
-                
-                let currentTime = CGFloat(_player.currentTime().value) / CGFloat(_player.currentTime().timescale)
+                var currentTime = CGFloat(_player.currentTime().value) / CGFloat(_player.currentTime().timescale)
                 let duration = CGFloat(_player.currentItem!.duration.value) / CGFloat(_player.currentItem!.duration.timescale)
                 
-                // Update progress
-                let progress = CGFloat(currentTime) / CGFloat(duration)
-                _lastPlayed.setValue(Float(progress), animated: false)
+                // Seek player only after it's ready to play
+                if self.shouldSeek {
+                    currentTime = duration * CGFloat((self.lastPlayed?.value)!)
+                    print("Just seek to: \(currentTime)")
+                    _player.seek(to: CMTimeMakeWithSeconds(Float64(currentTime), _player.currentTime().timescale), toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+
+                    self.shouldSeek = false
+                } else {
+                    // Update progress
+                    let progress = CGFloat(currentTime) / CGFloat(duration)
+                    _lastPlayed.setValue(Float(progress), animated: false)
+                }
                 
                 // Update elapsed time
                 if let _elapsedTimeLabel = self.elapsedTimeLabel as UILabel? {
@@ -82,7 +83,7 @@ class PlayerController {
                     _lastPlayed.playing = true
                 }
                 
-            } else {
+            } else if !self.shouldSeek {
                 // Reset progress while we're not ready to play
                 _lastPlayed.setValue(0.0, animated: false)
                 
