@@ -145,7 +145,8 @@ open class ExpandingMenuItem: UIView {
     
     // MARK: - Tapped Action
     @objc func tapped() {
-        self.delegate?.menuItemTapped(self)
-        self.tappedAction?()
+        self.delegate?.menuItemTapped(self, completion: {
+            self.tappedAction?()
+        })
     }
 }

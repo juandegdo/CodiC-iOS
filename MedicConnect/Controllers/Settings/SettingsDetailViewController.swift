@@ -146,11 +146,19 @@ class SettingsDetailViewController: BaseViewController {
         self.present(alertController, animated: true, completion: nil)
         
         // Update AlertController Style
+        
+        let attributedText = NSMutableAttributedString(string: "SUBMIT TO MSP")
+        let range = NSRange(location: 0, length: attributedText.length)
+        attributedText.addAttribute(.font, value: UIFont(name: "Avenir-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15), range: range)
+        
         let actionViews = alertController.view.value(forKey: "actionViews") as! [UIView]
         if actionViews.count > 0 {
             let printView = actionViews[0] as UIView
+//            (printView.value(forKey: "label") as! UILabel).attributedText = attributedText
             (printView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 84
+            
             let submitMSPView = actionViews[1] as UIView
+//            (submitMSPView.value(forKey: "label") as! UILabel).font = UIFont(name: "Avenir-Medium", size: 15) ?? UIFont.systemFont(ofSize: 15)
             (submitMSPView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 80
         }
         

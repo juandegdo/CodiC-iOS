@@ -152,7 +152,7 @@ open class ExpandingMenuButton: UIView, UIGestureRecognizerDelegate {
     }
     
     // MARK: - Menu Item Tapped Action
-    open func menuItemTapped(_ item: ExpandingMenuItem) {
+    open func menuItemTapped(_ item: ExpandingMenuItem, completion: (() -> Void)?) {
         self.willDismissMenuItems?(self)
         self.isAnimating = true
         
@@ -190,6 +190,8 @@ open class ExpandingMenuButton: UIView, UIGestureRecognizerDelegate {
         self.resizeToFoldedFrame { () -> Void in
             self.isAnimating = false
             self.didDismissMenuItems?(self)
+            
+            completion?()
         }
     }
     
@@ -394,10 +396,10 @@ open class ExpandingMenuButton: UIView, UIGestureRecognizerDelegate {
         //
         if self.enabledExpandingAnimations.contains(.MenuButtonRotation) == true {
             UIView.animate(withDuration: 0.1575, animations: { () -> Void in
-                self.centerButton.transform = CGAffineTransform(rotationAngle: CGFloat(-0.5 * Float.pi))
+//                self.centerButton.transform = CGAffineTransform(rotationAngle: CGFloat(-0.5 * Float.pi))
             })
         } else {
-            self.centerButton.transform = CGAffineTransform(rotationAngle: CGFloat(-0.5 * Float.pi))
+//            self.centerButton.transform = CGAffineTransform(rotationAngle: CGFloat(-0.5 * Float.pi))
         }
         
         // 5. Excute the expanding animation

@@ -138,7 +138,7 @@ class ProfileViewController: BaseViewController {
             
             if let vc = storyboard.instantiateViewController(withIdentifier: "ConsultReferringViewController") as? ConsultReferringViewController {
                 
-                self.navigationController?.pushViewController(vc, animated: true)
+                self.navigationController?.pushViewController(vc, animated: false)
                 
             }
         }
