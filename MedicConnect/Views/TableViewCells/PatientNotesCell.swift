@@ -19,6 +19,7 @@ class PatientNotesCell: UITableViewCell {
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnBackward: UIButton!
     @IBOutlet var btnForward: UIButton!
+    @IBOutlet var btnSpeaker: UIButton!
     
     // Labels
     @IBOutlet var lblBroadcast: UILabel!
@@ -50,6 +51,7 @@ class PatientNotesCell: UITableViewCell {
                 
                 self.constOfImageAvatarBottom.constant = 20
                 self.constOfLblDescriptionHeight.constant = 18
+                self.btnSpeaker.isHidden = true
                 self.btnPlay.isHidden = true
                 self.btnBackward.isHidden = true
                 self.btnForward.isHidden = true
@@ -69,7 +71,10 @@ class PatientNotesCell: UITableViewCell {
                 
                 self.constOfImageAvatarBottom.constant = 65 + 20
                 
+                self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
+                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                    self.btnSpeaker.isHidden = false
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
                     self.btnForward.isHidden = false

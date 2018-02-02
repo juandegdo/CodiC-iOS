@@ -22,6 +22,7 @@ class ConsultCell: UITableViewCell {
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnBackward: UIButton!
     @IBOutlet var btnForward: UIButton!
+    @IBOutlet var btnSpeaker: UIButton!
     
     // Constraints
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
@@ -58,6 +59,7 @@ class ConsultCell: UITableViewCell {
                 self.constOfLblDateBottom.constant = 15
                 self.constOfLblDescriptionHeight.constant = 18
                 self.txtVHashtags.isHidden = true
+                self.btnSpeaker.isHidden = true
                 self.btnPlay.isHidden = true
                 self.btnBackward.isHidden = true
                 self.btnForward.isHidden = true
@@ -81,10 +83,13 @@ class ConsultCell: UITableViewCell {
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? ceil(boundingBox.height) : ceil(boundingBox.height) + 16.0
                 self.constOfLblDateBottom.constant = self.constOfTxtVHashtagsHeight.constant + 17 + 65
                 
+                self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
+                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.lblDescription.numberOfLines = 0
                     
                     self.txtVHashtags.isHidden = false
+                    self.btnSpeaker.isHidden = false
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
                     self.btnForward.isHidden = false

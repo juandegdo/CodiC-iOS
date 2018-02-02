@@ -266,7 +266,7 @@ class AnotherProfileViewController: BaseViewController {
                 
                 if let _player = PlayerController.Instance.player as AVPlayer? {
                     
-                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+                    AudioHelper.SetCategory(mode: AudioHelper.overrideMode)
                     
                     PlayerController.Instance.lastPlayed = cell?.playSlider
                     PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
@@ -392,6 +392,18 @@ class AnotherProfileViewController: BaseViewController {
             vc.strSynopsisUrl = post.transcriptionUrl
             present(vc, animated: true, completion: nil)
             
+        }
+        
+    }
+    
+    @objc func onSelectSpeaker(sender: UIButton) {
+        
+        if AudioHelper.overrideMode == .speaker {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
+            sender.setImage(UIImage(named: "icon_speaker_off"), for: .normal)
+        } else {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+            sender.setImage(UIImage(named: "icon_speaker_on"), for: .normal)
         }
         
     }
@@ -522,6 +534,11 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 cell.btnSynopsis.removeTarget(self, action: #selector(AnotherProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
             } else if cell.btnSynopsis.allTargets.count == 0 {
                 cell.btnSynopsis.addTarget(self, action: #selector(AnotherProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
+            }
+            
+            cell.btnSpeaker.tag = indexPath.row
+            if cell.btnSpeaker.allTargets.count == 0 {
+                cell.btnSpeaker.addTarget(self, action: #selector(onSelectSpeaker(sender:)), for: .touchUpInside)
             }
             
             cell.btnPlay.tag = indexPath.row

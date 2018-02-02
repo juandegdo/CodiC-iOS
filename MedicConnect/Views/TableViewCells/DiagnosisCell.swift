@@ -23,6 +23,7 @@ class DiagnosisCell: UITableViewCell {
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnBackward: UIButton!
     @IBOutlet var btnForward: UIButton!
+    @IBOutlet var btnSpeaker: UIButton!
     
     // BadgeViews
     @IBOutlet var likeBadgeView: GIBadgeView!
@@ -64,6 +65,7 @@ class DiagnosisCell: UITableViewCell {
                 self.btnShare.isHidden = true
                 self.lblLikedDescription.isHidden = true
                 self.txtVHashtags.isHidden = true
+                self.btnSpeaker.isHidden = true
                 self.btnPlay.isHidden = true
                 self.btnBackward.isHidden = true
                 self.btnForward.isHidden = true
@@ -80,12 +82,15 @@ class DiagnosisCell: UITableViewCell {
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? ceil(boundingBox.height) : ceil(boundingBox.height) + 16.0
                 self.constOfLblDateBottom.constant = self.constOfTxtVHashtagsHeight.constant + 48 + 65
                 
+                self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
+                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.btnLike.isHidden = false
                     self.btnMessage.isHidden = false
                     self.btnShare.isHidden = false
                     self.lblLikedDescription.isHidden = false
                     self.txtVHashtags.isHidden = false
+                    self.btnSpeaker.isHidden = false
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
                     self.btnForward.isHidden = false

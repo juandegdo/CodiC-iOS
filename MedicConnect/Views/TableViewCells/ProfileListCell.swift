@@ -16,6 +16,7 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnBackward: UIButton!
     @IBOutlet var btnForward: UIButton!
+    @IBOutlet var btnSpeaker: UIButton!
     
     // Labels
     @IBOutlet var lblBroadcast: UILabel!
@@ -52,6 +53,7 @@ class ProfileListCell: UITableViewCell {
                 
                 self.constOfLblDateBottom.constant = 20
                 self.constOfLblDescriptionHeight.constant = self.postType != Constants.PostTypeDiagnosis ? 18 : 0
+                self.btnSpeaker.isHidden = true
                 self.btnPlay.isHidden = true
                 self.btnBackward.isHidden = true
                 self.btnForward.isHidden = true
@@ -76,9 +78,12 @@ class ProfileListCell: UITableViewCell {
                 
                 self.constOfLblDateBottom.constant = 55 + 20
                 
+                self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
+                
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.lblDescription.numberOfLines = 0
                     
+                    self.btnSpeaker.isHidden = false
                     self.btnPlay.isHidden = false
                     self.btnBackward.isHidden = false
                     self.btnForward.isHidden = false

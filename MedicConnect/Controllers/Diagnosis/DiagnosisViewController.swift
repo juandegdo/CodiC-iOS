@@ -262,7 +262,7 @@ extension DiagnosisViewController {
                 
                 if let _player = PlayerController.Instance.player as AVPlayer? {
                     
-                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+                    AudioHelper.SetCategory(mode: AudioHelper.overrideMode)
                     
                     PlayerController.Instance.lastPlayed = cell?.playSlider
                     PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
@@ -582,6 +582,18 @@ extension DiagnosisViewController {
         
     }
     
+    @objc func onSelectSpeaker(sender: UIButton) {
+        
+        if AudioHelper.overrideMode == .speaker {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
+            sender.setImage(UIImage(named: "icon_speaker_off"), for: .normal)
+        } else {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+            sender.setImage(UIImage(named: "icon_speaker_on"), for: .normal)
+        }
+        
+    }
+    
     func logUser(user : User) {
         // TODO: Use the current user's information
         // You can call any combination of these three methods
@@ -639,15 +651,21 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         
         let index = self.indexFromPath(indexPath: indexPath)
         
-        cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
         cell.btnLike.index = index
+        if cell.btnLike.allTargets.count == 0 {
+            cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
+        }
         cell.btnLike.refTableView = tableView
         
         cell.btnMessage.tag = index
-        cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
+        if cell.btnMessage.allTargets.count == 0 {
+            cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
+        }
         
         cell.btnShare.tag = index
-        cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
+        if cell.btnShare.allTargets.count == 0 {
+            cell.btnShare.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
+        }
         
         if let _user = UserController.Instance.getUser() as User? {
             let hasLiked = post.hasLiked(id: _user.id)
@@ -675,6 +693,11 @@ extension DiagnosisViewController : UITableViewDataSource, UITableViewDelegate {
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
         cell.txtVHashtags.tag = index
+        
+        cell.btnSpeaker.tag = index
+        if cell.btnSpeaker.allTargets.count == 0 {
+            cell.btnSpeaker.addTarget(self, action: #selector(onSelectSpeaker(sender:)), for: .touchUpInside)
+        }
         
         cell.btnPlay.tag = index
         if cell.btnPlay.allTargets.count == 0 {

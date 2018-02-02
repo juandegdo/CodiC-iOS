@@ -644,10 +644,10 @@
 		D21BC8F61DEA285B008F5443 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				657B127E1FC331270059B16E /* PlaySlider */,
 				654FDF7F1F62060B009D4BA1 /* ExpandableLabel */,
 				653D812B2012342800136E1B /* ExpandingMenu */,
 				D2F55A7D1DEB23D90038A392 /* Others */,
+				657B127E1FC331270059B16E /* PlaySlider */,
 				D206582E1E5BB9DB003875E4 /* RadTabBarController */,
 				650E28851F71B5960096A3F0 /* SCSiriWaveformView */,
 				654C972C1FBDDB9F00490627 /* TableViewCells */,

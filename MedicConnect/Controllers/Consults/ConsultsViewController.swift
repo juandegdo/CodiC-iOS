@@ -245,7 +245,7 @@ extension ConsultsViewController {
                 
                 if let _player = PlayerController.Instance.player as AVPlayer? {
                     
-                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+                    AudioHelper.SetCategory(mode: AudioHelper.overrideMode)
                     
                     PlayerController.Instance.lastPlayed = cell?.playSlider
                     PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
@@ -454,6 +454,18 @@ extension ConsultsViewController {
         
     }
     
+    @objc func onSelectSpeaker(sender: UIButton) {
+        
+        if AudioHelper.overrideMode == .speaker {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
+            sender.setImage(UIImage(named: "icon_speaker_off"), for: .normal)
+        } else {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+            sender.setImage(UIImage(named: "icon_speaker_on"), for: .normal)
+        }
+        
+    }
+    
     func callProfileVC(user: User) {
         
         if  let _me = UserController.Instance.getUser() as User? {
@@ -568,6 +580,11 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
         cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
         cell.txtVHashtags.tag = indexPath.row
+        
+        cell.btnSpeaker.tag = indexPath.row
+        if cell.btnSpeaker.allTargets.count == 0 {
+            cell.btnSpeaker.addTarget(self, action: #selector(onSelectSpeaker(sender:)), for: .touchUpInside)
+        }
         
         cell.btnPlay.tag = indexPath.row
         if cell.btnPlay.allTargets.count == 0 {

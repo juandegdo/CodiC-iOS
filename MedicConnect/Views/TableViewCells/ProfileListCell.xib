@@ -115,6 +115,14 @@
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8jr-Vv-r4T">
+                        <rect key="frame" x="0.0" y="93" width="48" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="cZD-DO-bp7"/>
+                            <constraint firstAttribute="width" constant="48" id="whk-Hz-Y6M"/>
+                        </constraints>
+                        <state key="normal" image="icon_speaker_on"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="BUK-L1-LQL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="3V3-vR-XvW"/>
@@ -128,6 +136,7 @@
                     <constraint firstAttribute="trailing" secondItem="8bC-YF-Oyc" secondAttribute="trailing" constant="27" id="GLs-Qq-ocV"/>
                     <constraint firstItem="vC3-Iy-HDQ" firstAttribute="top" secondItem="UuY-LI-OfG" secondAttribute="bottom" constant="6" id="KOa-bs-a4N"/>
                     <constraint firstItem="3FL-ag-Z49" firstAttribute="leading" secondItem="OXa-Vd-uEY" secondAttribute="trailing" constant="24" id="Mjq-EN-uwo"/>
+                    <constraint firstItem="8jr-Vv-r4T" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="OEk-rx-dXl"/>
                     <constraint firstAttribute="trailing" secondItem="Tjd-Oa-PA5" secondAttribute="trailing" constant="2" id="QJG-eo-zUU"/>
                     <constraint firstItem="UuY-LI-OfG" firstAttribute="leading" secondItem="BUK-L1-LQL" secondAttribute="leading" id="RBz-vw-6rA"/>
                     <constraint firstItem="3FL-ag-Z49" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="RR3-1f-Aj6"/>
@@ -141,6 +150,7 @@
                     <constraint firstItem="vbR-Lq-Z6z" firstAttribute="leading" secondItem="3FL-ag-Z49" secondAttribute="trailing" constant="24" id="dmg-gu-9Ef"/>
                     <constraint firstItem="UuY-LI-OfG" firstAttribute="top" secondItem="BUK-L1-LQL" secondAttribute="bottom" constant="-3" id="fJF-3G-qli"/>
                     <constraint firstItem="hNQ-iX-474" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="oM3-JD-9JP"/>
+                    <constraint firstItem="8jr-Vv-r4T" firstAttribute="top" secondItem="3FL-ag-Z49" secondAttribute="top" id="pBx-Hd-Le1"/>
                     <constraint firstItem="8bC-YF-Oyc" firstAttribute="bottom" secondItem="vC3-Iy-HDQ" secondAttribute="bottom" constant="10" id="uhf-yJ-u1m"/>
                     <constraint firstItem="Tjd-Oa-PA5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="vzK-bi-bER"/>
                 </constraints>
@@ -155,6 +165,7 @@
                 <outlet property="btnBackward" destination="OXa-Vd-uEY" id="Pgj-cQ-7lc"/>
                 <outlet property="btnForward" destination="vbR-Lq-Z6z" id="CnB-Rh-MM2"/>
                 <outlet property="btnPlay" destination="3FL-ag-Z49" id="xMv-Mm-7IY"/>
+                <outlet property="btnSpeaker" destination="8jr-Vv-r4T" id="CLW-tc-59C"/>
                 <outlet property="btnSynopsis" destination="8bC-YF-Oyc" id="XJ5-5Y-MDw"/>
                 <outlet property="constOfLblBroadcastTop" destination="G1l-W9-WrD" id="40O-st-7Xh"/>
                 <outlet property="constOfLblDateBottom" destination="bls-kZ-NX8" id="zYY-7c-l3G"/>
@@ -175,5 +186,6 @@
         <image name="icon_playlist_backward" width="27" height="28"/>
         <image name="icon_playlist_forward" width="27" height="27"/>
         <image name="icon_playlist_play" width="20" height="23"/>
+        <image name="icon_speaker_on" width="24" height="25"/>
     </resources>
 </document>

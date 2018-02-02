@@ -147,6 +147,14 @@
                         <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vXv-Cz-jOR">
+                        <rect key="frame" x="0.0" y="172" width="48" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="PiL-hw-61Z"/>
+                            <constraint firstAttribute="width" constant="48" id="YfB-wc-Jeb"/>
+                        </constraints>
+                        <state key="normal" image="icon_speaker_on"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Mp5-NQ-lPz" firstAttribute="top" secondItem="Iua-8Q-dJ3" secondAttribute="bottom" constant="-4" id="1j6-z0-u0M"/>
@@ -169,6 +177,7 @@
                     <constraint firstItem="Rdt-ye-f9q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="PnQ-T1-cUV"/>
                     <constraint firstItem="Iua-8Q-dJ3" firstAttribute="top" secondItem="Rdt-ye-f9q" secondAttribute="top" constant="-4" id="R1X-HL-I81"/>
                     <constraint firstItem="XLe-VD-srP" firstAttribute="centerY" secondItem="odX-5J-mYb" secondAttribute="centerY" id="T6M-eC-FL9"/>
+                    <constraint firstItem="vXv-Cz-jOR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="U14-Jc-nME"/>
                     <constraint firstItem="fxs-EX-4Xa" firstAttribute="top" secondItem="Mp5-NQ-lPz" secondAttribute="bottom" constant="-3" id="Uy1-w6-vnp"/>
                     <constraint firstItem="aJe-xx-5oi" firstAttribute="top" secondItem="9su-jJ-NTv" secondAttribute="bottom" id="Ww5-f3-jRc"/>
                     <constraint firstItem="ELS-ub-nr1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="b7r-w5-uGW"/>
@@ -177,6 +186,7 @@
                     <constraint firstItem="4wr-dJ-cie" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Iua-8Q-dJ3" secondAttribute="trailing" constant="2" id="lAE-33-NuF"/>
                     <constraint firstItem="Rdt-ye-f9q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="mQs-xE-tDU"/>
                     <constraint firstAttribute="bottom" secondItem="gUB-RY-ucK" secondAttribute="bottom" priority="750" constant="152.5" id="oJR-1E-LIS"/>
+                    <constraint firstItem="vXv-Cz-jOR" firstAttribute="top" secondItem="odX-5J-mYb" secondAttribute="top" id="oQP-5S-I3Q"/>
                     <constraint firstItem="Tgc-P3-Wca" firstAttribute="bottom" secondItem="yVY-hU-fkK" secondAttribute="bottom" id="oT9-SP-JjY"/>
                     <constraint firstAttribute="trailing" secondItem="ELS-ub-nr1" secondAttribute="trailing" constant="2" id="p4M-Ud-2Ov"/>
                     <constraint firstItem="odX-5J-mYb" firstAttribute="centerY" secondItem="aJe-xx-5oi" secondAttribute="centerY" id="t3v-SJ-4Up"/>
@@ -195,6 +205,7 @@
                 <outlet property="btnBackward" destination="aJe-xx-5oi" id="6Je-QC-zOo"/>
                 <outlet property="btnForward" destination="XLe-VD-srP" id="CKr-YH-o1U"/>
                 <outlet property="btnPlay" destination="odX-5J-mYb" id="adl-dW-yJ9"/>
+                <outlet property="btnSpeaker" destination="vXv-Cz-jOR" id="yOP-1j-dPU"/>
                 <outlet property="btnSynopsis" destination="4wr-dJ-cie" id="uka-MW-UX9"/>
                 <outlet property="constOfLblDateBottom" destination="oJR-1E-LIS" id="oLV-wu-nsS"/>
                 <outlet property="constOfLblDescriptionHeight" destination="Se9-Qv-G2Q" id="dfh-jG-eT9"/>
@@ -217,5 +228,6 @@
         <image name="icon_playlist_backward" width="27" height="28"/>
         <image name="icon_playlist_forward" width="27" height="27"/>
         <image name="icon_playlist_play" width="20" height="23"/>
+        <image name="icon_speaker_on" width="24" height="25"/>
     </resources>
 </document>

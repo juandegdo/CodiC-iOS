@@ -18,7 +18,7 @@ class RecordingBroadcastViewController: BaseViewController {
     fileprivate var audioRecorder: AVAudioRecorder?
     fileprivate var updateTimer: Timer?
     
-    let exceedLimit = 180.0
+    let exceedLimit = 10.0
     var didExceedLimit: Bool = false
     var continueRecording: Bool = false
     

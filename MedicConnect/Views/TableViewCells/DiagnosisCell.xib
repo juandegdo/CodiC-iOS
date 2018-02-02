@@ -90,6 +90,14 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         <dataDetectorType key="dataDetectorTypes" link="YES"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cp-vn-reX">
+                        <rect key="frame" x="0.0" y="182" width="48" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="FlR-Zl-h3G"/>
+                            <constraint firstAttribute="height" constant="38" id="m6g-RB-yYr"/>
+                        </constraints>
+                        <state key="normal" image="icon_speaker_on"/>
+                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s2-Lk-Lr5">
                         <rect key="frame" x="103" y="182" width="40" height="38"/>
                         <constraints>
@@ -152,6 +160,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="sne-LX-u8R" secondAttribute="trailing" constant="2" id="0xm-rG-2lX"/>
+                    <constraint firstItem="4cp-vn-reX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="1E7-tM-p84"/>
                     <constraint firstItem="LBW-gV-D2s" firstAttribute="leading" secondItem="Qej-zB-OnK" secondAttribute="trailing" id="4MQ-FE-ay0"/>
                     <constraint firstItem="sne-LX-u8R" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="5RF-jr-p62"/>
                     <constraint firstItem="DvM-Fb-yYi" firstAttribute="bottom" secondItem="sne-LX-u8R" secondAttribute="bottom" id="93i-no-CF2"/>
@@ -160,6 +169,7 @@
                     <constraint firstItem="LBW-gV-D2s" firstAttribute="centerY" secondItem="Sh3-QM-5pM" secondAttribute="centerY" id="Ehc-HA-ikc"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yAB-0K-hMo" secondAttribute="trailing" constant="16" id="JdR-ZB-NLq"/>
                     <constraint firstItem="mMe-cx-n0Z" firstAttribute="leading" secondItem="yAB-0K-hMo" secondAttribute="leading" constant="-5" id="K26-Z4-92M"/>
+                    <constraint firstItem="4cp-vn-reX" firstAttribute="top" secondItem="1s2-Lk-Lr5" secondAttribute="top" id="MHf-fY-sQw"/>
                     <constraint firstAttribute="bottom" secondItem="ScX-Od-DNw" secondAttribute="bottom" priority="750" constant="183.5" id="O4q-Mm-cze"/>
                     <constraint firstAttribute="trailing" secondItem="Nym-Os-oSb" secondAttribute="trailing" constant="10" id="ODh-aT-JTf"/>
                     <constraint firstItem="ScX-Od-DNw" firstAttribute="top" secondItem="ZD4-Nz-qce" secondAttribute="bottom" constant="2" id="PG8-dQ-CFl"/>
@@ -205,6 +215,7 @@
                 <outlet property="btnMessage" destination="LBW-gV-D2s" id="5nP-or-WO6"/>
                 <outlet property="btnPlay" destination="XXL-Ly-JL8" id="50u-Aj-Tkd"/>
                 <outlet property="btnShare" destination="Sh3-QM-5pM" id="qiO-Dx-CjQ"/>
+                <outlet property="btnSpeaker" destination="4cp-vn-reX" id="4Oc-dp-7UN"/>
                 <outlet property="constOfLblDateBottom" destination="O4q-Mm-cze" id="NiG-Kd-ASe"/>
                 <outlet property="constOfTxtVHashtagsHeight" destination="aqE-Ew-75b" id="g15-d0-5TN"/>
                 <outlet property="constOfTxtVHashtagsTop" destination="bPC-eX-xKg" id="SXF-tG-uch"/>
@@ -228,5 +239,6 @@
         <image name="icon_playlist_backward" width="27" height="28"/>
         <image name="icon_playlist_forward" width="27" height="27"/>
         <image name="icon_playlist_play" width="20" height="23"/>
+        <image name="icon_speaker_on" width="24" height="25"/>
     </resources>
 </document>
