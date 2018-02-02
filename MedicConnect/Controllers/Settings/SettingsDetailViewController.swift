@@ -131,7 +131,7 @@ class SettingsDetailViewController: BaseViewController {
         alertController.addAction(printAction)
 
         let submitMSPAction = UIAlertAction.init(title: "SUBMIT TO MSP", style: .default) { (action) in
-
+            // Submit to MSP
         }
         
         submitMSPAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")

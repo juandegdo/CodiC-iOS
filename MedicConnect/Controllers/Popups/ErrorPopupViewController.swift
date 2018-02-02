@@ -91,7 +91,7 @@ class ErrorPopupViewController: BaseViewController {
             
         case .exceedLimit:
             self.constOfViewHeight.constant = 212.0
-            self.lblDescription.text = "The length of your \(DataManager.Instance.getPostType() == Constants.PostTypeConsult ? Constants.PostTypeConsult.lowercased() : "patient \(Constants.PostTypeNote.lowercased())") has\nexceeded 3 minutes."
+            self.lblDescription.text = "The length of your \(DataManager.Instance.getPostType() == Constants.PostTypeConsult ? Constants.PostTypeConsult.lowercased() : "patient \(Constants.PostTypeNote.lowercased())") has\nexceeded 2 minutes."
             self.lblQuestion.text = "Would you like to\ncontinue recording?"
             break
             

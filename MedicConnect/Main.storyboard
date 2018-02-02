@@ -1101,6 +1101,52 @@
             </objects>
             <point key="canvasLocation" x="2887" y="809"/>
         </scene>
+        <!--Patient Scan View Controller-->
+        <scene sceneID="6Ko-0a-a0j">
+            <objects>
+                <viewController storyboardIdentifier="PatientScanViewController" id="Mig-NB-mDs" customClass="PatientScanViewController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zsc-1f-hKA"/>
+                        <viewControllerLayoutGuide type="bottom" id="RHa-UF-9hZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AEU-HR-AZv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9E6-bI-MPb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0hb-TK-cBx" customClass="ScanAreaView" customModule="Medic_Connect" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0hb-TK-cBx" firstAttribute="top" secondItem="9E6-bI-MPb" secondAttribute="top" id="H7O-cE-5Om"/>
+                                    <constraint firstItem="0hb-TK-cBx" firstAttribute="leading" secondItem="9E6-bI-MPb" secondAttribute="leading" id="KAJ-Vt-BQU"/>
+                                    <constraint firstAttribute="bottom" secondItem="0hb-TK-cBx" secondAttribute="bottom" id="dVR-Nz-u29"/>
+                                    <constraint firstAttribute="trailing" secondItem="0hb-TK-cBx" secondAttribute="trailing" id="yOn-FC-oZf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9E6-bI-MPb" secondAttribute="bottom" id="4sT-Rt-zYU"/>
+                            <constraint firstItem="9E6-bI-MPb" firstAttribute="leading" secondItem="AEU-HR-AZv" secondAttribute="leading" id="Gte-bE-d69"/>
+                            <constraint firstItem="9E6-bI-MPb" firstAttribute="top" secondItem="AEU-HR-AZv" secondAttribute="top" id="ObQ-sE-hC5"/>
+                            <constraint firstAttribute="trailing" secondItem="9E6-bI-MPb" secondAttribute="trailing" id="jmh-no-bgH"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="overlayView" destination="0hb-TK-cBx" id="b7x-En-xxf"/>
+                        <outlet property="previewView" destination="9E6-bI-MPb" id="SI9-gB-yaP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="czV-Ai-rYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3705.7971014492755" y="593.47826086956525"/>
+        </scene>
         <!--Invite Popup View Controller-->
         <scene sceneID="qCz-nr-Cac">
             <objects>
@@ -3591,7 +3637,7 @@ recorded a new diagnosis.</string>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiO-uo-FGg">
-                                        <rect key="frame" x="175.33333333333334" y="32" width="65" height="20"/>
+                                        <rect key="frame" x="174.66666666666666" y="32" width="65" height="20"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -7496,7 +7542,7 @@ uploaded a new diagnosis.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQu-kJ-XMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3706" y="-580"/>
+            <point key="canvasLocation" x="3706" y="-807"/>
         </scene>
         <!--Edit Patient View Controller-->
         <scene sceneID="5RR-IK-oht">
@@ -7763,7 +7809,7 @@ uploaded a new diagnosis.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fqe-s2-wH7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3706" y="117"/>
+            <point key="canvasLocation" x="3706" y="-82"/>
         </scene>
         <!--Save Consult View Controller-->
         <scene sceneID="XHA-hw-0RV">

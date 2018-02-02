@@ -26,6 +26,8 @@ class CreatePatientViewController: BaseViewController {
     var patientNumber: String = ""
     var isSaved: Bool = false
     
+    var scanResults: [RTRTextLine]? = nil
+    
     let debouncer = Debouncer(interval: 1.0)
     
     override func viewDidLoad() {
@@ -83,6 +85,61 @@ class CreatePatientViewController: BaseViewController {
         
         // Address
         self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
+        
+        if let _textLines = self.scanResults {
+            let dateFormatter1 = DateFormatter()
+            dateFormatter1.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter1.dateFormat = "d MMM yyyy"
+            
+            let dateFormatter2 = DateFormatter()
+            dateFormatter2.locale = Locale(identifier: "en_US_POSIX")
+            dateFormatter2.dateFormat = "d'-'MMM'-'yy"
+            
+            let birthDateFormatter = DateFormatter()
+            birthDateFormatter.dateStyle = .medium
+            birthDateFormatter.timeStyle = .none
+            
+            var index = 0
+            
+            for textLine in _textLines {
+                var text = textLine.text as String
+                if index == 0 {
+                    // Possibly Name
+                    self.tfName.text = text.components(separatedBy: ",").reversed().joined(separator: " ")
+                    
+                } else if text.contains("DOB") && text.count > 10 {
+                    // Possibly Date of Birth
+                    var components = text.components(separatedBy: " ")
+                    components.removeFirst()
+                    text = components.joined(separator: " ")
+                    
+                    if let date = dateFormatter1.date(from: text) {
+                        self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                    } else if let date = dateFormatter2.date(from: text) {
+                        self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                    }
+                    
+                } else if let date = dateFormatter1.date(from: text) {
+                    // Possibly Date of Birth
+                    self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                    
+                } else if let date = dateFormatter2.date(from: text) {
+                    // Possibly Date of Birth
+                    self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                    
+                } else if (text.contains("HCN") || text.contains("PHN")) && text.count >= 13 {
+                    // Possibly Patient Number
+                    self.tfPHN.text = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+                    
+                } else if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) && text.count == 10 {
+                    // Possibly Patient Number
+                    self.tfPHN.text = text
+                    
+                }
+                
+                index += 1
+            }
+        }
         
     }
     
@@ -143,7 +200,7 @@ extension CreatePatientViewController {
     
     @IBAction func onBack(sender: AnyObject!) {
         if let _nav = self.navigationController as UINavigationController? {
-            if self.fromRecord == true && isSaved == true {
+            if (self.fromRecord == true && isSaved == true) || self.scanResults != nil {
                 _nav.popToRootViewController(animated: false)
             } else {
                 _nav.popViewController(animated: false)

@@ -25,12 +25,17 @@ class PatientsViewController: BaseViewController, UIGestureRecognizerDelegate {
     var vcDisappearType : ViewControllerDisappearType = .other
     var searchedPatients: [Patient] = []
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        configureExpandingMenuButton()
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         vcDisappearType = .other
-        
-        configureExpandingMenuButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -89,7 +94,10 @@ extension PatientsViewController {
         
         let item2 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Scan Patient Label", image: UIImage(named: "icon_scan_label")!, highlightedImage: UIImage(named: "icon_scan_label")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             // Scan
-            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientScanViewController") as? PatientScanViewController {
+                self.navigationController?.pushViewController(vc, animated: false)
+            }
         }
         
         menuButton!.addMenuItems([item1, item2])

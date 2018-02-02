@@ -18,7 +18,7 @@ class RecordingBroadcastViewController: BaseViewController {
     fileprivate var audioRecorder: AVAudioRecorder?
     fileprivate var updateTimer: Timer?
     
-    let exceedLimit = 10.0
+    let exceedLimit = 120.0
     var didExceedLimit: Bool = false
     var continueRecording: Bool = false
     
@@ -50,6 +50,8 @@ class RecordingBroadcastViewController: BaseViewController {
         
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
+        
+        self.pauseRecording(isPaused: true)
         
     }
     

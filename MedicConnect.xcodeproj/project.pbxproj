@@ -61,6 +61,34 @@
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
 		65D4B94F1FEC82D9005D9C45 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */; };
 		65D4B9511FED0E4C005D9C45 /* PatientNoteReferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */; };
+		65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */ = {isa = PBXBuildFile; fileRef = 65D70D292029A44300686C43 /* AbbyyRtrSdk.license */; };
+		65D70D5D2029A51100686C43 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D70D5C2029A51100686C43 /* libc++.tbd */; };
+		65D70D5F2029AC4800686C43 /* PatientScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D70D5E2029AC4800686C43 /* PatientScanViewController.swift */; };
+		65D70D622029B4DF00686C43 /* ScanAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D70D612029B4DF00686C43 /* ScanAreaView.swift */; };
+		65D70D662029BFAA00686C43 /* AbbyyRtrSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */; };
+		65D70D682029C12900686C43 /* Brazil.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D382029A4AD00686C43 /* Brazil.edc */; };
+		65D70D692029C12900686C43 /* Czech.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3D2029A4AF00686C43 /* Czech.edc */; };
+		65D70D6A2029C12900686C43 /* Danish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D372029A4AD00686C43 /* Danish.edc */; };
+		65D70D6B2029C12900686C43 /* Dutch.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3F2029A4AF00686C43 /* Dutch.edc */; };
+		65D70D6C2029C12900686C43 /* English.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D322029A4AC00686C43 /* English.edc */; };
+		65D70D6D2029C12900686C43 /* Eston.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D2E2029A4AC00686C43 /* Eston.edc */; };
+		65D70D6E2029C12900686C43 /* Finnish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D302029A4AC00686C43 /* Finnish.edc */; };
+		65D70D6F2029C12900686C43 /* Flemmish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D312029A4AC00686C43 /* Flemmish.edc */; };
+		65D70D702029C12900686C43 /* French.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D2F2029A4AC00686C43 /* French.edc */; };
+		65D70D712029C12900686C43 /* German.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3B2029A4AE00686C43 /* German.edc */; };
+		65D70D722029C12900686C43 /* GermanNS.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3E2029A4AF00686C43 /* GermanNS.edc */; };
+		65D70D732029C12900686C43 /* Greek.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D2D2029A4AC00686C43 /* Greek.edc */; };
+		65D70D742029C12900686C43 /* Indones.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D412029A4B000686C43 /* Indones.edc */; };
+		65D70D752029C12900686C43 /* Italian.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D362029A4AD00686C43 /* Italian.edc */; };
+		65D70D762029C12900686C43 /* NorwBok.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3A2029A4AE00686C43 /* NorwBok.edc */; };
+		65D70D772029C12A00686C43 /* NorwNyn.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D402029A4AF00686C43 /* NorwNyn.edc */; };
+		65D70D782029C12A00686C43 /* Polish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D332029A4AC00686C43 /* Polish.edc */; };
+		65D70D792029C12A00686C43 /* Portug.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D392029A4AE00686C43 /* Portug.edc */; };
+		65D70D7A2029C12A00686C43 /* Spanish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3C2029A4AE00686C43 /* Spanish.edc */; };
+		65D70D7B2029C12A00686C43 /* Swedish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D342029A4AD00686C43 /* Swedish.edc */; };
+		65D70D7C2029C12A00686C43 /* Turkish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D352029A4AD00686C43 /* Turkish.edc */; };
+		65D70D7E2029C14E00686C43 /* European.rom in Copy Patterns */ = {isa = PBXBuildFile; fileRef = 65D70D582029A4E600686C43 /* European.rom */; };
+		65D70D7F2029C14E00686C43 /* FindText.rom in Copy Patterns */ = {isa = PBXBuildFile; fileRef = 65D70D592029A4E600686C43 /* FindText.rom */; };
 		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
 		65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0D1F12017F142008A79CB /* VSTextField.swift */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
@@ -168,6 +196,52 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		65D70D672029C0FF00686C43 /* Copy Dictionaries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Dictionaries;
+			dstSubfolderSpec = 7;
+			files = (
+				65D70D682029C12900686C43 /* Brazil.edc in Copy Dictionaries */,
+				65D70D692029C12900686C43 /* Czech.edc in Copy Dictionaries */,
+				65D70D6A2029C12900686C43 /* Danish.edc in Copy Dictionaries */,
+				65D70D6B2029C12900686C43 /* Dutch.edc in Copy Dictionaries */,
+				65D70D6C2029C12900686C43 /* English.edc in Copy Dictionaries */,
+				65D70D6D2029C12900686C43 /* Eston.edc in Copy Dictionaries */,
+				65D70D6E2029C12900686C43 /* Finnish.edc in Copy Dictionaries */,
+				65D70D6F2029C12900686C43 /* Flemmish.edc in Copy Dictionaries */,
+				65D70D702029C12900686C43 /* French.edc in Copy Dictionaries */,
+				65D70D712029C12900686C43 /* German.edc in Copy Dictionaries */,
+				65D70D722029C12900686C43 /* GermanNS.edc in Copy Dictionaries */,
+				65D70D732029C12900686C43 /* Greek.edc in Copy Dictionaries */,
+				65D70D742029C12900686C43 /* Indones.edc in Copy Dictionaries */,
+				65D70D752029C12900686C43 /* Italian.edc in Copy Dictionaries */,
+				65D70D762029C12900686C43 /* NorwBok.edc in Copy Dictionaries */,
+				65D70D772029C12A00686C43 /* NorwNyn.edc in Copy Dictionaries */,
+				65D70D782029C12A00686C43 /* Polish.edc in Copy Dictionaries */,
+				65D70D792029C12A00686C43 /* Portug.edc in Copy Dictionaries */,
+				65D70D7A2029C12A00686C43 /* Spanish.edc in Copy Dictionaries */,
+				65D70D7B2029C12A00686C43 /* Swedish.edc in Copy Dictionaries */,
+				65D70D7C2029C12A00686C43 /* Turkish.edc in Copy Dictionaries */,
+			);
+			name = "Copy Dictionaries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		65D70D7D2029C13800686C43 /* Copy Patterns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Patterns;
+			dstSubfolderSpec = 7;
+			files = (
+				65D70D7E2029C14E00686C43 /* European.rom in Copy Patterns */,
+				65D70D7F2029C14E00686C43 /* FindText.rom in Copy Patterns */,
+			);
+			name = "Copy Patterns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		005642951EFEDA3000B42A42 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		005642971EFF003B00B42A42 /* NotificationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
@@ -226,6 +300,34 @@
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNoteReferViewController.swift; sourceTree = "<group>"; };
+		65D70D292029A44300686C43 /* AbbyyRtrSdk.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = AbbyyRtrSdk.license; sourceTree = "<group>"; };
+		65D70D2D2029A4AC00686C43 /* Greek.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Greek.edc; sourceTree = "<group>"; };
+		65D70D2E2029A4AC00686C43 /* Eston.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eston.edc; sourceTree = "<group>"; };
+		65D70D2F2029A4AC00686C43 /* French.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = French.edc; sourceTree = "<group>"; };
+		65D70D302029A4AC00686C43 /* Finnish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Finnish.edc; sourceTree = "<group>"; };
+		65D70D312029A4AC00686C43 /* Flemmish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flemmish.edc; sourceTree = "<group>"; };
+		65D70D322029A4AC00686C43 /* English.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = English.edc; sourceTree = "<group>"; };
+		65D70D332029A4AC00686C43 /* Polish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Polish.edc; sourceTree = "<group>"; };
+		65D70D342029A4AD00686C43 /* Swedish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Swedish.edc; sourceTree = "<group>"; };
+		65D70D352029A4AD00686C43 /* Turkish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Turkish.edc; sourceTree = "<group>"; };
+		65D70D362029A4AD00686C43 /* Italian.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Italian.edc; sourceTree = "<group>"; };
+		65D70D372029A4AD00686C43 /* Danish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Danish.edc; sourceTree = "<group>"; };
+		65D70D382029A4AD00686C43 /* Brazil.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brazil.edc; sourceTree = "<group>"; };
+		65D70D392029A4AE00686C43 /* Portug.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Portug.edc; sourceTree = "<group>"; };
+		65D70D3A2029A4AE00686C43 /* NorwBok.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = NorwBok.edc; sourceTree = "<group>"; };
+		65D70D3B2029A4AE00686C43 /* German.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = German.edc; sourceTree = "<group>"; };
+		65D70D3C2029A4AE00686C43 /* Spanish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Spanish.edc; sourceTree = "<group>"; };
+		65D70D3D2029A4AF00686C43 /* Czech.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Czech.edc; sourceTree = "<group>"; };
+		65D70D3E2029A4AF00686C43 /* GermanNS.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = GermanNS.edc; sourceTree = "<group>"; };
+		65D70D3F2029A4AF00686C43 /* Dutch.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dutch.edc; sourceTree = "<group>"; };
+		65D70D402029A4AF00686C43 /* NorwNyn.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = NorwNyn.edc; sourceTree = "<group>"; };
+		65D70D412029A4B000686C43 /* Indones.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Indones.edc; sourceTree = "<group>"; };
+		65D70D582029A4E600686C43 /* European.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = European.rom; sourceTree = "<group>"; };
+		65D70D592029A4E600686C43 /* FindText.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = FindText.rom; sourceTree = "<group>"; };
+		65D70D5C2029A51100686C43 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		65D70D5E2029AC4800686C43 /* PatientScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientScanViewController.swift; sourceTree = "<group>"; };
+		65D70D612029B4DF00686C43 /* ScanAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAreaView.swift; sourceTree = "<group>"; };
+		65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AbbyyRtrSDK.framework; sourceTree = "<group>"; };
 		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
 		65E0D1F12017F142008A79CB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VSTextField.swift; path = MedicConnect/Views/VSTextField/VSTextField.swift; sourceTree = SOURCE_ROOT; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -338,7 +440,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D70D5D2029A51100686C43 /* libc++.tbd in Frameworks */,
 				A9E444F91F0A458D00F49C7E /* SystemConfiguration.framework in Frameworks */,
+				65D70D662029BFAA00686C43 /* AbbyyRtrSDK.framework in Frameworks */,
 				BA23873CF71C63A70D49CA98 /* Pods_MedicConnect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +469,7 @@
 		4475F5E7744A51F7CD3E202D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65D70D5C2029A51100686C43 /* libc++.tbd */,
 				A9E444F81F0A458D00F49C7E /* SystemConfiguration.framework */,
 				AF005EE626377A938548EE01 /* Pods_MedicConnect.framework */,
 				371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */,
@@ -412,6 +517,7 @@
 				652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */,
 				6561037920090C47000E79FC /* EditPatientViewController.swift */,
 				65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */,
+				65D70D5E2029AC4800686C43 /* PatientScanViewController.swift */,
 			);
 			path = Patients;
 			sourceTree = "<group>";
@@ -540,6 +646,95 @@
 			path = Favroites;
 			sourceTree = "<group>";
 		};
+		65D70D232029A34100686C43 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D242029A35A00686C43 /* AbbyyRtrSDK */,
+				655013A220065B4700D88443 /* progress_circle.gif */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		65D70D242029A35A00686C43 /* AbbyyRtrSDK */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D252029A38600686C43 /* assets */,
+				65D70D642029BF8D00686C43 /* libs */,
+				65D70D262029A38C00686C43 /* License */,
+			);
+			path = AbbyyRtrSDK;
+			sourceTree = "<group>";
+		};
+		65D70D252029A38600686C43 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D2C2029A46B00686C43 /* dictionaries */,
+				65D70D572029A4CC00686C43 /* patterns */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		65D70D262029A38C00686C43 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D292029A44300686C43 /* AbbyyRtrSdk.license */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		65D70D2C2029A46B00686C43 /* dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D382029A4AD00686C43 /* Brazil.edc */,
+				65D70D3D2029A4AF00686C43 /* Czech.edc */,
+				65D70D372029A4AD00686C43 /* Danish.edc */,
+				65D70D3F2029A4AF00686C43 /* Dutch.edc */,
+				65D70D322029A4AC00686C43 /* English.edc */,
+				65D70D2E2029A4AC00686C43 /* Eston.edc */,
+				65D70D302029A4AC00686C43 /* Finnish.edc */,
+				65D70D312029A4AC00686C43 /* Flemmish.edc */,
+				65D70D2F2029A4AC00686C43 /* French.edc */,
+				65D70D3B2029A4AE00686C43 /* German.edc */,
+				65D70D3E2029A4AF00686C43 /* GermanNS.edc */,
+				65D70D2D2029A4AC00686C43 /* Greek.edc */,
+				65D70D412029A4B000686C43 /* Indones.edc */,
+				65D70D362029A4AD00686C43 /* Italian.edc */,
+				65D70D3A2029A4AE00686C43 /* NorwBok.edc */,
+				65D70D402029A4AF00686C43 /* NorwNyn.edc */,
+				65D70D332029A4AC00686C43 /* Polish.edc */,
+				65D70D392029A4AE00686C43 /* Portug.edc */,
+				65D70D3C2029A4AE00686C43 /* Spanish.edc */,
+				65D70D342029A4AD00686C43 /* Swedish.edc */,
+				65D70D352029A4AD00686C43 /* Turkish.edc */,
+			);
+			path = dictionaries;
+			sourceTree = "<group>";
+		};
+		65D70D572029A4CC00686C43 /* patterns */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D582029A4E600686C43 /* European.rom */,
+				65D70D592029A4E600686C43 /* FindText.rom */,
+			);
+			path = patterns;
+			sourceTree = "<group>";
+		};
+		65D70D602029B4BD00686C43 /* ScanAreaView */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D612029B4DF00686C43 /* ScanAreaView.swift */,
+			);
+			path = ScanAreaView;
+			sourceTree = "<group>";
+		};
+		65D70D642029BF8D00686C43 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
 		65E0D1F02017F117008A79CB /* VSTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,6 +839,7 @@
 		D21BC8F61DEA285B008F5443 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				65D70D602029B4BD00686C43 /* ScanAreaView */,
 				654FDF7F1F62060B009D4BA1 /* ExpandableLabel */,
 				653D812B2012342800136E1B /* ExpandingMenu */,
 				D2F55A7D1DEB23D90038A392 /* Others */,
@@ -709,12 +905,12 @@
 				D21BC8F01DEA171E008F5443 /* Data */,
 				D21BC8FB1DEA32A2008F5443 /* Helper */,
 				D21BC8F61DEA285B008F5443 /* Views */,
+				65D70D232029A34100686C43 /* Resources */,
 				D270B7DF1DE51F7600458C2E /* Assets.xcassets */,
 				653E7C631FBA067C00B41A5C /* Main.storyboard */,
 				D270B7E11DE51F7600458C2E /* LaunchScreen.storyboard */,
 				D270B7E41DE51F7600458C2E /* Info.plist */,
 				A9E4451B1F0A699000F49C7E /* playlist.xcdatamodeld */,
-				655013A220065B4700D88443 /* progress_circle.gif */,
 			);
 			path = MedicConnect;
 			sourceTree = "<group>";
@@ -833,6 +1029,8 @@
 				3D2624C31446F4C261B2C7CD /* [CP] Embed Pods Frameworks */,
 				4951CF85088FC2C7A2E0041F /* [CP] Copy Pods Resources */,
 				A912FC2A1F027C79004C01BD /* ShellScript */,
+				65D70D672029C0FF00686C43 /* Copy Dictionaries */,
+				65D70D7D2029C13800686C43 /* Copy Patterns */,
 			);
 			buildRules = (
 			);
@@ -952,6 +1150,7 @@
 				D2A634561E1DE05500E51AA0 /* FollowingCell.xib in Resources */,
 				D270B7E31DE51F7600458C2E /* LaunchScreen.storyboard in Resources */,
 				A9A358791F07447F005B8011 /* Privacy_policy_HTML.html in Resources */,
+				65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */,
 				655013A320065B4800D88443 /* progress_circle.gif in Resources */,
 				653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */,
 				D270B7E01DE51F7600458C2E /* Assets.xcassets in Resources */,
@@ -1268,12 +1467,14 @@
 				D213CB1D1E0CAA93004BEA3C /* SettingListCell.swift in Sources */,
 				D213CB231E0CB002004BEA3C /* SettingHeaderCell.swift in Sources */,
 				D2301FDB1E5FBD03006C636A /* UserController.swift in Sources */,
+				65D70D622029B4DF00686C43 /* ScanAreaView.swift in Sources */,
 				652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */,
 				D2301FDD1E5FC212006C636A /* WelcomeLastViewController.swift in Sources */,
 				D213CB1B1E0CA7B0004BEA3C /* SettingsViewController.swift in Sources */,
 				D23BFACA1E8AF80600F3934B /* TVButton.swift in Sources */,
 				650E28881F71B64B0096A3F0 /* SCSiriWaveformView.m in Sources */,
 				65A289771F3BC97B00547D72 /* SearchTagCell.swift in Sources */,
+				65D70D5F2029AC4800686C43 /* PatientScanViewController.swift in Sources */,
 				D2F55A921DEB74F40038A392 /* FollowingCell.swift in Sources */,
 				D279AD4C1E13295B001714FC /* CommentsViewController.swift in Sources */,
 				651952AF1F426A3300AA6627 /* PatientService.swift in Sources */,
@@ -1479,6 +1680,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MedicConnect/Resources/AbbyyRtrSDK/libs",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = MedicConnect/Info.plist;
@@ -1508,6 +1710,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/MedicConnect/Resources/AbbyyRtrSDK/libs",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				INFOPLIST_FILE = MedicConnect/Info.plist;
