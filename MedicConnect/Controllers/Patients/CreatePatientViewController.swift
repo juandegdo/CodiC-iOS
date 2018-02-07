@@ -87,6 +87,7 @@ class CreatePatientViewController: BaseViewController {
         self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
         
         if let _textLines = self.scanResults {
+            
             let dateFormatter1 = DateFormatter()
             dateFormatter1.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter1.dateFormat = "d MMM yyyy"
@@ -95,17 +96,13 @@ class CreatePatientViewController: BaseViewController {
             dateFormatter2.locale = Locale(identifier: "en_US_POSIX")
             dateFormatter2.dateFormat = "d'-'MMM'-'yy"
             
-            let birthDateFormatter = DateFormatter()
-            birthDateFormatter.dateStyle = .medium
-            birthDateFormatter.timeStyle = .none
-            
             var index = 0
             
             for textLine in _textLines {
                 var text = textLine.text as String
                 print("\(text)")
                 
-                if index == 0 {
+                if index == 0 && text.count > 3 {
                     // Possibly Name
                     self.tfName.text = text.components(separatedBy: ",").reversed().joined(separator: " ")
                     
@@ -116,36 +113,56 @@ class CreatePatientViewController: BaseViewController {
                     text = components.joined(separator: " ")
                     
                     if let date = dateFormatter1.date(from: text) {
-                        self.tfBirthdate.text = birthDateFormatter.string(from: date)
                         self.birthDate = date
                     } else if let date = dateFormatter2.date(from: text) {
-                        self.tfBirthdate.text = birthDateFormatter.string(from: date)
                         self.birthDate = date
                     }
                     
                 } else if let date = dateFormatter1.date(from: text) {
                     // Possibly Date of Birth
-                    self.tfBirthdate.text = birthDateFormatter.string(from: date)
                     self.birthDate = date
                     
                 } else if let date = dateFormatter2.date(from: text) {
                     // Possibly Date of Birth
-                    self.tfBirthdate.text = birthDateFormatter.string(from: date)
                     self.birthDate = date
                     
                 } else if (text.contains("HCN") || text.contains("PHN")) && text.count >= 13 {
                     // Possibly Patient Number
-                    self.tfPHN.text = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-                    self.patientNumber = self.tfPHN.text!
+                    self.patientNumber = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
                     
                 } else if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) && text.count == 10 {
                     // Possibly Patient Number
-                    self.tfPHN.text = text
                     self.patientNumber = text
-                    
                 }
                 
                 index += 1
+            }
+            
+            if self.patientNumber != "" {
+                self.tfPHN.text = self.patientNumber
+            }
+            
+            if self.birthDate != nil {
+                let birthDateFormatter = DateFormatter()
+                birthDateFormatter.dateStyle = .medium
+                birthDateFormatter.timeStyle = .none
+                self.tfBirthdate.text = birthDateFormatter.string(from: birthDate)
+                
+                // Check if patient exists
+                self.btnSave.isUserInteractionEnabled = false
+                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId, patientName) in
+                    self.btnSave.isUserInteractionEnabled = true
+                    
+                    if success == true && PHN == self.tfPHN.text! {
+                        if patientId == nil || patientId == "" {
+                            self.lblPHNError.isHidden = true
+                        } else {
+                            self.lblPHNError.isHidden = false
+                        }
+                    } else if success == false {
+                        self.lblPHNError.isHidden = true
+                    }
+                }
             }
         }
         
