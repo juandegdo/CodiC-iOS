@@ -103,6 +103,8 @@ class CreatePatientViewController: BaseViewController {
             
             for textLine in _textLines {
                 var text = textLine.text as String
+                print("\(text)")
+                
                 if index == 0 {
                     // Possibly Name
                     self.tfName.text = text.components(separatedBy: ",").reversed().joined(separator: " ")
@@ -115,25 +117,31 @@ class CreatePatientViewController: BaseViewController {
                     
                     if let date = dateFormatter1.date(from: text) {
                         self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                        self.birthDate = date
                     } else if let date = dateFormatter2.date(from: text) {
                         self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                        self.birthDate = date
                     }
                     
                 } else if let date = dateFormatter1.date(from: text) {
                     // Possibly Date of Birth
                     self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                    self.birthDate = date
                     
                 } else if let date = dateFormatter2.date(from: text) {
                     // Possibly Date of Birth
                     self.tfBirthdate.text = birthDateFormatter.string(from: date)
+                    self.birthDate = date
                     
                 } else if (text.contains("HCN") || text.contains("PHN")) && text.count >= 13 {
                     // Possibly Patient Number
                     self.tfPHN.text = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+                    self.patientNumber = self.tfPHN.text!
                     
                 } else if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) && text.count == 10 {
                     // Possibly Patient Number
                     self.tfPHN.text = text
+                    self.patientNumber = text
                     
                 }
                 
