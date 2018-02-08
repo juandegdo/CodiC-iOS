@@ -61,6 +61,7 @@
 		65D2501C1F8E8B8E00279713 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D2501B1F8E8B8E00279713 /* MessageViewController.swift */; };
 		65D4B94F1FEC82D9005D9C45 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */; };
 		65D4B9511FED0E4C005D9C45 /* PatientNoteReferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */; };
+		65D5C1DE202C593700EE96D3 /* PatientNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5C1DD202C593700EE96D3 /* PatientNavigationController.swift */; };
 		65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */ = {isa = PBXBuildFile; fileRef = 65D70D292029A44300686C43 /* AbbyyRtrSdk.license */; };
 		65D70D5D2029A51100686C43 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D70D5C2029A51100686C43 /* libc++.tbd */; };
 		65D70D5F2029AC4800686C43 /* PatientScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D70D5E2029AC4800686C43 /* PatientScanViewController.swift */; };
@@ -300,6 +301,7 @@
 		65D2501B1F8E8B8E00279713 /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNoteReferViewController.swift; sourceTree = "<group>"; };
+		65D5C1DD202C593700EE96D3 /* PatientNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNavigationController.swift; sourceTree = "<group>"; };
 		65D70D292029A44300686C43 /* AbbyyRtrSdk.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = AbbyyRtrSdk.license; sourceTree = "<group>"; };
 		65D70D2D2029A4AC00686C43 /* Greek.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Greek.edc; sourceTree = "<group>"; };
 		65D70D2E2029A4AC00686C43 /* Eston.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eston.edc; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 		65488DAA1F944204005C1EA8 /* Patients */ = {
 			isa = PBXGroup;
 			children = (
+				65D5C1DD202C593700EE96D3 /* PatientNavigationController.swift */,
 				65488DAB1F944239005C1EA8 /* PatientsViewController.swift */,
 				656C1E991FAD3E7A00F33697 /* PatientProfileViewController.swift */,
 				652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */,
@@ -1232,6 +1235,7 @@
 				"${BUILT_PRODUCTS_DIR}/SZTextView/SZTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Sheriff/Sheriff.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftGifOrigin/SwiftGifOrigin.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMoment/SwiftMoment.framework",
 				"${BUILT_PRODUCTS_DIR}/TLTagsControl/TLTagsControl.framework",
 				"${BUILT_PRODUCTS_DIR}/TTTAttributedLabel/TTTAttributedLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/UITextView+Placeholder/UITextView_Placeholder.framework",
@@ -1257,6 +1261,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SZTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sheriff.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGifOrigin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMoment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLTagsControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TTTAttributedLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UITextView_Placeholder.framework",
@@ -1432,6 +1437,7 @@
 				6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */,
 				D2F0C6C01DF3059800475696 /* PreRecordingBroadcastViewController.swift in Sources */,
 				D2E87DD21EA441DB00996DBC /* AnotherProfileViewController.swift in Sources */,
+				65D5C1DE202C593700EE96D3 /* PatientNavigationController.swift in Sources */,
 				D2F55A961DEBB8920038A392 /* ProfileListCell.swift in Sources */,
 				00CFBD8F1EF83BEE000A4D1E /* CommentController.swift in Sources */,
 				D20658471E5BD07F003875E4 /* Extensions.swift in Sources */,

@@ -844,10 +844,10 @@
             </objects>
             <point key="canvasLocation" x="-861" y="1502"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Patient Navigation Controller-->
         <scene sceneID="fju-W8-4NO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="9Rw-kA-iik" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="9Rw-kA-iik" customClass="PatientNavigationController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1002" title="" image="tab_icon_patient" id="yI1-MV-Jga"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gem-sX-cYE">

@@ -113,8 +113,14 @@ class PatientScanViewController: UIViewController {
         
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
+//        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.landscapeRight, andRotateTo: UIInterfaceOrientation.landscapeRight)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AppDelegate.AppUtility.lockOrientation(.all)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,13 +128,12 @@ class PatientScanViewController: UIViewController {
         self.session?.stopRunning()
         self.isRunning = false
         self.textCaptureService?.stopTasks()
-        
-        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
-        
+
         super.viewWillDisappear(animated)
         
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
+        AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
         
     }
     
@@ -294,7 +299,7 @@ class PatientScanViewController: UIViewController {
         self.lblInstruction.font = textFont
         
         self.btnCancel.setTitle("Cancel", for: .normal)
-        self.btnCancel.setTitleColor(UIColor.init(hex: 0x93CBCA), for: .normal)
+        self.btnCancel.setTitleColor(UIColor.white, for: .normal)
         self.btnCancel.backgroundColor = Constants.ColorDarkGray4
         self.btnCancel.layer.cornerRadius = 4.0
         self.btnCancel.layer.masksToBounds = true
@@ -302,7 +307,7 @@ class PatientScanViewController: UIViewController {
         self.btnCancel.addTarget(self, action: #selector(cancelPressed(_:)), for: .touchUpInside)
         
         self.btnScan.setTitle("Scan", for: .normal)
-        self.btnScan.setTitleColor(UIColor.init(hex: 0x93CBCA), for: .normal)
+        self.btnScan.setTitleColor(UIColor.white, for: .normal)
         self.btnScan.backgroundColor = Constants.ColorDarkGray4
         self.btnScan.layer.cornerRadius = 4.0
         self.btnScan.layer.masksToBounds = true
