@@ -14,13 +14,21 @@
 	}
 	.container {
 		width: 100%;
-		margin: 40px 0px;
+		margin: 40px -20px;
 	}
 	#title {
 		text-align: center;
 	}
 	.margins {
 		margin: 10px 45px 10px 45px;
+	}
+	.mobile {
+		display: none;
+	}
+	@media only screen and (max-width: 500px) {
+	   	.mobile {
+	    	display: block;
+	    }
 	}
 </style>
 <html>
@@ -94,7 +102,7 @@
 		<br />
 		<div class="footer margins" id="title">
 			<h3>Privacy Policy | Medic &copy; 2018</h3>
-			<p>Website: <a href="http://medic.com/">www.medic.com</a> &nbsp;&nbsp; Phone: <a href="tel:6046184420">604.618.4420</a></p>
+			<p>Website: <a href="http://medic.com/">www.medic.com</a> &nbsp;&nbsp; <br class="mobile">Phone: <a href="tel:6046184420">604.618.4420</a></p>
 		</div>
 	</div>
 </body>
