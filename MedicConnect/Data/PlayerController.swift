@@ -7,7 +7,6 @@
 //
 
 import AVFoundation
-import YLProgressBar
 
 class PlayerController {
     
@@ -19,9 +18,7 @@ class PlayerController {
     var elapsedTimeLabel: UILabel?
     var durationLabel: UILabel?
     var playerObserver: Any?
-    
     var shouldSeek: Bool = true
-    
     var timerReset: Timer?
     
     func addObserver() {

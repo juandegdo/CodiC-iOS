@@ -4,34 +4,18 @@ PODS:
   - Alamofire (4.6.0)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
-  - ERJustifiedFlowLayout (1.1)
-  - Fabric (1.7.2)
+  - Crashlytics (3.10.0):
+    - Fabric (~> 1.7.3)
+  - Fabric (1.7.3)
   - FXBlurView (1.6.4)
-  - HCSStarRatingView (1.5)
-  - HTHorizontalSelectionList (0.7.4):
-    - M13BadgeView (~> 1.0.4)
-  - IQDropDownTextField (1.1.1)
   - IQKeyboardManager (5.0.7)
-  - M13BadgeView (1.0.4)
-  - Masonry (1.1.0)
   - NSDate+TimeAgo (1.0.6)
-  - PhoneNumberKit (2.1.0):
-    - PhoneNumberKit/PhoneNumberKitCore (= 2.1.0)
-    - PhoneNumberKit/UIKit (= 2.1.0)
-  - PhoneNumberKit/PhoneNumberKitCore (2.1.0)
-  - PhoneNumberKit/UIKit (2.1.0):
-    - PhoneNumberKit/PhoneNumberKitCore
-  - PICollectionPageView (0.0.2)
   - Sheriff (0.3.2)
   - SwiftGifOrigin (1.6.1)
   - SwiftMoment (0.7)
+  - SwiftValidators (7.0.3)
   - SZTextView (1.3.0)
   - TLTagsControl (1.0.0)
-  - TTTAttributedLabel (2.0.0)
-  - UITextView+Placeholder (1.2.0)
-  - YLProgressBar (3.10.2)
 
 DEPENDENCIES:
   - ACFloatingTextfield-Swift (~> 1.7)
@@ -39,42 +23,27 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Crashlytics
-  - ERJustifiedFlowLayout
   - Fabric
   - FXBlurView
-  - HCSStarRatingView
-  - HTHorizontalSelectionList (from `https://github.com/voltaesaito/HTHorizontalSelectionList.git`)
-  - IQDropDownTextField
   - IQKeyboardManager
-  - M13BadgeView
-  - Masonry
   - NSDate+TimeAgo
-  - PhoneNumberKit (~> 2.1)
-  - PICollectionPageView (from `https://github.com/voltaesaito/PICollectionPageView.git`)
   - Sheriff
   - SwiftGifOrigin (~> 1.6.1)
-  - SwiftMoment
+  - SwiftMoment (from `https://github.com/danielyang112/SwiftMoment.git`)
+  - SwiftValidators
   - SZTextView
   - TLTagsControl (from `https://github.com/danielyang112/TLTagsControl.git`)
-  - TTTAttributedLabel
-  - UITextView+Placeholder
-  - YLProgressBar
 
 EXTERNAL SOURCES:
-  HTHorizontalSelectionList:
-    :git: https://github.com/voltaesaito/HTHorizontalSelectionList.git
-  PICollectionPageView:
-    :git: https://github.com/voltaesaito/PICollectionPageView.git
+  SwiftMoment:
+    :git: https://github.com/danielyang112/SwiftMoment.git
   TLTagsControl:
     :git: https://github.com/danielyang112/TLTagsControl.git
 
 CHECKOUT OPTIONS:
-  HTHorizontalSelectionList:
-    :commit: f9eb7acfdd9516c99a898a99565be82b2df35e44
-    :git: https://github.com/voltaesaito/HTHorizontalSelectionList.git
-  PICollectionPageView:
-    :commit: 4b0c9c95560dac009bbfb28908377137b50321b5
-    :git: https://github.com/voltaesaito/PICollectionPageView.git
+  SwiftMoment:
+    :commit: afe8ee1cfc2742fcb505483fe8f4d8ae2d53be8f
+    :git: https://github.com/danielyang112/SwiftMoment.git
   TLTagsControl:
     :commit: 872997c0b69c8ab3eda9e4f9715b0ebb734135bd
     :git: https://github.com/danielyang112/TLTagsControl.git
@@ -84,28 +53,18 @@ SPEC CHECKSUMS:
   AFImageHelper: 9142599fb4f826b480d177902ab7f0c961bc966c
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
-  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
-  ERJustifiedFlowLayout: 902f49c431ff7eaab6995e569bb8b513c200633d
-  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  Crashlytics: a989ef242b66605577a425733797f810bd2725eb
+  Fabric: bb495bb9a7a7677c6d03a1f8b83d95bc49b47e41
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
-  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
-  HTHorizontalSelectionList: c38792f4bc87f941ab6c07b02a40abf111c68249
-  IQDropDownTextField: 3d2e5728a2b83ff5dbb14cb9b497a80005124cbe
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
-  M13BadgeView: 700dd0714fdc837c0cf1c8c004454963ec22441f
-  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
-  PhoneNumberKit: 62003f40ff75315fd3738286558bc365365ac222
-  PICollectionPageView: a35d950f7dcc1d2bb95e40b05709858b88536665
   Sheriff: d3d03fe6d35aa781e3f42d48f3fb53ed7d04958d
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftMoment: dc6dd27012e267819104cbb03f74ff9192dd0b42
+  SwiftValidators: 660ce9ef3f0358c25c3a6154f7edc02c7d4a0578
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   TLTagsControl: 34ab7d25f282aa2b8b42e73cc71b96ffe9fa7a15
-  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
-  UITextView+Placeholder: 77680995fcdd07c3f52ec92fe1150874a2ac89ff
-  YLProgressBar: 365b6c5e934be18b661f79413db33c993c8e8251
 
-PODFILE CHECKSUM: 6bf677d750be74a24431893fc72c183142272cf8
+PODFILE CHECKSUM: b3bfb3cd35e430fea7602e3c4444785b68dca35d
 
 COCOAPODS: 1.3.1

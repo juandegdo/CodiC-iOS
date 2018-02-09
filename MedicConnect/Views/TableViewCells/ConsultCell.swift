@@ -9,7 +9,6 @@
 import UIKit
 import AlamofireImage
 import Sheriff
-import TTTAttributedLabel
 
 class ConsultCell: UITableViewCell {
     

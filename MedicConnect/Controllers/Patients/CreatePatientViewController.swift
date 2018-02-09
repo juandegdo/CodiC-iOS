@@ -8,6 +8,8 @@
 
 import UIKit
 import ACFloatingTextfield_Swift
+import SwiftMoment
+import SwiftValidators
 
 class CreatePatientViewController: BaseViewController {
     
@@ -141,6 +143,13 @@ class CreatePatientViewController: BaseViewController {
             if self.patientNumber != "" {
                 self.tfPHN.text = self.patientNumber
             }
+            
+//            self.birthDate = moment("10/01/77")?.date
+//            print("\(self.birthDate)")
+//            print("\(moment("10-Mar-1977")?.date)")
+//            print("\(moment("10-Mar-77")?.date)")
+//            print("\(moment("13 Feb 1966")?.date)")
+//            print("\(moment("13 Feb 66")?.date)")
             
             if self.birthDate != nil {
                 let birthDateFormatter = DateFormatter()
