@@ -253,7 +253,12 @@ class PatientScanViewController: UIViewController {
             connection.videoOrientation = self.videoOrientation(orientation)
             let viewBounds = self.view.bounds
             self.previewLayer?.frame = viewBounds
-            self.selectedArea = viewBounds.insetBy(dx: viewBounds.width/6.0, dy: viewBounds.height/3.5)
+            
+            if (UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)) {
+                self.selectedArea = viewBounds.insetBy(dx: 40, dy: viewBounds.height / 3.5)
+            } else {
+                self.selectedArea = viewBounds.insetBy(dx: 20, dy: viewBounds.height / 8 * 3)
+            }
             
             self.updateAreaOfInterest()
         }
@@ -283,7 +288,6 @@ class PatientScanViewController: UIViewController {
     
     private func initView() {
         // Initialize views
-        let textFont = UIFont(name: "Avenir-Book", size: 16) ?? UIFont.systemFont(ofSize: 16)
         let btnFont = UIFont(name: "Avenir-Medium", size: 18) ?? UIFont.systemFont(ofSize: 18)
         
         self.ivArrowUp.image = UIImage(named: "icon_arrow_up")
@@ -291,12 +295,12 @@ class PatientScanViewController: UIViewController {
         self.lblDirection.text = "This side up."
         self.lblDirection.textColor = Constants.ColorDarkGray4
         self.lblDirection.textAlignment = .center
-        self.lblDirection.font = textFont
+        self.lblDirection.font = UIFont(name: "Avenir-Book", size: 16) ?? UIFont.systemFont(ofSize: 16)
         
         self.lblInstruction.text = "Place the label within the guide rectangle."
         self.lblInstruction.textColor = Constants.ColorDarkGray4
         self.lblInstruction.textAlignment = .center
-        self.lblInstruction.font = textFont
+        self.lblInstruction.font = UIFont(name: "Avenir-Book", size: 15) ?? UIFont.systemFont(ofSize: 15)
         
         self.btnCancel.setTitle("Cancel", for: .normal)
         self.btnCancel.setTitleColor(UIColor.white, for: .normal)
@@ -328,7 +332,7 @@ class PatientScanViewController: UIViewController {
         
         self.ivArrowUp.frame = CGRect.init(x: viewBounds.width / 2.0 - 74, y: viewBounds.height / 7.0 - 20, width: 40, height: 40)
         self.lblDirection.frame = CGRect.init(x: viewBounds.width / 2.0 - 30, y: viewBounds.height / 7.0 - 10, width: 100, height: 20)
-        self.lblInstruction.frame = CGRect.init(x: viewBounds.width / 6.0, y: viewBounds.height - viewBounds.height / 3.5 + 12, width: viewBounds.width / 6.0 * 4.0, height: 20)
+        self.lblInstruction.frame = CGRect.init(x: 20, y: viewBounds.height - viewBounds.height / 3.5 + 12, width: viewBounds.width - 40, height: 20)
         
         self.btnCancel.frame = CGRect.init(x: 16, y: viewBounds.height - 60, width: 100, height: 40)
         self.btnScan.frame = CGRect.init(x: viewBounds.width - 100 - 16, y: viewBounds.height - 60, width: 100, height: 40)
@@ -606,7 +610,7 @@ extension PatientScanViewController: RTRTextCaptureServiceDelegate {
                     return
                 }
                 
-                AlertUtil.showSimpleAlert(self, title: description, message: nil, okButtonTitle: "OK")
+//                AlertUtil.showSimpleAlert(self, title: description, message: nil, okButtonTitle: "OK")
                 self.isRunning = false
                 
             }

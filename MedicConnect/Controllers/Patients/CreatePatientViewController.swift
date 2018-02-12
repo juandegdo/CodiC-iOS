@@ -89,67 +89,42 @@ class CreatePatientViewController: BaseViewController {
         self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
         
         if let _textLines = self.scanResults {
-            
-            let dateFormatter1 = DateFormatter()
-            dateFormatter1.locale = Locale(identifier: "en_US_POSIX")
-            dateFormatter1.dateFormat = "d MMM yyyy"
-            
-            let dateFormatter2 = DateFormatter()
-            dateFormatter2.locale = Locale(identifier: "en_US_POSIX")
-            dateFormatter2.dateFormat = "d'-'MMM'-'yy"
-            
-            var index = 0
+            var name = ""
             
             for textLine in _textLines {
                 var text = textLine.text as String
                 print("\(text)")
                 
-                if index == 0 && text.count > 3 {
+                if name == "" && Validator.regex("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$").apply(text) {
                     // Possibly Name
-                    self.tfName.text = text.components(separatedBy: ",").reversed().joined(separator: " ")
+                    name = text
                     
-                } else if text.contains("DOB") && text.count > 10 {
+                } else if self.birthDate == nil && text.contains("DOB") {
                     // Possibly Date of Birth
                     var components = text.components(separatedBy: " ")
                     components.removeFirst()
                     text = components.joined(separator: " ")
                     
-                    if let date = dateFormatter1.date(from: text) {
-                        self.birthDate = date
-                    } else if let date = dateFormatter2.date(from: text) {
+                    if let date = moment(text)?.date {
                         self.birthDate = date
                     }
                     
-                } else if let date = dateFormatter1.date(from: text) {
+                } else if self.birthDate == nil, let date = moment(text)?.date {
                     // Possibly Date of Birth
                     self.birthDate = date
                     
-                } else if let date = dateFormatter2.date(from: text) {
-                    // Possibly Date of Birth
-                    self.birthDate = date
-                    
-                } else if (text.contains("HCN") || text.contains("PHN")) && text.count >= 13 {
+                } else if self.patientNumber == "" && text.count >= 13 && (text.contains("HCN") || text.contains("PHN")) {
                     // Possibly Patient Number
                     self.patientNumber = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
                     
-                } else if CharacterSet.decimalDigits.isSuperset(of: CharacterSet(charactersIn: text)) && text.count == 10 {
+                } else if self.patientNumber == "" && text.count == 10 && Validator.isNumeric().apply(text) {
                     // Possibly Patient Number
                     self.patientNumber = text
                 }
-                
-                index += 1
             }
             
-            if self.patientNumber != "" {
-                self.tfPHN.text = self.patientNumber
-            }
-            
-//            self.birthDate = moment("10/01/77")?.date
-//            print("\(self.birthDate)")
-//            print("\(moment("10-Mar-1977")?.date)")
-//            print("\(moment("10-Mar-77")?.date)")
-//            print("\(moment("13 Feb 1966")?.date)")
-//            print("\(moment("13 Feb 66")?.date)")
+            self.tfName.text = name == "" ? "" : name.components(separatedBy: ",").reversed().joined(separator: " ")
+            self.tfPHN.text = self.patientNumber == "" ? "" : self.patientNumber
             
             if self.birthDate != nil {
                 let birthDateFormatter = DateFormatter()
