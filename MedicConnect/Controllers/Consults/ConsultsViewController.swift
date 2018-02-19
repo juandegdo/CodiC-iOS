@@ -138,7 +138,7 @@ extension ConsultsViewController {
     func loadPosts() {
         
         // Load Timeline
-        UserService.Instance.getTimeline(completion: {
+        UserService.Instance.getTimeline(self.postType, completion: {
             (success: Bool) in
             if success {
                 self.selectedRowIndex = (self.tvConsults.indexPathForSelectedRow != nil) ? self.tvConsults.indexPathForSelectedRow!.row : -1

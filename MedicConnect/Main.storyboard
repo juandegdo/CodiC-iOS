@@ -837,7 +837,7 @@
                         <segue destination="RTa-YJ-vwu" kind="relationship" relationship="viewControllers" id="FHj-CS-7fy"/>
                         <segue destination="9Rw-kA-iik" kind="relationship" relationship="viewControllers" id="96r-ya-xny"/>
                         <segue destination="PBS-ls-Yn8" kind="relationship" relationship="viewControllers" id="puq-aO-tGw"/>
-                        <segue destination="hah-31-yjC" kind="relationship" relationship="viewControllers" id="cDL-cM-Via"/>
+                        <segue destination="Uph-7W-oOM" kind="relationship" relationship="viewControllers" id="d1j-aH-Ziz"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ML-r0-FWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -848,7 +848,7 @@
         <scene sceneID="fju-W8-4NO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="9Rw-kA-iik" customClass="PatientNavigationController" customModule="Medic_Connect" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1002" title="" image="tab_icon_patient" id="yI1-MV-Jga"/>
+                    <tabBarItem key="tabBarItem" tag="1002" title="" image="tab_icon_diagnosis" id="yI1-MV-Jga"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gem-sX-cYE">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1366,7 +1366,7 @@ community. Invite people that you actually like to give it a try ;)</string>
         <scene sceneID="Pk1-O8-slM">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="RTa-YJ-vwu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1001" title="" image="tab_icon_home" id="Ved-8q-cab"/>
+                    <tabBarItem key="tabBarItem" tag="1001" title="" image="tab_icon_patient" id="Ved-8q-cab"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hnl-pJ-K6i">
                         <autoresizingMask key="autoresizingMask"/>
@@ -2180,122 +2180,61 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <constraint firstItem="ZjA-aD-DTN" firstAttribute="leading" secondItem="Vfj-G6-owO" secondAttribute="trailing" id="kxR-6V-Ysp"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXp-01-gdN" userLabel="Search Control">
-                                <rect key="frame" x="0.0" y="64" width="414" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbo-kP-vHr">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_search_field" translatesAutoresizingMaskIntoConstraints="NO" id="oMi-5F-Vfh">
-                                        <rect key="frame" x="12" y="5" width="391" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBB-B1-IAp">
+                                        <rect key="frame" x="102" y="291.33333333333331" width="210" height="41"/>
+                                        <string key="text">We’re currently working on the audio/video calling feature.</string>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.4549019608" green="0.71764705880000002" blue="0.74901960779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_feature" translatesAutoresizingMaskIntoConstraints="NO" id="6hb-Px-5cT">
+                                        <rect key="frame" x="198.66666666666666" y="252.33333333333331" width="17" height="24"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="uek-H5-pgm"/>
+                                            <constraint firstAttribute="width" constant="17" id="IV9-6J-Io6"/>
+                                            <constraint firstAttribute="height" constant="24" id="WXC-x3-xMd"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wu1-th-6px">
-                                        <rect key="frame" x="25" y="6" width="339" height="30"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="GAM-7Z-meG"/>
-                                        </constraints>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                                <color key="value" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <outlet property="delegate" destination="sow-wn-UC9" id="aFn-LW-fhj"/>
-                                        </connections>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6E-pn-WDW">
-                                        <rect key="frame" x="369" y="5" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="tfT-AV-V1f"/>
-                                            <constraint firstAttribute="height" constant="30" id="y45-de-KbN"/>
-                                        </constraints>
-                                        <state key="normal" image="icon_search"/>
-                                        <connections>
-                                            <action selector="onSearchTappedWithSender:" destination="sow-wn-UC9" eventType="touchUpInside" id="g1v-Dh-hpL"/>
-                                        </connections>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stay tuned." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fg-Dw-DBN">
+                                        <rect key="frame" x="168.33333333333334" y="340.33333333333331" width="77.333333333333343" height="20.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.23137254900000001" green="0.23137254900000001" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="wu1-th-6px" firstAttribute="top" secondItem="iXp-01-gdN" secondAttribute="top" constant="6" id="328-gr-lGO"/>
-                                    <constraint firstAttribute="height" constant="50" id="6on-aE-pFS"/>
-                                    <constraint firstItem="x6E-pn-WDW" firstAttribute="leading" secondItem="wu1-th-6px" secondAttribute="trailing" constant="5" id="D01-8c-UBB"/>
-                                    <constraint firstAttribute="trailing" secondItem="oMi-5F-Vfh" secondAttribute="trailing" constant="11.5" id="FQ8-fD-4cQ"/>
-                                    <constraint firstItem="wu1-th-6px" firstAttribute="leading" secondItem="iXp-01-gdN" secondAttribute="leading" constant="25" id="YZV-dZ-XzU"/>
-                                    <constraint firstItem="oMi-5F-Vfh" firstAttribute="top" secondItem="iXp-01-gdN" secondAttribute="top" constant="5" id="bfe-Z2-Cbk"/>
-                                    <constraint firstItem="x6E-pn-WDW" firstAttribute="top" secondItem="iXp-01-gdN" secondAttribute="top" constant="5" id="fOC-a3-Axx"/>
-                                    <constraint firstItem="oMi-5F-Vfh" firstAttribute="leading" secondItem="iXp-01-gdN" secondAttribute="leading" constant="11.5" id="jsI-Sx-2bf"/>
-                                    <constraint firstAttribute="trailing" secondItem="x6E-pn-WDW" secondAttribute="trailing" constant="15" id="vmH-g9-3DD"/>
+                                    <constraint firstItem="CBB-B1-IAp" firstAttribute="centerX" secondItem="sbo-kP-vHr" secondAttribute="centerX" id="5mD-Io-FCG"/>
+                                    <constraint firstItem="2fg-Dw-DBN" firstAttribute="centerX" secondItem="sbo-kP-vHr" secondAttribute="centerX" id="OLe-Vc-moS"/>
+                                    <constraint firstItem="CBB-B1-IAp" firstAttribute="centerY" secondItem="sbo-kP-vHr" secondAttribute="centerY" id="aLN-ku-S7L"/>
+                                    <constraint firstItem="2fg-Dw-DBN" firstAttribute="top" secondItem="CBB-B1-IAp" secondAttribute="bottom" constant="8" id="aNa-Gg-8MV"/>
+                                    <constraint firstItem="6hb-Px-5cT" firstAttribute="centerX" secondItem="sbo-kP-vHr" secondAttribute="centerX" id="bJg-N9-JX3"/>
+                                    <constraint firstItem="CBB-B1-IAp" firstAttribute="top" secondItem="6hb-Px-5cT" secondAttribute="bottom" constant="15" id="oIm-9B-0KW"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGI-ZW-IBP">
-                                <rect key="frame" x="0.0" y="114" width="414" height="49"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fzO-fG-2u7">
-                                        <rect key="frame" x="96" y="11" width="223" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="27" id="FPa-tS-gRh"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="223" id="I1k-EJ-hnx"/>
-                                        </constraints>
-                                        <segments>
-                                            <segment title="VIDEO"/>
-                                            <segment title="AUDIO"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.56862745098039214" green="0.77647058823529413" blue="0.77647058823529413" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <action selector="historyTypeChanged:" destination="sow-wn-UC9" eventType="valueChanged" id="Wze-2i-jd0"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="49" id="SkC-Qn-6Me"/>
-                                    <constraint firstItem="fzO-fG-2u7" firstAttribute="centerY" secondItem="fGI-ZW-IBP" secondAttribute="centerY" id="Tqv-w8-qf3"/>
-                                    <constraint firstItem="fzO-fG-2u7" firstAttribute="centerX" secondItem="fGI-ZW-IBP" secondAttribute="centerX" id="ud4-03-zT8"/>
-                                </constraints>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="81b-Rg-xNr">
-                                <rect key="frame" x="0.0" y="163" width="414" height="573"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="sow-wn-UC9" id="77u-zP-cmH"/>
-                                    <outlet property="delegate" destination="sow-wn-UC9" id="WTq-yE-tmG"/>
-                                </connections>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="wVY-ma-WBI" secondAttribute="trailing" id="4yf-Eo-RlJ"/>
                             <constraint firstItem="wVY-ma-WBI" firstAttribute="top" secondItem="eBx-fI-aBV" secondAttribute="top" id="BGd-ty-6g5"/>
                             <constraint firstItem="wVY-ma-WBI" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="Byu-sX-DKN"/>
-                            <constraint firstItem="iXp-01-gdN" firstAttribute="top" secondItem="Wg9-jM-k7X" secondAttribute="bottom" id="EVr-4m-Z6x"/>
                             <constraint firstItem="Wg9-jM-k7X" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="HrS-FX-X4t"/>
+                            <constraint firstAttribute="trailing" secondItem="sbo-kP-vHr" secondAttribute="trailing" id="ISj-M2-umO"/>
                             <constraint firstAttribute="trailing" secondItem="Wg9-jM-k7X" secondAttribute="trailing" id="Jo5-PG-9Up"/>
                             <constraint firstAttribute="bottom" secondItem="wVY-ma-WBI" secondAttribute="bottom" id="Juf-ca-WV0"/>
-                            <constraint firstAttribute="trailing" secondItem="iXp-01-gdN" secondAttribute="trailing" id="L5b-Jb-nK3"/>
-                            <constraint firstItem="81b-Rg-xNr" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="MgN-rI-nCA"/>
-                            <constraint firstAttribute="trailing" secondItem="81b-Rg-xNr" secondAttribute="trailing" id="cZG-Cn-qiZ"/>
-                            <constraint firstItem="81b-Rg-xNr" firstAttribute="top" secondItem="fGI-ZW-IBP" secondAttribute="bottom" id="i9Y-M1-iHr"/>
-                            <constraint firstItem="fGI-ZW-IBP" firstAttribute="top" secondItem="iXp-01-gdN" secondAttribute="bottom" id="ntc-CE-sFO"/>
-                            <constraint firstAttribute="trailing" secondItem="fGI-ZW-IBP" secondAttribute="trailing" id="qtO-gZ-auc"/>
-                            <constraint firstAttribute="bottom" secondItem="81b-Rg-xNr" secondAttribute="bottom" id="sBl-0b-JCV"/>
-                            <constraint firstItem="iXp-01-gdN" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="vEx-I5-4Oh"/>
+                            <constraint firstItem="9uK-Dc-dpL" firstAttribute="top" secondItem="sbo-kP-vHr" secondAttribute="bottom" id="cd2-rZ-ZTh"/>
+                            <constraint firstItem="sbo-kP-vHr" firstAttribute="top" secondItem="Wg9-jM-k7X" secondAttribute="bottom" id="k6G-oI-iI6"/>
+                            <constraint firstItem="sbo-kP-vHr" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="tME-gI-jhE"/>
                             <constraint firstItem="Wg9-jM-k7X" firstAttribute="top" secondItem="eBx-fI-aBV" secondAttribute="top" id="xWg-FR-k5n"/>
-                            <constraint firstItem="fGI-ZW-IBP" firstAttribute="leading" secondItem="eBx-fI-aBV" secondAttribute="leading" id="z2A-el-XkS"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Iye-PE-mDq"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="constOfNavigationTop" destination="xWg-FR-k5n" id="F6D-Mx-Nje"/>
-                        <outlet property="scCallType" destination="fzO-fG-2u7" id="4Tw-Im-PVj"/>
-                        <outlet property="tvHistory" destination="81b-Rg-xNr" id="W9h-r6-BtP"/>
-                        <outlet property="txFieldSearch" destination="wu1-th-6px" id="0UO-Q5-kuo"/>
                         <outlet property="viewNotificationAlert" destination="ySm-db-eVG" id="MsB-7i-wzR"/>
-                        <outlet property="viewSearch" destination="iXp-01-gdN" id="HNu-nI-qSI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ud-d9-HQw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8181,6 +8120,7 @@ uploaded a new diagnosis.</string>
         <image name="icon_close_grey" width="19" height="18"/>
         <image name="icon_edit_white" width="11" height="14"/>
         <image name="icon_favorites_gray" width="18" height="17"/>
+        <image name="icon_feature" width="16" height="16"/>
         <image name="icon_notification" width="15" height="15"/>
         <image name="icon_patient_add" width="58" height="58"/>
         <image name="icon_patient_plus" width="38" height="34"/>
@@ -8214,13 +8154,12 @@ uploaded a new diagnosis.</string>
         <image name="splash_logo" width="295" height="44"/>
         <image name="tab_icon_consults" width="33" height="30"/>
         <image name="tab_icon_diagnosis" width="33" height="40"/>
-        <image name="tab_icon_home" width="37" height="28"/>
         <image name="tab_icon_message" width="29" height="28"/>
         <image name="tab_icon_patient" width="27" height="29"/>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="znu-Px-ld3"/>
-        <segue reference="vbE-pK-CLR"/>
+        <segue reference="OMB-Di-mue"/>
     </inferredMetricsTieBreakers>
 </document>

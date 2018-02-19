@@ -361,10 +361,10 @@ class UserService: BaseTaskController {
                     return
                 }
                 
-                if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
-                }
-                                
+//                if let _ = response.result.value {
+//                    print("Response: \(response.result.value!)")
+//                }
+                
                 if response.response?.statusCode == 200 {
                     
                     if let _dic = response.result.value as? NSDictionary,
@@ -1088,9 +1088,9 @@ class UserService: BaseTaskController {
         }
     }
     
-    func getTimeline(completion: @escaping (_ success: Bool) -> Void) {
+    func getTimeline(_ postType: String, completion: @escaping (_ success: Bool) -> Void) {
         
-        let url = "\(self.baseURL)\(self.URLUser)/timeline"
+        let url = "\(self.baseURL)\(self.URLUser)/timeline?postType=\(postType)&skip=0&limit=1000"
         
         print("Fetching user posts at \(url)")
         
@@ -1103,6 +1103,10 @@ class UserService: BaseTaskController {
                     
                     completion(false)
                     return
+                }
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
                 }
                 
                 var posts: [Post] = []

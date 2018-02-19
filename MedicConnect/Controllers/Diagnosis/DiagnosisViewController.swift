@@ -151,7 +151,7 @@ extension DiagnosisViewController {
     func loadPosts() {
         
         // Load Timeline
-        UserService.Instance.getTimeline(completion: {
+        UserService.Instance.getTimeline(self.postType, completion: {
             (success: Bool) in
             if success {
                 self.selectedIndexPath = (self.tvDiagnoses.indexPathForSelectedRow != nil) ? self.tvDiagnoses.indexPathForSelectedRow : nil
