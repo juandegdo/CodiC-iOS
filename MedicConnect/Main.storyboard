@@ -16,9 +16,6 @@
         <array key="ArialRoundedMTBold.ttf">
             <string>ArialRoundedMTBold</string>
         </array>
-        <array key="Arial_Black.ttf">
-            <string>Arial-Black</string>
-        </array>
         <array key="Avenir.ttc">
             <string>Avenir-Black</string>
             <string>Avenir-Book</string>
@@ -40,12 +37,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="296-3u-1dW">
-                                <rect key="frame" x="141" y="224" width="133.66666666666663" height="68"/>
-                                <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="48"/>
-                                <color key="textColor" red="0.58431372550000005" green="0.81568627449999997" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ZGN-m3-n1v">
+                                <rect key="frame" x="142" y="240" width="130" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Sw4-0M-TLU"/>
+                                    <constraint firstAttribute="width" constant="130" id="pRP-JH-W8j"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Critical Online Diagnosistic Intervention" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WH7-l5-0mp">
                                 <rect key="frame" x="56" y="284" width="302.66666666666669" height="23.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
@@ -63,10 +61,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="WH7-l5-0mp" firstAttribute="centerX" secondItem="9Sa-ac-Vl7" secondAttribute="centerX" id="9Ge-k3-YYX"/>
-                            <constraint firstItem="296-3u-1dW" firstAttribute="centerX" secondItem="9Sa-ac-Vl7" secondAttribute="centerX" id="XH8-gP-sn9"/>
+                            <constraint firstItem="WH7-l5-0mp" firstAttribute="top" secondItem="ZGN-m3-n1v" secondAttribute="bottom" constant="4" id="Wn1-h4-6kD"/>
+                            <constraint firstItem="ZGN-m3-n1v" firstAttribute="centerY" secondItem="9Sa-ac-Vl7" secondAttribute="centerY" constant="-108" id="X9t-Jt-Yh5"/>
                             <constraint firstItem="oe0-Su-UwI" firstAttribute="centerY" secondItem="9Sa-ac-Vl7" secondAttribute="centerY" constant="14" id="iPu-dg-odX"/>
-                            <constraint firstItem="WH7-l5-0mp" firstAttribute="top" secondItem="296-3u-1dW" secondAttribute="bottom" constant="-8" id="l9h-1N-Slb"/>
-                            <constraint firstItem="296-3u-1dW" firstAttribute="centerY" secondItem="9Sa-ac-Vl7" secondAttribute="centerY" constant="-110" id="qt4-64-eXu"/>
+                            <constraint firstItem="ZGN-m3-n1v" firstAttribute="centerX" secondItem="9Sa-ac-Vl7" secondAttribute="centerX" id="roi-cQ-TGm"/>
                             <constraint firstItem="oe0-Su-UwI" firstAttribute="centerX" secondItem="9Sa-ac-Vl7" secondAttribute="centerX" id="viX-2f-e16"/>
                         </constraints>
                     </view>
@@ -8173,6 +8171,7 @@ uploaded a new diagnosis.</string>
         <image name="icon_upload" width="25" height="25"/>
         <image name="icon_user_profile" width="41" height="51"/>
         <image name="splash_icon" width="83" height="83"/>
+        <image name="splash_logo" width="130" height="40"/>
         <image name="tab_icon_consults" width="33" height="30"/>
         <image name="tab_icon_diagnosis" width="33" height="40"/>
         <image name="tab_icon_message" width="29" height="28"/>

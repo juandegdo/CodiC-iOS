@@ -9,9 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Arial_Black.ttf">
-            <string>Arial-Black</string>
-        </array>
         <array key="Avenir.ttc">
             <string>Avenir-Roman</string>
         </array>
@@ -29,12 +26,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iy-eg-L9R">
-                                <rect key="frame" x="121" y="189.5" width="133.5" height="68"/>
-                                <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="48"/>
-                                <color key="textColor" red="0.58431372549019611" green="0.81568627450980391" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Vek-p4-caW">
+                                <rect key="frame" x="122" y="205.5" width="130" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="Dac-Ds-xqx"/>
+                                    <constraint firstAttribute="height" constant="40" id="J3Z-TU-8fb"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Critical Online Diagnosistic Intervention" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSm-8b-fVa">
                                 <rect key="frame" x="36.5" y="249.5" width="302.5" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
@@ -53,10 +51,10 @@
                         <constraints>
                             <constraint firstItem="kSm-8b-fVa" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="7ay-d4-FWa"/>
                             <constraint firstItem="bNG-qn-9AB" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="7mH-z8-7pO"/>
-                            <constraint firstItem="7iy-eg-L9R" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="Efx-cx-YnZ"/>
-                            <constraint firstItem="kSm-8b-fVa" firstAttribute="top" secondItem="7iy-eg-L9R" secondAttribute="bottom" constant="-8" id="Leb-G2-QXb"/>
-                            <constraint firstItem="7iy-eg-L9R" firstAttribute="centerY" secondItem="aYB-YZ-uIu" secondAttribute="centerY" constant="-110" id="M14-uH-ONI"/>
+                            <constraint firstItem="kSm-8b-fVa" firstAttribute="top" secondItem="Vek-p4-caW" secondAttribute="bottom" constant="4" id="8y1-ST-arg"/>
+                            <constraint firstItem="Vek-p4-caW" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="MTg-G5-2Lv"/>
                             <constraint firstItem="bNG-qn-9AB" firstAttribute="centerY" secondItem="aYB-YZ-uIu" secondAttribute="centerY" constant="14" id="Q25-bu-yKv"/>
+                            <constraint firstItem="Vek-p4-caW" firstAttribute="centerY" secondItem="aYB-YZ-uIu" secondAttribute="centerY" constant="-108" id="oiE-cB-eZF"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -67,5 +65,6 @@
     </scenes>
     <resources>
         <image name="splash_icon" width="83" height="83"/>
+        <image name="splash_logo" width="130" height="40"/>
     </resources>
 </document>
