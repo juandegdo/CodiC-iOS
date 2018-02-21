@@ -20,6 +20,7 @@
 		6522BF141F732EAF00E40759 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF131F732EAF00E40759 /* SearchService.swift */; };
 		6522BF161F732F7C00E40759 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF151F732F7C00E40759 /* SearchController.swift */; };
 		6522BF181F733C2E00E40759 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */; };
+		6527286C203CF976008278D6 /* Arial_Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6527286B203CF976008278D6 /* Arial_Black.ttf */; };
 		652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C331FA9242A009B7765 /* PatientListCell.swift */; };
 		652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652A1C341FA9242A009B7765 /* PatientListCell.xib */; };
 		652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */; };
@@ -260,6 +261,7 @@
 		6522BF131F732EAF00E40759 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		6522BF151F732F7C00E40759 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
 		6522BF171F733C2E00E40759 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		6527286B203CF976008278D6 /* Arial_Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial_Black.ttf; sourceTree = "<group>"; };
 		652A1C331FA9242A009B7765 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		652A1C341FA9242A009B7765 /* PatientListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientListCell.xib; sourceTree = "<group>"; };
 		652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
@@ -386,7 +388,7 @@
 		D25EB15E1E845DA20082A9D5 /* Meta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
 		D25EB1601E8478B40082A9D5 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		D268F0E01E89875F0097BA48 /* MTScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MTScrollView.swift; path = MedicConnect/Helper/MTScrollView.swift; sourceTree = SOURCE_ROOT; };
-		D270B7D51DE51F7600458C2E /* Medic Connect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Medic Connect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D270B7D51DE51F7600458C2E /* CODI-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CODI-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D270B7D81DE51F7600458C2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D270B7DF1DE51F7600458C2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D270B7E21DE51F7600458C2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -500,6 +502,14 @@
 				650E28871F71B64B0096A3F0 /* SCSiriWaveformView.m */,
 			);
 			path = SCSiriWaveformView;
+			sourceTree = "<group>";
+		};
+		6527286A203CF8AC008278D6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6527286B203CF976008278D6 /* Arial_Black.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		653D812B2012342800136E1B /* ExpandingMenu */ = {
@@ -652,6 +662,7 @@
 		65D70D232029A34100686C43 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6527286A203CF8AC008278D6 /* Fonts */,
 				65D70D242029A35A00686C43 /* AbbyyRtrSDK */,
 				655013A220065B4700D88443 /* progress_circle.gif */,
 			);
@@ -891,7 +902,7 @@
 		D270B7D61DE51F7600458C2E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D270B7D51DE51F7600458C2E /* Medic Connect.app */,
+				D270B7D51DE51F7600458C2E /* CODI-C.app */,
 				D270B7E91DE51F7600458C2E /* MedicConnectTests.xctest */,
 				D270B7F41DE51F7600458C2E /* MedicConnectUITests.xctest */,
 			);
@@ -1041,7 +1052,7 @@
 			);
 			name = MedicConnect;
 			productName = Radioish;
-			productReference = D270B7D51DE51F7600458C2E /* Medic Connect.app */;
+			productReference = D270B7D51DE51F7600458C2E /* CODI-C.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D270B7E81DE51F7600458C2E /* MedicConnectTests */ = {
@@ -1150,6 +1161,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6527286C203CF976008278D6 /* Arial_Black.ttf in Resources */,
 				D2A634561E1DE05500E51AA0 /* FollowingCell.xib in Resources */,
 				D270B7E31DE51F7600458C2E /* LaunchScreen.storyboard in Resources */,
 				A9A358791F07447F005B8011 /* Privacy_policy_HTML.html in Resources */,
@@ -1673,7 +1685,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.loewen.medic;
-				PRODUCT_NAME = "Medic Connect";
+				PRODUCT_NAME = "CODI-C";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MedicConnect-Bridging-Header.h";
@@ -1703,7 +1715,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.loewen.medic;
-				PRODUCT_NAME = "Medic Connect";
+				PRODUCT_NAME = "CODI-C";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MedicConnect-Bridging-Header.h";

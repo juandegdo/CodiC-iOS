@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 class BaseTaskController {
-    let baseURL = "http://medic-app-dev.us-east-2.elasticbeanstalk.com/medic_back/api"
-//    let baseURL = "http://medicappproduct.us-east-2.elasticbeanstalk.com/medic_back/api"
+//    let baseURL = "http://medic-app-dev.us-east-2.elasticbeanstalk.com/medic_back/api"
+    let baseURL = "http://medicappproduct.us-east-2.elasticbeanstalk.com/medic_back/api"
     
     let URLSignUp = "/signup"
     let URLLogin = "/login"

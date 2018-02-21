@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fUA-sf-wK6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fUA-sf-wK6">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Arial_Black.ttf">
+            <string>Arial-Black</string>
+        </array>
+        <array key="Avenir.ttc">
+            <string>Avenir-Roman</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="Dad-vV-oUM">
@@ -23,27 +29,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rI8-Pk-GvH">
-                                <rect key="frame" x="40" y="232.5" width="295" height="45"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CODI" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iy-eg-L9R">
+                                <rect key="frame" x="121" y="189.5" width="133.5" height="68"/>
+                                <fontDescription key="fontDescription" name="Arial-Black" family="Arial Black" pointSize="48"/>
+                                <color key="textColor" red="0.58431372549019611" green="0.81568627450980391" blue="0.80784313725490198" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Critical Online Diagnosistic Intervention" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSm-8b-fVa">
+                                <rect key="frame" x="36.5" y="249.5" width="302.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                                <color key="textColor" red="0.58823529411764708" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bNG-qn-9AB">
+                                <rect key="frame" x="146" y="306" width="83" height="83"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="rI8-Pk-GvH" secondAttribute="height" multiplier="59:9" id="36U-d4-8Xc"/>
-                                    <constraint firstAttribute="width" constant="295" id="Lum-Ye-WUJ"/>
+                                    <constraint firstAttribute="width" constant="83" id="BjZ-0G-XNW"/>
+                                    <constraint firstAttribute="height" constant="83" id="jgM-uB-oxt"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rI8-Pk-GvH" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="DoO-46-JXB"/>
-                            <constraint firstItem="rI8-Pk-GvH" firstAttribute="bottom" secondItem="aYB-YZ-uIu" secondAttribute="centerY" constant="-56" id="gnQ-Q7-IUP"/>
+                            <constraint firstItem="kSm-8b-fVa" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="7ay-d4-FWa"/>
+                            <constraint firstItem="bNG-qn-9AB" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="7mH-z8-7pO"/>
+                            <constraint firstItem="7iy-eg-L9R" firstAttribute="centerX" secondItem="aYB-YZ-uIu" secondAttribute="centerX" id="Efx-cx-YnZ"/>
+                            <constraint firstItem="kSm-8b-fVa" firstAttribute="top" secondItem="7iy-eg-L9R" secondAttribute="bottom" constant="-8" id="Leb-G2-QXb"/>
+                            <constraint firstItem="7iy-eg-L9R" firstAttribute="centerY" secondItem="aYB-YZ-uIu" secondAttribute="centerY" constant="-110" id="M14-uH-ONI"/>
+                            <constraint firstItem="bNG-qn-9AB" firstAttribute="centerY" secondItem="aYB-YZ-uIu" secondAttribute="centerY" constant="14" id="Q25-bu-yKv"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAC-sE-dRt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
     <resources>
-        <image name="splash_logo" width="295" height="44"/>
+        <image name="splash_icon" width="83" height="83"/>
     </resources>
 </document>

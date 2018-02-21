@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>45</string>
+	<string>47</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -60,6 +60,10 @@
 	<string>Microphone Access Warning</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library Access Warning</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Arial_Black.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
