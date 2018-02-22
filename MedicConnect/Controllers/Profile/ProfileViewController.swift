@@ -479,11 +479,14 @@ class ProfileViewController: BaseViewController {
         let post = _user.getPosts(type: self.postType)[_index]
         if post.transcriptionUrl == "" {
             // Synopsis Not Exists
-            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
-                DataManager.Instance.setPostType(postType: post.postType)
-                vc.postId = post.id
-                vc.fromList = true
-                self.navigationController?.pushViewController(vc, animated: false)
+            if post.orderNumber == "" {
+                // No order yet
+                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
+                    DataManager.Instance.setPostType(postType: post.postType)
+                    vc.postId = post.id
+                    vc.fromList = true
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
             }
             
         } else {
