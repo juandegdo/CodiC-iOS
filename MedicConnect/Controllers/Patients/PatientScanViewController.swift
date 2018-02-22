@@ -26,6 +26,7 @@ class PatientScanViewController: UIViewController {
     var btnScan: UIButton! = UIButton()
     
     var results: [RTRTextLine] = []
+    var fromConsult: Bool = false
     
     /// Camera session.
     private var session: AVCaptureSession?
@@ -513,22 +514,27 @@ class PatientScanViewController: UIViewController {
     }
     
     @IBAction func scanPressed(_ sender: AnyObject) {
-//        self.captureButton.isSelected = !self.captureButton.isSelected
-//        self.isRunning = true // self.captureButton.isSelected
-//
-//        if self.isRunning {
-//            self.clearScreenFromRegions()
-//            self.session?.startRunning()
-//        } else {
-//            self.textCaptureService?.stopTasks()
-//        }
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "CreatePatientViewController") as? CreatePatientViewController {
-            vc.scanResults = self.results
-            self.navigationController?.pushViewController(vc, animated: false)
+        // Scan finished
+        if self.fromConsult {
+            // Go back to consult referring screen
+            let lenght = self.navigationController?.viewControllers.count
+            if let consultReferVC = self.navigationController?.viewControllers[lenght! - 2] as? ConsultReferringViewController {
+                consultReferVC.scanResults = self.results
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: false)
+                }
+            }
+            
+        } else {
+            // Show create patient screen
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "CreatePatientViewController") as? CreatePatientViewController {
+                vc.scanResults = self.results
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
+            }
         }
-        
     }
     
     /// Human-readable descriptions for the RTRCallbackWarningCode constants.

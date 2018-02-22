@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftValidators
 
 class ConsultReferringViewController: BaseViewController {
 
@@ -20,8 +21,13 @@ class ConsultReferringViewController: BaseViewController {
     
     @IBOutlet weak var btnRecord: UIButton!
     
+    var btnCameraScan: UIButton?
+    var viewCheckmark: UIView?
+    
     var patientID: String = ""
     var referUserID: String = ""
+    
+    var scanResults: [RTRTextLine]? = nil
     
     let debouncer = Debouncer(interval: 1.0)
     
@@ -37,6 +43,8 @@ class ConsultReferringViewController: BaseViewController {
         
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
+        
+        self.showScanResult()
         
     }
     
@@ -63,9 +71,29 @@ class ConsultReferringViewController: BaseViewController {
         self.tfPatientNumber.leftViewMode = .always
         self.tfPatientNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
+        self.btnCameraScan = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 44, height: 44))
+        self.btnCameraScan?.setImage(UIImage(named: "icon_camera_scan"), for: .normal)
+        self.btnCameraScan?.addTarget(self, action: #selector(onScanPatient(sender:)), for: .touchUpInside)
+        
+        let imageView: UIImageView = UIImageView.init(frame: CGRect.init(x: 7, y: 16.5, width: 11, height: 11))
+        imageView.image = UIImage.init(named: "icon_save_done_new")
+        self.viewCheckmark = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 25, height: 44))
+        self.viewCheckmark?.addSubview(imageView)
+        
+        self.tfPatientNumber.rightView = self.btnCameraScan
+        self.tfPatientNumber.rightViewMode = .always
+        
         self.tfDoctorMSPNumber.leftView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 10, height: 10))
         self.tfDoctorMSPNumber.leftViewMode = .always
         self.tfDoctorMSPNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 7, y: 16.5, width: 11, height: 11))
+        ivCheck.image = UIImage.init(named: "icon_save_done_new")
+        let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 25, height: 44))
+        view.addSubview(ivCheck)
+        
+        self.tfDoctorMSPNumber.rightView = view
+        self.tfDoctorMSPNumber.rightViewMode = .always
         
         // Hide error labels
         self.lblPHNError.isHidden = true
@@ -74,22 +102,61 @@ class ConsultReferringViewController: BaseViewController {
         self.lblPatientName.text = ""
         self.lblDoctorName.text = ""
         
-        // Add checkmarks on right views
-        for textField in [self.tfPatientNumber, self.tfDoctorMSPNumber] {
-            let ivCheck: UIImageView = UIImageView.init(frame: CGRect.init(x: 7, y: 16.5, width: 11, height: 11))
-            ivCheck.image = UIImage.init(named: "icon_save_done_new")
-            let view: UIView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 25, height: 44))
-            view.addSubview(ivCheck)
-            
-            textField?.rightView = view
-            textField?.rightViewMode = .always
-        }
-        
-        // Hide checkmarks
-        self.tfPatientNumber.rightView?.isHidden = true
+        // Hide checkmark
         self.tfDoctorMSPNumber.rightView?.isHidden = true
         
     }
+    
+    func showScanResult() {
+        // Get patient PHN from scan results
+        if let _textLines = self.scanResults {
+            var phn: String = ""
+            for textLine in _textLines {
+                let text = textLine.text as String
+                
+                if text.count >= 13 && (text.contains("HCN") || text.contains("PHN")) {
+                    // Possibly Patient Number
+                    phn = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+                    break
+                    
+                } else if text.count == 10 && Validator.isNumeric().apply(text) {
+                    // Possibly Patient Number
+                    phn = text
+                    break
+                }
+            }
+            
+            if phn != "" {
+                self.tfPatientNumber.text = phn
+                
+                // Check if patient exists
+                self.btnRecord.isUserInteractionEnabled = false
+                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId, patientName) in
+                    self.btnRecord.isUserInteractionEnabled = true
+                    
+                    if success == true && PHN == self.tfPatientNumber.text! {
+                        if patientId == nil || patientId == "" {
+                            self.lblPHNError.isHidden = false
+                            self.tfPatientNumber.textColor = UIColor.red
+                        } else {
+                            self.patientID = patientId!
+                            self.lblPatientName.text = patientName!
+                            self.lblPHNError.isHidden = true
+                            self.tfPatientNumber.textColor = UIColor.black
+                        }
+                    } else if success == false {
+                        self.lblPHNError.isHidden = false
+                        self.tfPatientNumber.textColor = UIColor.red
+                    }
+                    
+                    if self.lblPHNError.isHidden {
+                        self.tfPatientNumber.rightView = self.viewCheckmark
+                    }
+                }
+            }
+        }
+    }
+
     
     // MARK: Private Methods
     
@@ -149,12 +216,13 @@ extension ConsultReferringViewController : UITextFieldDelegate {
     @objc func textFieldDidChange(_ textField: UITextField) {
         // When the user performs a repeating action, such as entering text, invoke the `call` method
         textField.textColor = UIColor.black
-        textField.rightView?.isHidden = true
         
         if (textField == self.tfPatientNumber) {
             self.lblPatientName.text = ""
+            textField.rightView = self.btnCameraScan
         } else {
             self.lblDoctorName.text = ""
+            textField.rightView?.isHidden = true
         }
         
         debouncer.call()
@@ -182,7 +250,9 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                             self.tfPatientNumber.textColor = UIColor.red
                         }
                         
-                        self.tfPatientNumber.rightView?.isHidden = !self.lblPHNError.isHidden
+                        if self.lblPHNError.isHidden {
+                            self.tfPatientNumber.rightView = self.viewCheckmark
+                        }
                     }
                 } else if (textField == self.tfDoctorMSPNumber) {
                     // Check if MSP number exists
@@ -225,6 +295,18 @@ extension ConsultReferringViewController {
             self.dismiss(animated: false, completion: nil)
         }
         
+    }
+    
+    @IBAction func onScanPatient(sender: UIButton!) {
+        self.view.endEditing(true)
+        self.scanResults = nil
+        
+        // Show Scan screen
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientScanViewController") as? PatientScanViewController {
+            vc.fromConsult = true
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
     
     @IBAction func onCreatePatient(sender: UIButton!) {
