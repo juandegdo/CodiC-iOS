@@ -269,13 +269,13 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
     
     func refreshData() {
         
-        UserService.Instance.getMe(completion: {
-            (user: User?) in
-            
-            if let _ = user as User? {
+//        UserService.Instance.getMe(completion: {
+//            (user: User?) in
+//
+//            if let _ = user as User? {
                 self.tvNotifications.reloadData()
-            }
-        })
+//            }
+//        })
         
     }
     
