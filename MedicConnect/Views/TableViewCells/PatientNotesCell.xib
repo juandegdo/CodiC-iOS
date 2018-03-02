@@ -18,7 +18,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PatientNotesCell" customModule="Medic_Connect" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PatientNotesCell" customModule="CODI_C" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -34,7 +34,7 @@
                         <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0li-rS-gx0" userLabel="Lbl Description" customClass="ExpandableLabel" customModule="Medic_Connect" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0li-rS-gx0" userLabel="Lbl Description" customClass="ExpandableLabel" customModule="CODI_C" customModuleProvider="target">
                         <rect key="frame" x="17" y="44" width="341" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="7Rk-UK-wMb"/>
@@ -111,7 +111,7 @@
                         </constraints>
                         <state key="normal" image="icon_playlist_forward"/>
                     </button>
-                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="IHn-xy-ZmG" customClass="PlaySlider" customModule="Medic_Connect" customModuleProvider="target">
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="IHn-xy-ZmG" customClass="PlaySlider" customModule="CODI_C" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="159.5" width="375" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="jgG-WL-w4r"/>
@@ -152,17 +152,15 @@
                     <constraint firstItem="PHU-SL-tHX" firstAttribute="centerY" secondItem="qg2-Er-3Ou" secondAttribute="centerY" id="67s-2A-0bf"/>
                     <constraint firstItem="UpP-oO-SpW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="r9l-BS-3Md" secondAttribute="trailing" id="6eH-zW-Zbx"/>
                     <constraint firstItem="5XI-tK-MoF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="7JN-S4-3jQ"/>
+                    <constraint firstItem="jPu-w6-Kjj" firstAttribute="bottom" secondItem="IHn-xy-ZmG" secondAttribute="bottom" constant="-4" id="7sM-k0-3C1"/>
                     <constraint firstItem="IHn-xy-ZmG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="8U4-cF-ehQ"/>
-                    <constraint firstAttribute="bottom" secondItem="IHn-xy-ZmG" secondAttribute="bottom" id="8ou-A7-iNO"/>
                     <constraint firstItem="EwO-DJ-ko3" firstAttribute="leading" secondItem="PHU-SL-tHX" secondAttribute="trailing" constant="24" id="AbX-9N-YS1"/>
                     <constraint firstItem="BEW-PY-Ro3" firstAttribute="leading" secondItem="r9l-BS-3Md" secondAttribute="leading" id="Caq-ye-ID7"/>
                     <constraint firstItem="r9l-BS-3Md" firstAttribute="top" secondItem="Z8a-pR-iJ0" secondAttribute="top" constant="-1" id="DDX-Zl-VGJ"/>
-                    <constraint firstAttribute="bottom" secondItem="4VI-u2-fWW" secondAttribute="bottom" constant="4" id="FGS-bP-Axi"/>
                     <constraint firstItem="PHU-SL-tHX" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="G60-TM-fIp"/>
-                    <constraint firstAttribute="bottom" secondItem="qg2-Er-3Ou" secondAttribute="bottom" constant="26.5" id="Icn-cM-7df"/>
-                    <constraint firstAttribute="bottom" secondItem="jPu-w6-Kjj" secondAttribute="bottom" constant="4" id="JD1-dB-i1r"/>
                     <constraint firstItem="Z8a-pR-iJ0" firstAttribute="leading" secondItem="5XI-tK-MoF" secondAttribute="leading" id="JoF-NA-pN6"/>
                     <constraint firstItem="Z8a-pR-iJ0" firstAttribute="top" secondItem="0li-rS-gx0" secondAttribute="bottom" constant="13" id="RUo-Ut-PuY"/>
+                    <constraint firstItem="IHn-xy-ZmG" firstAttribute="top" secondItem="PHU-SL-tHX" secondAttribute="bottom" constant="-3.5" id="RWn-ek-h2L"/>
                     <constraint firstItem="cg9-sg-N7i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="S9J-6n-XgK"/>
                     <constraint firstAttribute="trailing" secondItem="UpP-oO-SpW" secondAttribute="trailing" constant="27" id="TkF-3Y-d8X"/>
                     <constraint firstItem="0li-rS-gx0" firstAttribute="top" secondItem="5XI-tK-MoF" secondAttribute="bottom" constant="1" id="Tnj-Za-HsM"/>
@@ -170,6 +168,8 @@
                     <constraint firstAttribute="bottom" secondItem="Z8a-pR-iJ0" secondAttribute="bottom" priority="750" constant="85" id="Zsu-OS-iGR"/>
                     <constraint firstAttribute="trailing" secondItem="4VI-u2-fWW" secondAttribute="trailing" constant="10" id="bzO-Yb-2Mf"/>
                     <constraint firstItem="UpP-oO-SpW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BEW-PY-Ro3" secondAttribute="trailing" id="fga-za-fxi"/>
+                    <constraint firstItem="4VI-u2-fWW" firstAttribute="centerY" secondItem="jPu-w6-Kjj" secondAttribute="centerY" id="g3C-Ay-aH5"/>
+                    <constraint firstItem="PHU-SL-tHX" firstAttribute="top" secondItem="Z8a-pR-iJ0" secondAttribute="bottom" constant="20" id="h0H-zh-POc"/>
                     <constraint firstItem="EwO-DJ-ko3" firstAttribute="centerY" secondItem="PHU-SL-tHX" secondAttribute="centerY" id="h6t-QY-w5p"/>
                     <constraint firstItem="BEW-PY-Ro3" firstAttribute="top" secondItem="r9l-BS-3Md" secondAttribute="bottom" constant="-2" id="h9X-ee-O9f"/>
                     <constraint firstItem="Ynh-vo-jhZ" firstAttribute="trailing" secondItem="UpP-oO-SpW" secondAttribute="trailing" constant="8" id="hHD-re-LOs"/>

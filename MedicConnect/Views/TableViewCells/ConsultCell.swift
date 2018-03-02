@@ -57,14 +57,17 @@ class ConsultCell: UITableViewCell {
                 
                 self.constOfLblDateBottom.constant = 15
                 self.constOfLblDescriptionHeight.constant = 18
-                self.txtVHashtags.isHidden = true
-                self.btnSpeaker.isHidden = true
-                self.btnPlay.isHidden = true
-                self.btnBackward.isHidden = true
-                self.btnForward.isHidden = true
-                self.lblElapsedTime.isHidden = true
-                self.lblDuration.isHidden = true
-                self.playSlider.isHidden = true
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.txtVHashtags.alpha = 0
+                    self.btnSpeaker.alpha = 0
+                    self.btnPlay.alpha = 0
+                    self.btnBackward.alpha = 0
+                    self.btnForward.alpha = 0
+                    self.lblElapsedTime.alpha = 0
+                    self.lblDuration.alpha = 0
+                    self.playSlider.alpha = 0
+                })
                 
             } else {
                 self.clipsToBounds = false
@@ -84,20 +87,36 @@ class ConsultCell: UITableViewCell {
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                UIView.animate(withDuration: 0.7, animations: {
+                    self.txtVHashtags.alpha = 1
+                    self.btnSpeaker.alpha = 1
+                    self.btnPlay.alpha = 1
+                    self.btnBackward.alpha = 1
+                    self.btnForward.alpha = 1
+                    self.lblElapsedTime.alpha = 1
+                    self.lblDuration.alpha = 1
+                    self.playSlider.alpha = 1
+                })
+                
+//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
                     self.lblDescription.numberOfLines = 0
-                    
-                    self.txtVHashtags.isHidden = false
-                    self.btnSpeaker.isHidden = false
-                    self.btnPlay.isHidden = false
-                    self.btnBackward.isHidden = false
-                    self.btnForward.isHidden = false
-                    self.lblElapsedTime.isHidden = false
-                    self.lblDuration.isHidden = false
-                    self.playSlider.isHidden = false
-                }
+//                }
             }
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        // Hide bottom controls
+        self.txtVHashtags.alpha = 0
+        self.btnSpeaker.alpha = 0
+        self.btnPlay.alpha = 0
+        self.btnBackward.alpha = 0
+        self.btnForward.alpha = 0
+        self.lblElapsedTime.alpha = 0
+        self.lblDuration.alpha = 0
+        self.playSlider.alpha = 0
     }
     
     override func layoutSubviews() {
