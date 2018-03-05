@@ -68,7 +68,7 @@ class ProfileViewController: BaseViewController {
         self.tableView.estimatedRowHeight = 80.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        configureExpandingMenuButton()
+//        configureExpandingMenuButton()
         
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(self.updatedProfileSettings), name: updatedProfileNotification, object: nil)
@@ -835,7 +835,16 @@ extension ProfileViewController {
         vcDisappearType = .record
         self.releasePlayer()
         
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordPopup, sender: nil)
+        // Consult
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
+            
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setFromPatientProfile(false)
+            
+            self.present(vc, animated: false, completion: nil)
+            
+        }
     }
     
 }
