@@ -19,13 +19,17 @@ class ConsultReferringViewController: BaseViewController {
     @IBOutlet weak var lblMSPError: UILabel!
     @IBOutlet weak var lblDoctorName: UILabel!
     
-    @IBOutlet weak var btnRecord: UIButton!
+    @IBOutlet weak var btnSave: UIButton!
+    
+    var activityIndicatorView = UIActivityIndicatorView()
     
     var btnCameraScan: UIButton?
     var viewCheckmark: UIView?
     
+    var noteInfo: [String: Any] = [:]
     var patientID: String = ""
     var referUserID: String = ""
+    var isSaveConsult: Bool = false
     
     var scanResults: [RTRTextLine]? = nil
     
@@ -46,6 +50,15 @@ class ConsultReferringViewController: BaseViewController {
         
         self.showScanResult()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Check if Yes is clicked on error popup
+        if isSaveConsult {
+            self.saveConsult()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -130,9 +143,9 @@ class ConsultReferringViewController: BaseViewController {
                 self.tfPatientNumber.text = phn
                 
                 // Check if patient exists
-                self.btnRecord.isUserInteractionEnabled = false
+                self.btnSave.isUserInteractionEnabled = false
                 PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId, patientName) in
-                    self.btnRecord.isUserInteractionEnabled = true
+                    self.btnSave.isUserInteractionEnabled = true
                     
                     if success == true && PHN == self.tfPatientNumber.text! {
                         if patientId == nil || patientId == "" {
@@ -176,6 +189,7 @@ class ConsultReferringViewController: BaseViewController {
         
         if let vc = storyboard.instantiateViewController(withIdentifier: "ErrorPopupViewController") as? ErrorPopupViewController {
             vc.popupType = popupType
+            vc.fromConsult = true
             self.navigationController?.pushViewController(vc, animated: false)
         }
     }
@@ -193,6 +207,60 @@ class ConsultReferringViewController: BaseViewController {
             })
             
         }
+    }
+    
+    func startIndicating(){
+        activityIndicatorView.center = self.view.center
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.activityIndicatorViewStyle = .gray
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopIndicating() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.removeFromSuperview()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
+    
+    func saveConsult() {
+        // Save consult
+        self.startIndicating()
+        self.btnSave.isEnabled = false
+        
+        PostService.Instance.sendPost(noteInfo["title"] as! String,
+                                      author: noteInfo["author"] as! String,
+                                      description: noteInfo["description"] as! String,
+                                      hashtags: noteInfo["hashtags"] as! [String],
+                                      postType: noteInfo["postType"] as! String,
+                                      diagnosticCode: noteInfo["diagnosticCode"] as! String,
+                                      billingCode: noteInfo["billingCode"] as! String,
+                                      audioData: noteInfo["audioData"] as! Data,
+                                      image: nil,
+                                      fileExtension: noteInfo["fileExtension"] as! String,
+                                      mimeType: noteInfo["mimeType"] as! String,
+                                      completion: { (success: Bool, postId: String?) in
+            
+            if success {
+                DispatchQueue.main.async {
+                    self.stopIndicating()
+                    self.btnSave.isEnabled = true
+                    
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let vc = storyboard.instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
+                        vc.postId = postId
+                        self.navigationController?.pushViewController(vc, animated: false)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.stopIndicating()
+                    self.btnSave.isEnabled = true
+                }
+            }
+        })
     }
 
 }
@@ -231,9 +299,9 @@ extension ConsultReferringViewController : UITextFieldDelegate {
             if (textField.text!.count > 0) {
                 if (textField == self.tfPatientNumber) {
                     // Check if patient exists
-                    self.btnRecord.isUserInteractionEnabled = false
+                    self.btnSave.isUserInteractionEnabled = false
                     PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId, patientName) in
-                        self.btnRecord.isUserInteractionEnabled = true
+                        self.btnSave.isUserInteractionEnabled = true
                         
                         if success == true && PHN == self.tfPatientNumber.text! {
                             if patientId == nil || patientId == "" {
@@ -256,9 +324,9 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                     }
                 } else if (textField == self.tfDoctorMSPNumber) {
                     // Check if MSP number exists
-                    self.btnRecord.isUserInteractionEnabled = false
+                    self.btnSave.isUserInteractionEnabled = false
                     UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId, name) in
-                        self.btnRecord.isUserInteractionEnabled = true
+                        self.btnSave.isUserInteractionEnabled = true
                         
                         if success == true && MSP == self.tfDoctorMSPNumber.text! {
                             if userId == nil || userId == "" {
@@ -290,7 +358,7 @@ extension ConsultReferringViewController {
     @IBAction func onBack(sender: UIButton!) {
         
         if let _nav = self.navigationController as UINavigationController? {
-            _nav.popToRootViewController(animated: false)
+            _nav.popViewController(animated: false)
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -311,6 +379,44 @@ extension ConsultReferringViewController {
     
     @IBAction func onCreatePatient(sender: UIButton!) {
         self.presentCreatePatient("")
+    }
+    
+    @IBAction func onSave(sender: UIButton!) {
+        // Save consults and notes
+        var errorType: ErrorPopupType = .none
+        if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) && (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
+            errorType = .noMSPAndPHN
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setReferringUserIds(referringUserIds: [])
+            
+        } else if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
+            errorType = .noPHN
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setReferringUserIds(referringUserIds: [self.referUserID])
+            
+        } else if (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
+            errorType = .noMSP
+            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPatientId(patientId: self.patientID)
+            DataManager.Instance.setReferringUserIds(referringUserIds: [])
+            
+        }
+        
+        if (errorType != .none) {
+            // Show Error Popup
+            self.presentErrorPopup(errorType)
+            return
+        }
+        
+        DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+        DataManager.Instance.setPatientId(patientId: patientID)
+        DataManager.Instance.setReferringUserIds(referringUserIds: [referUserID])
+        
+        // Save consult
+        self.saveConsult()
+        
     }
     
     @IBAction func onRecordConsult(sender: UIButton!) {

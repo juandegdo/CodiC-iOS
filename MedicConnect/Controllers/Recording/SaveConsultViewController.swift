@@ -190,9 +190,6 @@ extension SaveConsultViewController {
         }
         
         let fromPatientProfile = DataManager.Instance.getFromPatientProfile()
-        if !fromPatientProfile {
-            self.startIndicating()
-        }
         
         var audioFilename: URL
         if (self.fileURL != nil) {
@@ -206,52 +203,31 @@ extension SaveConsultViewController {
         
         do {
             let audioData = try Data(contentsOf: audioFilename)
+            let noteInfo = ["title" : title,
+                            "author" : author,
+                            "description" : self.tvDescription.text!,
+                            "hashtags" : hashTagCtrl.tags as! [String],
+                            "postType" : postType,
+                            "diagnosticCode" : self.tfDiagnosticCode.text!,
+                            "billingCode" : self.tfBillingCode.text!,
+                            "audioData" : audioData,
+                            "fileExtension": fileExtension,
+                            "mimeType": fileMimeType] as [String : Any]
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             if fromPatientProfile {
                 // From Patient Profile
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
-                    
-                    let noteInfo = ["title" : title,
-                                    "author" : author,
-                                    "description" : self.tvDescription.text!,
-                                    "hashtags" : hashTagCtrl.tags as! [String],
-                                    "postType" : postType,
-                                    "diagnosticCode" : self.tfDiagnosticCode.text!,
-                                    "billingCode" : self.tfBillingCode.text!,
-                                    "audioData" : audioData,
-                                    "fileExtension": fileExtension,
-                                    "mimeType": fileMimeType] as [String : Any]
-                    
                     vc.noteInfo = noteInfo
                     self.navigationController?.pushViewController(vc, animated: false)
                 }
-                
             } else {
-                // From other screens
-                self.btnSave.isEnabled = false
-                
-                PostService.Instance.sendPost(title, author: author, description: self.tvDescription.text!, hashtags: hashTagCtrl.tags as! [String], postType: postType, diagnosticCode: self.tfDiagnosticCode.text!, billingCode: self.tfBillingCode.text!, audioData: audioData, image: nil/*self.imgAvatar.image*/, fileExtension: fileExtension, mimeType: fileMimeType, completion: {
-                    (success: Bool, postId: String?) in
-                    
-                    if success {
-                        DispatchQueue.main.async {
-                            self.stopIndicating()
-                            self.btnSave.isEnabled = true
-                            
-                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                            if let vc = storyboard.instantiateViewController(withIdentifier: "ShareBroadcastViewController") as? ShareBroadcastViewController {
-                                vc.postId = postId
-                                self.navigationController?.pushViewController(vc, animated: false)
-                            }
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            self.stopIndicating()
-                            self.btnSave.isEnabled = true
-                        }
-                    }
-                })
+                // From Profile Consult
+                if let vc = storyboard.instantiateViewController(withIdentifier: "ConsultReferringViewController") as? ConsultReferringViewController {
+                    vc.noteInfo = noteInfo
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
             }
             
         } catch let error {

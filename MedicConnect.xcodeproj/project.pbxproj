@@ -31,7 +31,6 @@
 		653D81302012347800136E1B /* ExpandingMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D812E2012347800136E1B /* ExpandingMenuItem.swift */; };
 		653D81312012347800136E1B /* ExpandingMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D812F2012347800136E1B /* ExpandingMenuButton.swift */; };
 		653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 653E7C631FBA067C00B41A5C /* Main.storyboard */; };
-		654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */; };
 		65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65488DAB1F944239005C1EA8 /* PatientsViewController.swift */; };
 		654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654FDF801F620620009D4BA1 /* ExpandableLabel.swift */; };
 		655013A320065B4800D88443 /* progress_circle.gif in Resources */ = {isa = PBXBuildFile; fileRef = 655013A220065B4700D88443 /* progress_circle.gif */; };
@@ -272,7 +271,6 @@
 		653D812E2012347800136E1B /* ExpandingMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuItem.swift; path = MedicConnect/Views/ExpandingMenu/ExpandingMenuItem.swift; sourceTree = SOURCE_ROOT; };
 		653D812F2012347800136E1B /* ExpandingMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpandingMenuButton.swift; path = MedicConnect/Views/ExpandingMenu/ExpandingMenuButton.swift; sourceTree = SOURCE_ROOT; };
 		653E7C631FBA067C00B41A5C /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordPopupViewController.swift; sourceTree = "<group>"; };
 		65488DAB1F944239005C1EA8 /* PatientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsViewController.swift; sourceTree = "<group>"; };
 		654FDF801F620620009D4BA1 /* ExpandableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandableLabel.swift; sourceTree = "<group>"; };
 		655013A220065B4700D88443 /* progress_circle.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = progress_circle.gif; sourceTree = "<group>"; };
@@ -623,7 +621,6 @@
 			children = (
 				658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */,
 				D2F2A9F21E285F0000DA2434 /* InvitePopupViewController.swift */,
-				654644E31F8ED8CA002CA3A9 /* RecordPopupViewController.swift */,
 				D2F55A6D1DEB1A690038A392 /* SharePopupViewController.swift */,
 				6593AB5920173A8400E43611 /* RecordExceedPopupViewController.swift */,
 			);
@@ -1402,7 +1399,6 @@
 				D268F0E11E89875F0097BA48 /* MTScrollView.swift in Sources */,
 				D2AFD0081E99426C00246477 /* PlayerController.swift in Sources */,
 				654FDF811F620620009D4BA1 /* ExpandableLabel.swift in Sources */,
-				654644E41F8ED8CA002CA3A9 /* RecordPopupViewController.swift in Sources */,
 				653D81312012347800136E1B /* ExpandingMenuButton.swift in Sources */,
 				D20658331E5BB9ED003875E4 /* RadTabBar.m in Sources */,
 				D29891F51E651075004C0FC1 /* ResetViewController.swift in Sources */,

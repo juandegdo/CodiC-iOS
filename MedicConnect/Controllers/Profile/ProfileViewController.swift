@@ -135,10 +135,12 @@ class ProfileViewController: BaseViewController {
         let item1 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Record New Consult", image: UIImage(named: "icon_record_consult")!, highlightedImage: UIImage(named: "icon_record_consult")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             // Consult
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            if let vc = storyboard.instantiateViewController(withIdentifier: "ConsultReferringViewController") as? ConsultReferringViewController {
+            if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
                 
-                self.navigationController?.pushViewController(vc, animated: false)
+                DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+                DataManager.Instance.setFromPatientProfile(false)
+                
+                self.present(vc, animated: false, completion: nil)
                 
             }
         }
@@ -146,7 +148,6 @@ class ProfileViewController: BaseViewController {
         let item2 = ExpandingMenuItem(size: CGSize(width: 50.0, height: 50.0), title: "Record New Diagnosis", image: UIImage(named: "icon_record_diagnosis")!, highlightedImage: UIImage(named: "icon_record_diagnosis")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             // Diagnosis
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
             if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
                 
                 DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)

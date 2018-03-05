@@ -1790,7 +1790,6 @@ community. Invite people that you actually like to give it a try ;)</string>
                         <outlet property="viewProfileInfo" destination="oGP-1Q-fhG" id="oDf-EZ-ZWl"/>
                         <segue destination="dIj-Ko-9ku" kind="show" identifier="EditProfile" id="HOx-wp-DVQ"/>
                         <segue destination="75C-cM-54S" kind="show" identifier="ShareBroadcastPopUp" animates="NO" id="vbE-pK-CLR"/>
-                        <segue destination="4IT-S5-5ZL" kind="show" identifier="segueRecordPopUp" animates="NO" id="VI6-oN-DoH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="806-Gz-M0p" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5725,115 +5724,6 @@ you a link to reset your password.</string>
             </objects>
             <point key="canvasLocation" x="1271" y="2217"/>
         </scene>
-        <!--Record Popup View Controller-->
-        <scene sceneID="xlE-ta-v1d">
-            <objects>
-                <viewController storyboardIdentifier="RecordPopupViewController" id="4IT-S5-5ZL" customClass="RecordPopupViewController" customModule="CODI_C" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="THv-TK-1UA"/>
-                        <viewControllerLayoutGuide type="bottom" id="VtQ-oE-QID"/>
-                    </layoutGuides>
-                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7Gq-oE-VHy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MSI-9p-7ye">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qkd-AQ-Fc9" customClass="FXBlurView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="blurRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="dynamic" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view alpha="0.44999997615814202" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogO-dR-xml" userLabel="Mask">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="986-Dy-vE3">
-                                <rect key="frame" x="341" y="618" width="58" height="58"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="58" id="Zg6-ce-SvN"/>
-                                    <constraint firstAttribute="width" constant="58" id="oyo-JN-HUO"/>
-                                </constraints>
-                                <state key="normal" image="icon_profile_add"/>
-                                <connections>
-                                    <action selector="onCloseWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="YuX-KR-EC8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jj-sk-eQe">
-                                <rect key="frame" x="226" y="558" width="164" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="amZ-tH-7EB"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="164" id="g70-ME-yuU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                <state key="normal" title="record new consult" image="icon_record_consult">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onRecordConsultWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="0LF-Vj-tUL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o5x-7j-iiZ">
-                                <rect key="frame" x="226" y="504" width="164" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="164" id="7kL-HM-kqc"/>
-                                    <constraint firstAttribute="height" constant="48" id="Qv6-s3-Tle"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
-                                <state key="normal" title="record new diagnosis" image="icon_record_diagnosis">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onRecordDiagnosisWithSender:" destination="4IT-S5-5ZL" eventType="touchUpInside" id="kNi-ZZ-bFL"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="ogO-dR-xml" secondAttribute="trailing" id="205-gu-RmB"/>
-                            <constraint firstItem="qkd-AQ-Fc9" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="3Pz-Um-nOg"/>
-                            <constraint firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" constant="24" id="3no-DV-RFd"/>
-                            <constraint firstAttribute="bottom" secondItem="qkd-AQ-Fc9" secondAttribute="bottom" id="4vY-Ql-h4e"/>
-                            <constraint firstAttribute="bottom" secondItem="ogO-dR-xml" secondAttribute="bottom" id="5GH-xs-fAh"/>
-                            <constraint firstItem="o5x-7j-iiZ" firstAttribute="trailing" secondItem="6jj-sk-eQe" secondAttribute="trailing" id="BW8-4O-GL2"/>
-                            <constraint firstAttribute="trailing" secondItem="qkd-AQ-Fc9" secondAttribute="trailing" id="L9A-i8-Bg4"/>
-                            <constraint firstItem="o5x-7j-iiZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gq-oE-VHy" secondAttribute="leading" constant="20" symbolic="YES" id="Mic-cB-IIV"/>
-                            <constraint firstAttribute="trailing" secondItem="986-Dy-vE3" secondAttribute="trailing" constant="15" id="Qt9-y0-HRO"/>
-                            <constraint firstItem="986-Dy-vE3" firstAttribute="top" secondItem="6jj-sk-eQe" secondAttribute="bottom" constant="12" id="Xv7-cK-L0g"/>
-                            <constraint firstItem="qkd-AQ-Fc9" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="YQg-F3-yfJ"/>
-                            <constraint firstItem="MSI-9p-7ye" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="ZfL-Bn-sOu"/>
-                            <constraint firstItem="6jj-sk-eQe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7Gq-oE-VHy" secondAttribute="leading" constant="20" symbolic="YES" id="bFQ-bq-pcR"/>
-                            <constraint firstAttribute="bottom" secondItem="986-Dy-vE3" secondAttribute="bottom" constant="60" id="dVp-42-jCL"/>
-                            <constraint firstAttribute="trailing" secondItem="MSI-9p-7ye" secondAttribute="trailing" id="iNF-ze-Svj"/>
-                            <constraint firstAttribute="bottom" secondItem="MSI-9p-7ye" secondAttribute="bottom" id="jN3-N0-URn"/>
-                            <constraint firstItem="ogO-dR-xml" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="lJm-px-hrM"/>
-                            <constraint firstItem="6jj-sk-eQe" firstAttribute="top" secondItem="o5x-7j-iiZ" secondAttribute="bottom" constant="6" id="lWE-XX-iRm"/>
-                            <constraint firstItem="MSI-9p-7ye" firstAttribute="top" secondItem="7Gq-oE-VHy" secondAttribute="top" id="tVn-mv-zvf"/>
-                            <constraint firstItem="ogO-dR-xml" firstAttribute="leading" secondItem="7Gq-oE-VHy" secondAttribute="leading" id="v7J-Ou-DiH"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="fL1-MY-gLL"/>
-                    <connections>
-                        <outlet property="btnRecordConsult" destination="6jj-sk-eQe" id="vXO-YJ-bfa"/>
-                        <outlet property="btnRecordDiagnosis" destination="o5x-7j-iiZ" id="2TW-NH-Zwg"/>
-                        <outlet property="mBackgroundImageView" destination="MSI-9p-7ye" id="pxx-MN-sne"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gDz-3S-d2g" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2887" y="-580"/>
-        </scene>
         <!--Create Patient View Controller-->
         <scene sceneID="8gz-gD-13n">
             <objects>
@@ -6938,13 +6828,13 @@ you a link to reset your password.</string>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noR-y0-LQP">
-                                <rect key="frame" x="25" y="432" width="364" height="44"/>
+                                <rect key="frame" x="25" y="442" width="364" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="w9s-zo-oWu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="12"/>
-                                <state key="normal" title="RECORD CONSULT">
+                                <state key="normal" title="SAVE">
                                     <color key="titleColor" red="0.5490196078431373" green="0.5490196078431373" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -6954,21 +6844,7 @@ you a link to reset your password.</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="onRecordConsultWithSender:" destination="lqe-eh-LPZ" eventType="touchUpInside" id="TaF-n6-Tsf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z6U-x3-biI">
-                                <rect key="frame" x="25" y="506" width="364" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="V2z-HQ-gPB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="12"/>
-                                <state key="normal" title="SKIP">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSkipWithSender:" destination="lqe-eh-LPZ" eventType="touchUpInside" id="ykw-sw-E7e"/>
+                                    <action selector="onSaveWithSender:" destination="lqe-eh-LPZ" eventType="touchUpInside" id="U1y-iT-VpT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -6984,23 +6860,20 @@ you a link to reset your password.</string>
                             <constraint firstItem="Qj5-gA-fWl" firstAttribute="top" secondItem="4w1-GM-BkE" secondAttribute="top" id="Qm0-AP-ofB"/>
                             <constraint firstItem="YHZ-mX-fb3" firstAttribute="centerX" secondItem="4w1-GM-BkE" secondAttribute="centerX" id="TS4-Ma-w9U"/>
                             <constraint firstItem="TSw-bi-rTQ" firstAttribute="top" secondItem="8te-dN-hdo" secondAttribute="bottom" constant="2" id="VaA-dt-6X6"/>
-                            <constraint firstItem="z6U-x3-biI" firstAttribute="leading" secondItem="4w1-GM-BkE" secondAttribute="leading" constant="25" id="caz-An-HCe"/>
-                            <constraint firstItem="noR-y0-LQP" firstAttribute="top" secondItem="YHZ-mX-fb3" secondAttribute="bottom" constant="32" id="dWf-ku-sN1"/>
+                            <constraint firstItem="noR-y0-LQP" firstAttribute="top" secondItem="YHZ-mX-fb3" secondAttribute="bottom" constant="42" id="dWf-ku-sN1"/>
                             <constraint firstItem="8te-dN-hdo" firstAttribute="top" secondItem="bj6-xG-O71" secondAttribute="bottom" constant="25" id="eIA-96-9ju"/>
                             <constraint firstItem="bj6-xG-O71" firstAttribute="top" secondItem="Qj5-gA-fWl" secondAttribute="bottom" constant="86" id="kmh-Oc-5yB"/>
-                            <constraint firstItem="z6U-x3-biI" firstAttribute="top" secondItem="noR-y0-LQP" secondAttribute="bottom" constant="30" id="lEL-Xy-Su1"/>
                             <constraint firstAttribute="trailing" secondItem="8te-dN-hdo" secondAttribute="trailing" constant="25" id="lNb-6G-JOd"/>
                             <constraint firstAttribute="trailing" secondItem="bj6-xG-O71" secondAttribute="trailing" constant="25" id="qJ4-qK-Rag"/>
                             <constraint firstItem="TSw-bi-rTQ" firstAttribute="trailing" secondItem="8te-dN-hdo" secondAttribute="trailing" id="t3T-J5-GwR"/>
                             <constraint firstItem="bj6-xG-O71" firstAttribute="leading" secondItem="4w1-GM-BkE" secondAttribute="leading" constant="25" id="uLh-oU-vgo"/>
-                            <constraint firstAttribute="trailing" secondItem="z6U-x3-biI" secondAttribute="trailing" constant="25" id="ujP-FV-Vzn"/>
                             <constraint firstItem="YHZ-mX-fb3" firstAttribute="top" secondItem="8Mq-7s-fnw" secondAttribute="bottom" constant="6" id="wDG-ZU-MkC"/>
                             <constraint firstItem="8Mq-7s-fnw" firstAttribute="top" secondItem="8te-dN-hdo" secondAttribute="bottom" constant="32" id="wka-a4-dio"/>
                             <constraint firstItem="8Mq-7s-fnw" firstAttribute="centerX" secondItem="4w1-GM-BkE" secondAttribute="centerX" id="xpl-Zg-cnb"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnRecord" destination="noR-y0-LQP" id="LsP-Bz-Wl1"/>
+                        <outlet property="btnSave" destination="noR-y0-LQP" id="fmn-qp-Huj"/>
                         <outlet property="constOfNavigationTop" destination="Qm0-AP-ofB" id="gOZ-cb-JnI"/>
                         <outlet property="lblDoctorName" destination="L4Y-GK-Dat" id="Ttq-Rj-YVf"/>
                         <outlet property="lblMSPError" destination="TSw-bi-rTQ" id="4ug-SY-F3f"/>
@@ -8149,8 +8022,6 @@ uploaded a new diagnosis.</string>
         <image name="icon_playlist_prev_off" width="29" height="18"/>
         <image name="icon_plus" width="29" height="26"/>
         <image name="icon_profile_add" width="58" height="58"/>
-        <image name="icon_record_consult" width="44" height="45"/>
-        <image name="icon_record_diagnosis" width="45" height="45"/>
         <image name="icon_recording_btn" width="93" height="93"/>
         <image name="icon_recording_next_off" width="29" height="18"/>
         <image name="icon_recording_pause_off" width="20" height="26"/>

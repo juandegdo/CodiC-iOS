@@ -33,6 +33,7 @@ class ErrorPopupViewController: BaseViewController {
     var popupType: ErrorPopupType = .none
     var isYes: Bool = false
     var fromPatientNote: Bool = false
+    var fromConsult: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,11 +148,16 @@ extension ErrorPopupViewController {
     @IBAction func onYes(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if fromPatientNote == true {
+        if fromPatientNote == true || fromConsult == true {
             
             let lenght = self.navigationController?.viewControllers.count
-            let patientNoteVC: PatientNoteReferViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientNoteReferViewController : nil
-            patientNoteVC?.isSaveNote = true
+            if fromPatientNote {
+                let patientNoteVC: PatientNoteReferViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? PatientNoteReferViewController : nil
+                patientNoteVC?.isSaveNote = true
+            } else if fromConsult {
+                let patientNoteVC: ConsultReferringViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? ConsultReferringViewController : nil
+                patientNoteVC?.isSaveConsult = true
+            }
             
             self.onClose(sender: nil)
             
