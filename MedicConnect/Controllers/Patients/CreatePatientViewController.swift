@@ -55,6 +55,12 @@ class CreatePatientViewController: BaseViewController {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.configureData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -68,7 +74,6 @@ class CreatePatientViewController: BaseViewController {
         
         // PHN
         self.tfPHN.placeholder = NSLocalizedString("PHN#", comment: "comment")
-        self.tfPHN.text = self.patientNumber
         self.tfPHN.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         self.lblPHNError.isHidden = true
@@ -124,32 +129,37 @@ class CreatePatientViewController: BaseViewController {
             }
             
             self.tfName.text = name == "" ? "" : name.components(separatedBy: ",").reversed().joined(separator: " ")
-            self.tfPHN.text = self.patientNumber == "" ? "" : self.patientNumber
             
             if self.birthDate != nil {
                 let birthDateFormatter = DateFormatter()
                 birthDateFormatter.dateStyle = .medium
                 birthDateFormatter.timeStyle = .none
                 self.tfBirthdate.text = birthDateFormatter.string(from: birthDate)
-                
-                // Check if patient exists
-                self.btnSave.isUserInteractionEnabled = false
-                PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId, patientName) in
-                    self.btnSave.isUserInteractionEnabled = true
-                    
-                    if success == true && PHN == self.tfPHN.text! {
-                        if patientId == nil || patientId == "" {
-                            self.lblPHNError.isHidden = true
-                        } else {
-                            self.lblPHNError.isHidden = false
-                        }
-                    } else if success == false {
-                        self.lblPHNError.isHidden = true
-                    }
-                }
             }
         }
         
+        self.tfPHN.text = self.patientNumber
+        
+    }
+    
+    func configureData() {
+        // Check if patient exists
+        if self.tfPHN.text != "" {
+            self.btnSave.isUserInteractionEnabled = false
+            PatientService.Instance.getPatientIdByPHN(PHN: self.tfPHN.text!) { (success, PHN, patientId, patientName) in
+                self.btnSave.isUserInteractionEnabled = true
+                
+                if success == true && PHN == self.tfPHN.text! {
+                    if patientId == nil || patientId == "" {
+                        self.lblPHNError.isHidden = true
+                    } else {
+                        self.lblPHNError.isHidden = false
+                    }
+                } else if success == false {
+                    self.lblPHNError.isHidden = true
+                }
+            }
+        }
     }
     
 }
@@ -248,19 +258,16 @@ extension CreatePatientViewController {
                     if self.fromRecord == true {
                         // Go to record screen
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        
-                        if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
-                            
-                            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
+                        if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
+                            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
                             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
                             DataManager.Instance.setReferringUserIds(referringUserIds: [])
-                            DataManager.Instance.setFromPatientProfile(false)
                             
-                            weak var weakSelf = self
-                            self.present(vc, animated: false, completion: {
-                                weakSelf?.onBack(sender: nil)
-                            })
-                            
+                            let lenght = self.navigationController?.viewControllers.count
+                            if let prevVC: ConsultReferringViewController = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? ConsultReferringViewController : nil {
+                                vc.noteInfo = prevVC.consultInfo
+                                self.navigationController?.pushViewController(vc, animated: false)
+                            }
                         }
                         
                     } else {

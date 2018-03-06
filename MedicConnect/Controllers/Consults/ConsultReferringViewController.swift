@@ -26,7 +26,7 @@ class ConsultReferringViewController: BaseViewController {
     var btnCameraScan: UIButton?
     var viewCheckmark: UIView?
     
-    var noteInfo: [String: Any] = [:]
+    var consultInfo: [String: Any] = [:]
     var patientID: String = ""
     var referUserID: String = ""
     var isSaveConsult: Bool = false
@@ -230,17 +230,17 @@ class ConsultReferringViewController: BaseViewController {
         self.startIndicating()
         self.btnSave.isEnabled = false
         
-        PostService.Instance.sendPost(noteInfo["title"] as! String,
-                                      author: noteInfo["author"] as! String,
-                                      description: noteInfo["description"] as! String,
-                                      hashtags: noteInfo["hashtags"] as! [String],
-                                      postType: noteInfo["postType"] as! String,
-                                      diagnosticCode: noteInfo["diagnosticCode"] as! String,
-                                      billingCode: noteInfo["billingCode"] as! String,
-                                      audioData: noteInfo["audioData"] as! Data,
+        PostService.Instance.sendPost(consultInfo["title"] as! String,
+                                      author: consultInfo["author"] as! String,
+                                      description: consultInfo["description"] as! String,
+                                      hashtags: consultInfo["hashtags"] as! [String],
+                                      postType: consultInfo["postType"] as! String,
+                                      diagnosticCode: consultInfo["diagnosticCode"] as! String,
+                                      billingCode: consultInfo["billingCode"] as! String,
+                                      audioData: consultInfo["audioData"] as! Data,
                                       image: nil,
-                                      fileExtension: noteInfo["fileExtension"] as! String,
-                                      mimeType: noteInfo["mimeType"] as! String,
+                                      fileExtension: consultInfo["fileExtension"] as! String,
+                                      mimeType: consultInfo["mimeType"] as! String,
                                       completion: { (success: Bool, postId: String?) in
             
             if success {

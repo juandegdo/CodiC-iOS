@@ -203,7 +203,7 @@ extension SaveConsultViewController {
         
         do {
             let audioData = try Data(contentsOf: audioFilename)
-            let noteInfo = ["title" : title,
+            let postInfo = ["title" : title,
                             "author" : author,
                             "description" : self.tvDescription.text!,
                             "hashtags" : hashTagCtrl.tags as! [String],
@@ -219,22 +219,18 @@ extension SaveConsultViewController {
             if fromPatientProfile {
                 // From Patient Profile
                 if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
-                    vc.noteInfo = noteInfo
+                    vc.noteInfo = postInfo
                     self.navigationController?.pushViewController(vc, animated: false)
                 }
             } else {
                 // From Profile Consult
                 if let vc = storyboard.instantiateViewController(withIdentifier: "ConsultReferringViewController") as? ConsultReferringViewController {
-                    vc.noteInfo = noteInfo
+                    vc.consultInfo = postInfo
                     self.navigationController?.pushViewController(vc, animated: false)
                 }
             }
             
         } catch let error {
-            if !fromPatientProfile {
-                self.stopIndicating()
-            }
-            
             self.btnSave.isEnabled = true
             print(error.localizedDescription)
         }
