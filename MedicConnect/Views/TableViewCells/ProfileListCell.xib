@@ -52,17 +52,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ks-PC-uWn">
-                        <rect key="frame" x="30" y="83" width="60" height="30"/>
+                        <rect key="frame" x="30" y="81" width="64" height="40"/>
                         <subviews>
                             <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rm9-ao-1Bw">
-                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                <rect key="frame" x="0.0" y="2" width="32" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EGe-FQ-viO">
-                                        <rect key="frame" x="1" y="1" width="28" height="28"/>
+                                        <rect key="frame" x="1" y="1" width="30" height="30"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="14"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
@@ -72,26 +72,26 @@
                                     <constraint firstItem="EGe-FQ-viO" firstAttribute="top" secondItem="Rm9-ao-1Bw" secondAttribute="top" constant="1" id="0mS-SQ-D3j"/>
                                     <constraint firstItem="EGe-FQ-viO" firstAttribute="leading" secondItem="Rm9-ao-1Bw" secondAttribute="leading" constant="1" id="klN-80-g1o"/>
                                     <constraint firstAttribute="bottom" secondItem="EGe-FQ-viO" secondAttribute="bottom" constant="1" id="oCe-6V-Y6U"/>
-                                    <constraint firstAttribute="height" constant="30" id="oXL-iF-VJj"/>
-                                    <constraint firstAttribute="width" constant="30" id="tBS-e0-GEL"/>
+                                    <constraint firstAttribute="height" constant="32" id="oXL-iF-VJj"/>
+                                    <constraint firstAttribute="width" constant="32" id="tBS-e0-GEL"/>
                                     <constraint firstAttribute="trailing" secondItem="EGe-FQ-viO" secondAttribute="trailing" constant="1" id="wea-nd-F5b"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
+                                        <integer key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lHJ-XO-2KU">
-                                <rect key="frame" x="15" y="0.0" width="30" height="30"/>
+                                <rect key="frame" x="16" y="2" width="32" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iWU-sK-vHE">
-                                        <rect key="frame" x="1" y="1" width="28" height="28"/>
+                                        <rect key="frame" x="1" y="1" width="30" height="30"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="14"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
@@ -106,19 +106,19 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
+                                        <integer key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view tag="102" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6T-4F-hkC">
-                                <rect key="frame" x="30" y="0.0" width="30" height="30"/>
+                                <rect key="frame" x="32" y="2" width="32" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hCn-cd-V5I">
-                                        <rect key="frame" x="1" y="1" width="28" height="28"/>
+                                        <rect key="frame" x="1" y="1" width="30" height="30"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="14"/>
+                                                <integer key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
@@ -133,25 +133,25 @@
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
+                                        <integer key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="v6T-4F-hkC" firstAttribute="height" secondItem="Rm9-ao-1Bw" secondAttribute="height" id="2X3-V3-Q7F"/>
                             <constraint firstItem="lHJ-XO-2KU" firstAttribute="height" secondItem="Rm9-ao-1Bw" secondAttribute="height" id="7kM-fh-tQJ"/>
                             <constraint firstItem="lHJ-XO-2KU" firstAttribute="top" secondItem="Rm9-ao-1Bw" secondAttribute="top" id="B66-8i-oK4"/>
                             <constraint firstItem="Rm9-ao-1Bw" firstAttribute="leading" secondItem="0ks-PC-uWn" secondAttribute="leading" id="DPh-yi-ta6"/>
-                            <constraint firstItem="Rm9-ao-1Bw" firstAttribute="top" secondItem="0ks-PC-uWn" secondAttribute="top" id="F8o-iW-z5D"/>
+                            <constraint firstItem="Rm9-ao-1Bw" firstAttribute="top" secondItem="0ks-PC-uWn" secondAttribute="top" constant="2" id="F8o-iW-z5D"/>
                             <constraint firstItem="lHJ-XO-2KU" firstAttribute="width" secondItem="Rm9-ao-1Bw" secondAttribute="width" id="a02-GF-Grk"/>
-                            <constraint firstAttribute="width" constant="60" id="cNV-5d-CPD"/>
+                            <constraint firstAttribute="width" constant="64" id="cNV-5d-CPD"/>
                             <constraint firstItem="v6T-4F-hkC" firstAttribute="width" secondItem="Rm9-ao-1Bw" secondAttribute="width" id="ick-E3-Cj7"/>
                             <constraint firstItem="lHJ-XO-2KU" firstAttribute="centerX" secondItem="0ks-PC-uWn" secondAttribute="centerX" id="m4Y-b4-4b5"/>
                             <constraint firstItem="v6T-4F-hkC" firstAttribute="top" secondItem="Rm9-ao-1Bw" secondAttribute="top" id="nDf-Eq-zFB"/>
                             <constraint firstAttribute="trailing" secondItem="v6T-4F-hkC" secondAttribute="trailing" id="q3Q-Pb-71f"/>
-                            <constraint firstAttribute="height" constant="30" id="vOY-Ce-Spj"/>
+                            <constraint firstAttribute="height" constant="40" id="vOY-Ce-Spj"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bC-YF-Oyc">
@@ -252,7 +252,7 @@
                     <constraint firstAttribute="trailing" secondItem="UuY-LI-OfG" secondAttribute="trailing" constant="20" id="div-j0-rbh"/>
                     <constraint firstItem="vbR-Lq-Z6z" firstAttribute="leading" secondItem="3FL-ag-Z49" secondAttribute="trailing" constant="24" id="dmg-gu-9Ef"/>
                     <constraint firstItem="UuY-LI-OfG" firstAttribute="top" secondItem="BUK-L1-LQL" secondAttribute="bottom" constant="-3" id="fJF-3G-qli"/>
-                    <constraint firstItem="0ks-PC-uWn" firstAttribute="top" secondItem="vC3-Iy-HDQ" secondAttribute="bottom" id="gN6-sb-7Fy"/>
+                    <constraint firstItem="0ks-PC-uWn" firstAttribute="top" secondItem="vC3-Iy-HDQ" secondAttribute="bottom" constant="-2" id="gN6-sb-7Fy"/>
                     <constraint firstItem="hNQ-iX-474" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="oM3-JD-9JP"/>
                     <constraint firstItem="8jr-Vv-r4T" firstAttribute="top" secondItem="3FL-ag-Z49" secondAttribute="top" id="pBx-Hd-Le1"/>
                     <constraint firstItem="kqc-hW-lde" firstAttribute="centerY" secondItem="hNQ-iX-474" secondAttribute="centerY" id="puv-aW-tab"/>

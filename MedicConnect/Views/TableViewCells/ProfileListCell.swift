@@ -9,6 +9,10 @@
 import UIKit
 import SwiftGifOrigin
 
+protocol ProfileListCellDelegate : class {
+    func profileListCellDidTapReferringUser(_ user: User)
+}
+
 class ProfileListCell: UITableViewCell {
     
     // Buttons
@@ -42,8 +46,11 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var constOfDocsViewWidth: NSLayoutConstraint!
     @IBOutlet var constOfBtnPlayTop: NSLayoutConstraint!
     
+    weak var delegate: ProfileListCellDelegate?
+    
     var postDescription: String = ""
     var postType: String = ""
+    var referringUsers: [User] = []
     
     // Expand/Collpase
     var isExpanded:Bool = false {
@@ -68,6 +75,8 @@ class ProfileListCell: UITableViewCell {
                     self.lblElapsedTime.alpha = 0
                     self.lblDuration.alpha = 0
                     self.playSlider.alpha = 0
+                }, completion: { (success) in
+                    self.constOfDocsViewWidth.constant = 64
                 })
                 
             } else {
@@ -119,6 +128,10 @@ class ProfileListCell: UITableViewCell {
         self.lblElapsedTime.alpha = 0
         self.lblDuration.alpha = 0
         self.playSlider.alpha = 0
+        
+        let tapGestureOnUserAvatars = UITapGestureRecognizer(target: self, action: #selector(onTapUsers(sender:)))
+        self.viewDoctors.addGestureRecognizer(tapGestureOnUserAvatars)
+        
     }
     
     override func layoutSubviews() {
@@ -187,6 +200,8 @@ class ProfileListCell: UITableViewCell {
         }
         // Show referring doctors' images
         self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 10 : 32
+        self.viewDoctors.isUserInteractionEnabled = post.referringUsers.count == 0 ? false : true
+        self.referringUsers = post.referringUsers
         
         for index in 0...2 {
             if let view = self.viewDoctors.viewWithTag(index + 100) {
@@ -201,7 +216,7 @@ class ProfileListCell: UITableViewCell {
                             imgView.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
                                                                                                      text: user.getInitials(),
                                                                                                      font: UIFont(name: "Avenir-Book", size: 13)!,
-                                                                                                     size: CGSize(width: 28, height: 28))
+                                                                                                     size: CGSize(width: 30, height: 30))
                         }
                     }
                     
@@ -211,6 +226,30 @@ class ProfileListCell: UITableViewCell {
             }
         }
         
+    }
+    
+    // MARK: Tap Gesture
+    
+    @objc func onTapUsers(sender: UITapGestureRecognizer) {
+        if self.constOfDocsViewWidth.constant == 150 || self.referringUsers.count == 1 {
+            // Already expanded
+            let view = sender.view
+            let loc = sender.location(in: view)
+            if let subview = view?.hitTest(loc, with: nil),
+                subview.tag >= 100 {
+                let user = self.referringUsers[subview.tag - 100]
+                delegate?.profileListCellDidTapReferringUser(user)
+            }
+            
+        } else {
+            // Expand Referring Doctor images
+            self.constOfDocsViewWidth.constant = 150
+            UIView.animate(withDuration: 0.3, animations: {
+                self.contentView.layoutIfNeeded()
+            }) { (success) in
+                // self.viewDoctors.isUserInteractionEnabled = false
+            }
+        }
     }
     
 }
