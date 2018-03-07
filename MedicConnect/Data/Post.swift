@@ -26,7 +26,7 @@ class Post: NSObject {
     var hashtags: [String] = []
     var postType: String
     var patientId: String = ""
-    var referringUsers: [String] = []
+    var referringUsers: [User] = []
     var deletedUsers: [String] = []
     var orderNumber: String = ""
     var transcriptionUrl: String = ""

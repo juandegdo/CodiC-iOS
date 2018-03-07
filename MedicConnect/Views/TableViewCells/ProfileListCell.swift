@@ -25,6 +25,9 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var lblElapsedTime: UILabel!
     @IBOutlet var lblDuration: UILabel!
     
+    // Container View
+    @IBOutlet var viewDoctors: UIView!
+    
     // ImageViews
     @IBOutlet var ivProgressCircle: UIImageView!
     
@@ -36,6 +39,8 @@ class ProfileListCell: UITableViewCell {
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
     @IBOutlet var constOfLblDateTop: NSLayoutConstraint!
     @IBOutlet var constOfLblDateBottom: NSLayoutConstraint!
+    @IBOutlet var constOfDocsViewWidth: NSLayoutConstraint!
+    @IBOutlet var constOfBtnPlayTop: NSLayoutConstraint!
     
     var postDescription: String = ""
     var postType: String = ""
@@ -55,6 +60,7 @@ class ProfileListCell: UITableViewCell {
                 self.constOfLblDescriptionHeight.constant = self.postType != Constants.PostTypeDiagnosis ? 18 : 0
                 
                 UIView.animate(withDuration: 0.3, animations: {
+                    self.viewDoctors.alpha = 0
                     self.btnSpeaker.alpha = 0
                     self.btnPlay.alpha = 0
                     self.btnBackward.alpha = 0
@@ -79,11 +85,12 @@ class ProfileListCell: UITableViewCell {
                     self.lblDescription.collapsed = false
                 }
                 
-                self.constOfLblDateBottom.constant = 55 + 20
+                self.constOfLblDateBottom.constant = 65 + self.constOfBtnPlayTop.constant
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 
                 UIView.animate(withDuration: 0.7, animations: {
+                    self.viewDoctors.alpha = 1
                     self.btnSpeaker.alpha = 1
                     self.btnPlay.alpha = 1
                     self.btnBackward.alpha = 1
@@ -104,6 +111,7 @@ class ProfileListCell: UITableViewCell {
         super.awakeFromNib()
         
         // Hide bottom controls
+        self.viewDoctors.alpha = 0
         self.btnSpeaker.alpha = 0
         self.btnPlay.alpha = 0
         self.btnBackward.alpha = 0
@@ -115,6 +123,13 @@ class ProfileListCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        // Referring Doctor images
+        for view in self.viewDoctors.subviews {
+            let imgView: UIImageView = view.viewWithTag(200) as! UIImageView
+            imgView.layer.borderWidth = 1.0
+            imgView.layer.borderColor = UIColor.init(red: 107/255.0, green: 199/255.0, blue: 213/255.0, alpha: 1.0).cgColor
+        }
         
         // Slider
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
@@ -131,13 +146,6 @@ class ProfileListCell: UITableViewCell {
         
         self.lblDescription.collapsed = true
         self.lblDescription.text = nil
-        
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
         
     }
 
@@ -174,6 +182,31 @@ class ProfileListCell: UITableViewCell {
                 } else {
                     self.btnSynopsis.setImage(UIImage.init(named: "icon_transcription_active"), for: .normal)
                     self.ivProgressCircle.isHidden = true
+                }
+            }
+        }
+        // Show referring doctors' images
+        self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 10 : 32
+        
+        for index in 0...2 {
+            if let view = self.viewDoctors.viewWithTag(index + 100) {
+                if index < post.referringUsers.count {
+                    view.isHidden = false
+                    
+                    if let imgView = view.viewWithTag(200) as? UIImageView {
+                        let user = post.referringUsers[index]
+                        if let imgURL = URL(string: user.photo) as URL? {
+                            imgView.af_setImage(withURL: imgURL)
+                        } else {
+                            imgView.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                                     text: user.getInitials(),
+                                                                                                     font: UIFont(name: "Avenir-Book", size: 13)!,
+                                                                                                     size: CGSize(width: 28, height: 28))
+                        }
+                    }
+                    
+                } else {
+                    view.isHidden = true
                 }
             }
         }

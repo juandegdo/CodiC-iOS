@@ -189,8 +189,20 @@ class NotificationService: BaseTaskController {
                                     
                                     // Optional referring users
                                     
-                                    if let _referringUsers = _broadcastObj["referring_user"] as? [String] {
-                                        post.referringUsers = _referringUsers
+                                    if let _referringUsers = _broadcastObj["referring_user"] as? [[String : AnyObject]] {
+                                        for referringUser in _referringUsers {
+                                            if let _referUserId = referringUser["_id"] as? String,
+                                                let _referUserEmail = referringUser["email"] as? String {
+                                                let _referUserName = referringUser["name"] as? String ?? ""
+                                                let _referUser = User(id: _referUserId, fullName: _referUserName, email: _referUserEmail)
+                                                
+                                                if let _userPhoto = referringUser["photo"] as? String {
+                                                    _referUser.photo = _userPhoto
+                                                }
+                                                
+                                                post.referringUsers.append(_referUser)
+                                            }
+                                        }
                                     }
                                     
                                     // Optional deleted users
