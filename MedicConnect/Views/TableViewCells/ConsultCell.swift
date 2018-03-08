@@ -199,7 +199,7 @@ class ConsultCell: UITableViewCell {
         }
         
         // Show referring doctors' images
-        self.constOfTxtVHashtagsTop.constant = post.referringUsers.count == 0 ? 17 : 37
+        self.constOfTxtVHashtagsTop.constant = post.referringUsers.count == 0 ? 15 : 37
         self.viewDoctors.isUserInteractionEnabled = post.referringUsers.count == 0 ? false : true
         self.referringUsers = post.referringUsers
         

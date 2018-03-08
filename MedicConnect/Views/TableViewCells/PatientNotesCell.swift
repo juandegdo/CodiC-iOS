@@ -197,7 +197,7 @@ class PatientNotesCell: UITableViewCell {
         }
         
         // Show referring doctors' images
-        self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 20 : 50
+        self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 18 : 46
         self.viewDoctors.isUserInteractionEnabled = post.referringUsers.count == 0 ? false : true
         self.referringUsers = post.referringUsers
         

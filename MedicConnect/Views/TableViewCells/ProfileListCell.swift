@@ -200,7 +200,7 @@ class ProfileListCell: UITableViewCell {
         }
         
         // Show referring doctors' images
-        self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 10 : 32
+        self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 8 : 38
         self.viewDoctors.isUserInteractionEnabled = post.referringUsers.count == 0 ? false : true
         self.referringUsers = post.referringUsers
         
