@@ -24,6 +24,7 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
     @IBOutlet var avatarImageView: UIImageView!
     
     var avatarImage: UIImage?
+    var user: User? = nil
     
     let debouncer = Debouncer(interval: 1.0)
     
@@ -161,52 +162,78 @@ extension WelcomeProfileViewController {
     
     @IBAction func tapSave(_ sender: Any) {
         
-        if let _user = UserController.Instance.getUser() as User? {
-            
-            if self.tfTitle.text != "" {
-                _user.title = self.tfTitle.text!
-            } else {
-                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your title!", message: nil, okButtonTitle: "OK")
+        guard self.user != nil else {
+            print("No user found")
+            return
+        }
+        
+        guard self.tfTitle.text != "" else {
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your title!", message: nil, okButtonTitle: "OK")
+            return
+        }
+        
+        if self.tfMSP.text != "" {
+            if !self.lblMSPError.isHidden {
                 return
             }
+        } else {
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your MSP number!", message: nil, okButtonTitle: "OK")
+            return
+        }
+        
+        guard self.tfLocation.text != "" else {
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your site!", message: nil, okButtonTitle: "OK")
+            return
+        }
+        
+        guard self.tfPhoneNumber.text != "" else {
+            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your phone number!", message: nil, okButtonTitle: "OK")
+            return
+        }
+        
+        self.btnSave.isEnabled = false
+        
+        UserService.Instance.signup(self.user!, completion: {
+            (success: Bool, message: String) in
             
-            if self.tfMSP.text != "" {
-                if !self.lblMSPError.isHidden {
-                    return
-                }
+            if success {
+                // Set FirstLoad to 0 to show tutorials for new users
+                UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
                 
-                _user.msp = self.tfMSP.text!
-            } else {
-                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your MSP number!", message: nil, okButtonTitle: "OK")
-                return
-            }
-            
-            if self.tfLocation.text != "" {
-                _user.location = self.tfLocation.text!
-            } else {
-                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your site!", message: nil, okButtonTitle: "OK")
-                return
-            }
-            
-            if self.tfPhoneNumber.text != "" {
-                _user.phoneNumber = self.tfPhoneNumber.text!
-            } else {
-                AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to fill in your phone number!", message: nil, okButtonTitle: "OK")
-                return
-            }
-            
-            self.btnSave.isEnabled = false
-            
-            UserService.Instance.editUser(user: _user, completion: {
-                (success: Bool, message: String) in
-                if success {
-                    if let _image = self.avatarImageView.image {
-                        
-                        UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
-                            (success: Bool) in
-                            print("\(success) uploading image.")
-                            
-                            if success {
+                if let _user = UserController.Instance.getUser() as User? {
+                    
+                    _user.title = self.tfTitle.text!
+                    _user.msp = self.tfMSP.text!
+                    _user.location = self.tfLocation.text!
+                    _user.phoneNumber = self.tfPhoneNumber.text!
+                    
+                    UserService.Instance.editUser(user: _user, completion: {
+                        (success: Bool, message: String) in
+                        if success {
+                            if let _image = self.avatarImageView.image {
+                                
+                                UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
+                                    (success: Bool) in
+                                    print("\(success) uploading image.")
+                                    
+                                    if success {
+                                        UserService.Instance.getMe(completion: {
+                                            (user: User?) in
+                                            
+                                            DispatchQueue.main.async {
+                                                self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
+                                            }
+                                            
+                                            print("\(success) refreshing user info.")
+                                            
+                                        })
+                                    } else {
+                                        self.btnSave.isEnabled = true
+                                        AlertUtil.showSimpleAlert(self, title: "Uplading your profile image failed. Try again.", message: nil, okButtonTitle: "OK")
+                                    }
+                                })
+                                
+                            } else {
                                 UserService.Instance.getMe(completion: {
                                     (user: User?) in
                                     
@@ -217,37 +244,28 @@ extension WelcomeProfileViewController {
                                     print("\(success) refreshing user info.")
                                     
                                 })
-                            } else {
-                                self.btnSave.isEnabled = true
-                                AlertUtil.showSimpleAlert(self, title: "Uplading your profile image failed. Try again.", message: nil, okButtonTitle: "OK")
-                            }
-                        })
-                        
-                    } else {
-                        UserService.Instance.getMe(completion: {
-                            (user: User?) in
-                            
-                            DispatchQueue.main.async {
-                                self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeLast, sender: nil)
                             }
                             
-                            print("\(success) refreshing user info.")
+                        } else {
+                            self.btnSave.isEnabled = true
                             
-                        })
-                    }
+                            if !message.isEmpty {
+                                AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
+                            }
+                        }
+                    })
                     
-                } else {
-                    self.btnSave.isEnabled = true
-                    
-                    if !message.isEmpty {
-                        AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
-                    }
                 }
-            })
+                
+            } else {
+                self.btnSave.isEnabled = true
+                if !message.isEmpty {
+                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
+                }
+                
+            }
             
-        } else {
-            print("No user found")
-        }
+        })
         
     }
     

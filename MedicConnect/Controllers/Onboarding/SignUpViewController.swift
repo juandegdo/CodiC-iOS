@@ -18,6 +18,8 @@ class SignUpViewController: BaseViewController {
     @IBOutlet var btnSignup: UIButton!
     @IBOutlet var pageControl: UIPageControl!
     
+    var user: User? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,17 @@ class SignUpViewController: BaseViewController {
         
         // Page Control
         self.pageControl.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        
+    }
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        let welcomeProfileVC = segue.destination as! WelcomeProfileViewController
+        welcomeProfileVC.user = self.user
         
     }
     
@@ -82,27 +95,9 @@ extension SignUpViewController {
             return
         }
         
-        let _user = User(fullName: self.tfName.text!, email: self.tfEmail.text!, password: self.tfPassword.text!)
+        self.user = User(fullName: self.tfName.text!, email: self.tfEmail.text!, password: self.tfPassword.text!)
         
-        self.btnSignup.isEnabled = false
-        UserService.Instance.signup(_user, completion: {
-            (success: Bool, message: String) in
-            
-            if success {
-                // Set FirstLoad to 0 to show tutorials for new users
-                UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
-                
-                self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeProfile, sender: nil)
-            } else {
-                if !message.isEmpty {
-                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
-                }
-                
-            }
-            
-            self.btnSignup.isEnabled = true
-            
-        })
+        self.performSegue(withIdentifier: Constants.SegueMedicConnectWelcomeProfile, sender: nil)
         
     }
     
