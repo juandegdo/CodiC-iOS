@@ -479,6 +479,8 @@ extension PatientProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return cell
             }
             
+            cell.delegate = self
+            
             let post = PostController.Instance.getPatientNotes()[indexPath.row]
             cell.setData(post: post)
             
@@ -654,6 +656,39 @@ extension PatientProfileViewController {
                 
             })
             
+        }
+    }
+    
+}
+
+extension PatientProfileViewController: PatientNotesCellDelegate {
+    
+    func patientNotesCellDidTapReferringUser(_ user: User) {
+        // Show referring user profile
+        if  let _me = UserController.Instance.getUser() as User? {
+            if _me.id == user.id {
+                return
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+                
+                if let blockedby = _me.blockedby as? [User] {
+                    if blockedby.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                if let blocking = _me.blocking as? [User] {
+                    if blocking.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                
+                vc.currentUser = user
+                self.present(vc, animated: false, completion: nil)
+                
+            }
         }
     }
     
