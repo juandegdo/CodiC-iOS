@@ -292,8 +292,7 @@ open class ExpandableLabel: UILabel {
     
     fileprivate func textWillBeTruncated(_ text: NSAttributedString) -> Bool {
         let lines = text.lines(for: Constants.ScreenWidth - 63.0)
-//        return collapsedNumberOfLines > 0 && collapsedNumberOfLines < lines.count
-        return collapsedNumberOfLines < lines.count
+        return (collapsedNumberOfLines > 0 && collapsedNumberOfLines < lines.count) || (collapsedNumberOfLines == 0 && lines.count > 1)
     }
     
     // MARK: Touch Handling

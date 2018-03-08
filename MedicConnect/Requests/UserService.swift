@@ -1130,7 +1130,7 @@ class UserService: BaseTaskController {
                 }
                 
                 if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
+//                    print("Response: \(response.result.value!)")
                 }
                 
                 var posts: [Post] = []
