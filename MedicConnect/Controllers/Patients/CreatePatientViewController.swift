@@ -230,13 +230,18 @@ extension CreatePatientViewController {
     }
     
     @IBAction func onSaveChange(sender: AnyObject!) {
-        guard  self.tfName.text?.count != 0 else {
+        guard self.tfName.text?.count != 0 else {
             AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your patient name!", message: nil, okButtonTitle: "OK")
             return
         }
         
-        guard  self.tfPHN.text?.count != 0 else {
+        guard self.tfPHN.text?.count != 0 else {
             AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your patient number!", message: nil, okButtonTitle: "OK")
+            return
+        }
+        
+        guard self.tfPHN.text?.count == 10 else {
+            AlertUtil.showSimpleAlert(self, title: "Oops, your patient number should be 10 digits!", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -244,8 +249,13 @@ extension CreatePatientViewController {
             return
         }
         
-        guard  self.tfBirthdate.text?.count != 0 else {
+        guard self.tfBirthdate.text?.count != 0 else {
             AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your patient birthdate!", message: nil, okButtonTitle: "OK")
+            return
+        }
+        
+        guard self.birthDate.compare(Date()) == .orderedAscending else {
+            AlertUtil.showSimpleAlert(self, title: "Oops, your patient birthdate must be earlier than current date!", message: nil, okButtonTitle: "OK")
             return
         }
         
