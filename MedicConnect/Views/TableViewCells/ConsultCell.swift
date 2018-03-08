@@ -10,6 +10,10 @@ import UIKit
 import AlamofireImage
 import Sheriff
 
+protocol ConsultCellDelegate : class {
+    func consultCellDidTapReferringUser(_ user: User)
+}
+
 class ConsultCell: UITableViewCell {
     
     // ImageViews
@@ -27,6 +31,8 @@ class ConsultCell: UITableViewCell {
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
     @IBOutlet var constOfLblDateBottom: NSLayoutConstraint!
     @IBOutlet var constOfTxtVHashtagsHeight: NSLayoutConstraint!
+    @IBOutlet var constOfTxtVHashtagsTop: NSLayoutConstraint!
+    @IBOutlet var constOfDocsViewWidth: NSLayoutConstraint!
     
     // Labels
     @IBOutlet var lblUsername: UILabel!
@@ -39,10 +45,16 @@ class ConsultCell: UITableViewCell {
     // TextView
     @IBOutlet weak var txtVHashtags: UITextView!
     
+    // Container View
+    @IBOutlet var viewDoctors: UIView!
+    
     // Slider
     @IBOutlet weak var playSlider: PlaySlider!
     
+    weak var delegate: ConsultCellDelegate?
+    
     var postDescription: String = ""
+    var referringUsers: [User] = []
     
     // Expand/Collpase
     var isExpanded: Bool = false {
@@ -59,6 +71,7 @@ class ConsultCell: UITableViewCell {
                 self.constOfLblDescriptionHeight.constant = 18
                 
                 UIView.animate(withDuration: 0.3, animations: {
+                    self.viewDoctors.alpha = 0
                     self.txtVHashtags.alpha = 0
                     self.btnSpeaker.alpha = 0
                     self.btnPlay.alpha = 0
@@ -67,6 +80,8 @@ class ConsultCell: UITableViewCell {
                     self.lblElapsedTime.alpha = 0
                     self.lblDuration.alpha = 0
                     self.playSlider.alpha = 0
+                }, completion: { (success) in
+                    self.constOfDocsViewWidth.constant = 64
                 })
                 
             } else {
@@ -83,11 +98,12 @@ class ConsultCell: UITableViewCell {
                 let boundingBox = self.txtVHashtags.text == "" ? CGRect.zero : self.txtVHashtags.text!.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font: self.txtVHashtags.font!], context: nil)
                 
                 self.constOfTxtVHashtagsHeight.constant = self.txtVHashtags.text == "" ? ceil(boundingBox.height) : ceil(boundingBox.height) + 16.0
-                self.constOfLblDateBottom.constant = self.constOfTxtVHashtagsHeight.constant + 17 + 65
+                self.constOfLblDateBottom.constant = self.constOfTxtVHashtagsHeight.constant + self.constOfTxtVHashtagsTop.constant + 65
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 
                 UIView.animate(withDuration: 0.7, animations: {
+                    self.viewDoctors.alpha = 1
                     self.txtVHashtags.alpha = 1
                     self.btnSpeaker.alpha = 1
                     self.btnPlay.alpha = 1
@@ -109,6 +125,7 @@ class ConsultCell: UITableViewCell {
         super.awakeFromNib()
         
         // Hide bottom controls
+        self.viewDoctors.alpha = 0
         self.txtVHashtags.alpha = 0
         self.btnSpeaker.alpha = 0
         self.btnPlay.alpha = 0
@@ -117,10 +134,21 @@ class ConsultCell: UITableViewCell {
         self.lblElapsedTime.alpha = 0
         self.lblDuration.alpha = 0
         self.playSlider.alpha = 0
+        
+        let tapGestureOnUserAvatars = UITapGestureRecognizer(target: self, action: #selector(onTapUsers(sender:)))
+        self.viewDoctors.addGestureRecognizer(tapGestureOnUserAvatars)
+        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        // Referring Doctor images
+        for view in self.viewDoctors.subviews {
+            let imgView: UIImageView = view.viewWithTag(200) as! UIImageView
+            imgView.layer.borderWidth = 1.0
+            imgView.layer.borderColor = UIColor.init(red: 107/255.0, green: 199/255.0, blue: 213/255.0, alpha: 1.0).cgColor
+        }
         
         // Slider
         self.playSlider.setThumbImage(UIImage(named: "icon_play_slider_pin"), for: .normal)
@@ -170,6 +198,34 @@ class ConsultCell: UITableViewCell {
             }
         }
         
+        // Show referring doctors' images
+        self.constOfTxtVHashtagsTop.constant = post.referringUsers.count == 0 ? 17 : 37
+        self.viewDoctors.isUserInteractionEnabled = post.referringUsers.count == 0 ? false : true
+        self.referringUsers = post.referringUsers
+        
+        for index in 0...2 {
+            if let view = self.viewDoctors.viewWithTag(index + 100) {
+                if index < post.referringUsers.count {
+                    view.isHidden = false
+                    
+                    if let imgView = view.viewWithTag(200) as? UIImageView {
+                        let user = post.referringUsers[index]
+                        if let imgURL = URL(string: user.photo) as URL? {
+                            imgView.af_setImage(withURL: imgURL)
+                        } else {
+                            imgView.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                              text: user.getInitials(),
+                                                                                              font: UIFont(name: "Avenir-Book", size: 13)!,
+                                                                                              size: CGSize(width: 30, height: 30))
+                        }
+                    }
+                    
+                } else {
+                    view.isHidden = true
+                }
+            }
+        }
+        
         // Set hashtags textview
         self.txtVHashtags.text = post.hashtags.count > 0 ? post.hashtags.joined(separator: " ") : ""
                 
@@ -184,6 +240,30 @@ class ConsultCell: UITableViewCell {
                                                                                          size: CGSize(width: 30, height: 30))
         }
         
+    }
+    
+    // MARK: Tap Gesture
+    
+    @objc func onTapUsers(sender: UITapGestureRecognizer) {
+        if self.constOfDocsViewWidth.constant == 150 || self.referringUsers.count == 1 {
+            // Already expanded
+            let view = sender.view
+            let loc = sender.location(in: view)
+            if let subview = view?.hitTest(loc, with: nil),
+                subview.tag >= 100 {
+                let user = self.referringUsers[subview.tag - 100]
+                delegate?.consultCellDidTapReferringUser(user)
+            }
+            
+        } else {
+            // Expand Referring Doctor images
+            self.constOfDocsViewWidth.constant = 150
+            UIView.animate(withDuration: 0.3, animations: {
+                self.contentView.layoutIfNeeded()
+            }) { (success) in
+                // self.viewDoctors.isUserInteractionEnabled = false
+            }
+        }
     }
     
 }

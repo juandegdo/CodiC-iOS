@@ -557,6 +557,8 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         
         let cell: ConsultCell = tableView.dequeueReusableCell(withIdentifier: ConsultCellID) as! ConsultCell
         
+        cell.delegate = self
+        
         let post = searchResult[indexPath.row]
         cell.setData(post: post)
         
@@ -737,6 +739,15 @@ extension ConsultsViewController : UITextFieldDelegate {
         self.loadSearchResult(txtAfterUpdate as String)
         
         return true
+    }
+    
+}
+
+extension ConsultsViewController: ConsultCellDelegate {
+    
+    func consultCellDidTapReferringUser(_ user: User) {
+        // Show referring user profile
+        self.callProfileVC(user: user)
     }
     
 }
