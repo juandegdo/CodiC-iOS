@@ -577,9 +577,10 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
             cell.btnSynopsis.addTarget(self, action: #selector(onSynopsis(sender:)), for: .touchUpInside)
         }
         
-        let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
-        cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
-        cell.txtVHashtags.tag = indexPath.row
+        cell.txtVHashtags.isUserInteractionEnabled = false
+//        let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
+//        cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
+//        cell.txtVHashtags.tag = indexPath.row
         
         cell.btnSpeaker.tag = indexPath.row
         if cell.btnSpeaker.allTargets.count == 0 {
