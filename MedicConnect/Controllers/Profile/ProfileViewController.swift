@@ -39,6 +39,8 @@ class ProfileViewController: BaseViewController {
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
+    var activityIndicatorView = UIActivityIndicatorView()
+    
     var firstLoad: Bool = true
     var postType: String = Constants.PostTypeDiagnosis
     var vcDisappearType : ViewControllerDisappearType = .other
@@ -604,6 +606,24 @@ class ProfileViewController: BaseViewController {
         
     }
     
+    // MARK: Activity Indicator
+    
+    func startIndicating(){
+        activityIndicatorView.center = self.view.center
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.activityIndicatorViewStyle = .gray
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopIndicating() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.removeFromSuperview()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
+    
 }
 
 extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
@@ -761,19 +781,28 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             if tableView == self.tableView {
                 if let _user = UserController.Instance.getUser() as User? {
                     self.releasePlayer()
+                    self.startIndicating()
                     
                     let _post = _user.getPosts(type: self.postType)[indexPath.row]
+                    
                     PostService.Instance.deletePost(id: _post.id, completion: {
                         (success: Bool) in
+                        self.stopIndicating()
+                        
+                        if success {
+                            DispatchQueue.main.async {
+                                let _ = UserController.Instance.deletePost(id: _post.id)
+                                tableView.setEditing(false, animated: true)
+                                self.tableView.reloadData()
+                                
+                                // Reset diagnosis and consults count
+                                self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
+                                self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
+                            }
+                        } else {
+                            AlertUtil.showSimpleAlert(self, title: "You have failed to delete the consult Please try again.", message: nil, okButtonTitle: "OK")
+                        }
                     })
-                    
-                    let _ = UserController.Instance.deletePost(id: _post.id)
-                    tableView.setEditing(false, animated: true)
-                    self.tableView.reloadData()
-                    
-                    // Reset diagnosis and consults count
-                    self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
-                    self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
                     
                 }
             }
