@@ -51,6 +51,7 @@ class ProfileListCell: UITableViewCell {
     var postDescription: String = ""
     var postType: String = ""
     var referringUsers: [User] = []
+    var reload: Bool = false
     
     // Expand/Collpase
     var isExpanded:Bool = false {
@@ -66,7 +67,9 @@ class ProfileListCell: UITableViewCell {
                 self.constOfLblDateBottom.constant = 20
                 self.constOfLblDescriptionHeight.constant = self.postType != Constants.PostTypeDiagnosis ? 18 : 0
                 
-                UIView.animate(withDuration: 0.3, animations: {
+                let animationDuration = !self.reload ? 0.3 : 0
+                
+                UIView.animate(withDuration: animationDuration, animations: {
                     self.viewDoctors.alpha = 0
                     self.btnSpeaker.alpha = 0
                     self.btnPlay.alpha = 0
@@ -98,7 +101,9 @@ class ProfileListCell: UITableViewCell {
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 
-                UIView.animate(withDuration: 0.7, animations: {
+                let animationDuration = !self.reload ? 0.7 : 0
+                
+                UIView.animate(withDuration: animationDuration, animations: {
                     self.viewDoctors.alpha = 1
                     self.btnSpeaker.alpha = 1
                     self.btnPlay.alpha = 1
@@ -113,6 +118,9 @@ class ProfileListCell: UITableViewCell {
                     self.lblDescription.numberOfLines = 0
 //                }
             }
+            
+            // Set reload to false
+            self.reload = false
         }
     }
     
@@ -226,6 +234,9 @@ class ProfileListCell: UITableViewCell {
                 }
             }
         }
+        
+        // Set reload to true
+        self.reload = true
         
     }
     

@@ -45,6 +45,7 @@ class ProfileViewController: BaseViewController {
     var postType: String = Constants.PostTypeDiagnosis
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
+    var selectedRowIndex = -1
     
     var menuButton: ExpandingMenuButton?
     
@@ -113,6 +114,8 @@ class ProfileViewController: BaseViewController {
         
         self.imgAvatar.layer.borderWidth = 1.5
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
+        
+        self.selectedRowIndex = (self.tableView.indexPathForSelectedRow != nil) ? self.tableView.indexPathForSelectedRow!.row : -1
         
         self.updateUI()
         self.loadAll()
@@ -744,6 +747,16 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 self.expandedRows.remove(post.id)
                 
             case false:
+                do {
+                    if self.selectedRowIndex > -1 {
+                        if let oldCell = tableView.cellForRow(at: IndexPath.init(row: self.selectedRowIndex, section: 0)) as? ProfileListCell {
+                            oldCell.isExpanded = false
+                            self.selectedRowIndex = -1
+                        }
+                    }
+                }
+                
+                self.expandedRows.removeAll()
                 self.expandedRows.insert(post.id)
             }
             
@@ -806,6 +819,15 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                     
                 }
             }
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if let _cell = cell as? ConsultCell,
+            _cell.isExpanded == true {
+            _cell.isExpanded = false
         }
         
     }

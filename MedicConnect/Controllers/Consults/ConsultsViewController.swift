@@ -59,6 +59,8 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        self.selectedRowIndex = (self.tvConsults.indexPathForSelectedRow != nil) ? self.tvConsults.indexPathForSelectedRow!.row : -1
+        
         if let tabvc = self.tabBarController as UITabBarController? {
             DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
         }
@@ -679,9 +681,10 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         if let _cell = cell as? ConsultCell,
             _cell.isExpanded == true {
             
-//            self.tvConsults.beginUpdates()
-            _cell.isExpanded = false
-//            self.tvConsults.endUpdates()
+            if let _cell = cell as? ConsultCell,
+                _cell.isExpanded == true {
+                _cell.isExpanded = false
+            }
             
         }
         
