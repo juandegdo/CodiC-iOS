@@ -55,6 +55,7 @@ class ConsultCell: UITableViewCell {
     
     var postDescription: String = ""
     var referringUsers: [User] = []
+    var reload: Bool = false
     
     // Expand/Collpase
     var isExpanded: Bool = false {
@@ -70,7 +71,9 @@ class ConsultCell: UITableViewCell {
                 self.constOfLblDateBottom.constant = 15
                 self.constOfLblDescriptionHeight.constant = 18
                 
-                UIView.animate(withDuration: 0.3, animations: {
+                let animationDuration = !self.reload ? 0.3 : 0
+                
+                UIView.animate(withDuration: animationDuration, animations: {
                     self.viewDoctors.alpha = 0
                     self.txtVHashtags.alpha = 0
                     self.btnSpeaker.alpha = 0
@@ -102,7 +105,9 @@ class ConsultCell: UITableViewCell {
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 
-                UIView.animate(withDuration: 0.7, animations: {
+                let animationDuration = !self.reload ? 0.7 : 0
+                
+                UIView.animate(withDuration: animationDuration, animations: {
                     self.viewDoctors.alpha = 1
                     self.txtVHashtags.alpha = 1
                     self.btnSpeaker.alpha = 1
@@ -118,6 +123,10 @@ class ConsultCell: UITableViewCell {
                     self.lblDescription.numberOfLines = 0
 //                }
             }
+            
+            // Set reload to false
+            self.reload = false
+            
         }
     }
     
@@ -239,6 +248,9 @@ class ConsultCell: UITableViewCell {
                                                                                          font: UIFont(name: "Avenir-Book", size: 14)!,
                                                                                          size: CGSize(width: 30, height: 30))
         }
+        
+        // Set reload to true
+        self.reload = true
         
     }
     

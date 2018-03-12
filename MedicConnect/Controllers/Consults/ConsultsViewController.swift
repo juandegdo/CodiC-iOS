@@ -642,14 +642,13 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         case false:
             do {
                 if self.selectedRowIndex > -1 {
-                    guard let oldCell = tableView.cellForRow(at: IndexPath.init(row: self.selectedRowIndex, section: 0)) as? ConsultCell
-                        else { return }
-                    
-                    oldCell.isExpanded = false
-                    self.expandedRows.removeAll()
-                    self.selectedRowIndex = -1
+                    if let oldCell = tableView.cellForRow(at: IndexPath.init(row: self.selectedRowIndex, section: 0)) as? ConsultCell {
+                        oldCell.isExpanded = false
+                        self.selectedRowIndex = -1
+                    }
                 }
                 
+                self.expandedRows.removeAll()
                 self.expandedRows.insert(post.id)
             }
         }
@@ -672,6 +671,19 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
         cell.isExpanded = false
         
         self.tvConsults.endUpdates()
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if let _cell = cell as? ConsultCell,
+            _cell.isExpanded == true {
+            
+//            self.tvConsults.beginUpdates()
+            _cell.isExpanded = false
+//            self.tvConsults.endUpdates()
+            
+        }
         
     }
     
