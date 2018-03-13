@@ -22,6 +22,7 @@ pod 'Crashlytics'
 pod 'SwiftGifOrigin', '~> 1.6.1'
 pod 'SwiftMoment', :git => 'https://github.com/danielyang112/SwiftMoment.git'
 pod 'SwiftValidators'
+pod 'SinchRTC'
 
   target 'MedicConnectTests' do
     inherit! :search_paths
