@@ -35,6 +35,11 @@ class SplashViewController: UIViewController {
                 if let _user = user as User? {
                     // User logged in
                     UserController.Instance.setUser(_user)
+                    
+                    // Configure sinch client
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.configureSinchClient(_user.id)
+                    
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)
                 } else {
                     // User not logged in properly

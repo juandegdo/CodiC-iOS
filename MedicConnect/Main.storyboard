@@ -2259,6 +2259,103 @@ audio/video calling feature.</string>
             </objects>
             <point key="canvasLocation" x="1271" y="3003"/>
         </scene>
+        <!--Call Screen View Controller-->
+        <scene sceneID="Co4-Cf-A2G">
+            <objects>
+                <viewController storyboardIdentifier="CallScreenViewController" id="mfa-mr-5Ek" customClass="CallScreenViewController" customModule="CODI_C" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="adp-I1-dDI"/>
+                        <viewControllerLayoutGuide type="bottom" id="xKg-gt-ew6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hnx-BS-NVk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YK0-Ip-roT">
+                                <rect key="frame" x="158" y="60" width="98" height="98"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="98" id="Chl-RC-dDy"/>
+                                    <constraint firstAttribute="height" constant="98" id="Oav-Xz-qFy"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="49"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xt3-QN-51l">
+                                <rect key="frame" x="207" y="368" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="isa-3L-44M">
+                                <rect key="frame" x="20" y="676" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="h8u-HT-KOt"/>
+                                    <constraint firstAttribute="width" constant="100" id="pah-BP-z0r"/>
+                                </constraints>
+                                <state key="normal" title="Decline">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDeclineWithSender:" destination="mfa-mr-5Ek" eventType="touchUpInside" id="lLN-Nu-2Vo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SEn-Vc-L9V">
+                                <rect key="frame" x="294" y="676" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Xkr-Yf-CXg"/>
+                                    <constraint firstAttribute="width" constant="100" id="i2v-aF-eTX"/>
+                                </constraints>
+                                <state key="normal" title="Accept">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onAcceptWithSender:" destination="mfa-mr-5Ek" eventType="touchUpInside" id="2NF-n7-tcE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DIQ-Tf-Dyf">
+                                <rect key="frame" x="157" y="676" width="100" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HPh-5g-MIs"/>
+                                    <constraint firstAttribute="width" constant="100" id="fvz-6l-ctO"/>
+                                </constraints>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDeclineWithSender:" destination="mfa-mr-5Ek" eventType="touchUpInside" id="LGJ-wz-gZb"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.078431372549019607" green="0.078431372549019607" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="isa-3L-44M" firstAttribute="leading" secondItem="hnx-BS-NVk" secondAttribute="leading" constant="20" id="1x5-Yk-S7Q"/>
+                            <constraint firstItem="YK0-Ip-roT" firstAttribute="centerX" secondItem="hnx-BS-NVk" secondAttribute="centerX" id="303-ck-SZs"/>
+                            <constraint firstAttribute="bottom" secondItem="isa-3L-44M" secondAttribute="bottom" constant="20" id="60i-j6-RCz"/>
+                            <constraint firstItem="DIQ-Tf-Dyf" firstAttribute="centerX" secondItem="hnx-BS-NVk" secondAttribute="centerX" id="9ta-ru-SKe"/>
+                            <constraint firstItem="Xt3-QN-51l" firstAttribute="centerY" secondItem="hnx-BS-NVk" secondAttribute="centerY" id="BcF-Qo-KiR"/>
+                            <constraint firstItem="YK0-Ip-roT" firstAttribute="top" secondItem="hnx-BS-NVk" secondAttribute="top" constant="60" id="C7I-hI-oCA"/>
+                            <constraint firstAttribute="trailing" secondItem="SEn-Vc-L9V" secondAttribute="trailing" constant="20" id="GsF-lT-Fcn"/>
+                            <constraint firstAttribute="bottom" secondItem="SEn-Vc-L9V" secondAttribute="bottom" constant="20" id="Hzq-I0-ahe"/>
+                            <constraint firstItem="Xt3-QN-51l" firstAttribute="centerX" secondItem="hnx-BS-NVk" secondAttribute="centerX" id="UEs-f7-W4F"/>
+                            <constraint firstAttribute="bottom" secondItem="DIQ-Tf-Dyf" secondAttribute="bottom" constant="20" id="f2u-la-YTz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnAccept" destination="SEn-Vc-L9V" id="Ne0-3X-ESd"/>
+                        <outlet property="btnCancel" destination="DIQ-Tf-Dyf" id="7RT-yx-bZ6"/>
+                        <outlet property="btnDecline" destination="isa-3L-44M" id="v8f-1O-ckN"/>
+                        <outlet property="ivProfileImage" destination="YK0-Ip-roT" id="js6-gQ-roy"/>
+                        <outlet property="lblDescription" destination="Xt3-QN-51l" id="DWx-AT-jaf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dcp-Ru-nn2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2087" y="3003"/>
+        </scene>
         <!--Pre Recording Broadcast View Controller-->
         <scene sceneID="ecF-5P-vE1">
             <objects>

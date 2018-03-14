@@ -15,6 +15,7 @@
 #import "SCSiriWaveformView.h"
 #import <CommonCrypto/CommonCrypto.h>
 #import <AbbyyRtrSDK/AbbyyRtrSDK.h>
+#import <Sinch/Sinch.h>
 
 #ifndef MedicConnect_Bridging_Header_h
 #define MedicConnect_Bridging_Header_h

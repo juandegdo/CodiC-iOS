@@ -16,10 +16,16 @@ import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    
+    static let kSinchApplicationKey = "7297db41-4f67-499c-940d-1edff525d48e"
+    static let kSinchApplicationSecret = "BcDM5Av1XkGLb3z5DLiK4A=="
+    static let kSinchHostname = "sandbox.sinch.com" // devlopment, change to production for release clientapi.sinch.com
 
     var window: UIWindow?
     var launchedURL: URL? = nil
     var orientationLock = UIInterfaceOrientationMask.portrait
+    
+    var sinchClient: SINClient?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -326,7 +332,79 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIDevice.current.setValue(rotateOrientation.rawValue, forKey: "orientation")
         }
     }
+    
+    // MARK: - Sinch
+    
+    func configureSinchClient(_ userId: String) {
+        // Instantiate a Sinch client object
+        self.sinchClient = Sinch.client(withApplicationKey: AppDelegate.kSinchApplicationKey,
+                                        applicationSecret: AppDelegate.kSinchApplicationSecret,
+                                        environmentHost: AppDelegate.kSinchHostname,
+                                        userId: userId)
+        
+        // Specify the client capabilities.
+        // (At least one of the messaging or calling capabilities should be enabled.)
+        self.sinchClient?.setSupportCalling(true)
+        self.sinchClient?.setSupportPushNotifications(true)
+        
+        // Assign as SINClientDelegate
+        self.sinchClient?.delegate = self
+        self.sinchClient?.call().delegate = self
+        
+        // Start the Sinch Client
+        self.sinchClient?.start()
+        
+        // Start listening for incoming calls and messages
+        self.sinchClient?.startListeningOnActiveConnection()
+        
+    }
 
+}
+
+extension AppDelegate: SINClientDelegate {
+    
+    func clientDidStart(_ client: SINClient!) {
+        print("client did start")
+    }
+    
+    func clientDidFail(_ client: SINClient!, error: Error!) {
+        print("client did fail: \(error.localizedDescription)")
+    }
+    
+    func client(_ client: SINClient!, logMessage message: String!, area: String!, severity: SINLogSeverity, timestamp: Date!) {
+        print(message)
+    }
+    
+}
+
+extension AppDelegate: SINCallClientDelegate {
+    
+    func client(_ client: SINCallClient!, didReceiveIncomingCall call: SINCall!) {
+        // Start playing ringing tone
+//        self.callReceivedOnRemoteEnd(call)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
+            vc.call = call
+            if let vvc = self.window?.rootViewController {
+                vvc.present(vc, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    func callReceivedOnRemoteEnd(_ call: SINCall!) {
+        
+        let soundFilePath = Bundle.main.path(forResource: "progresstone", ofType: "wav")
+        // get audio controller from SINClient
+        let audioController: SINAudioController? = self.sinchClient?.audioController()
+        audioController?.startPlayingSoundFile(soundFilePath, loop: false)
+        
+    }
+    
+}
+
+extension AppDelegate: SINCallDelegate {
+    
 }
 
 extension UIWindow {
