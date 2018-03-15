@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var orientationLock = UIInterfaceOrientationMask.portrait
     
     var sinchClient: SINClient?
+    var sinchPush: SINManagedPush?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -55,6 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         catch {
             print("Failed to enable playing audio in silent mode")
         }
+        
+        // Sinch Push
+        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.production)  // needs to be changed to production
+        self.sinchPush?.delegate = self
+        self.sinchPush?.setDesiredPushTypeAutomatically()
         
         return true
     }
@@ -97,8 +103,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        self.saveContext()
     }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        self.sinchPush?.application(application, didReceiveRemoteNotification: userInfo)
+    }
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("========Received========\n\(userInfo)\n")
+        
+        self.sinchPush?.application(application, didReceiveRemoteNotification: userInfo)
         
         if let dictInfo = userInfo["aps"] as? NSDictionary {
             if  let _ = UserController.Instance.getUser() as User? {
@@ -163,10 +175,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        
+        print(error.localizedDescription)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        // Add to sinch
+        self.sinchPush?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+        
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print(deviceTokenString)
@@ -174,6 +189,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if let _me = UserController.Instance.getUser() as User? {
             
+            // Add to server
             UserService.Instance.putDeviceToken(deviceToken: deviceTokenString) { (success) in
                 if (success) {
                     _me.deviceToken = deviceTokenString
@@ -336,20 +352,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     // MARK: - Sinch
     
     func configureSinchClient(_ userId: String) {
+        
+        self.sinchPush?.registerUserNotificationSettings()
+        
         // Instantiate a Sinch client object
         self.sinchClient = Sinch.client(withApplicationKey: AppDelegate.kSinchApplicationKey,
                                         applicationSecret: AppDelegate.kSinchApplicationSecret,
                                         environmentHost: AppDelegate.kSinchHostname,
                                         userId: userId)
         
+        // Assign as SINClientDelegate
+        self.sinchClient?.delegate = self
+        self.sinchClient?.call().delegate = self
+        
         // Specify the client capabilities.
         // (At least one of the messaging or calling capabilities should be enabled.)
         self.sinchClient?.setSupportCalling(true)
         self.sinchClient?.setSupportPushNotifications(true)
         
-        // Assign as SINClientDelegate
-        self.sinchClient?.delegate = self
-        self.sinchClient?.call().delegate = self
+        self.sinchClient?.enableManagedPushNotifications()
         
         // Start the Sinch Client
         self.sinchClient?.start()
@@ -357,6 +378,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Start listening for incoming calls and messages
         self.sinchClient?.startListeningOnActiveConnection()
         
+    }
+    
+    func handleRemoteNotification(_ userInfo: [AnyHashable : Any]) {
+        if self.sinchClient == nil {
+            if let _me = UserController.Instance.getUser() as User? {
+                self.configureSinchClient(_me.id)
+            }
+        }
+        
+        let result: SINNotificationResult? = self.sinchClient?.relayRemotePushNotification(userInfo)
+        
+        if ((result?.isCall())! && (result?.call().isTimedOut)!) {
+            self.presentMissedCallNotificationWithRemoteUserId((result?.call().remoteUserId)!)
+        }
+    }
+    
+    func presentMissedCallNotificationWithRemoteUserId(_ remoteUserId: String) {
+//        UIApplication *application = [UIApplication sharedApplication];
+//        if ([application applicationState] == UIApplicationStateBackground) {
+//            UILocalNotification *note = [[UILocalNotification alloc] init];
+//            note.alertBody = [NSString stringWithFormat:@"Missed call from %@", remoteUserId];
+//            note.alertTitle = @"Missed call";
+//            [application presentLocalNotificationNow:note];
+//        }
     }
 
 }
@@ -380,9 +425,6 @@ extension AppDelegate: SINClientDelegate {
 extension AppDelegate: SINCallClientDelegate {
     
     func client(_ client: SINCallClient!, didReceiveIncomingCall call: SINCall!) {
-        // Start playing ringing tone
-//        self.callReceivedOnRemoteEnd(call)
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
             vc.call = call
@@ -392,18 +434,25 @@ extension AppDelegate: SINCallClientDelegate {
         }
     }
     
-    func callReceivedOnRemoteEnd(_ call: SINCall!) {
+    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {
+        let notification: SINLocalNotification = SINLocalNotification.init()
+        notification.alertAction = "Answer"
+        notification.alertBody = "Incoming call"
+        return notification
         
-        let soundFilePath = Bundle.main.path(forResource: "progresstone", ofType: "wav")
-        // get audio controller from SINClient
-        let audioController: SINAudioController? = self.sinchClient?.audioController()
-        audioController?.startPlayingSoundFile(soundFilePath, loop: false)
-        
+//        SINLocalNotification *notification = [[SINLocalNotification alloc] init];
+//        notification.alertAction = @"Answer";
+//        notification.alertBody = [NSString stringWithFormat:@"Incoming call from %@", [call remoteUserId]];
+//        return notification;
     }
     
 }
 
-extension AppDelegate: SINCallDelegate {
+extension AppDelegate: SINManagedPushDelegate {
+    
+    func managedPush(_ managedPush: SINManagedPush!, didReceiveIncomingPushWithPayload payload: [AnyHashable : Any]!, forType pushType: String!) {
+        self.handleRemoteNotification(payload)
+    }
     
 }
 

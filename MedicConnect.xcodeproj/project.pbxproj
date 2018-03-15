@@ -24,6 +24,9 @@
 		652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C331FA9242A009B7765 /* PatientListCell.swift */; };
 		652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652A1C341FA9242A009B7765 /* PatientListCell.xib */; };
 		652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */; };
+		65373AD02059DBA1008A483A /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = 65373ACE2059DB9F008A483A /* incoming.wav */; };
+		65373AD12059DBA1008A483A /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 65373ACF2059DBA0008A483A /* ringback.wav */; };
+		65373AD72059EA4D008A483A /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65373AD62059EA4C008A483A /* PushKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		653D8122200FF31800136E1B /* SaveDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8121200FF31800136E1B /* SaveDiagnosisViewController.swift */; };
 		653D8124200FF32F00136E1B /* SaveConsultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8123200FF32F00136E1B /* SaveConsultViewController.swift */; };
 		653D8127201024D300136E1B /* DiagnosisCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8125201024D300136E1B /* DiagnosisCell.swift */; };
@@ -276,6 +279,9 @@
 		652A1C331FA9242A009B7765 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		652A1C341FA9242A009B7765 /* PatientListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientListCell.xib; sourceTree = "<group>"; };
 		652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
+		65373ACE2059DB9F008A483A /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
+		65373ACF2059DBA0008A483A /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
+		65373AD62059EA4C008A483A /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		653D8121200FF31800136E1B /* SaveDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiagnosisViewController.swift; sourceTree = "<group>"; };
 		653D8123200FF32F00136E1B /* SaveConsultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveConsultViewController.swift; sourceTree = "<group>"; };
 		653D8125201024D300136E1B /* DiagnosisCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisCell.swift; sourceTree = "<group>"; };
@@ -466,6 +472,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65373AD72059EA4D008A483A /* PushKit.framework in Frameworks */,
 				6557841420581C0B0084DD05 /* QuartzCore.framework in Frameworks */,
 				6557841220581C040084DD05 /* OpenGLES.framework in Frameworks */,
 				6557841020581BFC0084DD05 /* GLKit.framework in Frameworks */,
@@ -506,6 +513,7 @@
 		4475F5E7744A51F7CD3E202D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65373AD62059EA4C008A483A /* PushKit.framework */,
 				6557841320581C0B0084DD05 /* QuartzCore.framework */,
 				6557841120581C040084DD05 /* OpenGLES.framework */,
 				6557840F20581BFB0084DD05 /* GLKit.framework */,
@@ -707,6 +715,8 @@
 			children = (
 				6527286A203CF8AC008278D6 /* Fonts */,
 				65D70D242029A35A00686C43 /* AbbyyRtrSDK */,
+				65373ACE2059DB9F008A483A /* incoming.wav */,
+				65373ACF2059DBA0008A483A /* ringback.wav */,
 				655013A220065B4700D88443 /* progress_circle.gif */,
 			);
 			path = Resources;
@@ -1212,6 +1222,7 @@
 				65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */,
 				655013A320065B4800D88443 /* progress_circle.gif in Resources */,
 				653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */,
+				65373AD02059DBA1008A483A /* incoming.wav in Resources */,
 				D270B7E01DE51F7600458C2E /* Assets.xcassets in Resources */,
 				D2F55A9C1DEBB8BB0038A392 /* ProfileListCell.xib in Resources */,
 				A9C741D81F0FDCC700894651 /* PrivateUserTableViewCell.xib in Resources */,
@@ -1225,6 +1236,7 @@
 				D213CB1F1E0CABC6004BEA3C /* SettingListCell.xib in Resources */,
 				65A289741F3BC95300547D72 /* SearchPeopleCell.xib in Resources */,
 				65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */,
+				65373AD12059DBA1008A483A /* ringback.wav in Resources */,
 				657B12841FC38E4C0059B16E /* PatientNotesCell.xib in Resources */,
 				D279AD501E132A26001714FC /* CommentsListCell.xib in Resources */,
 				D21BC8FF1DEA3F0D008F5443 /* ConsultCell.xib in Resources */,

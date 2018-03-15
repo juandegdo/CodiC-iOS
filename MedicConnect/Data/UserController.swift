@@ -119,6 +119,16 @@ class UserController {
         
     }
     
+    func findUserById(_ id: String) -> User? {
+        for index in 0..<self.users.count {
+            if id == self.users[index].id {
+                return self.users[index]
+            }
+        }
+        
+        return nil
+    }
+    
     // User Device Token
     func getDeviceToken() -> String? {
         return self.deviceToken
