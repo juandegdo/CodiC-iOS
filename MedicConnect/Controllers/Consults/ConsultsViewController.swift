@@ -677,17 +677,10 @@ extension ConsultsViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         if let _cell = cell as? ConsultCell,
             _cell.isExpanded == true {
-            
-            if let _cell = cell as? ConsultCell,
-                _cell.isExpanded == true {
-                _cell.isExpanded = false
-            }
-            
+            _cell.isExpanded = false
         }
-        
     }
     
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
