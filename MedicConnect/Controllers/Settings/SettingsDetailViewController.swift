@@ -149,9 +149,7 @@ class SettingsDetailViewController: BaseViewController {
 //                    mailComposer.setMessageBody("This is what they sound like.", isHTML: true)
                     
                     let pathPDF = self.destinationFileUrl.path
-                    print(self.destinationFileUrl.lastPathComponent)
                     if let fileData = NSData(contentsOfFile: pathPDF) {
-                        print("File data loaded.")
                         mailComposer.addAttachmentData(fileData as Data, mimeType: "application/pdf", fileName: self.destinationFileUrl.lastPathComponent)
                     }
                     
