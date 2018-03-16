@@ -12,7 +12,7 @@ import Crashlytics
 
 class ProfileViewController: BaseViewController {
     
-    let OffsetHeaderStop: CGFloat = 240.0
+    let OffsetHeaderStop: CGFloat = 190.0
     let ProfileListCellID = "ProfileListCell"
     
     // Header
@@ -24,10 +24,6 @@ class ProfileViewController: BaseViewController {
     @IBOutlet var lblUsername: UILabel!
     @IBOutlet var lblLocation: UILabel!
     @IBOutlet var lblTitle: UILabel!
-    @IBOutlet var lblDiagnosisNumber: UILabel!
-    @IBOutlet var lblDiagnosisText: UILabel!
-    @IBOutlet var lblConsultNumber: UILabel!
-    @IBOutlet var lblConsultText: UILabel!
     
     // Scroll
     @IBOutlet var mainScrollView: UIScrollView!
@@ -42,7 +38,7 @@ class ProfileViewController: BaseViewController {
     var activityIndicatorView = UIActivityIndicatorView()
     
     var firstLoad: Bool = true
-    var postType: String = Constants.PostTypeDiagnosis
+    var postType: String = Constants.PostTypeConsult
     var vcDisappearType : ViewControllerDisappearType = .other
     var expandedRows = Set<String>()
     var selectedRowIndex = -1
@@ -68,7 +64,7 @@ class ProfileViewController: BaseViewController {
         // Initialize Table Views
         self.tableView.register(UINib(nibName: ProfileListCellID, bundle: nil), forCellReuseIdentifier: ProfileListCellID)
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50.0))
-        self.tableView.estimatedRowHeight = 80.0
+        self.tableView.estimatedRowHeight = 110.0
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
 //        configureExpandingMenuButton()
@@ -238,27 +234,6 @@ class ProfileViewController: BaseViewController {
             self.lblUsername.text = "\(_user.fullName)"
             self.lblLocation.text = _user.location
             self.lblTitle.text = _user.title
-            
-            // Customize Diagnosis and Consults count
-            self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
-            self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
-            
-            if self.postType == Constants.PostTypeDiagnosis {
-                self.lblDiagnosisNumber.textColor = Constants.ColorDarkGray4
-                self.lblDiagnosisText.textColor = Constants.ColorDarkGray4
-                self.lblConsultNumber.textColor = Constants.ColorLightGray1
-                self.lblConsultText.textColor = Constants.ColorLightGray1
-                
-                self.tableView.estimatedRowHeight = 80.0
-                
-            } else {
-                self.lblDiagnosisNumber.textColor = Constants.ColorLightGray1
-                self.lblDiagnosisText.textColor = Constants.ColorLightGray1
-                self.lblConsultNumber.textColor = Constants.ColorDarkGray4
-                self.lblConsultText.textColor = Constants.ColorDarkGray4
-                
-                self.tableView.estimatedRowHeight = 110.0
-            }
             
         }
         
@@ -807,10 +782,6 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                                 let _ = UserController.Instance.deletePost(id: _post.id)
                                 tableView.setEditing(false, animated: true)
                                 self.tableView.reloadData()
-                                
-                                // Reset diagnosis and consults count
-                                self.lblDiagnosisNumber.text  = "\(_user.getPosts(type: Constants.PostTypeDiagnosis).count)"
-                                self.lblConsultNumber.text  = "\(_user.getPosts(type: Constants.PostTypeConsult).count)"
                             }
                         } else {
                             AlertUtil.showSimpleAlert(self, title: "You have failed to delete the consult Please try again.", message: nil, okButtonTitle: "OK")
@@ -863,26 +834,6 @@ extension ProfileViewController : UIScrollViewDelegate {
 extension ProfileViewController {
 
     //MARK: IBActions
-    
-    @IBAction func onDiagnosisTapped(sender: AnyObject!) {
-        if (self.postType == Constants.PostTypeConsult) {
-            self.releasePlayer()
-            
-            self.postType = Constants.PostTypeDiagnosis
-            self.expandedRows = Set<String>()
-            self.updateUI()
-        }
-    }
-    
-    @IBAction func onConsultsTapped(sender: AnyObject!) {
-        if (self.postType == Constants.PostTypeDiagnosis) {
-            self.releasePlayer()
-            
-            self.postType = Constants.PostTypeConsult
-            self.expandedRows = Set<String>()
-            self.updateUI()
-        }
-    }
     
     @IBAction func onRecord(sender: AnyObject!) {
         vcDisappearType = .record
