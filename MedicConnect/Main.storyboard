@@ -21,7 +21,6 @@
             <string>Avenir-Book</string>
             <string>Avenir-Light</string>
             <string>Avenir-Medium</string>
-            <string>Avenir-Roman</string>
         </array>
     </customFonts>
     <scenes>
@@ -44,9 +43,9 @@
                                     <constraint firstAttribute="width" constant="130" id="pRP-JH-W8j"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Critical Online Diagnosistic Intervention" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WH7-l5-0mp">
-                                <rect key="frame" x="56" y="284" width="302.66666666666669" height="23.666666666666686"/>
-                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Critical Outreach &amp; Diagnostic Intervention" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WH7-l5-0mp">
+                                <rect key="frame" x="55" y="284" width="305.33333333333331" height="22"/>
+                                <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                                 <color key="textColor" red="0.58823529409999997" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
