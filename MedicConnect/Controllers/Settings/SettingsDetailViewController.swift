@@ -130,8 +130,37 @@ class SettingsDetailViewController: BaseViewController {
         printAction.setValue(UIImage(named:"icon_print")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         alertController.addAction(printAction)
 
-        let submitMSPAction = UIAlertAction.init(title: "SUBMIT TO MSP", style: .default) { (action) in
-            // Submit to MSP
+        let submitMSPAction = UIAlertAction.init(title: "EMAIL", style: .default) { (action) in
+            // Email
+            if( MFMailComposeViewController.canSendMail()){
+                print("Can send email.")
+                
+                DispatchQueue.main.async {
+                    let mailComposer = MFMailComposeViewController()
+                    mailComposer.mailComposeDelegate = self
+                    
+                    // Set to recipients
+//                    mailComposer.setToRecipients(["yakupad@yandex.com"])
+//
+//                    // Set the subject
+//                    mailComposer.setSubject("email with document pdf")
+//
+//                    // Set mail body
+//                    mailComposer.setMessageBody("This is what they sound like.", isHTML: true)
+                    
+                    let pathPDF = self.destinationFileUrl.path
+                    print(self.destinationFileUrl.lastPathComponent)
+                    if let fileData = NSData(contentsOfFile: pathPDF) {
+                        print("File data loaded.")
+                        mailComposer.addAttachmentData(fileData as Data, mimeType: "application/pdf", fileName: self.destinationFileUrl.lastPathComponent)
+                    }
+                    
+                    //this will compose and present mail to user
+                    self.present(mailComposer, animated: true, completion: nil)
+                }
+            } else {
+                print("email is not supported")
+            }
         }
         
         submitMSPAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
