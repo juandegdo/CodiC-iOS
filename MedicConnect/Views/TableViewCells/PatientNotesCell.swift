@@ -87,7 +87,7 @@ class PatientNotesCell: UITableViewCell {
                 self.lblDescription.text = self.postDescription
                 self.lblDescription.collapsed = false
                 
-                self.constOfImageAvatarBottom.constant = 65 + self.constOfBtnPlayTop.constant
+                self.constOfImageAvatarBottom.constant = 69 + self.constOfBtnPlayTop.constant
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 

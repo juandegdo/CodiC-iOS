@@ -97,7 +97,7 @@ class ProfileListCell: UITableViewCell {
                     self.lblDescription.collapsed = false
                 }
                 
-                self.constOfLblDateBottom.constant = 65 + self.constOfBtnPlayTop.constant
+                self.constOfLblDateBottom.constant = 69 + self.constOfBtnPlayTop.constant
                 
                 self.btnSpeaker.setImage(UIImage(named: AudioHelper.overrideMode == .speaker ? "icon_speaker_on" : "icon_speaker_off"), for: .normal)
                 

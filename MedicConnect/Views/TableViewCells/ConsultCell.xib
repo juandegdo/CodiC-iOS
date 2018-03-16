@@ -336,6 +336,6 @@
         <image name="icon_playlist_backward" width="27" height="28"/>
         <image name="icon_playlist_forward" width="27" height="27"/>
         <image name="icon_playlist_play" width="20" height="23"/>
-        <image name="icon_speaker_on" width="24" height="25"/>
+        <image name="icon_speaker_on" width="25" height="25"/>
     </resources>
 </document>
