@@ -500,6 +500,7 @@ class PatientScanViewController: UIViewController {
     @objc
     func applicationWillEnterForeground(_ notification: NSNotification) {
         self.session?.startRunning()
+        self.isRunning = true
     }
     
     
