@@ -23,4 +23,14 @@ class ConferenceViewController: BaseViewController {
         
     }
     
+    @IBAction func onShowCallScreen(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            if let vvc = appDelegate.window?.visibleViewController() {
+                vvc.present(vc, animated: false, completion: nil)
+            }
+        }
+    }
+    
 }

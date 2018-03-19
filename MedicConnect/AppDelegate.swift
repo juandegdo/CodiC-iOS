@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // Sinch Push
-        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.production)  // needs to be changed to production
+        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.development)  // needs to be changed to production
         self.sinchPush?.delegate = self
         self.sinchPush?.setDesiredPushTypeAutomatically()
         
@@ -439,11 +439,6 @@ extension AppDelegate: SINCallClientDelegate {
         notification.alertAction = "Answer"
         notification.alertBody = "Incoming call"
         return notification
-        
-//        SINLocalNotification *notification = [[SINLocalNotification alloc] init];
-//        notification.alertAction = @"Answer";
-//        notification.alertBody = [NSString stringWithFormat:@"Incoming call from %@", [call remoteUserId]];
-//        return notification;
     }
     
 }
