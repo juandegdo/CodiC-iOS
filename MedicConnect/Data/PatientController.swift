@@ -24,4 +24,18 @@ class PatientController {
         self.patients = patients
     }
     
+    func findPatientById(_ id: String) -> Patient? {
+        if id == "" {
+            return nil
+        }
+        
+        for index in 0..<self.patients.count {
+            if id == self.patients[index].id {
+                return self.patients[index]
+            }
+        }
+        
+        return nil
+    }
+    
 }

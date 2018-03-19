@@ -187,6 +187,10 @@ class ProfileViewController: BaseViewController {
             print("notification: \(success)")
         }
         
+        PatientService.Instance.getPatients(completion: { (success: Bool) in
+            
+        })
+        
     }
     
     func refreshData() {
@@ -481,6 +485,26 @@ class ProfileViewController: BaseViewController {
         
     }
     
+    @objc func onSelectPatient(sender: UITapGestureRecognizer) {
+        guard let _index = sender.view?.tag as Int? else {
+            return
+        }
+        
+        guard let _user = UserController.Instance.getUser() as User? else {
+            return
+        }
+        
+        let post = _user.getPosts(type: self.postType)[_index]
+        if let _patient = PatientController.Instance.findPatientById(post.patientId) {
+            
+            let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
+            patientProfileVC.patient = _patient
+            patientProfileVC.fromAdd = false
+            self.navigationController?.pushViewController(patientProfileVC, animated: true)
+            
+        }
+    }
+    
     @objc func onSelectSpeaker(sender: UIButton) {
         
         if AudioHelper.overrideMode == .speaker {
@@ -650,6 +674,18 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
             
             let post = _user.getPosts(type: self.postType)[indexPath.row]
             cell.setData(post: post)
+            
+            if post.patientId != "" {
+                let tapGestureOnPatient = UITapGestureRecognizer(target: self, action: #selector(onSelectPatient(sender:)))
+                cell.lblBroadcast.addGestureRecognizer(tapGestureOnPatient)
+                cell.lblBroadcast.tag = indexPath.row
+                cell.lblBroadcast.isUserInteractionEnabled = true
+            } else {
+                for recognizer in cell.lblBroadcast.gestureRecognizers ?? [] {
+                    cell.lblBroadcast.removeGestureRecognizer(recognizer)
+                }
+                cell.lblBroadcast.isUserInteractionEnabled = false
+            }
             
             cell.lblDescription.isUserInteractionEnabled = false
             
