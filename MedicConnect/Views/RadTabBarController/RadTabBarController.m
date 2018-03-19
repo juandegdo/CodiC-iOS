@@ -9,7 +9,7 @@
 #import "RadTabBarController.h"
 #import "RadTabBar.h"
 
-@interface RadTabBarController ()
+@interface RadTabBarController () <UITabBarControllerDelegate>
 
 @end
 
@@ -17,6 +17,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.delegate = self;
     
     // Add border on top
     UIView *borderTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 0.5)];
@@ -53,6 +55,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        [(UINavigationController *)viewController popToRootViewControllerAnimated:NO];
+    }
+    
+    return YES;
 }
 
 @end
