@@ -1,17 +1,17 @@
 PODS:
   - ACFloatingTextfield-Swift (1.7)
   - AFImageHelper (3.2.1)
-  - Alamofire (4.6.0)
+  - Alamofire (4.7.0)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
-  - Crashlytics (3.10.0):
-    - Fabric (~> 1.7.3)
-  - Fabric (1.7.3)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.6)
   - FXBlurView (1.6.4)
-  - IQKeyboardManager (5.0.7)
+  - IQKeyboardManager (5.0.8)
   - NSDate+TimeAgo (1.0.6)
   - Sheriff (0.3.2)
-  - SinchRTC (3.12.3)
+  - SinchRTC (3.12.4)
   - SwiftGifOrigin (1.6.1)
   - SwiftMoment (0.7)
   - SwiftValidators (7.0.3)
@@ -53,15 +53,15 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   ACFloatingTextfield-Swift: df075d5ed5d441d8603f985fc106ec7ebe0c673f
   AFImageHelper: 9142599fb4f826b480d177902ab7f0c961bc966c
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
-  Crashlytics: a989ef242b66605577a425733797f810bd2725eb
-  Fabric: bb495bb9a7a7677c6d03a1f8b83d95bc49b47e41
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
-  IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
+  IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   NSDate+TimeAgo: 35601c619b2d59290055e4fe76e61d97677a2360
   Sheriff: d3d03fe6d35aa781e3f42d48f3fb53ed7d04958d
-  SinchRTC: d0114589145c6779e30589119042ad7efc6b42cf
+  SinchRTC: 1b46443f85beeac406b0fd97eb98e1912c4e9dd8
   SwiftGifOrigin: d6679d3ebe9df2e049a84bc52582635107b581f6
   SwiftMoment: dc6dd27012e267819104cbb03f74ff9192dd0b42
   SwiftValidators: 660ce9ef3f0358c25c3a6154f7edc02c7d4a0578

@@ -35,7 +35,9 @@ class NotificationUtil {
         else {  
             UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
         }
+        
     }
+    
     static func isEnabledPushNotification()->Bool {
         let application = UIApplication.shared
         
@@ -49,6 +51,7 @@ class NotificationUtil {
         
         return false
     }
+    
     static func processPushNotificationSettings() {
         let alertController = UIAlertController(title: "Setting", message: "You must enable push notifications to use this feature.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)

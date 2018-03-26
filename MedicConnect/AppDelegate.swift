@@ -13,13 +13,15 @@ import Crashlytics
 import UserNotifications
 import CoreData
 import AVFoundation
+import PushKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, PKPushRegistryDelegate {
     
     static let kSinchApplicationKey = "7297db41-4f67-499c-940d-1edff525d48e"
     static let kSinchApplicationSecret = "BcDM5Av1XkGLb3z5DLiK4A=="
-    static let kSinchHostname = "sandbox.sinch.com" // devlopment, change to production for release clientapi.sinch.com
+    static let kSinchHostname = "sandbox.sinch.com" // devlopment
+//    static let kSinchHostname = "clientapi.sinch.com" // production
 
     var window: UIWindow?
     var launchedURL: URL? = nil
@@ -27,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var sinchClient: SINClient?
     var sinchPush: SINManagedPush?
+    var sinchCallKitProvider: SINCallKitProvider?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -49,6 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // Fallback on earlier versions
         }
         
+        self.voipRegistration()
+        
         // Enable playing audio in silent mode
         do {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
@@ -58,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // Sinch Push
-        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.development)  // needs to be changed to production
+        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.production)  // needs to be changed to production
         self.sinchPush?.delegate = self
         self.sinchPush?.setDesiredPushTypeAutomatically()
         
@@ -88,6 +93,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if let call = self.sinchCallKitProvider?.currentEstablishedCall() {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
+                vc.call = call
+                if let vvc = self.window?.rootViewController {
+                    vvc.present(vc, animated: false, completion: nil)
+                }
+            }
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -214,14 +228,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         if let _ = response.notification.request.content.userInfo as? [String : AnyObject] {
             // Getting user info
-            if  let _ = UserController.Instance.getUser() as User? {
-                NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-            }
+//            if  let _ = UserController.Instance.getUser() as User? {
+//                NotificationUtil.updateNotificationAlert(hasNewAlert: true)
+//            }
         }
         completionHandler()
     }
     
+    // MARK: - PushKit Delegate
+    
+    func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
+        
+    }
+    
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        self.handleRemoteNotification(payload.dictionaryPayload)
+    }
+    
     // MARK: - Private Methods
+    
+    func voipRegistration() {
+        // Register for VoIP notifications
+        let mainQueue = DispatchQueue.main
+        // Create a push registry object
+        let voipRegistry: PKPushRegistry = PKPushRegistry(queue: mainQueue)
+        // Set the registry's delegate to self
+        voipRegistry.delegate = self
+        // Set the push type to VoIP
+        voipRegistry.desiredPushTypes = [PKPushType.voIP]
+    }
     
     func openLink(url: URL, fromLaunch: Bool) {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (fromLaunch ? 0.8 : 0.0)) {
@@ -374,6 +409,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Start listening for incoming calls and messages
         self.sinchClient?.startListeningOnActiveConnection()
         
+        self.sinchCallKitProvider = SINCallKitProvider.init(client: self.sinchClient!)
+        
     }
     
     func handleRemoteNotification(_ userInfo: [AnyHashable : Any]) {
@@ -385,7 +422,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let result: SINNotificationResult? = self.sinchClient?.relayRemotePushNotification(userInfo)
         
-        if ((result?.isCall())! && (result?.call().isTimedOut)!) {
+        if ((result != nil) && (result?.isCall())! && (result?.call().isTimedOut)!) {
             self.presentMissedCallNotificationWithRemoteUserId((result?.call().remoteUserId)!)
         }
     }
@@ -430,18 +467,23 @@ extension AppDelegate: SINCallClientDelegate {
         }
     }
     
-    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {
-        let notification: SINLocalNotification = SINLocalNotification.init()
-        notification.alertAction = "Answer"
-        notification.alertBody = "Incoming call"
-        return notification
+    func client(_ client: SINCallClient!, willReceiveIncomingCall call: SINCall!) {
+        self.sinchCallKitProvider?.reportNewIncomingCall(call)
     }
+    
+//    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {
+//        let notification: SINLocalNotification = SINLocalNotification.init()
+//        notification.alertAction = "Answer"
+//        notification.alertBody = "Incoming call"
+//        return notification
+//    }
     
 }
 
 extension AppDelegate: SINManagedPushDelegate {
     
     func managedPush(_ managedPush: SINManagedPush!, didReceiveIncomingPushWithPayload payload: [AnyHashable : Any]!, forType pushType: String!) {
+        print(payload)
         self.handleRemoteNotification(payload)
     }
     

@@ -107,6 +107,9 @@
 		65D70D7F2029C14E00686C43 /* FindText.rom in Copy Patterns */ = {isa = PBXBuildFile; fileRef = 65D70D592029A4E600686C43 /* FindText.rom */; };
 		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
 		65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0D1F12017F142008A79CB /* VSTextField.swift */; };
+		65F4AEBB2062C15200D75335 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F4AEBA2062C15100D75335 /* CallKit.framework */; };
+		65F4AEC52062C3F100D75335 /* SINCallKitProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */; };
+		65F4AEC62062C3F100D75335 /* AudioControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC32062C3F100D75335 /* AudioControllerDelegate.m */; };
 		8D478D52C56C936A296C4B44 /* Pods_MedicConnectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */; };
 		9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D24ACA81F20E7E700229E29 /* ResetPasswordViewController.swift */; };
 		A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A358721F0742D7005B8011 /* SettingsDetailViewController.swift */; };
@@ -362,6 +365,11 @@
 		65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AbbyyRtrSDK.framework; sourceTree = "<group>"; };
 		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
 		65E0D1F12017F142008A79CB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VSTextField.swift; path = MedicConnect/Views/VSTextField/VSTextField.swift; sourceTree = SOURCE_ROOT; };
+		65F4AEBA2062C15100D75335 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
+		65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINCallKitProvider.m; sourceTree = "<group>"; };
+		65F4AEC22062C3F100D75335 /* SINCallKitProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINCallKitProvider.h; sourceTree = "<group>"; };
+		65F4AEC32062C3F100D75335 /* AudioControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioControllerDelegate.m; sourceTree = "<group>"; };
+		65F4AEC42062C3F100D75335 /* AudioControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioControllerDelegate.h; sourceTree = "<group>"; };
 		6CD8165D0828570BE6D81221 /* Pods-MedicConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.debug.xcconfig"; sourceTree = "<group>"; };
 		6D8CF7F78CFE7BB69B7329A8 /* Pods-MedicConnectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnectTests/Pods-MedicConnectTests.release.xcconfig"; sourceTree = "<group>"; };
 		94CC90B0ADCB7E73FB76698B /* Pods-MedicConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect.release.xcconfig"; sourceTree = "<group>"; };
@@ -472,6 +480,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65F4AEBB2062C15200D75335 /* CallKit.framework in Frameworks */,
 				65373AD72059EA4D008A483A /* PushKit.framework in Frameworks */,
 				6557841420581C0B0084DD05 /* QuartzCore.framework in Frameworks */,
 				6557841220581C040084DD05 /* OpenGLES.framework in Frameworks */,
@@ -513,6 +522,7 @@
 		4475F5E7744A51F7CD3E202D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65F4AEBA2062C15100D75335 /* CallKit.framework */,
 				65373AD62059EA4C008A483A /* PushKit.framework */,
 				6557841320581C0B0084DD05 /* QuartzCore.framework */,
 				6557841120581C040084DD05 /* OpenGLES.framework */,
@@ -810,6 +820,17 @@
 			path = VSTextField;
 			sourceTree = "<group>";
 		};
+		65F4AEC02062C3BB00D75335 /* Sinch */ = {
+			isa = PBXGroup;
+			children = (
+				65F4AEC42062C3F100D75335 /* AudioControllerDelegate.h */,
+				65F4AEC32062C3F100D75335 /* AudioControllerDelegate.m */,
+				65F4AEC22062C3F100D75335 /* SINCallKitProvider.h */,
+				65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */,
+			);
+			path = Sinch;
+			sourceTree = "<group>";
+		};
 		A9A358741F07446B005B8011 /* htmls */ = {
 			isa = PBXGroup;
 			children = (
@@ -923,6 +944,7 @@
 			isa = PBXGroup;
 			children = (
 				A9E444F21F0A43A100F49C7E /* Internet */,
+				65F4AEC02062C3BB00D75335 /* Sinch */,
 				D2301FDE1E5FC71A006C636A /* AlertUtil.swift */,
 				00C748411EFD179200BD3EAE /* NotificationUtil.swift */,
 				D2EB58B61E93E5A700D94194 /* AudioHelper.swift */,
@@ -1473,6 +1495,7 @@
 				653D8127201024D300136E1B /* DiagnosisCell.swift in Sources */,
 				D29891F11E613DBA004C0FC1 /* FavoritesViewController.swift in Sources */,
 				A9E4451D1F0A699000F49C7E /* playlist.xcdatamodeld in Sources */,
+				65F4AEC62062C3F100D75335 /* AudioControllerDelegate.m in Sources */,
 				00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */,
 				65C915D61FCF1687002AC31B /* PatientController.swift in Sources */,
 				D29891F21E613DBA004C0FC1 /* ProfileViewController.swift in Sources */,
@@ -1522,6 +1545,7 @@
 				D2301FDB1E5FBD03006C636A /* UserController.swift in Sources */,
 				65D70D622029B4DF00686C43 /* ScanAreaView.swift in Sources */,
 				652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */,
+				65F4AEC52062C3F100D75335 /* SINCallKitProvider.m in Sources */,
 				D2301FDD1E5FC212006C636A /* WelcomeLastViewController.swift in Sources */,
 				D213CB1B1E0CA7B0004BEA3C /* SettingsViewController.swift in Sources */,
 				D23BFACA1E8AF80600F3934B /* TVButton.swift in Sources */,
