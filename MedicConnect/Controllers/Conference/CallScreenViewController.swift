@@ -84,7 +84,10 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
 //            self.audioController?.disableSpeaker()
         }
         
-        self.audioController?.disableSpeaker()
+        self.speakerEnabled = !(self.call?.details.isVideoOffered)!
+        self.onSpeaker(sender: self.btnSpeaker)
+        
+//        self.audioController?.disableSpeaker()
         self.audioController?.unmute()
     }
 
@@ -106,10 +109,15 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         }
         
         if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
-            self.setCallStatusText("00:00")
-            self.fromCallKit = true
             self.showButtons(.kButtonsAnswerDecline)
-            self.callDidEstablish(self.call)
+            
+            if self.fromCallKit {
+                self.callDidEstablish(self.call)
+            } else {
+                self.setCallStatusText("00:00")
+                self.showButtons(.kButtonsHangup)
+            }
+            
         } else {
             self.setCallStatusText("CALLING...")
             self.showButtons(.kButtonsAnswerDecline)
@@ -139,11 +147,20 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidEstablish(_ call: SINCall!) {
-        if self.call?.details.isVideoOffered == false && !self.fromCallKit {
+        if self.call?.details.isVideoOffered == false {
             self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
+        } else if self.call?.details.isVideoOffered == true {
+            self.audioController?.disableSpeaker()
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                self.audioController?.enableSpeaker()
+            }
+            
+            if self.fromCallKit == true {
+                self.callDidAddVideoTrack(call)
+            }
         }
         
-        self.fromCallKit = false
         self.showButtons(.kButtonsHangup)
         self.audioController?.stopPlayingSoundFile()
     }
