@@ -17,8 +17,6 @@ PODS:
   - SwiftValidators (7.0.3)
   - SZTextView (1.3.0)
   - TLTagsControl (1.0.0)
-  - TwilioVideo (2.0.0-beta3)
-  - TwilioVoice (2.0.3)
 
 DEPENDENCIES:
   - ACFloatingTextfield-Swift (~> 1.7)
@@ -37,8 +35,6 @@ DEPENDENCIES:
   - SwiftValidators
   - SZTextView
   - TLTagsControl (from `https://github.com/danielyang112/TLTagsControl.git`)
-  - TwilioVideo (= 2.0.0-beta3)
-  - TwilioVoice (~> 2.0.0)
 
 EXTERNAL SOURCES:
   SwiftMoment:
@@ -71,9 +67,7 @@ SPEC CHECKSUMS:
   SwiftValidators: 660ce9ef3f0358c25c3a6154f7edc02c7d4a0578
   SZTextView: 094dc6acc9beec537685c545d6e3e0d4975174e1
   TLTagsControl: 34ab7d25f282aa2b8b42e73cc71b96ffe9fa7a15
-  TwilioVideo: 08cada2c04a7a908655fd80a1423a9c762344625
-  TwilioVoice: b8a33002b76aa346fe2641069b2440e9ab40ecd7
 
-PODFILE CHECKSUM: ee7213261de2793fbf2887860db1228408da2ca4
+PODFILE CHECKSUM: c96ab5997019189c67ec6cc6baba6be481a83e7f
 
 COCOAPODS: 1.3.1
