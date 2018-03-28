@@ -67,7 +67,21 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.audioController?.enableSpeaker()
+        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+        var hasHeadphones = false
+        for description in currentRoute.outputs {
+            if description.portType == AVAudioSessionPortHeadphones {
+                hasHeadphones = true
+                break
+            }
+        }
+        
+        if !hasHeadphones {
+            self.audioController?.enableSpeaker()
+        } else {
+            self.audioController?.disableSpeaker()
+        }
+        
         self.audioController?.unmute()
     }
 
