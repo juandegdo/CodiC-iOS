@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // Sinch Push
-        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.production)  // needs to be changed to production
+        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.development)  // needs to be changed to production
         self.sinchPush?.delegate = self
         self.sinchPush?.setDesiredPushTypeAutomatically()
         
@@ -97,6 +97,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
                 vc.call = call
+                vc.fromCallKit = true
+                
                 if let vvc = self.window?.rootViewController {
                     vvc.present(vc, animated: false, completion: nil)
                 }

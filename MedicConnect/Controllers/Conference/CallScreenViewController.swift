@@ -37,9 +37,11 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     @IBOutlet weak var viewLocalVideo: UIView!
     @IBOutlet weak var viewRemoteVideo: UIView!
     
-    var durationTimer: Timer?
-    var speakerEnabled: Bool = false
-    var muted: Bool = false
+    var fromCallKit: Bool = false
+    
+    private var durationTimer: Timer?
+    private var speakerEnabled: Bool = false
+    private var muted: Bool = false
     
     var audioController: SINAudioController? {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -77,11 +79,12 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         }
         
         if !hasHeadphones {
-            self.audioController?.enableSpeaker()
+//            self.audioController?.enableSpeaker()
         } else {
-            self.audioController?.disableSpeaker()
+//            self.audioController?.disableSpeaker()
         }
         
+        self.audioController?.disableSpeaker()
         self.audioController?.unmute()
     }
 
@@ -102,9 +105,16 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             self.lblRemoteUserLocation.text = _user.location
         }
         
-        self.setCallStatusText("CALLING...")
-        self.showButtons(.kButtonsAnswerDecline)
-        self.audioController?.startPlayingSoundFile(self.pathForSound("incoming.wav"), loop: true)
+        if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
+            self.setCallStatusText("00:00")
+            self.fromCallKit = true
+            self.showButtons(.kButtonsAnswerDecline)
+            self.callDidEstablish(self.call)
+        } else {
+            self.setCallStatusText("CALLING...")
+            self.showButtons(.kButtonsAnswerDecline)
+            self.audioController?.startPlayingSoundFile(self.pathForSound("incoming.wav"), loop: true)
+        }
         
         self.viewLocalVideo.layer.borderColor = UIColor.init(red: 147/255.0, green: 203/255.0, blue: 202/255.0, alpha: 1.0).cgColor
         
@@ -129,12 +139,11 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidEstablish(_ call: SINCall!) {
-        self.audioController?.disableSpeaker()
-        
-        if self.call?.details.isVideoOffered == false {
+        if self.call?.details.isVideoOffered == false && !self.fromCallKit {
             self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
         }
         
+        self.fromCallKit = false
         self.showButtons(.kButtonsHangup)
         self.audioController?.stopPlayingSoundFile()
     }
@@ -259,32 +268,34 @@ extension CallScreenViewController {
     }
     
     @IBAction func onAccept(sender: AnyObject) {
+        self.btnAccept.isUserInteractionEnabled = false
+        
         self.audioController?.stopPlayingSoundFile()
         self.call?.answer()
     }
     
     @IBAction func onSpeaker(sender: AnyObject) {
+        self.speakerEnabled = !self.speakerEnabled
+        
         if self.speakerEnabled {
-            self.btnSpeaker.setImage(UIImage(named: "icon_call_speaker"), for: .normal)
-            self.audioController?.disableSpeaker()
-        } else {
             self.btnSpeaker.setImage(UIImage(named: "icon_call_speaker_on"), for: .normal)
             self.audioController?.enableSpeaker()
+        } else {
+            self.btnSpeaker.setImage(UIImage(named: "icon_call_speaker"), for: .normal)
+            self.audioController?.disableSpeaker()
         }
-        
-        self.speakerEnabled = !self.speakerEnabled
     }
     
     @IBAction func onMute(sender: AnyObject) {
+        self.muted = !self.muted
+        
         if self.muted {
-            self.btnMute.setImage(UIImage(named: "icon_mute"), for: .normal)
-            self.audioController?.unmute()
-        } else {
             self.btnMute.setImage(UIImage(named: "icon_muted"), for: .normal)
             self.audioController?.mute()
+        } else {
+            self.btnMute.setImage(UIImage(named: "icon_mute"), for: .normal)
+            self.audioController?.unmute()
         }
-        
-        self.muted = !self.muted
     }
     
     @IBAction func onEndCall(sender: AnyObject) {

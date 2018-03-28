@@ -1,3 +1,5 @@
+source 'https://github.com/CocoaPods/Specs'
+
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
@@ -23,6 +25,8 @@ pod 'SwiftGifOrigin', '~> 1.6.1'
 pod 'SwiftMoment', :git => 'https://github.com/danielyang112/SwiftMoment.git'
 pod 'SwiftValidators'
 pod 'SinchRTC'
+pod 'TwilioVoice', '~> 2.0.0'
+pod 'TwilioVideo', '2.0.0-beta3'
 
   target 'MedicConnectTests' do
     inherit! :search_paths
