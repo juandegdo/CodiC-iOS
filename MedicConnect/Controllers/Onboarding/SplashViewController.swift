@@ -36,6 +36,8 @@ class SplashViewController: UIViewController {
                     // User logged in
                     UserController.Instance.setUser(_user)
                     
+                    UserDefaultsUtil.SaveUserId(userid: (user?.id)!)
+                    
                     // Configure sinch client
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.configureSinchClient(_user.id)
@@ -43,12 +45,14 @@ class SplashViewController: UIViewController {
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)
                 } else {
                     // User not logged in properly
+                    UserDefaultsUtil.DeleteUserId()
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectSignIn, sender: nil)
                 }
             })
             
         } else {
             // User not logged in
+            UserDefaultsUtil.DeleteUserId()
             self.performSegue(withIdentifier: Constants.SegueMedicConnectSignIn, sender: nil)
         }
         

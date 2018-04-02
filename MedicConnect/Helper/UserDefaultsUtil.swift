@@ -32,6 +32,21 @@ class UserDefaultsUtil {
         
     }
     
+    class func SaveUserId(userid: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(userid, forKey: "userid")
+        defaults.synchronize()
+    }
+    
+    class func LoadUserId() -> String {
+        let defaults = UserDefaults.standard
+        return defaults.object(forKey: "userid") as? String ?? ""
+    }
+    
+    class func DeleteUserId() {
+        UserDefaults.standard.removeObject(forKey: "userid")
+    }
+    
     class func SaveUserName(username: String) {
         let defaults = UserDefaults.standard
         defaults.set(username, forKey: "username")

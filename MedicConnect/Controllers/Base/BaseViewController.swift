@@ -156,6 +156,7 @@ class BaseViewController: UIViewController {
         NotificationController.Instance.setNotifications([])
         PatientController.Instance.setPatients([])
         UserDefaultsUtil.DeleteToken()
+        UserDefaultsUtil.DeleteUserId()
         
     }
 }

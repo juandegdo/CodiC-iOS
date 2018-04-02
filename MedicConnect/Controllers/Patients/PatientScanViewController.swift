@@ -185,7 +185,7 @@ class PatientScanViewController: UIViewController {
         }
         
         let licensePath = (Bundle.main.bundlePath as NSString).appendingPathComponent("AbbyyRtrSdk.license")
-        self.engine = RTREngine.sharedEngine(withLicense: NSData(contentsOfFile: licensePath) as Data!)
+        self.engine = RTREngine.sharedEngine(withLicense: NSData(contentsOfFile: licensePath) as Data?)
         assert(self.engine != nil)
         guard self.engine != nil else {
             AlertUtil.showSimpleAlert(self, title: "OCR engine error.", message: nil, okButtonTitle: "OK")

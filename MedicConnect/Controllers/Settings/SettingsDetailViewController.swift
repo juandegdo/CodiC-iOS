@@ -62,8 +62,8 @@ class SettingsDetailViewController: BaseViewController {
     
     func downloadPDF(fileURL: URL) {
         // Create destination URL
-        let documentsUrl: URL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL!
-        self.destinationFileUrl = documentsUrl.appendingPathComponent("Synopsis.pdf") as URL!
+        let documentsUrl: URL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        self.destinationFileUrl = documentsUrl.appendingPathComponent("Synopsis.pdf") as URL?
         
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig)

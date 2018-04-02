@@ -46,9 +46,11 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
     _acDelegate = [[AudioContollerDelegate alloc] init];
     _client.audioController.delegate = _acDelegate;
     _calls = [NSMutableDictionary dictionary];
-    CXProviderConfiguration *config = [[CXProviderConfiguration alloc] initWithLocalizedName:@"Sinch"];
+    CXProviderConfiguration *config = [[CXProviderConfiguration alloc] initWithLocalizedName:@"CODI-C"];
     config.maximumCallGroups = 1;
     config.maximumCallsPerCallGroup = 1;
+    config.supportsVideo = YES;
+    config.ringtoneSound = @"incoming.wav";
 
     _provider = [[CXProvider alloc] initWithConfiguration:config];
     [_provider setDelegate:self queue:nil];
@@ -63,7 +65,8 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
 
 - (void)reportNewIncomingCall:(id<SINCall>)call {
   CXCallUpdate *update = [[CXCallUpdate alloc] init];
-  update.remoteHandle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:call.remoteUserId];
+  update.remoteHandle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:@"Daniel Yang"]; //call.remoteUserId
+  update.hasVideo = YES;
 
   [_provider reportNewIncomingCallWithUUID:[[NSUUID alloc] initWithUUIDString:call.callId]
                                     update:update
@@ -83,6 +86,10 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
 - (void)callDidEnd:(NSNotification *)notification {
   id<SINCall> call = [notification userInfo][SINCallKey];
   if (call) {
+    id<SINCallDetails> details = call.details;
+    int endCause = call.details.endCause;
+    NSDate *endTime = call.details.endedTime;
+    NSLog(@"%d", call.details.endCause);
     [_provider reportCallWithUUID:[[NSUUID alloc] initWithUUIDString:call.callId]
                       endedAtDate:call.details.endedTime
                            reason:SINGetCallEndedReason(call.details.endCause)];
@@ -115,7 +122,7 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
 
 - (id<SINCall>)currentEstablishedCall {
   NSArray *calls = [self activeCalls];
-  if (calls && [calls count] == 1 && [calls[0] state] == SINCallStateEstablished) {
+  if (calls && [calls count] == 1 && ([calls[0] state] == SINCallStateEstablished || [calls[0] state] == SINCallStateInitiating)) {
     return calls[0];
   } else {
     return nil;

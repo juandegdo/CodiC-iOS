@@ -24,7 +24,6 @@
 		652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C331FA9242A009B7765 /* PatientListCell.swift */; };
 		652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652A1C341FA9242A009B7765 /* PatientListCell.xib */; };
 		652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */; };
-		65373AD02059DBA1008A483A /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = 65373ACE2059DB9F008A483A /* incoming.wav */; };
 		65373AD12059DBA1008A483A /* ringback.wav in Resources */ = {isa = PBXBuildFile; fileRef = 65373ACF2059DBA0008A483A /* ringback.wav */; };
 		65373AD72059EA4D008A483A /* PushKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65373AD62059EA4C008A483A /* PushKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		653D8122200FF31800136E1B /* SaveDiagnosisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653D8121200FF31800136E1B /* SaveDiagnosisViewController.swift */; };
@@ -59,6 +58,7 @@
 		657B12841FC38E4C0059B16E /* PatientNotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 657B12821FC38E4C0059B16E /* PatientNotesCell.xib */; };
 		658AFB241FEB23900055B70C /* ErrorPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */; };
 		6593AB5A20173A8400E43611 /* RecordExceedPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6593AB5920173A8400E43611 /* RecordExceedPopupViewController.swift */; };
+		65940B27206EED95006F9302 /* incoming.wav in Resources */ = {isa = PBXBuildFile; fileRef = 65940B26206EED95006F9302 /* incoming.wav */; };
 		659C70CE1F2014BF0045F6CF /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659C70CD1F2014BF0045F6CF /* AlertController.swift */; };
 		65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896D1F3A935400547D72 /* LikesViewController.swift */; };
 		65A289701F3A95D600547D72 /* LikeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A2896F1F3A95D600547D72 /* LikeController.swift */; };
@@ -282,7 +282,6 @@
 		652A1C331FA9242A009B7765 /* PatientListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientListCell.swift; sourceTree = "<group>"; };
 		652A1C341FA9242A009B7765 /* PatientListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientListCell.xib; sourceTree = "<group>"; };
 		652A1C371FA93E1B009B7765 /* CreatePatientViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePatientViewController.swift; sourceTree = "<group>"; };
-		65373ACE2059DB9F008A483A /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		65373ACF2059DBA0008A483A /* ringback.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ringback.wav; sourceTree = "<group>"; };
 		65373AD62059EA4C008A483A /* PushKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PushKit.framework; path = System/Library/Frameworks/PushKit.framework; sourceTree = SDKROOT; };
 		653D8121200FF31800136E1B /* SaveDiagnosisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiagnosisViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +316,7 @@
 		657B12821FC38E4C0059B16E /* PatientNotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PatientNotesCell.xib; sourceTree = "<group>"; };
 		658AFB231FEB23900055B70C /* ErrorPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorPopupViewController.swift; sourceTree = "<group>"; };
 		6593AB5920173A8400E43611 /* RecordExceedPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordExceedPopupViewController.swift; sourceTree = "<group>"; };
+		65940B26206EED95006F9302 /* incoming.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming.wav; sourceTree = "<group>"; };
 		659C70CD1F2014BF0045F6CF /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		65A2896D1F3A935400547D72 /* LikesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesViewController.swift; sourceTree = "<group>"; };
 		65A2896F1F3A95D600547D72 /* LikeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeController.swift; sourceTree = "<group>"; };
@@ -725,7 +725,7 @@
 			children = (
 				6527286A203CF8AC008278D6 /* Fonts */,
 				65D70D242029A35A00686C43 /* AbbyyRtrSDK */,
-				65373ACE2059DB9F008A483A /* incoming.wav */,
+				65940B26206EED95006F9302 /* incoming.wav */,
 				65373ACF2059DBA0008A483A /* ringback.wav */,
 				655013A220065B4700D88443 /* progress_circle.gif */,
 			);
@@ -1244,7 +1244,6 @@
 				65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */,
 				655013A320065B4800D88443 /* progress_circle.gif in Resources */,
 				653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */,
-				65373AD02059DBA1008A483A /* incoming.wav in Resources */,
 				D270B7E01DE51F7600458C2E /* Assets.xcassets in Resources */,
 				D2F55A9C1DEBB8BB0038A392 /* ProfileListCell.xib in Resources */,
 				A9C741D81F0FDCC700894651 /* PrivateUserTableViewCell.xib in Resources */,
@@ -1254,6 +1253,7 @@
 				653D8128201024D300136E1B /* DiagnosisCell.xib in Resources */,
 				D2F55A8B1DEB23D90038A392 /* RadTableBackgroundView.xib in Resources */,
 				A9A3587A1F07447F005B8011 /* Terms_of_service_HTML.html in Resources */,
+				65940B27206EED95006F9302 /* incoming.wav in Resources */,
 				652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */,
 				D213CB1F1E0CABC6004BEA3C /* SettingListCell.xib in Resources */,
 				65A289741F3BC95300547D72 /* SearchPeopleCell.xib in Resources */,
@@ -1769,6 +1769,7 @@
 				CODE_SIGN_ENTITLEMENTS = MedicConnect/MedicConnect.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HERPRDNG3R;
 				ENABLE_BITCODE = NO;
@@ -1799,6 +1800,7 @@
 				CODE_SIGN_ENTITLEMENTS = MedicConnect/MedicConnect.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HERPRDNG3R;
 				ENABLE_BITCODE = NO;

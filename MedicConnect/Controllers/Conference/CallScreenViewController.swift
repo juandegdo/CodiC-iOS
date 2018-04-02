@@ -131,12 +131,15 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     // MARK: Private Methods
     
     func pathForSound(_ soundName: String) -> String {
+        print(Bundle.main.resourceURL!.appendingPathComponent(soundName).path)
         return Bundle.main.resourceURL!.appendingPathComponent(soundName).path
     }
     
     @objc func onDurationTimer(_ unused: Timer) {
         let duration: Int = Int(Date().timeIntervalSince((self.call?.details.establishedTime)!))
-        self.setDuration(duration)
+        DispatchQueue.main.async {
+            self.setDuration(duration)
+        }
     }
     
     // MARK: - SINCallDelegate
@@ -148,7 +151,11 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     
     func callDidEstablish(_ call: SINCall!) {
         if self.call?.details.isVideoOffered == false {
-            self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
+            if self.call?.state != SINCallState.initiating  {
+                self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
+            } else {
+                self.setCallStatusText("00:00")
+            }
         } else if self.call?.details.isVideoOffered == true {
             self.audioController?.disableSpeaker()
             
@@ -156,9 +163,11 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
                 self.audioController?.enableSpeaker()
             }
             
-            if self.fromCallKit == true {
+            if self.fromCallKit == true && self.call?.state != SINCallState.initiating {
                 self.callDidAddVideoTrack(call)
             }
+            
+            self.fromCallKit = false
         }
         
         self.showButtons(.kButtonsHangup)

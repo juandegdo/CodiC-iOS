@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Xlp-Qq-qIT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Xlp-Qq-qIT">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="ArialRoundedMTBold.ttf">
-            <string>ArialRoundedMTBold</string>
-        </array>
-        <array key="Avenir.ttc">
-            <string>Avenir-Black</string>
-            <string>Avenir-Book</string>
-            <string>Avenir-Light</string>
-            <string>Avenir-Medium</string>
-            <string>Avenir-Roman</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Splash View Controller-->
         <scene sceneID="eJC-uK-5YF">
@@ -1215,7 +1203,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVITE OTHERS TO JOIN" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z8c-ea-UMg">
-                                        <rect key="frame" x="48" y="55" width="209" height="50"/>
+                                        <rect key="frame" x="48.333333333333329" y="55" width="208.33333333333337" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9WI-k6-X9v"/>
                                         </constraints>
@@ -3884,7 +3872,7 @@ recorded a new diagnosis.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alex Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kyS-0w-zZl">
-                                                    <rect key="frame" x="89" y="11" width="222" height="27"/>
+                                                    <rect key="frame" x="94" y="11" width="212" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="mRi-LD-r5Y"/>
                                                     </constraints>
@@ -3893,7 +3881,7 @@ recorded a new diagnosis.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9l-Zd-f5g">
-                                                    <rect key="frame" x="89" y="40" width="207" height="15"/>
+                                                    <rect key="frame" x="94" y="40" width="202" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="d6n-B4-lI7"/>
                                                     </constraints>
@@ -3902,7 +3890,7 @@ recorded a new diagnosis.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8329 Plays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bN-7K-KST">
-                                                    <rect key="frame" x="89" y="63" width="200" height="15"/>
+                                                    <rect key="frame" x="94" y="63" width="190" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="aVR-tn-bnb"/>
                                                     </constraints>
@@ -3911,7 +3899,7 @@ recorded a new diagnosis.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h91-jp-qbF">
-                                                    <rect key="frame" x="304" y="29" width="95" height="29"/>
+                                                    <rect key="frame" x="304" y="29" width="90" height="29"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="29" id="0fp-XL-tZx"/>
@@ -3923,7 +3911,7 @@ recorded a new diagnosis.</string>
                                                     </connections>
                                                 </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T30-79-kwJ">
-                                                    <rect key="frame" x="22" y="20" width="49" height="49"/>
+                                                    <rect key="frame" x="27" y="20" width="49" height="49"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="T30-79-kwJ" secondAttribute="height" multiplier="1:1" id="vmn-UE-0mh"/>
                                                     </constraints>
@@ -4751,7 +4739,7 @@ recorded a new diagnosis.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n46-Ot-K5w">
-                                                <rect key="frame" x="25" y="157" width="364" height="70"/>
+                                                <rect key="frame" x="25" y="157" width="364" height="69.666666666666686"/>
                                                 <string key="text">Congratulations! You have successfully 
 set up your account.Tap the link in the
  email we’ve sent you to confirm it.</string>
@@ -4760,7 +4748,7 @@ set up your account.Tap the link in the
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4sI-5l-env">
-                                                <rect key="frame" x="25" y="397" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="396.66666666666669" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="kPr-EN-HFd"/>
                                                 </constraints>
@@ -4884,7 +4872,7 @@ set up your account.Tap the link in the
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uM-uC-kIK">
-                                                <rect key="frame" x="25" y="138" width="364" height="47"/>
+                                                <rect key="frame" x="25" y="138" width="364" height="46.666666666666657"/>
                                                 <string key="text">Enter your email and we will send
 you a link to reset your password.</string>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
@@ -4892,7 +4880,7 @@ you a link to reset your password.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6eF-xU-qJ3" customClass="ACFloatingTextfield" customModule="ACFloatingTextfield_Swift">
-                                                <rect key="frame" x="25" y="255" width="364" height="50"/>
+                                                <rect key="frame" x="25" y="254.66666666666669" width="364" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="t4C-vC-bMd"/>
                                                 </constraints>
@@ -4918,7 +4906,7 @@ you a link to reset your password.</string>
                                                 </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j55-UO-ji7">
-                                                <rect key="frame" x="25" y="355" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="354.66666666666669" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="6TQ-9r-Pa0"/>
                                                 </constraints>
@@ -6464,7 +6452,7 @@ you a link to reset your password.</string>
                                                 <rect key="frame" x="12" y="51" width="390" height="18"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-rm-npz">
-                                                        <rect key="frame" x="178.66666666666666" y="0.0" width="34" height="18"/>
+                                                        <rect key="frame" x="178.66666666666666" y="0.0" width="34.333333333333343" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="uK2-Mo-G8P"/>
                                                         </constraints>
