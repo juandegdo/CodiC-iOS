@@ -20,6 +20,9 @@
     
     self.delegate = self;
     
+    // Default tab - Profile
+    self.selectedIndex = 1;
+    
     // Add border on top
     UIView *borderTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 0.5)];
     borderTop.backgroundColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0];

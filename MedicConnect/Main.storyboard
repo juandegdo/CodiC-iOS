@@ -840,10 +840,10 @@
                         <color key="selectedImageTintColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="RTa-YJ-vwu" kind="relationship" relationship="viewControllers" id="FHj-CS-7fy"/>
-                        <segue destination="9Rw-kA-iik" kind="relationship" relationship="viewControllers" id="96r-ya-xny"/>
-                        <segue destination="PBS-ls-Yn8" kind="relationship" relationship="viewControllers" id="puq-aO-tGw"/>
                         <segue destination="Uph-7W-oOM" kind="relationship" relationship="viewControllers" id="d1j-aH-Ziz"/>
+                        <segue destination="RTa-YJ-vwu" kind="relationship" relationship="viewControllers" id="6zV-Ma-1nf"/>
+                        <segue destination="9Rw-kA-iik" kind="relationship" relationship="viewControllers" id="7rz-21-rM9"/>
+                        <segue destination="PBS-ls-Yn8" kind="relationship" relationship="viewControllers" id="W97-7o-WUh"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ML-r0-FWH" userLabel="First Responder" sceneMemberID="firstResponder"/>

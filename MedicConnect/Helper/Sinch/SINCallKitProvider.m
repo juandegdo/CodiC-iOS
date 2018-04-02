@@ -86,10 +86,6 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
 - (void)callDidEnd:(NSNotification *)notification {
   id<SINCall> call = [notification userInfo][SINCallKey];
   if (call) {
-    id<SINCallDetails> details = call.details;
-    int endCause = call.details.endCause;
-    NSDate *endTime = call.details.endedTime;
-    NSLog(@"%d", call.details.endCause);
     [_provider reportCallWithUUID:[[NSUUID alloc] initWithUUIDString:call.callId]
                       endedAtDate:call.details.endedTime
                            reason:SINGetCallEndedReason(call.details.endCause)];
