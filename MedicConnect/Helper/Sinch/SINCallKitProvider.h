@@ -8,7 +8,7 @@
 
 - (instancetype)initWithClient:(id<SINClient>)client;
 
-- (void)reportNewIncomingCall:(id<SINCall>)call;
+- (void)reportNewIncomingCall:(id<SINCall>)call headers:(NSDictionary *)headers;
 
 - (BOOL)callExists:(NSString*)callId;
 

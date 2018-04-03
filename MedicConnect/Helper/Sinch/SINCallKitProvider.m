@@ -47,6 +47,7 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
     _client.audioController.delegate = _acDelegate;
     _calls = [NSMutableDictionary dictionary];
     CXProviderConfiguration *config = [[CXProviderConfiguration alloc] initWithLocalizedName:@"CODI-C"];
+    config.iconTemplateImageData = UIImagePNGRepresentation([UIImage imageNamed:@"callkit_icon"]);
     config.maximumCallGroups = 1;
     config.maximumCallsPerCallGroup = 1;
     config.supportsVideo = YES;
@@ -63,10 +64,12 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
   return self;
 }
 
-- (void)reportNewIncomingCall:(id<SINCall>)call {
+- (void)reportNewIncomingCall:(id<SINCall>)call headers:(NSDictionary *)headers {
   CXCallUpdate *update = [[CXCallUpdate alloc] init];
-  update.remoteHandle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:@"Daniel Yang"]; //call.remoteUserId
-  update.hasVideo = YES;
+  NSString *remoteName =  headers[@"display_name"] ? headers[@"display_name"] : @"Doctor";
+  BOOL hasVideo =  headers[@"type"] != nil ? ([headers[@"type"] isEqualToString:@"video"] ? YES : NO) : NO;
+  update.remoteHandle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:remoteName];
+  update.hasVideo = hasVideo;
 
   [_provider reportNewIncomingCallWithUUID:[[NSUUID alloc] initWithUUIDString:call.callId]
                                     update:update

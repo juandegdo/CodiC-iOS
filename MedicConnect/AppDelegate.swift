@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var launchedURL: URL? = nil
     var orientationLock = UIInterfaceOrientationMask.portrait
     var deviceLocked: Bool = false
+    var callHeaders: [String: Any] = [:]
     
     var sinchClient: SINClient?
     var sinchPush: SINManagedPush?
@@ -305,18 +306,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
         print("PushKit: \(payload.dictionaryPayload.description)")
         self.handleRemoteNotification(payload.dictionaryPayload)
-        
-//        let config = CXProviderConfiguration(localizedName: "CODI-C")
-//        config.iconTemplateImageData = UIImagePNGRepresentation(UIImage(named: "pizza")!)
-//        config.ringtoneSound = "ringtone.caf"
-//        config.includesCallsInRecents = false;
-//        config.supportsVideo = true;
-//        let provider = CXProvider(configuration: config)
-//        provider.setDelegate(self.sinchCallKitProvider, queue: nil)
-//        let update = CXCallUpdate()
-//        update.remoteHandle = CXHandle(type: .generic, value: "Ming Low")
-//        update.hasVideo = true
-//        provider.reportNewIncomingCall(with: UUID(), update: update, completion: { error in })
     }
     
     // MARK: - Private Methods
@@ -502,6 +491,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         if (self.sinchClient != nil) {
+            let sinJSONString = userInfo["sin"] as? String
+            if let data = sinJSONString?.data(using: .utf8) {
+                do {
+                    let sinJSON = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                    if let publicHeaders = sinJSON!["public_headers"] as? [String: Any] {
+                        self.callHeaders = publicHeaders
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
             let result: SINNotificationResult? = self.sinchClient?.relayRemotePushNotification(userInfo)
             
             if ((result != nil) && (result?.isCall())! && (result?.call().isTimedOut)!) {
@@ -552,7 +553,8 @@ extension AppDelegate: SINCallClientDelegate {
     }
     
     func client(_ client: SINCallClient!, willReceiveIncomingCall call: SINCall!) {
-        self.sinchCallKitProvider?.reportNewIncomingCall(call)
+        self.sinchCallKitProvider?.reportNewIncomingCall(call, headers: self.callHeaders)
+        self.callHeaders = [:]
     }
     
 //    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {
