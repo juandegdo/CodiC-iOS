@@ -94,9 +94,9 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if self.call?.details.isVideoOffered == true {
-            AppDelegate.AppUtility.lockOrientation(.all)
-        }
+//        if self.call?.details.isVideoOffered == true {
+//            AppDelegate.AppUtility.lockOrientation(.all)
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -255,6 +255,9 @@ extension CallScreenViewController {
                 self.lblRemoteUserName.isHidden = true
                 self.lblRemoteUserLocation.isHidden = true
                 self.lblCallState.isHidden = true
+                
+                // Enable landscape mode
+                AppDelegate.AppUtility.lockOrientation(.all)
                 
             } else {
                 
