@@ -186,9 +186,11 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         
         weak var pvc = self.presentingViewController
         self.dismiss(animated: false, completion: {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "EndCallPopupViewController") as? EndCallPopupViewController {
-                pvc?.present(vc, animated: false, completion: nil)
+            if (call.details.endCause.rawValue == 5) { // SINCallEndCauseHungUp
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let vc = storyboard.instantiateViewController(withIdentifier: "EndCallPopupViewController") as? EndCallPopupViewController {
+                    pvc?.present(vc, animated: false, completion: nil)
+                }
             }
         })
     }
