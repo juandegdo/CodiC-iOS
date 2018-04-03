@@ -69,26 +69,42 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let currentRoute = AVAudioSession.sharedInstance().currentRoute
-        var hasHeadphones = false
-        for description in currentRoute.outputs {
-            if description.portType == AVAudioSessionPortHeadphones {
-                hasHeadphones = true
-                break
-            }
-        }
-        
-        if !hasHeadphones {
+//        let currentRoute = AVAudioSession.sharedInstance().currentRoute
+//        var hasHeadphones = false
+//        for description in currentRoute.outputs {
+//            if description.portType == AVAudioSessionPortHeadphones {
+//                hasHeadphones = true
+//                break
+//            }
+//        }
+//
+//        if !hasHeadphones {
 //            self.audioController?.enableSpeaker()
-        } else {
+//        } else {
 //            self.audioController?.disableSpeaker()
-        }
+//        }
         
         self.speakerEnabled = !(self.call?.details.isVideoOffered)!
         self.onSpeaker(sender: self.btnSpeaker)
         
-//        self.audioController?.disableSpeaker()
         self.audioController?.unmute()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.call?.details.isVideoOffered == true {
+            AppDelegate.AppUtility.lockOrientation(.all)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if self.call?.details.isVideoOffered == true {
+            AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -196,6 +212,7 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidAddVideoTrack(_ call: SINCall!) {
+        self.videoController?.remoteView().frame = UIScreen.main.bounds
         self.videoController?.remoteView().contentMode = .scaleAspectFill
         self.viewRemoteVideo.addSubview((self.videoController?.remoteView())!)
     }
