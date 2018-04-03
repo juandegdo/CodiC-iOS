@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     var launchedURL: URL? = nil
     var orientationLock = UIInterfaceOrientationMask.portrait
+    var deviceLocked: Bool = false
     
     var sinchClient: SINClient?
     var sinchPush: SINManagedPush?
@@ -64,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         self.voipRegistration()
+        self.registerforDeviceLockNotification()
         
         // Enable playing audio in silent mode
         do {
@@ -104,6 +106,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        if let call = self.sinchCallKitProvider?.currentEstablishedCall(),
+            self.deviceLocked == true {
+            
+            self.deviceLocked = false
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
+                vc.call = call
+                vc.fromCallKit = true
+                
+                if let vvc = self.window?.rootViewController {
+                    vvc.present(vc, animated: false, completion: nil)
+                }
+            }
+            
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -235,6 +253,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            }
         }
         completionHandler()
+    }
+    
+    func registerforDeviceLockNotification() {
+        //Screen lock notifications
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
+            Unmanaged.passUnretained(self).toOpaque(),     // observer
+            displayStatusChangedCallback,     // callback
+            "com.apple.springboard.lockcomplete" as CFString,     // event name
+            nil,     // object
+            .deliverImmediately)
+        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
+            Unmanaged.passUnretained(self).toOpaque(),     // observer
+            displayStatusChangedCallback,     // callback
+            "com.apple.springboard.lockstate" as CFString,    // event name
+            nil,     // object
+            .deliverImmediately)
+    }
+    
+    private let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
+        guard let lockState = cfName?.rawValue as String? else {
+            return
+        }
+        
+        let catcher = Unmanaged<AppDelegate>.fromOpaque(UnsafeRawPointer(OpaquePointer(cfObserver)!)).takeUnretainedValue()
+        catcher.displayStatusChanged(lockState)
+    }
+    
+    private func displayStatusChanged(_ lockState: String) {
+        // the "com.apple.springboard.lockcomplete" notification will always come after the "com.apple.springboard.lockstate" notification
+        print("Darwin notification NAME = \(lockState)")
+        if (lockState == "com.apple.springboard.lockcomplete") {
+            print("DEVICE LOCKED")
+        } else {
+            self.deviceLocked = true
+            print("LOCK STATUS CHANGED")
+        }
     }
     
     // MARK: - PushKit Delegate
@@ -423,7 +477,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Specify the client capabilities.
         // (At least one of the messaging or calling capabilities should be enabled.)
         self.sinchClient?.setSupportCalling(true)
-//        self.sinchClient?.setSupportPushNotifications(true)
+        self.sinchClient?.setSupportPushNotifications(true)
         
         self.sinchClient?.enableManagedPushNotifications()
         
@@ -438,6 +492,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func handleRemoteNotification(_ userInfo: [AnyHashable : Any]) {
+        
+        self.deviceLocked = false
         
         if let _me = UserController.Instance.getUser() as User? {
             self.configureSinchClient(_me.id)

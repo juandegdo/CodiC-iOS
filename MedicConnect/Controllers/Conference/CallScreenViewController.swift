@@ -91,14 +91,6 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        if self.call?.details.isVideoOffered == true {
-//            AppDelegate.AppUtility.lockOrientation(.all)
-//        }
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
