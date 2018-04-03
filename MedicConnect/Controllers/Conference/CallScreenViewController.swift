@@ -180,26 +180,23 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         self.stopCallDurationTimer()
         
         if (self.call?.details.isVideoOffered)! {
+            self.videoController?.localView().removeFromSuperview()
             self.videoController?.remoteView().removeFromSuperview()
         }
         
-        self.dismiss(animated: true, completion: nil)
+        weak var pvc = self.presentingViewController
+        self.dismiss(animated: false, completion: {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let vc = storyboard.instantiateViewController(withIdentifier: "EndCallPopupViewController") as? EndCallPopupViewController {
+                pvc?.present(vc, animated: false, completion: nil)
+            }
+        })
     }
     
     func callDidAddVideoTrack(_ call: SINCall!) {
         self.videoController?.remoteView().contentMode = .scaleAspectFill
         self.viewRemoteVideo.addSubview((self.videoController?.remoteView())!)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 

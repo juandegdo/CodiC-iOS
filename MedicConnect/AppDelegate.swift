@@ -104,17 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-//        if let call = self.sinchCallKitProvider?.currentEstablishedCall() {
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
-//                vc.call = call
-//                vc.fromCallKit = true
-//
-//                if let vvc = self.window?.rootViewController {
-//                    vvc.present(vc, animated: false, completion: nil)
-//                }
-//            }
-//        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -255,11 +244,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        if let dictPayload = payload.dictionaryPayload as? NSDictionary {
-            NSLog("\n Custom: \(String(describing: dictPayload))")
-        } else {
-            NSLog("//////////////////////////Normal launch")
-        }
         self.handleRemoteNotification(payload.dictionaryPayload)
         completion()
     }
