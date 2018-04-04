@@ -47,7 +47,7 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
     _client.audioController.delegate = _acDelegate;
     _calls = [NSMutableDictionary dictionary];
     CXProviderConfiguration *config = [[CXProviderConfiguration alloc] initWithLocalizedName:@"CODI-C"];
-    config.iconTemplateImageData = UIImagePNGRepresentation([UIImage imageNamed:@"callkit_icon"]);
+//    config.iconTemplateImageData = UIImagePNGRepresentation([UIImage imageNamed:@"callkit_icon"]);
     config.maximumCallGroups = 1;
     config.maximumCallsPerCallGroup = 1;
     config.supportsVideo = YES;

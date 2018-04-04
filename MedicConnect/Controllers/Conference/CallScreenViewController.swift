@@ -84,9 +84,10 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
 //            self.audioController?.disableSpeaker()
 //        }
         
-        self.speakerEnabled = !(self.call?.details.isVideoOffered)!
-        self.onSpeaker(sender: self.btnSpeaker)
+//        self.speakerEnabled = !(self.call?.details.isVideoOffered)!
+//        self.onSpeaker(sender: self.btnSpeaker)
         
+        self.audioController?.enableSpeaker()
         self.audioController?.unmute()
         
     }
@@ -158,6 +159,8 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidEstablish(_ call: SINCall!) {
+        self.audioController?.disableSpeaker()
+        
         if self.call?.details.isVideoOffered == false {
             if self.call?.state != SINCallState.initiating  {
                 self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
@@ -165,8 +168,6 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
                 self.setCallStatusText("00:00")
             }
         } else if self.call?.details.isVideoOffered == true {
-            self.audioController?.disableSpeaker()
-            
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                 self.audioController?.enableSpeaker()
             }
@@ -250,9 +251,13 @@ extension CallScreenViewController {
                 
                 // Enable landscape mode
                 AppDelegate.AppUtility.lockOrientation(.all)
-                
+            }
+            
+            self.speakerEnabled = (self.call?.details.isVideoOffered)!
+            if self.speakerEnabled {
+                self.btnSpeaker.setImage(UIImage(named: "icon_call_speaker_on"), for: .normal)
             } else {
-                
+                self.btnSpeaker.setImage(UIImage(named: "icon_call_speaker"), for: .normal)
             }
             
             self.btnClose.isHidden = true
