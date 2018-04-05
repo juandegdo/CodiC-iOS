@@ -62,8 +62,6 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.initViews()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +87,8 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         
         self.audioController?.enableSpeaker()
         self.audioController?.unmute()
+        
+        self.initViews()
         
     }
     
@@ -168,6 +168,9 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
                 self.setCallStatusText("00:00")
             }
         } else if self.call?.details.isVideoOffered == true {
+            // Disable idle timer
+            UIApplication.shared.isIdleTimerDisabled = true
+            
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                 self.audioController?.enableSpeaker()
             }
@@ -193,6 +196,9 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             self.videoController?.remoteView().removeFromSuperview()
         }
         
+        // Disable idle timer
+        UIApplication.shared.isIdleTimerDisabled = false
+        
         weak var pvc = self.presentingViewController
         self.dismiss(animated: false, completion: {
             if (call.details.endCause.rawValue == 5) { // SINCallEndCauseHungUp
@@ -205,7 +211,13 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidAddVideoTrack(_ call: SINCall!) {
-        self.videoController?.remoteView().frame = UIScreen.main.bounds
+        if Int( max(Constants.ScreenWidth, Constants.ScreenHeight) ) == 812 {
+            // iPhone X
+            self.videoController?.remoteView().frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
+        } else {
+            self.videoController?.remoteView().frame = UIScreen.main.bounds
+        }
+        
         self.videoController?.remoteView().contentMode = .scaleAspectFill
         self.viewRemoteVideo.addSubview((self.videoController?.remoteView())!)
     }

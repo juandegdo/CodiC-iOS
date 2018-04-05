@@ -77,9 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // Sinch Push
-        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.development)  // needs to be changed to production
+        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.production)  // needs to be changed to production
         self.sinchPush?.delegate = self
-        self.sinchPush?.setDesiredPushTypeAutomatically()
+        self.sinchPush?.setDesiredPushType(SINPushTypeVoIP)
         
         return true
     }
@@ -141,7 +141,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("========Received========\n\(userInfo)\n")
         
-        self.sinchPush?.application(application, didReceiveRemoteNotification: userInfo)
+//        self.sinchPush?.application(application, didReceiveRemoteNotification: userInfo)
         
         if let dictInfo = userInfo["aps"] as? NSDictionary {
             if  let _ = UserController.Instance.getUser() as User? {
@@ -211,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         // Add to sinch
-        self.sinchPush?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
+//        self.sinchPush?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
         
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
@@ -296,6 +296,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         print("PushKit: \(pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()))")
+        print("PushKit:---------------Token generate-----------")
     }
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
@@ -447,11 +448,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func configureSinchClient(_ userId: String) {
         
-        if (self.sinchClient != nil) {
+        self.sinchPush?.registerUserNotificationSettings()
+        
+        if (self.sinchClient != nil || userId == "") {
             return
         }
-        
-        self.sinchPush?.registerUserNotificationSettings()
         
         // Instantiate a Sinch client object
         self.sinchClient = Sinch.client(withApplicationKey: AppDelegate.kSinchApplicationKey,
@@ -484,10 +485,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         self.deviceLocked = false
         
-        if let _me = UserController.Instance.getUser() as User? {
-            self.configureSinchClient(_me.id)
-        } else if !UserDefaultsUtil.LoadUserId().isEmpty {
-            self.configureSinchClient(UserDefaultsUtil.LoadUserId())
+        if self.sinchClient == nil {
+            if let _me = UserController.Instance.getUser() as User? {
+                self.configureSinchClient(_me.id)
+            } else if !UserDefaultsUtil.LoadUserId().isEmpty {
+                self.configureSinchClient(UserDefaultsUtil.LoadUserId())
+            }
         }
         
         if (self.sinchClient != nil) {
