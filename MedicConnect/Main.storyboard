@@ -2208,6 +2208,22 @@ audio/video calling feature.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjh-J4-gcM">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <subviews>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw8-oe-er7">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="Xw8-oe-er7" firstAttribute="leading" secondItem="jjh-J4-gcM" secondAttribute="leading" id="J0A-hY-UvX"/>
+                                            <constraint firstAttribute="bottom" secondItem="Xw8-oe-er7" secondAttribute="bottom" id="MoC-yf-PVb"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xw8-oe-er7" secondAttribute="trailing" id="ddu-FP-IRH"/>
+                                            <constraint firstItem="Xw8-oe-er7" firstAttribute="top" secondItem="jjh-J4-gcM" secondAttribute="top" id="fCj-sB-Zch"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nlt-7w-wNO">
                                         <rect key="frame" x="25" y="60" width="314" height="30"/>
                                         <constraints>
@@ -2235,37 +2251,6 @@ audio/video calling feature.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jjh-J4-gcM">
-                                        <rect key="frame" x="28" y="35" width="78" height="100"/>
-                                        <subviews>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xw8-oe-er7">
-                                                <rect key="frame" x="1" y="1" width="76" height="98"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="4"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                        <integer key="value" value="1"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="Xw8-oe-er7" firstAttribute="leading" secondItem="jjh-J4-gcM" secondAttribute="leading" constant="1" id="J0A-hY-UvX"/>
-                                            <constraint firstAttribute="bottom" secondItem="Xw8-oe-er7" secondAttribute="bottom" constant="1" id="MoC-yf-PVb"/>
-                                            <constraint firstAttribute="width" constant="78" id="UnA-iD-MAr"/>
-                                            <constraint firstAttribute="height" constant="100" id="WWH-zz-6qc"/>
-                                            <constraint firstAttribute="trailing" secondItem="Xw8-oe-er7" secondAttribute="trailing" constant="1" id="ddu-FP-IRH"/>
-                                            <constraint firstItem="Xw8-oe-er7" firstAttribute="top" secondItem="jjh-J4-gcM" secondAttribute="top" constant="1" id="fCj-sB-Zch"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Y5-TR-FfK">
                                         <rect key="frame" x="0.0" y="24" width="56" height="50"/>
                                         <constraints>
@@ -2351,7 +2336,8 @@ audio/video calling feature.</string>
                                     <constraint firstAttribute="bottom" secondItem="J63-L6-xhC" secondAttribute="bottom" id="B1o-Ka-h0E"/>
                                     <constraint firstAttribute="trailing" secondItem="J63-L6-xhC" secondAttribute="trailing" id="GfG-Qf-udH"/>
                                     <constraint firstAttribute="bottom" secondItem="gqt-1v-cz0" secondAttribute="bottom" constant="42" id="IPT-ze-CWX"/>
-                                    <constraint firstItem="jjh-J4-gcM" firstAttribute="top" secondItem="TS8-wg-26d" secondAttribute="top" constant="35" id="LAq-mz-aec"/>
+                                    <constraint firstItem="jjh-J4-gcM" firstAttribute="top" secondItem="TS8-wg-26d" secondAttribute="top" id="LAq-mz-aec"/>
+                                    <constraint firstAttribute="trailing" secondItem="jjh-J4-gcM" secondAttribute="trailing" id="LXb-Dd-Sha"/>
                                     <constraint firstItem="8u7-Tw-qmP" firstAttribute="top" secondItem="Nlt-7w-wNO" secondAttribute="bottom" constant="-2" id="NaC-Bd-ka6"/>
                                     <constraint firstAttribute="bottom" secondItem="QHG-xD-KHX" secondAttribute="bottom" constant="30" id="Obd-dU-Oan"/>
                                     <constraint firstItem="J63-L6-xhC" firstAttribute="top" secondItem="TS8-wg-26d" secondAttribute="top" id="YYn-ew-dg9"/>
@@ -2359,12 +2345,13 @@ audio/video calling feature.</string>
                                     <constraint firstItem="J63-L6-xhC" firstAttribute="leading" secondItem="TS8-wg-26d" secondAttribute="leading" id="blw-zz-wKw"/>
                                     <constraint firstItem="Nlt-7w-wNO" firstAttribute="top" secondItem="gP4-18-Bxz" secondAttribute="top" id="cFq-zn-qVd"/>
                                     <constraint firstItem="eoa-ji-94J" firstAttribute="trailing" secondItem="Nlt-7w-wNO" secondAttribute="trailing" id="f0N-1S-ew8"/>
-                                    <constraint firstItem="jjh-J4-gcM" firstAttribute="leading" secondItem="TS8-wg-26d" secondAttribute="leading" constant="28" id="h4K-mh-aAL"/>
+                                    <constraint firstItem="jjh-J4-gcM" firstAttribute="leading" secondItem="TS8-wg-26d" secondAttribute="leading" id="h4K-mh-aAL"/>
                                     <constraint firstItem="Nlt-7w-wNO" firstAttribute="leading" secondItem="TS8-wg-26d" secondAttribute="leading" constant="25" id="j7n-AH-lUp"/>
                                     <constraint firstAttribute="bottom" secondItem="bu0-Zv-CeG" secondAttribute="bottom" constant="42" id="lmi-p2-tvC"/>
                                     <constraint firstItem="gP4-18-Bxz" firstAttribute="leading" secondItem="Nlt-7w-wNO" secondAttribute="trailing" id="nZT-Kg-4qZ"/>
                                     <constraint firstAttribute="trailing" secondItem="gP4-18-Bxz" secondAttribute="trailing" constant="25" id="pdK-DS-aqR"/>
                                     <constraint firstItem="1Y5-TR-FfK" firstAttribute="leading" secondItem="TS8-wg-26d" secondAttribute="leading" id="rtZ-SU-D4f"/>
+                                    <constraint firstAttribute="bottom" secondItem="jjh-J4-gcM" secondAttribute="bottom" id="sCx-Ku-w2w"/>
                                     <constraint firstItem="QHG-xD-KHX" firstAttribute="leading" secondItem="TS8-wg-26d" secondAttribute="leading" constant="25" id="uAQ-2B-vNB"/>
                                     <constraint firstItem="eoa-ji-94J" firstAttribute="leading" secondItem="Nlt-7w-wNO" secondAttribute="leading" id="ve1-jP-NbN"/>
                                     <constraint firstItem="1Y5-TR-FfK" firstAttribute="top" secondItem="TS8-wg-26d" secondAttribute="top" constant="24" id="zsx-wb-UY0"/>
@@ -2398,6 +2385,14 @@ audio/video calling feature.</string>
                         <outlet property="btnMute" destination="HUp-in-zTW" id="ZGw-W4-Oae"/>
                         <outlet property="btnSpeaker" destination="QHG-xD-KHX" id="y92-HG-wMT"/>
                         <outlet property="btnSwitchCamera" destination="gP4-18-Bxz" id="TFb-Q4-az7"/>
+                        <outlet property="constOfLocalContainerBottom" destination="sCx-Ku-w2w" id="uqx-A8-afA"/>
+                        <outlet property="constOfLocalContainerLeading" destination="h4K-mh-aAL" id="Nru-mQ-gLh"/>
+                        <outlet property="constOfLocalContainerTop" destination="LAq-mz-aec" id="9jV-rw-7MD"/>
+                        <outlet property="constOfLocalContainerTrailing" destination="LXb-Dd-Sha" id="rAi-Eq-0LV"/>
+                        <outlet property="constOfLocalVideoBottom" destination="MoC-yf-PVb" id="FIc-fg-VV3"/>
+                        <outlet property="constOfLocalVideoLeading" destination="J0A-hY-UvX" id="6Sa-3X-uHq"/>
+                        <outlet property="constOfLocalVideoTop" destination="fCj-sB-Zch" id="rHx-H4-7Fd"/>
+                        <outlet property="constOfLocalVideoTrailing" destination="ddu-FP-IRH" id="I8l-uj-AEr"/>
                         <outlet property="lblCallState" destination="eoa-ji-94J" id="JPw-pk-lkt"/>
                         <outlet property="lblRemoteUserLocation" destination="8u7-Tw-qmP" id="bLF-6c-rin"/>
                         <outlet property="lblRemoteUserName" destination="Nlt-7w-wNO" id="hpn-eW-GyC"/>

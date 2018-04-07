@@ -37,6 +37,17 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     @IBOutlet weak var viewLocalVideo: UIView!
     @IBOutlet weak var viewRemoteVideo: UIView!
     
+    // Local Video Constraints
+    @IBOutlet weak var constOfLocalContainerLeading: NSLayoutConstraint!
+    @IBOutlet weak var constOfLocalContainerTop: NSLayoutConstraint!
+    @IBOutlet weak var constOfLocalContainerTrailing: NSLayoutConstraint!
+    @IBOutlet weak var constOfLocalContainerBottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var constOfLocalVideoLeading: NSLayoutConstraint!
+    @IBOutlet weak var constOfLocalVideoTrailing: NSLayoutConstraint!
+    @IBOutlet weak var constOfLocalVideoTop: NSLayoutConstraint!
+    @IBOutlet weak var constOfLocalVideoBottom: NSLayoutConstraint!
+    
     var fromCallKit: Bool = false
     
     private var durationTimer: Timer?
@@ -133,7 +144,20 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             self.audioController?.startPlayingSoundFile(self.pathForSound("incoming.wav"), loop: true)
         }
         
-        self.viewLocalVideo.layer.borderColor = UIColor.init(red: 147/255.0, green: 203/255.0, blue: 202/255.0, alpha: 1.0).cgColor
+        if (self.call?.details.isVideoOffered)! {
+            // Add Local Video
+            if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
+                self.videoController?.localView().frame = UIScreen.main.bounds
+            }
+            
+            self.videoController?.localView().contentMode = .scaleAspectFill
+            self.viewLocalVideo.addSubview((self.videoController?.localView())!)
+            self.viewLocalVideo.alpha = 0
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.viewLocalVideo.alpha = 1
+            })
+        }
         
     }
     
@@ -176,7 +200,9 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             }
             
             if self.fromCallKit == true && self.call?.state != SINCallState.initiating {
-                self.callDidAddVideoTrack(call)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    self.callDidAddVideoTrack(call)
+                }
             }
             
             self.fromCallKit = false
@@ -211,15 +237,36 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidAddVideoTrack(_ call: SINCall!) {
-        if Int( max(Constants.ScreenWidth, Constants.ScreenHeight) ) == 812 {
-            // iPhone X
-            self.videoController?.remoteView().frame = CGRect.init(x: 0, y: 0, width: 375, height: 812)
-        } else {
-            self.videoController?.remoteView().frame = UIScreen.main.bounds
-        }
-        
+        self.videoController?.remoteView().frame = UIScreen.main.bounds
         self.videoController?.remoteView().contentMode = .scaleAspectFill
         self.viewRemoteVideo.addSubview((self.videoController?.remoteView())!)
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+            // Remove call state text
+            self.lblCallState.isHidden = true
+            
+            // Animate Local Video
+            self.constOfLocalContainerLeading.constant = 28
+            self.constOfLocalContainerTop.constant = 35
+            self.constOfLocalContainerTrailing.constant = Constants.ScreenWidth - 28 - 78
+            self.constOfLocalContainerBottom.constant = Constants.ScreenHeight - 35 - 100
+            
+            self.constOfLocalVideoLeading.constant = 1
+            self.constOfLocalVideoTop.constant = 1
+            self.constOfLocalVideoTrailing.constant = 1
+            self.constOfLocalVideoBottom.constant = 1
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                self.videoController?.localView().frame = CGRect.init(x: 0, y: 0, width: 78, height: 100)
+                self.view.layoutIfNeeded()
+            }) { (completed) in
+                self.viewLocalContainer.backgroundColor = UIColor.white
+                self.viewLocalContainer.layer.cornerRadius = 6
+                self.viewLocalVideo.layer.cornerRadius = 4
+                self.viewLocalVideo.layer.borderWidth = 0.5
+                self.viewLocalVideo.layer.borderColor = UIColor.init(red: 147/255.0, green: 203/255.0, blue: 202/255.0, alpha: 1.0).cgColor
+            }
+        }
     }
 
 }
@@ -234,7 +281,7 @@ extension CallScreenViewController {
     
     fileprivate func showButtons(_ buttons: EButtonsBar) {
         if buttons == .kButtonsAnswerDecline {
-            self.viewLocalContainer.isHidden = true
+            self.viewLocalContainer.isHidden = !(self.call?.details.isVideoOffered)!
             self.viewRemoteVideo.isHidden = true
             
             self.btnSwitchCamera.isHidden = true
@@ -244,10 +291,6 @@ extension CallScreenViewController {
         } else if buttons == .kButtonsHangup {
             if (self.call?.details.isVideoOffered)! {
                 // Video Call
-                self.videoController?.localView().contentMode = .scaleAspectFill
-                self.viewLocalVideo.addSubview((self.videoController?.localView())!)
-                
-                self.viewLocalContainer.isHidden = false
                 self.viewRemoteVideo.isHidden = false
                 self.btnSwitchCamera.isHidden = false
                 
@@ -259,7 +302,9 @@ extension CallScreenViewController {
                 
                 self.lblRemoteUserName.isHidden = true
                 self.lblRemoteUserLocation.isHidden = true
-                self.lblCallState.isHidden = true
+//                self.lblCallState.isHidden = true
+                
+                self.setCallStatusText("CONNECTING...")
                 
                 // Enable landscape mode
                 AppDelegate.AppUtility.lockOrientation(.all)
@@ -353,7 +398,11 @@ extension CallScreenViewController {
     }
     
     @IBAction func onEndCall(sender: AnyObject) {
-        self.call?.hangup()
+        if self.call?.state == SINCallState.ended {
+            self.callDidEnd(self.call!)
+        } else {
+            self.call?.hangup()
+        }
     }
     
 }
