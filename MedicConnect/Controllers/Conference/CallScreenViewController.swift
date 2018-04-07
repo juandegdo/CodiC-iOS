@@ -49,6 +49,7 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     @IBOutlet weak var constOfLocalVideoBottom: NSLayoutConstraint!
     
     var fromCallKit: Bool = false
+    var rotationEnabled: Bool = false
     
     private var durationTimer: Timer?
     private var speakerEnabled: Bool = false
@@ -106,8 +107,22 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if self.call?.details.isVideoOffered == true {
+        if self.rotationEnabled {
             AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if self.rotationEnabled {
+            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait {
+                self.constOfLocalContainerTrailing.constant = Constants.ScreenWidth - 28 - 78
+                self.constOfLocalContainerBottom.constant = Constants.ScreenHeight - 35 - 100
+            } else {
+                self.constOfLocalContainerTrailing.constant = Constants.ScreenHeight - 28 - 78
+                self.constOfLocalContainerBottom.constant = Constants.ScreenWidth - 35 - 100
+            }
         }
     }
 
@@ -132,6 +147,7 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             self.showButtons(.kButtonsAnswerDecline)
             
             if self.fromCallKit {
+                self.call?.delegate = self
                 self.callDidEstablish(self.call)
             } else {
                 self.setCallStatusText("00:00")
@@ -146,17 +162,19 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         
         if (self.call?.details.isVideoOffered)! {
             // Add Local Video
-            if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
-                self.videoController?.localView().frame = UIScreen.main.bounds
-            }
+//            if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
+//                self.videoController?.localView().frame = UIScreen.main.bounds
+//            }
             
             self.videoController?.localView().contentMode = .scaleAspectFill
             self.viewLocalVideo.addSubview((self.videoController?.localView())!)
             self.viewLocalVideo.alpha = 0
             
-            UIView.animate(withDuration: 0.3, animations: {
-                self.viewLocalVideo.alpha = 1
-            })
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.viewLocalVideo.alpha = 1
+                })
+            }
         }
         
     }
@@ -200,12 +218,12 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             }
             
             if self.fromCallKit == true && self.call?.state != SINCallState.initiating {
+                self.fromCallKit = false
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                     self.callDidAddVideoTrack(call)
                 }
             }
             
-            self.fromCallKit = false
         }
         
         self.showButtons(.kButtonsHangup)
@@ -218,6 +236,9 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         self.stopCallDurationTimer()
         
         if (self.call?.details.isVideoOffered)! {
+            self.videoController?.localView().frame = UIScreen.main.bounds
+            self.videoController?.remoteView().frame = UIScreen.main.bounds
+            
             self.videoController?.localView().removeFromSuperview()
             self.videoController?.remoteView().removeFromSuperview()
         }
@@ -265,6 +286,10 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
                 self.viewLocalVideo.layer.cornerRadius = 4
                 self.viewLocalVideo.layer.borderWidth = 0.5
                 self.viewLocalVideo.layer.borderColor = UIColor.init(red: 147/255.0, green: 203/255.0, blue: 202/255.0, alpha: 1.0).cgColor
+                
+                // Enable landscape mode
+                AppDelegate.AppUtility.lockOrientation(.all)
+                self.rotationEnabled = true
             }
         }
     }
@@ -302,12 +327,8 @@ extension CallScreenViewController {
                 
                 self.lblRemoteUserName.isHidden = true
                 self.lblRemoteUserLocation.isHidden = true
-//                self.lblCallState.isHidden = true
                 
                 self.setCallStatusText("CONNECTING...")
-                
-                // Enable landscape mode
-                AppDelegate.AppUtility.lockOrientation(.all)
             }
             
             self.speakerEnabled = (self.call?.details.isVideoOffered)!
