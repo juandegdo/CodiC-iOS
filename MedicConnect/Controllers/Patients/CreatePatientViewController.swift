@@ -115,7 +115,7 @@ class CreatePatientViewController: BaseViewController {
                     // Possibly Name
                     name = text
                     
-                } else if self.birthDate == nil && text.contains("DOB") {
+                } else if self.birthDate == nil && (text.contains("DOB") || text.contains("DOS ") || text.contains("DOS:")) {
                     // Possibly Date of Birth
                     var components = text.components(separatedBy: " ")
                     components.removeFirst()
