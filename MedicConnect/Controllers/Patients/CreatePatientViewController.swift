@@ -252,8 +252,6 @@ extension CreatePatientViewController {
     
     @IBAction func onScanInfo(sender: AnyObject!) {
         // Show Scan screen
-        self.scanResults = nil
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientScanViewController") as? PatientScanViewController {
             vc.fromCreatePatient = true
