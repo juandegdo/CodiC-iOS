@@ -101,8 +101,11 @@ class CreatePatientViewController: BaseViewController {
     }
     
     func showScanResult() {
+        
         if let _textLines = self.scanResults {
             var name = ""
+            self.birthDate = nil
+            self.patientNumber = ""
             
             for textLine in _textLines {
                 var text = textLine.text as String
@@ -117,6 +120,10 @@ class CreatePatientViewController: BaseViewController {
                     var components = text.components(separatedBy: " ")
                     components.removeFirst()
                     text = components.joined(separator: " ")
+                    
+                    let range: Range = text.startIndex..<text.index(text.startIndex, offsetBy: 3)
+                    text = text.replacingOccurrences(of: "I", with: "1", options: .literal, range: range)
+                    text = text.replacingOccurrences(of: "O", with: "0", options: .literal, range: range)
                     
                     if let date = moment(text)?.date {
                         self.birthDate = date
@@ -144,6 +151,8 @@ class CreatePatientViewController: BaseViewController {
                 birthDateFormatter.dateStyle = .medium
                 birthDateFormatter.timeStyle = .none
                 self.tfBirthdate.text = birthDateFormatter.string(from: birthDate)
+            } else {
+                self.tfBirthdate.text = ""
             }
         }
         
@@ -243,6 +252,8 @@ extension CreatePatientViewController {
     
     @IBAction func onScanInfo(sender: AnyObject!) {
         // Show Scan screen
+        self.scanResults = nil
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientScanViewController") as? PatientScanViewController {
             vc.fromCreatePatient = true
