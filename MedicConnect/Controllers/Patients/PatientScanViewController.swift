@@ -27,6 +27,7 @@ class PatientScanViewController: UIViewController {
     
     var results: [RTRTextLine] = []
     var fromConsult: Bool = false
+    var fromCreatePatient: Bool = false
     
     /// Camera session.
     private var session: AVCaptureSession?
@@ -516,11 +517,11 @@ class PatientScanViewController: UIViewController {
     
     @IBAction func scanPressed(_ sender: AnyObject) {
         // Scan finished
-        if self.fromConsult {
+        if self.fromCreatePatient {
             // Go back to consult referring screen
             let lenght = self.navigationController?.viewControllers.count
-            if let consultReferVC = self.navigationController?.viewControllers[lenght! - 2] as? ConsultReferringViewController {
-                consultReferVC.scanResults = self.results
+            if let createPatientVC = self.navigationController?.viewControllers[lenght! - 2] as? CreatePatientViewController {
+                createPatientVC.scanResults = self.results
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: false)
                 }
@@ -531,6 +532,8 @@ class PatientScanViewController: UIViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let vc = storyboard.instantiateViewController(withIdentifier: "CreatePatientViewController") as? CreatePatientViewController {
                 vc.scanResults = self.results
+                vc.fromRecord = self.fromConsult
+                
                 DispatchQueue.main.async {
                     self.navigationController?.pushViewController(vc, animated: false)
                 }

@@ -5926,14 +5926,23 @@ you a link to reset your password.</string>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iw7-zE-dmO">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="600"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_patient_plus" translatesAutoresizingMaskIntoConstraints="NO" id="eY6-48-KpK">
-                                                <rect key="frame" x="165" y="18" width="84" height="64"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ba-YV-T8P">
+                                                <rect key="frame" x="179.66666666666666" y="19" width="55" height="55"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="84" id="CJd-54-SiK"/>
-                                                    <constraint firstAttribute="height" constant="64" id="qAF-C8-EIM"/>
+                                                    <constraint firstAttribute="width" constant="55" id="HBu-O6-fDZ"/>
+                                                    <constraint firstAttribute="height" constant="55" id="HDz-3d-ODR"/>
                                                 </constraints>
-                                            </imageView>
+                                                <state key="normal" image="icon_scan_label"/>
+                                                <connections>
+                                                    <action selector="onScanInfoWithSender:" destination="CUC-y6-FQ3" eventType="touchUpInside" id="Qwe-io-ALo"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXx-n3-Daj">
+                                                <rect key="frame" x="182.33333333333334" y="72" width="49.333333333333343" height="16.666666666666671"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
+                                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="IRJ-5D-L8i">
                                                 <rect key="frame" x="25" y="98" width="364" height="270"/>
                                                 <subviews>
@@ -6085,14 +6094,16 @@ you a link to reset your password.</string>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="KsA-NB-6m1" firstAttribute="top" secondItem="IRJ-5D-L8i" secondAttribute="bottom" constant="98" id="0b8-93-oDM"/>
+                                            <constraint firstItem="7ba-YV-T8P" firstAttribute="top" secondItem="Iw7-zE-dmO" secondAttribute="top" constant="19" id="18t-he-VSL"/>
                                             <constraint firstItem="KsA-NB-6m1" firstAttribute="leading" secondItem="Iw7-zE-dmO" secondAttribute="leading" constant="25" id="64g-G9-UN0"/>
                                             <constraint firstItem="AtH-VO-aze" firstAttribute="trailing" secondItem="IRJ-5D-L8i" secondAttribute="trailing" id="ABA-D4-DV5"/>
-                                            <constraint firstItem="eY6-48-KpK" firstAttribute="centerX" secondItem="Iw7-zE-dmO" secondAttribute="centerX" id="Arj-Jz-dw3"/>
                                             <constraint firstItem="AtH-VO-aze" firstAttribute="centerY" secondItem="7R6-hJ-s6B" secondAttribute="centerY" constant="2" id="LBo-dK-rOz"/>
+                                            <constraint firstItem="wXx-n3-Daj" firstAttribute="centerX" secondItem="Iw7-zE-dmO" secondAttribute="centerX" id="XmO-Rx-hTj"/>
                                             <constraint firstAttribute="height" constant="600" id="boC-fT-ZSh"/>
                                             <constraint firstItem="IRJ-5D-L8i" firstAttribute="leading" secondItem="Iw7-zE-dmO" secondAttribute="leading" constant="25" id="cd5-IS-sxR"/>
-                                            <constraint firstItem="IRJ-5D-L8i" firstAttribute="top" secondItem="eY6-48-KpK" secondAttribute="bottom" constant="16" id="h4M-jS-CBK"/>
-                                            <constraint firstItem="eY6-48-KpK" firstAttribute="top" secondItem="Iw7-zE-dmO" secondAttribute="top" constant="18" id="spk-1R-wPD"/>
+                                            <constraint firstItem="IRJ-5D-L8i" firstAttribute="top" secondItem="Iw7-zE-dmO" secondAttribute="top" constant="98" id="dKd-1j-2hT"/>
+                                            <constraint firstItem="wXx-n3-Daj" firstAttribute="top" secondItem="7ba-YV-T8P" secondAttribute="bottom" constant="-2" id="dZ4-Kr-t6j"/>
+                                            <constraint firstItem="7ba-YV-T8P" firstAttribute="centerX" secondItem="Iw7-zE-dmO" secondAttribute="centerX" id="oeh-eq-686"/>
                                             <constraint firstAttribute="trailing" secondItem="IRJ-5D-L8i" secondAttribute="trailing" constant="25" id="wJ0-Y0-KcE"/>
                                             <constraint firstAttribute="trailing" secondItem="KsA-NB-6m1" secondAttribute="trailing" constant="25" id="wmr-7k-q5X"/>
                                         </constraints>
@@ -8386,6 +8397,7 @@ finished the call.</string>
         <image name="icon_recording_play_off" width="20" height="23"/>
         <image name="icon_recording_prev_off" width="29" height="18"/>
         <image name="icon_save_done_new" width="21" height="21"/>
+        <image name="icon_scan_label" width="45" height="45"/>
         <image name="icon_search" width="16" height="16"/>
         <image name="icon_setting" width="16" height="16"/>
         <image name="icon_social_document" width="36" height="37"/>

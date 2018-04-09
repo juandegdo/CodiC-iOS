@@ -169,19 +169,28 @@ class ConsultReferringViewController: BaseViewController {
             }
         }
     }
-
     
     // MARK: Private Methods
     
     func presentCreatePatient(_ patientNumber: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if let vc = storyboard.instantiateViewController(withIdentifier: "CreatePatientViewController") as? CreatePatientViewController {
-            vc.fromRecord = true
-            vc.patientNumber = patientNumber
-            
-            self.navigationController?.pushViewController(vc, animated: false)
-        }
+        AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Would you like to scan label?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("YES", comment: "comment"), cancelButtonTitle: NSLocalizedString("NO", comment: "comment"), okCompletionBlock: {
+            // OK completion block
+            DispatchQueue.main.async {
+                self.onScanPatient(sender: nil)
+            }
+        }, cancelCompletionBlock: {
+            // Cancel completion block
+            DispatchQueue.main.async {
+                if let vc = storyboard.instantiateViewController(withIdentifier: "CreatePatientViewController") as? CreatePatientViewController {
+                    vc.fromRecord = true
+                    vc.patientNumber = patientNumber
+                    
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
+            }
+        })
     }
     
     func presentErrorPopup(_ popupType: ErrorPopupType) {

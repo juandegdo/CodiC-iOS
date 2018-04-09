@@ -45,6 +45,8 @@ class CreatePatientViewController: BaseViewController {
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
         
+        self.showScanResult()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,6 +60,7 @@ class CreatePatientViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.showScanResult()
         self.configureData()
     }
     
@@ -93,6 +96,11 @@ class CreatePatientViewController: BaseViewController {
         // Address
         self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
         
+        self.tfPHN.text = self.patientNumber
+        
+    }
+    
+    func showScanResult() {
         if let _textLines = self.scanResults {
             var name = ""
             
@@ -129,6 +137,7 @@ class CreatePatientViewController: BaseViewController {
             }
             
             self.tfName.text = name == "" ? "" : name.components(separatedBy: ",").reversed().joined(separator: " ")
+            self.tfPHN.text = self.patientNumber
             
             if self.birthDate != nil {
                 let birthDateFormatter = DateFormatter()
@@ -137,8 +146,6 @@ class CreatePatientViewController: BaseViewController {
                 self.tfBirthdate.text = birthDateFormatter.string(from: birthDate)
             }
         }
-        
-        self.tfPHN.text = self.patientNumber
         
     }
     
@@ -219,13 +226,27 @@ extension CreatePatientViewController {
     
     @IBAction func onBack(sender: AnyObject!) {
         if let _nav = self.navigationController as UINavigationController? {
-            if (self.fromRecord == true && isSaved == true) || self.scanResults != nil {
+            if (self.fromRecord == true && isSaved == true) || (self.fromRecord == false && self.scanResults != nil) {
                 _nav.popToRootViewController(animated: false)
             } else {
-                _nav.popViewController(animated: false)
+                let viewControllers = _nav.viewControllers
+                if viewControllers[viewControllers.count - 2] is PatientScanViewController {
+                    _nav.popToViewController(viewControllers[viewControllers.count - 3], animated: false)
+                } else {
+                    _nav.popViewController(animated: false)
+                }
             }
         } else {
             self.dismiss(animated: false, completion: nil)
+        }
+    }
+    
+    @IBAction func onScanInfo(sender: AnyObject!) {
+        // Show Scan screen
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientScanViewController") as? PatientScanViewController {
+            vc.fromCreatePatient = true
+            self.navigationController?.pushViewController(vc, animated: false)
         }
     }
     
@@ -274,7 +295,8 @@ extension CreatePatientViewController {
                             DataManager.Instance.setReferringUserIds(referringUserIds: [])
                             
                             let lenght = self.navigationController?.viewControllers.count
-                            if let prevVC: ConsultReferringViewController = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? ConsultReferringViewController : nil {
+                            let prevOffset = self.scanResults == nil ? 2 : 3;
+                            if let prevVC: ConsultReferringViewController = lenght! >= prevOffset ? self.navigationController?.viewControllers[lenght! - prevOffset] as? ConsultReferringViewController : nil {
                                 vc.noteInfo = prevVC.consultInfo
                                 self.navigationController?.pushViewController(vc, animated: false)
                             }
