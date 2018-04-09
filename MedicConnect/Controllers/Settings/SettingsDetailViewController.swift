@@ -130,7 +130,7 @@ class SettingsDetailViewController: BaseViewController {
         printAction.setValue(UIImage(named:"icon_print")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         alertController.addAction(printAction)
 
-        let submitMSPAction = UIAlertAction.init(title: "EMAIL", style: .default) { (action) in
+        let submitMSPAction = UIAlertAction.init(title: "EMAIL TO MSP", style: .default) { (action) in
             // Email
             if( MFMailComposeViewController.canSendMail()){
                 print("Can send email.")
