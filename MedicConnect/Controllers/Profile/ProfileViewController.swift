@@ -88,6 +88,8 @@ class ProfileViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        self.selectedRowIndex = (self.tableView.indexPathForSelectedRow != nil) ? self.tableView.indexPathForSelectedRow!.row : -1
+        
         if let tabvc = self.tabBarController as UITabBarController? {
             DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
         }
@@ -110,8 +112,6 @@ class ProfileViewController: BaseViewController {
         
         self.imgAvatar.layer.borderWidth = 1.5
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
-        
-        self.selectedRowIndex = (self.tableView.indexPathForSelectedRow != nil) ? self.tableView.indexPathForSelectedRow!.row : -1
         
         self.updateUI()
         self.loadAll()
@@ -199,8 +199,11 @@ class ProfileViewController: BaseViewController {
             (user: User?) in
             
             if let _user = user as User? {
+                self.selectedRowIndex = (self.tableView.indexPathForSelectedRow != nil) ? self.tableView.indexPathForSelectedRow!.row : -1
+                
                 self.logUser(user: _user)
-                self.updateUI()
+                self.tableView.reloadData()
+                self.updateScroll(offset: self.mainScrollView.contentOffset.y)
             }
         })
         
@@ -214,7 +217,8 @@ class ProfileViewController: BaseViewController {
         if (DataManager.Instance.getPostType() != Constants.PostTypeNote && self.postType != DataManager.Instance.getPostType()) {
             self.postType = DataManager.Instance.getPostType()
             self.expandedRows = Set<String>()
-            self.updateUI()
+            self.tableView.reloadData()
+            self.updateScroll(offset: self.mainScrollView.contentOffset.y)
         }
     }
     
@@ -240,9 +244,6 @@ class ProfileViewController: BaseViewController {
             self.lblTitle.text = _user.title
             
         }
-        
-        self.tableView.reloadData()
-        self.updateScroll(offset: self.mainScrollView.contentOffset.y)
         
     }
     
