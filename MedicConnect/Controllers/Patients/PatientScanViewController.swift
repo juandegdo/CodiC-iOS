@@ -405,18 +405,20 @@ class PatientScanViewController: UIViewController {
     }
     
     func progressColor(_ progress:RTRResultStabilityStatus) -> UIColor {
-        switch progress {
-        case RTRResultStabilityStatus.notReady, RTRResultStabilityStatus.tentative:
-            return UIColor(hex: 0xFF6500)
-        case RTRResultStabilityStatus.verified:
-            return UIColor(hex: 0xC96500)
-        case RTRResultStabilityStatus.available:
-            return UIColor(hex: 0x886500)
-        case RTRResultStabilityStatus.tentativelyStable:
-            return UIColor(hex: 0x4B6500)
-        case RTRResultStabilityStatus.stable:
-            return UIColor(hex: 0x006500)
-        }
+        return UIColor(hex: 0x009500)
+        
+//        switch progress {
+//        case RTRResultStabilityStatus.notReady, RTRResultStabilityStatus.tentative:
+//            return UIColor(hex: 0xFF6500)
+//        case RTRResultStabilityStatus.verified:
+//            return UIColor(hex: 0xC96500)
+//        case RTRResultStabilityStatus.available:
+//            return UIColor(hex: 0x886500)
+//        case RTRResultStabilityStatus.tentativelyStable:
+//            return UIColor(hex: 0x4B6500)
+//        case RTRResultStabilityStatus.stable:
+//            return UIColor(hex: 0x006500)
+//        }
     }
     
     /// Remove all visible regions
