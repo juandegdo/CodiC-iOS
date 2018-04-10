@@ -310,49 +310,55 @@ extension ConsultReferringViewController : UITextFieldDelegate {
                     // Check if patient exists
                     self.btnSave.isUserInteractionEnabled = false
                     PatientService.Instance.getPatientIdByPHN(PHN: self.tfPatientNumber.text!) { (success, PHN, patientId, patientName) in
-                        self.btnSave.isUserInteractionEnabled = true
                         
-                        if success == true && PHN == self.tfPatientNumber.text! {
-                            if patientId == nil || patientId == "" {
+                        DispatchQueue.main.async {
+                            self.btnSave.isUserInteractionEnabled = true
+                            
+                            if success == true && PHN == self.tfPatientNumber.text! {
+                                if patientId == nil || patientId == "" {
+                                    self.lblPHNError.isHidden = false
+                                    self.tfPatientNumber.textColor = UIColor.red
+                                } else {
+                                    self.patientID = patientId!
+                                    self.lblPatientName.text = patientName!
+                                    self.lblPHNError.isHidden = true
+                                    self.tfPatientNumber.textColor = UIColor.black
+                                }
+                            } else if success == false {
                                 self.lblPHNError.isHidden = false
                                 self.tfPatientNumber.textColor = UIColor.red
-                            } else {
-                                self.patientID = patientId!
-                                self.lblPatientName.text = patientName!
-                                self.lblPHNError.isHidden = true
-                                self.tfPatientNumber.textColor = UIColor.black
                             }
-                        } else if success == false {
-                            self.lblPHNError.isHidden = false
-                            self.tfPatientNumber.textColor = UIColor.red
+                            
+                            if self.lblPHNError.isHidden {
+                                self.tfPatientNumber.rightView = self.viewCheckmark
+                            }
                         }
                         
-                        if self.lblPHNError.isHidden {
-                            self.tfPatientNumber.rightView = self.viewCheckmark
-                        }
                     }
                 } else if (textField == self.tfDoctorMSPNumber) {
                     // Check if MSP number exists
                     self.btnSave.isUserInteractionEnabled = false
                     UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId, name) in
-                        self.btnSave.isUserInteractionEnabled = true
-                        
-                        if success == true && MSP == self.tfDoctorMSPNumber.text! {
-                            if userId == nil || userId == "" {
+                        DispatchQueue.main.async {
+                            self.btnSave.isUserInteractionEnabled = true
+                            
+                            if success == true && MSP == self.tfDoctorMSPNumber.text! {
+                                if userId == nil || userId == "" {
+                                    self.lblMSPError.isHidden = false
+                                    self.tfDoctorMSPNumber.textColor = UIColor.red
+                                } else {
+                                    self.referUserID = userId!
+                                    self.lblDoctorName.text = name!
+                                    self.lblMSPError.isHidden = true
+                                    self.tfDoctorMSPNumber.textColor = UIColor.black
+                                }
+                            } else if success == false {
                                 self.lblMSPError.isHidden = false
                                 self.tfDoctorMSPNumber.textColor = UIColor.red
-                            } else {
-                                self.referUserID = userId!
-                                self.lblDoctorName.text = name!
-                                self.lblMSPError.isHidden = true
-                                self.tfDoctorMSPNumber.textColor = UIColor.black
                             }
-                        } else if success == false {
-                            self.lblMSPError.isHidden = false
-                            self.tfDoctorMSPNumber.textColor = UIColor.red
+                            
+                            self.tfDoctorMSPNumber.rightView?.isHidden = !self.lblMSPError.isHidden
                         }
-                        
-                        self.tfDoctorMSPNumber.rightView?.isHidden = !self.lblMSPError.isHidden
                     }
                 }
             }

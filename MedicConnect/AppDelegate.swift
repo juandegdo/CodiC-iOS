@@ -549,7 +549,7 @@ extension AppDelegate: SINCallClientDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
             vc.call = call
-            if let vvc = self.window?.rootViewController {
+            if let vvc = self.window?.visibleViewController() {
                 vvc.present(vc, animated: false, completion: nil)
             }
         }
