@@ -6891,7 +6891,7 @@ you a link to reset your password.</string>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fvz-Kw-3V0">
-                                        <rect key="frame" x="339" y="43" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="100" y="43" width="239" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                         <color key="textColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -6905,6 +6905,7 @@ you a link to reset your password.</string>
                                     <constraint firstAttribute="trailing" secondItem="bcK-jL-8fT" secondAttribute="trailing" id="B41-O4-OqK"/>
                                     <constraint firstItem="odl-tz-sM6" firstAttribute="leading" secondItem="bj6-xG-O71" secondAttribute="leading" constant="2" id="Nq9-0l-Cdu"/>
                                     <constraint firstItem="Fvz-Kw-3V0" firstAttribute="centerY" secondItem="bcK-jL-8fT" secondAttribute="centerY" id="Wzm-aj-8q6"/>
+                                    <constraint firstItem="Fvz-Kw-3V0" firstAttribute="leading" secondItem="bcK-jL-8fT" secondAttribute="leading" constant="100" id="js2-16-ShS"/>
                                     <constraint firstAttribute="height" constant="65" id="nf8-2Y-ssN"/>
                                     <constraint firstItem="bcK-jL-8fT" firstAttribute="leading" secondItem="bj6-xG-O71" secondAttribute="leading" id="rRI-OQ-ii0"/>
                                 </constraints>
