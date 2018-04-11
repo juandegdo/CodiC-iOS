@@ -23,6 +23,8 @@ pod 'SwiftGifOrigin', '~> 1.6.1'
 pod 'SwiftMoment', :git => 'https://github.com/danielyang112/SwiftMoment.git'
 pod 'SwiftValidators'
 pod 'SinchRTC'
+pod 'Firebase/Core'
+pod 'Firebase/Database'
 
   target 'MedicConnectTests' do
     inherit! :search_paths
