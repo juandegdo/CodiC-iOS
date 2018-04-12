@@ -87,8 +87,14 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
 
 // Handle cancel/bye event initiated by either caller or callee
 - (void)callDidEnd:(NSNotification *)notification {
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"sinchCallDidEnd" object:nil];
+  
   id<SINCall> call = [notification userInfo][SINCallKey];
   if (call) {
+    if (call.details.establishedTime) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"callShouldUpdateHistory" object:nil];
+    }
+    
     [_provider reportCallWithUUID:[[NSUUID alloc] initWithUUIDString:call.callId]
                       endedAtDate:call.details.endedTime
                            reason:SINGetCallEndedReason(call.details.endCause)];

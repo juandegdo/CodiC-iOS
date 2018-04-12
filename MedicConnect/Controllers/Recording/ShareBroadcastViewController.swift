@@ -88,6 +88,12 @@ extension ShareBroadcastViewController {
     //MARK: IBActions
     
     @IBAction func onClose(sender: UIButton) {
+        UserService.Instance.updateAvailability(available: true) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+        
         if let _nav = self.navigationController as UINavigationController? {
             if DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis {
                 _nav.popToRootViewController(animated: false)

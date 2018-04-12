@@ -108,6 +108,11 @@
 		65D70D7F2029C14E00686C43 /* FindText.rom in Copy Patterns */ = {isa = PBXBuildFile; fileRef = 65D70D592029A4E600686C43 /* FindText.rom */; };
 		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
 		65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0D1F12017F142008A79CB /* VSTextField.swift */; };
+		65ED27E5207FCC290039715D /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27E4207FCC290039715D /* History.swift */; };
+		65ED27E7207FCC3C0039715D /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27E6207FCC3C0039715D /* HistoryController.swift */; };
+		65ED27E9207FCC490039715D /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27E8207FCC490039715D /* HistoryService.swift */; };
+		65ED27EC207FD6F00039715D /* HistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27EA207FD6F00039715D /* HistoryListCell.swift */; };
+		65ED27ED207FD6F00039715D /* HistoryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65ED27EB207FD6F00039715D /* HistoryListCell.xib */; };
 		65F4AEBB2062C15200D75335 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F4AEBA2062C15100D75335 /* CallKit.framework */; };
 		65F4AEC52062C3F100D75335 /* SINCallKitProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */; };
 		65F4AEC62062C3F100D75335 /* AudioControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC32062C3F100D75335 /* AudioControllerDelegate.m */; };
@@ -367,6 +372,11 @@
 		65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AbbyyRtrSDK.framework; sourceTree = "<group>"; };
 		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
 		65E0D1F12017F142008A79CB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VSTextField.swift; path = MedicConnect/Views/VSTextField/VSTextField.swift; sourceTree = SOURCE_ROOT; };
+		65ED27E4207FCC290039715D /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		65ED27E6207FCC3C0039715D /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
+		65ED27E8207FCC490039715D /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
+		65ED27EA207FD6F00039715D /* HistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListCell.swift; sourceTree = "<group>"; };
+		65ED27EB207FD6F00039715D /* HistoryListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryListCell.xib; sourceTree = "<group>"; };
 		65F4AEBA2062C15100D75335 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINCallKitProvider.m; sourceTree = "<group>"; };
 		65F4AEC22062C3F100D75335 /* SINCallKitProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINCallKitProvider.h; sourceTree = "<group>"; };
@@ -624,6 +634,8 @@
 				D2A9E7371E0A18E70032C2CA /* NotificationListCell.xib */,
 				652A1C331FA9242A009B7765 /* PatientListCell.swift */,
 				652A1C341FA9242A009B7765 /* PatientListCell.xib */,
+				65ED27EA207FD6F00039715D /* HistoryListCell.swift */,
+				65ED27EB207FD6F00039715D /* HistoryListCell.xib */,
 				657B12811FC38E4C0059B16E /* PatientNotesCell.swift */,
 				657B12821FC38E4C0059B16E /* PatientNotesCell.xib */,
 				D21BC8F71DEA2867008F5443 /* ConsultCell.swift */,
@@ -874,6 +886,7 @@
 				00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */,
 				005642951EFEDA3000B42A42 /* NotificationService.swift */,
 				6522BF131F732EAF00E40759 /* SearchService.swift */,
+				65ED27E8207FCC490039715D /* HistoryService.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -905,6 +918,7 @@
 				65C915D71FCF1696002AC31B /* Patient.swift */,
 				D25EB15C1E845D5F0082A9D5 /* Post.swift */,
 				D20658441E5BCEB4003875E4 /* User.swift */,
+				65ED27E4207FCC290039715D /* History.swift */,
 				D2301FDA1E5FBD03006C636A /* UserController.swift */,
 				65C915D51FCF1687002AC31B /* PatientController.swift */,
 				D225D11A1E84BDC600B5793A /* PostController.swift */,
@@ -913,6 +927,7 @@
 				65A2896F1F3A95D600547D72 /* LikeController.swift */,
 				005642971EFF003B00B42A42 /* NotificationController.swift */,
 				6522BF151F732F7C00E40759 /* SearchController.swift */,
+				65ED27E6207FCC3C0039715D /* HistoryController.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1266,6 +1281,7 @@
 				D279AD501E132A26001714FC /* CommentsListCell.xib in Resources */,
 				D21BC8FF1DEA3F0D008F5443 /* ConsultCell.xib in Resources */,
 				D213CB251E0CB043004BEA3C /* SettingHeaderCell.xib in Resources */,
+				65ED27ED207FD6F00039715D /* HistoryListCell.xib in Resources */,
 				D2A9E7381E0A18E70032C2CA /* NotificationListCell.xib in Resources */,
 				65A2897C1F3BC98E00547D72 /* SearchPlaceCell.xib in Resources */,
 			);
@@ -1536,6 +1552,7 @@
 				D2C1A8401E15E77C00E213F4 /* SearchViewController.swift in Sources */,
 				D270B7D91DE51F7600458C2E /* AppDelegate.swift in Sources */,
 				D206583F1E5BCCD4003875E4 /* UserService.swift in Sources */,
+				65ED27E7207FCC3C0039715D /* HistoryController.swift in Sources */,
 				651952AD1F42413D00AA6627 /* TutorialViewController.swift in Sources */,
 				D279AD4E1E132A14001714FC /* CommentsListCell.swift in Sources */,
 				D2A9E7361E0A11BB0032C2CA /* NotificationListCell.swift in Sources */,
@@ -1547,12 +1564,14 @@
 				00CFBD8D1EF7DC5B000A4D1E /* CommentService.swift in Sources */,
 				65488DAC1F944239005C1EA8 /* PatientsViewController.swift in Sources */,
 				D20658411E5BCD30003875E4 /* UserDefaultsUtil.swift in Sources */,
+				65ED27E5207FCC290039715D /* History.swift in Sources */,
 				65A2897B1F3BC98E00547D72 /* SearchPlaceCell.swift in Sources */,
 				D24B18261E7F5360002E35E2 /* PostService.swift in Sources */,
 				D29891DE1E613274004C0FC1 /* StringUtil.swift in Sources */,
 				D25EB15D1E845D5F0082A9D5 /* Post.swift in Sources */,
 				D2F2A9F31E285F0000DA2434 /* InvitePopupViewController.swift in Sources */,
 				0056429A1EFF007300B42A42 /* Notification.swift in Sources */,
+				65ED27E9207FCC490039715D /* HistoryService.swift in Sources */,
 				9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */,
 				652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */,
 				65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */,
@@ -1567,6 +1586,7 @@
 				652A1C381FA93E1B009B7765 /* CreatePatientViewController.swift in Sources */,
 				65F4AEC52062C3F100D75335 /* SINCallKitProvider.m in Sources */,
 				D2301FDD1E5FC212006C636A /* WelcomeLastViewController.swift in Sources */,
+				65ED27EC207FD6F00039715D /* HistoryListCell.swift in Sources */,
 				D213CB1B1E0CA7B0004BEA3C /* SettingsViewController.swift in Sources */,
 				D23BFACA1E8AF80600F3934B /* TVButton.swift in Sources */,
 				650E28881F71B64B0096A3F0 /* SCSiriWaveformView.m in Sources */,

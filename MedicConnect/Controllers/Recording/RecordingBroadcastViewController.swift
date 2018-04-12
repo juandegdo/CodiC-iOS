@@ -181,6 +181,12 @@ extension RecordingBroadcastViewController {
     @IBAction func onClose(sender: AnyObject) {
         self.stopRecording()
         
+        UserService.Instance.updateAvailability(available: true) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+        
         if let _nav = self.navigationController as UINavigationController? {
             _nav.dismiss(animated: false, completion: nil)
         } else {

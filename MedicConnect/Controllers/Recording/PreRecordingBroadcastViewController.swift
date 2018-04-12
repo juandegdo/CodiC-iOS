@@ -13,6 +13,16 @@ class PreRecordingBroadcastViewController: BaseViewController {
     
     var fileURL: URL?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        UserService.Instance.updateAvailability(available: false) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -69,6 +79,12 @@ extension PreRecordingBroadcastViewController {
     }
     
     @IBAction func onClose(sender: AnyObject) {
+        
+        UserService.Instance.updateAvailability(available: true) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
         
         if let _nav = self.navigationController as UINavigationController? {
             _nav.dismiss(animated: false, completion: nil)

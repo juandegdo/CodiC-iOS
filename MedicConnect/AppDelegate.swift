@@ -83,6 +83,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.sinchPush?.delegate = self
         self.sinchPush?.setDesiredPushType(SINPushTypeVoIP)
         
+        // Update user availability
+        UserService.Instance.updateAvailability(available: true) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+        
+        // NotificationCenter
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.callDidEnd), name: NSNotification.Name(rawValue: "sinchCallDidEnd"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.updateCallHistory), name: NSNotification.Name(rawValue: "callShouldUpdateHistory"), object: nil)
+        
         return true
     }
     
@@ -142,8 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("========Received========\n\(userInfo)\n")
-        
-//        self.sinchPush?.application(application, didReceiveRemoteNotification: userInfo)
         
         if let dictInfo = userInfo["aps"] as? NSDictionary {
             if  let _ = UserController.Instance.getUser() as User? {
@@ -212,9 +221,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // Add to sinch
-//        self.sinchPush?.application(application, didRegisterForRemoteNotificationsWithDeviceToken: deviceToken)
-        
         // Convert token to string
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print(deviceTokenString)
@@ -298,25 +304,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func pushRegistry(_ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType) {
         print("PushKit: \(pushCredentials.token.map { String(format: "%02.2hhx", $0) }.joined()))")
-        print("PushKit:---------------Token generate-----------")
     }
     
     func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType, completion: @escaping () -> Void) {
-        self.handleRemoteNotification(payload.dictionaryPayload)
-        completion()
-    }
-    
-    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
         print("PushKit: \(payload.dictionaryPayload.description)")
         self.handleRemoteNotification(payload.dictionaryPayload)
+        completion()
     }
     
     // MARK: - Private Methods
     
     func voipRegistration() {
-//        // Register for VoIP notifications
+        // Register for VoIP notifications
 //        let mainQueue = DispatchQueue.main
-//        // Create a push registry object
+        // Create a push registry object
 //        let voipRegistry: PKPushRegistry = PKPushRegistry(queue: mainQueue)
         // Set the registry's delegate to self
         voipRegistry.delegate = self
@@ -526,6 +527,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            [application presentLocalNotificationNow:note];
 //        }
     }
+    
+    @objc func callDidEnd() {
+        // Update user availability
+        UserService.Instance.updateAvailability(available: true) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+    }
+    
+    @objc func updateCallHistory() {
+        // Update call History
+        if let callId = self.callHeaders["callId"] as? String {
+            HistoryService.Instance.updateCallHistory(callId: callId, callState: 1, duration: 0) { (success) in
+                if (success) {
+                    // Do nothing now
+                }
+            }
+        }
+    }
 
 }
 
@@ -548,16 +569,36 @@ extension AppDelegate: SINClientDelegate {
 extension AppDelegate: SINCallClientDelegate {
     
     func client(_ client: SINCallClient!, didReceiveIncomingCall call: SINCall!) {
+        if !call.headers.isEmpty {
+            self.callHeaders = call.headers as! [String : Any]
+        }
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
             vc.call = call
             if let vvc = self.window?.visibleViewController() {
                 vvc.present(vc, animated: false, completion: nil)
+                
+                if call.details.applicationStateWhenReceived == UIApplicationState.active {
+                    // Update user availability
+                    UserService.Instance.updateAvailability(available: false) { (success) in
+                        if (success) {
+                            // Do nothing now
+                        }
+                    }
+                }
             }
         }
     }
     
     func client(_ client: SINCallClient!, willReceiveIncomingCall call: SINCall!) {
+        // Update user availability
+        UserService.Instance.updateAvailability(available: false) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+        
         if !call.headers.isEmpty {
             self.callHeaders = call.headers as! [String : Any]
         }
