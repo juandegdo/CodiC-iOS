@@ -182,15 +182,15 @@ extension SaveConsultViewController {
             return
         }
         
-        guard  self.tfDiagnosticCode.text!.count != 0 else {
-            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a diagnostic code!", message: nil, okButtonTitle: "OK")
-            return
-        }
-        
-        guard  self.tfBillingCode.text!.count != 0 else {
-            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a billing code!", message: nil, okButtonTitle: "OK")
-            return
-        }
+//        guard  self.tfDiagnosticCode.text!.count != 0 else {
+//            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a diagnostic code!", message: nil, okButtonTitle: "OK")
+//            return
+//        }
+//        
+//        guard  self.tfBillingCode.text!.count != 0 else {
+//            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a billing code!", message: nil, okButtonTitle: "OK")
+//            return
+//        }
         
         var author = ""
         if let _user = UserController.Instance.getUser() as User? {
