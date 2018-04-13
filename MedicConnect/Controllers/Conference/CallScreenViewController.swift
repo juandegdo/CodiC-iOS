@@ -74,6 +74,15 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Enable playing audio in silent mode
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions.allowBluetoothA2DP)
+            try AVAudioSession.sharedInstance().setActive(true)
+        }
+        catch {
+            print("Failed to enable playing audio in silent mode")
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,6 +105,8 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         
 //        self.speakerEnabled = !(self.call?.details.isVideoOffered)!
 //        self.onSpeaker(sender: self.btnSpeaker)
+        
+        AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
         
         self.audioController?.enableSpeaker()
         self.audioController?.unmute()
