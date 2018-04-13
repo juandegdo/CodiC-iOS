@@ -122,6 +122,8 @@ class SettingsDetailViewController: BaseViewController {
                 printController.printingItem = self.destinationFileUrl
                 
                 printController.present(animated: true)
+            } else {
+                AlertUtil.showSimpleAlert(self, title: "Print service is not available.", message: nil, okButtonTitle: "OK")
             }
         }
         
@@ -139,13 +141,8 @@ class SettingsDetailViewController: BaseViewController {
                     let mailComposer = MFMailComposeViewController()
                     mailComposer.mailComposeDelegate = self
                     
-                    // Set to recipients
 //                    mailComposer.setToRecipients(["yakupad@yandex.com"])
-//
-//                    // Set the subject
 //                    mailComposer.setSubject("email with document pdf")
-//
-//                    // Set mail body
 //                    mailComposer.setMessageBody("This is what they sound like.", isHTML: true)
                     
                     let pathPDF = self.destinationFileUrl.path
@@ -158,6 +155,7 @@ class SettingsDetailViewController: BaseViewController {
                 }
             } else {
                 print("email is not supported")
+                AlertUtil.showSimpleAlert(self, title: "Mail services are not available.", message: nil, okButtonTitle: "OK")
             }
         }
         
