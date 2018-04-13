@@ -47,7 +47,7 @@ class HistoryService: BaseTaskController {
     
     func getCallHistory(completion: @escaping (_ success: Bool) -> Void) {
         
-        let url = "\(self.baseURL)\(self.URLGetCallHistory)?skip=\(0)&limit=\(100)"
+        let url = "\(self.baseURL)\(self.URLGetCallHistory)?skip=\(0)&limit=\(20)"
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
