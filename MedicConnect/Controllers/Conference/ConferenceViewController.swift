@@ -80,8 +80,9 @@ extension ConferenceViewController {
         self.tvHistory.register(nibPatientCell, forCellReuseIdentifier: HistoryCellID)
         
         self.tvHistory.tableFooterView = UIView()
-        self.tvHistory.estimatedRowHeight = 65.0
-        self.tvHistory.rowHeight = UITableViewAutomaticDimension
+        self.tvHistory.rowHeight = 65.0
+//        self.tvHistory.estimatedRowHeight = 65.0
+//        self.tvHistory.rowHeight = UITableViewAutomaticDimension
         
     }
     

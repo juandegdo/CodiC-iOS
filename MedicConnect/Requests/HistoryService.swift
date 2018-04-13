@@ -60,9 +60,9 @@ class HistoryService: BaseTaskController {
                     return
                 }
                 
-                if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
-                }
+//                if let _ = response.result.value {
+//                    print("Response: \(response.result.value!)")
+//                }
                 
                 var histories: [History] = []
                 

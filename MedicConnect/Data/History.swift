@@ -34,8 +34,8 @@ class History {
     
     func getFormattedDate() -> String {
         
-        let dDate = DateUtil.ParseStringDateToDouble(self.meta.createdAt) as Date
-        let formattedDate = DateUtil.GetBirthDate(dDate) as String? ?? ""
+        let dDate = DateUtil.ParseStringDateToDouble(self.meta.createdAt) as NSDate
+        let formattedDate = DateUtil.GetDateTime(dDate.timeIntervalSince1970) as String? ?? ""
         
         return formattedDate
         

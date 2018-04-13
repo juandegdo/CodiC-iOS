@@ -32,6 +32,12 @@ class HistoryListCell: UITableViewCell {
         self.lblCallType.text = "\(history.type.uppercased())"
         self.lblCallDate.text = history.getFormattedDate().replacingOccurrences(of: ",", with: "")
         
+        if history.callState == 0 {
+            self.lblDoctorName.textColor = UIColor.init(red: 246/255.0, green: 48/255.0, blue: 57/255.0, alpha: 1.0)
+        } else {
+            self.lblDoctorName.textColor = UIColor.init(red: 32/255.0, green: 32/255.0, blue: 41/255.0, alpha: 1.0)
+        }
+        
         self.imgUserPhoto.image = nil
         if let _user = history.fromUser as User? {
             if let imgURL = URL(string: _user.photo) as URL? {
