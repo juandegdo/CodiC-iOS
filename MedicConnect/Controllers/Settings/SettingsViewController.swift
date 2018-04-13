@@ -245,9 +245,6 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     self.sendEmail(emailAddress: "info@medicconnect.com")
                     
                 } else if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
-//                    if (indexPath.row == 0) {
-//                        vc.strTitle = "About"
-//                    } else
                     if (indexPath.row == 0) {
                         vc.strTitle = "Privacy Policy"
                     }else if (indexPath.row == 1) {
@@ -351,11 +348,17 @@ extension SettingsViewController : SettingListCellDelegate {
                 }
                 print(tmpValue)
                 
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                
                 UserService.Instance.setNotificationFilter(value: tmpValue, completion: { (success) in
-                    UserService.Instance.getMe(completion: { (_) in
-                        self.tvSettings.reloadSections(IndexSet.init(integer: 1), with: .none)
-                    })
-                    
+                    if success {
+                        UserService.Instance.getMe(completion: { (_) in
+                            UIApplication.shared.endIgnoringInteractionEvents()
+                            self.tvSettings.reloadSections(IndexSet.init(integer: 1), with: .none)
+                        })
+                    } else {
+                        UIApplication.shared.endIgnoringInteractionEvents()
+                    }
                 })
             }
         }
