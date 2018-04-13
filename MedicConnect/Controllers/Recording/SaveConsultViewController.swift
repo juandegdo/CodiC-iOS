@@ -97,6 +97,8 @@ extension SaveConsultViewController : UITextFieldDelegate {
         
         if (textField == self.tfBroadcastName) {
             return newLength <= Constants.MaxFullNameLength
+        } else if (textField == self.tfDiagnosticCode) {
+            return newLength <= Constants.MaxDiagnosticCodeLength
         } else {
             return true
         }
