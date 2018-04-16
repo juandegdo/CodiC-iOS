@@ -362,7 +362,7 @@ class UserService: BaseTaskController {
                 }
                 
                 if let _ = response.result.value {
-//                    print("Response: \(response.result.value!)")
+                    print("Response: \(response.result.value!)")
                 }
                 
                 if response.response?.statusCode == 200 {
@@ -417,7 +417,10 @@ class UserService: BaseTaskController {
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String,
-                                    let _postType = p["post_type"] as? String {
+                                    let _postType = p["post_type"] as? String,
+                                    let _creatorObj = p["user"] as? NSDictionary,
+                                    let _creatorId = _creatorObj["_id"] as? String,
+                                    let _creatorName = _creatorObj["name"] as? String {
                                     
                                     // Create meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -426,7 +429,26 @@ class UserService: BaseTaskController {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType)
+                                    // Create Consult Creator
+                                    let _creator = User(id: _creatorId, fullName: _creatorName, email: "")
+                                    
+                                    if let _userPhoto = _creatorObj["photo"] as? String {
+                                        _creator.photo = _userPhoto
+                                    }
+                                    
+                                    if let _title = _creatorObj["title"] as? String {
+                                        _creator.title = _title
+                                    }
+                                    
+                                    if let _msp = _creatorObj["msp"] as? String {
+                                        _creator.msp = _msp
+                                    }
+                                    
+                                    if let _location = _creatorObj["location"] as? String {
+                                        _creator.location = _location
+                                    }
+                                    
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _creator, postType: _postType)
                                     
                                     // Optional description
                                     
@@ -809,7 +831,10 @@ class UserService: BaseTaskController {
                                     let _playCount = p["play_count"] as? Int,
                                     let _commentsCount = p["comments_count"] as? Int,
                                     let _title = p["title"] as? String,
-                                    let _postType = p["post_type"] as? String {
+                                    let _postType = p["post_type"] as? String,
+                                    let _creatorObj = p["user"] as? NSDictionary,
+                                    let _creatorId = _creatorObj["_id"] as? String,
+                                    let _creatorName = _creatorObj["name"] as? String {
                                     
                                     // Create meta
                                     let _meta = Meta(createdAt: _createdAt)
@@ -818,7 +843,26 @@ class UserService: BaseTaskController {
                                         _meta.updatedAt = _updatedAt
                                     }
                                     
-                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _user, postType: _postType)
+                                    // Create Consult Creator
+                                    let _creator = User(id: _creatorId, fullName: _creatorName, email: "")
+                                    
+                                    if let _userPhoto = _creatorObj["photo"] as? String {
+                                        _creator.photo = _userPhoto
+                                    }
+                                    
+                                    if let _title = _creatorObj["title"] as? String {
+                                        _creator.title = _title
+                                    }
+                                    
+                                    if let _msp = _creatorObj["msp"] as? String {
+                                        _creator.msp = _msp
+                                    }
+                                    
+                                    if let _location = _creatorObj["location"] as? String {
+                                        _creator.location = _location
+                                    }
+                                    
+                                    let post = Post(id: _id, audio: _audio, meta: _meta, playCount: _playCount, commentsCount: _commentsCount, title: _title, description: "", user: _creator, postType: _postType)
                                     
                                     // Optional description
                                     

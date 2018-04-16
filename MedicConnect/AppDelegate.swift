@@ -592,19 +592,19 @@ extension AppDelegate: SINCallClientDelegate {
     }
     
     func client(_ client: SINCallClient!, willReceiveIncomingCall call: SINCall!) {
-        // Update user availability
-        UserService.Instance.updateAvailability(available: false) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
-        
         if !call.headers.isEmpty {
             self.callHeaders = call.headers as! [String : Any]
         }
         
         self.sinchCallKitProvider?.reportNewIncomingCall(call, headers: self.callHeaders)
         self.callHeaders = [:]
+        
+        // Update user availability
+        UserService.Instance.updateAvailability(available: false) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
     }
     
 //    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {
