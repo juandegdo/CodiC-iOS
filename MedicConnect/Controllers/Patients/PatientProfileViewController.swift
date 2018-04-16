@@ -649,6 +649,7 @@ extension PatientProfileViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
+            DataManager.Instance.setPatient(patient: patient)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
             DataManager.Instance.setFromPatientProfile(true)
             

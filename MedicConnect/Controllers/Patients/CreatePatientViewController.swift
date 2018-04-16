@@ -301,6 +301,7 @@ extension CreatePatientViewController {
                         if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
                             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
                             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
+                            DataManager.Instance.setPatient(patient: patient)
                             DataManager.Instance.setReferringUserIds(referringUserIds: [])
                             
                             let lenght = self.navigationController?.viewControllers.count

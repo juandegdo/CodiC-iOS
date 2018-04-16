@@ -72,6 +72,7 @@ extension EndCallPopupViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
             DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setPatient(patient: nil)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
             DataManager.Instance.setFromPatientProfile(false)
             

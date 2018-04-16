@@ -153,6 +153,7 @@ class ProfileViewController: BaseViewController {
                 
                 DataManager.Instance.setPostType(postType: Constants.PostTypeDiagnosis)
                 DataManager.Instance.setPatientId(patientId: "")
+                DataManager.Instance.setPatient(patient: nil)
                 DataManager.Instance.setReferringUserIds(referringUserIds: [])
                 
                 self.present(vc, animated: false, completion: nil)

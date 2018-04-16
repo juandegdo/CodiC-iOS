@@ -14,6 +14,11 @@ class RecordingBroadcastViewController: BaseViewController {
     @IBOutlet var lblCurrentTime: UILabel!
     @IBOutlet var waveformView: SCSiriWaveformView!
     
+    @IBOutlet weak var patientInfoView: UIStackView!
+    @IBOutlet weak var lblPatientName: UILabel!
+    @IBOutlet weak var lblPatientDOB: UILabel!
+    @IBOutlet weak var lblPatientPHN: UILabel!
+    
     fileprivate var recordingSession: AVAudioSession?
     fileprivate var audioRecorder: AVAudioRecorder?
     fileprivate var updateTimer: Timer?
@@ -24,6 +29,15 @@ class RecordingBroadcastViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _patient = DataManager.Instance.getPatient() {
+            self.lblPatientName.text = _patient.name
+            self.lblPatientDOB.text = _patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+            self.lblPatientPHN.text = _patient.patientNumber
+            
+        } else {
+            self.patientInfoView.isHidden = true
+        }
         
         self.initRecording()
     }

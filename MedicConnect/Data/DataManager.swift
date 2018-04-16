@@ -15,6 +15,7 @@ class DataManager {
     var theLastTabIndex: Int = 0
     var postType: String = Constants.PostTypeDiagnosis
     var patientId: String = ""
+    var patient: Patient? = nil
     var referringUserIds: [String] = []
     var fromPatientProfile: Bool = false
     var recordDuration: Int = 0
@@ -47,6 +48,16 @@ class DataManager {
     
     func setPatientId(patientId: String) {
         self.patientId = patientId
+    }
+    
+    // MARK: Patient
+    
+    func getPatient() -> Patient? {
+        return self.patient
+    }
+    
+    func setPatient(patient: Patient?) {
+        self.patient = patient
     }
     
     // MARK: Referring User Id
