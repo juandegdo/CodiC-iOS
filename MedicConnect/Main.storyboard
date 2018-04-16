@@ -7715,54 +7715,8 @@ uploaded a new diagnosis.</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nF4-IK-dko">
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDH-Qf-sQc">
-                                        <rect key="frame" x="0.0" y="55" width="414" height="55"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consult Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPl-z9-hBK">
-                                                <rect key="frame" x="25" y="0.0" width="364" height="20"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="RL9-eV-seP"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="12"/>
-                                                <color key="textColor" red="0.55294117649999996" green="0.55294117649999996" blue="0.55294117649999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1sZ-cZ-HKg">
-                                                <rect key="frame" x="25" y="20" width="364" height="30"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="k7c-8g-hKx"/>
-                                                </constraints>
-                                                <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="7ns-tt-YUN" id="3Xi-cy-ovr"/>
-                                                </connections>
-                                            </textField>
-                                            <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bhE-Xr-al2">
-                                                <rect key="frame" x="25" y="54" width="364" height="1"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="0.5" id="vSR-gU-k9O"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="55" id="5hY-y1-K0W"/>
-                                            <constraint firstAttribute="trailing" secondItem="1sZ-cZ-HKg" secondAttribute="trailing" constant="25" id="6nX-jF-60c"/>
-                                            <constraint firstItem="1sZ-cZ-HKg" firstAttribute="leading" secondItem="cDH-Qf-sQc" secondAttribute="leading" constant="25" id="GI7-oX-K72"/>
-                                            <constraint firstItem="bhE-Xr-al2" firstAttribute="top" secondItem="1sZ-cZ-HKg" secondAttribute="bottom" constant="4" id="MF6-NL-Axh"/>
-                                            <constraint firstItem="bPl-z9-hBK" firstAttribute="top" secondItem="cDH-Qf-sQc" secondAttribute="top" id="RDV-JS-IQq"/>
-                                            <constraint firstItem="bhE-Xr-al2" firstAttribute="leading" secondItem="cDH-Qf-sQc" secondAttribute="leading" constant="25" id="UWE-PP-Zv4"/>
-                                            <constraint firstItem="bPl-z9-hBK" firstAttribute="leading" secondItem="cDH-Qf-sQc" secondAttribute="leading" constant="25" id="dqK-YE-kFi"/>
-                                            <constraint firstAttribute="trailing" secondItem="bhE-Xr-al2" secondAttribute="trailing" constant="25" id="sMh-nA-OgF"/>
-                                            <constraint firstAttribute="trailing" secondItem="bPl-z9-hBK" secondAttribute="trailing" constant="25" id="xaV-1K-Gl8"/>
-                                            <constraint firstItem="1sZ-cZ-HKg" firstAttribute="top" secondItem="bPl-z9-hBK" secondAttribute="bottom" id="z1c-ax-wwO"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consult Notes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-Rr-42b">
-                                        <rect key="frame" x="25" y="126" width="364" height="20"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consult Brief" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDd-Rr-42b">
+                                        <rect key="frame" x="25" y="70" width="364" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="jEp-OG-6zc"/>
                                         </constraints>
@@ -7771,7 +7725,7 @@ uploaded a new diagnosis.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1003" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UTV-Ud-ENG" customClass="RadContentHeightTextView">
-                                        <rect key="frame" x="25" y="146" width="364" height="40"/>
+                                        <rect key="frame" x="25" y="90" width="364" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="6Uj-HA-lJD"/>
@@ -7784,21 +7738,21 @@ uploaded a new diagnosis.</string>
                                         </connections>
                                     </textView>
                                     <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2n-ZZ-OYa">
-                                        <rect key="frame" x="25" y="187" width="364" height="1"/>
+                                        <rect key="frame" x="25" y="131" width="364" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="cSy-PT-uDt"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_textview_rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="zrD-aq-IpV">
-                                        <rect key="frame" x="372" y="171" width="17" height="17"/>
+                                        <rect key="frame" x="372" y="115" width="17" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="17" id="MJA-pj-oJp"/>
                                             <constraint firstAttribute="width" constant="17" id="yeN-yw-5wX"/>
                                         </constraints>
                                     </imageView>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vml-Cd-ege">
-                                        <rect key="frame" x="0.0" y="204" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="148" width="414" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diagnostic Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p25-tC-SB8">
                                                 <rect key="frame" x="25" y="0.0" width="364" height="20"/>
@@ -7844,7 +7798,7 @@ uploaded a new diagnosis.</string>
                                         </constraints>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pm2-Jm-kZE">
-                                        <rect key="frame" x="0.0" y="275" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="219" width="414" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Billing Code" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-sk-iSP">
                                                 <rect key="frame" x="25" y="0.0" width="364" height="20"/>
@@ -7890,7 +7844,7 @@ uploaded a new diagnosis.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keywords" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jty-tA-gVX">
-                                        <rect key="frame" x="25" y="346" width="364" height="20"/>
+                                        <rect key="frame" x="25" y="290" width="364" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="hVa-5I-xmb"/>
                                         </constraints>
@@ -7899,20 +7853,20 @@ uploaded a new diagnosis.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mBl-oQ-bQB" customClass="TLTagsControl">
-                                        <rect key="frame" x="25" y="386" width="364" height="22"/>
+                                        <rect key="frame" x="25" y="330" width="364" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="wcu-QF-fWG"/>
                                         </constraints>
                                     </scrollView>
                                     <view alpha="0.20000000298023224" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jy9-Pl-8UF">
-                                        <rect key="frame" x="25" y="418" width="364" height="1"/>
+                                        <rect key="frame" x="25" y="362" width="364" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="iBr-eV-pKV"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZO-Up-RJI">
-                                        <rect key="frame" x="20" y="504" width="374" height="44"/>
+                                        <rect key="frame" x="20" y="448" width="374" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="JBj-1K-Zre"/>
                                         </constraints>
@@ -7932,17 +7886,15 @@ uploaded a new diagnosis.</string>
                                     <constraint firstAttribute="bottom" secondItem="2ZO-Up-RJI" secondAttribute="bottom" constant="20" id="2Am-7k-kiQ"/>
                                     <constraint firstItem="2ZO-Up-RJI" firstAttribute="top" secondItem="Jy9-Pl-8UF" secondAttribute="bottom" constant="85" id="2JJ-HM-egn"/>
                                     <constraint firstItem="Vml-Cd-ege" firstAttribute="top" secondItem="d2n-ZZ-OYa" secondAttribute="bottom" constant="16" id="2gz-GA-rWu"/>
-                                    <constraint firstAttribute="trailing" secondItem="cDH-Qf-sQc" secondAttribute="trailing" id="AOt-04-aIX"/>
-                                    <constraint firstItem="cDH-Qf-sQc" firstAttribute="top" secondItem="nF4-IK-dko" secondAttribute="top" constant="55" id="CAl-M6-g4R"/>
                                     <constraint firstAttribute="trailing" secondItem="Pm2-Jm-kZE" secondAttribute="trailing" id="ECu-ys-uhi"/>
                                     <constraint firstItem="Vml-Cd-ege" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" id="FQn-Lc-TH7"/>
+                                    <constraint firstItem="yDd-Rr-42b" firstAttribute="top" secondItem="nF4-IK-dko" secondAttribute="top" constant="70" id="FUM-qP-9pA"/>
                                     <constraint firstAttribute="trailing" secondItem="2ZO-Up-RJI" secondAttribute="trailing" constant="20" id="GjV-YR-8Jj"/>
                                     <constraint firstItem="jty-tA-gVX" firstAttribute="top" secondItem="Pm2-Jm-kZE" secondAttribute="bottom" constant="16" id="IMm-mB-5mP"/>
                                     <constraint firstItem="Pm2-Jm-kZE" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" id="KWu-7w-yd1"/>
                                     <constraint firstAttribute="trailing" secondItem="zrD-aq-IpV" secondAttribute="trailing" constant="25" id="LDG-Wc-80M"/>
                                     <constraint firstItem="d2n-ZZ-OYa" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="MeS-TG-4af"/>
                                     <constraint firstAttribute="trailing" secondItem="mBl-oQ-bQB" secondAttribute="trailing" constant="25" id="NZi-Nx-muE"/>
-                                    <constraint firstItem="yDd-Rr-42b" firstAttribute="top" secondItem="cDH-Qf-sQc" secondAttribute="bottom" constant="16" id="QTf-al-aC2"/>
                                     <constraint firstItem="Pm2-Jm-kZE" firstAttribute="top" secondItem="Vml-Cd-ege" secondAttribute="bottom" constant="16" id="QqG-h6-9Kz"/>
                                     <constraint firstAttribute="trailing" secondItem="jty-tA-gVX" secondAttribute="trailing" constant="25" id="QzY-0U-PpG"/>
                                     <constraint firstItem="d2n-ZZ-OYa" firstAttribute="top" secondItem="UTV-Ud-ENG" secondAttribute="bottom" constant="1" id="TGp-jo-54F"/>
@@ -7950,12 +7902,12 @@ uploaded a new diagnosis.</string>
                                     <constraint firstItem="mBl-oQ-bQB" firstAttribute="top" secondItem="jty-tA-gVX" secondAttribute="bottom" constant="20" id="Vfg-Wy-Y3Q"/>
                                     <constraint firstAttribute="trailing" secondItem="UTV-Ud-ENG" secondAttribute="trailing" constant="25" id="ZE9-0x-1rW"/>
                                     <constraint firstAttribute="trailing" secondItem="Vml-Cd-ege" secondAttribute="trailing" id="akf-M8-n0u"/>
+                                    <constraint firstItem="Vml-Cd-ege" firstAttribute="width" secondItem="nF4-IK-dko" secondAttribute="width" id="be7-X9-Dc8"/>
                                     <constraint firstAttribute="trailing" secondItem="yDd-Rr-42b" secondAttribute="trailing" constant="25" id="caO-g2-WqO"/>
                                     <constraint firstAttribute="trailing" secondItem="yDd-Rr-42b" secondAttribute="trailing" constant="25" id="iDB-IT-WAb"/>
                                     <constraint firstAttribute="trailing" secondItem="d2n-ZZ-OYa" secondAttribute="trailing" constant="25" id="iRN-Qc-7uH"/>
                                     <constraint firstItem="jty-tA-gVX" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="j76-Tm-4VU"/>
                                     <constraint firstItem="d2n-ZZ-OYa" firstAttribute="top" secondItem="zrD-aq-IpV" secondAttribute="bottom" constant="-0.5" id="jZR-BR-dO1"/>
-                                    <constraint firstItem="cDH-Qf-sQc" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" id="kzs-lw-coG"/>
                                     <constraint firstItem="yDd-Rr-42b" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="oph-5g-dek"/>
                                     <constraint firstItem="yDd-Rr-42b" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="qzf-T6-7ho"/>
                                     <constraint firstItem="UTV-Ud-ENG" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="srX-dN-1VC"/>
@@ -7963,7 +7915,6 @@ uploaded a new diagnosis.</string>
                                     <constraint firstItem="mBl-oQ-bQB" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="tN4-MU-msg"/>
                                     <constraint firstItem="Jy9-Pl-8UF" firstAttribute="leading" secondItem="nF4-IK-dko" secondAttribute="leading" constant="25" id="uwF-nw-Is1"/>
                                     <constraint firstAttribute="trailing" secondItem="Jy9-Pl-8UF" secondAttribute="trailing" constant="25" id="wtq-Fg-Rd3"/>
-                                    <constraint firstItem="cDH-Qf-sQc" firstAttribute="width" secondItem="nF4-IK-dko" secondAttribute="width" id="yLW-SN-4eQ"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -7987,10 +7938,8 @@ uploaded a new diagnosis.</string>
                         <outlet property="constOfNavigationTop" destination="32m-wq-c8Y" id="Sc0-zL-wl1"/>
                         <outlet property="hashTagCtrl" destination="mBl-oQ-bQB" id="fB1-8T-V7n"/>
                         <outlet property="lblPostDescription" destination="yDd-Rr-42b" id="qD6-Kg-6Vv"/>
-                        <outlet property="lblPostTitle" destination="bPl-z9-hBK" id="nP8-RU-MwC"/>
                         <outlet property="lblTitle" destination="K7H-d0-z8t" id="BXU-UQ-DdK"/>
                         <outlet property="tfBillingCode" destination="z2a-zh-TM9" id="odu-b9-vJM"/>
-                        <outlet property="tfBroadcastName" destination="1sZ-cZ-HKg" id="tep-9M-16J"/>
                         <outlet property="tfDiagnosticCode" destination="ocs-y3-Se1" id="Ay8-qS-4UF"/>
                         <outlet property="tvDescription" destination="UTV-Ud-ENG" id="LO6-y2-PbM"/>
                         <segue destination="u1M-NI-bkt" kind="unwind" identifier="StopRecordingBroadcast" animates="NO" unwindAction="unWindToPreRecordingWithSegue:" id="XDK-En-rWG"/>

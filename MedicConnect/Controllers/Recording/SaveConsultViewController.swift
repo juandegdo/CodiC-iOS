@@ -59,8 +59,7 @@ class SaveConsultViewController: BaseViewController {
         
         // Title
         self.lblTitle.text = "Save \(DataManager.Instance.getPostType() == Constants.PostTypeConsult ? Constants.PostTypeConsult : "Patient \(Constants.PostTypeNote)")"
-        self.lblPostTitle.text = "\(DataManager.Instance.getPostType()) Title"
-        self.lblPostDescription.text = "\(DataManager.Instance.getPostType() == Constants.PostTypeConsult ? Constants.PostTypeConsult : "Patient") Notes"
+        self.lblPostDescription.text = "\(DataManager.Instance.getPostType() == Constants.PostTypeConsult ? Constants.PostTypeConsult : "Patient") Brief"
         self.btnSave.setTitle("SAVE \(DataManager.Instance.getPostType().uppercased())", for: .normal)
         
         // Description
@@ -176,11 +175,11 @@ extension SaveConsultViewController {
     @IBAction func onSave(sender: UIButton) {
         
         let postType = DataManager.Instance.getPostType()
-        let title = self.tfBroadcastName.text!
-        guard  title.count != 0 else {
-            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a name!", message: nil, okButtonTitle: "OK")
-            return
-        }
+//        let title = self.tfBroadcastName.text!
+//        guard  title.count != 0 else {
+//            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a name!", message: nil, okButtonTitle: "OK")
+//            return
+//        }
         
 //        guard  self.tfDiagnosticCode.text!.count != 0 else {
 //            AlertUtil.showSimpleAlert(self, title: "Oops, it looks like you forgot to give your \(postType.lowercased()) a diagnostic code!", message: nil, okButtonTitle: "OK")
@@ -211,7 +210,7 @@ extension SaveConsultViewController {
         
         do {
             let audioData = try Data(contentsOf: audioFilename)
-            let postInfo = ["title" : title,
+            let postInfo = ["title" : "",
                             "author" : author,
                             "description" : self.tvDescription.text!,
                             "hashtags" : hashTagCtrl.tags as! [String],
