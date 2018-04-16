@@ -139,6 +139,8 @@ class ProfileViewController: BaseViewController {
             if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
                 
                 DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+                DataManager.Instance.setPatientId(patientId: "")
+                DataManager.Instance.setPatient(patient: nil)
                 DataManager.Instance.setFromPatientProfile(false)
                 
                 self.present(vc, animated: false, completion: nil)
@@ -882,6 +884,8 @@ extension ProfileViewController {
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPatientId(patientId: "")
+            DataManager.Instance.setPatient(patient: nil)
             DataManager.Instance.setFromPatientProfile(false)
             
             self.present(vc, animated: false, completion: nil)
