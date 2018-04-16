@@ -120,13 +120,14 @@ class CreatePatientViewController: BaseViewController {
                     var components = text.components(separatedBy: " ")
                     components.removeFirst()
                     text = components.joined(separator: " ")
-                    
-                    let range: Range = text.startIndex..<text.index(text.startIndex, offsetBy: 3)
-                    text = text.replacingOccurrences(of: "I", with: "1", options: .literal, range: range)
-                    text = text.replacingOccurrences(of: "O", with: "0", options: .literal, range: range)
-                    
-                    if let date = moment(text)?.date {
-                        self.birthDate = date
+                    if text.count > 8 {
+                        let range: Range = text.startIndex..<text.index(text.startIndex, offsetBy: 3)
+                        text = text.replacingOccurrences(of: "I", with: "1", options: .literal, range: range)
+                        text = text.replacingOccurrences(of: "O", with: "0", options: .literal, range: range)
+                        
+                        if let date = moment(text)?.date {
+                            self.birthDate = date
+                        }
                     }
                     
                 } else if self.birthDate == nil, let date = moment(text)?.date {
