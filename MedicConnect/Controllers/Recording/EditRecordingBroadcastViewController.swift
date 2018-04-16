@@ -16,6 +16,7 @@ class EditRecordingBroadcastViewController: BaseViewController {
     @IBOutlet var labelLength: UILabel!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnPause: UIButton!
+    @IBOutlet var btnSpeaker: UIButton!
     
     fileprivate var audioPlayer: AVAudioPlayer?
     fileprivate var updateTimer: Timer?
@@ -236,6 +237,18 @@ extension EditRecordingBroadcastViewController {
     @IBAction func onContinueRecording(sender: UIButton) {
         self.stop()
         self.navigationController?.popViewController(animated: false)
+        
+    }
+    
+    @IBAction func onSelectSpeaker(sender: UIButton) {
+        
+        if AudioHelper.overrideMode == .speaker {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
+            sender.setImage(UIImage(named: "icon_speaker_off"), for: .normal)
+        } else {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+            sender.setImage(UIImage(named: "icon_speaker_on"), for: .normal)
+        }
         
     }
     

@@ -2705,12 +2705,24 @@ community. Invite people that you actually like to give it a try ;)</string>
                                     <constraint firstItem="KD0-DK-vS4" firstAttribute="top" secondItem="xsQ-mm-9zc" secondAttribute="top" id="wam-uX-rVD"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICj-Xt-VY2">
+                                <rect key="frame" x="11" y="507" width="48" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="M56-iL-XIN"/>
+                                    <constraint firstAttribute="height" constant="48" id="lLU-Bv-a0C"/>
+                                </constraints>
+                                <state key="normal" image="icon_speaker_on"/>
+                                <connections>
+                                    <action selector="onSelectSpeakerWithSender:" destination="yyh-Zf-iCf" eventType="touchUpInside" id="4ph-nr-7PL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="v5T-Oc-OBv" secondAttribute="trailing" id="2Us-Ju-mwo"/>
                             <constraint firstItem="wqq-yb-b3H" firstAttribute="centerX" secondItem="kUK-wx-d2F" secondAttribute="centerX" id="2pn-Am-ZKq"/>
                             <constraint firstItem="xsQ-mm-9zc" firstAttribute="leading" secondItem="kUK-wx-d2F" secondAttribute="leading" id="43p-9B-rOH"/>
+                            <constraint firstItem="ICj-Xt-VY2" firstAttribute="centerY" secondItem="GLf-0f-4kL" secondAttribute="centerY" id="6Lk-lN-eyb"/>
                             <constraint firstAttribute="trailing" secondItem="xsQ-mm-9zc" secondAttribute="trailing" id="8W3-bJ-TRp"/>
                             <constraint firstItem="v5T-Oc-OBv" firstAttribute="top" secondItem="kUK-wx-d2F" secondAttribute="top" id="Akh-Jo-IUA"/>
                             <constraint firstItem="pRo-UP-jrI" firstAttribute="top" secondItem="v5T-Oc-OBv" secondAttribute="bottom" constant="25" id="Dkc-ei-Qrh"/>
@@ -2718,6 +2730,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                             <constraint firstItem="GLf-0f-4kL" firstAttribute="centerX" secondItem="kUK-wx-d2F" secondAttribute="centerX" id="JKn-U5-SNw"/>
                             <constraint firstItem="iMw-Ue-X4h" firstAttribute="top" secondItem="dAg-A4-gA0" secondAttribute="bottom" constant="-2" id="UrO-oh-j3g"/>
                             <constraint firstItem="pRo-UP-jrI" firstAttribute="centerX" secondItem="kUK-wx-d2F" secondAttribute="centerX" id="Wrr-21-MO3"/>
+                            <constraint firstItem="ICj-Xt-VY2" firstAttribute="leading" secondItem="kUK-wx-d2F" secondAttribute="leading" constant="11" id="fGQ-6z-fDf"/>
                             <constraint firstItem="bpM-Ou-p0U" firstAttribute="top" secondItem="wqq-yb-b3H" secondAttribute="bottom" constant="38" id="kvX-yS-FP2"/>
                             <constraint firstAttribute="trailing" secondItem="dAg-A4-gA0" secondAttribute="trailing" id="mdS-dS-6oD"/>
                             <constraint firstItem="xsQ-mm-9zc" firstAttribute="top" secondItem="iMw-Ue-X4h" secondAttribute="bottom" constant="48" id="qP5-Zo-YSW"/>
@@ -2732,6 +2745,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                     <connections>
                         <outlet property="btnPause" destination="fum-UW-dcS" id="bq1-YA-aYD"/>
                         <outlet property="btnPlay" destination="mEN-9m-RIR" id="Q07-8i-yrS"/>
+                        <outlet property="btnSpeaker" destination="ICj-Xt-VY2" id="Y85-h4-gau"/>
                         <outlet property="constOfNavigationTop" destination="Akh-Jo-IUA" id="5JU-77-7fn"/>
                         <outlet property="labelLength" destination="MU4-2z-Hqb" id="WpH-06-dDg"/>
                         <outlet property="lblCurrentTime" destination="iMw-Ue-X4h" id="5Wt-tB-KwD"/>
@@ -8388,6 +8402,7 @@ finished the call.</string>
         <image name="icon_social_message_on" width="36" height="36"/>
         <image name="icon_social_twitter_off" width="38" height="38"/>
         <image name="icon_social_twitter_on" width="38" height="38"/>
+        <image name="icon_speaker_on" width="25" height="25"/>
         <image name="icon_switch_camera" width="47" height="47"/>
         <image name="icon_textview_rectangle" width="16" height="16"/>
         <image name="icon_upload" width="25" height="25"/>
