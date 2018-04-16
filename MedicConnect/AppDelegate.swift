@@ -312,6 +312,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         completion()
     }
     
+    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, for type: PKPushType) {
+        print("PushKit: \(payload.dictionaryPayload.description)")
+        self.handleRemoteNotification(payload.dictionaryPayload)
+    }
+    
     // MARK: - Private Methods
     
     func voipRegistration() {
