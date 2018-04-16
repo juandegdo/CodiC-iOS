@@ -55,6 +55,9 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     private var speakerEnabled: Bool = false
     private var muted: Bool = false
     
+    private var hideControls: Bool = false
+    private var hideTimer: Timer?
+    
     var audioController: SINAudioController? {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.sinchClient?.audioController()
@@ -173,10 +176,6 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         
         if (self.call?.details.isVideoOffered)! {
             // Add Local Video
-//            if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
-//                self.videoController?.localView().frame = UIScreen.main.bounds
-//            }
-            
             self.videoController?.localView().contentMode = .scaleAspectFill
             self.viewLocalVideo.addSubview((self.videoController?.localView())!)
             self.viewLocalVideo.alpha = 0
@@ -201,6 +200,18 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         let duration: Int = Int(Date().timeIntervalSince((self.call?.details.establishedTime)!))
         DispatchQueue.main.async {
             self.setDuration(duration)
+        }
+    }
+    
+    @objc func onViewTapped(sender: UITapGestureRecognizer) {
+        self.stopHideDurationTimer()
+        self.hideControls = !self.hideControls
+        if self.hideControls == false {
+            self.startHideTimerWithSelector()
+        }
+        
+        DispatchQueue.main.async {
+            self.showHideControls()
         }
     }
     
@@ -245,6 +256,7 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         self.audioController?.stopPlayingSoundFile()
         self.audioController?.disableSpeaker()
         self.stopCallDurationTimer()
+        self.stopHideDurationTimer()
         
         if (self.call?.details.isVideoOffered)! {
             self.videoController?.localView().frame = UIScreen.main.bounds
@@ -354,7 +366,26 @@ extension CallScreenViewController {
             self.btnSpeaker.isHidden = false
             self.btnMute.isHidden = false
             self.btnEnd.isHidden = false
+            
+            let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(onViewTapped(sender:)))
+            self.view.addGestureRecognizer(tapGesture)
+            self.view.isUserInteractionEnabled = true
+            
+            self.hideControls = false
+            self.startHideTimerWithSelector()
         }
+    }
+    
+    fileprivate func showHideControls() {
+        
+        if (self.call?.details.isVideoOffered)! {
+            self.btnSwitchCamera.isHidden = self.hideControls
+        }
+        
+        self.btnSpeaker.isHidden = self.hideControls
+        self.btnMute.isHidden = self.hideControls
+        self.btnEnd.isHidden = self.hideControls
+        
     }
     
     fileprivate func setDuration(_ seconds: Int) {
@@ -381,6 +412,24 @@ extension CallScreenViewController {
         if (self.durationTimer != nil) {
             self.durationTimer?.invalidate()
             self.durationTimer = nil
+        }
+    }
+    
+    fileprivate func startHideTimerWithSelector() {
+        self.hideTimer = Timer.scheduledTimer(withTimeInterval: 5.5,
+                                              repeats: false,
+                                              block: { (timer) in
+                                                self.hideControls = true
+                                                DispatchQueue.main.async {
+                                                    self.showHideControls()
+                                                }
+        })
+    }
+    
+    fileprivate func stopHideDurationTimer() {
+        if (self.hideTimer != nil) {
+            self.hideTimer?.invalidate()
+            self.hideTimer = nil
         }
     }
     
