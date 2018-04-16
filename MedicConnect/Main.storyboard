@@ -3000,7 +3000,7 @@ community. Invite people that you actually like to give it a try ;)</string>
                                             <constraint firstAttribute="width" constant="40" id="Nf5-pf-7C2"/>
                                             <constraint firstAttribute="height" constant="40" id="duT-4M-dDy"/>
                                         </constraints>
-                                        <state key="normal" image="icon_close_grey"/>
+                                        <state key="normal" image="icon_close_white"/>
                                         <connections>
                                             <action selector="onCloseWithSender:" destination="QbM-bR-Xg1" eventType="touchUpInside" id="18c-vq-O8Y"/>
                                         </connections>
@@ -7904,7 +7904,7 @@ uploaded a new diagnosis.</string>
                                             <constraint firstAttribute="width" constant="40" id="0R6-np-vAJ"/>
                                             <constraint firstAttribute="height" constant="40" id="Khe-Fr-zs0"/>
                                         </constraints>
-                                        <state key="normal" image="icon_close_grey"/>
+                                        <state key="normal" image="icon_close_white"/>
                                         <connections>
                                             <action selector="onCloseWithSender:" destination="7ns-tt-YUN" eventType="touchUpInside" id="4gN-wE-K7Z"/>
                                         </connections>
@@ -8584,7 +8584,6 @@ finished the call.</string>
         <image name="icon_call_speaker" width="61" height="61"/>
         <image name="icon_chat_send" width="29" height="29"/>
         <image name="icon_close" width="19" height="18"/>
-        <image name="icon_close_grey" width="19" height="18"/>
         <image name="icon_close_white" width="19" height="18"/>
         <image name="icon_edit_white" width="11" height="14"/>
         <image name="icon_end_call" width="122" height="121"/>
@@ -8631,7 +8630,7 @@ finished the call.</string>
         <image name="tab_icon_video" width="40" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="znu-Px-ld3"/>
+        <segue reference="DbY-Qb-ZIx"/>
         <segue reference="dMz-5h-amD"/>
     </inferredMetricsTieBreakers>
 </document>
