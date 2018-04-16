@@ -2307,8 +2307,8 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                         <color key="textColor" red="0.5568627451" green="0.65098039220000004" blue="0.70196078429999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgz-rq-x8Y">
-                                                        <rect key="frame" x="185.33333333333334" y="14" width="44" height="20"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgz-rq-x8Y">
+                                                        <rect key="frame" x="8" y="14" width="398" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="oOb-iV-4YG"/>
                                                         </constraints>
@@ -2321,9 +2321,11 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                 <constraints>
                                                     <constraint firstItem="eUF-ef-obS" firstAttribute="centerX" secondItem="i4m-ns-8S8" secondAttribute="centerX" id="3qG-cd-6QC"/>
                                                     <constraint firstAttribute="height" constant="34" id="8xv-Kc-vhr"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Jgz-rq-x8Y" secondAttribute="trailing" constant="8" id="I7X-xY-tf3"/>
                                                     <constraint firstItem="Jgz-rq-x8Y" firstAttribute="centerX" secondItem="i4m-ns-8S8" secondAttribute="centerX" id="Ug2-Xi-Rt6"/>
                                                     <constraint firstItem="Jgz-rq-x8Y" firstAttribute="top" secondItem="eUF-ef-obS" secondAttribute="bottom" id="bza-sK-bXP"/>
                                                     <constraint firstItem="eUF-ef-obS" firstAttribute="top" secondItem="i4m-ns-8S8" secondAttribute="top" id="nxU-tl-NKT"/>
+                                                    <constraint firstItem="Jgz-rq-x8Y" firstAttribute="leading" secondItem="i4m-ns-8S8" secondAttribute="leading" constant="8" id="rJ1-K5-CDi"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yxa-EW-zka">
@@ -2533,8 +2535,8 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                                 <color key="textColor" red="0.55686274509803924" green="0.65098039215686276" blue="0.70196078431372544" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgN-eF-99r">
-                                                                <rect key="frame" x="185.33333333333334" y="14" width="44" height="20"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LgN-eF-99r">
+                                                                <rect key="frame" x="8" y="14" width="398" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="2qB-wR-w1E"/>
                                                                 </constraints>
@@ -2545,10 +2547,12 @@ community. Invite people that you actually like to give it a try ;)</string>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
+                                                            <constraint firstItem="LgN-eF-99r" firstAttribute="leading" secondItem="LXE-Ud-uqu" secondAttribute="leading" constant="8" id="7Ga-N5-nuE"/>
                                                             <constraint firstItem="A5w-CT-DAL" firstAttribute="centerX" secondItem="LXE-Ud-uqu" secondAttribute="centerX" id="8k6-SC-KG8"/>
                                                             <constraint firstItem="A5w-CT-DAL" firstAttribute="top" secondItem="LXE-Ud-uqu" secondAttribute="top" id="Oq5-vL-FU0"/>
                                                             <constraint firstAttribute="height" constant="34" id="VtQ-NS-Vtf"/>
                                                             <constraint firstItem="LgN-eF-99r" firstAttribute="top" secondItem="A5w-CT-DAL" secondAttribute="bottom" id="Wew-N0-7dC"/>
+                                                            <constraint firstAttribute="trailing" secondItem="LgN-eF-99r" secondAttribute="trailing" constant="8" id="eyv-5n-kcS"/>
                                                             <constraint firstItem="LgN-eF-99r" firstAttribute="centerX" secondItem="LXE-Ud-uqu" secondAttribute="centerX" id="tgh-Um-mDx"/>
                                                         </constraints>
                                                     </view>
