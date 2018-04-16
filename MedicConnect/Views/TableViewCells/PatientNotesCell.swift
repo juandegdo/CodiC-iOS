@@ -35,6 +35,7 @@ class PatientNotesCell: UITableViewCell {
     
     // Container View
     @IBOutlet var viewDoctors: UIView!
+    @IBOutlet var ivCreator: UIImageView!
     
     // Slider
     @IBOutlet weak var playSlider: PlaySlider!
@@ -74,7 +75,7 @@ class PatientNotesCell: UITableViewCell {
                     self.lblDuration.alpha = 0
                     self.playSlider.alpha = 0
                 }, completion: { (success) in
-                    self.constOfDocsViewWidth.constant = 64
+                    self.constOfDocsViewWidth.constant = 88
                 })
                 
             } else {
@@ -132,9 +133,14 @@ class PatientNotesCell: UITableViewCell {
         
         // Referring Doctor images
         for view in self.viewDoctors.subviews {
-            let imgView: UIImageView = view.viewWithTag(200) as! UIImageView
-            imgView.layer.borderWidth = 1.0
-            imgView.layer.borderColor = UIColor.init(red: 107/255.0, green: 199/255.0, blue: 213/255.0, alpha: 1.0).cgColor
+            if view.tag >= 100 {
+                let imgView: UIImageView = view.viewWithTag(200) as! UIImageView
+                imgView.layer.borderWidth = 1.0
+                imgView.layer.borderColor = UIColor.init(red: 107/255.0, green: 199/255.0, blue: 213/255.0, alpha: 1.0).cgColor
+            } else if view is UIImageView {
+                view.layer.borderWidth = 1.0
+                view.layer.borderColor = UIColor.init(red: 107/255.0, green: 199/255.0, blue: 213/255.0, alpha: 1.0).cgColor
+            }
         }
         
         // Slider
@@ -198,8 +204,17 @@ class PatientNotesCell: UITableViewCell {
         
         // Show referring doctors' images
         self.constOfBtnPlayTop.constant = post.referringUsers.count == 0 ? 18 : 46
-        self.viewDoctors.isUserInteractionEnabled = post.referringUsers.count == 0 ? false : true
+        self.viewDoctors.isHidden = post.referringUsers.count == 0 ? true : false
         self.referringUsers = post.referringUsers
+        
+        if let imgURL = URL(string: post.user.photo) as URL? {
+            self.ivCreator.af_setImage(withURL: imgURL)
+        } else {
+            self.ivCreator.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                     text: post.user.getInitials(),
+                                                                                     font: UIFont(name: "Avenir-Book", size: 13)!,
+                                                                                     size: CGSize(width: 30, height: 30))
+        }
         
         for index in 0...2 {
             if let view = self.viewDoctors.viewWithTag(index + 100) {
