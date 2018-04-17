@@ -19,6 +19,7 @@ public enum NotificationType : Int {
     case requestAccepted
     case requestDeclined
     case blocked
+    case missedCall
 }
 
 class Notification {

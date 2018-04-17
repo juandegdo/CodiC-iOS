@@ -33,6 +33,7 @@
     [self.tabBar setTintColor:COLOR_TABBAR_TINT];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoProfileScreen:) name:@"gotoProfileScreen" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCallHistoryScreen:) name:@"gotoCallHistoryScreen" object:nil];
     
 }
 
@@ -53,6 +54,14 @@
     
     [nc dismissViewControllerAnimated:NO completion:nil];
     [nc popToRootViewControllerAnimated:NO];
+}
+    
+- (void)gotoCallHistoryScreen:(NSNotification *)notification {
+    UINavigationController *nc = self.viewControllers[0];
+    [nc dismissViewControllerAnimated:NO completion:nil];
+    [nc popToRootViewControllerAnimated:NO];
+    
+    self.selectedIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning {

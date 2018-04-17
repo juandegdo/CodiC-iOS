@@ -198,6 +198,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     case .transcribed:
                         NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
                         
+                    case .missedCall:
+                        NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
+                        
                         break
                     default:
                         self.callNotificationVC()
@@ -259,6 +262,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if let patientId = dictInfo["patientId"] as? String {
                     self.callPatientProfileVC(patientId: patientId)
                 }
+            } else if notificationType == .missedCall {
+                NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
             }
             
         }
