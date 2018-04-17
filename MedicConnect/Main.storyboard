@@ -6504,8 +6504,8 @@ you a link to reset your password.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZW8-rp-2Ws">
                                                 <rect key="frame" x="12" y="30" width="390" height="21"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfq-8O-lye">
-                                                        <rect key="frame" x="173" y="0.0" width="44" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfq-8O-lye">
+                                                        <rect key="frame" x="195" y="0.0" width="0.0" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="lg5-Cn-LLd"/>
                                                         </constraints>
@@ -6514,7 +6514,7 @@ you a link to reset your password.</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p9E-NX-pyq">
-                                                        <rect key="frame" x="213" y="-10" width="40" height="40"/>
+                                                        <rect key="frame" x="191" y="-10" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="Xvl-vb-sYq"/>
                                                             <constraint firstAttribute="width" constant="40" id="j0j-B5-h3u"/>
@@ -6538,8 +6538,8 @@ you a link to reset your password.</string>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LuJ-yz-Wsp">
                                                 <rect key="frame" x="12" y="51" width="390" height="18"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-rm-npz">
-                                                        <rect key="frame" x="178.66666666666666" y="0.0" width="34.333333333333343" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBX-rm-npz">
+                                                        <rect key="frame" x="195" y="0.0" width="0.0" height="18"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="18" id="uK2-Mo-G8P"/>
                                                         </constraints>
@@ -6557,8 +6557,8 @@ you a link to reset your password.</string>
                                                     <constraint firstItem="PBX-rm-npz" firstAttribute="centerX" secondItem="LuJ-yz-Wsp" secondAttribute="centerX" id="pM6-ue-Hto"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-cO-sya">
-                                                <rect key="frame" x="189" y="69" width="36.666666666666657" height="20.666666666666671"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dDu-cO-sya">
+                                                <rect key="frame" x="207.33333333333334" y="69" width="0.0" height="20.666666666666671"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="8Wx-8f-Hik"/>
                                                 </constraints>
@@ -6566,8 +6566,8 @@ you a link to reset your password.</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SF5-lg-x9g">
-                                                <rect key="frame" x="190.66666666666666" y="89.666666666666657" width="34" height="19.333333333333329"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SF5-lg-x9g">
+                                                <rect key="frame" x="207.66666666666666" y="89.666666666666657" width="0.0" height="19.333333333333329"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="gce-hA-x7W"/>
                                                 </constraints>
@@ -6575,8 +6575,8 @@ you a link to reset your password.</string>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrT-D3-n0o">
-                                                <rect key="frame" x="190.66666666666666" y="129" width="34" height="19.666666666666657"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrT-D3-n0o">
+                                                <rect key="frame" x="207.66666666666666" y="129" width="0.0" height="19.666666666666657"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="fLv-pb-vbL"/>
                                                 </constraints>

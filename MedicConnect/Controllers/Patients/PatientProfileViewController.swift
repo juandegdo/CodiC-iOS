@@ -14,6 +14,7 @@ class PatientProfileViewController: BaseViewController {
     let OffsetHeaderStop: CGFloat = 180.0
     let PatientNotesCellID = "PatientNotesCell"
     
+    var patientId: String? = nil
     var patient: Patient? = nil
     var fromAdd: Bool = false
     
@@ -59,10 +60,17 @@ class PatientProfileViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.initViews()
+        // Update UI with basic patient info
+        self.updateUI()
         
         NotificationCenter.default.addObserver(self, selector: #selector(PatientProfileViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.refreshData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,22 +84,13 @@ class PatientProfileViewController: BaseViewController {
     
     // MARK: Private methods
     
-    func initViews() {
-        
-        // Update UI with basic patient info
-        self.updateUI()
-        
-        // Load patient notes
-        self.refreshData()
-        
-    }
-    
     func refreshData() {
         
-        if let _patient = self.patient as Patient? {
+        let patientId = self.patient != nil ? self.patient?.id : self.patientId
+        if let _patientId = patientId as String? {
             
             // Fetch all patient notes
-            PostService.Instance.getNotesByPatientId(id: _patient.id, completion: { (success) in
+            PostService.Instance.getNotesByPatientId(id: _patientId, completion: { (success) in
                 
                 if (success) {
                     self.tableView.reloadData()
@@ -113,6 +112,20 @@ class PatientProfileViewController: BaseViewController {
             self.lblAddress.text = _patient.address
             self.lblPhoneNumber.text = _patient.phoneNumber
             self.lblPaitentNumber.text = "PHN # \(_patient.patientNumber)"
+            
+        } else if let _patientId = self.patientId as String? {
+            // Get patient with id
+            PatientService.Instance.getPatientById(patientId: _patientId, completion: { (success, patient) in
+                if success == true && patient != nil {
+                    self.patient = patient
+                    
+                    self.lblPatientName.text = patient?.name
+                    self.lblBirthday.text = patient?.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+                    self.lblAddress.text = patient?.address
+                    self.lblPhoneNumber.text = patient?.phoneNumber
+                    self.lblPaitentNumber.text = "PHN # \(String(describing: patient?.patientNumber))"
+                }
+            })
         }
         
         self.updateScroll(offset: self.mainScrollView.contentOffset.y)

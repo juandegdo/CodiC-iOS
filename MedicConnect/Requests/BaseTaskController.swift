@@ -10,8 +10,9 @@ import Foundation
 import Alamofire
 
 class BaseTaskController {
-    let baseURL = "http://medic-app-dev.us-east-2.elasticbeanstalk.com/medic_back/api"
+//    let baseURL = "http://medic-app-dev.us-east-2.elasticbeanstalk.com/medic_back/api"
 //    let baseURL = "http://medicappproduct.us-east-2.elasticbeanstalk.com/medic_back/api"
+    let baseURL = "http://codi-dev-test.us-east-2.elasticbeanstalk.com/medic_back/api"
     
     let URLSignUp = "/signup"
     let URLLogin = "/login"
@@ -57,6 +58,7 @@ class BaseTaskController {
     let URLEditPatientSuffix = "/editpatient"
     let URLGetPatientsSuffix = "/getpatients"
     let URLGetPatientIdByPHNSuffix = "/getpatientid"
+    let URLGetPatientByIDSuffix = "/getpatientbyid"
     
     let URLGetUserIdByMSPSuffix = "/getuseridbymsp"
     let URLUpdateAvailability = "/consulters/updateavailability"

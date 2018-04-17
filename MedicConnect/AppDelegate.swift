@@ -174,6 +174,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 }
             }
             
+            if application.applicationState == .inactive {
+                print("inactive")
+            } else if application.applicationState == .background {
+                print("background")
+            }
+            
             if application.applicationState != .active {
                 // Only show views if app is not active
                 if let type = dictInfo["type"] as? Int, let notificationType = NotificationType(rawValue: type) {
@@ -187,14 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         }
                         break
                     case .broadcast:
-                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-//                        if let userId = dictInfo["user"] as? String {
-//                            UserService.Instance.getUser(forId: userId, completion: { (user) in
-//                                if let user = user {
-//                                    self.callProfileVC(user: user)
-//                                }
-//                            })
-//                        }
+//                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
                         break
                     case .transcribed:
                         NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
@@ -247,20 +246,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("Handle push from foreground")
-        if  let _ = UserController.Instance.getUser() as User? {
-            NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-        }
         completionHandler([.alert,.sound])
     }
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if let _ = response.notification.request.content.userInfo as? [String : AnyObject] {
-            // Getting user info
-//            if  let _ = UserController.Instance.getUser() as User? {
-//                NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-//            }
+        if let userInfo = response.notification.request.content.userInfo as? [String : AnyObject],
+            let dictInfo = userInfo["aps"] as? NSDictionary,
+            let type = dictInfo["type"] as? Int, let notificationType = NotificationType(rawValue: type) {
+            
+            if notificationType == .broadcast {
+                if let patientId = dictInfo["patientId"] as? String {
+                    self.callPatientProfileVC(patientId: patientId)
+                }
+            }
+            
         }
+        
         completionHandler()
     }
     
@@ -380,12 +382,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         break
                     }
                 }
-                
             }
-            
-            
         }
         
+    }
+    
+    func callPatientProfileVC(patientId: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientProfileViewController") as? PatientProfileViewController {
+            vc.patientId = patientId
+            vc.fromAdd = false
+            if let vvc = self.window?.visibleViewController() {
+                vvc.present(vc, animated: false, completion: nil)
+            }
+        }
     }
     
     // MARK: - Core Data stack

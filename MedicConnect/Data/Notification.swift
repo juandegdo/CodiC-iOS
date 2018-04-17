@@ -13,12 +13,12 @@ public enum NotificationType : Int {
     case like
     case comment
     case broadcast
+    case transcribed
     case newFollower
     case followRequest
     case requestAccepted
     case requestDeclined
     case blocked
-    case transcribed
 }
 
 class Notification {

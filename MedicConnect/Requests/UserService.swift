@@ -362,7 +362,7 @@ class UserService: BaseTaskController {
                 }
                 
                 if let _ = response.result.value {
-                    print("Response: \(response.result.value!)")
+//                    print("Response: \(response.result.value!)")
                 }
                 
                 if response.response?.statusCode == 200 {

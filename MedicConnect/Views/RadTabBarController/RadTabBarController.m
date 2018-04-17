@@ -42,14 +42,14 @@
 }
 
 - (void)gotoProfileScreen:(NSNotification *)notification {
-    UINavigationController *nc = self.viewControllers[0];
+    UINavigationController *nc = self.viewControllers[1];
     
-    if (self.selectedIndex == 0 && nc.viewControllers.count == 1) {
+    if (self.selectedIndex == 1 && nc.viewControllers.count == 1) {
         // Reload Profile
         [[NSNotificationCenter defaultCenter] postNotificationName:@"userUpdated" object:nil];
     }
     
-    self.selectedIndex = 0;
+    self.selectedIndex = 1;
     
     [nc dismissViewControllerAnimated:NO completion:nil];
     [nc popToRootViewControllerAnimated:NO];
