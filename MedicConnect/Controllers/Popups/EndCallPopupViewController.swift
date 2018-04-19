@@ -67,17 +67,22 @@ extension EndCallPopupViewController {
     
     @IBAction func onYes(sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
+         
         if let vc = storyboard.instantiateViewController(withIdentifier: "recordNavController") as? UINavigationController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
-            DataManager.Instance.setPatientId(patientId: "")
             DataManager.Instance.setPatient(patient: nil)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
             DataManager.Instance.setFromPatientProfile(false)
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let topNav = appDelegate.window?.rootViewController as! UINavigationController
+            
+            if let _patientId = appDelegate.callHeaders["patientId"] as! String? {
+                DataManager.Instance.setPatientId(patientId: _patientId)
+            } else {
+                DataManager.Instance.setPatientId(patientId: "")
+            }
             
             if let tabBarController = topNav.viewControllers[1] as? UITabBarController {
                 // Select Profile

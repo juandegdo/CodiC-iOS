@@ -34,7 +34,19 @@ class RecordingBroadcastViewController: BaseViewController {
             self.lblPatientName.text = _patient.name
             self.lblPatientDOB.text = _patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
             self.lblPatientPHN.text = _patient.patientNumber
-            
+        } else if DataManager.Instance.getPatientId() != "" {
+            // Get patient with id
+            PatientService.Instance.getPatientById(patientId: DataManager.Instance.getPatientId(), completion: { (success, patient) in
+                if success == true && patient != nil {
+                    DataManager.Instance.setPatient(patient: patient)
+                    
+                    DispatchQueue.main.async {
+                        self.lblPatientName.text = patient?.name
+                        self.lblPatientDOB.text = patient?.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+                        self.lblPatientPHN.text = patient?.patientNumber
+                    }
+                }
+            })
         } else {
             self.patientInfoView.isHidden = true
         }
