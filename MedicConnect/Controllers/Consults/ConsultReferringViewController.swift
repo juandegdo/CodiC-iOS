@@ -399,23 +399,19 @@ extension ConsultReferringViewController {
     @IBAction func onSave(sender: UIButton!) {
         // Save consults and notes
         var errorType: ErrorPopupType = .none
-        if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) && (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
-            errorType = .noMSPAndPHN
-            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
-            DataManager.Instance.setPatientId(patientId: "")
-            DataManager.Instance.setPatient(patient: nil)
-            DataManager.Instance.setReferringUserIds(referringUserIds: [])
-            
-        } else if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
+//        if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) && (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
+//            errorType = .noMSPAndPHN
+//            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+//            DataManager.Instance.setPatientId(patientId: "")
+//            DataManager.Instance.setPatient(patient: nil)
+//            DataManager.Instance.setReferringUserIds(referringUserIds: [])
+//
+//        } else
+        if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
             errorType = .noPHN
-            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
-            DataManager.Instance.setPatientId(patientId: "")
-            DataManager.Instance.setPatient(patient: nil)
-            DataManager.Instance.setReferringUserIds(referringUserIds: [self.referUserID])
-            
         } else if (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
             errorType = .noMSP
-            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+            DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
             DataManager.Instance.setPatientId(patientId: self.patientID)
             DataManager.Instance.setPatient(patient: nil)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
@@ -428,7 +424,7 @@ extension ConsultReferringViewController {
             return
         }
         
-        DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
+        DataManager.Instance.setPostType(postType: Constants.PostTypeNote)
         DataManager.Instance.setPatientId(patientId: patientID)
         DataManager.Instance.setPatient(patient: nil)
         DataManager.Instance.setReferringUserIds(referringUserIds: [referUserID])

@@ -79,9 +79,11 @@ class ErrorPopupViewController: BaseViewController {
             break
             
         case .noPHN:
-            self.constOfViewHeight.constant = 212.0
-            self.lblDescription.text = "You didn't enter correct Patient's PHN"
-            self.lblQuestion.text = "Would you like to\ncontinue without associating this\nconsult with a patient?"
+            self.constOfViewHeight.constant = 244.0
+            self.lblDescription.text = "Whoops, you need to associate\na patient with this consult."
+            self.lblQuestion.text = "Please enter an existing patient’s PHN\nor create a new patient."
+            self.btnNo.isHidden = true
+            self.btnYes.setTitle("OK", for: .normal)
             break
             
         case .noMSPAndPHN:
@@ -156,7 +158,7 @@ extension ErrorPopupViewController {
                 patientNoteVC?.isSaveNote = true
             } else if fromConsult {
                 let patientNoteVC: ConsultReferringViewController? = lenght! >= 2 ? self.navigationController?.viewControllers[lenght! - 2] as? ConsultReferringViewController : nil
-                patientNoteVC?.isSaveConsult = true
+                patientNoteVC?.isSaveConsult = self.popupType == .noPHN ? false : true
             }
             
             self.onClose(sender: nil)
