@@ -99,6 +99,15 @@ class PatientNoteReferViewController: BaseViewController {
         self.view2.isHidden = true
         self.view3.isHidden = true
         
+        if DataManager.Instance.getReferringUserIds().count > 0 {
+            self.userIDs["view1"] = DataManager.Instance.getReferringUserIds()[0]
+            
+            if let _user = UserController.Instance.findUserById(self.userIDs["view1"]!) as User? {
+                let textField: UITextField = self.view1.viewWithTag(10) as! UITextField
+                textField.text = _user.msp
+            }
+        }
+        
     }
     
     // MARK: Private Methods

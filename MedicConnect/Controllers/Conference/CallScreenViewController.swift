@@ -274,6 +274,7 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             if (call.details.endCause.rawValue == 5) { // SINCallEndCauseHungUp
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let vc = storyboard.instantiateViewController(withIdentifier: "EndCallPopupViewController") as? EndCallPopupViewController {
+                    vc.doctorId = (self.call?.remoteUserId)!
                     pvc?.present(vc, animated: false, completion: nil)
                 }
             }

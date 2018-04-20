@@ -21,6 +21,7 @@ class EndCallPopupViewController: UIViewController {
     @IBOutlet var viewYes: UIView!
     
     var isYes: Bool = false
+    var doctorId: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +73,7 @@ extension EndCallPopupViewController {
             
             DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
             DataManager.Instance.setPatient(patient: nil)
-            DataManager.Instance.setReferringUserIds(referringUserIds: [])
+            DataManager.Instance.setReferringUserIds(referringUserIds: [self.doctorId])
             DataManager.Instance.setFromPatientProfile(false)
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
