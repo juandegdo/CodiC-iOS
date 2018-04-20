@@ -45,6 +45,7 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
         super.viewDidAppear(animated)
         
         self.loadMe()
+        self.markAllAsRead()
         
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(ConsultsViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
@@ -116,6 +117,18 @@ class ConsultsViewController: BaseViewController, UIGestureRecognizerDelegate {
         // Hide search bar in the beginning
         self.mainScrollView.contentOffset = CGPoint.init(x: 0, y: OffsetHeaderStop)
         
+    }
+    
+    func markAllAsRead() {
+        // Clear notification state
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        NotificationUtil.updateNotificationAlert(hasNewAlert: false)
+        
+        NotificationService.Instance.markAllAsRead(completion: { (allRead) in
+            if (allRead) {
+                
+            }
+        })
     }
     
 }
