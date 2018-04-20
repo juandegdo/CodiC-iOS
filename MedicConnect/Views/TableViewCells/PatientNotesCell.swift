@@ -26,7 +26,6 @@ class PatientNotesCell: UITableViewCell {
     @IBOutlet var btnSpeaker: UIButton!
     
     // Labels
-    @IBOutlet var lblBroadcast: UILabel!
     @IBOutlet var lblDescription: ExpandableLabel!
     @IBOutlet var lblDoctorName: UILabel!
     @IBOutlet var lblDate: UILabel!
@@ -63,7 +62,7 @@ class PatientNotesCell: UITableViewCell {
                 self.lblDescription.collapsed = true
                 
                 self.constOfImageAvatarBottom.constant = 20
-                self.constOfLblDescriptionHeight.constant = 18
+                self.constOfLblDescriptionHeight.constant = 20.5
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     self.viewDoctors.alpha = 0
@@ -170,7 +169,6 @@ class PatientNotesCell: UITableViewCell {
     
     func setData(post: Post) {
         // Set Patient Note Info
-        self.lblBroadcast.text = post.title
         self.lblDoctorName.text = post.user.fullName
         self.lblDate.text = post.getFormattedDate()
         self.postDescription = post.descriptions

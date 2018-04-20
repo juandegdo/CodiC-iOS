@@ -79,7 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         // Sinch Push
-        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.development)  // needs to be changed to production
+        self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.production)  // needs to be changed to production
         self.sinchPush?.delegate = self
         self.sinchPush?.setDesiredPushType(SINPushTypeVoIP)
         
