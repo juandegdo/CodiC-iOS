@@ -62,7 +62,7 @@ class PatientNotesCell: UITableViewCell {
                 self.lblDescription.collapsed = true
                 
                 self.constOfImageAvatarBottom.constant = 20
-                self.constOfLblDescriptionHeight.constant = 20.5
+                self.constOfLblDescriptionHeight.constant = 21
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     self.viewDoctors.alpha = 0
