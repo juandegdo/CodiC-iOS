@@ -72,7 +72,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             case 0:
                 return 4
             case 1:
-                return 4
+                return 2
             case 2:
                 return 3
                 
@@ -117,16 +117,16 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 
             } else if indexPath.section == 1 {
                 
+//                if (indexPath.row == 0) {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Likes", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+//                }
+//                else if (indexPath.row == 1) {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Comments", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+//                } else
                 if (indexPath.row == 0) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Likes", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+                    cell.setCellWithTitle(title: NSLocalizedString("New Consult", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 else if (indexPath.row == 1) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Comments", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("New Diagnosis", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 3) {
                     cell.setCellWithTitle(title: NSLocalizedString("New Transcription", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 
@@ -342,9 +342,9 @@ extension SettingsViewController : SettingListCellDelegate {
             if (indexPath.section == 1) { // Notification Filter
                 var tmpValue = UserController.Instance.getUser().notificationfilter
                 if sender.isOn {
-                    tmpValue = tmpValue | (1<<indexPath.row)
+                    tmpValue = tmpValue | (1<<(indexPath.row + 2))
                 } else {
-                    tmpValue = tmpValue ^ (1<<indexPath.row)
+                    tmpValue = tmpValue ^ (1<<(indexPath.row + 2))
                 }
                 print(tmpValue)
                 
