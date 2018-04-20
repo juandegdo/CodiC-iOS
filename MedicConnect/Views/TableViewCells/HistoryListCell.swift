@@ -34,8 +34,10 @@ class HistoryListCell: UITableViewCell {
         
         if history.callState == 0 {
             self.lblDoctorName.textColor = UIColor.init(red: 246/255.0, green: 48/255.0, blue: 57/255.0, alpha: 1.0)
+            self.lblDoctorLocation.textColor = UIColor.init(red: 246/255.0, green: 48/255.0, blue: 57/255.0, alpha: 1.0)
         } else {
             self.lblDoctorName.textColor = UIColor.init(red: 32/255.0, green: 32/255.0, blue: 41/255.0, alpha: 1.0)
+            self.lblDoctorLocation.textColor = UIColor.init(red: 79/255.0, green: 79/255.0, blue: 85/255.0, alpha: 1.0)
         }
         
         self.imgUserPhoto.image = nil
