@@ -194,13 +194,13 @@ class SettingsDetailViewController: BaseViewController {
 extension SettingsDetailViewController : UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if let url = request.url?.absoluteString {
-            if url == "https://www.medicconnect.com/privacy" {
+            if url == "https://www.codiapp.com/privacy" {
                 self.strTitle = "Privacy Policy"
                 openContents()
-            } else if url == "https://www.medicconnect.com/conduct" {
+            } else if url == "https://www.codiapp.com/conduct" {
                 self.strTitle = "Code of Conduct"
                 openContents()
-            } else if url == "https://www.medicconnect.com/support" {
+            } else if url == "https://www.codiapp.com/support" {
                 self.sendEmail(subject: "Contact Us", msgbody: "")
             }
         }
@@ -224,7 +224,7 @@ extension SettingsDetailViewController : MFMailComposeViewControllerDelegate {
     func sendEmail(subject: String, msgbody: String){
         let mailComposer = MFMailComposeViewController()
         mailComposer.mailComposeDelegate = self
-        mailComposer.setToRecipients(["info@medicconnect.com"])
+        mailComposer.setToRecipients(["info@codiapp.com"])
         mailComposer.setSubject( subject )
         mailComposer.setMessageBody(msgbody, isHTML: false)
         

@@ -11,7 +11,7 @@ import MessageUI
 
 let inviteTitle = "Check Out This New App"
 let inviteText = "Hey, I'm trying this new Audio Social App called Medic Connect, tap the link below and sign up to Beta Test it with me!"
-let inviteURL = "https://www.medicconnect.com"
+let inviteURL = "https://www.codiapp.com"
 
 class InvitePopupViewController: BaseViewController {
     
