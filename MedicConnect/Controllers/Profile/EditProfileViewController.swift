@@ -24,6 +24,7 @@ class EditProfileViewController: BaseViewController {
     @IBOutlet var btnChangePicture: UIButton!
     @IBOutlet var btnSave: UIButton!
     
+    var activityIndicatorView = UIActivityIndicatorView()
     var alertWindow: UIWindow!
     
     let debouncer = Debouncer(interval: 1.0)
@@ -119,8 +120,7 @@ class EditProfileViewController: BaseViewController {
             
             if let _image = self.imgAvatar.image as UIImage? {
                 
-                //SwiftSpinner.show("Uploading image...")
-                self.btnSave.makeEnabled(enabled: false)
+                self.startIndicating()
                 UserService.Instance.postUserImage(id: _user.id, image: _image, completion: {
                     (success: Bool) in
                     print("\(success) uploading image.")
@@ -130,9 +130,8 @@ class EditProfileViewController: BaseViewController {
                         
                         let nc = NotificationCenter.default
                         nc.post(name: updatedProfileNotification, object: nil, userInfo: nil)
-                        //SwiftSpinner.hide()
-                        self.btnSave.makeEnabled(enabled: true)
-                                                                        
+                        self.stopIndicating()
+                        
                     })
                     
                 })
@@ -145,6 +144,24 @@ class EditProfileViewController: BaseViewController {
             print("No user found")
         }
         
+    }
+    
+    // MARK: Activity Indicator
+    
+    func startIndicating(){
+        activityIndicatorView.center = self.view.center
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.activityIndicatorViewStyle = .gray
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopIndicating() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.removeFromSuperview()
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
     
 }
@@ -298,12 +315,10 @@ extension EditProfileViewController {
                 return
             }
             
-            //SwiftSpinner.show("Updating user...")
-            self.btnSave.isEnabled = false
+            self.startIndicating()
             UserService.Instance.editUser(user: _user, completion: {
                 (success: Bool, message: String) in
-                //SwiftSpinner.hide()
-                self.btnSave.isEnabled = true
+                self.stopIndicating()
                 
                 if success {
                     self.onBack(sender: nil)
