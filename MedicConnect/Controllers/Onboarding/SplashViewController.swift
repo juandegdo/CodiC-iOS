@@ -44,6 +44,13 @@ class SplashViewController: UIViewController {
                     appDelegate.voipRegistration()
                     appDelegate.configureSinchClient(_user.id)
                     
+                    // Update user availability
+                    UserService.Instance.updateAvailability(available: true) { (success) in
+                        if (success) {
+                            // Do nothing now
+                        }
+                    }
+                    
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)
                 } else {
                     // User not logged in properly

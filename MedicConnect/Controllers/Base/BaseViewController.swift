@@ -143,6 +143,18 @@ class BaseViewController: UIViewController {
     }
     
     func clearAllData() {
+        // Update user availability
+        UserService.Instance.updateAvailability(available: false) { (success) in
+            if (success) {
+                // Do nothing now
+            }
+        }
+        
+        UIApplication.shared.unregisterForRemoteNotifications()
+        
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.disableSinchClient()
+        
         UserController.Instance.eraseUser()
         UserController.Instance.setRecommedendUsers([])
         UserController.Instance.setAvatarImg(nil)
@@ -157,11 +169,6 @@ class BaseViewController: UIViewController {
         PatientController.Instance.setPatients([])
         UserDefaultsUtil.DeleteToken()
         UserDefaultsUtil.DeleteUserId()
-        
-        UIApplication.shared.unregisterForRemoteNotifications()
-        
-        let delegate = UIApplication.shared.delegate as? AppDelegate
-        delegate?.disableSinchClient()
     }
 }
 

@@ -83,13 +83,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.sinchPush?.delegate = self
         self.sinchPush?.setDesiredPushType(SINPushTypeVoIP)
         
-        // Update user availability
-        UserService.Instance.updateAvailability(available: true) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
-        
         // NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.callDidEnd), name: NSNotification.Name(rawValue: "sinchCallDidEnd"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AppDelegate.updateCallHistory), name: NSNotification.Name(rawValue: "callShouldUpdateHistory"), object: nil)
@@ -639,10 +632,13 @@ extension AppDelegate: SINCallClientDelegate {
         
         self.sinchCallKitProvider?.reportNewIncomingCall(call, headers: self.callHeaders)
         
-        // Update user availability
-        UserService.Instance.updateAvailability(available: false) { (success) in
-            if (success) {
-                // Do nothing now
+        let fromLaunch = call.details.applicationStateWhenReceived == UIApplicationState.inactive
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (fromLaunch ? 2.0 : 2.0)) {
+            // Update user availability
+            UserService.Instance.updateAvailability(available: false) { (success) in
+                if (success) {
+                    // Do nothing now
+                }
             }
         }
     }
