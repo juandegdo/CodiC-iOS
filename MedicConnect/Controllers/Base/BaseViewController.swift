@@ -159,6 +159,9 @@ class BaseViewController: UIViewController {
         UserDefaultsUtil.DeleteUserId()
         
         UIApplication.shared.unregisterForRemoteNotifications()
+        
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.disableSinchClient()
     }
 }
 

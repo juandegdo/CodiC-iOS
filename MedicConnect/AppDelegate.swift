@@ -508,6 +508,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
     }
     
+    func disableSinchClient() {
+        self.sinchClient?.stopListeningOnActiveConnection()
+        self.sinchClient?.terminateGracefully()
+        self.sinchClient = nil
+    }
+    
     func handleRemoteNotification(_ userInfo: [AnyHashable : Any]) {
         
         self.deviceLocked = false

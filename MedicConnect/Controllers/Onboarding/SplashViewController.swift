@@ -37,9 +37,11 @@ class SplashViewController: UIViewController {
                     UserController.Instance.setUser(_user)
                     
                     UserDefaultsUtil.SaveUserId(userid: (user?.id)!)
+                    NotificationUtil.makeUserNotificationEnabled()
                     
-                    // Configure sinch client
+                    // Configure VOIP and sinch client
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.voipRegistration()
                     appDelegate.configureSinchClient(_user.id)
                     
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)

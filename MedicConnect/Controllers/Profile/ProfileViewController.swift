@@ -48,10 +48,6 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationUtil.makeUserNotificationEnabled()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.voipRegistration()
-        
         if (UIApplication.shared.applicationIconBadgeNumber > 0) {
             NotificationUtil.updateNotificationAlert(hasNewAlert: true)
         }
