@@ -43,6 +43,8 @@ class PatientNotesCell: UITableViewCell {
     @IBOutlet var constOfLblDescriptionHeight: NSLayoutConstraint!
     @IBOutlet var constOfImageAvatarBottom: NSLayoutConstraint!
     @IBOutlet var constOfDocsViewWidth: NSLayoutConstraint!
+    @IBOutlet var constOfDocsViewFirstLeading: NSLayoutConstraint!
+    @IBOutlet var constOfDocsViewCenterX: NSLayoutConstraint!
     @IBOutlet var constOfBtnPlayTop: NSLayoutConstraint!
     
     weak var delegate: PatientNotesCellDelegate?
@@ -75,6 +77,8 @@ class PatientNotesCell: UITableViewCell {
                     self.playSlider.alpha = 0
                 }, completion: { (success) in
                     self.constOfDocsViewWidth.constant = 88
+                    self.constOfDocsViewFirstLeading.constant = 24
+                    self.constOfDocsViewCenterX.constant = 12
                 })
                 
             } else {
@@ -241,7 +245,7 @@ class PatientNotesCell: UITableViewCell {
     // MARK: Tap Gesture
     
     @objc func onTapUsers(sender: UITapGestureRecognizer) {
-        if self.constOfDocsViewWidth.constant == 150 || self.referringUsers.count == 1 {
+        if self.constOfDocsViewWidth.constant == 180 {
             // Already expanded
             let view = sender.view
             let loc = sender.location(in: view)
@@ -253,7 +257,9 @@ class PatientNotesCell: UITableViewCell {
             
         } else {
             // Expand Referring Doctor images
-            self.constOfDocsViewWidth.constant = 150
+            self.constOfDocsViewWidth.constant = 180
+            self.constOfDocsViewFirstLeading.constant = 54
+            self.constOfDocsViewCenterX.constant = 27
             UIView.animate(withDuration: 0.3, animations: {
                 self.contentView.layoutIfNeeded()
             }) { (success) in

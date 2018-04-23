@@ -282,6 +282,8 @@
                 <outlet property="btnSpeaker" destination="8jr-Vv-r4T" id="CLW-tc-59C"/>
                 <outlet property="btnSynopsis" destination="8bC-YF-Oyc" id="XJ5-5Y-MDw"/>
                 <outlet property="constOfBtnPlayTop" destination="YJu-CJ-xkn" id="Fbh-6r-mon"/>
+                <outlet property="constOfDocsViewCenterX" destination="m4Y-b4-4b5" id="476-7B-EHa"/>
+                <outlet property="constOfDocsViewFirstLeading" destination="DPh-yi-ta6" id="Ie4-wi-e1B"/>
                 <outlet property="constOfDocsViewWidth" destination="cNV-5d-CPD" id="hFp-oI-FAH"/>
                 <outlet property="constOfLblBroadcastTop" destination="G1l-W9-WrD" id="40O-st-7Xh"/>
                 <outlet property="constOfLblDateBottom" destination="bls-kZ-NX8" id="zYY-7c-l3G"/>
