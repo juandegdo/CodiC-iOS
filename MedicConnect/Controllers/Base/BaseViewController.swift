@@ -158,6 +158,7 @@ class BaseViewController: UIViewController {
         UserDefaultsUtil.DeleteToken()
         UserDefaultsUtil.DeleteUserId()
         
+        UIApplication.shared.unregisterForRemoteNotifications()
     }
 }
 

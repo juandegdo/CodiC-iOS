@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     static let kSinchHostname = "sandbox.sinch.com" // devlopment
 //    static let kSinchHostname = "clientapi.sinch.com" // production
     
-    let voipRegistry: PKPushRegistry = PKPushRegistry(queue: DispatchQueue.main)
+//    let voipRegistry: PKPushRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
     var window: UIWindow?
     var launchedURL: URL? = nil
@@ -60,15 +60,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         IQKeyboardManager.shared().shouldShowToolbarPlaceholder = true
         IQKeyboardManager.shared().toolbarManageBehaviour = IQAutoToolbarManageBehaviour.bySubviews
 
-        NotificationUtil.makeUserNotificationEnabled()
+//        NotificationUtil.makeUserNotificationEnabled()
+//        self.voipRegistration()
+        self.registerforDeviceLockNotification()
+        
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
         } else {
             // Fallback on earlier versions
         }
-        
-        self.voipRegistration()
-        self.registerforDeviceLockNotification()
         
         // Enable playing audio in silent mode
         do {
@@ -332,9 +332,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func voipRegistration() {
         // Register for VoIP notifications
-//        let mainQueue = DispatchQueue.main
+        let mainQueue = DispatchQueue.main
         // Create a push registry object
-//        let voipRegistry: PKPushRegistry = PKPushRegistry(queue: mainQueue)
+        let voipRegistry: PKPushRegistry = PKPushRegistry(queue: mainQueue)
         // Set the registry's delegate to self
         voipRegistry.delegate = self
         // Set the push type to VoIP

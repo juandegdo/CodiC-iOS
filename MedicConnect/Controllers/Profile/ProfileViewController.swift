@@ -48,18 +48,22 @@ class ProfileViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationUtil.makeUserNotificationEnabled()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.voipRegistration()
+        
         if (UIApplication.shared.applicationIconBadgeNumber > 0) {
             NotificationUtil.updateNotificationAlert(hasNewAlert: true)
         }
         
         // Register Device Token
-        if let _me = UserController.Instance.getUser() as User?, let deviceToken = UserController.Instance.getDeviceToken() as String?, deviceToken != _me.deviceToken {
-            UserService.Instance.putDeviceToken(deviceToken: deviceToken) { (success) in
-                if (success) {
-                    _me.deviceToken = deviceToken
-                }
-            }
-        }
+//        if let _me = UserController.Instance.getUser() as User?, let deviceToken = UserController.Instance.getDeviceToken() as String?, deviceToken != _me.deviceToken {
+//            UserService.Instance.putDeviceToken(deviceToken: deviceToken) { (success) in
+//                if (success) {
+//                    _me.deviceToken = deviceToken
+//                }
+//            }
+//        }
         
         // Initialize Table Views
         self.tableView.register(UINib(nibName: ProfileListCellID, bundle: nil), forCellReuseIdentifier: ProfileListCellID)
