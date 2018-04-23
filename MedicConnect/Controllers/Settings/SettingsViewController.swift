@@ -242,7 +242,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             } else if indexPath.section == 2 { // Information
                 
                 if (indexPath.row == 2) {
-                    self.sendEmail(emailAddress: "contact@cadiapp.com")
+                    self.sendEmail(emailAddress: "contact@codiapp.com")
                     
                 } else if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
                     if (indexPath.row == 0) {
