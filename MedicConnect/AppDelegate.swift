@@ -621,7 +621,6 @@ extension AppDelegate: SINCallClientDelegate {
         }
         
         self.sinchCallKitProvider?.reportNewIncomingCall(call, headers: self.callHeaders)
-        self.callHeaders = [:]
         
         // Update user availability
         UserService.Instance.updateAvailability(available: false) { (success) in
