@@ -182,31 +182,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             
             if application.applicationState != .active {
                 // Only show views if app is not active
-                if let type = dictInfo["type"] as? Int, let notificationType = NotificationType(rawValue: type) {
-                    switch notificationType {
-                    case .like:
-                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-                        break
-                    case .comment:
-                        if let postId = dictInfo["broadcast"] as? String {
-                            self.callCommentVC(id: postId)
+                
+                // Check if calling screen is showing
+                if let _ = self.window?.visibleViewController() as? CallScreenViewController {
+                    
+                } else {
+                    if let type = dictInfo["type"] as? Int, let notificationType = NotificationType(rawValue: type) {
+                        switch notificationType {
+                        case .like:
+                            NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
+                            break
+                        case .comment:
+                            if let postId = dictInfo["broadcast"] as? String {
+                                self.callCommentVC(id: postId)
+                            }
+                            break
+                        case .broadcast:
+                            // NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
+                            break
+                        case .transcribed:
+                            NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
+                            
+                        case .missedCall:
+                            NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
+                            
+                            break
+                        default:
+                            self.callNotificationVC()
+                            break
                         }
-                        break
-                    case .broadcast:
-//                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-                        break
-                    case .transcribed:
-                        NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-                        
-                    case .missedCall:
-                        NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
-                        
-                        break
-                    default:
-                        self.callNotificationVC()
-                        break
                     }
                 }
+                
             } else if let topVC = self.window?.visibleViewController() as? ProfileViewController {
                 // Reload profile view
                 topVC.initViews()
@@ -258,12 +265,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let dictInfo = userInfo["aps"] as? NSDictionary,
             let type = dictInfo["type"] as? Int, let notificationType = NotificationType(rawValue: type) {
             
-            if notificationType == .broadcast {
-                if let patientId = dictInfo["patientId"] as? String {
-                    self.callPatientProfileVC(patientId: patientId)
+            if let _ = self.window?.visibleViewController() as? CallScreenViewController {
+                
+            } else {
+                if notificationType == .broadcast {
+                    if let patientId = dictInfo["patientId"] as? String {
+                        self.callPatientProfileVC(patientId: patientId)
+                    }
+                } else if notificationType == .missedCall {
+                    NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
                 }
-            } else if notificationType == .missedCall {
-                NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
             }
             
         }
