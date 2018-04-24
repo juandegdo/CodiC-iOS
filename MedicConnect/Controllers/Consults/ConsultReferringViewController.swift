@@ -127,6 +127,35 @@ class ConsultReferringViewController: BaseViewController {
             self.tfPatientNumber.textColor = UIColor.black
         }
         
+        let _msp = DataManager.Instance.getReferringUserMSP()
+        if _msp != "" {
+            self.tfDoctorMSPNumber.text = _msp
+            self.btnSave.isUserInteractionEnabled = false
+            
+            UserService.Instance.getUserIdByMSP(MSP: self.tfDoctorMSPNumber.text!) { (success, MSP, userId, name) in
+                DispatchQueue.main.async {
+                    self.btnSave.isUserInteractionEnabled = true
+                    
+                    if success == true && MSP == self.tfDoctorMSPNumber.text! {
+                        if userId == nil || userId == "" {
+                            self.lblMSPError.isHidden = false
+                            self.tfDoctorMSPNumber.textColor = UIColor.red
+                        } else {
+                            self.referUserID = userId!
+                            self.lblDoctorName.text = name!
+                            self.lblMSPError.isHidden = true
+                            self.tfDoctorMSPNumber.textColor = UIColor.black
+                        }
+                    } else if success == false {
+                        self.lblMSPError.isHidden = false
+                        self.tfDoctorMSPNumber.textColor = UIColor.red
+                    }
+                    
+                    self.tfDoctorMSPNumber.rightView?.isHidden = !self.lblMSPError.isHidden
+                }
+            }
+        }
+        
     }
     
     func showScanResult() {
@@ -408,14 +437,7 @@ extension ConsultReferringViewController {
     @IBAction func onSave(sender: UIButton!) {
         // Save consults and notes
         var errorType: ErrorPopupType = .none
-//        if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) && (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {
-//            errorType = .noMSPAndPHN
-//            DataManager.Instance.setPostType(postType: Constants.PostTypeConsult)
-//            DataManager.Instance.setPatientId(patientId: "")
-//            DataManager.Instance.setPatient(patient: nil)
-//            DataManager.Instance.setReferringUserIds(referringUserIds: [])
-//
-//        } else
+        
         if (self.tfPatientNumber.text!.count == 0 || !self.lblPHNError.isHidden) {
             errorType = .noPHN
         } else if (self.tfDoctorMSPNumber.text!.count == 0 || !self.lblMSPError.isHidden) {

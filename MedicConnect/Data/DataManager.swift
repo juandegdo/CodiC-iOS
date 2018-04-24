@@ -17,6 +17,7 @@ class DataManager {
     var patientId: String = ""
     var patient: Patient? = nil
     var referringUserIds: [String] = []
+    var referringUserMSP: String = ""
     var fromPatientProfile: Bool = false
     var recordDuration: Int = 0
     
@@ -60,7 +61,7 @@ class DataManager {
         self.patient = patient
     }
     
-    // MARK: Referring User Id
+    // MARK: Referring User IDs
     
     func getReferringUserIds() -> [String] {
         return self.referringUserIds
@@ -68,6 +69,16 @@ class DataManager {
     
     func setReferringUserIds(referringUserIds: [String]) {
         self.referringUserIds = referringUserIds
+    }
+    
+    // MARK: Referring User MSP
+    
+    func getReferringUserMSP() -> String {
+        return self.referringUserMSP
+    }
+    
+    func setReferringUserMSP(referringUserMSP: String) {
+        self.referringUserMSP = referringUserMSP
     }
     
     // MARK: From Patient Profile
