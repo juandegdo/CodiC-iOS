@@ -118,6 +118,15 @@ class ConsultReferringViewController: BaseViewController {
         // Hide checkmark
         self.tfDoctorMSPNumber.rightView?.isHidden = true
         
+        if let _patient = DataManager.Instance.getPatient() {
+            self.patientID = _patient.id
+            self.lblPatientName.text = _patient.name
+            self.lblPHNError.isHidden = true
+            self.tfPatientNumber.text = _patient.patientNumber
+            self.tfPatientNumber.rightView = self.viewCheckmark
+            self.tfPatientNumber.textColor = UIColor.black
+        }
+        
     }
     
     func showScanResult() {
