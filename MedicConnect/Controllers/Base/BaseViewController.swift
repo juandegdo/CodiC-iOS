@@ -153,6 +153,7 @@ class BaseViewController: UIViewController {
         UIApplication.shared.unregisterForRemoteNotifications()
         
         let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.tabBarController = nil
         delegate?.disableSinchClient()
         
         UserController.Instance.eraseUser()

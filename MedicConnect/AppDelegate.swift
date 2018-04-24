@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //    let voipRegistry: PKPushRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
     var window: UIWindow?
+    var tabBarController: RadTabBarController?
     var launchedURL: URL? = nil
     var orientationLock = UIInterfaceOrientationMask.portrait
     var deviceLocked: Bool = false
@@ -148,8 +149,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("========Received========\n\(userInfo)\n")
         
         if let dictInfo = userInfo["aps"] as? NSDictionary {
-            if  let _ = UserController.Instance.getUser() as User? {
+            if let _ = UserController.Instance.getUser() as User?,
+                let type = dictInfo["type"] as? Int,
+                let notificationType = NotificationType(rawValue: type),
+                notificationType != .missedCall {
+                
                 NotificationUtil.updateNotificationAlert(hasNewAlert: true)
+                
             }
             
             if let id = dictInfo["id"] as? String {
@@ -197,6 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
                             
                         case .missedCall:
+                            UIApplication.shared.applicationIconBadgeNumber = 0
                             NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
                             
                             break
@@ -207,13 +214,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     }
                 }
                 
-            } else if let topVC = self.window?.visibleViewController() as? ProfileViewController {
-                // Reload profile view
-                topVC.initViews()
+            } else {
+                // Active State
+                if let type = dictInfo["type"] as? Int, let notificationType = NotificationType(rawValue: type) {
+                    
+                    let topVC = self.window?.visibleViewController()
+                    
+                    if notificationType == .missedCall && !(topVC?.isKind(of: ConferenceViewController.self))! {
+                        if let _tabController = self.tabBarController {
+                            let tabBarItem = _tabController.tabBar.items![0]
+                            let value = UserDefaultsUtil.LoadMissedCalls()
+                            tabBarItem.badgeValue = "\(value == "" ? 1 : Int(value)! + 1)"
+                            
+                            UserDefaultsUtil.SaveMissedCalls(tabBarItem.badgeValue!)
+                        }
+                    } else if notificationType == .missedCall {
+                        // Reload call history view
+                        let profileVC = topVC as! ConferenceViewController
+                        profileVC.loadHistory()
+                        
+                    } else if (topVC?.isKind(of: ProfileViewController.self))! && (notificationType == .broadcast ||  notificationType == .transcribed) {
+                        // Reload profile view
+                        let profileVC = topVC as! ProfileViewController
+                        profileVC.initViews()
+                        
+                    } else if let topVC = self.window?.visibleViewController() as? NotificationsViewController {
+                        // Notification controller is currently presenting
+                        topVC.loadNotifications()
+                    }
+                    
+                }
                 
-            } else if let topVC = self.window?.visibleViewController() as? NotificationsViewController {
-                // Notification controller is currently presenting
-                topVC.loadNotifications()
+                
             }
         }
     }

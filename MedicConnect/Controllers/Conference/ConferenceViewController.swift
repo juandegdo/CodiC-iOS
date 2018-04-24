@@ -35,6 +35,9 @@ class ConferenceViewController: BaseViewController, UIGestureRecognizerDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        self.navigationController?.tabBarItem.badgeValue = nil
+        UserDefaultsUtil.SaveMissedCalls("")
+        
         self.loadHistory()
     }
     

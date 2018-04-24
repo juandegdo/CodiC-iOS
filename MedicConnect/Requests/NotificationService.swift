@@ -72,6 +72,10 @@ class NotificationService: BaseTaskController {
                     return
                 }
                 
+                if let _ = response.result.value {
+//                    print("Response: \(response.result.value!)")
+                }
+                
                 var notifications: [Notification] = []
                 
                 if response.response?.statusCode == 200 {

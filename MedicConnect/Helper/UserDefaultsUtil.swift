@@ -95,6 +95,17 @@ class UserDefaultsUtil {
         return defaults.object(forKey: "lastNotificationID") as? String ?? ""
     }
     
+    class func SaveMissedCalls(_ value: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(value, forKey: "missedCalls")
+        defaults.synchronize()
+    }
+    
+    class func LoadMissedCalls() -> String {
+        let defaults = UserDefaults.standard
+        return defaults.object(forKey: "missedCalls") as? String ?? ""
+    }
+    
     class func SaveFirstLoad(firstLoad: Int) {
         
         KeychainService.saveFirstLoad(firstLoad: "\(firstLoad)" as NSString)

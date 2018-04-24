@@ -52,6 +52,12 @@ class ProfileViewController: BaseViewController {
             NotificationUtil.updateNotificationAlert(hasNewAlert: true)
         }
         
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.tabBarController = self.tabBarController as? RadTabBarController
+        
+        let tabBarItem = self.tabBarController?.tabBar.items![0]
+        tabBarItem?.badgeValue = UserDefaultsUtil.LoadMissedCalls() == "" ? nil : UserDefaultsUtil.LoadMissedCalls()
+        
         // Register Device Token
 //        if let _me = UserController.Instance.getUser() as User?, let deviceToken = UserController.Instance.getDeviceToken() as String?, deviceToken != _me.deviceToken {
 //            UserService.Instance.putDeviceToken(deviceToken: deviceToken) { (success) in
