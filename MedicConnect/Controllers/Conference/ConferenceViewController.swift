@@ -35,6 +35,9 @@ class ConferenceViewController: BaseViewController, UIGestureRecognizerDelegate 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
+        let badgeValue = self.navigationController?.tabBarItem.badgeValue == nil ? 0 : Int((self.navigationController?.tabBarItem.badgeValue)!)!
+        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber > badgeValue ? UIApplication.shared.applicationIconBadgeNumber - badgeValue : 0
+        
         self.navigationController?.tabBarItem.badgeValue = nil
         UserDefaultsUtil.SaveMissedCalls("")
         

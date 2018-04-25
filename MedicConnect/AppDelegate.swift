@@ -203,8 +203,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
                             
                         case .missedCall:
-                            UIApplication.shared.applicationIconBadgeNumber = 0
-                            NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
+//                            UIApplication.shared.applicationIconBadgeNumber = 0
+//                            NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
+                            
+                            if let _tabController = self.tabBarController {
+                                let tabBarItem = _tabController.tabBar.items![0]
+                                let value = UserDefaultsUtil.LoadMissedCalls()
+                                tabBarItem.badgeValue = "\(value == "" ? 1 : Int(value)! + 1)"
+                                
+                                UserDefaultsUtil.SaveMissedCalls(tabBarItem.badgeValue!)
+                            }
                             
                             break
                         default:
