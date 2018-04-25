@@ -277,6 +277,8 @@ class ConsultReferringViewController: BaseViewController {
         self.startIndicating()
         self.btnSave.isEnabled = false
         
+        DataManager.Instance.setReferringUserMSP(referringUserMSP: "")
+        
         PostService.Instance.sendPost(consultInfo["title"] as! String,
                                       author: consultInfo["author"] as! String,
                                       description: consultInfo["description"] as! String,
@@ -446,7 +448,6 @@ extension ConsultReferringViewController {
             DataManager.Instance.setPatientId(patientId: self.patientID)
             DataManager.Instance.setPatient(patient: nil)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
-            
         }
         
         if (errorType != .none) {
@@ -513,6 +514,7 @@ extension ConsultReferringViewController {
         DataManager.Instance.setPatientId(patientId: "")
         DataManager.Instance.setPatient(patient: nil)
         DataManager.Instance.setReferringUserIds(referringUserIds: [])
+        DataManager.Instance.setReferringUserMSP(referringUserMSP: "")
         
         // Show record screen
         self.presentRecordScreen()

@@ -304,6 +304,7 @@ extension CreatePatientViewController {
                             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
                             DataManager.Instance.setPatient(patient: patient)
                             DataManager.Instance.setReferringUserIds(referringUserIds: [])
+                            DataManager.Instance.setReferringUserMSP(referringUserMSP: "")
                             
                             let lenght = self.navigationController?.viewControllers.count
                             let prevOffset = self.scanResults == nil ? 2 : 3;

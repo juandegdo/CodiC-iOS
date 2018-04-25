@@ -163,6 +163,7 @@ class ProfileViewController: BaseViewController {
                 DataManager.Instance.setPatientId(patientId: "")
                 DataManager.Instance.setPatient(patient: nil)
                 DataManager.Instance.setReferringUserIds(referringUserIds: [])
+                DataManager.Instance.setReferringUserMSP(referringUserMSP: "")
                 
                 self.present(vc, animated: false, completion: nil)
                 

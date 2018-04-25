@@ -664,6 +664,7 @@ extension PatientProfileViewController {
             DataManager.Instance.setPatientId(patientId: (patient?.id)!)
             DataManager.Instance.setPatient(patient: patient)
             DataManager.Instance.setReferringUserIds(referringUserIds: [])
+            DataManager.Instance.setReferringUserMSP(referringUserMSP: "")
             DataManager.Instance.setFromPatientProfile(true)
             
             self.present(vc, animated: false, completion: {
