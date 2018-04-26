@@ -89,6 +89,7 @@ class ProfileViewController: BaseViewController {
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(ProfileViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationDidBecomeActive , object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,6 +105,7 @@ class ProfileViewController: BaseViewController {
             self.releasePlayer()
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
             NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         }
         
     }
@@ -590,6 +592,11 @@ class ProfileViewController: BaseViewController {
         PlayerController.Instance.shouldSeek = true
         PlayerController.Instance.scheduleReset()
         
+    }
+    
+    
+    @objc func willEnterForeground(){
+        self.refreshData()
     }
     
     // MARK: Scroll Ralated
