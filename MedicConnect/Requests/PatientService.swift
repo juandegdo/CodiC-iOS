@@ -15,6 +15,8 @@ class PatientService: BaseTaskController {
     func addPatient(_ name: String, patientNumber: String, birthDate: Date, phoneNumber: String, address: String, completion: @escaping (_ success: Bool, _ patient: Patient?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLAddPatientSuffix)"
+        print("Connect to Server at \(url)")
+        
         let parameters = ["name" : name,
                           "patient_number" : patientNumber,
                           "birthday" : birthDate,
@@ -85,6 +87,8 @@ class PatientService: BaseTaskController {
     func editPatient(_ patientId: String, name: String, patientNumber: String, birthDate: Date, phoneNumber: String, address: String, completion: @escaping (_ success: Bool, _ patient: Patient?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLEditPatientSuffix)/\(patientId)"
+        print("Connect to Server at \(url)")
+        
         let parameters = ["name" : name,
                           "patient_number" : patientNumber,
                           "birthday" : birthDate,
@@ -155,6 +159,7 @@ class PatientService: BaseTaskController {
     func getPatients(_ skip : Int = 0, limit: Int = 1000, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientsSuffix)?skip=\(skip)&limit=\(limit)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -272,6 +277,7 @@ class PatientService: BaseTaskController {
     func getPatientIdByPHN(PHN: String, completion: @escaping (_ success: Bool, _ PHN: String?, _ patientId: String?, _ patientName: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientIdByPHNSuffix)/\(PHN)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -309,6 +315,7 @@ class PatientService: BaseTaskController {
     func getPatientById(patientId: String, completion: @escaping (_ success: Bool, _ patient: Patient?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPatient)\(self.URLGetPatientByIDSuffix)/\(patientId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in

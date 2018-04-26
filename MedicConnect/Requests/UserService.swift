@@ -21,6 +21,7 @@ class UserService: BaseTaskController {
     func signup(_ user: User, completion: @escaping (_ success: Bool, _ message: String) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLSignUp)"
+        print("Connect to Server at \(url)")
         
         let parameters = ["password" : user.password, "email" : user.email, "name" : user.fullName]
         
@@ -70,6 +71,7 @@ class UserService: BaseTaskController {
     func login(_ user: User, completion: @escaping (_ success: Bool, _ message: String) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLLogin)"
+        print("Connect to Server at \(url)")
         
         let parameters = ["password" : user.password, "email" : user.email]
         
@@ -253,6 +255,7 @@ class UserService: BaseTaskController {
     func forgotPassword(email: String, token: String, completion: @escaping (_ success: Bool, _ code: Int?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLForgetPassword)"
+        print("Connect to Server at \(url)")
         
         let parameters = ["email" : email, "token": token]
         
@@ -267,6 +270,7 @@ class UserService: BaseTaskController {
     func updatePassword(token: String, new: String, completion: @escaping (_ success: Bool, _ code: Int?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUpdatePassword)/\(token)"
+        print("Connect to Server at \(url)")
         
         let parameters = ["updatePassword" : new]
         
@@ -283,6 +287,7 @@ class UserService: BaseTaskController {
         guard let _url = URL(string: "\(self.baseURL)\(self.URLUser)") as URL? else {
             return
         }
+        print("Connect to Server at \(_url)")
         
         self.manager!.request(_url, method: .delete, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -304,6 +309,7 @@ class UserService: BaseTaskController {
     func makePrivate(value: Bool, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = (value==true) ? "\(self.baseURL)\(self.URLUser)\(self.URLMakePrivateSuffix)" : "\(self.baseURL)\(self.URLUser)\(self.URLMakeUnprivateSuffix)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -326,6 +332,7 @@ class UserService: BaseTaskController {
     
     func setNotificationFilter(value: Int, completion: @escaping (_ success: Bool) -> Void) {
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLMakeNotiFilterSuffix)?filterValue=\(value)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -349,6 +356,7 @@ class UserService: BaseTaskController {
     func getMe(completion: @escaping (_ user: User?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)/me"
+        print("Connect to Server at \(url)")
         
         self.manager!.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON { response in
@@ -779,6 +787,7 @@ class UserService: BaseTaskController {
     func getUser(forId: String, completion: @escaping (_ user: User?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)/id/\(forId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1069,6 +1078,7 @@ class UserService: BaseTaskController {
         }
         
         let url = "\(self.baseURL)\(self.URLUser)/all?skip=0&limit=100"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1159,8 +1169,7 @@ class UserService: BaseTaskController {
     func getTimeline(_ postType: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)/timeline?postType=\(postType)&skip=0&limit=1000"
-        
-        print("Fetching user posts at \(url)")
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1361,8 +1370,7 @@ class UserService: BaseTaskController {
     func getRecommendedUsers(completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)/recommended"
-        
-        print("Fetching user posts at \(url)")
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1451,8 +1459,7 @@ class UserService: BaseTaskController {
     func getPromotedUsers(completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)/getpromotedcontent"
-        
-        print("Fetching promoted content at \(url)")
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1547,6 +1554,7 @@ class UserService: BaseTaskController {
     func block(userId: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLBlockSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1566,11 +1574,13 @@ class UserService: BaseTaskController {
                 completion(response.response?.statusCode == 200)
                 
         }
+        
     }
     
     func unblock(userId: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLUnblockSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1595,6 +1605,7 @@ class UserService: BaseTaskController {
     
     func acceptRequest(userId: String, completion: @escaping (_ success: Bool) -> Void) {
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLAcceptRequestSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1618,6 +1629,7 @@ class UserService: BaseTaskController {
     
     func declineRequest(userId: String, completion: @escaping (_ success: Bool) -> Void) {
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLDeclineRequestSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1642,6 +1654,7 @@ class UserService: BaseTaskController {
     func follow(userId: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLFollowSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1667,6 +1680,7 @@ class UserService: BaseTaskController {
     func unfollow(userId: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLUnfollowSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1692,6 +1706,8 @@ class UserService: BaseTaskController {
     func putDeviceToken(deviceToken: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLDeviceToken)"
+        print("Connect to Server at \(url)")
+        
         let parameter = ["deviceToken": deviceToken]
         manager!.request(url, method: .put, parameters: parameter, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1717,6 +1733,8 @@ class UserService: BaseTaskController {
     func report(from: String, subject: String, msgbody: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLReport)"
+        print("Connect to Server at \(url)")
+        
         let parameter = ["from": from, "subject": subject, "text": msgbody]
         manager!.request(url, method: .post, parameters: parameter, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1742,6 +1760,7 @@ class UserService: BaseTaskController {
     func getUserIdByMSP(MSP: String, completion: @escaping (_ success: Bool, _ MSP: String? , _ userId: String?, _ name: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUser)\(self.URLGetUserIdByMSPSuffix)/\(MSP)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -1779,6 +1798,8 @@ class UserService: BaseTaskController {
     func updateAvailability(available: Bool, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUpdateAvailability)"
+        print("Connect to Server at \(url)")
+        
         let parameter = ["available": available]
         print(parameter)
         

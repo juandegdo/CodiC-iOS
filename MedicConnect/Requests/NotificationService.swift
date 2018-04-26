@@ -15,6 +15,8 @@ class NotificationService: BaseTaskController {
     
     func markAsRead(_ unreadId: String, completion: @escaping (_ success: Bool, _ count: Int?) -> Void) {
         let url = "\(self.baseURL)\(self.URLNotification)/markread/\(unreadId)"
+        print("Connect to Server at \(url)")
+        
         manager!.request(url, method: .post, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
                 
@@ -40,6 +42,8 @@ class NotificationService: BaseTaskController {
     
     func markAllAsRead(completion: @escaping (_ success: Bool) -> Void) {
         let url = "\(self.baseURL)\(self.URLNotification)/allread/markallread"
+        print("Connect to Server at \(url)")
+        
         manager!.request(url, method: .post, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
                 
@@ -60,6 +64,7 @@ class NotificationService: BaseTaskController {
     func getNotifications(_ skip : Int = 0, limit: Int = 1000, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLNotification)?skip=\(skip)&limit=\(limit)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in

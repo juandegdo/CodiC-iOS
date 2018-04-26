@@ -594,7 +594,6 @@ class ProfileViewController: BaseViewController {
         
     }
     
-    
     @objc func willEnterForeground(){
         self.refreshData()
     }

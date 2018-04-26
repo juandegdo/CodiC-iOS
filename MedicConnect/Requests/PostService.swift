@@ -19,6 +19,8 @@ class PostService: BaseTaskController {
             return
         }
         
+        print("Connect to Server at \(_url)")
+        
         let token = UserDefaultsUtil.LoadToken()
         let bearer = "Bearer \(token)"
         let headers = ["Authorization" : bearer, "user-agent" : UIDevice.current.identifierForVendor!.uuidString.sha1()]
@@ -91,6 +93,8 @@ class PostService: BaseTaskController {
     func placeOrder(postId: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLPlaceOrderSuffix)"
+        print("Connect to Server at \(url)")
+        
         let params = ["postId" : postId]
         
         manager!.request(url, method: .post, parameters: params, encoding: URLEncoding.default)
@@ -113,6 +117,7 @@ class PostService: BaseTaskController {
     func getPosts(completion: @escaping (_ success: Bool) -> Void) {
     
         let url = "\(self.baseURL)\(self.URLPost)/all"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -297,8 +302,7 @@ class PostService: BaseTaskController {
     func getRecommendedPosts(completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)/recommended"
-        
-        print("Fetching user posts at \(url)")
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -482,6 +486,7 @@ class PostService: BaseTaskController {
     func incrementPost(id: String, completion: @escaping (_ success: Bool, _ play_count: Int?) -> Void) {
     
         let url = "\(self.baseURL)\(self.URLPost)/increment/\(id)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -505,6 +510,7 @@ class PostService: BaseTaskController {
     func deletePost(id: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)/\(id)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .delete, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -525,6 +531,7 @@ class PostService: BaseTaskController {
     func getNotesByPatientId(id: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetNotesByPatientIdSuffix)/\(id)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -727,6 +734,7 @@ class PostService: BaseTaskController {
     
     func getPost(postId: String, completion: @escaping (_ post: Post?) -> Void) {
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetPostSuffix)/\(postId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
         .responseJSON { (response) in
@@ -748,6 +756,7 @@ class PostService: BaseTaskController {
     
     func getRecentPost(userId: String, completion: @escaping (_ post: [Post]?) -> Void) {
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetRecentPostSuffix)/\(userId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { (response) in
@@ -770,6 +779,7 @@ class PostService: BaseTaskController {
     func getPostLikes(_ postId: String, skip : Int = 0, limit: Int = 100, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetPostLikesSuffix)/\(postId)?skip=\(skip)&limit=\(limit)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -864,6 +874,7 @@ class PostService: BaseTaskController {
     func like(postId: String, completion: @escaping (_ success: Bool, _ like_description: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLLikeSuffix)/\(postId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -889,6 +900,7 @@ class PostService: BaseTaskController {
     func unlike(postId: String, completion: @escaping (_ success: Bool, _ like_description: String?) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLUnlikeSuffix)/\(postId)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .put, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -914,6 +926,7 @@ class PostService: BaseTaskController {
     func getTrendingHashtags(completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetTrendingHashtagsSuffix)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
@@ -945,6 +958,7 @@ class PostService: BaseTaskController {
     func getPostsFromHashtag(hashtag: String, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLPost)\(self.URLGetPostsFromHashtagSuffix)/\(hashtag.replacingOccurrences(of: "#", with: ""))"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in

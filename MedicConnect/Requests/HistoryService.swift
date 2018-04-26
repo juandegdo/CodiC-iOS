@@ -16,6 +16,8 @@ class HistoryService: BaseTaskController {
     func updateCallHistory(callId: String, callState: Int, duration: Double, completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLUpdateCallHistory)"
+        print("Connect to Server at \(url)")
+        
         let parameter = [
             "callId": callId,
             "callState": callState,
@@ -48,6 +50,7 @@ class HistoryService: BaseTaskController {
     func getCallHistory(completion: @escaping (_ success: Bool) -> Void) {
         
         let url = "\(self.baseURL)\(self.URLGetCallHistory)?skip=\(0)&limit=\(20)"
+        print("Connect to Server at \(url)")
         
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in

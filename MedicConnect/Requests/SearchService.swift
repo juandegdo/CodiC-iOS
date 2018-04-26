@@ -25,6 +25,8 @@ class SearchService: BaseTaskController {
         }
         
         let url = "\(self.baseURL)\(self.URLSearch)"
+        print("Connect to Server at \(url)")
+        
         let parameters = ["keyword" : keyword]
         
         manager!.request(url, method: .post, parameters: parameters, encoding: URLEncoding.default)

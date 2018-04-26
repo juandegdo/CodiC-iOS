@@ -18,6 +18,7 @@ class CommentService: BaseTaskController {
         guard let url = URL(string: "\(self.baseURL)\(self.URLComment)/\(postId)") else {
             return
         }
+        print("Connect to Server at \(url)")
         
         let parameters = ["content" : content]
         
@@ -67,6 +68,7 @@ class CommentService: BaseTaskController {
     func getComments(_ postId: String, skip : Int = 0, limit: Int = 100, completion: @escaping (_ success: Bool) -> Void) {
     
         let url = "\(self.baseURL)\(self.URLComment)/\(postId)?skip=\(skip)&limit=\(limit)"
+        print("Connect to Server at \(url)")
     
         manager!.request(url, method: .get, parameters: nil, encoding: URLEncoding.default)
             .responseJSON { response in
