@@ -34,13 +34,9 @@ class ConferenceViewController: BaseViewController, UIGestureRecognizerDelegate 
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationDidBecomeActive , object: nil)
         
-        let badgeValue = self.navigationController?.tabBarItem.badgeValue == nil ? 0 : Int((self.navigationController?.tabBarItem.badgeValue)!)!
-        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber > badgeValue ? UIApplication.shared.applicationIconBadgeNumber - badgeValue : 0
-        
-        self.navigationController?.tabBarItem.badgeValue = nil
-        UserDefaultsUtil.SaveMissedCalls("")
-        
+        self.clearBadges()
         self.loadHistory()
     }
     
@@ -71,6 +67,20 @@ class ConferenceViewController: BaseViewController, UIGestureRecognizerDelegate 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func clearBadges() {
+//        let badgeValue = self.navigationController?.tabBarItem.badgeValue == nil ? 0 : Int((self.navigationController?.tabBarItem.badgeValue)!)!
+//        UIApplication.shared.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber > badgeValue ? UIApplication.shared.applicationIconBadgeNumber - badgeValue : 0
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        self.navigationController?.tabBarItem.badgeValue = nil
+        UserDefaultsUtil.SaveMissedCalls("")
+    }
+    
+    @objc func willEnterForeground(){
+        self.clearBadges()
+        self.loadHistory()
     }
     
 }

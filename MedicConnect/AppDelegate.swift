@@ -203,15 +203,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
                             
                         case .missedCall:
-//                            UIApplication.shared.applicationIconBadgeNumber = 0
-//                            NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
-                            
                             if let _tabController = self.tabBarController {
-                                let tabBarItem = _tabController.tabBar.items![0]
+                                if let _ = self.window?.visibleViewController() as? ConferenceViewController {
+//                                    topVC.loadHistory()
+                                } else {
+                                    let tabBarItem = _tabController.tabBar.items![0]
+                                    let value = UserDefaultsUtil.LoadMissedCalls()
+                                    tabBarItem.badgeValue = "\(value == "" ? 1 : Int(value)! + 1)"
+                                    
+                                    UserDefaultsUtil.SaveMissedCalls(tabBarItem.badgeValue!)
+                                }
+                            } else {
                                 let value = UserDefaultsUtil.LoadMissedCalls()
-                                tabBarItem.badgeValue = "\(value == "" ? 1 : Int(value)! + 1)"
-                                
-                                UserDefaultsUtil.SaveMissedCalls(tabBarItem.badgeValue!)
+                                UserDefaultsUtil.SaveMissedCalls("\(value == "" ? 1 : Int(value)! + 1)")
                             }
                             
                             break
@@ -240,6 +244,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                         // Reload call history view
                         let profileVC = topVC as! ConferenceViewController
                         profileVC.loadHistory()
+                        
+                        UIApplication.shared.applicationIconBadgeNumber = 0
                         
                     } else if (topVC?.isKind(of: ProfileViewController.self))! && (notificationType == .broadcast ||  notificationType == .transcribed) {
                         // Reload profile view
