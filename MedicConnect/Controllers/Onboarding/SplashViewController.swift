@@ -51,6 +51,8 @@ class SplashViewController: UIViewController {
                         }
                     }
                     
+                    self.requestPermissions()
+                    
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)
                 } else {
                     // User not logged in properly
@@ -65,6 +67,51 @@ class SplashViewController: UIViewController {
             self.performSegue(withIdentifier: Constants.SegueMedicConnectSignIn, sender: nil)
         }
         
+    }
+    
+    func requestPermissions() {
+        
+        //Microphone
+        let recordingSession = AVAudioSession.sharedInstance()
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() {
+                (allowed) in
+                DispatchQueue.main.async {
+                    // Run UI Updates
+                    if (allowed) {
+                        
+                    } else {
+                        try? recordingSession.setActive(false)
+                        self.processMicrophoneSettings("You've already disabled microphone.\nGo to settings and enable microphone please.")
+                    }
+                }
+            }
+        } catch {
+        }
+        
+        //Camera
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                //access granted
+            } else {
+                self.processMicrophoneSettings("You've already disabled camera.\nGo to settings and enable camera please.")
+            }
+        }
+        
+    }
+    
+    func processMicrophoneSettings(_ message: String) {
+        let alertController = UIAlertController(title: "Setting", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        let goAction = UIAlertAction(title: "Go", style: .cancel) { (action) in
+            NotificationUtil.goToAppSettings()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(goAction)
+        
+        self.present(alertController, animated: false, completion: nil)
     }
 
 }
