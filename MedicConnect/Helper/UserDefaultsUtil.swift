@@ -17,11 +17,20 @@ class UserDefaultsUtil {
         UserService.Instance.configureInstance(token)
         
         KeychainService.savePassword(token: token as NSString)
+        
+        let defaults = UserDefaults.standard
+        defaults.set(token, forKey: "token")
+        defaults.synchronize()
 
     }
     
     class func LoadToken() -> String {
-        return KeychainService.loadPassword() as String? ?? ""
+        if let token = KeychainService.loadPassword() as String? {
+            return token
+        } else {
+            let defaults = UserDefaults.standard
+            return defaults.object(forKey: "token") as? String ?? ""
+        }
     }
     
     class func DeleteToken() {
@@ -29,6 +38,7 @@ class UserDefaultsUtil {
         KeychainService.savePassword(token: "" as NSString)
         UserDefaults.standard.removeObject(forKey: "username")
         UserDefaults.standard.removeObject(forKey: "password")
+        UserDefaults.standard.removeObject(forKey: "token")
         
     }
     
