@@ -66,7 +66,7 @@ static CXCallEndedReason SINGetCallEndedReason(SINCallEndCause cause) {
 
 - (void)reportNewIncomingCall:(id<SINCall>)call headers:(NSDictionary *)headers {
   CXCallUpdate *update = [[CXCallUpdate alloc] init];
-  NSString *remoteName =  headers[@"display_name"] ? headers[@"display_name"] : @"Doctor";
+  NSString *remoteName =  headers[@"display_name"] ? headers[@"display_name"] : @"Unknown";
   BOOL hasVideo =  headers[@"type"] != nil ? ([headers[@"type"] isEqualToString:@"v"] ? YES : NO) : NO;
   update.remoteHandle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:remoteName];
   update.hasVideo = hasVideo;
