@@ -133,7 +133,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHE-eY-Tsp">
                         <rect key="frame" x="17" y="84" width="88" height="40"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HPE-e3-lhG">
+                            <imageView tag="99" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HPE-e3-lhG">
                                 <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="1qE-3u-6k0"/>

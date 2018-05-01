@@ -51,6 +51,7 @@ class PatientNotesCell: UITableViewCell {
     
     var postDescription: String = ""
     var referringUsers: [User] = []
+    var postUser: User? = nil
     
     // Expand/Collpase
     var isExpanded:Bool = false {
@@ -209,6 +210,8 @@ class PatientNotesCell: UITableViewCell {
         self.viewDoctors.isHidden = post.referringUsers.count == 0 ? true : false
         self.referringUsers = post.referringUsers
         
+        self.postUser = post.user
+        
         if let imgURL = URL(string: post.user.photo) as URL? {
             self.ivCreator.af_setImage(withURL: imgURL)
         } else {
@@ -249,10 +252,13 @@ class PatientNotesCell: UITableViewCell {
             // Already expanded
             let view = sender.view
             let loc = sender.location(in: view)
-            if let subview = view?.hitTest(loc, with: nil),
-                subview.tag >= 100 {
-                let user = self.referringUsers[subview.tag - 100]
-                delegate?.patientNotesCellDidTapReferringUser(user)
+            if let subview = view?.hitTest(loc, with: nil) {
+                if subview.tag >= 100 {
+                    let user = self.referringUsers[subview.tag - 100]
+                    delegate?.patientNotesCellDidTapReferringUser(user)
+                } else if subview.tag == 99 {
+                    delegate?.patientNotesCellDidTapReferringUser(self.postUser!)
+                }
             }
             
         } else {

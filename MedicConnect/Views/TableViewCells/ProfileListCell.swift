@@ -55,6 +55,7 @@ class ProfileListCell: UITableViewCell {
     var postType: String = ""
     var referringUsers: [User] = []
     var reload: Bool = false
+    var postUser: User? = nil
     
     // Expand/Collpase
     var isExpanded:Bool = false {
@@ -222,6 +223,8 @@ class ProfileListCell: UITableViewCell {
         self.viewDoctors.isHidden = post.referringUsers.count == 0 ? true : false
         self.referringUsers = post.referringUsers
         
+        self.postUser = post.user
+        
         if let imgURL = URL(string: post.user.photo) as URL? {
             self.ivCreator.af_setImage(withURL: imgURL)
         } else {
@@ -266,10 +269,13 @@ class ProfileListCell: UITableViewCell {
             // Already expanded
             let view = sender.view
             let loc = sender.location(in: view)
-            if let subview = view?.hitTest(loc, with: nil),
-                subview.tag >= 100 {
-                let user = self.referringUsers[subview.tag - 100]
-                delegate?.profileListCellDidTapReferringUser(user)
+            if let subview = view?.hitTest(loc, with: nil) {
+                if subview.tag >= 100 {
+                    let user = self.referringUsers[subview.tag - 100]
+                    delegate?.profileListCellDidTapReferringUser(user)
+                } else if subview.tag == 99 {
+                    delegate?.profileListCellDidTapReferringUser(self.postUser!)
+                }
             }
             
         } else {
