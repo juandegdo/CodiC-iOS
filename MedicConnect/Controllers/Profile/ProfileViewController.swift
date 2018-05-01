@@ -267,6 +267,18 @@ class ProfileViewController: BaseViewController {
         Crashlytics.sharedInstance().setUserName(user.fullName)
     }
     
+    func markAllAsRead() {
+        // Clear notification state
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        NotificationUtil.updateNotificationAlert(hasNewAlert: false)
+        
+        NotificationService.Instance.markAllAsRead(completion: { (allRead) in
+            if (allRead) {
+                
+            }
+        })
+    }
+    
     // MARK: Player Functions
     
     func releasePlayer(onlyState: Bool = false) {
@@ -786,6 +798,10 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 
                 self.expandedRows.removeAll()
                 self.expandedRows.insert(post.id)
+                
+                if NotificationUtil.hasNewNotification {
+                    self.markAllAsRead()
+                }
             }
             
             cell.isExpanded = !cell.isExpanded
