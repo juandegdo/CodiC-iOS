@@ -608,6 +608,9 @@ class ProfileViewController: BaseViewController {
     
     @objc func willEnterForeground(){
         self.refreshData()
+        
+        let tabBarItem = self.tabBarController?.tabBar.items![0]
+        tabBarItem?.badgeValue = UserDefaultsUtil.LoadMissedCalls() == "" ? nil : UserDefaultsUtil.LoadMissedCalls()
     }
     
     // MARK: Scroll Ralated
