@@ -10,12 +10,20 @@ import UIKit
 
 class PatientNoteReferViewController: BaseViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var lblPatientName: UILabel!
+    @IBOutlet weak var lblPatientDOB: UILabel!
+    @IBOutlet weak var lblPatientPHN: UILabel!
+    
+    @IBOutlet weak var lblDoctorName: UILabel!
+    @IBOutlet weak var lblDoctorMSP: UILabel!
+    
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
     @IBOutlet weak var view3: UIView!
     
     @IBOutlet weak var btnSaveNote: UIButton!
-    @IBOutlet weak var constOfViewTop: NSLayoutConstraint!
     
     var activityIndicatorView = UIActivityIndicatorView()
     
@@ -65,8 +73,27 @@ class PatientNoteReferViewController: BaseViewController {
     // MARK: Initialize views
     
     func initViews() {
-        if Constants.ScreenWidth == 320 {
-            self.constOfViewTop.constant = 100
+        // Initialize
+        if let _patient = DataManager.Instance.getPatient() {
+            self.lblPatientName.text = _patient.name
+            self.lblPatientDOB.text = "DOB \(_patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: ""))"
+            self.lblPatientPHN.text = "PHN# \(_patient.patientNumber)"
+        }
+        
+        let _msp = DataManager.Instance.getReferringUserMSP()
+        if _msp != "" {
+            self.lblDoctorMSP.text = "MSP# \(_msp)"
+            self.btnSaveNote.isUserInteractionEnabled = false
+            
+            UserService.Instance.getUserIdByMSP(MSP: _msp) { (success, MSP, userId, name) in
+                DispatchQueue.main.async {
+                    self.btnSaveNote.isUserInteractionEnabled = true
+                    
+                    if success == true && userId != nil && userId != "" {
+                        self.lblDoctorName.text = name
+                    }
+                }
+            }
         }
         
         let views: [UIView] = [view1, view2, view3]
