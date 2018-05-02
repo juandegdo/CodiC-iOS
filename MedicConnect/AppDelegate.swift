@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if url.absoluteString.lowercased().contains("medicconnectlink") && UserDefaultsUtil.LoadToken().isEmpty {
+        if url.absoluteString.lowercased().contains("codiapplink") && UserDefaultsUtil.LoadToken().isEmpty {
             self.openLink(url: url, fromLaunch: false)
             return true
         }
@@ -164,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 
                 NotificationService.Instance.markAsRead(id, completion: { (success, count) in
                     if (success) {
-                        application.applicationIconBadgeNumber = count! >= 0 ? count! : 0
+//                        application.applicationIconBadgeNumber = count! >= 0 ? count! : 0
                     }
                 })
                 
