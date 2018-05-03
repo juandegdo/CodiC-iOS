@@ -18,7 +18,11 @@ class NotificationUtil {
     static func makeUserNotificationEnabled() {
         // iOS 10 support
         if #available(iOS 10, *) {
-            UNUserNotificationCenter.current().requestAuthorization(options:[.badge, .alert, .sound]){ (granted, error) in }
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
+                
+                // Request other permissions
+                self.requestPermissions()
+            }
             UIApplication.shared.registerForRemoteNotifications()
         }
             // iOS 9 support
@@ -78,6 +82,55 @@ class NotificationUtil {
         
         // Update notification flag on screens
         NotificationCenter.default.post(name: Foundation.Notification.Name(rawValue: NewNotificationAlertDidChangeNotification), object: nil)
+    }
+    
+    // MARK: Permissions
+    
+    static func requestPermissions() {
+        
+        //Microphone
+        let recordingSession = AVAudioSession.sharedInstance()
+        do {
+            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() {
+                (allowed) in
+                DispatchQueue.main.async {
+                    // Run UI Updates
+                    if (allowed) {
+                        
+                    } else {
+                        try? recordingSession.setActive(false)
+                        self.processMicrophoneSettings("You've already disabled microphone.\nGo to settings and enable microphone please.")
+                    }
+                }
+            }
+        } catch {
+        }
+        
+        //Camera
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+            if response {
+                //access granted
+            } else {
+                self.processMicrophoneSettings("You've already disabled camera.\nGo to settings and enable camera please.")
+            }
+        }
+        
+    }
+    
+    static func processMicrophoneSettings(_ message: String) {
+        let alertController = UIAlertController(title: "Setting", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default)
+        let goAction = UIAlertAction(title: "Go", style: .cancel) { (action) in
+            NotificationUtil.goToAppSettings()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(goAction)
+        
+        if let w = UIApplication.shared.delegate?.window, let vc = w?.rootViewController {
+            vc.present(alertController, animated: false, completion: nil)
+        }
     }
     
 }
