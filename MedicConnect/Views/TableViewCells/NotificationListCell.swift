@@ -48,6 +48,8 @@ class NotificationListCell: UITableViewCell {
             return
         }
         
+        self.backgroundColor = notification.isRead == 0 ? UIColor.red : UIColor.white
+        
         self.btnFollowing.isHidden = true
         self.btnUnFollow.isHidden = true
         self.btnRequested.isHidden = true

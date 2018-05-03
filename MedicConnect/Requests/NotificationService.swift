@@ -77,9 +77,9 @@ class NotificationService: BaseTaskController {
                     return
                 }
                 
-                if let _ = response.result.value {
+//                if let _ = response.result.value {
 //                    print("Response: \(response.result.value!)")
-                }
+//                }
                 
                 var notifications: [Notification] = []
                 
@@ -94,6 +94,7 @@ class NotificationService: BaseTaskController {
                                 let _message = n["message"] as? String,
                                 let _notificationType = n["notificationType"] as? Int,
                                 let _createdAt = n["createdAt"] as? String,
+                                let _isRead = n["isRead"] as? Int,
                                 let _userObj = n["fromUser"] as? NSDictionary {
                                 
                                 if firstNotifcation {
@@ -149,7 +150,7 @@ class NotificationService: BaseTaskController {
                                     _user.location = _location
                                 }
                                 
-                                let notification = Notification(id: _nid, notificationType: NotificationType(rawValue: _notificationType)!, message: _message, date: _createdAt, fromUser: _user)
+                                let notification = Notification(id: _nid, notificationType: NotificationType(rawValue: _notificationType)!, message: _message, date: _createdAt, fromUser: _user, isRead: _isRead)
                                 
                                 if let _broadcastObj = n["broadcast"] as? NSDictionary,
                                     let _id = _broadcastObj["_id"] as? String,

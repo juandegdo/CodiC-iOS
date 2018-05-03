@@ -151,32 +151,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let dictInfo = userInfo["aps"] as? NSDictionary {
             if let _ = UserController.Instance.getUser() as User?,
                 let type = dictInfo["type"] as? Int,
-                let notificationType = NotificationType(rawValue: type),
-                notificationType != .missedCall {
+                let notificationType = NotificationType(rawValue: type) {
                 
-                NotificationUtil.updateNotificationAlert(hasNewAlert: true)
-                
+                if notificationType != .missedCall {
+                    NotificationUtil.updateNotificationAlert(hasNewAlert: true)
+                } else {
+                    if let id = dictInfo["id"] as? String {
+                        NotificationService.Instance.markAsRead(id, completion: { (success, count) in
+                            if (success) {
+                                
+                            }
+                        })
+                    }
+                }
             }
             
             if let id = dictInfo["id"] as? String {
                 // Save notification id
                 UserDefaultsUtil.SaveLastNotificationID(id: id)
                 
-                NotificationService.Instance.markAsRead(id, completion: { (success, count) in
-                    if (success) {
-//                        application.applicationIconBadgeNumber = count! >= 0 ? count! : 0
-                    }
-                })
-                
                 NotificationService.Instance.getNotifications { (success) in
                     print("notification: \(success)")
                 }
-            }
-            
-            if application.applicationState == .inactive {
-                print("inactive")
-            } else if application.applicationState == .background {
-                print("background")
             }
             
             if application.applicationState != .active {
@@ -220,7 +216,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             
                             break
                         default:
-                            self.callNotificationVC()
                             break
                         }
                     }
@@ -310,6 +305,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if notificationType == .broadcast {
                     if let patientId = dictInfo["patientId"] as? String {
                         self.callPatientProfileVC(patientId: patientId)
+                        
+//                        if let id = dictInfo["id"] as? String {
+//                            NotificationService.Instance.markAsRead(id, completion: { (success, count) in
+//                                if (success) {
+//                                    UIApplication.shared.applicationIconBadgeNumber = count! >= 0 ? count! : 0
+//                                }
+//                            })
+//                        }
                     }
                 } else if notificationType == .missedCall {
                     NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)

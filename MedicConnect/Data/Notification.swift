@@ -30,14 +30,16 @@ class Notification {
     var date: String
     var message: String
     var fromUser: User
+    var isRead: Int
 
-    init(id: String, notificationType: NotificationType, message: String, date: String, fromUser: User) {
+    init(id: String, notificationType: NotificationType, message: String, date: String, fromUser: User, isRead: Int) {
         
         self.id = id
         self.notificationType = notificationType
         self.date = date
         self.fromUser = fromUser
         self.message = message
+        self.isRead = isRead
         
     }
     

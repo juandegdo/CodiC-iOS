@@ -15,6 +15,7 @@ class NotificationsViewController: BaseViewController {
     @IBOutlet var tvNotifications: UITableView!
     
     var notificationsArr: [[String : AnyObject]] = []
+    var needsReload: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,6 @@ class NotificationsViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.loadNotifications()
-        self.markAllAsRead()
     }
     
     //MARK: UI Functions
@@ -44,6 +44,13 @@ class NotificationsViewController: BaseViewController {
         NotificationService.Instance.getNotifications { (success) in
             if (success) {
                 self.refreshData()
+                
+                if NotificationController.Instance.getUnreadNotificationCount() > 0 {
+                    self.needsReload = true
+                    self.markAllAsRead()
+                } else {
+                    self.needsReload = false
+                }
             }
         }
     }
@@ -55,7 +62,11 @@ class NotificationsViewController: BaseViewController {
         
         NotificationService.Instance.markAllAsRead(completion: { (allRead) in
             if (allRead) {
+                if self.needsReload {
+                    NotificationController.Instance.markAllRead()
+                }
                 
+                self.refreshData()
             }
         })
     }
