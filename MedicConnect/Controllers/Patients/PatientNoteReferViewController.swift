@@ -74,27 +74,6 @@ class PatientNoteReferViewController: BaseViewController {
     
     func initViews() {
         // Initialize
-        if let _patient = DataManager.Instance.getPatient() {
-            self.lblPatientName.text = _patient.name
-            self.lblPatientDOB.text = "DOB \(_patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: ""))"
-            self.lblPatientPHN.text = "PHN# \(_patient.patientNumber)"
-        }
-        
-        let _msp = DataManager.Instance.getReferringUserMSP()
-        if _msp != "" {
-            self.lblDoctorMSP.text = "MSP# \(_msp)"
-            self.btnSaveNote.isUserInteractionEnabled = false
-            
-            UserService.Instance.getUserIdByMSP(MSP: _msp) { (success, MSP, userId, name) in
-                DispatchQueue.main.async {
-                    self.btnSaveNote.isUserInteractionEnabled = true
-                    
-                    if success == true && userId != nil && userId != "" {
-                        self.lblDoctorName.text = name
-                    }
-                }
-            }
-        }
         
         let views: [UIView] = [view1, view2, view3]
         
@@ -125,6 +104,47 @@ class PatientNoteReferViewController: BaseViewController {
         // Hide the other 2 fields
         self.view2.isHidden = true
         self.view3.isHidden = true
+        
+        if let _patient = DataManager.Instance.getPatient() {
+            self.lblPatientName.text = _patient.name
+            self.lblPatientDOB.text = "DOB \(_patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: ""))"
+            self.lblPatientPHN.text = "PHN# \(_patient.patientNumber)"
+        }
+        
+        let _msp = DataManager.Instance.getReferringUserMSP()
+        if _msp != "" {
+            self.lblDoctorMSP.text = "MSP# \(_msp)"
+            self.btnSaveNote.isUserInteractionEnabled = false
+            
+            UserService.Instance.getUserIdByMSP(MSP: _msp) { (success, MSP, userId, name) in
+                DispatchQueue.main.async {
+                    self.btnSaveNote.isUserInteractionEnabled = true
+                    
+                    if success == true && userId != nil && userId != "" {
+                        self.lblDoctorName.text = name
+                    }
+                }
+                
+                let textField: UITextField = self.view1.viewWithTag(10) as! UITextField
+                let errorLabel: UILabel = self.view1.viewWithTag(11) as! UILabel
+                let nameLabel: UILabel = self.view1.viewWithTag(12) as! UILabel
+                
+                DispatchQueue.main.async {
+                    self.btnSaveNote.isUserInteractionEnabled = true
+                    
+                    if success == true && userId != nil && userId != "" {
+                        self.lblDoctorName.text = name
+                        
+                        self.userIDs["view1"] = userId
+                        nameLabel.text = name!
+                        errorLabel.isHidden = true
+                        textField.text = _msp
+                        textField.textColor = UIColor.black
+                        textField.rightView?.isHidden = false
+                    }
+                }
+            }
+        }
         
     }
     
