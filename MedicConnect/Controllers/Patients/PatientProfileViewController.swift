@@ -17,6 +17,7 @@ class PatientProfileViewController: BaseViewController {
     var patientId: String? = nil
     var patient: Patient? = nil
     var fromAdd: Bool = false
+    var fromNotification: Bool = false
     
     // Header
     @IBOutlet var headerLabel: UILabel!
@@ -95,6 +96,14 @@ class PatientProfileViewController: BaseViewController {
                 if (success) {
                     self.tableView.reloadData()
                     self.updateScroll(offset: self.mainScrollView.contentOffset.y)
+                    
+                    if self.fromNotification && PostController.Instance.getPatientNotes().count > 0 {
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                            let indexPath = IndexPath.init(row: 0, section: 0)
+                            self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                            self.tableView(self.tableView, didSelectRowAt: indexPath)
+                        }
+                    }
                 }
                 
             })

@@ -453,7 +453,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientProfileViewController") as? PatientProfileViewController {
             vc.patientId = patientId
-            vc.fromAdd = false
+            vc.fromNotification = true
             if let vvc = self.window?.visibleViewController() {
                 vvc.present(vc, animated: false, completion: nil)
             }
