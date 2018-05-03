@@ -223,7 +223,7 @@ extension SaveConsultViewController {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            if fromPatientProfile || DataManager.Instance.getPatient() != nil {
+            if fromPatientProfile || DataManager.Instance.getReferringUserMSP() != "" {
                 // From Patient Profile
                 if let vc = storyboard.instantiateViewController(withIdentifier: "PatientNoteReferViewController") as? PatientNoteReferViewController {
                     vc.noteInfo = postInfo
