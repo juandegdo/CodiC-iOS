@@ -64,9 +64,8 @@ class NotificationsViewController: BaseViewController {
             if (allRead) {
                 if self.needsReload {
                     NotificationController.Instance.markAllRead()
+//                    self.refreshData()
                 }
-                
-                self.refreshData()
             }
         })
     }

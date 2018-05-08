@@ -10,6 +10,7 @@ import UIKit
 
 class NotificationListCell: UITableViewCell {
     
+    @IBOutlet var viewBlink: UIView!
     @IBOutlet var imgUserPhoto: UIImageView!
     @IBOutlet var lblUsername: UILabel!
     @IBOutlet var lblDescription: UILabel!
@@ -48,7 +49,20 @@ class NotificationListCell: UITableViewCell {
             return
         }
         
-        self.backgroundColor = notification.isRead == 0 ? UIColor.red : UIColor.white
+//        self.backgroundColor = notification.isRead == 0 ? UIColor.red : UIColor.white
+        self.viewBlink.alpha = 0
+        if notification.isRead == 0 {
+            // Show Blinking animation
+            UIView.animate(withDuration: 0.3, animations: {
+                self.viewBlink.alpha = 1.0
+            }) { (success) in
+                UIView.animate(withDuration: 0.3, delay: 0.5, options: UIViewAnimationOptions(rawValue: 0), animations: {
+                    self.viewBlink.alpha = 0
+                }, completion: { (success) in
+                    
+                })
+            }
+        }
         
         self.btnFollowing.isHidden = true
         self.btnUnFollow.isHidden = true
@@ -59,7 +73,6 @@ class NotificationListCell: UITableViewCell {
         if let _url = notification.fromUser.photo as String?,
             let imgURL = URL(string: _url) as URL? {
             self.imgUserPhoto.af_setImage(withURL: imgURL)
-//            self.imgUserPhoto.af_setImage(withURL: imgURL, placeholderImage: ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: Constants.ColorOrange, text: notification.fromUser.getInitials(), font: font, size: CGSize(width: 40, height: 40)))
         } else {
             self.imgUserPhoto.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
                                                                                         text: notification.fromUser.getInitials(),
