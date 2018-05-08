@@ -286,16 +286,37 @@ extension PatientNoteReferViewController {
                                       completion: { (success: Bool, postId: String?) in
                                         
                                         // As we just posted a new audio, it's a good thing to refresh user info.
-                                        UserService.Instance.getMe(completion: {
-                                            (user: User?) in
+                                        
+                                        if self.constOfRefDoctorViewHeight.constant == 0 {
+                                            // Go to share post screen
                                             DispatchQueue.main.async {
                                                 self.stopIndicating()
                                                 self.btnSaveNote.isEnabled = true
-                                                
-                                                // Go to share post screen
                                                 self.presentSharePopup(postId!)
                                             }
-                                        })
+                                        } else {
+                                            // Automatic Transcription
+                                            PostService.Instance.placeOrder(postId: postId!, completion: { (success: Bool) in
+                                                
+                                                DispatchQueue.main.async {
+                                                    self.stopIndicating()
+                                                    self.btnSaveNote.isEnabled = true
+                                                    
+                                                    if let _nav = self.navigationController as UINavigationController? {
+                                                        _nav.dismiss(animated: false, completion: nil)
+                                                    } else {
+                                                        self.dismiss(animated: false, completion: nil)
+                                                    }
+                                                }
+                                                
+                                                if !success {
+                                                    DispatchQueue.main.async {
+                                                        AlertUtil.showSimpleAlert(self, title: "Transcription failed. Please try again.", message: nil, okButtonTitle: "OK")
+                                                    }
+                                                }
+                                                
+                                            })
+                                        }
                                         
         })
         

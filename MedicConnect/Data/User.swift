@@ -105,7 +105,14 @@ class User {
         
     }
     
-    
-    
+    func getPostIndex(id: String) -> Int? {
+        
+        let index = self.posts.index(where: { (post) -> Bool in
+            post.id == id
+        })
+        
+        return index
+        
+    }
     
 }
