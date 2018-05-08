@@ -7384,7 +7384,7 @@ uploaded a new diagnosis.</string>
                                 <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUh-l3-Hur">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="750"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KOQ-cL-QGd">
                                                 <rect key="frame" x="0.0" y="36" width="414" height="85"/>
@@ -7486,8 +7486,8 @@ uploaded a new diagnosis.</string>
                                                     <constraint firstItem="FGd-5t-Ums" firstAttribute="leading" secondItem="RMN-hz-iLl" secondAttribute="leading" constant="8" id="xdt-Ua-R9e"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Referring Doctor's MSP #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZ8-Iw-Q9Z">
-                                                <rect key="frame" x="25" y="278" width="168.66666666666666" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Referring Doctor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oZ8-Iw-Q9Z">
+                                                <rect key="frame" x="25" y="278" width="144.33333333333334" height="17"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="17" id="Keg-cp-ooa"/>
                                                 </constraints>
@@ -7632,24 +7632,14 @@ uploaded a new diagnosis.</string>
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQn-Tu-TMe">
-                                                <rect key="frame" x="123.66666666666667" y="516.66666666666663" width="10.666666666666671" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="dNO-EK-hTE"/>
-                                                    <constraint firstAttribute="width" constant="10.67" id="vdo-QG-DM1"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="18"/>
-                                                <color key="textColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0gm-dJ-kjh">
-                                                <rect key="frame" x="107" y="508" width="200" height="40"/>
+                                                <rect key="frame" x="167" y="508" width="80" height="54"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Lv2-XD-36z"/>
-                                                    <constraint firstAttribute="width" constant="200" id="NCN-9n-ko9"/>
+                                                    <constraint firstAttribute="height" constant="54" id="Lv2-XD-36z"/>
+                                                    <constraint firstAttribute="width" constant="80" id="NCN-9n-ko9"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="12"/>
-                                                <state key="normal" title="  ADD REFERRING DOCTOR">
+                                                <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="48"/>
+                                                <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -7657,7 +7647,7 @@ uploaded a new diagnosis.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7MQ-ED-8y6">
-                                                <rect key="frame" x="25" y="598" width="364" height="44"/>
+                                                <rect key="frame" x="25" y="612" width="364" height="44"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="8U8-KF-Jrl"/>
@@ -7677,7 +7667,7 @@ uploaded a new diagnosis.</string>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Usn-y8-Vvv">
-                                                <rect key="frame" x="25" y="666" width="364" height="44"/>
+                                                <rect key="frame" x="25" y="680" width="364" height="44"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="MmE-YT-5nf"/>
@@ -7699,11 +7689,9 @@ uploaded a new diagnosis.</string>
                                             <constraint firstAttribute="trailing" secondItem="RMN-hz-iLl" secondAttribute="trailing" id="BLV-hy-wNt"/>
                                             <constraint firstAttribute="trailing" secondItem="KOQ-cL-QGd" secondAttribute="trailing" id="H6H-VO-UVD"/>
                                             <constraint firstItem="7MQ-ED-8y6" firstAttribute="top" secondItem="0gm-dJ-kjh" secondAttribute="bottom" constant="50" id="I8o-9d-YPi"/>
-                                            <constraint firstItem="VQn-Tu-TMe" firstAttribute="centerY" secondItem="0gm-dJ-kjh" secondAttribute="centerY" constant="-1" id="IsA-QN-dr3"/>
                                             <constraint firstAttribute="trailing" secondItem="7MQ-ED-8y6" secondAttribute="trailing" constant="25" id="JJi-xX-sI2"/>
                                             <constraint firstItem="Puc-my-4OE" firstAttribute="leading" secondItem="FUh-l3-Hur" secondAttribute="leading" constant="25" id="Jfp-q4-cdf"/>
                                             <constraint firstItem="KOQ-cL-QGd" firstAttribute="top" secondItem="FUh-l3-Hur" secondAttribute="top" constant="36" id="SYG-fr-otQ"/>
-                                            <constraint firstItem="VQn-Tu-TMe" firstAttribute="centerX" secondItem="0gm-dJ-kjh" secondAttribute="centerX" constant="-78" id="TQv-ZM-REE"/>
                                             <constraint firstItem="KOQ-cL-QGd" firstAttribute="leading" secondItem="FUh-l3-Hur" secondAttribute="leading" id="X1X-dc-cfe"/>
                                             <constraint firstAttribute="trailing" secondItem="Usn-y8-Vvv" secondAttribute="trailing" constant="25" id="a8Z-nf-mGf"/>
                                             <constraint firstAttribute="bottom" secondItem="Usn-y8-Vvv" secondAttribute="bottom" constant="40" id="dLu-C0-mcE"/>
@@ -7741,6 +7729,7 @@ uploaded a new diagnosis.</string>
                     <connections>
                         <outlet property="btnSaveNote" destination="7MQ-ED-8y6" id="Air-Cw-8Lp"/>
                         <outlet property="constOfNavigationTop" destination="dxE-yz-n0a" id="v3v-0a-6Y7"/>
+                        <outlet property="constOfRefDoctorViewHeight" destination="rsy-Xb-cN1" id="b0i-Wh-SVl"/>
                         <outlet property="lblDoctorMSP" destination="FGd-5t-Ums" id="hEG-0c-6uR"/>
                         <outlet property="lblDoctorName" destination="frT-SN-tHZ" id="6b1-L4-aVG"/>
                         <outlet property="lblPatientDOB" destination="Cw8-YN-w9C" id="5fm-UZ-lLc"/>
@@ -7750,6 +7739,7 @@ uploaded a new diagnosis.</string>
                         <outlet property="view1" destination="ldH-OX-AK8" id="uJI-W2-sbF"/>
                         <outlet property="view2" destination="mfx-OV-LQC" id="cDo-KD-IGC"/>
                         <outlet property="view3" destination="nnq-4c-ng1" id="nLH-s3-ySO"/>
+                        <outlet property="viewReferringDoctor" destination="RMN-hz-iLl" id="xuA-RT-EUR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bQu-kJ-XMD" userLabel="First Responder" sceneMemberID="firstResponder"/>

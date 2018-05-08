@@ -16,8 +16,10 @@ class PatientNoteReferViewController: BaseViewController {
     @IBOutlet weak var lblPatientDOB: UILabel!
     @IBOutlet weak var lblPatientPHN: UILabel!
     
+    @IBOutlet weak var viewReferringDoctor: UIView!
     @IBOutlet weak var lblDoctorName: UILabel!
     @IBOutlet weak var lblDoctorMSP: UILabel!
+    @IBOutlet weak var constOfRefDoctorViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var view1: UIView!
     @IBOutlet weak var view2: UIView!
@@ -28,7 +30,7 @@ class PatientNoteReferViewController: BaseViewController {
     var activityIndicatorView = UIActivityIndicatorView()
     
     var noteInfo: [String: Any] = [:]
-    var userIDs: [String: String] = ["view1": "", "view2" : "", "view3": ""]
+    var userIDs: [String: String] = ["refer": "", "view1": "", "view2" : "", "view3": ""]
     var isSaveNote: Bool = false
     
     let debouncer = Debouncer(interval: 1.0)
@@ -122,28 +124,32 @@ class PatientNoteReferViewController: BaseViewController {
                     
                     if success == true && userId != nil && userId != "" {
                         self.lblDoctorName.text = name
+                        self.userIDs["refer"] = userId
                     }
                 }
                 
-                let textField: UITextField = self.view1.viewWithTag(10) as! UITextField
-                let errorLabel: UILabel = self.view1.viewWithTag(11) as! UILabel
-                let nameLabel: UILabel = self.view1.viewWithTag(12) as! UILabel
-                
-                DispatchQueue.main.async {
-                    self.btnSaveNote.isUserInteractionEnabled = true
-                    
-                    if success == true && userId != nil && userId != "" {
-                        self.lblDoctorName.text = name
-                        
-                        self.userIDs["view1"] = userId
-                        nameLabel.text = name!
-                        errorLabel.isHidden = true
-                        textField.text = _msp
-                        textField.textColor = UIColor.black
-                        textField.rightView?.isHidden = false
-                    }
-                }
+//                let textField: UITextField = self.view1.viewWithTag(10) as! UITextField
+//                let errorLabel: UILabel = self.view1.viewWithTag(11) as! UILabel
+//                let nameLabel: UILabel = self.view1.viewWithTag(12) as! UILabel
+//
+//                DispatchQueue.main.async {
+//                    self.btnSaveNote.isUserInteractionEnabled = true
+//
+//                    if success == true && userId != nil && userId != "" {
+//                        self.lblDoctorName.text = name
+//
+//                        self.userIDs["view1"] = userId
+//                        nameLabel.text = name!
+//                        errorLabel.isHidden = true
+//                        textField.text = _msp
+//                        textField.textColor = UIColor.black
+//                        textField.rightView?.isHidden = false
+//                    }
+//                }
             }
+        } else {
+            // Hide Referring Doctor View
+            self.constOfRefDoctorViewHeight.constant = 0
         }
         
     }
@@ -310,7 +316,7 @@ extension PatientNoteReferViewController {
             let textField: UITextField = view1.viewWithTag(10) as! UITextField
             let label: UILabel = view1.viewWithTag(11) as! UILabel
             view2.isHidden = !(label.isHidden && !(textField.rightView?.isHidden)!)
-        } else if (view3.isHidden) {
+        } else if (view3.isHidden && self.constOfRefDoctorViewHeight.constant == 0) {
             let textField1: UITextField = view1.viewWithTag(10) as! UITextField
             let label1: UILabel = view1.viewWithTag(11) as! UILabel
             let textField2: UITextField = view2.viewWithTag(10) as! UITextField
@@ -322,6 +328,7 @@ extension PatientNoteReferViewController {
     @IBAction func onSaveNote(sender: UIButton!) {
         // Save Note
         var doctorIds: [String] = []
+        
         for (_, value) in self.userIDs {
             if value != "" {
                 doctorIds.append(value)
@@ -342,7 +349,10 @@ extension PatientNoteReferViewController {
     
     @IBAction func onSkip(sender: UIButton!) {
         // Skip referring users
-        DataManager.Instance.setReferringUserIds(referringUserIds: [])
+        if self.constOfRefDoctorViewHeight.constant == 0 {
+            DataManager.Instance.setReferringUserIds(referringUserIds: [])
+        }
+        
         self.saveNote()
     }
     
