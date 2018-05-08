@@ -13,6 +13,7 @@ class NotificationController {
     static let Instance = NotificationController()
     
     fileprivate var notifications: [Notification] = []
+    fileprivate var animatedNotifIDs: [String] = []
     
     //MARK: Notifications
     
@@ -40,6 +41,18 @@ class NotificationController {
         for index in 0..<self.notifications.count {
             self.notifications[index].isRead = 1
         }
+    }
+    
+    func addAnimatedNotifID(_ id: String) {
+        self.animatedNotifIDs.append(id)
+    }
+    
+    func checkIfAnimated(_ id: String) -> Bool {
+        return self.animatedNotifIDs.contains(id)
+    }
+    
+    func setAnimatedNotifIDs(_ animatedNotifIDs: [String]) {
+        self.animatedNotifIDs = animatedNotifIDs
     }
     
 }

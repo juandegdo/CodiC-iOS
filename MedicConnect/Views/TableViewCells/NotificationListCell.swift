@@ -51,7 +51,9 @@ class NotificationListCell: UITableViewCell {
         
 //        self.backgroundColor = notification.isRead == 0 ? UIColor.red : UIColor.white
         self.viewBlink.alpha = 0
-        if notification.isRead == 0 {
+        if notification.isRead == 0 && !NotificationController.Instance.checkIfAnimated(notification.id) {
+            NotificationController.Instance.addAnimatedNotifID(notification.id)
+            
             // Show Blinking animation
             UIView.animate(withDuration: 0.3, animations: {
                 self.viewBlink.alpha = 1.0

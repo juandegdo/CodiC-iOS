@@ -167,6 +167,7 @@ class BaseViewController: UIViewController {
         CommentController.Instance.setComments([])
         LikeController.Instance.setPostLikes([])
         NotificationController.Instance.setNotifications([])
+        NotificationController.Instance.setAnimatedNotifIDs([])
         PatientController.Instance.setPatients([])
         UserDefaultsUtil.DeleteToken()
         UserDefaultsUtil.DeleteUserId()
