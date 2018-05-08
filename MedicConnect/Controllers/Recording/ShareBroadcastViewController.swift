@@ -153,6 +153,7 @@ extension ShareBroadcastViewController {
                     
                 } else {
                     DispatchQueue.main.async {
+                        AlertUtil.showSimpleAlert(self, title: "Transcription failed. Please try again.", message: nil, okButtonTitle: "OK")
                         self.btnSkip.isEnabled = true
                         self.btnYes.isEnabled = true
                     }
