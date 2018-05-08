@@ -36,6 +36,7 @@ class AnotherProfileViewController: BaseViewController {
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
     var currentUser: User?
+    var selectedPostId: String?
     var selectedDotsIndex = 0
     
     var profileType = 0 //0: normal, 1: private, 2: blocked
@@ -102,16 +103,23 @@ class AnotherProfileViewController: BaseViewController {
                     
                     if _updatedUser.isprivate == true {
                         self.profileType = 1
-//                        for tuser in _updatedUser.follower {
-//                            if let user = tuser as? User, user.id == UserController.Instance.getUser().id {
-//                                self.profileType = 0
-//                            }
-//
-//                        }
                     }
                     
                     self.currentUser = _updatedUser
                     self.updateUI(user: self.currentUser!)
+                    
+                    if let _user = self.currentUser {
+                        if _user.getPosts(type: self.postType).count > 0 && self.selectedPostId != nil {
+                            if let _postIndex = _user.getPostIndex(id: self.selectedPostId!) {
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                                    let indexPath = IndexPath.init(row: _postIndex, section: 0)
+                                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                                    self.tableView(self.tableView, didSelectRowAt: indexPath)
+                                }
+                            }
+                        }
+                    }
+                    
                 } else {
                     self.profileType = 2
                 }

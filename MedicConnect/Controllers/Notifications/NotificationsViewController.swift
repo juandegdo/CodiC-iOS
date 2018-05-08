@@ -80,7 +80,7 @@ class NotificationsViewController: BaseViewController {
         
     }
     
-    func callProfileVC(user: User) {
+    func callProfileVC(user: User, postId: String?) {
         
         if  let _me = UserController.Instance.getUser() as User? {
 //            if _me.id == user.id {
@@ -103,6 +103,7 @@ class NotificationsViewController: BaseViewController {
                 }
                 
                 vc.currentUser = user
+                vc.selectedPostId = postId
                 self.present(vc, animated: false, completion: nil)
                 
             }
@@ -325,13 +326,10 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
         let notification = NotificationController.Instance.getNotifications()[indexPath.row]
         
-        if notification.notificationType == .comment {
-            callCommentVC(post: notification.broadcast!)
-        } else if notification.notificationType == .like {
-            NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-        } else {
-//            callProfileVC(user: notification.fromUser)
-            callProfileVC(user: UserController.Instance.getUser())
+        if notification.notificationType == .broadcast {
+            callProfileVC(user: notification.fromUser, postId: notification.broadcast?.id)
+        } else if notification.notificationType == .transcribed {
+//            callProfileVC(user: UserController.Instance.getUser(), postId: nil)
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
