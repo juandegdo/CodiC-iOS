@@ -20,6 +20,7 @@ class EditRecordingBroadcastViewController: BaseViewController {
     
     fileprivate var audioPlayer: AVAudioPlayer?
     fileprivate var updateTimer: Timer?
+    fileprivate var fromDelete: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,7 +162,11 @@ extension EditRecordingBroadcastViewController {
         }
         
         if let _nav = self.navigationController as UINavigationController? {
-            _nav.dismiss(animated: false, completion: nil)
+            if fromDelete {
+                _nav.popToRootViewController(animated: false)
+            } else {
+                _nav.dismiss(animated: false, completion: nil)
+            }
         } else {
             self.dismiss(animated: false, completion: nil)
         }
@@ -216,6 +221,7 @@ extension EditRecordingBroadcastViewController {
         
         AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to delete recording?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
             // OK completion block
+            self.fromDelete = true
             self.onClose(sender: UIButton())
         }, cancelCompletionBlock: {
             // Cancel completion block
