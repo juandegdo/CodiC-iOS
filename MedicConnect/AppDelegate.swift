@@ -196,12 +196,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                             // NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
                             break
                         case .transcribed:
-                            NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-                            
+                            // NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
+                            break
                         case .missedCall:
                             if let _tabController = self.tabBarController {
                                 if let _ = self.window?.visibleViewController() as? ConferenceViewController {
-//                                    topVC.loadHistory()
+                                    // topVC.loadHistory()
                                 } else {
                                     let tabBarItem = _tabController.tabBar.items![0]
                                     let value = UserDefaultsUtil.LoadMissedCalls()
@@ -305,7 +305,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 if notificationType == .broadcast {
                     if let patientId = dictInfo["patientId"] as? String {
                         self.callPatientProfileVC(patientId: patientId)
-                        
 //                        if let id = dictInfo["id"] as? String {
 //                            NotificationService.Instance.markAsRead(id, completion: { (success, count) in
 //                                if (success) {
@@ -313,6 +312,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //                                }
 //                            })
 //                        }
+                    }
+                } else if notificationType == .transcribed {
+                    if let transcriptionUrl = dictInfo["patientId"] as? String {
+                        self.callTranscriptionVC(transcriptionUrl: transcriptionUrl)
                     }
                 } else if notificationType == .missedCall {
                     NotificationCenter.default.post(name: NSNotification.Name("gotoCallHistoryScreen"), object: nil, userInfo: nil)
@@ -454,6 +457,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientProfileViewController") as? PatientProfileViewController {
             vc.patientId = patientId
             vc.fromNotification = true
+            if let vvc = self.window?.visibleViewController() {
+                vvc.present(vc, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    func callTranscriptionVC(transcriptionUrl: String) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Transcription"
+            vc.strSynopsisUrl = transcriptionUrl
             if let vvc = self.window?.visibleViewController() {
                 vvc.present(vc, animated: false, completion: nil)
             }

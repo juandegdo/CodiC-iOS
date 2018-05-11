@@ -111,6 +111,17 @@ class NotificationsViewController: BaseViewController {
         
     }
     
+    func callTranscriptionVC(transcriptionUrl: String) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Transcription"
+            vc.strSynopsisUrl = transcriptionUrl
+            self.present(vc, animated: false, completion: nil)
+        }
+        
+    }
+    
 }
 
 extension NotificationsViewController {
@@ -329,7 +340,9 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         if notification.notificationType == .broadcast {
             callProfileVC(user: notification.fromUser, postId: notification.broadcast?.id)
         } else if notification.notificationType == .transcribed {
-//            callProfileVC(user: UserController.Instance.getUser(), postId: nil)
+            if let _transcriptionURL = notification.broadcast?.transcriptionUrl {
+                callTranscriptionVC(transcriptionUrl: _transcriptionURL)
+            }
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
