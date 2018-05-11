@@ -9,25 +9,50 @@
 import UIKit
 import MessageUI
 import MobileCoreServices
+import PDFKit
 
 class SettingsDetailViewController: BaseViewController {
 
     var strTitle: String?
     var strSynopsisUrl: String?
+    var destinationFileUrl: URL!
     
     let contentDict = ["Privacy Policy":"Privacy_policy_HTML", "Code of Conduct": "Code_of_conduct_HTML", "Terms of Use": "Terms_of_service_HTML"]
     
-    var destinationFileUrl: URL!
+    private var _pdfDocument: Any?
+    @available(iOS 11.0, *)
+    fileprivate var pdfDocument: PDFDocument? {
+        get {
+            return _pdfDocument as? PDFDocument
+        }
+        set {
+            _pdfDocument = newValue
+        }
+    }
+    
+    private var _pdfView: Any?
+    @available(iOS 11.0, *)
+    fileprivate var pdfView: PDFView! {
+        get {
+            return _pdfView as! PDFView
+        }
+        set {
+            _pdfView = newValue
+        }
+    }
     
     @IBOutlet weak var m_lblTitle: UILabel!
-    @IBOutlet weak var m_btnSave: UIButton!
+    @IBOutlet weak var m_btnEdit: UIButton!
+    @IBOutlet weak var m_btnShare: UIButton!
     @IBOutlet weak var m_contentWebView: UIWebView!
+    @IBOutlet weak var m_pdfView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Hide Save button
-        self.m_btnSave.isHidden = true
+        self.m_btnEdit.isHidden = true
+        self.m_btnShare.isHidden = true
         
         openContents()
         
@@ -53,6 +78,8 @@ class SettingsDetailViewController: BaseViewController {
                 self.downloadPDF(fileURL: URL(string: synopsisUrl)!)
                 
             } else if let contentPath = contentDict[titleText] {
+                self.m_pdfView.isHidden = true
+                
                 let url = Bundle.main.url(forResource: contentPath, withExtension: "html")
                 let request = URLRequest(url: url!)
                 self.m_contentWebView.loadRequest(request)
@@ -86,8 +113,27 @@ class SettingsDetailViewController: BaseViewController {
                     
                     DispatchQueue.main.async {
                         // Show PDF
-                        let request = URLRequest(url: self.destinationFileUrl)
-                        self.m_contentWebView.loadRequest(request)
+                        if #available(iOS 11.0, *) {
+                            self.m_contentWebView.isHidden = true
+                            self.m_btnEdit.isHidden = false
+                            self.m_btnShare.isHidden = false
+                            
+                            self.pdfView = PDFView(frame: CGRect(x: 0, y: 0, width: self.m_pdfView.frame.width, height: self.m_pdfView.frame.height))
+                            self.pdfDocument = PDFDocument(url: self.destinationFileUrl!)
+                            
+                            self.pdfView.document = self.pdfDocument
+                            self.pdfView.displayMode = PDFDisplayMode.singlePageContinuous
+                            self.pdfView.autoScales = true
+                            self.pdfView.backgroundColor = UIColor.lightGray
+                            
+                            self.m_pdfView.addSubview(self.pdfView)
+                        } else {
+                            // Fallback on earlier versions
+                            self.m_pdfView.isHidden = true
+                            
+                            let request = URLRequest(url: self.destinationFileUrl)
+                            self.m_contentWebView.loadRequest(request)
+                        }
                     }
                     
                 } catch (let writeError) {
@@ -105,8 +151,60 @@ class SettingsDetailViewController: BaseViewController {
     @IBAction func btnBackClicked(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
     }
+    
+    @IBAction func btnEditClicked(_ sender: Any) {
+        
+        if #available(iOS 11.0, *) {
+            if let page = self.pdfDocument?.page(at: 0) {
+                let upperSelection = self.pdfDocument?.findString("Consult Notes:", withOptions: .literal)[0]
+                let bottomSelection = self.pdfDocument?.findString("Consult Prepared by:", withOptions: .literal)[0]
+                let upperBounds = upperSelection?.bounds(for: page)
+                let bottomBounds = bottomSelection?.bounds(for: page)
+                let pageBounds = page.bounds(for: .cropBox)
+                
+                let textFieldMultilineBounds = CGRect(x: (bottomBounds?.origin.x)!, y: (bottomBounds?.origin.y)! + 22, width: (pageBounds.size.width - (bottomBounds?.origin.x)! * 2), height: ((upperBounds?.origin.y)! - (bottomBounds?.origin.y)! - 35))
+                let textFieldMultiline = PDFAnnotation(bounds: textFieldMultilineBounds, forType: PDFAnnotationSubtype(rawValue: PDFAnnotationSubtype.widget.rawValue), withProperties: nil)
+                textFieldMultiline.widgetFieldType = PDFAnnotationWidgetSubtype(rawValue: PDFAnnotationWidgetSubtype.text.rawValue)
+                textFieldMultiline.backgroundColor = UIColor.white
+                textFieldMultiline.font = UIFont.systemFont(ofSize: 12)
+                textFieldMultiline.isMultiline = true
+                textFieldMultiline.shouldDisplay = true
+                textFieldMultiline.setValue("Test. Test.", forAnnotationKey: .widgetValue)
+                
+                let border = PDFBorder()
+                border.lineWidth = 1.0
+                textFieldMultiline.border = border
+                
+                page.addAnnotation(textFieldMultiline)
+                
+//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+//                    let gestures = self.pdfView.gestureRecognizers
+//                    let allTextViews: [UITextView] = self.getSubviewsOf(view: self.pdfView)
+//                    print(allTextViews)
+//                }
+            }
+        } else {
+            // Fallback on earlier versions
+            
+        }
+        
+    }
+    
+    private func getSubviewsOf<T: UIView>(view: UIView) -> [T] {
+        var subviews = [T]()
+        
+        for subview in view.subviews {
+            subviews += getSubviewsOf(view: subview) as [T]
+            
+            if let subview = subview as? T {
+                subviews.append(subview)
+            }
+        }
+        
+        return subviews
+    }
 
-    @IBAction func btnSaveClicked(_ sender: UIButton) {
+    @IBAction func btnShareClicked(_ sender: UIButton) {
         // Present AlertController
         let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
         let printAction = UIAlertAction.init(title: "PRINT", style: .default) { (action) in
@@ -210,7 +308,8 @@ extension SettingsDetailViewController : UIWebViewDelegate {
     func webViewDidFinishLoad(_ webView: UIWebView) {
         if (self.strSynopsisUrl as String?) != nil {
             // Synopsis Document
-            self.m_btnSave.isHidden = false
+//            self.m_btnEdit.isHidden = false
+            self.m_btnShare.isHidden = false
             
             // Enable zoom
             self.m_contentWebView.scrollView.minimumZoomScale = 1.0

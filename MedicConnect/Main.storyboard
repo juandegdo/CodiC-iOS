@@ -3828,17 +3828,28 @@ recorded a new diagnosis.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kzu-h3-Bjc">
+                                        <rect key="frame" x="322" y="22" width="44" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Cvc-zP-fAo"/>
+                                            <constraint firstAttribute="width" constant="44" id="bLi-aK-Qb5"/>
+                                        </constraints>
+                                        <state key="normal" image="icon_edit_pdf"/>
+                                        <connections>
+                                            <action selector="btnEditClicked:" destination="blF-Iv-w30" eventType="touchUpInside" id="H0i-xp-5Vv"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCc-Ww-fMj">
-                                        <rect key="frame" x="364" y="22" width="50" height="40"/>
+                                        <rect key="frame" x="366" y="22" width="44" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="HvB-6B-8Ha"/>
-                                            <constraint firstAttribute="width" constant="50" id="vBF-I0-8hy"/>
+                                            <constraint firstAttribute="width" constant="44" id="vBF-I0-8hy"/>
                                         </constraints>
                                         <state key="normal" image="icon_upload">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnSaveClicked:" destination="blF-Iv-w30" eventType="touchUpInside" id="8RB-cz-LYZ"/>
+                                            <action selector="btnShareClicked:" destination="blF-Iv-w30" eventType="touchUpInside" id="RZi-KP-eXd"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -3847,10 +3858,12 @@ recorded a new diagnosis.</string>
                                     <constraint firstAttribute="height" constant="64" id="3NG-LN-E6f"/>
                                     <constraint firstItem="dCc-Ww-fMj" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="22" id="73X-4h-h1Q"/>
                                     <constraint firstItem="2dc-3y-gB2" firstAttribute="leading" secondItem="4xe-F3-Xqz" secondAttribute="leading" id="C2k-mP-mXb"/>
+                                    <constraint firstItem="dCc-Ww-fMj" firstAttribute="leading" secondItem="Kzu-h3-Bjc" secondAttribute="trailing" id="GP6-14-wJB"/>
                                     <constraint firstItem="fiO-uo-FGg" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="32" id="Heg-gN-1EK"/>
+                                    <constraint firstItem="Kzu-h3-Bjc" firstAttribute="top" secondItem="dCc-Ww-fMj" secondAttribute="top" id="agA-WD-tfe"/>
                                     <constraint firstItem="2dc-3y-gB2" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="top" constant="22" id="cCp-rn-rgf"/>
                                     <constraint firstItem="fiO-uo-FGg" firstAttribute="centerX" secondItem="4xe-F3-Xqz" secondAttribute="centerX" id="lDr-Tv-mCM"/>
-                                    <constraint firstAttribute="trailing" secondItem="dCc-Ww-fMj" secondAttribute="trailing" id="x0C-Jg-w9f"/>
+                                    <constraint firstAttribute="trailing" secondItem="dCc-Ww-fMj" secondAttribute="trailing" constant="4" id="x0C-Jg-w9f"/>
                                 </constraints>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-vF-8Dj">
@@ -3860,12 +3873,19 @@ recorded a new diagnosis.</string>
                                     <outlet property="delegate" destination="blF-Iv-w30" id="2YS-A9-Kuv"/>
                                 </connections>
                             </webView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vfq-4b-x8c">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4xe-F3-Xqz" firstAttribute="top" secondItem="1fB-zz-69v" secondAttribute="top" id="2Xw-aY-wRh"/>
+                            <constraint firstAttribute="trailing" secondItem="Vfq-4b-x8c" secondAttribute="trailing" id="Esj-0v-jAV"/>
                             <constraint firstAttribute="trailing" secondItem="4xe-F3-Xqz" secondAttribute="trailing" id="HEp-x2-dqp"/>
                             <constraint firstItem="CZA-vF-8Dj" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="bottom" id="KPj-39-sde"/>
+                            <constraint firstItem="Vfq-4b-x8c" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Laq-mT-pDn"/>
+                            <constraint firstItem="Vfq-4b-x8c" firstAttribute="top" secondItem="4xe-F3-Xqz" secondAttribute="bottom" id="Ndt-z9-uFP"/>
                             <constraint firstItem="4xe-F3-Xqz" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Xee-Df-RYj"/>
                             <constraint firstAttribute="trailing" secondItem="CZA-vF-8Dj" secondAttribute="trailing" id="YTd-g2-uzZ"/>
                             <constraint firstItem="CZA-vF-8Dj" firstAttribute="leading" secondItem="1fB-zz-69v" secondAttribute="leading" id="Zpv-4D-KwC"/>
@@ -3874,13 +3894,16 @@ recorded a new diagnosis.</string>
                             <constraint firstAttribute="bottom" secondItem="CZA-vF-8Dj" secondAttribute="bottom" id="i3a-K0-ETJ"/>
                             <constraint firstAttribute="trailing" secondItem="k1X-cB-qd2" secondAttribute="trailing" id="ntg-mM-08q"/>
                             <constraint firstItem="k1X-cB-qd2" firstAttribute="top" secondItem="1fB-zz-69v" secondAttribute="top" id="sSY-Iy-m0W"/>
+                            <constraint firstAttribute="bottom" secondItem="Vfq-4b-x8c" secondAttribute="bottom" id="xyp-oF-iGd"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="constOfNavigationTop" destination="2Xw-aY-wRh" id="U2M-t8-YMv"/>
-                        <outlet property="m_btnSave" destination="dCc-Ww-fMj" id="9S6-co-AxC"/>
+                        <outlet property="m_btnEdit" destination="Kzu-h3-Bjc" id="sbO-jj-eck"/>
+                        <outlet property="m_btnShare" destination="dCc-Ww-fMj" id="394-Rr-sYb"/>
                         <outlet property="m_contentWebView" destination="CZA-vF-8Dj" id="sSr-0I-rhg"/>
                         <outlet property="m_lblTitle" destination="fiO-uo-FGg" id="ckl-8z-6tP"/>
+                        <outlet property="m_pdfView" destination="Vfq-4b-x8c" id="PEI-yP-v8o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QlL-ky-zu8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8719,6 +8742,7 @@ finished the call.</string>
         <image name="icon_chat_send" width="29" height="29"/>
         <image name="icon_close" width="19" height="18"/>
         <image name="icon_close_white" width="19" height="18"/>
+        <image name="icon_edit_pdf" width="25" height="25"/>
         <image name="icon_edit_white" width="11" height="14"/>
         <image name="icon_end_call" width="122" height="121"/>
         <image name="icon_favorites_gray" width="18" height="17"/>
