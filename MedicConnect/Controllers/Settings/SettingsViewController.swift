@@ -351,13 +351,15 @@ extension SettingsViewController : SettingListCellDelegate {
                 UIApplication.shared.beginIgnoringInteractionEvents()
                 
                 UserService.Instance.setNotificationFilter(value: tmpValue, completion: { (success) in
+                    UIApplication.shared.endIgnoringInteractionEvents()
                     if success {
-                        UserService.Instance.getMe(completion: { (_) in
-                            UIApplication.shared.endIgnoringInteractionEvents()
-                            self.tvSettings.reloadSections(IndexSet.init(integer: 1), with: .none)
-                        })
+                        if let _user = UserController.Instance.getUser() {
+                            _user.notificationfilter = tmpValue
+                            UserController.Instance.setUser(_user)
+                        }
                     } else {
-                        UIApplication.shared.endIgnoringInteractionEvents()
+                        AlertUtil.showSimpleAlert(self, title: "Failed to update your notification setting. Please try again.", message: nil, okButtonTitle: "OK")
+                        sender.setOn(!sender.isOn, animated: false)
                     }
                 })
             }
