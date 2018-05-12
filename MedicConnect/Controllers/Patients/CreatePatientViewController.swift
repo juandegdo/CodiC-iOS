@@ -29,11 +29,14 @@ class CreatePatientViewController: BaseViewController {
     var isSaved: Bool = false
     
     var scanResults: [RTRTextLine]? = nil
+    var prevOffset: Int = 0
     
     let debouncer = Debouncer(interval: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.prevOffset = self.scanResults == nil ? 2 : 3
         
         self.initViews()
         
@@ -44,8 +47,6 @@ class CreatePatientViewController: BaseViewController {
         
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
-        
-        self.showScanResult()
         
     }
     
@@ -236,7 +237,7 @@ extension CreatePatientViewController {
     
     @IBAction func onBack(sender: AnyObject!) {
         if let _nav = self.navigationController as UINavigationController? {
-            if (self.fromRecord == true && isSaved == true) || (self.fromRecord == false && self.scanResults != nil) {
+            if (self.fromRecord == true && isSaved == true) || (self.fromRecord == false && self.prevOffset == 3) {
                 _nav.popToRootViewController(animated: false)
             } else {
                 let viewControllers = _nav.viewControllers
@@ -255,6 +256,8 @@ extension CreatePatientViewController {
         // Show Scan screen
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if  let vc = storyboard.instantiateViewController(withIdentifier: "PatientScanViewController") as? PatientScanViewController {
+            self.scanResults = nil
+            
             vc.fromCreatePatient = true
             self.navigationController?.pushViewController(vc, animated: false)
         }
@@ -307,8 +310,7 @@ extension CreatePatientViewController {
                             DataManager.Instance.setReferringUserMSP(referringUserMSP: "")
                             
                             let lenght = self.navigationController?.viewControllers.count
-                            let prevOffset = self.scanResults == nil ? 2 : 3;
-                            if let prevVC: ConsultReferringViewController = lenght! >= prevOffset ? self.navigationController?.viewControllers[lenght! - prevOffset] as? ConsultReferringViewController : nil {
+                            if let prevVC: ConsultReferringViewController = lenght! >= self.prevOffset ? self.navigationController?.viewControllers[lenght! - self.prevOffset] as? ConsultReferringViewController : nil {
                                 vc.noteInfo = prevVC.consultInfo
                                 self.navigationController?.pushViewController(vc, animated: false)
                             }
