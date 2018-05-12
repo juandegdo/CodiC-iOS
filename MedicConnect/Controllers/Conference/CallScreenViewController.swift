@@ -450,7 +450,7 @@ extension CallScreenViewController {
     }
     
     @IBAction func onAccept(sender: AnyObject) {
-        self.btnAccept.isUserInteractionEnabled = false
+        self.btnAccept.isHidden = true
         
         self.audioController?.stopPlayingSoundFile()
         self.call?.answer()
