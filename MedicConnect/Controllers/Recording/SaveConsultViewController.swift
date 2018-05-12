@@ -158,11 +158,8 @@ extension SaveConsultViewController {
     
     @IBAction func onClose(sender: UIButton) {
         
-        UserService.Instance.updateAvailability(available: true) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = true
         
         if let _nav = self.navigationController as UINavigationController? {
             _nav.dismiss(animated: false, completion: nil)

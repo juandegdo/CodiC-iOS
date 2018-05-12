@@ -42,11 +42,8 @@ class PreRecordingBroadcastViewController: BaseViewController {
             self.patientInfoView.isHidden = true
         }
         
-        UserService.Instance.updateAvailability(available: false) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,11 +103,8 @@ extension PreRecordingBroadcastViewController {
     
     @IBAction func onClose(sender: AnyObject) {
         
-        UserService.Instance.updateAvailability(available: true) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = true
         
         if let _nav = self.navigationController as UINavigationController? {
             _nav.dismiss(animated: false, completion: nil)

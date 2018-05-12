@@ -22,8 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     static let kSinchApplicationSecret = "BcDM5Av1XkGLb3z5DLiK4A=="
     static let kSinchHostname = "sandbox.sinch.com" // devlopment
 //    static let kSinchHostname = "clientapi.sinch.com" // production
-    
-//    let voipRegistry: PKPushRegistry = PKPushRegistry(queue: DispatchQueue.main)
 
     var window: UIWindow?
     var tabBarController: RadTabBarController?
@@ -35,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var sinchClient: SINClient?
     var sinchPush: SINManagedPush?
     var sinchCallKitProvider: SINCallKitProvider?
+    var shouldReceiveCall: Bool = true
+    var tempShouldReceiveCall: Bool = true
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -110,10 +110,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//        self.tempShouldReceiveCall = self.shouldReceiveCall
+//        self.shouldReceiveCall = true
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+//        self.shouldReceiveCall = self.tempShouldReceiveCall
+        
         if let call = self.sinchCallKitProvider?.currentEstablishedCall(),
             self.deviceLocked == true {
             
@@ -585,6 +589,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         self.deviceLocked = false
         
+        if !self.shouldReceiveCall {
+            return
+        }
+        
         if self.sinchClient == nil {
             if let _me = UserController.Instance.getUser() as User? {
                 self.configureSinchClient(_me.id)
@@ -627,11 +635,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     @objc func callDidEnd() {
         // Update user availability
-        UserService.Instance.updateAvailability(available: true) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
+        self.shouldReceiveCall = true
     }
     
     @objc func updateCallHistory() {
@@ -666,6 +670,10 @@ extension AppDelegate: SINClientDelegate {
 extension AppDelegate: SINCallClientDelegate {
     
     func client(_ client: SINCallClient!, didReceiveIncomingCall call: SINCall!) {
+        if !self.shouldReceiveCall {
+            return
+        }
+        
         if !call.headers.isEmpty {
             self.callHeaders = call.headers as! [String : Any]
         }
@@ -676,34 +684,25 @@ extension AppDelegate: SINCallClientDelegate {
             if let vvc = self.window?.visibleViewController() {
                 vvc.present(vc, animated: false, completion: nil)
                 
-                if call.details.applicationStateWhenReceived == UIApplicationState.active {
-                    // Update user availability
-                    UserService.Instance.updateAvailability(available: false) { (success) in
-                        if (success) {
-                            // Do nothing now
-                        }
-                    }
-                }
+                // Update user availability
+                self.shouldReceiveCall = false
             }
         }
     }
     
     func client(_ client: SINCallClient!, willReceiveIncomingCall call: SINCall!) {
+        if !self.shouldReceiveCall {
+            return
+        }
+        
         if !call.headers.isEmpty {
             self.callHeaders = call.headers as! [String : Any]
         }
         
         self.sinchCallKitProvider?.reportNewIncomingCall(call, headers: self.callHeaders)
         
-        let fromLaunch = call.details.applicationStateWhenReceived == UIApplicationState.inactive
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + (fromLaunch ? 2.0 : 2.0)) {
-            // Update user availability
-            UserService.Instance.updateAvailability(available: false) { (success) in
-                if (success) {
-                    // Do nothing now
-                }
-            }
-        }
+        // Update user availability
+        self.shouldReceiveCall = false
     }
     
 //    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {

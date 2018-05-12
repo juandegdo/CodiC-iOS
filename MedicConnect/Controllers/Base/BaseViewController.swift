@@ -143,18 +143,14 @@ class BaseViewController: UIViewController {
     }
     
     func clearAllData() {
-        // Update user availability
-        UserService.Instance.updateAvailability(available: false) { (success) in
-            if (success) {
-                // Do nothing now
-            }
-        }
-        
         UIApplication.shared.unregisterForRemoteNotifications()
         
         let delegate = UIApplication.shared.delegate as? AppDelegate
         delegate?.tabBarController = nil
         delegate?.disableSinchClient()
+        
+        // Update user availability
+        delegate?.shouldReceiveCall = false
         
         UserController.Instance.eraseUser()
         UserController.Instance.setRecommedendUsers([])

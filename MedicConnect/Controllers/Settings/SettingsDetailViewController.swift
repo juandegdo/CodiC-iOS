@@ -154,39 +154,39 @@ class SettingsDetailViewController: BaseViewController {
     
     @IBAction func btnEditClicked(_ sender: Any) {
         
-        if #available(iOS 11.0, *) {
-            if let page = self.pdfDocument?.page(at: 0) {
-                let upperSelection = self.pdfDocument?.findString("Consult Notes:", withOptions: .literal)[0]
-                let bottomSelection = self.pdfDocument?.findString("Consult Prepared by:", withOptions: .literal)[0]
-                let upperBounds = upperSelection?.bounds(for: page)
-                let bottomBounds = bottomSelection?.bounds(for: page)
-                let pageBounds = page.bounds(for: .cropBox)
-                
-                let textFieldMultilineBounds = CGRect(x: (bottomBounds?.origin.x)!, y: (bottomBounds?.origin.y)! + 22, width: (pageBounds.size.width - (bottomBounds?.origin.x)! * 2), height: ((upperBounds?.origin.y)! - (bottomBounds?.origin.y)! - 35))
-                let textFieldMultiline = PDFAnnotation(bounds: textFieldMultilineBounds, forType: PDFAnnotationSubtype(rawValue: PDFAnnotationSubtype.widget.rawValue), withProperties: nil)
-                textFieldMultiline.widgetFieldType = PDFAnnotationWidgetSubtype(rawValue: PDFAnnotationWidgetSubtype.text.rawValue)
-                textFieldMultiline.backgroundColor = UIColor.white
-                textFieldMultiline.font = UIFont.systemFont(ofSize: 12)
-                textFieldMultiline.isMultiline = true
-                textFieldMultiline.shouldDisplay = true
-                textFieldMultiline.setValue("Test. Test.", forAnnotationKey: .widgetValue)
-                
-                let border = PDFBorder()
-                border.lineWidth = 1.0
-                textFieldMultiline.border = border
-                
-                page.addAnnotation(textFieldMultiline)
-                
-//                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-//                    let gestures = self.pdfView.gestureRecognizers
-//                    let allTextViews: [UITextView] = self.getSubviewsOf(view: self.pdfView)
-//                    print(allTextViews)
-//                }
-            }
-        } else {
-            // Fallback on earlier versions
-            
-        }
+//        if #available(iOS 11.0, *) {
+//            if let page = self.pdfDocument?.page(at: 0) {
+//                let upperSelection = self.pdfDocument?.findString("Consult Notes:", withOptions: .literal)[0]
+//                let bottomSelection = self.pdfDocument?.findString("Consult Prepared by:", withOptions: .literal)[0]
+//                let upperBounds = upperSelection?.bounds(for: page)
+//                let bottomBounds = bottomSelection?.bounds(for: page)
+//                let pageBounds = page.bounds(for: .cropBox)
+//
+//                let textFieldMultilineBounds = CGRect(x: (bottomBounds?.origin.x)!, y: (bottomBounds?.origin.y)! + 22, width: (pageBounds.size.width - (bottomBounds?.origin.x)! * 2), height: ((upperBounds?.origin.y)! - (bottomBounds?.origin.y)! - 35))
+//                let textFieldMultiline = PDFAnnotation(bounds: textFieldMultilineBounds, forType: PDFAnnotationSubtype(rawValue: PDFAnnotationSubtype.widget.rawValue), withProperties: nil)
+//                textFieldMultiline.widgetFieldType = PDFAnnotationWidgetSubtype(rawValue: PDFAnnotationWidgetSubtype.text.rawValue)
+//                textFieldMultiline.backgroundColor = UIColor.white
+//                textFieldMultiline.font = UIFont.systemFont(ofSize: 12)
+//                textFieldMultiline.isMultiline = true
+//                textFieldMultiline.shouldDisplay = true
+//                textFieldMultiline.setValue("Test. Test.", forAnnotationKey: .widgetValue)
+//
+//                let border = PDFBorder()
+//                border.lineWidth = 1.0
+//                textFieldMultiline.border = border
+//
+//                page.addAnnotation(textFieldMultiline)
+//
+////                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
+////                    let gestures = self.pdfView.gestureRecognizers
+////                    let allTextViews: [UITextView] = self.getSubviewsOf(view: self.pdfView)
+////                    print(allTextViews)
+////                }
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//
+//        }
         
     }
     

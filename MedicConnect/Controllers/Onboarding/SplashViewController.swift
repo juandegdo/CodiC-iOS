@@ -45,11 +45,7 @@ class SplashViewController: UIViewController {
                     appDelegate.configureSinchClient(_user.id)
                     
                     // Update user availability
-                    UserService.Instance.updateAvailability(available: true) { (success) in
-                        if (success) {
-                            // Do nothing now
-                        }
-                    }
+                    appDelegate.shouldReceiveCall = true
                     
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)
                 } else {
