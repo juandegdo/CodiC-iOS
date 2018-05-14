@@ -217,7 +217,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iFW-6z-ehw">
-                                                <rect key="frame" x="72" y="498" width="270" height="50"/>
+                                                <rect key="frame" x="72" y="488" width="270" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don't have an account" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFu-Ls-qtk">
                                                         <rect key="frame" x="0.0" y="4" width="190" height="42"/>
@@ -252,7 +252,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="818-aL-fzN" secondAttribute="trailing" constant="25" id="0zL-uY-ayt"/>
-                                            <constraint firstItem="iFW-6z-ehw" firstAttribute="top" secondItem="ShR-ol-thB" secondAttribute="bottom" constant="100" id="1DI-56-Y6N"/>
+                                            <constraint firstItem="iFW-6z-ehw" firstAttribute="top" secondItem="ShR-ol-thB" secondAttribute="bottom" constant="90" id="1DI-56-Y6N"/>
                                             <constraint firstItem="iFW-6z-ehw" firstAttribute="centerX" secondItem="Ze0-1j-RaN" secondAttribute="centerX" id="1JX-9f-lEM"/>
                                             <constraint firstItem="818-aL-fzN" firstAttribute="leading" secondItem="Ze0-1j-RaN" secondAttribute="leading" constant="25" id="6wo-Kv-XtQ"/>
                                             <constraint firstItem="Qh6-xS-9B9" firstAttribute="leading" secondItem="Ze0-1j-RaN" secondAttribute="leading" constant="25" id="B51-WU-oR1"/>
