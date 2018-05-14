@@ -493,23 +493,17 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKo-x0-zfR">
-                                                <rect key="frame" x="85" y="492.66666666666663" width="244" height="30"/>
+                                                <rect key="frame" x="85" y="482.66666666666663" width="244" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmh-tZ-M5U">
-                                                        <rect key="frame" x="0.0" y="4" width="171.66666666666666" height="22"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="22" id="pTe-I4-4KN"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="4" width="171.66666666666666" height="42"/>
                                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                         <color key="textColor" red="0.56470588239999997" green="0.60784313729999995" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S1k-pJ-m8O">
-                                                        <rect key="frame" x="167.66666666666666" y="0.0" width="76.333333333333343" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="B77-hW-agh"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="15"/>
+                                                        <rect key="frame" x="167.66666666666666" y="0.0" width="76.333333333333343" height="50"/>
+                                                        <fontDescription key="fontDescription" name="Avenir-Black" family="Avenir" pointSize="16"/>
                                                         <state key="normal" title="Login">
                                                             <color key="titleColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
@@ -524,7 +518,7 @@
                                                     <constraint firstAttribute="width" constant="244" id="7ys-8v-Plz"/>
                                                     <constraint firstItem="hmh-tZ-M5U" firstAttribute="top" secondItem="EKo-x0-zfR" secondAttribute="top" constant="4" id="Gef-cQ-WG2"/>
                                                     <constraint firstItem="hmh-tZ-M5U" firstAttribute="leading" secondItem="EKo-x0-zfR" secondAttribute="leading" id="Nu3-7q-4w8"/>
-                                                    <constraint firstAttribute="height" constant="30" id="Wuz-dN-0rf"/>
+                                                    <constraint firstAttribute="height" constant="50" id="Wuz-dN-0rf"/>
                                                     <constraint firstItem="S1k-pJ-m8O" firstAttribute="leading" secondItem="hmh-tZ-M5U" secondAttribute="trailing" constant="-4" id="ahH-Nk-7ZP"/>
                                                     <constraint firstAttribute="trailing" secondItem="S1k-pJ-m8O" secondAttribute="trailing" id="ljv-Bx-6al"/>
                                                     <constraint firstAttribute="bottom" secondItem="hmh-tZ-M5U" secondAttribute="bottom" constant="4" id="mvy-eB-FrT"/>
@@ -536,7 +530,7 @@
                                             <constraint firstItem="hhT-vs-kHL" firstAttribute="top" secondItem="5ei-76-eon" secondAttribute="bottom" constant="48" id="1Qt-8M-4ob"/>
                                             <constraint firstItem="5ei-76-eon" firstAttribute="centerX" secondItem="Bcv-VS-7f4" secondAttribute="centerX" id="6Hd-gN-RXC"/>
                                             <constraint firstAttribute="height" constant="600" id="6R8-LG-59q"/>
-                                            <constraint firstItem="EKo-x0-zfR" firstAttribute="top" secondItem="YRm-Fk-KA9" secondAttribute="bottom" constant="45" id="MQe-8l-pcS"/>
+                                            <constraint firstItem="EKo-x0-zfR" firstAttribute="top" secondItem="YRm-Fk-KA9" secondAttribute="bottom" constant="35" id="MQe-8l-pcS"/>
                                             <constraint firstItem="EKo-x0-zfR" firstAttribute="centerX" secondItem="Bcv-VS-7f4" secondAttribute="centerX" id="UPI-th-y7a"/>
                                             <constraint firstAttribute="trailing" secondItem="hhT-vs-kHL" secondAttribute="trailing" constant="25" id="YWn-q5-cnZ"/>
                                             <constraint firstItem="mQO-em-fUr" firstAttribute="top" secondItem="Bcv-VS-7f4" secondAttribute="top" constant="-2" id="Yaw-Cc-bPD"/>
