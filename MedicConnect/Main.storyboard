@@ -4698,8 +4698,29 @@ recorded a new diagnosis.</string>
                                                 <color key="textColor" red="0.8862745098" green="0.30196078430000001" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7Q-hA-7Be">
+                                                <rect key="frame" x="82" y="413" width="250" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="250" id="0ii-vq-QsU"/>
+                                                    <constraint firstAttribute="height" constant="48" id="Oz0-6h-Ppu"/>
+                                                </constraints>
+                                                <string key="text">By tapping ‘Save Profile’ I agree to the Terms of Use &amp; Privacy Policy </string>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
+                                                <color key="textColor" red="0.30588235294117649" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w9a-16-B1b">
+                                                <rect key="frame" x="105" y="426" width="95" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="95" id="172-Ns-lgL"/>
+                                                    <constraint firstAttribute="height" constant="40" id="dTz-yb-1EJ"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="onTermsTappedWithSender:" destination="DZR-Zp-gfd" eventType="touchUpInside" id="di4-Iv-4fl"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2x-Id-t5o">
-                                                <rect key="frame" x="25" y="453.66666666666663" width="364" height="45"/>
+                                                <rect key="frame" x="25" y="476.66666666666663" width="364" height="45"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="45" id="iCI-iK-mLC"/>
                                                 </constraints>
@@ -4711,22 +4732,38 @@ recorded a new diagnosis.</string>
                                                     <action selector="tapSave:" destination="DZR-Zp-gfd" eventType="touchUpInside" id="WJM-us-oO9"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3e-UY-A9x">
+                                                <rect key="frame" x="214" y="426" width="95" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="95" id="glC-Ry-owy"/>
+                                                    <constraint firstAttribute="height" constant="40" id="uau-zP-as8"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="onPrivacyTappedWithSender:" destination="DZR-Zp-gfd" eventType="touchUpInside" id="tRb-Dd-9dY"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="a2x-Id-t5o" secondAttribute="trailing" constant="25" id="0Lb-el-YvK"/>
+                                            <constraint firstItem="b3e-UY-A9x" firstAttribute="top" secondItem="w9a-16-B1b" secondAttribute="top" id="1jR-OY-xb3"/>
                                             <constraint firstItem="gA3-4j-FPx" firstAttribute="top" secondItem="zoW-dF-i8I" secondAttribute="top" constant="-2" id="2Sg-qe-QOg"/>
                                             <constraint firstAttribute="trailing" secondItem="Ptn-2j-ZGI" secondAttribute="trailing" constant="25" id="4T2-BF-diG"/>
                                             <constraint firstItem="dC0-Km-o8L" firstAttribute="centerX" secondItem="zoW-dF-i8I" secondAttribute="centerX" id="8Ir-Jb-NAW"/>
                                             <constraint firstItem="a2x-Id-t5o" firstAttribute="leading" secondItem="zoW-dF-i8I" secondAttribute="leading" constant="25" id="A6p-bC-aAj"/>
                                             <constraint firstItem="qJ1-5h-g23" firstAttribute="height" secondItem="dC0-Km-o8L" secondAttribute="height" id="FQx-HT-LD4"/>
+                                            <constraint firstItem="d7Q-hA-7Be" firstAttribute="top" secondItem="Ptn-2j-ZGI" secondAttribute="bottom" constant="16" id="Jkt-vx-lA0"/>
+                                            <constraint firstItem="w9a-16-B1b" firstAttribute="trailing" secondItem="d7Q-hA-7Be" secondAttribute="centerX" constant="-7" id="Kz3-ap-ZaQ"/>
                                             <constraint firstItem="qJ1-5h-g23" firstAttribute="width" secondItem="dC0-Km-o8L" secondAttribute="width" id="PEL-7r-3gv"/>
                                             <constraint firstItem="qJ1-5h-g23" firstAttribute="leading" secondItem="dC0-Km-o8L" secondAttribute="leading" id="QYF-xg-7jS"/>
                                             <constraint firstAttribute="height" constant="530" id="TEv-9v-4mL"/>
                                             <constraint firstItem="gA3-4j-FPx" firstAttribute="centerX" secondItem="zoW-dF-i8I" secondAttribute="centerX" id="arJ-tO-6wA"/>
                                             <constraint firstItem="LYi-gX-XUy" firstAttribute="trailing" secondItem="Ptn-2j-ZGI" secondAttribute="trailing" id="awi-6h-nli"/>
-                                            <constraint firstItem="a2x-Id-t5o" firstAttribute="top" secondItem="Ptn-2j-ZGI" secondAttribute="bottom" constant="57" id="chV-km-O5v"/>
+                                            <constraint firstItem="a2x-Id-t5o" firstAttribute="top" secondItem="Ptn-2j-ZGI" secondAttribute="bottom" constant="80" id="chV-km-O5v"/>
+                                            <constraint firstItem="w9a-16-B1b" firstAttribute="bottom" secondItem="d7Q-hA-7Be" secondAttribute="bottom" constant="5" id="emA-qu-9UU"/>
                                             <constraint firstItem="Ptn-2j-ZGI" firstAttribute="top" secondItem="dC0-Km-o8L" secondAttribute="bottom" constant="6" id="eoD-ny-g7u"/>
+                                            <constraint firstItem="b3e-UY-A9x" firstAttribute="leading" secondItem="w9a-16-B1b" secondAttribute="trailing" constant="14" id="ie5-OT-EHJ"/>
+                                            <constraint firstItem="d7Q-hA-7Be" firstAttribute="centerX" secondItem="zoW-dF-i8I" secondAttribute="centerX" id="msZ-Rp-rS4"/>
                                             <constraint firstItem="qJ1-5h-g23" firstAttribute="top" secondItem="dC0-Km-o8L" secondAttribute="top" id="nOF-6p-hpw"/>
                                             <constraint firstItem="zqG-x3-FgA" firstAttribute="centerX" secondItem="zoW-dF-i8I" secondAttribute="centerX" id="stw-L4-Qel"/>
                                             <constraint firstItem="LYi-gX-XUy" firstAttribute="centerY" secondItem="7sO-Iv-B8b" secondAttribute="centerY" constant="2" id="tnr-QJ-X3b"/>
@@ -4773,9 +4810,12 @@ recorded a new diagnosis.</string>
                     <connections>
                         <outlet property="avatarImageView" destination="qJ1-5h-g23" id="N2Y-RJ-0vl"/>
                         <outlet property="btnAvatarImage" destination="dC0-Km-o8L" id="iiB-9d-P7T"/>
+                        <outlet property="btnPrivacy" destination="b3e-UY-A9x" id="5Ol-v4-hwR"/>
                         <outlet property="btnSave" destination="a2x-Id-t5o" id="YkL-ZS-xdH"/>
+                        <outlet property="btnTerms" destination="w9a-16-B1b" id="mnt-Pd-IAS"/>
                         <outlet property="constOfNavigationTop" destination="cIz-f3-sKX" id="aof-4T-k7K"/>
                         <outlet property="lblMSPError" destination="LYi-gX-XUy" id="vfG-vN-N5C"/>
+                        <outlet property="lblTermsPrivacy" destination="d7Q-hA-7Be" id="dgS-Vl-Xaw"/>
                         <outlet property="pageControl" destination="YzN-ow-qBJ" id="2Gr-zp-Dsc"/>
                         <outlet property="tfLocation" destination="Vq7-ZI-lhX" id="Mfc-s8-vqG"/>
                         <outlet property="tfMSP" destination="7sO-Iv-B8b" id="YIG-GR-582"/>
@@ -4786,7 +4826,7 @@ recorded a new diagnosis.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ocg-oc-ONC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1455" y="-82"/>
+            <point key="canvasLocation" x="-1455.072463768116" y="-82.33695652173914"/>
         </scene>
         <!--Welcome Last View Controller-->
         <scene sceneID="hdL-0S-B5B">

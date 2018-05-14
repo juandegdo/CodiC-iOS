@@ -23,6 +23,10 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
     @IBOutlet var pageControl: UIPageControl!
     @IBOutlet var avatarImageView: UIImageView!
     
+    @IBOutlet weak var lblTermsPrivacy: UILabel!
+    @IBOutlet weak var btnTerms: UIButton!
+    @IBOutlet weak var btnPrivacy: UIButton!
+    
     var avatarImage: UIImage?
     var user: User? = nil
     
@@ -56,6 +60,28 @@ class WelcomeProfileViewController: BaseViewController, UINavigationControllerDe
         // Phone Number
         self.tfPhoneNumber.placeholder = NSLocalizedString("Phone #", comment: "comment")
         self.tfPhoneNumber.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        // Terms of Use and Privacy Policy
+        let string = self.lblTermsPrivacy.text!
+        let myMutableString = NSMutableAttributedString(string: string,
+                                                        attributes: [NSAttributedStringKey.font : UIFont(name: "Avenir-Book", size: 14.0)!])
+        //Add more attributes here
+        if let range = string.range(of: "Terms of Use") {
+            let nsRange = string.nsRange(from: range)
+            myMutableString.addAttribute(NSAttributedStringKey.font,
+                                         value: UIFont(name: "Avenir-Black", size: 14.0)!,
+                                         range: nsRange)
+        }
+        
+        if let rangeP = string.range(of: "Privacy Policy") {
+            let nsRange = string.nsRange(from: rangeP)
+            myMutableString.addAttribute(NSAttributedStringKey.font,
+                                         value: UIFont(name: "Avenir-Black", size: 14.0)!,
+                                         range: nsRange)
+        }
+        
+        //Apply to the label
+        self.lblTermsPrivacy.attributedText = myMutableString
         
         // Page Control
         self.pageControl.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
@@ -133,6 +159,20 @@ extension WelcomeProfileViewController {
             self.dismiss(animated: true, completion: nil)
         }
         
+    }
+    
+    @IBAction func onTermsTapped(sender: AnyObject!) {
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Terms of Use"
+            present(vc, animated: false, completion: nil)
+        }
+    }
+    
+    @IBAction func onPrivacyTapped(sender: AnyObject!) {
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Privacy Policy"
+            present(vc, animated: false, completion: nil)
+        }
     }
     
     @IBAction func tapPicture(_ sender: Any) {
@@ -290,3 +330,8 @@ extension WelcomeProfileViewController : UIImagePickerControllerDelegate{
     
 }
 
+extension StringProtocol where Index == String.Index {
+    func nsRange(from range: Range<Index>) -> NSRange {
+        return NSRange(range, in: self)
+    }
+}
