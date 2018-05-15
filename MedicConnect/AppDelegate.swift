@@ -130,6 +130,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 
                 if let vvc = self.window?.rootViewController {
                     vvc.present(vc, animated: false, completion: nil)
+                    
+                    // Update user availability
+                    self.shouldReceiveCall = false
                 }
             }
             
@@ -691,18 +694,11 @@ extension AppDelegate: SINCallClientDelegate {
     }
     
     func client(_ client: SINCallClient!, willReceiveIncomingCall call: SINCall!) {
-        if !self.shouldReceiveCall {
-            return
-        }
-        
         if !call.headers.isEmpty {
             self.callHeaders = call.headers as! [String : Any]
         }
         
         self.sinchCallKitProvider?.reportNewIncomingCall(call, headers: self.callHeaders)
-        
-        // Update user availability
-        self.shouldReceiveCall = false
     }
     
 //    func client(_ client: SINCallClient!, localNotificationForIncomingCall call: SINCall!) -> SINLocalNotification! {
