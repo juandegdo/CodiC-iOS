@@ -16,6 +16,8 @@ class SettingsDetailViewController: BaseViewController {
     var strTitle: String?
     var strSynopsisUrl: String?
     var destinationFileUrl: URL!
+    var notes: String?
+    var shouldSave: Bool = true
     
     let contentDict = ["Privacy Policy":"Privacy_policy_HTML", "Code of Conduct": "Code_of_conduct_HTML", "Terms of Use": "Terms_of_service_HTML"]
     
@@ -32,9 +34,9 @@ class SettingsDetailViewController: BaseViewController {
     
     private var _pdfView: Any?
     @available(iOS 11.0, *)
-    fileprivate var pdfView: PDFView! {
+    fileprivate var pdfView: PDFView? {
         get {
-            return _pdfView as! PDFView
+            return _pdfView as? PDFView
         }
         set {
             _pdfView = newValue
@@ -46,6 +48,8 @@ class SettingsDetailViewController: BaseViewController {
     @IBOutlet weak var m_btnShare: UIButton!
     @IBOutlet weak var m_contentWebView: UIWebView!
     @IBOutlet weak var m_pdfView: UIView!
+    
+    var activityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,21 +116,25 @@ class SettingsDetailViewController: BaseViewController {
                     try FileManager.default.copyItem(at: tempLocalUrl, to: self.destinationFileUrl)
                     
                     DispatchQueue.main.async {
+                        self.stopIndicating()
+                        
                         // Show PDF
                         if #available(iOS 11.0, *) {
                             self.m_contentWebView.isHidden = true
                             self.m_btnEdit.isHidden = false
                             self.m_btnShare.isHidden = false
                             
-                            self.pdfView = PDFView(frame: CGRect(x: 0, y: 0, width: self.m_pdfView.frame.width, height: self.m_pdfView.frame.height))
+                            if self.pdfView == nil {
+                                self.pdfView = PDFView(frame: CGRect(x: 0, y: 0, width: self.m_pdfView.frame.width, height: self.m_pdfView.frame.height))
+                                self.pdfView?.displayMode = PDFDisplayMode.singlePageContinuous
+                                self.pdfView?.autoScales = true
+                                self.pdfView?.backgroundColor = UIColor.lightGray
+                                self.m_pdfView.addSubview(self.pdfView!)
+                            }
+                            
                             self.pdfDocument = PDFDocument(url: self.destinationFileUrl!)
+                            self.pdfView?.document = self.pdfDocument
                             
-                            self.pdfView.document = self.pdfDocument
-                            self.pdfView.displayMode = PDFDisplayMode.singlePageContinuous
-                            self.pdfView.autoScales = true
-                            self.pdfView.backgroundColor = UIColor.lightGray
-                            
-                            self.m_pdfView.addSubview(self.pdfView)
                         } else {
                             // Fallback on earlier versions
                             self.m_pdfView.isHidden = true
@@ -147,61 +155,76 @@ class SettingsDetailViewController: BaseViewController {
         task.resume()
     }
     
-    // Mark : UI Actions
-    @IBAction func btnBackClicked(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
-    @IBAction func btnEditClicked(_ sender: Any) {
-        
-//        if #available(iOS 11.0, *) {
-//            if let page = self.pdfDocument?.page(at: 0) {
-//                let upperSelection = self.pdfDocument?.findString("Consult Notes:", withOptions: .literal)[0]
-//                let bottomSelection = self.pdfDocument?.findString("Consult Prepared by:", withOptions: .literal)[0]
-//                let upperBounds = upperSelection?.bounds(for: page)
-//                let bottomBounds = bottomSelection?.bounds(for: page)
-//                let pageBounds = page.bounds(for: .cropBox)
-//
-//                let textFieldMultilineBounds = CGRect(x: (bottomBounds?.origin.x)!, y: (bottomBounds?.origin.y)! + 22, width: (pageBounds.size.width - (bottomBounds?.origin.x)! * 2), height: ((upperBounds?.origin.y)! - (bottomBounds?.origin.y)! - 35))
-//                let textFieldMultiline = PDFAnnotation(bounds: textFieldMultilineBounds, forType: PDFAnnotationSubtype(rawValue: PDFAnnotationSubtype.widget.rawValue), withProperties: nil)
-//                textFieldMultiline.widgetFieldType = PDFAnnotationWidgetSubtype(rawValue: PDFAnnotationWidgetSubtype.text.rawValue)
-//                textFieldMultiline.backgroundColor = UIColor.white
-//                textFieldMultiline.font = UIFont.systemFont(ofSize: 12)
-//                textFieldMultiline.isMultiline = true
-//                textFieldMultiline.shouldDisplay = true
-//                textFieldMultiline.setValue("Test. Test.", forAnnotationKey: .widgetValue)
-//
-//                let border = PDFBorder()
-//                border.lineWidth = 1.0
-//                textFieldMultiline.border = border
-//
-//                page.addAnnotation(textFieldMultiline)
-//
-////                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) {
-////                    let gestures = self.pdfView.gestureRecognizers
-////                    let allTextViews: [UITextView] = self.getSubviewsOf(view: self.pdfView)
-////                    print(allTextViews)
-////                }
-//            }
-//        } else {
-//            // Fallback on earlier versions
-//
-//        }
-        
-    }
-    
     private func getSubviewsOf<T: UIView>(view: UIView) -> [T] {
         var subviews = [T]()
         
         for subview in view.subviews {
             subviews += getSubviewsOf(view: subview) as [T]
-            
-            if let subview = subview as? T {
-                subviews.append(subview)
+            if String(describing: type(of: subview)) == "PDFPageView" {
+                subviews.append((subview as? T)!)
             }
         }
         
         return subviews
+    }
+    
+    // Mark : UI Actions
+    @IBAction func btnBackClicked(_ sender: Any) {
+        self.shouldSave = false
+        self.view.endEditing(true)
+        
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func btnEditClicked(_ sender: Any) {
+        
+        if #available(iOS 11.0, *) {
+            if let page = self.pdfDocument?.page(at: 0) {
+                let upperSelection = self.pdfDocument?.findString("Consult Notes:", withOptions: .literal)[0]
+                let bottomSelection = self.pdfDocument?.findString("Consult Prepared by:", withOptions: .literal)[0]
+                let upperBounds = upperSelection?.bounds(for: page)
+                let bottomBounds = bottomSelection?.bounds(for: page)
+                let pageBounds = page.bounds(for: .cropBox)
+                
+                var textFieldMultilineBounds = CGRect.zero
+                if (bottomBounds?.size.height)! > CGFloat(0) {
+                    textFieldMultilineBounds = CGRect(x: (upperBounds?.origin.x)! - 5, y: (pageBounds.size.height - (upperBounds?.origin.y)! + 4), width: (pageBounds.size.width - (upperBounds?.origin.x)! * 2 + 10), height: ((upperBounds?.origin.y)! - (bottomBounds?.origin.y)! - 25))
+                } else {
+                    textFieldMultilineBounds = CGRect(x: (upperBounds?.origin.x)! - 5, y: (pageBounds.size.height - (upperBounds?.origin.y)! + 4), width: (pageBounds.size.width - (upperBounds?.origin.x)! * 2 + 10), height: ((upperBounds?.origin.y)! - 80))
+                }
+                
+                let textView: UITextView = UITextView.init(frame: textFieldMultilineBounds)
+                textView.backgroundColor = UIColor.white
+                textView.layer.borderColor = UIColor.gray.cgColor
+                textView.layer.borderWidth = 1.0
+                textView.layer.cornerRadius = 3.0
+                textView.delegate = self
+                
+                if let text = self.pdfDocument?.string {
+                    if let startRange = text.range(of: "Consult Notes:\n"),
+                        let endRange = text.range(of: "\nConsult Prepared by:"),
+                        startRange.upperBound < endRange.lowerBound {
+                        let _notes = text[startRange.upperBound..<endRange.lowerBound]
+                        print(text)
+                        print(_notes)
+                        self.notes = String(_notes)
+                        textView.text = self.notes!
+                    }
+                }
+                
+                let allTextViews: [UIView] = self.getSubviewsOf(view: self.pdfView!)
+                if allTextViews.count > 0 {
+                    let _pageView = allTextViews[0]
+                    _pageView.backgroundColor = UIColor.red
+                    _pageView.addSubview(textView)
+                    textView.becomeFirstResponder()
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+            
+        }
+        
     }
 
     @IBAction func btnShareClicked(_ sender: UIButton) {
@@ -285,6 +308,63 @@ class SettingsDetailViewController: BaseViewController {
             (submitMSPView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 80
         }
         
+    }
+    
+    // MARK: Activity Indicator
+    
+    func startIndicating(){
+        activityIndicatorView.center = self.view.center
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.activityIndicatorViewStyle = .gray
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    func stopIndicating() {
+        if activityIndicatorView.superview != nil {
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.removeFromSuperview()
+            UIApplication.shared.endIgnoringInteractionEvents()
+        }
+    }
+    
+}
+
+extension SettingsDetailViewController : UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.shouldSave = true
+        self.m_btnEdit.isHidden = true
+        self.m_btnShare.isHidden = true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if let _notes = textView.text,
+            _notes != self.notes,
+            self.shouldSave == true {
+            // Notes updated
+            self.startIndicating()
+            PostService.Instance.updateTranscript(transcriptionURL: self.strSynopsisUrl!, notes: _notes) { (success) in
+                if success {
+                    if let synopsisUrl = self.strSynopsisUrl as String? {
+                        self.downloadPDF(fileURL: URL(string: synopsisUrl)!)
+                    }
+                } else {
+                    self.stopIndicating()
+                    self.m_btnEdit.isHidden = false
+                    self.m_btnShare.isHidden = false
+                    
+                    AlertUtil.showSimpleAlert(self, title: "You cannot edit the transcription now. Please try again.", message: nil, okButtonTitle: "OK")
+                }
+            }
+        } else {
+            self.m_btnEdit.isHidden = false
+            self.m_btnShare.isHidden = false
+        }
+        
+        textView.removeFromSuperview()
     }
     
 }

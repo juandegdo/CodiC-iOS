@@ -34,6 +34,7 @@ class BaseTaskController {
     let URLLikeSuffix = "/like"
     let URLUnlikeSuffix = "/unlike"
     let URLPlaceOrderSuffix = "/transcription"
+    let URLTranscriptUpdateSuffix = "/updateTranscript"
     
     let URLBlockSuffix = "/block"
     let URLUnblockSuffix = "/unblock"

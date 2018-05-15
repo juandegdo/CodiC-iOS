@@ -4686,7 +4686,8 @@ recorded a new diagnosis.</string>
                                                     <constraint firstAttribute="width" constant="250" id="0ii-vq-QsU"/>
                                                     <constraint firstAttribute="height" constant="48" id="Oz0-6h-Ppu"/>
                                                 </constraints>
-                                                <string key="text">By tapping ‘Save Profile’ I agree to the Terms of Use &amp; Privacy Policy </string>
+                                                <string key="text">By tapping ‘Save Profile’ I agree to the
+Terms of Use &amp; Privacy Policy </string>
                                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                                 <color key="textColor" red="0.30588235294117649" green="0.30588235294117649" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>

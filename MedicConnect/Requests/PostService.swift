@@ -1159,4 +1159,33 @@ class PostService: BaseTaskController {
         
     }
     
+    func updateTranscript(transcriptionURL: String, notes: String, completion: @escaping (_ success: Bool) -> Void) {
+        
+        let url = "\(self.baseURL)\(self.URLPost)\(self.URLTranscriptUpdateSuffix)"
+        print("Connect to Server at \(url)")
+        
+        let params = [
+            "transcriptionURL" : transcriptionURL,
+            "notes" : notes
+        ]
+        
+        print(params)
+        
+        manager!.request(url, method: .post, parameters: params, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
+                    completion(false)
+                    return
+                }
+                
+                completion(response.response?.statusCode == 200)
+                
+        }
+        
+    }
+    
 }
