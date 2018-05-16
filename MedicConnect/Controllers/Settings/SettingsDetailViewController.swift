@@ -127,13 +127,15 @@ class SettingsDetailViewController: BaseViewController {
                             if self.pdfView == nil {
                                 self.pdfView = PDFView(frame: CGRect(x: 0, y: 0, width: self.m_pdfView.frame.width, height: self.m_pdfView.frame.height))
                                 self.pdfView?.displayMode = PDFDisplayMode.singlePageContinuous
-                                self.pdfView?.autoScales = true
                                 self.pdfView?.backgroundColor = UIColor.lightGray
                                 self.m_pdfView.addSubview(self.pdfView!)
                             }
                             
                             self.pdfDocument = PDFDocument(url: self.destinationFileUrl!)
                             self.pdfView?.document = self.pdfDocument
+//                            self.pdfView?.autoScales = true
+                            self.pdfView?.maxScaleFactor = 4.0
+                            self.pdfView?.minScaleFactor = (self.pdfView?.scaleFactorForSizeToFit)!
                             
                         } else {
                             // Fallback on earlier versions
