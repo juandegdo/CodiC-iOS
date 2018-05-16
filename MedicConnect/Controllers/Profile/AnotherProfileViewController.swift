@@ -63,6 +63,7 @@ class AnotherProfileViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         self.initViews()
+        AudioHelper.SetCategory(mode: .speaker)
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)

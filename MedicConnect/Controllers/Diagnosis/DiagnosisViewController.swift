@@ -58,6 +58,8 @@ class DiagnosisViewController: BaseViewController, UIGestureRecognizerDelegate {
         
         self.loadMe()
         
+        AudioHelper.SetCategory(mode: .speaker)
+        
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(DiagnosisViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         

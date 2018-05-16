@@ -63,6 +63,7 @@ class PatientProfileViewController: BaseViewController {
         
         // Update UI with basic patient info
         self.updateUI()
+        AudioHelper.SetCategory(mode: .speaker)
         
         NotificationCenter.default.addObserver(self, selector: #selector(PatientProfileViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)

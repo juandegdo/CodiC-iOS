@@ -58,15 +58,6 @@ class ProfileViewController: BaseViewController {
         let tabBarItem = self.tabBarController?.tabBar.items![0]
         tabBarItem?.badgeValue = UserDefaultsUtil.LoadMissedCalls() == "" ? nil : UserDefaultsUtil.LoadMissedCalls()
         
-        // Register Device Token
-//        if let _me = UserController.Instance.getUser() as User?, let deviceToken = UserController.Instance.getDeviceToken() as String?, deviceToken != _me.deviceToken {
-//            UserService.Instance.putDeviceToken(deviceToken: deviceToken) { (success) in
-//                if (success) {
-//                    _me.deviceToken = deviceToken
-//                }
-//            }
-//        }
-        
         // Initialize Table Views
         self.tableView.register(UINib(nibName: ProfileListCellID, bundle: nil), forCellReuseIdentifier: ProfileListCellID)
         self.tableView.tableFooterView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50.0))
@@ -85,6 +76,8 @@ class ProfileViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         self.initViews()
+        
+        AudioHelper.SetCategory(mode: .speaker)
         
         vcDisappearType = .other
         NotificationCenter.default.addObserver(self, selector: #selector(ProfileViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)

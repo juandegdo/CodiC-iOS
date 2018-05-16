@@ -18,6 +18,7 @@ class AudioHelper {
             
             if mode == .speaker {
                 try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions(rawValue: AVAudioSessionCategoryOptions.RawValue(UInt8(AVAudioSessionCategoryOptions.defaultToSpeaker.rawValue) | UInt8(AVAudioSessionCategoryOptions.allowBluetoothA2DP.rawValue))))
+                try AVAudioSession.sharedInstance().overrideOutputAudioPort(mode)
                 try AVAudioSession.sharedInstance().setActive(true)
                 
             } else {
