@@ -89,8 +89,8 @@ class RecordingBroadcastViewController: BaseViewController {
         self.recordingSession = AVAudioSession.sharedInstance()
         
         do {
-            try recordingSession?.setCategory(AVAudioSessionCategoryPlayAndRecord)
-            try recordingSession?.setActive(true)
+//            try recordingSession?.setCategory(AVAudioSessionCategoryPlayAndRecord)
+//            try recordingSession?.setActive(true)
             recordingSession?.requestRecordPermission() { [unowned self] allowed in
                 DispatchQueue.main.async {
                     if allowed {
@@ -119,7 +119,6 @@ class RecordingBroadcastViewController: BaseViewController {
         
         do {
             
-            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder?.prepareToRecord()
             audioRecorder?.isMeteringEnabled = true

@@ -83,7 +83,8 @@ extension PreRecordingBroadcastViewController {
         
         let recordingSession = AVAudioSession.sharedInstance()
         do {
-            try recordingSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try recordingSession.setCategory(AVAudioSessionCategoryRecord)
+            try recordingSession.setInputGain(1.0)
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() {
                 (allowed) in
