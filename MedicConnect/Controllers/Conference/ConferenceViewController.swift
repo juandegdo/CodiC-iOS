@@ -22,6 +22,14 @@ class ConferenceViewController: BaseViewController, UIGestureRecognizerDelegate 
     var vcDisappearType : ViewControllerDisappearType = .other
     var searchedHistory: [History] = []
     
+    var call: SINCall? = nil
+//    {
+//        didSet {
+//            call?.delegate = self
+//        }
+//    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -86,6 +94,7 @@ class ConferenceViewController: BaseViewController, UIGestureRecognizerDelegate 
 }
 
 extension ConferenceViewController {
+    // SINCallClientDelegate, SINCallDelegate
     
     // MARK: Private methods
     
@@ -127,7 +136,6 @@ extension ConferenceViewController {
         HistoryService.Instance.getCallHistory { (success: Bool) in
             self.loadSearchResult(self.txFieldSearch.text!)
         }
-        
     }
     
     func loadSearchResult(_ keyword: String) {
@@ -144,8 +152,124 @@ extension ConferenceViewController {
         self.tvHistory.reloadData()
     }
     
-    // MARK: Selectors
+    func randomString(length: Int) -> String {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
+    }
     
+    // MARK: - SINCallDelegate
+    /*
+    func callDidProgress(_ call: SINCall!) {
+        self.audioController?.startPlayingSoundFile(self.pathForSound("ringback.wav"), loop: true)
+        
+        self.callShouldSendAlert = true
+        
+        // Define Call Task
+        self.callTask = DispatchWorkItem.init(block: {
+            self.call?.hangup()
+        })
+        
+        // Execute call task in 20 seconds
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 20, execute: callTask!)
+    }
+    
+    func callDidEstablish(_ call: SINCall!) {
+        // Cancel call task
+        if self.callTask != nil && !(self.callTask?.isCancelled)! {
+            self.callTask?.cancel()
+        }
+        
+        self.callShouldEnd = true
+        
+        self.audioController?.disableSpeaker()
+        
+        if self.call?.details.isVideoOffered == false {
+            self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                self.audioController?.enableSpeaker()
+            }
+            
+            // Disable idle timer
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+        
+        self.showButtons(.kButtonsHangup)
+        self.audioController?.stopPlayingSoundFile()
+    }
+    
+    func callDidEnd(_ call: SINCall!) {
+        // Cancel call task
+        if self.callTask != nil && !(self.callTask?.isCancelled)! {
+            self.callTask?.cancel()
+        }
+        
+        if self.callShouldSendAlert && call.details.endCause != SINCallEndCause.hungUp {
+            // Call misssed
+            NotificationService.Instance.sendMissedCallAlert(toUser: self.consulterId!) { (success) in
+                // Do nothing
+            }
+        }
+        
+        if self.callShouldEnd || self.callStep == 3 {
+            self.audioController?.stopPlayingSoundFile()
+            self.audioController?.disableSpeaker()
+            self.stopCallDurationTimer()
+            self.stopHideDurationTimer()
+            
+            if (self.call?.details.isVideoOffered)! {
+                self.videoController?.remoteView().removeFromSuperview()
+            }
+            
+            // Disable idle timer
+            UIApplication.shared.isIdleTimerDisabled = false
+            
+            self.dismiss(animated: true, completion: nil)
+            self.presentingViewController?.dismiss(animated: false, completion: nil)
+        } else {
+            // Show routing state
+            self.setCallStatusText("ROUTING...")
+            self.lblRemoteUserName.text = ""
+            
+            // Get consulting doctors from server
+            ConsultService.Instance.getConsultingDoctors { (success) in
+                if success {
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+                        self.startCall(self.isVideo)
+                    }
+                } else {
+                    // Finish screen
+                    self.callShouldEnd = true
+                    self.callShouldSendAlert = false
+                    self.callDidEnd(self.call!)
+                }
+            }
+        }
+        
+    }
+    
+    func callDidAddVideoTrack(_ call: SINCall!) {
+        self.videoController?.remoteView().frame = UIScreen.main.bounds
+        self.videoController?.remoteView().contentMode = .scaleAspectFill
+        self.viewRemoteVideo.addSubview((self.videoController?.remoteView())!)
+    }
+    
+    func call(_ call: SINCall!, shouldSendPushNotifications pushPairs: [Any]!) {
+        
+    }
+    */
+    // MARK: Selectors
     
 }
 
@@ -189,15 +313,23 @@ extension ConferenceViewController : UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
+        let history = self.searchedHistory[indexPath.row]
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "CallMakeScreenViewController") as? CallMakeScreenViewController {
+            vc.callReceiver = history.fromUser
+            self.present(vc, animated: false, completion: nil)
+        }
+
+        
 //        guard let _patient = self.searchedPatients[indexPath.row] as Patient? else {
 //            return
 //        }
-//
+
 //        let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
 //        patientProfileVC.patient = _patient
 //        patientProfileVC.fromAdd = false
 //        self.navigationController?.pushViewController(patientProfileVC, animated: true)
-        
     }
     
 }

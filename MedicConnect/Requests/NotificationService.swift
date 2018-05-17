@@ -277,4 +277,27 @@ class NotificationService: BaseTaskController {
         
     }
     
+    func sendMissedCallAlert(toUser: String, completion: @escaping (_ success: Bool) -> Void) {
+        let url = "\(self.baseURL)\(self.URLNotification)/sendmissedcallalert"
+        let params = ["toUser": toUser]
+        
+        manager!.request(url, method: .post, parameters: params, encoding: URLEncoding.default)
+            .responseJSON { response in
+                
+                if let _ = response.result.value {
+                    print("Response: \(response.result.value!)")
+                }
+                
+                if let err = response.result.error as NSError?, err.code == -1009 {
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    AlertUtil.showSimpleAlert((appDelegate.window?.visibleViewController())!, title: "You aren't online.", message: "Get connected to the internet\nand try again.", okButtonTitle: "OK")
+                    
+                    completion(false)
+                    return
+                }
+                
+                completion(response.response?.statusCode == 200)
+        }
+    }
+
 }

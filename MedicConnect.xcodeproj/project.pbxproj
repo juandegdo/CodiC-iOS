@@ -13,6 +13,32 @@
 		00C748421EFD179200BD3EAE /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C748411EFD179200BD3EAE /* NotificationUtil.swift */; };
 		00CFBD8D1EF7DC5B000A4D1E /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */; };
 		00CFBD8F1EF83BEE000A4D1E /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00CFBD8E1EF83BEE000A4D1E /* CommentController.swift */; };
+		220E7CE720A3EAFC008DEB69 /* Brazil.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CCB20A3EAFB008DEB69 /* Brazil.edc */; };
+		220E7CE820A3EAFC008DEB69 /* Czech.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CCC20A3EAFB008DEB69 /* Czech.edc */; };
+		220E7CE920A3EAFC008DEB69 /* Danish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CCD20A3EAFB008DEB69 /* Danish.edc */; };
+		220E7CEA20A3EAFC008DEB69 /* Dutch.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CCE20A3EAFB008DEB69 /* Dutch.edc */; };
+		220E7CEB20A3EAFC008DEB69 /* English.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CCF20A3EAFB008DEB69 /* English.edc */; };
+		220E7CEC20A3EAFC008DEB69 /* Eston.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD020A3EAFB008DEB69 /* Eston.edc */; };
+		220E7CED20A3EAFC008DEB69 /* Finnish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD120A3EAFB008DEB69 /* Finnish.edc */; };
+		220E7CEE20A3EAFC008DEB69 /* Flemmish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD220A3EAFB008DEB69 /* Flemmish.edc */; };
+		220E7CEF20A3EAFC008DEB69 /* French.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD320A3EAFB008DEB69 /* French.edc */; };
+		220E7CF020A3EAFC008DEB69 /* German.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD420A3EAFB008DEB69 /* German.edc */; };
+		220E7CF120A3EAFC008DEB69 /* GermanNS.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD520A3EAFB008DEB69 /* GermanNS.edc */; };
+		220E7CF220A3EAFC008DEB69 /* Greek.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD620A3EAFB008DEB69 /* Greek.edc */; };
+		220E7CF320A3EAFC008DEB69 /* Indones.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD720A3EAFB008DEB69 /* Indones.edc */; };
+		220E7CF420A3EAFC008DEB69 /* Italian.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD820A3EAFB008DEB69 /* Italian.edc */; };
+		220E7CF520A3EAFC008DEB69 /* NorwBok.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CD920A3EAFB008DEB69 /* NorwBok.edc */; };
+		220E7CF620A3EAFC008DEB69 /* NorwNyn.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CDA20A3EAFB008DEB69 /* NorwNyn.edc */; };
+		220E7CF720A3EAFC008DEB69 /* Polish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CDB20A3EAFB008DEB69 /* Polish.edc */; };
+		220E7CF820A3EAFC008DEB69 /* Portug.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CDC20A3EAFB008DEB69 /* Portug.edc */; };
+		220E7CF920A3EAFC008DEB69 /* Spanish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CDD20A3EAFB008DEB69 /* Spanish.edc */; };
+		220E7CFA20A3EAFC008DEB69 /* Swedish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CDE20A3EAFB008DEB69 /* Swedish.edc */; };
+		220E7CFB20A3EAFC008DEB69 /* Turkish.edc in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CDF20A3EAFB008DEB69 /* Turkish.edc */; };
+		220E7CFC20A3EAFC008DEB69 /* European.rom in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CE120A3EAFB008DEB69 /* European.rom */; };
+		220E7CFD20A3EAFC008DEB69 /* FindText.rom in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CE220A3EAFB008DEB69 /* FindText.rom */; };
+		220E7CFE20A3EAFC008DEB69 /* AbbyyRtrSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220E7CE420A3EAFB008DEB69 /* AbbyyRtrSDK.framework */; };
+		220E7CFF20A3EAFC008DEB69 /* AbbyyRtrSdk.license in Resources */ = {isa = PBXBuildFile; fileRef = 220E7CE620A3EAFB008DEB69 /* AbbyyRtrSdk.license */; };
+		223CEB9A20AB2A0B005741A4 /* CallMakeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223CEB9920AB2A0B005741A4 /* CallMakeScreenViewController.swift */; };
 		45A7B1E968F7EC644C84BD83 /* Pods_MedicConnectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB8CB135971FDBA662C5F09 /* Pods_MedicConnectUITests.framework */; };
 		650E28881F71B64B0096A3F0 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 650E28871F71B64B0096A3F0 /* SCSiriWaveformView.m */; };
 		651952AD1F42413D00AA6627 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651952AC1F42413D00AA6627 /* TutorialViewController.swift */; };
@@ -78,34 +104,9 @@
 		65D4B94F1FEC82D9005D9C45 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */; };
 		65D4B9511FED0E4C005D9C45 /* PatientNoteReferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */; };
 		65D5C1DE202C593700EE96D3 /* PatientNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D5C1DD202C593700EE96D3 /* PatientNavigationController.swift */; };
-		65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */ = {isa = PBXBuildFile; fileRef = 65D70D292029A44300686C43 /* AbbyyRtrSdk.license */; };
 		65D70D5D2029A51100686C43 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D70D5C2029A51100686C43 /* libc++.tbd */; };
 		65D70D5F2029AC4800686C43 /* PatientScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D70D5E2029AC4800686C43 /* PatientScanViewController.swift */; };
 		65D70D622029B4DF00686C43 /* ScanAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D70D612029B4DF00686C43 /* ScanAreaView.swift */; };
-		65D70D662029BFAA00686C43 /* AbbyyRtrSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */; };
-		65D70D682029C12900686C43 /* Brazil.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D382029A4AD00686C43 /* Brazil.edc */; };
-		65D70D692029C12900686C43 /* Czech.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3D2029A4AF00686C43 /* Czech.edc */; };
-		65D70D6A2029C12900686C43 /* Danish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D372029A4AD00686C43 /* Danish.edc */; };
-		65D70D6B2029C12900686C43 /* Dutch.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3F2029A4AF00686C43 /* Dutch.edc */; };
-		65D70D6C2029C12900686C43 /* English.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D322029A4AC00686C43 /* English.edc */; };
-		65D70D6D2029C12900686C43 /* Eston.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D2E2029A4AC00686C43 /* Eston.edc */; };
-		65D70D6E2029C12900686C43 /* Finnish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D302029A4AC00686C43 /* Finnish.edc */; };
-		65D70D6F2029C12900686C43 /* Flemmish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D312029A4AC00686C43 /* Flemmish.edc */; };
-		65D70D702029C12900686C43 /* French.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D2F2029A4AC00686C43 /* French.edc */; };
-		65D70D712029C12900686C43 /* German.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3B2029A4AE00686C43 /* German.edc */; };
-		65D70D722029C12900686C43 /* GermanNS.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3E2029A4AF00686C43 /* GermanNS.edc */; };
-		65D70D732029C12900686C43 /* Greek.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D2D2029A4AC00686C43 /* Greek.edc */; };
-		65D70D742029C12900686C43 /* Indones.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D412029A4B000686C43 /* Indones.edc */; };
-		65D70D752029C12900686C43 /* Italian.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D362029A4AD00686C43 /* Italian.edc */; };
-		65D70D762029C12900686C43 /* NorwBok.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3A2029A4AE00686C43 /* NorwBok.edc */; };
-		65D70D772029C12A00686C43 /* NorwNyn.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D402029A4AF00686C43 /* NorwNyn.edc */; };
-		65D70D782029C12A00686C43 /* Polish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D332029A4AC00686C43 /* Polish.edc */; };
-		65D70D792029C12A00686C43 /* Portug.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D392029A4AE00686C43 /* Portug.edc */; };
-		65D70D7A2029C12A00686C43 /* Spanish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D3C2029A4AE00686C43 /* Spanish.edc */; };
-		65D70D7B2029C12A00686C43 /* Swedish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D342029A4AD00686C43 /* Swedish.edc */; };
-		65D70D7C2029C12A00686C43 /* Turkish.edc in Copy Dictionaries */ = {isa = PBXBuildFile; fileRef = 65D70D352029A4AD00686C43 /* Turkish.edc */; };
-		65D70D7E2029C14E00686C43 /* European.rom in Copy Patterns */ = {isa = PBXBuildFile; fileRef = 65D70D582029A4E600686C43 /* European.rom */; };
-		65D70D7F2029C14E00686C43 /* FindText.rom in Copy Patterns */ = {isa = PBXBuildFile; fileRef = 65D70D592029A4E600686C43 /* FindText.rom */; };
 		65D80F531FE28D7000DC5A6E /* ConsultReferringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */; };
 		65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E0D1F12017F142008A79CB /* VSTextField.swift */; };
 		65ED27E5207FCC290039715D /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27E4207FCC290039715D /* History.swift */; };
@@ -228,27 +229,6 @@
 			dstPath = Dictionaries;
 			dstSubfolderSpec = 7;
 			files = (
-				65D70D682029C12900686C43 /* Brazil.edc in Copy Dictionaries */,
-				65D70D692029C12900686C43 /* Czech.edc in Copy Dictionaries */,
-				65D70D6A2029C12900686C43 /* Danish.edc in Copy Dictionaries */,
-				65D70D6B2029C12900686C43 /* Dutch.edc in Copy Dictionaries */,
-				65D70D6C2029C12900686C43 /* English.edc in Copy Dictionaries */,
-				65D70D6D2029C12900686C43 /* Eston.edc in Copy Dictionaries */,
-				65D70D6E2029C12900686C43 /* Finnish.edc in Copy Dictionaries */,
-				65D70D6F2029C12900686C43 /* Flemmish.edc in Copy Dictionaries */,
-				65D70D702029C12900686C43 /* French.edc in Copy Dictionaries */,
-				65D70D712029C12900686C43 /* German.edc in Copy Dictionaries */,
-				65D70D722029C12900686C43 /* GermanNS.edc in Copy Dictionaries */,
-				65D70D732029C12900686C43 /* Greek.edc in Copy Dictionaries */,
-				65D70D742029C12900686C43 /* Indones.edc in Copy Dictionaries */,
-				65D70D752029C12900686C43 /* Italian.edc in Copy Dictionaries */,
-				65D70D762029C12900686C43 /* NorwBok.edc in Copy Dictionaries */,
-				65D70D772029C12A00686C43 /* NorwNyn.edc in Copy Dictionaries */,
-				65D70D782029C12A00686C43 /* Polish.edc in Copy Dictionaries */,
-				65D70D792029C12A00686C43 /* Portug.edc in Copy Dictionaries */,
-				65D70D7A2029C12A00686C43 /* Spanish.edc in Copy Dictionaries */,
-				65D70D7B2029C12A00686C43 /* Swedish.edc in Copy Dictionaries */,
-				65D70D7C2029C12A00686C43 /* Turkish.edc in Copy Dictionaries */,
 			);
 			name = "Copy Dictionaries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,8 +239,6 @@
 			dstPath = Patterns;
 			dstSubfolderSpec = 7;
 			files = (
-				65D70D7E2029C14E00686C43 /* European.rom in Copy Patterns */,
-				65D70D7F2029C14E00686C43 /* FindText.rom in Copy Patterns */,
 			);
 			name = "Copy Patterns";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +252,32 @@
 		00C748411EFD179200BD3EAE /* NotificationUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		00CFBD8E1EF83BEE000A4D1E /* CommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
+		220E7CCB20A3EAFB008DEB69 /* Brazil.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brazil.edc; sourceTree = "<group>"; };
+		220E7CCC20A3EAFB008DEB69 /* Czech.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Czech.edc; sourceTree = "<group>"; };
+		220E7CCD20A3EAFB008DEB69 /* Danish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Danish.edc; sourceTree = "<group>"; };
+		220E7CCE20A3EAFB008DEB69 /* Dutch.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dutch.edc; sourceTree = "<group>"; };
+		220E7CCF20A3EAFB008DEB69 /* English.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = English.edc; sourceTree = "<group>"; };
+		220E7CD020A3EAFB008DEB69 /* Eston.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eston.edc; sourceTree = "<group>"; };
+		220E7CD120A3EAFB008DEB69 /* Finnish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Finnish.edc; sourceTree = "<group>"; };
+		220E7CD220A3EAFB008DEB69 /* Flemmish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flemmish.edc; sourceTree = "<group>"; };
+		220E7CD320A3EAFB008DEB69 /* French.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = French.edc; sourceTree = "<group>"; };
+		220E7CD420A3EAFB008DEB69 /* German.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = German.edc; sourceTree = "<group>"; };
+		220E7CD520A3EAFB008DEB69 /* GermanNS.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = GermanNS.edc; sourceTree = "<group>"; };
+		220E7CD620A3EAFB008DEB69 /* Greek.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Greek.edc; sourceTree = "<group>"; };
+		220E7CD720A3EAFB008DEB69 /* Indones.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Indones.edc; sourceTree = "<group>"; };
+		220E7CD820A3EAFB008DEB69 /* Italian.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Italian.edc; sourceTree = "<group>"; };
+		220E7CD920A3EAFB008DEB69 /* NorwBok.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = NorwBok.edc; sourceTree = "<group>"; };
+		220E7CDA20A3EAFB008DEB69 /* NorwNyn.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = NorwNyn.edc; sourceTree = "<group>"; };
+		220E7CDB20A3EAFB008DEB69 /* Polish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Polish.edc; sourceTree = "<group>"; };
+		220E7CDC20A3EAFB008DEB69 /* Portug.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Portug.edc; sourceTree = "<group>"; };
+		220E7CDD20A3EAFB008DEB69 /* Spanish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Spanish.edc; sourceTree = "<group>"; };
+		220E7CDE20A3EAFB008DEB69 /* Swedish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Swedish.edc; sourceTree = "<group>"; };
+		220E7CDF20A3EAFB008DEB69 /* Turkish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Turkish.edc; sourceTree = "<group>"; };
+		220E7CE120A3EAFB008DEB69 /* European.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = European.rom; sourceTree = "<group>"; };
+		220E7CE220A3EAFB008DEB69 /* FindText.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = FindText.rom; sourceTree = "<group>"; };
+		220E7CE420A3EAFB008DEB69 /* AbbyyRtrSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AbbyyRtrSDK.framework; sourceTree = "<group>"; };
+		220E7CE620A3EAFB008DEB69 /* AbbyyRtrSdk.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = AbbyyRtrSdk.license; sourceTree = "<group>"; };
+		223CEB9920AB2A0B005741A4 /* CallMakeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallMakeScreenViewController.swift; sourceTree = "<group>"; };
 		316C95B4D075CFE02D5E09C6 /* Pods-MedicConnectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicConnectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MedicConnectUITests/Pods-MedicConnectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		371374D4B7C170794CB55B1B /* Pods_MedicConnectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicConnectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB8CB135971FDBA662C5F09 /* Pods_MedicConnectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicConnectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,34 +346,9 @@
 		65D4B94E1FEC82D9005D9C45 /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 		65D4B9501FED0E4C005D9C45 /* PatientNoteReferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNoteReferViewController.swift; sourceTree = "<group>"; };
 		65D5C1DD202C593700EE96D3 /* PatientNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientNavigationController.swift; sourceTree = "<group>"; };
-		65D70D292029A44300686C43 /* AbbyyRtrSdk.license */ = {isa = PBXFileReference; lastKnownFileType = file; path = AbbyyRtrSdk.license; sourceTree = "<group>"; };
-		65D70D2D2029A4AC00686C43 /* Greek.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Greek.edc; sourceTree = "<group>"; };
-		65D70D2E2029A4AC00686C43 /* Eston.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Eston.edc; sourceTree = "<group>"; };
-		65D70D2F2029A4AC00686C43 /* French.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = French.edc; sourceTree = "<group>"; };
-		65D70D302029A4AC00686C43 /* Finnish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Finnish.edc; sourceTree = "<group>"; };
-		65D70D312029A4AC00686C43 /* Flemmish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flemmish.edc; sourceTree = "<group>"; };
-		65D70D322029A4AC00686C43 /* English.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = English.edc; sourceTree = "<group>"; };
-		65D70D332029A4AC00686C43 /* Polish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Polish.edc; sourceTree = "<group>"; };
-		65D70D342029A4AD00686C43 /* Swedish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Swedish.edc; sourceTree = "<group>"; };
-		65D70D352029A4AD00686C43 /* Turkish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Turkish.edc; sourceTree = "<group>"; };
-		65D70D362029A4AD00686C43 /* Italian.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Italian.edc; sourceTree = "<group>"; };
-		65D70D372029A4AD00686C43 /* Danish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Danish.edc; sourceTree = "<group>"; };
-		65D70D382029A4AD00686C43 /* Brazil.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Brazil.edc; sourceTree = "<group>"; };
-		65D70D392029A4AE00686C43 /* Portug.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Portug.edc; sourceTree = "<group>"; };
-		65D70D3A2029A4AE00686C43 /* NorwBok.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = NorwBok.edc; sourceTree = "<group>"; };
-		65D70D3B2029A4AE00686C43 /* German.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = German.edc; sourceTree = "<group>"; };
-		65D70D3C2029A4AE00686C43 /* Spanish.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Spanish.edc; sourceTree = "<group>"; };
-		65D70D3D2029A4AF00686C43 /* Czech.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Czech.edc; sourceTree = "<group>"; };
-		65D70D3E2029A4AF00686C43 /* GermanNS.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = GermanNS.edc; sourceTree = "<group>"; };
-		65D70D3F2029A4AF00686C43 /* Dutch.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dutch.edc; sourceTree = "<group>"; };
-		65D70D402029A4AF00686C43 /* NorwNyn.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = NorwNyn.edc; sourceTree = "<group>"; };
-		65D70D412029A4B000686C43 /* Indones.edc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Indones.edc; sourceTree = "<group>"; };
-		65D70D582029A4E600686C43 /* European.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = European.rom; sourceTree = "<group>"; };
-		65D70D592029A4E600686C43 /* FindText.rom */ = {isa = PBXFileReference; lastKnownFileType = file; path = FindText.rom; sourceTree = "<group>"; };
 		65D70D5C2029A51100686C43 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		65D70D5E2029AC4800686C43 /* PatientScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientScanViewController.swift; sourceTree = "<group>"; };
 		65D70D612029B4DF00686C43 /* ScanAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanAreaView.swift; sourceTree = "<group>"; };
-		65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AbbyyRtrSDK.framework; sourceTree = "<group>"; };
 		65D80F521FE28D7000DC5A6E /* ConsultReferringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultReferringViewController.swift; sourceTree = "<group>"; };
 		65E0D1F12017F142008A79CB /* VSTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VSTextField.swift; path = MedicConnect/Views/VSTextField/VSTextField.swift; sourceTree = SOURCE_ROOT; };
 		65ED27E4207FCC290039715D /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
@@ -496,6 +475,7 @@
 				65373AD72059EA4D008A483A /* PushKit.framework in Frameworks */,
 				6557841420581C0B0084DD05 /* QuartzCore.framework in Frameworks */,
 				6557841220581C040084DD05 /* OpenGLES.framework in Frameworks */,
+				220E7CFE20A3EAFC008DEB69 /* AbbyyRtrSDK.framework in Frameworks */,
 				6557841020581BFC0084DD05 /* GLKit.framework in Frameworks */,
 				6557840E20581BF20084DD05 /* CoreImage.framework in Frameworks */,
 				6557840C20581BEA0084DD05 /* CoreVideo.framework in Frameworks */,
@@ -507,7 +487,6 @@
 				6557840020581B4E0084DD05 /* libz.tbd in Frameworks */,
 				65D70D5D2029A51100686C43 /* libc++.tbd in Frameworks */,
 				A9E444F91F0A458D00F49C7E /* SystemConfiguration.framework in Frameworks */,
-				65D70D662029BFAA00686C43 /* AbbyyRtrSDK.framework in Frameworks */,
 				BA23873CF71C63A70D49CA98 /* Pods_MedicConnect.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -531,6 +510,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220E7CC820A3EAFB008DEB69 /* AbbyyRtrSDK */ = {
+			isa = PBXGroup;
+			children = (
+				220E7CC920A3EAFB008DEB69 /* assets */,
+				220E7CE320A3EAFB008DEB69 /* libs */,
+				220E7CE520A3EAFB008DEB69 /* License */,
+			);
+			path = AbbyyRtrSDK;
+			sourceTree = "<group>";
+		};
+		220E7CC920A3EAFB008DEB69 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				220E7CCA20A3EAFB008DEB69 /* dictionaries */,
+				220E7CE020A3EAFB008DEB69 /* patterns */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		220E7CCA20A3EAFB008DEB69 /* dictionaries */ = {
+			isa = PBXGroup;
+			children = (
+				220E7CCB20A3EAFB008DEB69 /* Brazil.edc */,
+				220E7CCC20A3EAFB008DEB69 /* Czech.edc */,
+				220E7CCD20A3EAFB008DEB69 /* Danish.edc */,
+				220E7CCE20A3EAFB008DEB69 /* Dutch.edc */,
+				220E7CCF20A3EAFB008DEB69 /* English.edc */,
+				220E7CD020A3EAFB008DEB69 /* Eston.edc */,
+				220E7CD120A3EAFB008DEB69 /* Finnish.edc */,
+				220E7CD220A3EAFB008DEB69 /* Flemmish.edc */,
+				220E7CD320A3EAFB008DEB69 /* French.edc */,
+				220E7CD420A3EAFB008DEB69 /* German.edc */,
+				220E7CD520A3EAFB008DEB69 /* GermanNS.edc */,
+				220E7CD620A3EAFB008DEB69 /* Greek.edc */,
+				220E7CD720A3EAFB008DEB69 /* Indones.edc */,
+				220E7CD820A3EAFB008DEB69 /* Italian.edc */,
+				220E7CD920A3EAFB008DEB69 /* NorwBok.edc */,
+				220E7CDA20A3EAFB008DEB69 /* NorwNyn.edc */,
+				220E7CDB20A3EAFB008DEB69 /* Polish.edc */,
+				220E7CDC20A3EAFB008DEB69 /* Portug.edc */,
+				220E7CDD20A3EAFB008DEB69 /* Spanish.edc */,
+				220E7CDE20A3EAFB008DEB69 /* Swedish.edc */,
+				220E7CDF20A3EAFB008DEB69 /* Turkish.edc */,
+			);
+			path = dictionaries;
+			sourceTree = "<group>";
+		};
+		220E7CE020A3EAFB008DEB69 /* patterns */ = {
+			isa = PBXGroup;
+			children = (
+				220E7CE120A3EAFB008DEB69 /* European.rom */,
+				220E7CE220A3EAFB008DEB69 /* FindText.rom */,
+			);
+			path = patterns;
+			sourceTree = "<group>";
+		};
+		220E7CE320A3EAFB008DEB69 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				220E7CE420A3EAFB008DEB69 /* AbbyyRtrSDK.framework */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		220E7CE520A3EAFB008DEB69 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				220E7CE620A3EAFB008DEB69 /* AbbyyRtrSdk.license */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
 		4475F5E7744A51F7CD3E202D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -682,6 +733,7 @@
 			children = (
 				65691C411FA958960071C162 /* ConferenceViewController.swift */,
 				6557841520587F710084DD05 /* CallScreenViewController.swift */,
+				223CEB9920AB2A0B005741A4 /* CallMakeScreenViewController.swift */,
 			);
 			path = Conference;
 			sourceTree = "<group>";
@@ -738,77 +790,13 @@
 		65D70D232029A34100686C43 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				220E7CC820A3EAFB008DEB69 /* AbbyyRtrSDK */,
 				6527286A203CF8AC008278D6 /* Fonts */,
-				65D70D242029A35A00686C43 /* AbbyyRtrSDK */,
 				65940B26206EED95006F9302 /* incoming.wav */,
 				65373ACF2059DBA0008A483A /* ringback.wav */,
 				655013A220065B4700D88443 /* progress_circle.gif */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		65D70D242029A35A00686C43 /* AbbyyRtrSDK */ = {
-			isa = PBXGroup;
-			children = (
-				65D70D252029A38600686C43 /* assets */,
-				65D70D642029BF8D00686C43 /* libs */,
-				65D70D262029A38C00686C43 /* License */,
-			);
-			path = AbbyyRtrSDK;
-			sourceTree = "<group>";
-		};
-		65D70D252029A38600686C43 /* assets */ = {
-			isa = PBXGroup;
-			children = (
-				65D70D2C2029A46B00686C43 /* dictionaries */,
-				65D70D572029A4CC00686C43 /* patterns */,
-			);
-			path = assets;
-			sourceTree = "<group>";
-		};
-		65D70D262029A38C00686C43 /* License */ = {
-			isa = PBXGroup;
-			children = (
-				65D70D292029A44300686C43 /* AbbyyRtrSdk.license */,
-			);
-			path = License;
-			sourceTree = "<group>";
-		};
-		65D70D2C2029A46B00686C43 /* dictionaries */ = {
-			isa = PBXGroup;
-			children = (
-				65D70D382029A4AD00686C43 /* Brazil.edc */,
-				65D70D3D2029A4AF00686C43 /* Czech.edc */,
-				65D70D372029A4AD00686C43 /* Danish.edc */,
-				65D70D3F2029A4AF00686C43 /* Dutch.edc */,
-				65D70D322029A4AC00686C43 /* English.edc */,
-				65D70D2E2029A4AC00686C43 /* Eston.edc */,
-				65D70D302029A4AC00686C43 /* Finnish.edc */,
-				65D70D312029A4AC00686C43 /* Flemmish.edc */,
-				65D70D2F2029A4AC00686C43 /* French.edc */,
-				65D70D3B2029A4AE00686C43 /* German.edc */,
-				65D70D3E2029A4AF00686C43 /* GermanNS.edc */,
-				65D70D2D2029A4AC00686C43 /* Greek.edc */,
-				65D70D412029A4B000686C43 /* Indones.edc */,
-				65D70D362029A4AD00686C43 /* Italian.edc */,
-				65D70D3A2029A4AE00686C43 /* NorwBok.edc */,
-				65D70D402029A4AF00686C43 /* NorwNyn.edc */,
-				65D70D332029A4AC00686C43 /* Polish.edc */,
-				65D70D392029A4AE00686C43 /* Portug.edc */,
-				65D70D3C2029A4AE00686C43 /* Spanish.edc */,
-				65D70D342029A4AD00686C43 /* Swedish.edc */,
-				65D70D352029A4AD00686C43 /* Turkish.edc */,
-			);
-			path = dictionaries;
-			sourceTree = "<group>";
-		};
-		65D70D572029A4CC00686C43 /* patterns */ = {
-			isa = PBXGroup;
-			children = (
-				65D70D582029A4E600686C43 /* European.rom */,
-				65D70D592029A4E600686C43 /* FindText.rom */,
-			);
-			path = patterns;
 			sourceTree = "<group>";
 		};
 		65D70D602029B4BD00686C43 /* ScanAreaView */ = {
@@ -817,14 +805,6 @@
 				65D70D612029B4DF00686C43 /* ScanAreaView.swift */,
 			);
 			path = ScanAreaView;
-			sourceTree = "<group>";
-		};
-		65D70D642029BF8D00686C43 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				65D70D652029BFAA00686C43 /* AbbyyRtrSDK.framework */,
-			);
-			path = libs;
 			sourceTree = "<group>";
 		};
 		65E0D1F02017F117008A79CB /* VSTextField */ = {
@@ -1135,7 +1115,6 @@
 				D270B7D21DE51F7500458C2E /* Frameworks */,
 				D270B7D31DE51F7500458C2E /* Resources */,
 				3D2624C31446F4C261B2C7CD /* [CP] Embed Pods Frameworks */,
-				4951CF85088FC2C7A2E0041F /* [CP] Copy Pods Resources */,
 				A912FC2A1F027C79004C01BD /* ShellScript */,
 				65D70D672029C0FF00686C43 /* Copy Dictionaries */,
 				65D70D7D2029C13800686C43 /* Copy Patterns */,
@@ -1157,8 +1136,6 @@
 				D270B7E51DE51F7600458C2E /* Sources */,
 				D270B7E61DE51F7600458C2E /* Frameworks */,
 				D270B7E71DE51F7600458C2E /* Resources */,
-				8991A5D33B344666A3E0DB1B /* [CP] Embed Pods Frameworks */,
-				7CD43CFFE001605805C708E5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1178,8 +1155,6 @@
 				D270B7F01DE51F7600458C2E /* Sources */,
 				D270B7F11DE51F7600458C2E /* Frameworks */,
 				D270B7F21DE51F7600458C2E /* Resources */,
-				2DACE5E32E3B37060848F6CF /* [CP] Embed Pods Frameworks */,
-				D91A030950792B6F3D9FEE8B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1205,7 +1180,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = HERPRDNG3R;
 						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1255,16 +1230,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220E7CF420A3EAFC008DEB69 /* Italian.edc in Resources */,
 				6527286C203CF976008278D6 /* Arial_Black.ttf in Resources */,
+				220E7CEB20A3EAFC008DEB69 /* English.edc in Resources */,
+				220E7CEC20A3EAFC008DEB69 /* Eston.edc in Resources */,
 				D2A634561E1DE05500E51AA0 /* FollowingCell.xib in Resources */,
+				220E7CFF20A3EAFC008DEB69 /* AbbyyRtrSdk.license in Resources */,
 				D270B7E31DE51F7600458C2E /* LaunchScreen.storyboard in Resources */,
 				A9A358791F07447F005B8011 /* Privacy_policy_HTML.html in Resources */,
-				65D70D2A2029A44300686C43 /* AbbyyRtrSdk.license in Resources */,
+				220E7CF520A3EAFC008DEB69 /* NorwBok.edc in Resources */,
+				220E7CF720A3EAFC008DEB69 /* Polish.edc in Resources */,
 				655013A320065B4800D88443 /* progress_circle.gif in Resources */,
+				220E7CF820A3EAFC008DEB69 /* Portug.edc in Resources */,
+				220E7CF620A3EAFC008DEB69 /* NorwNyn.edc in Resources */,
 				653E7C641FBA067C00B41A5C /* Main.storyboard in Resources */,
 				D270B7E01DE51F7600458C2E /* Assets.xcassets in Resources */,
+				220E7CFC20A3EAFC008DEB69 /* European.rom in Resources */,
 				D2F55A9C1DEBB8BB0038A392 /* ProfileListCell.xib in Resources */,
 				A9C741D81F0FDCC700894651 /* PrivateUserTableViewCell.xib in Resources */,
+				220E7CFB20A3EAFC008DEB69 /* Turkish.edc in Resources */,
 				D2941E651E109E7D00CB7552 /* ChangePasswordListCell.xib in Resources */,
 				A9A358781F07447F005B8011 /* Code_of_conduct_HTML.html in Resources */,
 				65A289781F3BC97B00547D72 /* SearchTagCell.xib in Resources */,
@@ -1275,12 +1259,26 @@
 				652A1C361FA9242B009B7765 /* PatientListCell.xib in Resources */,
 				D213CB1F1E0CABC6004BEA3C /* SettingListCell.xib in Resources */,
 				65A289741F3BC95300547D72 /* SearchPeopleCell.xib in Resources */,
+				220E7CE720A3EAFC008DEB69 /* Brazil.edc in Resources */,
 				65691C461FA95BA60071C162 /* CallHistoryAudioCell.xib in Resources */,
+				220E7CF020A3EAFC008DEB69 /* German.edc in Resources */,
+				220E7CF120A3EAFC008DEB69 /* GermanNS.edc in Resources */,
 				65373AD12059DBA1008A483A /* ringback.wav in Resources */,
+				220E7CEA20A3EAFC008DEB69 /* Dutch.edc in Resources */,
 				657B12841FC38E4C0059B16E /* PatientNotesCell.xib in Resources */,
 				D279AD501E132A26001714FC /* CommentsListCell.xib in Resources */,
+				220E7CEF20A3EAFC008DEB69 /* French.edc in Resources */,
+				220E7CEE20A3EAFC008DEB69 /* Flemmish.edc in Resources */,
+				220E7CED20A3EAFC008DEB69 /* Finnish.edc in Resources */,
+				220E7CE820A3EAFC008DEB69 /* Czech.edc in Resources */,
 				D21BC8FF1DEA3F0D008F5443 /* ConsultCell.xib in Resources */,
+				220E7CE920A3EAFC008DEB69 /* Danish.edc in Resources */,
+				220E7CF220A3EAFC008DEB69 /* Greek.edc in Resources */,
+				220E7CF320A3EAFC008DEB69 /* Indones.edc in Resources */,
+				220E7CF920A3EAFC008DEB69 /* Spanish.edc in Resources */,
+				220E7CFD20A3EAFC008DEB69 /* FindText.rom in Resources */,
 				D213CB251E0CB043004BEA3C /* SettingHeaderCell.xib in Resources */,
+				220E7CFA20A3EAFC008DEB69 /* Swedish.edc in Resources */,
 				65ED27ED207FD6F00039715D /* HistoryListCell.xib in Resources */,
 				D2A9E7381E0A18E70032C2CA /* NotificationListCell.xib in Resources */,
 				65A2897C1F3BC98E00547D72 /* SearchPlaceCell.xib in Resources */,
@@ -1304,21 +1302,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2DACE5E32E3B37060848F6CF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedicConnectUITests/Pods-MedicConnectUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3D2624C31446F4C261B2C7CD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1379,38 +1362,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4951CF85088FC2C7A2E0041F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect-resources.sh",
-				"${PODS_ROOT}/TwilioClient/Resources/disconnect.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_0.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_1.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_2.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_3.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_4.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_5.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_6.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_7.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_8.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_9.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_hash.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/dtmf_star.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/incoming.wav",
-				"${PODS_ROOT}/TwilioClient/Resources/outgoing.wav",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedicConnect/Pods-MedicConnect-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		72FD494FCC7DEDD6498CD582 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1429,36 +1380,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7CD43CFFE001605805C708E5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedicConnectTests/Pods-MedicConnectTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8991A5D33B344666A3E0DB1B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedicConnectTests/Pods-MedicConnectTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A912FC2A1F027C79004C01BD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1471,21 +1392,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" b8797e3a99e9fee48e7423bc6aeb6b458142edf4 e13c1abf5fbc19cd1627dfb7abbe1955602c3c52f553785a0390f1a80b8734d1";
-		};
-		D91A030950792B6F3D9FEE8B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MedicConnectUITests/Pods-MedicConnectUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D9706A81601258DB2BE3440C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1573,6 +1479,7 @@
 				0056429A1EFF007300B42A42 /* Notification.swift in Sources */,
 				65ED27E9207FCC490039715D /* HistoryService.swift in Sources */,
 				9D24ACA91F20E7E700229E29 /* ResetPasswordViewController.swift in Sources */,
+				223CEB9A20AB2A0B005741A4 /* CallMakeScreenViewController.swift in Sources */,
 				652A1C351FA9242A009B7765 /* PatientListCell.swift in Sources */,
 				65691C451FA95BA60071C162 /* CallHistoryAudioCell.swift in Sources */,
 				653D8122200FF31800136E1B /* SaveDiagnosisViewController.swift in Sources */,
@@ -1793,7 +1700,7 @@
 				CODE_SIGN_ENTITLEMENTS = MedicConnect/MedicConnect.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HERPRDNG3R;
 				ENABLE_BITCODE = NO;
@@ -1808,8 +1715,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codi.consultingapp;
 				PRODUCT_NAME = "CODI-C";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "aa4d9452-0569-447e-a45e-0563eb69c9fb";
+				PROVISIONING_PROFILE_SPECIFIER = codi_c_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "MedicConnect-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -1824,7 +1731,7 @@
 				CODE_SIGN_ENTITLEMENTS = MedicConnect/MedicConnect.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = HERPRDNG3R;
 				ENABLE_BITCODE = NO;
@@ -1839,8 +1746,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codi.consultingapp;
 				PRODUCT_NAME = "CODI-C";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "aa4d9452-0569-447e-a45e-0563eb69c9fb";
+				PROVISIONING_PROFILE_SPECIFIER = codi_c_dev;
 				SWIFT_OBJC_BRIDGING_HEADER = "MedicConnect-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;

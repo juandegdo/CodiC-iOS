@@ -1,34 +1,27 @@
 //
-//  CallScreenViewController.swift
+//  CallMakeScreenViewController.swift
 //  MedicConnect
 //
-//  Created by Daniel Yang on 2018-03-12.
+//  Created by Juan on 5/15/18.
 //  Copyright © 2018 Loewen. All rights reserved.
 //
 
 import UIKit
 import FXBlurView
 
-enum EButtonsBar {
-    case kButtonsAnswerDecline
-    case kButtonsHangup
-    case kButtonsCall
-}
+class CallMakeScreenViewController: UIViewController, SINCallClientDelegate, SINCallDelegate {
 
-class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCallDelegate {
-    
     @IBOutlet weak var mBackgroundImageView: UIImageView!
     @IBOutlet weak var blurView: FXBlurView!
     @IBOutlet weak var maskView: UIView!
     
-    @IBOutlet weak var lblRemoteUserName: UILabel!
-    @IBOutlet weak var lblRemoteUserLocation: UILabel!
     @IBOutlet weak var lblCallState: UILabel!
+    @IBOutlet weak var lblRemoteUserName: UILabel!
     
     // Buttons
     @IBOutlet weak var btnClose: UIButton!
     @IBOutlet weak var btnSwitchCamera: UIButton!
-    @IBOutlet weak var btnAccept: UIButton!
+    @IBOutlet weak var btnCall: UIButton!
     @IBOutlet weak var btnEnd: UIButton!
     @IBOutlet weak var btnSpeaker: UIButton!
     @IBOutlet weak var btnMute: UIButton!
@@ -38,23 +31,17 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     @IBOutlet weak var viewLocalVideo: UIView!
     @IBOutlet weak var viewRemoteVideo: UIView!
     
-    // Local Video Constraints
-    @IBOutlet weak var constOfLocalContainerLeading: NSLayoutConstraint!
-    @IBOutlet weak var constOfLocalContainerTop: NSLayoutConstraint!
-    @IBOutlet weak var constOfLocalContainerTrailing: NSLayoutConstraint!
-    @IBOutlet weak var constOfLocalContainerBottom: NSLayoutConstraint!
+    var receiverId: String? = nil
     
-    @IBOutlet weak var constOfLocalVideoLeading: NSLayoutConstraint!
-    @IBOutlet weak var constOfLocalVideoTrailing: NSLayoutConstraint!
-    @IBOutlet weak var constOfLocalVideoTop: NSLayoutConstraint!
-    @IBOutlet weak var constOfLocalVideoBottom: NSLayoutConstraint!
+    var activityIndicatorView = UIActivityIndicatorView()
     
-    var fromCallKit: Bool = false
-    var rotationEnabled: Bool = false
-    
-    private var durationTimer: Timer?
-    private var speakerEnabled: Bool = false
-    private var muted: Bool = false
+    var durationTimer: Timer?
+    var speakerEnabled: Bool = false
+    var muted: Bool = false
+    var isVideo: Bool = false
+    var callReceiver: User? = nil
+
+    var callShouldSendAlert: Bool = true
     
     private var hideControls: Bool = false
     private var hideTimer: Timer?
@@ -87,121 +74,49 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
             print("Failed to enable playing audio in silent mode")
         }
         
+        // Background captured image
+        self.mBackgroundImageView.image = ImageHelper.captureView()
+        
+        // Local video border color
+        self.viewLocalVideo.layer.borderColor = UIColor.init(red: 147/255.0, green: 203/255.0, blue: 202/255.0, alpha: 1.0).cgColor
+        
+        self.showButtons(.kButtonsCall)
+        
+        // Call Video
+        self.startCall(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        let currentRoute = AVAudioSession.sharedInstance().currentRoute
-//        var hasHeadphones = false
-//        for description in currentRoute.outputs {
-//            if description.portType == AVAudioSessionPortHeadphones {
-//                hasHeadphones = true
-//                break
-//            }
-//        }
-//
-//        if !hasHeadphones {
-//            self.audioController?.enableSpeaker()
-//        } else {
-//            self.audioController?.disableSpeaker()
-//        }
+        // Get consulting doctor
+        //        self.getConsultingDoctor()
         
-//        self.speakerEnabled = !(self.call?.details.isVideoOffered)!
-//        self.onSpeaker(sender: self.btnSpeaker)
-        
-        AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
-        
-        self.audioController?.enableSpeaker()
+        self.audioController?.disableSpeaker()
         self.audioController?.unmute()
-        
-        self.initViews()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if self.rotationEnabled {
+        if self.call?.details.isVideoOffered == true {
             AppDelegate.AppUtility.lockOrientation(UIInterfaceOrientationMask.portrait, andRotateTo: UIInterfaceOrientation.portrait)
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        if self.rotationEnabled {
-            if UIApplication.shared.statusBarOrientation == UIInterfaceOrientation.portrait {
-                self.constOfLocalContainerTrailing.constant = Constants.ScreenWidth - 28 - 78
-                self.constOfLocalContainerBottom.constant = Constants.ScreenHeight - 35 - 100
-            } else {
-                self.constOfLocalContainerTrailing.constant = Constants.ScreenHeight - 28 - 78
-                self.constOfLocalContainerBottom.constant = Constants.ScreenWidth - 35 - 100
-            }
-        }
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: Initialize views
-    
-    func initViews() {
-        // Background captured image
-        self.mBackgroundImageView.image = ImageHelper.captureView()
-        
-        // Customize Avatar
-        if let _user = UserController.Instance.findUserById((self.call?.remoteUserId)!) {
-            self.lblRemoteUserName.text = _user.fullName
-            self.lblRemoteUserLocation.text = _user.location
-        }
-        
-        if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
-            self.showButtons(.kButtonsAnswerDecline)
-            
-            if self.fromCallKit {
-                self.call?.delegate = self
-                self.callDidEstablish(self.call)
-            } else {
-                self.setCallStatusText("00:00")
-                self.showButtons(.kButtonsHangup)
-            }
-            
-        } else {
-            self.setCallStatusText("CALLING...")
-            self.showButtons(.kButtonsAnswerDecline)
-            self.audioController?.startPlayingSoundFile(self.pathForSound("incoming.wav"), loop: true)
-        }
-        
-        if (self.call?.details.isVideoOffered)! {
-            // Add Local Video
-            self.videoController?.localView().contentMode = .scaleAspectFill
-            self.viewLocalVideo.addSubview((self.videoController?.localView())!)
-            self.viewLocalVideo.alpha = 0
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.viewLocalVideo.alpha = 1
-                })
-            }
-        }
-        
-    }
-    
     // MARK: Private Methods
-    
     func pathForSound(_ soundName: String) -> String {
-        print(Bundle.main.resourceURL!.appendingPathComponent(soundName).path)
         return Bundle.main.resourceURL!.appendingPathComponent(soundName).path
     }
     
     @objc func onDurationTimer(_ unused: Timer) {
         let duration: Int = Int(Date().timeIntervalSince((self.call?.details.establishedTime)!))
-        DispatchQueue.main.async {
-            self.setDuration(duration)
-        }
+        self.setDuration(duration)
     }
     
     @objc func onViewTapped(sender: UITapGestureRecognizer) {
@@ -219,34 +134,22 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     // MARK: - SINCallDelegate
     
     func callDidProgress(_ call: SINCall!) {
-        self.setCallStatusText("CALLING...")
         self.audioController?.startPlayingSoundFile(self.pathForSound("ringback.wav"), loop: true)
+        self.callShouldSendAlert = true
     }
     
     func callDidEstablish(_ call: SINCall!) {
         self.audioController?.disableSpeaker()
         
         if self.call?.details.isVideoOffered == false {
-            if self.call?.state != SINCallState.initiating  {
-                self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
-            } else {
-                self.setCallStatusText("00:00")
-            }
-        } else if self.call?.details.isVideoOffered == true {
-            // Disable idle timer
-            UIApplication.shared.isIdleTimerDisabled = true
-            
+            self.startCallDurationTimerWithSelector(#selector(onDurationTimer(_:)))
+        } else {
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
                 self.audioController?.enableSpeaker()
             }
             
-            if self.fromCallKit == true && self.call?.state != SINCallState.initiating {
-                self.fromCallKit = false
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                    self.callDidAddVideoTrack(call)
-                }
-            }
-            
+            // Disable idle timer
+            UIApplication.shared.isIdleTimerDisabled = true
         }
         
         self.showButtons(.kButtonsHangup)
@@ -254,94 +157,103 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     }
     
     func callDidEnd(_ call: SINCall!) {
+        if self.callShouldSendAlert && call.details.endCause != SINCallEndCause.hungUp {
+            // Call misssed
+            NotificationService.Instance.sendMissedCallAlert(toUser: self.receiverId!) { (success) in
+                // Do nothing
+            }
+        }
+
         self.audioController?.stopPlayingSoundFile()
         self.audioController?.disableSpeaker()
         self.stopCallDurationTimer()
         self.stopHideDurationTimer()
         
         if (self.call?.details.isVideoOffered)! {
-            self.videoController?.localView().frame = UIScreen.main.bounds
-            self.videoController?.remoteView().frame = UIScreen.main.bounds
-            
-            self.videoController?.localView().removeFromSuperview()
             self.videoController?.remoteView().removeFromSuperview()
         }
         
         // Disable idle timer
         UIApplication.shared.isIdleTimerDisabled = false
         
-        weak var pvc = self.presentingViewController
-        self.dismiss(animated: false, completion: {
-            print("End Cause: \(call.details.endCause.rawValue)")
-            if (call.details.endCause.rawValue == 5 && call.details.establishedTime != nil) { // SINCallEndCauseHungUp
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let vc = storyboard.instantiateViewController(withIdentifier: "EndCallPopupViewController") as? EndCallPopupViewController {
-                    vc.doctorId = (self.call?.remoteUserId)!
-                    pvc?.present(vc, animated: false, completion: nil)
-                }
-            }
-        })
+        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.dismiss(animated: false, completion: nil)
     }
     
     func callDidAddVideoTrack(_ call: SINCall!) {
         self.videoController?.remoteView().frame = UIScreen.main.bounds
         self.videoController?.remoteView().contentMode = .scaleAspectFill
         self.viewRemoteVideo.addSubview((self.videoController?.remoteView())!)
-        
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
-            // Remove call state text
-            self.lblCallState.isHidden = true
-            
-            // Animate Local Video
-            self.constOfLocalContainerLeading.constant = 28
-            self.constOfLocalContainerTop.constant = 35
-            self.constOfLocalContainerTrailing.constant = Constants.ScreenWidth - 28 - 78
-            self.constOfLocalContainerBottom.constant = Constants.ScreenHeight - 35 - 100
-            
-            self.constOfLocalVideoLeading.constant = 1
-            self.constOfLocalVideoTop.constant = 1
-            self.constOfLocalVideoTrailing.constant = 1
-            self.constOfLocalVideoBottom.constant = 1
-            
-            UIView.animate(withDuration: 0.3, animations: {
-                self.videoController?.localView().frame = CGRect.init(x: 0, y: 0, width: 78, height: 100)
-                self.view.layoutIfNeeded()
-            }) { (completed) in
-                self.viewLocalContainer.backgroundColor = UIColor.white
-                self.viewLocalContainer.layer.cornerRadius = 6
-                self.viewLocalVideo.layer.cornerRadius = 4
-                self.viewLocalVideo.layer.borderWidth = 0.5
-                self.viewLocalVideo.layer.borderColor = UIColor.init(red: 147/255.0, green: 203/255.0, blue: 202/255.0, alpha: 1.0).cgColor
-                
-                // Enable landscape mode
-                AppDelegate.AppUtility.lockOrientation(.all)
-                self.rotationEnabled = true
-            }
-        }
     }
-
+    
+    func call(_ call: SINCall!, shouldSendPushNotifications pushPairs: [Any]!) {
+        
+    }
+    
 }
 
-extension CallScreenViewController {
+extension CallMakeScreenViewController {
     
     // MARK: - UI Methods
+    
+    fileprivate func startIndicating(){
+        activityIndicatorView.center = self.view.center
+        activityIndicatorView.hidesWhenStopped = true
+        activityIndicatorView.activityIndicatorViewStyle = .gray
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+    
+    fileprivate func stopIndicating() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.removeFromSuperview()
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
     
     fileprivate func setCallStatusText(_ text: String) {
         self.lblCallState.text = text
     }
     
+    fileprivate func setDuration(_ seconds: Int) {
+        self.setCallStatusText(String.init(format: "%02d:%02d", arguments: [Int(seconds / 60), Int(seconds % 60)]))
+    }
+    
     fileprivate func showButtons(_ buttons: EButtonsBar) {
-        if buttons == .kButtonsAnswerDecline {
-            self.viewLocalContainer.isHidden = !(self.call?.details.isVideoOffered)!
+        if buttons == .kButtonsCall {
+            self.viewLocalContainer.isHidden = true
             self.viewRemoteVideo.isHidden = true
+            
+            self.lblCallState.isHidden = true
+            self.lblRemoteUserName.isHidden = true
             
             self.btnSwitchCamera.isHidden = true
             self.btnSpeaker.isHidden = true
             self.btnMute.isHidden = true
             self.btnEnd.isHidden = true
+            
+        } else if buttons == .kButtonsAnswerDecline {
+            self.maskView.alpha = 0.35
+            self.setCallStatusText("CALLING")
+            
+            // Customize Avatar
+            self.lblRemoteUserName.text = self.callReceiver?.fullName
+            
+            self.lblCallState.isHidden = false
+            self.lblRemoteUserName.isHidden = false
+            
+            self.btnClose.isHidden = true
+            self.btnCall.isHidden = true
+            self.btnEnd.isHidden = false
+            
         } else if buttons == .kButtonsHangup {
             if (self.call?.details.isVideoOffered)! {
                 // Video Call
+                self.videoController?.localView().contentMode = .scaleAspectFill
+                self.viewLocalVideo.addSubview((self.videoController?.localView())!)
+                
+                self.viewLocalContainer.isHidden = false
                 self.viewRemoteVideo.isHidden = false
                 self.btnSwitchCamera.isHidden = false
                 
@@ -351,10 +263,11 @@ extension CallScreenViewController {
                 self.blurView.isHidden = true
                 self.maskView.isHidden = true
                 
+                self.lblCallState.isHidden = true
                 self.lblRemoteUserName.isHidden = true
-                self.lblRemoteUserLocation.isHidden = true
                 
-                self.setCallStatusText("CONNECTING...")
+                // Enable landscape mode
+                AppDelegate.AppUtility.lockOrientation(.all)
             }
             
             self.speakerEnabled = (self.call?.details.isVideoOffered)!
@@ -364,11 +277,8 @@ extension CallScreenViewController {
                 self.btnSpeaker.setImage(UIImage(named: "icon_call_speaker"), for: .normal)
             }
             
-            self.btnClose.isHidden = true
-            self.btnAccept.isHidden = true
             self.btnSpeaker.isHidden = false
             self.btnMute.isHidden = false
-            self.btnEnd.isHidden = false
             
             let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(onViewTapped(sender:)))
             self.view.addGestureRecognizer(tapGesture)
@@ -391,10 +301,6 @@ extension CallScreenViewController {
         
     }
     
-    fileprivate func setDuration(_ seconds: Int) {
-        self.setCallStatusText(String.init(format: "%02d:%02d", arguments: [Int(seconds / 60), Int(seconds % 60)]))
-    }
-    
     @objc fileprivate func internal_updateDuration(_ timer: Timer) {
         let selector: Selector = NSSelectorFromString(timer.userInfo as! String)
         if self.responds(to: selector) {
@@ -412,10 +318,8 @@ extension CallScreenViewController {
     }
     
     fileprivate func stopCallDurationTimer() {
-        if (self.durationTimer != nil) {
-            self.durationTimer?.invalidate()
-            self.durationTimer = nil
-        }
+        self.durationTimer?.invalidate()
+        self.durationTimer = nil
     }
     
     fileprivate func startHideTimerWithSelector() {
@@ -436,25 +340,95 @@ extension CallScreenViewController {
         }
     }
     
+    func startCall(_ isVideo: Bool) {
+        // Start audio/video call
+        self.isVideo = isVideo
+        
+        if let _user = self.callReceiver as User? {
+            print("Calling Doctor: \(_user.id)")
+            self.receiverId = _user.id
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.shouldReceiveCall = false
+
+            if isVideo {
+                self.call = appDelegate.sinchClient?.call().callUserVideo(withId: "5af4fb894920576fd7a5f92d"/*_user.id*/)
+            } else {
+                self.call = appDelegate.sinchClient?.call().callUser(withId: _user.id)
+            }
+            
+            self.showButtons(.kButtonsAnswerDecline)
+
+        } else {
+            // Finish screen
+            self.callShouldSendAlert = false
+            self.callDidEnd(self.call!)
+        }
+        
+    }
+    
 }
 
-extension CallScreenViewController {
+extension CallMakeScreenViewController {
     
     // MARK: - IBActions
     
     @IBAction func onClose(sender: AnyObject) {
-        self.call?.hangup()
+        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.dismiss(animated: false, completion: nil)
+    }
+    
+    @IBAction func onCall(sender: AnyObject) {
+        // Present AlertController
+        let alertController = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        let audioAction = UIAlertAction.init(title: "CALL AUDIO", style: .default) { (action) in
+            // Call Audio
+            if (self.callReceiver as User?) != nil {
+                self.startCall(false)
+            } else {
+                AlertUtil.showSimpleAlert(self, title: "Receiver is not available.", message: nil, okButtonTitle: "OK")
+            }
+        }
+        
+        audioAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
+        audioAction.setValue(UIColor.init(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 1), forKey: "titleTextColor")
+        audioAction.setValue(UIImage(named:"icon_audio")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        alertController.addAction(audioAction)
+        
+        let videoAction = UIAlertAction.init(title: "CALL VIDEO", style: .default) { (action) in
+            // Call Video
+            if (self.callReceiver as User?) != nil {
+                self.startCall(true)
+            } else {
+                AlertUtil.showSimpleAlert(self, title: "Receiver is not available.", message: nil, okButtonTitle: "OK")
+            }
+        }
+        
+        videoAction.setValue(NSNumber(value: NSTextAlignment.left.rawValue), forKey: "titleTextAlignment")
+        videoAction.setValue(UIColor.init(red: 120/255.0, green: 120/255.0, blue: 120/255.0, alpha: 1), forKey: "titleTextColor")
+        videoAction.setValue(UIImage(named:"icon_video")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        alertController.addAction(videoAction)
+        
+        let cancelAction = UIAlertAction(title: "CANCEL", style: .cancel)
+        cancelAction.setValue(UIColor.init(red: 143/255.0, green: 195/255.0, blue: 196/255.0, alpha: 1), forKey: "titleTextColor")
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+        // Update AlertController Style
+        let actionViews = alertController.view.value(forKey: "actionViews") as! [UIView]
+        if actionViews.count > 0 {
+            let audioView = actionViews[0] as UIView
+            (audioView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 80
+            
+            let videoView = actionViews[1] as UIView
+            (videoView.value(forKey: "marginToImageConstraint") as! NSLayoutConstraint).constant = Constants.ScreenWidth - 80
+        }
+        
     }
     
     @IBAction func onSwitchCamera(sender: AnyObject) {
         self.videoController?.captureDevicePosition = SINToggleCaptureDevicePosition((self.videoController?.captureDevicePosition)!);
-    }
-    
-    @IBAction func onAccept(sender: AnyObject) {
-        self.btnAccept.isHidden = true
-        
-        self.audioController?.stopPlayingSoundFile()
-        self.call?.answer()
     }
     
     @IBAction func onSpeaker(sender: AnyObject) {
@@ -482,11 +456,7 @@ extension CallScreenViewController {
     }
     
     @IBAction func onEndCall(sender: AnyObject) {
-        if self.call?.state == SINCallState.ended {
-            self.callDidEnd(self.call!)
-        } else {
-            self.call?.hangup()
-        }
+        self.call?.hangup()
     }
-    
+
 }

@@ -90,7 +90,6 @@ class EditPatientViewController: BaseViewController {
         // Address
         self.tfAddress.placeholder = NSLocalizedString("Address (optional)", comment: "comment")
         self.tfAddress.text = self.patient?.address
-        
     }
     
 }
