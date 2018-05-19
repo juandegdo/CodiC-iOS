@@ -136,6 +136,11 @@ class SettingsDetailViewController: BaseViewController {
 //                            self.pdfView?.autoScales = true
                             self.pdfView?.maxScaleFactor = 4.0
                             self.pdfView?.minScaleFactor = (self.pdfView?.scaleFactorForSizeToFit)!
+                            self.pdfView?.scaleFactor = (self.pdfView?.minScaleFactor)! + 0.18
+                            
+                            if let scrollView = self.pdfView?.subviews[0] as? UIScrollView {
+                                scrollView.contentOffset = CGPoint.init(x: (scrollView.contentSize.width - scrollView.bounds.width) / 2, y: scrollView.contentOffset.y)
+                            }
                             
                         } else {
                             // Fallback on earlier versions
@@ -219,6 +224,7 @@ class SettingsDetailViewController: BaseViewController {
                     let _pageView = allTextViews[0]
                     _pageView.backgroundColor = UIColor.red
                     _pageView.addSubview(textView)
+                    self.pdfView?.go(to: textFieldMultilineBounds, on: page)
                     textView.becomeFirstResponder()
                 }
             }
