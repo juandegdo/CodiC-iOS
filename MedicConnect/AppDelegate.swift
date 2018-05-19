@@ -71,13 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             // Fallback on earlier versions
         }
         
-        // Enable playing audio in silent mode
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-        }
-        catch {
-            print("Failed to enable playing audio in silent mode")
-        }
+        // Enable playing audio in speaker mode
+        AudioHelper.SetCategory(mode: .speaker)
         
         // Sinch Push
         self.sinchPush = Sinch.managedPush(with: SINAPSEnvironment.development)  // needs to be changed to production
