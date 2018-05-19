@@ -121,8 +121,13 @@ class SettingsDetailViewController: BaseViewController {
                         // Show PDF
                         if #available(iOS 11.0, *) {
                             self.m_contentWebView.isHidden = true
-                            self.m_btnEdit.isHidden = false
                             self.m_btnShare.isHidden = false
+                            
+                            if let _user = UserController.Instance.getUser() as User? {
+                                if _user.isEditableTranscription(transcriptionUrl: self.strSynopsisUrl!) {
+                                    self.m_btnEdit.isHidden = false
+                                }
+                            }
                             
                             if self.pdfView == nil {
                                 self.pdfView = PDFView(frame: CGRect(x: 0, y: 0, width: self.m_pdfView.frame.width, height: self.m_pdfView.frame.height))

@@ -115,4 +115,14 @@ class User {
         
     }
     
+    func isEditableTranscription(transcriptionUrl: String) -> Bool {
+        
+        let index = self.posts.index(where: { (post) -> Bool in
+            return post.user.id == self.id && post.transcriptionUrl == transcriptionUrl
+        })
+        
+        return index == nil ? false : true
+        
+    }
+    
 }
