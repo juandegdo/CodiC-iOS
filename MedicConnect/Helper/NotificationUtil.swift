@@ -19,26 +19,25 @@ class NotificationUtil {
         // iOS 10 support
         if #available(iOS 10, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
-                
                 // Request other permissions
                 self.requestPermissions()
             }
             UIApplication.shared.registerForRemoteNotifications()
         }
-            // iOS 9 support
-        else if #available(iOS 9, *) {
-            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-            UIApplication.shared.registerForRemoteNotifications()
-        }
-            // iOS 8 support
-        else if #available(iOS 8, *) {
-            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
-            UIApplication.shared.registerForRemoteNotifications()
-        }
-            // iOS 7 support
-        else {  
-            UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
-        }
+//            // iOS 9 support
+//        else if #available(iOS 9, *) {
+//            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+//            UIApplication.shared.registerForRemoteNotifications()
+//        }
+//            // iOS 8 support
+//        else if #available(iOS 8, *) {
+//            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil))
+//            UIApplication.shared.registerForRemoteNotifications()
+//        }
+//            // iOS 7 support
+//        else {  
+//            UIApplication.shared.registerForRemoteNotifications(matching: [.badge, .sound, .alert])
+//        }
         
     }
     
@@ -54,6 +53,10 @@ class NotificationUtil {
         }
         
         return false
+    }
+    
+    static func disablePushNotifications() {
+        UIApplication.shared.unregisterForRemoteNotifications()
     }
     
     static func processPushNotificationSettings() {

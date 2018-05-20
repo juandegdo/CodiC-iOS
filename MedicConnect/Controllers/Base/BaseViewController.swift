@@ -143,7 +143,7 @@ class BaseViewController: UIViewController {
     }
     
     func clearAllData() {
-        UIApplication.shared.unregisterForRemoteNotifications()
+        NotificationUtil.disablePushNotifications()
         
         let delegate = UIApplication.shared.delegate as? AppDelegate
         delegate?.tabBarController = nil

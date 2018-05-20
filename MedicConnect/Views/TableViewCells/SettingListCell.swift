@@ -88,13 +88,5 @@ class SettingListCell: UITableViewCell {
         if let del = delegate, let idxPath = indexPath {
             del.switchValueChanged(sender: sw, indexPath: idxPath)
         }
-//        NotificationUtil.makeUserNotificationEnabled()
-//        if let _me = UserController.Instance.getUser(),
-//            (_me.deviceToken == nil && value == true) {
-//            NotificationUtil.makeUserNotificationEnabled()
-//        } else {
-//            
-//        }
-        
     }
 }
