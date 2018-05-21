@@ -41,15 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Fabric
         Fabric.with([Crashlytics.self])
         
-        let remoteNotif = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary
-        if remoteNotif != nil {
-            let aps = remoteNotif!["aps" as NSString] as? [String:AnyObject]
-            NSLog("\n Custom: \(String(describing: aps))")
-        }
-        else {
-            NSLog("//////////////////////////Normal launch")
-        }
-        
         // Check launched URL for reset password
         self.launchedURL = launchOptions?[UIApplicationLaunchOptionsKey.url] as? URL
         

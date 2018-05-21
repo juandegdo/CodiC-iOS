@@ -113,6 +113,7 @@
 		65ED27E9207FCC490039715D /* HistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27E8207FCC490039715D /* HistoryService.swift */; };
 		65ED27EC207FD6F00039715D /* HistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27EA207FD6F00039715D /* HistoryListCell.swift */; };
 		65ED27ED207FD6F00039715D /* HistoryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65ED27EB207FD6F00039715D /* HistoryListCell.xib */; };
+		65F1103B20B31265003B0967 /* ConsultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F1103A20B31265003B0967 /* ConsultService.swift */; };
 		65F4AEBB2062C15200D75335 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F4AEBA2062C15100D75335 /* CallKit.framework */; };
 		65F4AEC52062C3F100D75335 /* SINCallKitProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */; };
 		65F4AEC62062C3F100D75335 /* AudioControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC32062C3F100D75335 /* AudioControllerDelegate.m */; };
@@ -377,6 +378,7 @@
 		65ED27E8207FCC490039715D /* HistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryService.swift; sourceTree = "<group>"; };
 		65ED27EA207FD6F00039715D /* HistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListCell.swift; sourceTree = "<group>"; };
 		65ED27EB207FD6F00039715D /* HistoryListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryListCell.xib; sourceTree = "<group>"; };
+		65F1103A20B31265003B0967 /* ConsultService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultService.swift; sourceTree = "<group>"; };
 		65F4AEBA2062C15100D75335 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINCallKitProvider.m; sourceTree = "<group>"; };
 		65F4AEC22062C3F100D75335 /* SINCallKitProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINCallKitProvider.h; sourceTree = "<group>"; };
@@ -886,6 +888,7 @@
 				00CFBD8C1EF7DC5B000A4D1E /* CommentService.swift */,
 				005642951EFEDA3000B42A42 /* NotificationService.swift */,
 				6522BF131F732EAF00E40759 /* SearchService.swift */,
+				65F1103A20B31265003B0967 /* ConsultService.swift */,
 				65ED27E8207FCC490039715D /* HistoryService.swift */,
 			);
 			path = Requests;
@@ -1599,6 +1602,7 @@
 				65A289731F3BC95300547D72 /* SearchPeopleCell.swift in Sources */,
 				65C915D81FCF1696002AC31B /* Patient.swift in Sources */,
 				D29891F31E613DBA004C0FC1 /* WelcomeProfileViewController.swift in Sources */,
+				65F1103B20B31265003B0967 /* ConsultService.swift in Sources */,
 				65A2896E1F3A935400547D72 /* LikesViewController.swift in Sources */,
 				653D8124200FF32F00136E1B /* SaveConsultViewController.swift in Sources */,
 				A9A358731F0742D8005B8011 /* SettingsDetailViewController.swift in Sources */,

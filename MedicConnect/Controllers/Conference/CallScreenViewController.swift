@@ -10,6 +10,7 @@ import UIKit
 import FXBlurView
 
 enum EButtonsBar {
+    case kButtonsCall
     case kButtonsAnswerDecline
     case kButtonsHangup
 }
@@ -49,11 +50,12 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     @IBOutlet weak var constOfLocalVideoBottom: NSLayoutConstraint!
     
     var fromCallKit: Bool = false
-    var rotationEnabled: Bool = false
+    var referringDoctor: User?
     
     private var durationTimer: Timer?
     private var speakerEnabled: Bool = false
     private var muted: Bool = false
+    private var rotationEnabled: Bool = false
     
     private var hideControls: Bool = false
     private var hideTimer: Timer?
@@ -78,39 +80,22 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         super.viewDidLoad()
         
         // Enable playing audio in silent mode
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions.allowBluetoothA2DP)
-            try AVAudioSession.sharedInstance().setActive(true)
-        }
-        catch {
-            print("Failed to enable playing audio in silent mode")
-        }
+//        do {
+//            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions.allowBluetoothA2DP)
+//            try AVAudioSession.sharedInstance().setActive(true)
+//        }
+//        catch {
+//            print("Failed to enable playing audio in silent mode")
+//        }
+        
+        AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        let currentRoute = AVAudioSession.sharedInstance().currentRoute
-//        var hasHeadphones = false
-//        for description in currentRoute.outputs {
-//            if description.portType == AVAudioSessionPortHeadphones {
-//                hasHeadphones = true
-//                break
-//            }
-//        }
-//
-//        if !hasHeadphones {
-//            self.audioController?.enableSpeaker()
-//        } else {
-//            self.audioController?.disableSpeaker()
-//        }
-        
-//        self.speakerEnabled = !(self.call?.details.isVideoOffered)!
-//        self.onSpeaker(sender: self.btnSpeaker)
-        
-        AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
-        
+//        AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
         self.audioController?.enableSpeaker()
         self.audioController?.unmute()
         
@@ -151,39 +136,73 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
         // Background captured image
         self.mBackgroundImageView.image = ImageHelper.captureView()
         
-        // Customize Avatar
-        if let _user = UserController.Instance.findUserById((self.call?.remoteUserId)!) {
-            self.lblRemoteUserName.text = _user.fullName
-            self.lblRemoteUserLocation.text = _user.location
-        }
-        
-        if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
-            self.showButtons(.kButtonsAnswerDecline)
-            
-            if self.fromCallKit {
-                self.call?.delegate = self
-                self.callDidEstablish(self.call)
+        if let _referringDoctor = self.referringDoctor as User? {
+            // Call back to referring doctor
+            if let _currentUser = UserController.Instance.getUser() as User? {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                let callId = self.randomString(length: 20)
+                var displayName = "\(_currentUser.fullName), \(_currentUser.location)"
+                displayName = displayName.count > 18 ? "\(displayName.prefix(18))..." : displayName
+                
+                let headers = [
+                    "display_name": displayName,
+                    "type": "v",
+                    "callId": callId,
+                    "msp": _currentUser.msp
+                ]
+                
+                self.call = appDelegate.sinchClient?.call().callUserVideo(withId: _referringDoctor.id, headers: headers)
+                
+                self.lblRemoteUserName.text = _referringDoctor.fullName
+                self.setCallStatusText("CALLING...")
+                self.showButtons(.kButtonsCall)
+                
+                // Add call history
+                ConsultService.Instance.addCallHistory(toUser: _referringDoctor.id, type: "video", callId: callId) {
+                    (success) in
+                    if (success) {
+                        // Do nothing now
+                    }
+                }
             } else {
-                self.setCallStatusText("00:00")
-                self.showButtons(.kButtonsHangup)
+                AlertUtil.showSimpleAlert(self, title: "You are not logged in.", message: nil, okButtonTitle: "OK")
             }
             
-        } else {
-            self.setCallStatusText("CALLING...")
-            self.showButtons(.kButtonsAnswerDecline)
-            self.audioController?.startPlayingSoundFile(self.pathForSound("incoming.wav"), loop: true)
-        }
-        
-        if (self.call?.details.isVideoOffered)! {
-            // Add Local Video
-            self.videoController?.localView().contentMode = .scaleAspectFill
-            self.viewLocalVideo.addSubview((self.videoController?.localView())!)
-            self.viewLocalVideo.alpha = 0
+        } else if self.call != nil {
+            // Receive calls
+            if let _user = UserController.Instance.findUserById((self.call?.remoteUserId)!) {
+                self.lblRemoteUserName.text = _user.fullName
+                self.lblRemoteUserLocation.text = _user.location
+            }
             
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.viewLocalVideo.alpha = 1
-                })
+            if self.fromCallKit || self.call?.details.applicationStateWhenReceived != UIApplicationState.active {
+                self.showButtons(.kButtonsAnswerDecline)
+                
+                if self.fromCallKit {
+                    self.call?.delegate = self
+                    self.callDidEstablish(self.call)
+                } else {
+                    self.setCallStatusText("00:00")
+                    self.showButtons(.kButtonsHangup)
+                }
+                
+            } else {
+                self.setCallStatusText("CALLING...")
+                self.showButtons(.kButtonsAnswerDecline)
+                self.audioController?.startPlayingSoundFile(self.pathForSound("incoming.wav"), loop: true)
+            }
+            
+            if (self.call?.details.isVideoOffered)! {
+                // Add Local Video
+                self.videoController?.localView().contentMode = .scaleAspectFill
+                self.viewLocalVideo.addSubview((self.videoController?.localView())!)
+                self.viewLocalVideo.alpha = 0
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.viewLocalVideo.alpha = 1
+                    })
+                }
             }
         }
         
@@ -194,6 +213,22 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     func pathForSound(_ soundName: String) -> String {
         print(Bundle.main.resourceURL!.appendingPathComponent(soundName).path)
         return Bundle.main.resourceURL!.appendingPathComponent(soundName).path
+    }
+    
+    func randomString(length: Int) -> String {
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        
+        return randomString
     }
     
     @objc func onDurationTimer(_ unused: Timer) {
@@ -218,12 +253,14 @@ class CallScreenViewController: UIViewController, SINCallClientDelegate, SINCall
     // MARK: - SINCallDelegate
     
     func callDidProgress(_ call: SINCall!) {
-        self.setCallStatusText("CALLING...")
+//        self.audioController?.enableSpeaker()
+//        self.audioController?.unmute()
         self.audioController?.startPlayingSoundFile(self.pathForSound("ringback.wav"), loop: true)
     }
     
     func callDidEstablish(_ call: SINCall!) {
         self.audioController?.disableSpeaker()
+        AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
         
         if self.call?.details.isVideoOffered == false {
             if self.call?.state != SINCallState.initiating  {
@@ -330,7 +367,22 @@ extension CallScreenViewController {
     }
     
     fileprivate func showButtons(_ buttons: EButtonsBar) {
-        if buttons == .kButtonsAnswerDecline {
+        if buttons == .kButtonsCall {
+            self.viewLocalContainer.isHidden = true
+            self.viewRemoteVideo.isHidden = true
+            
+            self.lblRemoteUserName.isHidden = false
+            self.lblRemoteUserLocation.isHidden = true
+            self.lblCallState.isHidden = false
+            
+            self.btnClose.isHidden = false
+            self.btnAccept.isHidden = true
+            self.btnSwitchCamera.isHidden = true
+            self.btnSpeaker.isHidden = true
+            self.btnMute.isHidden = true
+            self.btnEnd.isHidden = false
+            
+        } else if buttons == .kButtonsAnswerDecline {
             self.viewLocalContainer.isHidden = !(self.call?.details.isVideoOffered)!
             self.viewRemoteVideo.isHidden = true
             
@@ -341,6 +393,10 @@ extension CallScreenViewController {
         } else if buttons == .kButtonsHangup {
             if (self.call?.details.isVideoOffered)! {
                 // Video Call
+                self.videoController?.localView().contentMode = .scaleAspectFill
+                self.viewLocalVideo.addSubview((self.videoController?.localView())!)
+                
+                self.viewLocalContainer.isHidden = false
                 self.viewRemoteVideo.isHidden = false
                 self.btnSwitchCamera.isHidden = false
                 

@@ -94,11 +94,8 @@ extension ConferenceViewController {
         
         let nibPatientCell = UINib(nibName: HistoryCellID, bundle: nil)
         self.tvHistory.register(nibPatientCell, forCellReuseIdentifier: HistoryCellID)
-        
         self.tvHistory.tableFooterView = UIView()
         self.tvHistory.rowHeight = 65.0
-//        self.tvHistory.estimatedRowHeight = 65.0
-//        self.tvHistory.rowHeight = UITableViewAutomaticDimension
         
     }
     
@@ -189,15 +186,15 @@ extension ConferenceViewController : UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-//        guard let _patient = self.searchedPatients[indexPath.row] as Patient? else {
-//            return
-//        }
-//
-//        let patientProfileVC = self.storyboard!.instantiateViewController(withIdentifier: "PatientProfileViewController") as! PatientProfileViewController
-//        patientProfileVC.patient = _patient
-//        patientProfileVC.fromAdd = false
-//        self.navigationController?.pushViewController(patientProfileVC, animated: true)
+        guard let _history = self.searchedHistory[indexPath.row] as History? else {
+            return
+        }
         
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if  let vc = storyboard.instantiateViewController(withIdentifier: "CallScreenViewController") as? CallScreenViewController {
+            vc.referringDoctor = _history.fromUser
+            self.present(vc, animated: false, completion: nil)
+        }
     }
     
 }

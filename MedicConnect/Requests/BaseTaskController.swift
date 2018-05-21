@@ -64,6 +64,7 @@ class BaseTaskController {
     let URLGetUserIdByMSPSuffix = "/getuseridbymsp"
     let URLUpdateAvailability = "/consulters/updateavailability"
     
+    let URLAddCallHistory = "/history/addcall"
     let URLGetCallHistory = "/history/getcallhistory"
     let URLUpdateCallHistory = "/history/updatecall"
     

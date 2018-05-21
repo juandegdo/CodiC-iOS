@@ -8765,7 +8765,7 @@ finished the call.</string>
         <image name="icon_chat_send" width="29" height="29"/>
         <image name="icon_close" width="19" height="18"/>
         <image name="icon_close_white" width="19" height="18"/>
-        <image name="icon_edit_pdf" width="25" height="25"/>
+        <image name="icon_edit_pdf" width="16" height="21"/>
         <image name="icon_edit_white" width="11" height="14"/>
         <image name="icon_end_call" width="122" height="121"/>
         <image name="icon_favorites_gray" width="18" height="17"/>
