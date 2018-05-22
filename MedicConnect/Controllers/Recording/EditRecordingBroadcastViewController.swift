@@ -239,6 +239,15 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onContinueRecording(sender: UIButton) {
         self.stop()
+        
+        let lenght = self.navigationController?.viewControllers.count
+        if (lenght! >= 2) {
+            if let recordingVC = self.navigationController?.viewControllers[lenght! - 2] as? RecordingBroadcastViewController {
+                recordingVC.shouldInsert = true
+                recordingVC.recordingStartSeconds = TimeInterval(self.mSlider.value)
+            }
+        }
+        
         self.navigationController?.popViewController(animated: false)
         
     }

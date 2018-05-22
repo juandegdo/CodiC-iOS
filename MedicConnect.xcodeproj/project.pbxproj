@@ -114,6 +114,7 @@
 		65ED27EC207FD6F00039715D /* HistoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED27EA207FD6F00039715D /* HistoryListCell.swift */; };
 		65ED27ED207FD6F00039715D /* HistoryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65ED27EB207FD6F00039715D /* HistoryListCell.xib */; };
 		65F1103B20B31265003B0967 /* ConsultService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F1103A20B31265003B0967 /* ConsultService.swift */; };
+		65F1104420B39DD6003B0967 /* AudioProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F1104320B39DD6003B0967 /* AudioProcessing.swift */; };
 		65F4AEBB2062C15200D75335 /* CallKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F4AEBA2062C15100D75335 /* CallKit.framework */; };
 		65F4AEC52062C3F100D75335 /* SINCallKitProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */; };
 		65F4AEC62062C3F100D75335 /* AudioControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F4AEC32062C3F100D75335 /* AudioControllerDelegate.m */; };
@@ -379,6 +380,7 @@
 		65ED27EA207FD6F00039715D /* HistoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryListCell.swift; sourceTree = "<group>"; };
 		65ED27EB207FD6F00039715D /* HistoryListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryListCell.xib; sourceTree = "<group>"; };
 		65F1103A20B31265003B0967 /* ConsultService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsultService.swift; sourceTree = "<group>"; };
+		65F1104320B39DD6003B0967 /* AudioProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioProcessing.swift; sourceTree = "<group>"; };
 		65F4AEBA2062C15100D75335 /* CallKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CallKit.framework; path = System/Library/Frameworks/CallKit.framework; sourceTree = SDKROOT; };
 		65F4AEC12062C3F100D75335 /* SINCallKitProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SINCallKitProvider.m; sourceTree = "<group>"; };
 		65F4AEC22062C3F100D75335 /* SINCallKitProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SINCallKitProvider.h; sourceTree = "<group>"; };
@@ -967,6 +969,7 @@
 				A9E444F21F0A43A100F49C7E /* Internet */,
 				65F4AEC02062C3BB00D75335 /* Sinch */,
 				D2301FDE1E5FC71A006C636A /* AlertUtil.swift */,
+				65F1104320B39DD6003B0967 /* AudioProcessing.swift */,
 				00C748411EFD179200BD3EAE /* NotificationUtil.swift */,
 				D2EB58B61E93E5A700D94194 /* AudioHelper.swift */,
 				D25EB1601E8478B40082A9D5 /* DateUtil.swift */,
@@ -1526,6 +1529,7 @@
 				D2F0C6C21DF30A7000475696 /* DataManager.swift in Sources */,
 				D23CB7A41E1C6FA800C0EE8A /* Broadcast.swift in Sources */,
 				D20658341E5BB9ED003875E4 /* RadTabBarController.m in Sources */,
+				65F1104420B39DD6003B0967 /* AudioProcessing.swift in Sources */,
 				D2F55A6E1DEB1A690038A392 /* SharePopupViewController.swift in Sources */,
 				65C698361FBDE1EE00F594C8 /* ConsultsViewController.swift in Sources */,
 				65E0D1F22017F143008A79CB /* VSTextField.swift in Sources */,
