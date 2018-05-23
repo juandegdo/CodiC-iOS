@@ -794,10 +794,6 @@ extension ProfileViewController : UITableViewDataSource, UITableViewDelegate {
                 
                 self.expandedRows.removeAll()
                 self.expandedRows.insert(post.id)
-                
-                if NotificationUtil.hasNewNotification {
-                    self.markAllAsRead()
-                }
             }
             
             cell.isExpanded = !cell.isExpanded

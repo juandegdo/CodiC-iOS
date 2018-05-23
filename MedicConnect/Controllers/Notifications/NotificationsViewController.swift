@@ -45,12 +45,8 @@ class NotificationsViewController: BaseViewController {
             if (success) {
                 self.refreshData()
                 
-                if NotificationController.Instance.getUnreadNotificationCount() > 0 {
-                    self.needsReload = true
-                    self.markAllAsRead()
-                } else {
-                    self.needsReload = false
-                }
+                self.needsReload = NotificationController.Instance.getUnreadNotificationCount() > 0
+                self.markAllAsRead()
             }
         }
     }
