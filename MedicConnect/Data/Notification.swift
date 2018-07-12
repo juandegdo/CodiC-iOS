@@ -6,18 +6,20 @@
 //  Copyright © 2016 Loewen. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public enum NotificationType : Int {
     case none = 0
     case like
     case comment
     case broadcast
+    case transcribed
     case newFollower
     case followRequest
     case requestAccepted
     case requestDeclined
     case blocked
+    case missedCall
 }
 
 class Notification {
@@ -28,14 +30,16 @@ class Notification {
     var date: String
     var message: String
     var fromUser: User
+    var isRead: Int
 
-    init(id: String, notificationType: NotificationType, message: String, date: String, fromUser: User) {
+    init(id: String, notificationType: NotificationType, message: String, date: String, fromUser: User, isRead: Int) {
         
         self.id = id
         self.notificationType = notificationType
         self.date = date
         self.fromUser = fromUser
         self.message = message
+        self.isRead = isRead
         
     }
     

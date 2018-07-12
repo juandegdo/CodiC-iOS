@@ -8,9 +8,6 @@
 
 import UIKit
 import MessageUI
-import TwitterKit
-import FacebookCore
-import FacebookLogin
 
 class SettingsViewController: BaseViewController {
     
@@ -61,7 +58,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         
         if tableView == self.tvSettings {
-            return 4
+            return 3
         }
         
         return 1
@@ -73,13 +70,11 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             
             switch (section) {
             case 0:
-                return 7
-            case 1:
-                return 5
-            case 2:
-                return 5
-            case 3:
                 return 4
+            case 1:
+                return 2
+            case 2:
+                return 3
                 
             default:
                 break
@@ -107,71 +102,50 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 else if indexPath.row == 1 {
                     cell.setCellWithTitle(title: NSLocalizedString("Change Password", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
+//                else if indexPath.row == 2 {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Blocked Users", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
+//                }
+//                else if indexPath.row == 3 {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Reset Tutorial", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
+//                }
                 else if indexPath.row == 2 {
-                    cell.setCellWithTitle(title: NSLocalizedString("Blocked Users", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }
-                else if indexPath.row == 3 {
-                    cell.setCellWithTitle(title: NSLocalizedString("Private Account", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if indexPath.row == 4 {
-                    cell.setCellWithTitle(title: NSLocalizedString("Reset Tutorial", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
-                }
-                else if indexPath.row == 5 {
                     cell.setCellWithTitle(title: NSLocalizedString("Logout", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
-                else if indexPath.row == 6 {
+                else if indexPath.row == 3 {
                     cell.setCellWithTitle(title: NSLocalizedString("Delete Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
                 }
                 
             } else if indexPath.section == 1 {
                 
+//                if (indexPath.row == 0) {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Likes", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+//                }
+//                else if (indexPath.row == 1) {
+//                    cell.setCellWithTitle(title: NSLocalizedString("Comments", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+//                } else
                 if (indexPath.row == 0) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Likes", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+                    cell.setCellWithTitle(title: NSLocalizedString("New Consult", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 else if (indexPath.row == 1) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Comments", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("New Broadcasts", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 3) {
-                    cell.setCellWithTitle(title: NSLocalizedString("New Followers", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 4) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Follower Requests", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
+                    cell.setCellWithTitle(title: NSLocalizedString("New Transcription", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
                 }
                 
             } else if indexPath.section == 2 {
                 
+//                if (indexPath.row == 0) {
+//                    cell.setCellWithTitle(title: NSLocalizedString("About", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
+//                }
+//                else
                 if (indexPath.row == 0) {
-                    cell.setCellWithTitle(title: NSLocalizedString("About", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }
-                else if (indexPath.row == 1) {
                     cell.setCellWithTitle(title: NSLocalizedString("Privacy Policy", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
-                else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Code of Conduct", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }
-                else if (indexPath.row == 3) {
+                else if (indexPath.row == 1) {
                     cell.setCellWithTitle(title: NSLocalizedString("Terms of Use", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
-                }else if (indexPath.row == 4) {
+                }
+                else if (indexPath.row == 2) {
                     cell.setCellWithTitle(title: NSLocalizedString("Contact Us", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: true)
                 }
                 
-            } else if indexPath.section == 3 {
-                
-                if (indexPath.row == 0) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Twitter Account", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 1) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Facebook Account", comment: "comment"), iconImage: nil, hasSwitch: true, hasArrow: false, tag: indexPath)
-                }
-                else if (indexPath.row == 2) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Instagram Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
-                }
-                else if (indexPath.row == 3) {
-                    cell.setCellWithTitle(title: NSLocalizedString("Snapchat Account", comment: "comment"), iconImage: nil, hasSwitch: false, hasArrow: false)
-                }
             }
             
             return cell
@@ -201,33 +175,30 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChangePasswordVC")
                     present(vc, animated: false, completion: nil)
                     
+//                } else if indexPath.row == 2 {
+//                    print("Blocked users")
+//
+//                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BlockedUsersVCId")
+//                    present(vc, animated: false, completion: nil)
+//
+//                } else if indexPath.row == 3 {
+//                    print("Reset Tutorial")
+//
+//                    // Reset Tutorial
+                    //                    AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to reset tutorial?", comment: "comment"), message: "", okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+//                        // OK completion block
+//                        // Set FirstLoad to 0 to show tutorials for new users
+//                        UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
+//
+//                    }, cancelCompletionBlock: {
+//                        // Cancel completion block
+//
+//                    })
+//
                 } else if indexPath.row == 2 {
-                    print("Blocked users")
-                    
-                    let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BlockedUsersVCId")
-                    present(vc, animated: false, completion: nil)
-                    
-                } else if indexPath.row == 3 {
-                    print("Private account")
-                    
-                } else if indexPath.row == 4 {
-                    print("Reset Tutorial")
-                    
-                    // Reset Tutorial
-                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to reset tutorial?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
-                        // OK completion block
-                        // Set FirstLoad to 0 to show tutorials for new users
-                        UserDefaultsUtil.SaveFirstLoad(firstLoad: 0)
-                        
-                    }, cancelCompletionBlock: {
-                        // Cancel completion block
-                        
-                    })
-                    
-                } else if indexPath.row == 5 {
                     
                     // Logout
-                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to logout?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+                    AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to\nlogout?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("LOG OUT", comment: "comment"), cancelButtonTitle: NSLocalizedString("STAY LOGGED IN", comment: "comment"), okCompletionBlock: {
                         // OK completion block
                         self.clearAllData()
                         _ = self.tabBarController?.navigationController?.popToRootViewController(animated: true)
@@ -237,10 +208,15 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                         
                     })
                     
-                } else if indexPath.row == 6 {
+                } else if indexPath.row == 3 {
                     
                     // Delete account
-                    AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete your account?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+                    AlertUtil.showConfirmAlert(self,
+                                               title: NSLocalizedString("Are you sure you want to\ndelete your account?", comment: "comment"),
+                                               message: NSLocalizedString("We won’t delete any Consults\nthat are associated with\nPatient Notes or Diagnosis.", comment: "comment"),
+                                               okButtonTitle: NSLocalizedString("DELETE ACCOUNT", comment: "comment"),
+                                               cancelButtonTitle: NSLocalizedString("KEEP ACCOUNT", comment: "comment"),
+                                               okCompletionBlock: {
                         // OK completion block
                         UserService.Instance.deleteAccount(completion: {
                             (success: Bool, message: String) in
@@ -252,7 +228,7 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                                 
                             } else {
                                 if !message.isEmpty {
-                                    AlertUtil.showOKAlert(self, message: message)
+                                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                                 }
                             }
                         })
@@ -265,32 +241,18 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
                 }
             } else if indexPath.section == 2 { // Information
                 
-                if (indexPath.row == 4) {
-                    self.sendEmail(emailAddress: "info@radioishapp.com")
+                if (indexPath.row == 2) {
+                    self.sendEmail(emailAddress: "contact@codiapp.com")
                     
                 } else if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
-                    
                     if (indexPath.row == 0) {
-                        vc.strTitle = "About"
-                    } else if (indexPath.row == 1) {
                         vc.strTitle = "Privacy Policy"
-                    } else if (indexPath.row == 2) {
-                        vc.strTitle = "Code of Conduct"
-                    } else if (indexPath.row == 3) {
+                    }else if (indexPath.row == 1) {
                         vc.strTitle = "Terms of Use"
                     }
                     
                     present(vc, animated: false, completion: nil)
-                }
-            } else if indexPath.section == 3 { // Link/Unlink Socials
-                if (indexPath.row == 0) {
-                    print("Twitter account")
-                } else if (indexPath.row == 1) {
-                    print("Facebook account")
-                } else if (indexPath.row == 2) {
-                    print("Instagram account")
-                } else if (indexPath.row == 3) {
-                    print("Snapchat account")
+                    
                 }
             }
         }
@@ -310,8 +272,6 @@ extension SettingsViewController : UITableViewDataSource, UITableViewDelegate {
             headerCell.setTitle(title: NSLocalizedString("Notifications", comment: "comment"))
         } else if section == 2 {
             headerCell.setTitle(title: NSLocalizedString("Information", comment: "comment"))
-        } else if section == 3 {
-            headerCell.setTitle(title: NSLocalizedString("Link/Unlink Socials", comment: "comment"))
         }
         
         return headerCell.contentView
@@ -356,7 +316,7 @@ extension SettingsViewController : MFMailComposeViewControllerDelegate {
     
     func sendEmail(emailAddress: String) {
         if !MFMailComposeViewController.canSendMail() {
-            AlertUtil.showOKAlert(self, message: "Mail services are not available")
+            AlertUtil.showSimpleAlert(self, title: "Mail services are not available", message: nil, okButtonTitle: "OK")
             return
         }
         let composeVC = MFMailComposeViewController()
@@ -382,71 +342,26 @@ extension SettingsViewController : SettingListCellDelegate {
             if (indexPath.section == 1) { // Notification Filter
                 var tmpValue = UserController.Instance.getUser().notificationfilter
                 if sender.isOn {
-                    tmpValue = tmpValue | (1<<indexPath.row)
+                    tmpValue = tmpValue | (1<<(indexPath.row + 2))
                 } else {
-                    tmpValue = tmpValue ^ (1<<indexPath.row)
+                    tmpValue = tmpValue ^ (1<<(indexPath.row + 2))
                 }
                 print(tmpValue)
                 
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                
                 UserService.Instance.setNotificationFilter(value: tmpValue, completion: { (success) in
-                    UserService.Instance.getMe(completion: { (_) in
-                        self.tvSettings.reloadSections(IndexSet.init(integer: 1), with: .none)
-                    })
-                    
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    if success {
+                        if let _user = UserController.Instance.getUser() {
+                            _user.notificationfilter = tmpValue
+                            UserController.Instance.setUser(_user)
+                        }
+                    } else {
+                        AlertUtil.showSimpleAlert(self, title: "Failed to update your notification setting. Please try again.", message: nil, okButtonTitle: "OK")
+                        sender.setOn(!sender.isOn, animated: false)
+                    }
                 })
-            }
-            else if indexPath.section == 3 {
-                if indexPath.row == 0 {
-                    if sender.isOn == true {
-                        Twitter.sharedInstance().logIn(completion: { (session, error) in
-                            if let _ = session {
-                                AlertUtil.showOKAlert(self, message: "You linked Twitter account successfully.")
-                            }
-                            else {
-                                if let e = error {
-                                    print("error: \(e.localizedDescription)")
-                                    AlertUtil.showOKAlert(self, message: e.localizedDescription)
-                                }
-                                sender.isOn = false
-                            }
-                        })
-                    }
-                    else {
-                        let store = Twitter.sharedInstance().sessionStore
-                        if let userID = store.session()?.userID {
-                            store.logOutUserID(userID)
-                        }
-                    }
-                }
-                else if indexPath.row == 1 {
-                    if sender.isOn == true {
-                        let loginManager = LoginManager()
-                        loginManager.logIn([ .publicProfile, .email, .userFriends ], viewController: self) { loginResult in
-                            switch loginResult {
-                            case .failed(let error):
-                                print(error)
-                                AlertUtil.showOKAlert(self, message: "Oops. Failed to link Facebook.")
-                                sender.isOn = false
-                                break
-                            case .cancelled:
-                                print("User cancelled login.")
-                                AlertUtil.showOKAlert(self, message: "You cancelled linking Facebook.")
-                                sender.isOn = false
-                                break
-                            case .success( _, _, _):
-                                print("Logged in!")
-                                AlertUtil.showOKAlert(self, message: "You linked Facebook account successfully.")
-                                break
-                            }
-                        }
-                    }
-                    else {
-                        if let _ = AccessToken.current {
-                            let loginManager = LoginManager()
-                            loginManager.logOut()
-                        }
-                    }
-                }
             }
         }
     }

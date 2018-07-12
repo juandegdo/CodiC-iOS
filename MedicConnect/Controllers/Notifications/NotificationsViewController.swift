@@ -15,6 +15,7 @@ class NotificationsViewController: BaseViewController {
     @IBOutlet var tvNotifications: UITableView!
     
     var notificationsArr: [[String : AnyObject]] = []
+    var needsReload: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,7 @@ class NotificationsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        self.loadNotifications()
-        self.markAllAsRead()
+        self.loadNotifications()
     }
     
     //MARK: UI Functions
@@ -35,6 +35,8 @@ class NotificationsViewController: BaseViewController {
         // Initialize Table Views
         self.tvNotifications.register(UINib(nibName: NotificationListCellID, bundle: nil), forCellReuseIdentifier: NotificationListCellID)
         self.tvNotifications.tableFooterView = UIView()
+        self.tvNotifications.estimatedRowHeight = 70
+        self.tvNotifications.rowHeight = UITableViewAutomaticDimension
         
     }
     
@@ -42,6 +44,13 @@ class NotificationsViewController: BaseViewController {
         NotificationService.Instance.getNotifications { (success) in
             if (success) {
                 self.refreshData()
+                
+                if NotificationController.Instance.getUnreadNotificationCount() > 0 {
+                    self.needsReload = true
+                    self.markAllAsRead()
+                } else {
+                    self.needsReload = false
+                }
             }
         }
     }
@@ -53,8 +62,10 @@ class NotificationsViewController: BaseViewController {
         
         NotificationService.Instance.markAllAsRead(completion: { (allRead) in
             if (allRead) {
-//                UIApplication.shared.applicationIconBadgeNumber = 0
-//                NotificationUtil.updateNotificationAlert(hasNewAlert: false)
+                if self.needsReload {
+                    NotificationController.Instance.markAllRead()
+//                    self.refreshData()
+                }
             }
         })
     }
@@ -69,26 +80,44 @@ class NotificationsViewController: BaseViewController {
         
     }
     
-    func callProfileVC(user: User) {
+    func callProfileVC(user: User, postId: String?) {
+        
+        if  let _me = UserController.Instance.getUser() as User? {
+//            if _me.id == user.id {
+//                return
+//            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+                
+                if let blockedby = _me.blockedby as? [User] {
+                    if blockedby.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                if let blocking = _me.blocking as? [User] {
+                    if blocking.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                
+                vc.currentUser = user
+                vc.selectedPostId = postId
+                self.present(vc, animated: false, completion: nil)
+                
+            }
+        }
+        
+    }
+    
+    func callTranscriptionVC(transcriptionUrl: String) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if  let _me = UserController.Instance.getUser() as User?,
-            let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
-            if let blockedby = _me.blockedby as? [User] {
-                if blockedby.contains(where: { $0.id == user.id }) {
-                    return
-                }
-            }
-            if let blocking = _me.blocking as? [User] {
-                if blocking.contains(where: { $0.id == user.id }) {
-                    return
-                }
-            }
-            vc.currentUser = user
-            vc.isMyProfile = (_me.id == user.id)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Transcription"
+            vc.strSynopsisUrl = transcriptionUrl
             self.present(vc, animated: false, completion: nil)
-            
         }
         
     }
@@ -146,24 +175,29 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
             
             cell.setNotificationData(notification: NotificationController.Instance.getNotifications()[indexPath.row])
             
-
-            cell.btnFollowing.index = indexPath.row
-            cell.btnFollowing.refTableView = tableView
-            cell.btnFollowing.addTarget(self, action: #selector(NotificationsViewController.setUnfollow(sender:)), for: .touchUpInside)
-            cell.btnFollowing.makeEnabled(enabled: true)
+            cell.btnFollowing.isHidden = true
+//            cell.btnFollowing.index = indexPath.row
+//            cell.btnFollowing.refTableView = tableView
+//            cell.btnFollowing.addTarget(self, action: #selector(NotificationsViewController.setUnfollow(sender:)), for: .touchUpInside)
+//            cell.btnFollowing.makeEnabled(enabled: true)
             
-            cell.btnUnFollow.index = indexPath.row
-            cell.btnUnFollow.refTableView = tableView
-            cell.btnUnFollow.addTarget(self, action: #selector(NotificationsViewController.setFollow(sender:)), for: .touchUpInside)
-            cell.btnUnFollow.makeEnabled(enabled: true)
+            cell.btnUnFollow.isHidden = true
+//            cell.btnUnFollow.index = indexPath.row
+//            cell.btnUnFollow.refTableView = tableView
+//            cell.btnUnFollow.addTarget(self, action: #selector(NotificationsViewController.setFollow(sender:)), for: .touchUpInside)
+//            cell.btnUnFollow.makeEnabled(enabled: true)
             
-            cell.btnAccept.index = indexPath.row
-            cell.btnAccept.addTarget(self, action: #selector(acceptRequest(sender:)),for: .touchUpInside)
-            cell.btnFollowing.makeEnabled(enabled: true)
+            cell.btnAccept.isHidden = true
+//            cell.btnAccept.index = indexPath.row
+//            cell.btnAccept.addTarget(self, action: #selector(acceptRequest(sender:)),for: .touchUpInside)
+//            cell.btnFollowing.makeEnabled(enabled: true)
             
-            cell.btnDecline.index = indexPath.row
-            cell.btnDecline.addTarget(self, action: #selector(declineRequest(sender:)),for: .touchUpInside)
-            cell.btnUnFollow.makeEnabled(enabled: true)
+            cell.btnDecline.isHidden = true
+//            cell.btnDecline.index = indexPath.row
+//            cell.btnDecline.addTarget(self, action: #selector(declineRequest(sender:)),for: .touchUpInside)
+//            cell.btnUnFollow.makeEnabled(enabled: true)
+            
+            cell.btnRequested.isHidden = true
             
             return cell
             
@@ -180,7 +214,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
      
      - Parameter sender: Button containing user information.
      */
-    func setFollow(sender: TVButton) {
+    @objc func setFollow(sender: TVButton) {
         
         self.view.endEditing(true)
         
@@ -210,7 +244,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
      
      - Parameter sender: Button containing user information.
      */
-    func setUnfollow(sender: TVButton) {
+    @objc func setUnfollow(sender: TVButton) {
         
         self.view.endEditing(true)
         
@@ -257,17 +291,17 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
     
     func refreshData() {
         
-        UserService.Instance.getMe(completion: {
-            (user: User?) in
-            
-            if let _ = user as User? {
+//        UserService.Instance.getMe(completion: {
+//            (user: User?) in
+//
+//            if let _ = user as User? {
                 self.tvNotifications.reloadData()
-            }
-        })
+//            }
+//        })
         
     }
     
-    func acceptRequest(sender: TVButton) {
+    @objc func acceptRequest(sender: TVButton) {
         sender.makeEnabled(enabled: false)
         
         let row = sender.index
@@ -283,7 +317,7 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func declineRequest(sender: TVButton) {
+    @objc func declineRequest(sender: TVButton) {
         sender.makeEnabled(enabled: false)
         
         let row = sender.index
@@ -303,33 +337,16 @@ extension NotificationsViewController : UITableViewDelegate, UITableViewDataSour
         
         let notification = NotificationController.Instance.getNotifications()[indexPath.row]
         
-        if notification.notificationType == .comment {
-            callCommentVC(post: notification.broadcast!)
-        }else if notification.notificationType == .like {
-            NotificationCenter.default.post(name: NSNotification.Name("gotoProfileScreen"), object: nil, userInfo: nil)
-        }
-        else{
-            callProfileVC(user: notification.fromUser)
+        if notification.notificationType == .broadcast {
+            callProfileVC(user: notification.fromUser, postId: notification.broadcast?.id)
+        } else if notification.notificationType == .transcribed {
+            if let _transcriptionURL = notification.broadcast?.transcriptionUrl {
+                callTranscriptionVC(transcriptionUrl: _transcriptionURL)
+            }
         }
         
         tableView.deselectRow(at: indexPath, animated: false)
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if tableView == self.tvNotifications {
-            let notification = NotificationController.Instance.getNotifications()[indexPath.row]
-            
-            if (notification.notificationType == .like || notification.notificationType == .comment || notification.notificationType == .broadcast) {
-                return 75
-                
-            } else {
-                return 75
-            }
-        }
-        
-        return 0.0
-        
-    }
 }

@@ -104,18 +104,7 @@ class UserController {
             return result
         }
         
-        let blocking = self.getUser().blocking as! [User]
-        let blockedby = self.getUser().blockedby as! [User]
-        
         for u in self.users {
-            
-            if blocking.contains(where: { $0.id == u.id }) {
-                continue
-            }
-            if blockedby.contains(where: { $0.id == u.id }) {
-                continue
-            }
-            
             let lowercasedUsername = u.fullName.uppercased().trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             
             for n in lowercasedUsername.components(separatedBy: " ") {
@@ -128,6 +117,16 @@ class UserController {
 
         return result
         
+    }
+    
+    func findUserById(_ id: String) -> User? {
+        for index in 0..<self.users.count {
+            if id == self.users[index].id {
+                return self.users[index]
+            }
+        }
+        
+        return nil
     }
     
     // User Device Token

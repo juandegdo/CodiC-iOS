@@ -201,13 +201,13 @@ extension ChangePasswordViewController {
         
         // Check if all required fields are filled
         if self.currentPassword.isEmpty || self.newPassword.isEmpty || self.confirmPassword.isEmpty {
-            AlertUtil.showOKAlert(self, message: "Please fill in all fields")
+            AlertUtil.showSimpleAlert(self, title: "Please fill in all fields", message: nil, okButtonTitle: "OK")
             return
         }
         
         // Check if passwords match
         if self.newPassword != self.confirmPassword {
-            AlertUtil.showOKAlert(self, message: "The passwords don't match")
+            AlertUtil.showSimpleAlert(self, title: "The passwords don't match", message: nil, okButtonTitle: "OK")
             return
         }
         
@@ -220,10 +220,10 @@ extension ChangePasswordViewController {
             self.btnSave.isEnabled = true
             
             if success {
-                AlertUtil.showOKAlert(self, message: "Your password has been successfully changed")
+                AlertUtil.showSimpleAlert(self, title: "Your password has been successfully changed", message: nil, okButtonTitle: "OK")
             } else {
                 if !message.isEmpty {
-                    AlertUtil.showOKAlert(self, message: message)
+                    AlertUtil.showSimpleAlert(self, title: message, message: nil, okButtonTitle: "OK")
                 }
             }
             

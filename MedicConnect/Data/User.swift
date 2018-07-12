@@ -16,7 +16,9 @@ class User {
     var password: String
     var photo: String = ""
     var phoneNumber: String = ""
-    var description: String = ""
+    var title: String = ""
+    var msp: String = ""
+    var location: String = ""
     var posts: [Post] = []
     var following: [AnyObject] = []
     var follower: [AnyObject] = []
@@ -82,14 +84,34 @@ class User {
         if self.fullName.isEmpty {
             return ""
         } else {
-            return separated.reduce("") { $0.0 + String($0.1.characters.first!) }
+            return separated.reduce("") { $0 + String($1.first!) }
         }
         
     }
     
-    func getPosts() -> [Post] {
+    func getPosts(type: String) -> [Post] {
         
-        return self.posts.sorted(by: {$0.meta.createdAt > $1.meta.createdAt} )
+        let posts = self.posts.filter({(post: Post) -> Bool in
+            if type == Constants.PostTypeAll {
+                return true
+            } else if type == Constants.PostTypeConsult {
+                return post.postType == type || post.postType == Constants.PostTypeNote
+            } else {
+                return post.postType == type
+            }
+        })
+        
+        return posts
+        
+    }
+    
+    func getPostIndex(id: String) -> Int? {
+        
+        let index = self.posts.index(where: { (post) -> Bool in
+            post.id == id
+        })
+        
+        return index
         
     }
     

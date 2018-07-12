@@ -127,12 +127,23 @@ class DateUtil {
         return "\(startString) to \(endString)"
     }
     
+    class func GetBirthDate(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let longFormatWithoutYear = DateFormatter.dateFormat(fromTemplate: "MMMM d yyyy", options: 0, locale: dateFormatter.locale)
+        dateFormatter.dateFormat = longFormatWithoutYear
+        
+        return dateFormatter.string(from: date).capitalized
+    }
+    
     class func GetDate(_ dateTime: Double = Date().timeIntervalSince1970) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        let longFormatWithoutYear = DateFormatter.dateFormat(fromTemplate: "EEEE MMM d", options: 0, locale: dateFormatter.locale)
-        dateFormatter.dateFormat = longFormatWithoutYear
+//        let longFormatWithoutYear = DateFormatter.dateFormat(fromTemplate: "EEEE MMM d", options: 0, locale: dateFormatter.locale)
+//        dateFormatter.dateFormat = longFormatWithoutYear
+        dateFormatter.dateFormat = "MMMM d, yyyy"
         
         let date = Date(timeIntervalSince1970: dateTime as TimeInterval)
         return dateFormatter.string(from: date).capitalized
@@ -142,11 +153,10 @@ class DateUtil {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        let longFormat = DateFormatter.dateFormat(fromTemplate: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", options: 0, locale: dateFormatter.locale)
-        dateFormatter.dateFormat = longFormat
+        dateFormatter.dateFormat = "MMMM d, yyyy' @ 'h:mma"
         
         let date = Date(timeIntervalSince1970: dateTime as TimeInterval)
-        return dateFormatter.string(from: date).capitalized
+        return dateFormatter.string(from: date)
     }
 
     class func GetYear(_ dateTime: Double = Date().timeIntervalSince1970) -> String {

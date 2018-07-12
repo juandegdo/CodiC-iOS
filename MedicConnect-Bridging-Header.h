@@ -9,14 +9,14 @@
 
 #import "RadTabBar.h"
 #import "RadTabBarController.h"
-#import "RadShadowButton.h"
 #import "RadTableBackgroundView.h"
 #import "RadContentHeightTextView.h"
-#import "RadPopUpVC.h"
 #import "Reachability.h"
-#import "EVTTabPageScrollView.h"
 #import "SCSiriWaveformView.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import <AbbyyRtrSDK/AbbyyRtrSDK.h>
+#import <Sinch/Sinch.h>
+#import "SINCallKitProvider.h"
 
 #ifndef MedicConnect_Bridging_Header_h
 #define MedicConnect_Bridging_Header_h

@@ -8,11 +8,43 @@
 
 import UIKit
 import AVFoundation
-import MobileCoreServices
 
 class PreRecordingBroadcastViewController: BaseViewController {
     
     var fileURL: URL?
+    
+    @IBOutlet weak var patientInfoView: UIStackView!
+    @IBOutlet weak var lblPatientName: UILabel!
+    @IBOutlet weak var lblPatientDOB: UILabel!
+    @IBOutlet weak var lblPatientPHN: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let _patient = DataManager.Instance.getPatient() {
+            self.lblPatientName.text = _patient.name
+            self.lblPatientDOB.text = _patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+            self.lblPatientPHN.text = _patient.patientNumber
+        } else if DataManager.Instance.getPatientId() != "" {
+            // Get patient with id
+            PatientService.Instance.getPatientById(patientId: DataManager.Instance.getPatientId(), completion: { (success, patient) in
+                if success == true && patient != nil {
+                    DataManager.Instance.setPatient(patient: patient)
+                    
+                    DispatchQueue.main.async {
+                        self.lblPatientName.text = patient?.name
+                        self.lblPatientDOB.text = patient?.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+                        self.lblPatientPHN.text = patient?.patientNumber
+                    }
+                }
+            })
+        } else {
+            self.patientInfoView.isHidden = true
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = false
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,28 +62,11 @@ class PreRecordingBroadcastViewController: BaseViewController {
         
     }
     
-    func uploadFile(_ url: URL) {
-        self.fileURL = url
-        
-        let destinationVC = self.storyboard!.instantiateViewController(withIdentifier: "saveBroadcastVC") as! SaveBroadcastViewController
-        destinationVC.fileURL = self.fileURL
-        self.navigationController?.pushViewController(destinationVC, animated: true)
-    }
-    
-    @IBAction func onUploadBroadcast(_ sender: UIButton) {
-        let importMenu = UIDocumentMenuViewController(documentTypes: [kUTTypeAudio as String], in: .import)
-        importMenu.delegate = self
-        importMenu.popoverPresentationController?.sourceView = sender
-        self.present(importMenu, animated: true, completion: nil)
-    }
 }
 
 extension PreRecordingBroadcastViewController {
     //MARK: IBActions
     
-    func tapMicrophone() {
-        
-    }
     func processMicrophoneSettings() {
         let alertController = UIAlertController(title: "Setting", message: "You've already disabled microphone.\nGo to settings and enable microphone please.", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .default)
@@ -61,9 +76,7 @@ extension PreRecordingBroadcastViewController {
         alertController.addAction(cancelAction)
         alertController.addAction(goAction)
         
-        if let w = UIApplication.shared.delegate?.window, let vc = w?.rootViewController {
-            vc.present(alertController, animated: false, completion: nil)
-        }
+        self.present(alertController, animated: false, completion: nil)
     }
     
     @IBAction func onRecordBroadcast(sender: AnyObject) {
@@ -74,16 +87,13 @@ extension PreRecordingBroadcastViewController {
             try recordingSession.setActive(true)
             recordingSession.requestRecordPermission() {
                 (allowed) in
-                DispatchQueue.global(qos: .background).async {
-                    // Background Thread
-                    DispatchQueue.main.async {
-                        // Run UI Updates
-                        if(allowed){
-                            self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordingBroadcast, sender: nil)
-                        }else{
-                            try? recordingSession.setActive(false)
-                            self.processMicrophoneSettings()
-                        }
+                DispatchQueue.main.async {
+                    // Run UI Updates
+                    if (allowed) {
+                        self.performSegue(withIdentifier: Constants.SegueMedicConnectRecordingBroadcast, sender: nil)
+                    } else {
+                        try? recordingSession.setActive(false)
+                        self.processMicrophoneSettings()
                     }
                 }
             }
@@ -93,44 +103,15 @@ extension PreRecordingBroadcastViewController {
     
     @IBAction func onClose(sender: AnyObject) {
         
-        self.tabBarController?.selectedIndex = DataManager.Instance.getLastTabIndex()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = true
+        
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
         
     }
     
-    @IBAction func onGoLive(sender: AnyObject) {
-    }
-    
-    //MARK: Navigation
-    @IBAction func unWindToPreRecording(segue: UIStoryboardSegue) {
-        
-        self.tabBarController?.selectedIndex = Constants.ProfileTabIndex;
-        
-    }
-}
-
-//MARK: - UIDocumentMenuDelegate
-extension PreRecordingBroadcastViewController: UIDocumentMenuDelegate {
-    
-    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        print("document pick")
-        documentPicker.delegate = self
-        self.present(documentPicker, animated: true, completion: nil)
-    }
-    
-    public func documentMenuWasCancelled(_ documentMenu: UIDocumentMenuViewController) {
-        print("document menu cancelled")
-    }
-}
-
-//MARK: - UIDocumentPickerDelegate
-extension PreRecordingBroadcastViewController: UIDocumentPickerDelegate {
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        
-        self.uploadFile(url)
-    }
-    
-    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print("document picker cancelled")
-    }
 }

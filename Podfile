@@ -7,31 +7,22 @@ target 'MedicConnect' do
 
   # Pods for MedicConnect
 
-pod 'ACFloatingTextfield'
+pod 'ACFloatingTextfield-Swift', '~> 1.7'
 pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'AFImageHelper'
 pod 'Sheriff'
-pod 'M13BadgeView'
 pod 'FXBlurView'
-pod 'UITextView+Placeholder'
-pod 'IQDropDownTextField'
 pod 'IQKeyboardManager'
-pod 'ERJustifiedFlowLayout'
-pod 'YLProgressBar'
 pod 'SZTextView'
 pod 'NSDate+TimeAgo'
-pod 'HCSStarRatingView'
-pod 'HTHorizontalSelectionList', :git => 'https://github.com/voltaesaito/HTHorizontalSelectionList.git'
-pod 'TLTagsControl', :git => 'https://github.com/voltaesaito/TLTagsControl.git'
-pod 'PICollectionPageView', :git => 'https://github.com/voltaesaito/PICollectionPageView.git'
+pod 'TLTagsControl', :git => 'https://github.com/danielyang112/TLTagsControl.git'
 pod 'Fabric'
 pod 'Crashlytics'
-pod 'Masonry'
-pod 'TwitterKit'
-pod 'FacebookCore'
-pod 'FacebookLogin'
-pod 'FacebookShare'
+pod 'SwiftGifOrigin', '~> 1.6.1'
+pod 'SwiftMoment', :git => 'https://github.com/danielyang112/SwiftMoment.git'
+pod 'SwiftValidators'
+pod 'SinchRTC'
 
   target 'MedicConnectTests' do
     inherit! :search_paths

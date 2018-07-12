@@ -16,9 +16,11 @@ class EditRecordingBroadcastViewController: BaseViewController {
     @IBOutlet var labelLength: UILabel!
     @IBOutlet var btnPlay: UIButton!
     @IBOutlet var btnPause: UIButton!
+    @IBOutlet var btnSpeaker: UIButton!
     
     fileprivate var audioPlayer: AVAudioPlayer?
     fileprivate var updateTimer: Timer?
+    fileprivate var fromDelete: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +41,6 @@ class EditRecordingBroadcastViewController: BaseViewController {
         
     }
     
-    func willEnterForeground(){
-        if (self.audioPlayer != nil && self.audioPlayer?.isPlaying == false) {
-            self.btnPause.isHidden = true
-            self.btnPlay.isHidden = false
-        }
-    }
-    
-    func willEnterBackground(){
-        if (self.audioPlayer != nil) {
-            
-            self.btnPause.isHidden = false
-            self.btnPlay.isHidden = true
-            self.audioPlayer?.stop()
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -71,6 +57,23 @@ class EditRecordingBroadcastViewController: BaseViewController {
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
         
+    }
+    
+    @objc func willEnterForeground(){
+        if (self.audioPlayer != nil && self.audioPlayer?.isPlaying == false) {
+            self.btnPause.isHidden = true
+            self.btnPlay.isHidden = false
+        }
+    }
+    
+    @objc func willEnterBackground(){
+        if (self.audioPlayer != nil) {
+            
+            self.btnPause.isHidden = false
+            self.btnPlay.isHidden = true
+            self.audioPlayer?.stop()
+            self.updateTimer?.invalidate()
+        }
     }
     
     //MARK: Initialize views
@@ -98,6 +101,8 @@ class EditRecordingBroadcastViewController: BaseViewController {
                 let dTotalSeconds = _audioPlayer.duration
                 self.labelLength.text = dTotalSeconds.durationText
                 
+                DataManager.Instance.setRecordDuration(recordDuration: Int(dTotalSeconds.rounded(.awayFromZero)))
+                
                 AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
                 _audioPlayer.prepareToPlay()
                 _audioPlayer.play()
@@ -115,10 +120,14 @@ class EditRecordingBroadcastViewController: BaseViewController {
     func stop() {
         if (self.audioPlayer != nil && self.audioPlayer!.isPlaying) {
             self.audioPlayer!.stop()
+            self.audioPlayer = nil
+            
+            self.updateTimer?.invalidate()
+            self.updateTimer = nil
         }
     }
     
-    func updateSeekBar() {
+    @objc func updateSeekBar() {
         
         if let _audioPlayer = self.audioPlayer as AVAudioPlayer? {
             let progress = _audioPlayer.currentTime
@@ -145,8 +154,19 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onClose(sender: UIButton) {
         self.stop()
-        self.tabBarController?.selectedIndex = DataManager.Instance.getLastTabIndex()
-        self.navigationController?.popToRootViewController(animated: false)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = true
+        
+        if let _nav = self.navigationController as UINavigationController? {
+            if fromDelete {
+                _nav.popToRootViewController(animated: false)
+            } else {
+                _nav.dismiss(animated: false, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
         
     }
     
@@ -160,14 +180,25 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onRewind(_ sender: Any) {
         
-        self.audioPlayer?.stop()
-        self.audioPlayer?.play(atTime: 0)
+        if (self.audioPlayer != nil) {
+            self.audioPlayer?.currentTime = 0
+        }
+        
+    }
+    
+    @IBAction func onForward(_ sender: Any) {
+        
+        if (self.audioPlayer != nil) {
+            self.audioPlayer?.currentTime = (self.audioPlayer?.currentTime)! + 15
+        }
         
     }
     
     @IBAction func onPlay(_ sender: Any) {
         
         self.audioPlayer?.play()
+        self.updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(EditRecordingBroadcastViewController.updateSeekBar), userInfo: nil, repeats: true)
+        
         self.btnPlay.isHidden = true
         self.btnPause.isHidden = false
         
@@ -176,6 +207,8 @@ extension EditRecordingBroadcastViewController {
     @IBAction func onPause(_ sender: Any) {
         
         self.audioPlayer?.pause()
+        self.updateTimer?.invalidate()
+        
         self.btnPlay.isHidden = false
         self.btnPause.isHidden = true
         
@@ -183,10 +216,9 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onDelete(sender: UIButton) {
         
-        AlertUtil.showConfirmAlert(self, message: NSLocalizedString("Are you sure you want to delete recording?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
+        AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to delete recording?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("I'M SURE", comment: "comment"), cancelButtonTitle: NSLocalizedString("NEVER MIND", comment: "comment"), okCompletionBlock: {
             // OK completion block
-//            self.stop()
-//            self.performSegue(withIdentifier: Constants.SegueMedicConnectStopBroadcast, sender: nil)
+            self.fromDelete = true
             self.onClose(sender: UIButton())
         }, cancelCompletionBlock: {
             // Cancel completion block
@@ -196,13 +228,30 @@ extension EditRecordingBroadcastViewController {
     
     @IBAction func onSave(sender: UIButton) {
         self.stop()
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectSaveBroadcast, sender: nil)
+        
+        if DataManager.Instance.getPostType() == Constants.PostTypeDiagnosis {
+            self.performSegue(withIdentifier: Constants.SegueMedicConnectSaveDiagnosis, sender: nil)
+        } else {
+            self.performSegue(withIdentifier: Constants.SegueMedicConnectSaveConsult, sender: nil)
+        }
         
     }
     
     @IBAction func onContinueRecording(sender: UIButton) {
+        self.stop()
+        self.navigationController?.popViewController(animated: false)
         
-        _ = self.navigationController?.popViewController(animated: false)
+    }
+    
+    @IBAction func onSelectSpeaker(sender: UIButton) {
+        
+        if AudioHelper.overrideMode == .speaker {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
+            sender.setImage(UIImage(named: "icon_speaker_off"), for: .normal)
+        } else {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+            sender.setImage(UIImage(named: "icon_speaker_on"), for: .normal)
+        }
         
     }
     
@@ -216,6 +265,8 @@ extension EditRecordingBroadcastViewController : AVAudioPlayerDelegate {
         self.btnPlay.isHidden = false
         self.btnPause.isHidden = true
         
+        self.updateTimer?.invalidate()
+        
     }
 }
 
@@ -223,7 +274,7 @@ class RecordSlider: UISlider {
     
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
         var newBounds = super.trackRect(forBounds: bounds)
-        newBounds.size.height = 5
+        newBounds.size.height = 3
         return newBounds
     }
     

@@ -8,27 +8,23 @@
 
 import UIKit
 import AVFoundation
-import AlamofireImage
-import MessageUI
 
-class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate {
+class AnotherProfileViewController: BaseViewController {
     
+    let OffsetHeaderStop: CGFloat = 190.0
     let ProfileListCellID = "ProfileListCell"
     let PrivateUserTableViewCellID = "PrivateUserTableViewCell"
     
     // Header
-    @IBOutlet var headerView: UIView!
     @IBOutlet var headerLabel: UILabel!
     
     // Profile info
     @IBOutlet var viewProfileInfo: UIView!
     @IBOutlet var imgAvatar: UIImageView!
     @IBOutlet var lblUsername: UILabel!
-    @IBOutlet var btnPlaylist: UIButton!
-    @IBOutlet var lblDescription: UILabel!
-    @IBOutlet var lblFollowerNumber: UILabel!
-    @IBOutlet var lblFollowingNumber: UILabel!
-    @IBOutlet var btnFollow: UIButton!
+    @IBOutlet var lblLocation: UILabel!
+    @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var btnFavorites: UIButton!
     
     // Scroll
     @IBOutlet var mainScrollView: UIScrollView!
@@ -39,21 +35,18 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     @IBOutlet var tableViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet var headerViewHeightConstraint: NSLayoutConstraint!
     
-    var isMyProfile: Bool = false
     var currentUser: User?
-    var vcDisappearType : ViewControllerDisappearType = .other
-    var OffsetHeaderStop: CGFloat = 321.0
+    var selectedPostId: String?
     var selectedDotsIndex = 0
     
     var profileType = 0 //0: normal, 1: private, 2: blocked
+    var postType: String = Constants.PostTypeAll
     var expandedRows = Set<String>()
-    var states = Set<String>()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        OffsetHeaderStop = self.isMyProfile ? 271.0 : 321.0
-        self.headerViewHeightConstraint.constant = self.isMyProfile ? 335.0 : 385.0
+        self.headerViewHeightConstraint.constant = OffsetHeaderStop
     }
     
     override func viewDidLoad() {
@@ -64,11 +57,6 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         self.tableView.register(UINib(nibName: PrivateUserTableViewCellID, bundle: nil), forCellReuseIdentifier: PrivateUserTableViewCellID)
         self.tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 1 ))
         
-        PlayListDataController.Instance.loadPlayList()
-        if playlist.contains(where: { $0.user_id == self.currentUser?.id }) {
-            self.btnPlaylist.setImage(UIImage.init(named: "icon_playlist_highlighted"), for: .normal)
-        }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,24 +64,16 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
         self.initViews()
         
-        vcDisappearType = .other
-        NotificationCenter.default.addObserver(self, selector: #selector(HomeViewController.playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(note:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
         NotificationCenter.default.addObserver(self, selector: #selector(willEnterBackground), name: NSNotification.Name.UIApplicationWillResignActive , object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        if let tabvc = self.tabBarController as UITabBarController? {
-            DataManager.Instance.setLastTabIndex(tabIndex: tabvc.selectedIndex)
-        }
-        
-        if (vcDisappearType == .other) {
-            self.releasePlayer()
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
-            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        }
+        self.releasePlayer()
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: PlayerController.Instance.player?.currentItem)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         
     }
     
@@ -101,12 +81,8 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     
     func initViews() {
         
-        self.tableViewHeightConstraint.constant = self.view.frame.height - self.headerViewHeightConstraint.constant
-        
         self.imgAvatar.layer.borderWidth = 1.5
         self.imgAvatar.layer.borderColor = UIColor.white.cgColor
-        
-        self.btnFollow.isHidden = self.isMyProfile
         
         self.refreshData()
         
@@ -127,16 +103,23 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
                     
                     if _updatedUser.isprivate == true {
                         self.profileType = 1
-                        for tuser in _updatedUser.follower {
-                            if let user = tuser as? User, user.id == UserController.Instance.getUser().id {
-                                self.profileType = 0
-                            }
-                            
-                        }
                     }
                     
                     self.currentUser = _updatedUser
                     self.updateUI(user: self.currentUser!)
+                    
+                    if let _user = self.currentUser {
+                        if _user.getPosts(type: self.postType).count > 0 && self.selectedPostId != nil {
+                            if let _postIndex = _user.getPostIndex(id: self.selectedPostId!) {
+                                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.3) {
+                                    let indexPath = IndexPath.init(row: _postIndex, section: 0)
+                                    self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+                                    self.tableView(self.tableView, didSelectRowAt: indexPath)
+                                }
+                            }
+                        }
+                    }
+                    
                 } else {
                     self.profileType = 2
                 }
@@ -146,85 +129,22 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
     }
     
-    func releasePlayer(onlyState: Bool = false) {
-        
-        PlayerController.Instance.invalidateTimer()
-        
-        // Reset player state
-        if let _lastPlayed = PlayerController.Instance.lastPlayed as SVGPlayButton? {
-            _lastPlayed.tickCount = 0
-            _lastPlayed.playing = false
-            PlayerController.Instance.shouldSeek = true
-            
-            if let _player = PlayerController.Instance.player as AVPlayer?,
-                let _index = _lastPlayed.index as Int? {
-                
-                if let _user = self.currentUser {
-                    
-                    let post = _user.getPosts()[_index]
-                    post.setPlayed(time: _player.currentItem!.currentTime(), progress: _lastPlayed.progressStrokeEnd, setLastPlayed: false)
-                    
-                }
-                
-            }
-            
-        }
-        
-        if let _observer = PlayerController.Instance.playerObserver as Any? {
-            PlayerController.Instance.player?.removeTimeObserver(_observer)
-        }
-        
-        if onlyState {
-            return
-        }
-        
-        // Pause and reset components
-        PlayerController.Instance.player?.pause()
-        PlayerController.Instance.player = nil
-        PlayerController.Instance.lastPlayed = nil
-        
-        if let _user = self.currentUser,
-            let _index = PlayerController.Instance.currentIndex as Int? {
-            let post = _user.getPosts()[_index]
-            post.resetCurrentTime()
-        }
-        
-        PlayerController.Instance.currentIndex = nil        
-    }
-    
     func updateUI(user: User) {
         
         // Customize Avatar
-        _ = UIFont(name: "Avenir-Heavy", size: 18.0) as UIFont? ?? UIFont.systemFont(ofSize: 18.0)
-        
         if let imgURL = URL(string: user.photo) as URL? {
             self.imgAvatar.af_setImage(withURL: imgURL)
+        } else {
+            self.imgAvatar.image = ImageHelper.circleImageWithBackgroundColorAndText(backgroundColor: UIColor.init(red: 185/255.0, green: 186/255.0, blue: 189/255.0, alpha: 1.0),
+                                                                                     text: user.getInitials(),
+                                                                                     font: UIFont(name: "Avenir-Book", size: 44)!,
+                                                                                     size: CGSize(width: 98, height: 98))
         }
         
-        // Customize User name
-        self.lblUsername.text = user.fullName
-        
-        // Customize Description
-        self.lblDescription.text  = user.description
-        
-        // Customize Following/Follower
-        self.lblFollowerNumber.text  = "\(user.follower.count)"
-        self.lblFollowingNumber.text  = "\(user.following.count)"
-        
-        if let _me = UserController.Instance.getUser() as User? {
-            if (_me.requesting as! [User]).contains(where: { $0.id == user.id }) {
-                self.btnFollow.setTitle(NSLocalizedString("REQUESTED", comment: "comment"), for: .normal)
-                self.btnFollow.tag = 2
-            }else if (_me.following as! [User]).contains(where: { $0.id == user.id }) {
-                self.btnFollow.setTitle(NSLocalizedString("FOLLOWING", comment: "comment"), for: .normal)
-                self.btnFollow.tag = 1
-            } else {
-                self.btnFollow.setTitle(NSLocalizedString("FOLLOW", comment: "comment"), for: .normal)
-                self.btnFollow.tag = 0
-            }
-            
-            self.btnFollow.makeEnabled(enabled: true)
-        }
+        // Customize User Info
+        self.lblUsername.text = "\(user.fullName)"
+        self.lblLocation.text = user.location
+        self.lblTitle.text = user.title
         
         if self.profileType == 0 {
             // Private
@@ -240,15 +160,7 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
     }
     
-    func loadMe() {
-        
-        UserService.Instance.getMe(completion: {
-            (user: User?) in
-            
-            self.dismissVC()
-        })
-        
-    }
+    // MARK: Scroll Ralated
     
     func updateScroll(offset: CGFloat) {
         
@@ -256,13 +168,12 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
         // ScrollViews Frame
         if (offset >= OffsetHeaderStop) {
-            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant - 60.0
-            self.tableViewHeightConstraint.constant = self.view.frame.height - (self.headerViewHeightConstraint.constant - OffsetHeaderStop)
+            self.tableViewTopConstraint.constant = offset - OffsetHeaderStop + self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64.0
             self.getCurrentScroll().setContentOffset(CGPoint(x: 0, y: offset - OffsetHeaderStop), animated: false)
-        }
-        else {
-            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant - 60.0
-            self.tableViewHeightConstraint.constant = self.view.frame.height - self.headerViewHeightConstraint.constant + offset
+        } else {
+            self.tableViewTopConstraint.constant = self.headerViewHeightConstraint.constant
+            self.tableViewHeightConstraint.constant = self.view.frame.height - 64 - self.headerViewHeightConstraint.constant + offset
             self.getCurrentScroll().setContentOffset(CGPoint.zero, animated: false)
         }
         
@@ -271,268 +182,87 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
     func getCurrentScroll() -> UIScrollView {
         
         let scrollView: UIScrollView = self.tableView
-        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
+        self.mainScrollView.contentSize = CGSize(width: self.view.frame.width, height: max(self.view.frame.height - 64.0 + OffsetHeaderStop, scrollView.contentSize.height + self.headerViewHeightConstraint.constant))
         return scrollView
         
     }
     
-    func callEditVC() {
+    // MARK: Player Functions
+    
+    func releasePlayer(onlyState: Bool = false) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
-            self.present(vc, animated: false, completion: nil)
+        PlayerController.Instance.invalidateTimer()
+        
+        // Reset player state
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider?,
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel as UILabel?,
+            let _durationLabel = PlayerController.Instance.durationLabel as UILabel? {
+            _lastPlayed.setValue(0.0, animated: false)
+            _lastPlayed.playing = false
+            _elapsedLabel.text = "0:00"
+            _durationLabel.text = "0:00"
         }
         
-    }
-    
-    func callFollowerVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FollowingViewController") as? FollowingViewController {
-            vc.currentUser = self.currentUser
-            self.present(vc, animated: false, completion: nil)
+        if let _observer = PlayerController.Instance.playerObserver as Any? {
+            PlayerController.Instance.player?.removeTimeObserver(_observer)
+            PlayerController.Instance.playerObserver = nil
+            PlayerController.Instance.player?.seek(to: kCMTimeZero)
         }
         
-    }
-    
-    func callFollowingVC() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "FollowingViewController") as? FollowingViewController {
-            vc.currentUser = self.currentUser
-            vc.isDefaultFollowers = true
-            self.present(vc, animated: false, completion: nil)
+        if let _user = self.currentUser as User?,
+            let _index = PlayerController.Instance.currentIndex as Int? {
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: kCMTimeZero, progress: 0.0, setLastPlayed: false)
+            
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            cell?.btnPlay.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
         }
         
-    }
-    
-    func callSearchResultVC(hashtag: String) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if let vc = storyboard.instantiateViewController(withIdentifier: "SearchResultsViewController") as? SearchResultsViewController {
-            vc.hashtag = "#\(hashtag)"
-            self.present(vc, animated: false, completion: nil)
-        }
-    }
-    
-    // MARK: Selectors
-    
-    func onToggleLike(sender: TVButton) {
-        
-        guard let _index = sender.index as Int? else {
+        if onlyState {
             return
         }
         
-        guard let _user = self.currentUser else {
+        // Pause and reset components
+        PlayerController.Instance.player?.pause()
+        PlayerController.Instance.player = nil
+        PlayerController.Instance.lastPlayed = nil
+        PlayerController.Instance.elapsedTimeLabel = nil
+        PlayerController.Instance.durationLabel = nil
+        PlayerController.Instance.currentIndex = nil
+        
+    }
+    
+    @objc func onPlayAudio(sender: SVGPlayButton) {
+        
+        guard let _index = sender.tag as Int? else {
+            return
+        }
+
+        guard let _user = self.currentUser as User? else {
             return
         }
         
-        let post = _user.getPosts()[_index]
-        
-        sender.makeEnabled(enabled: false)
-        if sender.tag == 1 {
-            PostService.Instance.unlike(postId: post.id, completion: { (success, like_description) in
-                sender.makeEnabled(enabled: true)
-                
-                if success, let like_description = like_description {
-                    print("Post succesfully unliked")
-                    
-                    post.removeLike(id: UserController.Instance.getUser().id)
-                    post.likeDescription = like_description
-                    if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                        cell.setData(post: post)
-                        
-                        cell.btnLike.setImage(UIImage(named: "icon_broadcast_like"), for: .normal)
-                        cell.btnLike.tag = 0
-                    }
-                }
-            })
-            
-        } else {
-            PostService.Instance.like(postId: post.id, completion: { (success, like_description) in
-                sender.makeEnabled(enabled: true)
-                
-                if success, let like_description = like_description {
-                    print("Post succesfully liked")
-                    
-                    post.addLike(id: UserController.Instance.getUser().id)
-                    post.likeDescription = like_description
-                    if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                        cell.setData(post: post)
-                        
-                        cell.btnLike.setImage(UIImage(named: "icon_broadcast_liked"), for: .normal)
-                        cell.btnLike.tag = 1
-                    }
-                }
-            })
-            
-        }
-        
-    }
-    
-    func onToggleAction(sender: UIButton) {
-        
-        print("\(sender.tag)")
-        selectedDotsIndex = sender.tag
-        if let _user = self.currentUser {
-            let post = _user.getPosts()[sender.tag]
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-            
-            let actionReportThisBroadcast = UIAlertAction(title: "Report this broadcast", style: .destructive) { (action) in
-                
-                guard let _user = UserController.Instance.getUser() as User? else {
-                    return
-                }
-                
-                UserService.Instance.report(from: _user.email, subject: "Report this broadcast", msgbody: "User: \(post.user.fullName)\nUrl: \(post.audio)", completion: { (success) in
-                    
-                    if success {
-                        DispatchQueue.main.async {
-                            AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcast.\nWe are looking into it.")
-                        }
-                    }
-                    
-                });
-                
-            }
-            let actionReportUser = UIAlertAction(title: "Report this user", style: .destructive) { (action) in
-                
-                guard let _user = UserController.Instance.getUser() as User? else {
-                    return
-                }
-                
-                UserService.Instance.report(from: _user.email, subject: "Report this user", msgbody: "User: \(post.user.fullName)", completion: { (success) in
-                    
-                    if success {
-                        DispatchQueue.main.async {
-                            AlertUtil.showOKAlert(self, message: "Thanks for reporting this broadcaster.\nWe are looking into it.")
-                        }
-                    }
-                    
-                });
-                
-            }
-            let actionBlockUser = UIAlertAction(title: "Block user", style: .default) { (action) in
-                UserService.Instance.block(userId: _user.id , completion: {
-                    (success: Bool) in
-                    
-                    if success {
-                        DispatchQueue.main.async {
-                            AlertUtil.showOKAlert(self, message: "This user is now blocked.\nGo to Settings to undo this action.")
-                        }
-                        
-                        self.loadMe()
-                    } else {
-                        sender.makeEnabled(enabled: true)
-                    }
-                    
-                })
-            }
-            let actionTurnOnPost = UIAlertAction(title: "Turn on Post notification", style: .default) { (action) in
-                
-            }
-            let actionCopyShareUrl = UIAlertAction(title: "Copy Share Url", style: .default) { (action) in
-                UIPasteboard.general.string = post.audio
-            }
-            
-            let actionCancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-            
-            alertController.addAction(actionReportThisBroadcast)
-            alertController.addAction(actionReportUser)
-            alertController.addAction(actionBlockUser)
-            alertController.addAction(actionTurnOnPost)
-            alertController.addAction(actionCopyShareUrl)
-            alertController.addAction(actionCancel)
-            
-            alertController.view.tintColor = UIColor.black
-            
-            present(alertController, animated: false, completion: nil)
-        }
-    }
-    
-    func onSelectShare(sender: UIButton) {
-        
-        vcDisappearType = .share
-        
-        self.performSegue(withIdentifier: Constants.SegueMedicConnectShareBroadcastPopup, sender: nil)
-        
-    }
-    
-    func onSelectComment(sender: UIButton) {
-        
-        vcDisappearType = .comment
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "CommentsViewController") as? CommentsViewController {
-            if let _user = self.currentUser {
-                let post = _user.getPosts()[sender.tag]
-                vc.currentPost = post
-                
-                self.present(vc, animated: false, completion: nil)
-            }
-        }
-        
-    }
-    
-    func onSelectLikeDescription(sender: UITapGestureRecognizer) {
-        
-        vcDisappearType = .like
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let vc = storyboard.instantiateViewController(withIdentifier: "LikesViewController") as? LikesViewController {
-            if let _user = self.currentUser,
-                let index = sender.view?.tag {
-                let post = _user.getPosts()[index]
-                vc.currentPost = post
-                
-                self.present(vc, animated: false, completion: nil)
-            }
-        }
-        
-    }
-    
-    func onSelectHashtag (sender: UITapGestureRecognizer) {
-        let myTextView = sender.view as! UITextView //sender is TextView
-        let _pos: CGPoint = sender.location(in: myTextView)
-        
-        //eliminate scroll offset
-        //        pos.y += _tv.contentOffset.y;
-        
-        //get location in text from textposition at point
-        let tapPos = myTextView.closestPosition(to: _pos)
-        
-        //fetch the word at this position (or nil, if not available)
-        if let wordRange = myTextView.tokenizer.rangeEnclosingPosition(tapPos!, with: UITextGranularity.word, inDirection: UITextLayoutDirection.right.rawValue),
-            let tappedHashtag = myTextView.text(in: wordRange) {
-            NSLog("Word: \(String(describing: tappedHashtag))")
-            self.callSearchResultVC(hashtag: tappedHashtag)
-        }
-        
-    }
-    
-    func onPlayAudio(sender: SVGPlayButton) {
-        
-        guard let _index = sender.index as Int? else {
+        if let _lastPlayed = PlayerController.Instance.lastPlayed,
+            _lastPlayed.playing == true {
+            self.onPauseAudio(sender: sender)
             return
         }
         
-        guard let _user = self.currentUser else {
-            return
-        }
-        
-        let post = _user.getPosts()[_index]
-        
-        self.releasePlayer(onlyState: true)
+        let post = _user.getPosts(type: self.postType)[_index]
         
         if let _url = URL(string: post.audio ) as URL? {
+            let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell
+            sender.setImage(UIImage.init(named: "icon_playlist_pause"), for: .normal)
+            
             if let _player = PlayerController.Instance.player as AVPlayer?,
                 let _currentIndex = PlayerController.Instance.currentIndex as Int?, _currentIndex == _index {
                 
-                PlayerController.Instance.lastPlayed = sender
+                PlayerController.Instance.lastPlayed = cell?.playSlider
+                PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
+                PlayerController.Instance.durationLabel = cell?.lblDuration
+                PlayerController.Instance.shouldSeek = true
                 
-                PlayerController.Instance.shouldSeek = false
                 _player.rate = 1.0
-                PlayerController.Instance.currentTime = post.getCurrentTime()
                 _player.play()
                 
                 PlayerController.Instance.addObserver()
@@ -544,13 +274,15 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
                 
                 if let _player = PlayerController.Instance.player as AVPlayer? {
                     
-                    AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+                    AudioHelper.SetCategory(mode: AudioHelper.overrideMode)
                     
-                    PlayerController.Instance.lastPlayed = sender
+                    PlayerController.Instance.lastPlayed = cell?.playSlider
+                    PlayerController.Instance.elapsedTimeLabel = cell?.lblElapsedTime
+                    PlayerController.Instance.durationLabel = cell?.lblDuration
                     PlayerController.Instance.currentIndex = _index
+                    PlayerController.Instance.shouldSeek = true
                     
                     _player.rate = 1.0
-                    PlayerController.Instance.currentTime = post.getCurrentTime()
                     _player.play()
                     
                     PlayerController.Instance.addObserver()
@@ -560,12 +292,9 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
                             if success, let play_count = play_count {
                                 print("Post incremented")
                                 post.playCount = play_count
-                                if let cell = self.tableView.cellForRow(at: IndexPath.init(row: _index, section: 0)) as? ProfileListCell {
-                                    cell.setData(post: post)
-                                }
+                                // cell?.setData(post: post)
                             }
                         })
-                        
                     }
                     
                 }
@@ -576,7 +305,150 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
         
     }
     
-    func willEnterBackground() {
+    func onPauseAudio(sender: UIButton) {
+        
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.pause()
+        sender.setImage(UIImage.init(named: "icon_playlist_play"), for: .normal)
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed as PlaySlider? {
+            if let _observer = PlayerController.Instance.playerObserver as Any? {
+                PlayerController.Instance.player?.removeTimeObserver(_observer)
+                PlayerController.Instance.playerObserver = nil
+            }
+            
+            _lastPlayed.playing = false
+            
+            guard let _index = sender.tag as Int? else {
+                return
+            }
+            
+            guard let _user = self.currentUser as User? else {
+                return
+            }
+            
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(_lastPlayed.value))
+        }
+        
+    }
+    
+    @objc func onBackwardAudio(sender: UIButton) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        var time = CMTimeGetSeconds(_player.currentTime())
+        if time == 0 { return }
+        time = time - 15 >= 0 ? time - 15 : 0
+        
+        self.seekToTime(time: time)
+    }
+    
+    @objc func onForwardAudio(sender: UIButton) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        var time = CMTimeGetSeconds(_player.currentTime())
+        let duration = CMTimeGetSeconds((_player.currentItem?.duration)!)
+        if time == duration { return }
+        time = time + 15 <= duration ? time + 15 : duration
+        
+        self.seekToTime(time: time)
+    }
+    
+    @objc func onSeekSlider(sender: UISlider) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        if _player.status != .readyToPlay {
+            return
+        }
+        
+        let duration = CMTimeGetSeconds((_player.currentItem?.duration)!)
+        let time = duration * Float64(sender.value)
+        
+        self.seekToTime(time: time)
+    }
+    
+    @objc func onSynopsis(sender: UIButton) {
+        
+        guard let _index = sender.tag as Int? else {
+            return
+        }
+        
+        guard let _user = self.currentUser as User? else {
+            return
+        }
+        
+        let post = _user.getPosts(type: self.postType)[_index]
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsDetailViewController") as? SettingsDetailViewController {
+            vc.strTitle = "Transcription"
+            vc.strSynopsisUrl = post.transcriptionUrl
+            present(vc, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    @objc func onSelectSpeaker(sender: UIButton) {
+        
+        if AudioHelper.overrideMode == .speaker {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.none)
+            sender.setImage(UIImage(named: "icon_speaker_off"), for: .normal)
+        } else {
+            AudioHelper.SetCategory(mode: AVAudioSessionPortOverride.speaker)
+            sender.setImage(UIImage(named: "icon_speaker_on"), for: .normal)
+        }
+        
+    }
+    
+    func seekToTime(time: Float64) {
+        guard let _player = PlayerController.Instance.player as AVPlayer? else {
+            return
+        }
+        
+        _player.seek(to: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+        
+        if let _lastPlayed = PlayerController.Instance.lastPlayed,
+            let _elapsedLabel = PlayerController.Instance.elapsedTimeLabel,
+            _lastPlayed.playing == false {
+            
+            _lastPlayed.setValue(Float(time / CMTimeGetSeconds((_player.currentItem?.duration)!)), animated: false)
+            _elapsedLabel.text = TimeInterval(time).durationText
+            
+            guard let _index = _lastPlayed.index as Int? else {
+                return
+            }
+            
+            guard let _user = self.currentUser as User? else {
+                return
+            }
+            
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: CMTimeMakeWithSeconds(time, _player.currentTime().timescale), progress: CGFloat(_lastPlayed.value))
+            
+        }
+    }
+    
+    @objc func playerDidFinishPlaying(note: NSNotification) {
+        self.releasePlayer(onlyState: true)
+    }
+    
+    @objc func willEnterBackground() {
         guard let _player = PlayerController.Instance.player as AVPlayer? else {
             return
         }
@@ -589,71 +461,39 @@ class AnotherProfileViewController: BaseViewController, ExpandableLabelDelegate 
                 return
             }
             
-            guard let _user = self.currentUser else {
+            guard let _user = self.currentUser as User? else {
                 return
             }
             
-            let post = _user.getPosts()[_index]
-            post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
+            let post = _user.getPosts(type: self.postType)[_index]
+            post.setPlayed(time: _player.currentItem!.currentTime(), progress: CGFloat(sender.value))
         }
         
-        PlayerController.Instance.lastPlayed?.tickCount = 0
+        PlayerController.Instance.lastPlayed?.setValue(Float(0.0), animated: false)
         PlayerController.Instance.lastPlayed = nil
+        PlayerController.Instance.elapsedTimeLabel?.text = "0:00"
+        PlayerController.Instance.elapsedTimeLabel = nil
+        PlayerController.Instance.durationLabel?.text = "0:00"
+        PlayerController.Instance.durationLabel = nil
         PlayerController.Instance.shouldSeek = true
-        
         PlayerController.Instance.scheduleReset()
-    }
-    
-    
-    func onPauseAudio(sender: SVGPlayButton) {
-        
-        guard let _player = PlayerController.Instance.player as AVPlayer? else {
-            return
-        }
-        
-        _player.pause()
-        PlayerController.Instance.lastPlayed?.tickCount = 0
-        PlayerController.Instance.lastPlayed = nil
-        PlayerController.Instance.shouldSeek = true
-        
-        PlayerController.Instance.scheduleReset()
-        
-        guard let _index = sender.index as Int? else {
-            return
-        }
-        
-        guard let _user = self.currentUser else {
-            return
-        }
-        
-        let post = _user.getPosts()[_index]
-        post.setPlayed(time: _player.currentItem!.currentTime(), progress: sender.progressStrokeEnd)
-        
-    }
-    
-    func playerDidFinishPlaying(note: NSNotification) {
-        
-        self.releasePlayer()
         
     }
     
 }
 
 extension AnotherProfileViewController : UITableViewDataSource, UITableViewDelegate {
+    
     func numberOfRows(inTableView: UITableView, section: Int) -> Int {
         
         if (tableView == self.tableView) {
-            
             if let _user = self.currentUser {
                 if profileType == 0 {
-                    return _user.getPosts().count
+                    return _user.getPosts(type: self.postType).count
                 } else {
                     return 1
                 }
-            } else {
-                return 0
             }
-            
         }
         
         return 0
@@ -692,65 +532,45 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return cell
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            cell.delegate = self
+            
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             cell.setData(post: post)
             
-            cell.btnLoop.tag = indexPath.row
-            cell.btnLoop.addTarget(self, action: #selector(onSelectShare(sender:)), for: .touchUpInside)
+            cell.lblDescription.isUserInteractionEnabled = false
             
-            cell.btnMessage.tag = indexPath.row
-            cell.btnMessage.addTarget(self, action: #selector(onSelectComment(sender:)), for: .touchUpInside)
-            
-            cell.btnPlay.willPlay = { self.onPlayAudio(sender: cell.btnPlay) }
-            cell.btnPlay.willPause = { self.onPauseAudio(sender: cell.btnPlay)  }
-            cell.btnPlay.index = indexPath.row
-            cell.btnPlay.refTableView = tableView
-            cell.btnPlay.progressStrokeEnd = post.getCurrentProgress()
-            
-            if cell.btnPlay.playing {
-                cell.btnPlay.playing = false
+            cell.btnSynopsis.tag = indexPath.row
+            if post.transcriptionUrl == "" {
+                cell.btnSynopsis.removeTarget(self, action: #selector(AnotherProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
+            } else if cell.btnSynopsis.allTargets.count == 0 {
+                cell.btnSynopsis.addTarget(self, action: #selector(AnotherProfileViewController.onSynopsis(sender:)), for: .touchUpInside)
             }
             
-            cell.btnLike.addTarget(self, action: #selector(onToggleLike(sender:)), for: .touchUpInside)
-            cell.btnLike.index = indexPath.row
-            cell.btnLike.isEnabled = !isMyProfile
-            
-            if let _user = UserController.Instance.getUser() {
-                let hasLiked = post.hasLiked(id: _user.id)
-                let image = hasLiked ? UIImage(named: "icon_broadcast_liked") : UIImage(named: "icon_broadcast_like")
-                cell.btnLike.setImage(image, for: .normal)
-                cell.btnLike.tag = hasLiked ? 1 : 0
-                
-                let hasCommented = post.hasCommented(id: _user.id)
-                let image1 = hasCommented ? UIImage(named: "icon_broadcast_messaged") : UIImage(named: "icon_broadcast_message")
-                cell.btnMessage.setImage(image1, for: .normal)
-                
-                let hasAddedToPlaylist = playlist.contains(where: { $0.id == post.id })
-                let image2 = hasAddedToPlaylist ? UIImage(named: "icon_broadcast_playlisted") : UIImage(named: "icon_broadcast_playlist")
-                cell.btnPlaylist.setImage(image2, for: .normal)
+            cell.btnSpeaker.tag = indexPath.row
+            if cell.btnSpeaker.allTargets.count == 0 {
+                cell.btnSpeaker.addTarget(self, action: #selector(onSelectSpeaker(sender:)), for: .touchUpInside)
             }
             
-            cell.btnAction.addTarget(self, action: #selector(onToggleAction(sender:)), for: .touchUpInside)
-            cell.btnAction.tag = indexPath.row
+            cell.btnPlay.tag = indexPath.row
+            if cell.btnPlay.allTargets.count == 0 {
+                cell.btnPlay.addTarget(self, action: #selector(AnotherProfileViewController.onPlayAudio(sender:)), for: .touchUpInside)
+            }
             
-            // Hide Playlist button
-            cell.constOfBtnPlaylistWidth.constant = 0;
+            cell.btnBackward.tag = indexPath.row
+            if cell.btnBackward.allTargets.count == 0 {
+                cell.btnBackward.addTarget(self, action: #selector(AnotherProfileViewController.onBackwardAudio(sender:)), for: .touchUpInside)
+            }
             
-            let isFullDesc = self.states.contains(post.id)
-            cell.lblDescription.delegate = self
-            cell.lblDescription.shouldCollapse = true
-            cell.lblDescription.numberOfLines = isFullDesc ? 0 : 1;
-            cell.lblDescription.text = post.description
-            cell.lblDescription.collapsed = !isFullDesc
-            cell.showFullDescription = isFullDesc
+            cell.btnForward.tag = indexPath.row
+            if cell.btnForward.allTargets.count == 0 {
+                cell.btnForward.addTarget(self, action: #selector(AnotherProfileViewController.onForwardAudio(sender:)), for: .touchUpInside)
+            }
             
-            let tapGestureOnLikeDescription = UITapGestureRecognizer(target: self, action: #selector(onSelectLikeDescription(sender:)))
-            cell.lblLikedDescription.addGestureRecognizer(tapGestureOnLikeDescription)
-            cell.lblLikedDescription.tag = indexPath.row
-            
-            let tapGestureOnHashtags = UITapGestureRecognizer(target: self, action: #selector(onSelectHashtag(sender:)))
-            cell.txtVHashtags.addGestureRecognizer(tapGestureOnHashtags)
-            cell.txtVHashtags.tag = indexPath.row
+            cell.playSlider.index = indexPath.row
+            cell.playSlider.setValue(Float(post.getCurrentProgress()), animated: false)
+            if cell.playSlider.allTargets.count == 0 {
+                cell.playSlider.addTarget(self, action: #selector(AnotherProfileViewController.onSeekSlider(sender:)), for: .valueChanged)
+            }
             
             cell.isExpanded = self.expandedRows.contains(post.id)
             cell.selectionStyle = .none
@@ -774,7 +594,16 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
+            self.releasePlayer()
+            
+            if PlayerController.Instance.lastPlayed == nil {
+                cell.playSlider.setValue(0.0, animated: false)
+                cell.playSlider.playing = false
+            }
+            
+            self.tableView.beginUpdates()
+            
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
             
             switch cell.isExpanded {
             case true:
@@ -786,7 +615,6 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
             
             cell.isExpanded = !cell.isExpanded
             
-            self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
         
@@ -802,63 +630,15 @@ extension AnotherProfileViewController : UITableViewDataSource, UITableViewDeleg
                 return
             }
             
-            let post = _user.getPosts()[indexPath.row]
-            self.expandedRows.remove(post.id)
+            self.tableView.beginUpdates()
             
+            let post = _user.getPosts(type: self.postType)[indexPath.row]
+            self.expandedRows.remove(post.id)
             cell.isExpanded = false
             
-            self.tableView.beginUpdates()
             self.tableView.endUpdates()
         }
         
-    }
-    
-    //
-    // MARK: ExpandableLabel Delegate
-    //
-    
-    func willExpandLabel(_ label: ExpandableLabel) {
-        self.tableView.beginUpdates()
-    }
-    
-    func didExpandLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tableView)
-        if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { return }
-            
-            guard let _user = self.currentUser else {
-                return
-            }
-            
-            let post = _user.getPosts()[indexPath.row]
-            self.states.insert(post.id)
-            
-            cell.showFullDescription = true
-        }
-        self.tableView.endUpdates()
-    }
-    
-    func willCollapseLabel(_ label: ExpandableLabel) {
-        self.tableView.beginUpdates()
-    }
-    
-    func didCollapseLabel(_ label: ExpandableLabel) {
-        let point = label.convert(CGPoint.zero, to: self.tableView)
-        if let indexPath = self.tableView.indexPathForRow(at: point) as IndexPath? {
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? ProfileListCell
-                else { return }
-            
-            guard let _user = self.currentUser else {
-                return
-            }
-            
-            let post = _user.getPosts()[indexPath.row]
-            self.states.remove(post.id)
-            
-            cell.showFullDescription = false
-        }
-        self.tableView.endUpdates()
     }
     
 }
@@ -873,23 +653,10 @@ extension AnotherProfileViewController : UIScrollViewDelegate {
             
             let offset: CGFloat = scrollView.contentOffset.y
             
-            var headerTransform: CATransform3D = CATransform3DIdentity
-            
-            if offset < 0 { // PULL DOWN -----------------
-                
-                let headerScaleFactor: CGFloat = -(offset) / self.headerView.bounds.height
-                let headerSizevariation: CGFloat = ((self.headerView.bounds.height * (1.0 + headerScaleFactor)) - self.headerView.bounds.height) / 2.0
-                headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-                headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
-                
-                // Apply Transformations
-                self.headerView.layer.transform = headerTransform
-                self.viewProfileInfo.layer.transform = CATransform3DIdentity
-            }
-            else { // SCROLL UP/DOWN ------------
-                
+            if offset >= 0 { // SCROLL UP/DOWN ------------
                 self.updateScroll(offset: offset)
             }
+            
         }
         
     }
@@ -917,70 +684,7 @@ extension AnotherProfileViewController {
         
     }
     
-    @IBAction func onPlaylist(sender: AnyObject!) {
-        
-        if btnFollow.tag == 0 {
-            let alertController = UIAlertController(title: "Alert", message: "Please follow this broadcaster before you add the most recent broadcast into your playlist.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            alertController.addAction(okAction)
-            present(alertController, animated: false, completion: nil)
-            return
-        }
-        
-        if let _user = self.currentUser {
-            if _user.getPosts().count == 0 {
-                return
-            }
-            
-            let post = _user.getPosts()[0]
-            let userId: String = _user.id
-            
-            PlayListDataController.Instance.loadPlayList()
-            if !playlist.contains(where: { $0.user_id == userId }) {
-                PlayListDataController.Instance.addPost(post: post)
-                PlayListDataController.Instance.loadPlayList()
-                
-                self.btnPlaylist.makeEnabled(enabled: false)
-                PlaylistService.Instance.addToPlaylist(userId: userId, completion: { (success: Bool) in
-                    self.btnPlaylist.makeEnabled(enabled: true)
-                    
-                    if success {
-                        // Show success alert
-                        let alertController = UIAlertController(title: "Success", message: "Successfully added to your playlist.", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        
-                        self.btnPlaylist.setImage(UIImage.init(named: "icon_playlist_highlighted"), for: .normal)
-                        
-                    } else {
-                        NSLog("Failed to save the playlist user on remote db.")
-                        // Show error alert
-                        let alertController = UIAlertController(title: "Error", message: "Failed to add to your playlist.", preferredStyle: .alert)
-                        let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                        alertController.addAction(okAction)
-                        self.present(alertController, animated: true, completion: nil)
-                        
-                    }
-                })
-            }
-        }
-        
-    }
-    
-    @IBAction func onMyFollowers(sender: AnyObject!) {
-        
-        self.callFollowerVC()
-        
-    }
-    
-    @IBAction func onMyFollowings(sender: AnyObject!) {
-        
-        self.callFollowingVC()
-        
-    }
-    
-    @IBAction func onFollow(sender: AnyObject!) {
+    @IBAction func onFavorites(sender: AnyObject!) {
         
         guard let _currentUser = self.currentUser as User? else {
             return
@@ -989,7 +693,7 @@ extension AnotherProfileViewController {
             return
         }
         
-        self.btnFollow.makeEnabled(enabled: false)
+        self.btnFavorites.makeEnabled(enabled: false)
         if sender.tag == 0 {
             UserService.Instance.follow(userId: _currentUser.id, completion: {
                 (success: Bool) in
@@ -1000,7 +704,7 @@ extension AnotherProfileViewController {
                         self.refreshData()
                     })
                 } else {
-                    self.btnFollow.makeEnabled(enabled: true)
+                    self.btnFavorites.makeEnabled(enabled: true)
                 }
             })
             
@@ -1015,11 +719,44 @@ extension AnotherProfileViewController {
                         self.refreshData()
                     })
                 } else {
-                    self.btnFollow.makeEnabled(enabled: true)
+                    self.btnFavorites.makeEnabled(enabled: true)
                 }
             })
             
         }
         
     }
+}
+
+extension AnotherProfileViewController: ProfileListCellDelegate {
+    
+    func profileListCellDidTapReferringUser(_ user: User) {
+        // Show referring user profile
+        if let _currentUser = self.currentUser as User? {
+            if _currentUser.id == user.id {
+                return
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            if  let vc = storyboard.instantiateViewController(withIdentifier: "AnotherProfileViewController") as? AnotherProfileViewController {
+                
+                if let blockedby = _currentUser.blockedby as? [User] {
+                    if blockedby.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                if let blocking = _currentUser.blocking as? [User] {
+                    if blocking.contains(where: { $0.id == user.id }) {
+                        return
+                    }
+                }
+                
+                vc.currentUser = user
+                self.present(vc, animated: false, completion: nil)
+                
+            }
+        }
+    }
+    
 }

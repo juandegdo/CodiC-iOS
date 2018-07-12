@@ -14,12 +14,42 @@ class RecordingBroadcastViewController: BaseViewController {
     @IBOutlet var lblCurrentTime: UILabel!
     @IBOutlet var waveformView: SCSiriWaveformView!
     
+    @IBOutlet weak var patientInfoView: UIStackView!
+    @IBOutlet weak var lblPatientName: UILabel!
+    @IBOutlet weak var lblPatientDOB: UILabel!
+    @IBOutlet weak var lblPatientPHN: UILabel!
+    
     fileprivate var recordingSession: AVAudioSession?
     fileprivate var audioRecorder: AVAudioRecorder?
     fileprivate var updateTimer: Timer?
     
+    let exceedLimit = 120.0
+    var didExceedLimit: Bool = false
+    var continueRecording: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _patient = DataManager.Instance.getPatient() {
+            self.lblPatientName.text = _patient.name
+            self.lblPatientDOB.text = _patient.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+            self.lblPatientPHN.text = _patient.patientNumber
+        } else if DataManager.Instance.getPatientId() != "" {
+            // Get patient with id
+            PatientService.Instance.getPatientById(patientId: DataManager.Instance.getPatientId(), completion: { (success, patient) in
+                if success == true && patient != nil {
+                    DataManager.Instance.setPatient(patient: patient)
+                    
+                    DispatchQueue.main.async {
+                        self.lblPatientName.text = patient?.name
+                        self.lblPatientDOB.text = patient?.getFormattedBirthDate().replacingOccurrences(of: ",", with: "")
+                        self.lblPatientPHN.text = patient?.patientNumber
+                    }
+                }
+            })
+        } else {
+            self.patientInfoView.isHidden = true
+        }
         
         self.initRecording()
     }
@@ -30,6 +60,15 @@ class RecordingBroadcastViewController: BaseViewController {
         // Hide Tabbar
         self.tabBarController?.tabBar.isHidden = true
         
+        if didExceedLimit {
+            if continueRecording {
+                self.pauseRecording(isPaused: false)
+            } else {
+                self.stopRecording()
+                self.performSegue(withIdentifier: Constants.SegueMedicConnectEditBroadcast, sender: nil)
+            }
+        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -37,6 +76,8 @@ class RecordingBroadcastViewController: BaseViewController {
         
         // Show Tabbar
         self.tabBarController?.tabBar.isHidden = false
+        
+        self.pauseRecording(isPaused: true)
         
     }
     
@@ -101,8 +142,10 @@ class RecordingBroadcastViewController: BaseViewController {
         
         if (isPaused) {
             ar.pause()
+            updateTimer?.invalidate()
         } else {
             ar.record()
+            updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(RecordingBroadcastViewController.updateSeekBar), userInfo: nil, repeats: true)
         }
     }
     
@@ -110,18 +153,34 @@ class RecordingBroadcastViewController: BaseViewController {
         
         audioRecorder?.stop()
         audioRecorder = nil
-    
+        
+        updateTimer?.invalidate()
+        updateTimer = nil
+        
     }
     
-    func updateSeekBar() {
+    @objc func updateSeekBar() {
         
         if let _audioRecorder = self.audioRecorder as AVAudioRecorder? {
-            _audioRecorder.updateMeters()
-            let normalizedValue:CGFloat = pow(10, CGFloat(_audioRecorder.averagePower(forChannel: 0)) / 40)
-            self.waveformView.update(withLevel: normalizedValue)
-            
-            let progress = _audioRecorder.currentTime
-            self.lblCurrentTime.text = progress.durationText + " sec"
+            if !didExceedLimit && _audioRecorder.currentTime >= exceedLimit {
+                self.pauseRecording(isPaused: true)
+                self.didExceedLimit = true
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                if let vc = storyboard.instantiateViewController(withIdentifier: "ErrorPopupViewController") as? ErrorPopupViewController {
+                    vc.popupType = .exceedLimit
+                    self.navigationController?.pushViewController(vc, animated: false)
+                }
+                
+            } else {
+                _audioRecorder.updateMeters()
+                let normalizedValue:CGFloat = pow(10, CGFloat(_audioRecorder.averagePower(forChannel: 0)) / 40)
+                self.waveformView.update(withLevel: normalizedValue)
+                
+                let progress = _audioRecorder.currentTime
+                self.lblCurrentTime.text = progress.durationText + " sec"
+            }
         }
         
     }
@@ -146,16 +205,22 @@ extension RecordingBroadcastViewController {
     //MARK: IBActions
     
     @IBAction func onClose(sender: AnyObject) {
-        stopRecording()
+        self.stopRecording()
         
-        self.tabBarController?.selectedIndex = DataManager.Instance.getLastTabIndex()
-        self.navigationController?.popToRootViewController(animated: false)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.shouldReceiveCall = true
+        
+        if let _nav = self.navigationController as UINavigationController? {
+            _nav.dismiss(animated: false, completion: nil)
+        } else {
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
     @IBAction func onStopRecording(sender: AnyObject) {
         self.pauseRecording(isPaused: true)
         
-        AlertUtil.showConfirmAlert(self, message: NSLocalizedString("RECORDING PAUSED\nWould you like to continue recording?", comment: "comment"), okButtonTitle: NSLocalizedString("I'M DONE", comment: "comment"), cancelButtonTitle: NSLocalizedString("CONTINUE", comment: "comment"), okCompletionBlock: {
+        AlertUtil.showConfirmAlert(self, title: NSLocalizedString("Are you sure you want to stop\nrecording?", comment: "comment"), message: nil, okButtonTitle: NSLocalizedString("STOP RECORDING", comment: "comment"), cancelButtonTitle: NSLocalizedString("KEEP RECORDING", comment: "comment"), okCompletionBlock: {
             // OK completion block
             self.stopRecording()
             self.performSegue(withIdentifier: Constants.SegueMedicConnectEditBroadcast, sender: nil)

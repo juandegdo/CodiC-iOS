@@ -9,7 +9,7 @@
 #import "RadTabBarController.h"
 #import "RadTabBar.h"
 
-@interface RadTabBarController ()
+@interface RadTabBarController () <UITabBarControllerDelegate>
 
 @end
 
@@ -18,30 +18,50 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Tab Selected Image Color
-    [self.tabBar setTintColor:COLOR_TABBAR_TINT];
+    self.delegate = self;
     
-    // Center Post Button
-    UIButton *centerButton = [[UIButton alloc] initWithFrame:CGRectMake((self.tabBar.frame.size.width - TABBAR_RECORD_BUTTON_DIAMETER)/2, TABBAR_RECORD_BUTTON_PADDING, TABBAR_RECORD_BUTTON_DIAMETER, TABBAR_RECORD_BUTTON_DIAMETER)];
-    [centerButton setBackgroundImage:[UIImage imageNamed:@"tab_icon_record"] forState:UIControlStateNormal];
-    [centerButton addTarget:self action:@selector(recordButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.tabBar addSubview:centerButton];
-    [self.tabBar setSelectionIndicatorImage:[[UIImage alloc] init]];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoProfileScreen:) name:@"gotoProfileScreen" object:nil];
-    
-}
-
--(void)gotoProfileScreen:(NSNotification *)notification {
+    // Default tab - Profile
     self.selectedIndex = 1;
     
-    UINavigationController *nc = self.viewControllers[1];
-    [nc dismissViewControllerAnimated:FALSE completion:nil];
-    [nc popToRootViewControllerAnimated:false];
+    // Add border on top
+    UIView *borderTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 0.5)];
+    borderTop.backgroundColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0];
+    [self.tabBar addSubview:borderTop];
+    
+    // Tab Selected Image Color
+    self.tabBar.tintAdjustmentMode = UIViewTintAdjustmentModeNormal;
+    [self.tabBar setTintColor:COLOR_TABBAR_TINT];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoProfileScreen:) name:@"gotoProfileScreen" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCallHistoryScreen:) name:@"gotoCallHistoryScreen" object:nil];
+    
 }
 
-- (void)recordButtonPressed:(UIButton *)sender {
-    self.selectedIndex = 2;
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    [self.tabBar invalidateIntrinsicContentSize];
+}
+
+- (void)gotoProfileScreen:(NSNotification *)notification {
+    UINavigationController *nc = self.viewControllers[1];
+    
+    if (self.selectedIndex == 1 && nc.viewControllers.count == 1) {
+        // Reload Profile
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"userUpdated" object:nil];
+    }
+    
+    self.selectedIndex = 1;
+    
+    [nc dismissViewControllerAnimated:NO completion:nil];
+    [nc popToRootViewControllerAnimated:NO];
+}
+    
+- (void)gotoCallHistoryScreen:(NSNotification *)notification {
+    UINavigationController *nc = self.viewControllers[0];
+    [nc dismissViewControllerAnimated:NO completion:nil];
+    [nc popToRootViewControllerAnimated:NO];
+    
+    self.selectedIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,14 +69,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        [(UINavigationController *)viewController popToRootViewControllerAnimated:NO];
+    }
+    
+    return YES;
 }
-*/
 
 @end

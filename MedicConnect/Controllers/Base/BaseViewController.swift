@@ -7,18 +7,22 @@
 //
 
 import UIKit
-import TwitterKit
-import FacebookCore
-import FacebookLogin
 
 class BaseViewController: UIViewController {
     
     @IBOutlet weak var viewNotificationAlert: UIView!
-
+    
+    @IBOutlet weak var constOfNavigationTop: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Update layout for iPhone X
+        if UIScreen.main.nativeBounds.height == 2436 && self.constOfNavigationTop != nil {
+            self.constOfNavigationTop.constant = 24
+        }
         
         // Observe new notification alert
         NotificationCenter.default.addObserver(self, selector: #selector(updateNotificationIcon), name: NSNotification.Name(rawValue: NewNotificationAlertDidChangeNotification), object: nil)
@@ -42,7 +46,7 @@ class BaseViewController: UIViewController {
     
     // MARK: General Message Alert
     
-    func updateNotificationIcon() {
+    @objc func updateNotificationIcon() {
         // Show/Hide new notification mark
         if self.viewNotificationAlert != nil {
             self.viewNotificationAlert.isHidden = !NotificationUtil.hasNewNotification
@@ -92,6 +96,13 @@ class BaseViewController: UIViewController {
         
     }
     
+    @IBAction func onSearch(sender: AnyObject) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SearchVC")
+        
+        self.gotoNextViewController(vc: vc)
+    }
+    
     @IBAction func onSettings(sender: AnyObject) {
         
         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsVC")
@@ -132,27 +143,30 @@ class BaseViewController: UIViewController {
     }
     
     func clearAllData() {
+        UIApplication.shared.unregisterForRemoteNotifications()
+        
+        let delegate = UIApplication.shared.delegate as? AppDelegate
+        delegate?.tabBarController = nil
+        delegate?.disableSinchClient()
+        
+        // Update user availability
+        delegate?.shouldReceiveCall = false
+        
         UserController.Instance.eraseUser()
         UserController.Instance.setRecommedendUsers([])
         UserController.Instance.setAvatarImg(nil)
         PostController.Instance.setFollowingPosts([])
         PostController.Instance.setRecommendedPosts([])
+        PostController.Instance.setHashtagPosts([])
+        PostController.Instance.setTrendingHashtags([])
+        PostController.Instance.setPatientNotes([])
         CommentController.Instance.setComments([])
         LikeController.Instance.setPostLikes([])
         NotificationController.Instance.setNotifications([])
+        NotificationController.Instance.setAnimatedNotifIDs([])
+        PatientController.Instance.setPatients([])
         UserDefaultsUtil.DeleteToken()
-        
-        // Twitter Log out if needed
-        let store = Twitter.sharedInstance().sessionStore
-        if let userID = store.session()?.userID {
-            store.logOutUserID(userID)
-        }
-        
-        // Facebook Log out if needed
-        if let _ = AccessToken.current {
-            let loginManager = LoginManager()
-            loginManager.logOut()
-        }
+        UserDefaultsUtil.DeleteUserId()
     }
 }
 

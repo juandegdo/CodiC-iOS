@@ -6,7 +6,7 @@
 //  Copyright © 2016 Loewen. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class Comment {
     

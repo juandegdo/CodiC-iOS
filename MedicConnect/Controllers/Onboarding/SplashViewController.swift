@@ -35,15 +35,29 @@ class SplashViewController: UIViewController {
                 if let _user = user as User? {
                     // User logged in
                     UserController.Instance.setUser(_user)
+                    
+                    UserDefaultsUtil.SaveUserId(userid: (user?.id)!)
+                    NotificationUtil.makeUserNotificationEnabled()
+                    
+                    // Configure VOIP and sinch client
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.voipRegistration()
+                    appDelegate.configureSinchClient(_user.id)
+                    
+                    // Update user availability
+                    appDelegate.shouldReceiveCall = true
+                    
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectHome, sender: nil)
                 } else {
                     // User not logged in properly
+                    UserDefaultsUtil.DeleteUserId()
                     self.performSegue(withIdentifier: Constants.SegueMedicConnectSignIn, sender: nil)
                 }
             })
             
         } else {
             // User not logged in
+            UserDefaultsUtil.DeleteUserId()
             self.performSegue(withIdentifier: Constants.SegueMedicConnectSignIn, sender: nil)
         }
         

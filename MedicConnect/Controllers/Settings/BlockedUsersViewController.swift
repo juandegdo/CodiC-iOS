@@ -15,6 +15,9 @@ class BlockedUsersViewController: BaseViewController {
     @IBOutlet weak var m_tblBlockedUsers: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        m_tblBlockedUsers.tableFooterView = UIView.init(frame: .zero)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
